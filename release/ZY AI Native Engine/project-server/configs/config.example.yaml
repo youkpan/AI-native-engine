@@ -1,0 +1,199 @@
+# 项目服务器配置示例文件
+# 复制本文件为 config.yaml 后按环境填写。
+# 生产环境敏感字段建议用环境变量覆盖（PS_PLATFORM_PROJECT_KEY、PS_LLM_DEEPSEEK_API_KEY 等），勿写入版本库。
+
+server:
+  port: 8090
+  read_timeout: 30s
+  # 1200s：LLM 流式输出（plan/chat 对齐对话等）长连接传输，write_timeout 过短会在
+  # 输出中途强制切断连接，需按最长单次流式调用放宽。
+  write_timeout: 1200s
+  shutdown_timeout: 10s
+
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: "CHANGE_ME"                 # 数据库密码
+  name: project_server
+  ssl_mode: disable
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: 1h
+
+platform:
+  # 大平台回调地址（心跳上报）
+  callback_url: "http://localhost:18000/api/v1/heartbeat"
+  # 项目ID（由大平台分配）
+  project_id: "1"
+  # 项目密钥（由大平台生成，部署时注入）
+  project_key: "CHANGE_ME_INJECTED_AT_DEPLOY"
+  # HMAC 签名密钥（需与 platform 端一致）
+  hmac_secret: "CHANGE_ME_HMAC_SECRET"
+  # 心跳上报间隔
+  heartbeat_interval: 30s
+  # 请求时间窗口（防重放攻击）
+  replay_window: 5m
+  # ---- FIX-012 多项目执行面宿主（本地/单机测试部署形态；默认关，行为与单项目一致）----
+  # 多项目宿主模式入口（env: PS_PLATFORM_MULTI_PROJECT）。true 时 project_id 必须置空，
+  # 项目准入走 instance_project_grants 白名单；hmac_secret 即「宿主共享密钥」。
+  # 生产多租户仍一项目一机；边缘接入（/edge/*、/ws/edge）在该模式下不注册。
+  multi_project: false
+  # 多项目下 X-Project-ID 必须命中 grants 白名单（env: PS_PLATFORM_GRANT_REQUIRED，禁关）
+  grant_required: true
+  # 宿主托管项目数上限（env: PS_PLATFORM_MAX_HOSTED_PROJECTS），engine 每项目一 goroutine
+  max_hosted_projects: 8
+
+project:
+  name: "示例项目"
+  company: "示例公司"
+  description: "项目描述"
+  server_path: "/opt/project-server"
+
+cors:
+  allow_origins:
+    - "http://localhost:3000"
+    - "http://localhost:5173"
+    - "http://localhost:18000"
+
+log:
+  level: debug
+  file: "./logs/project-server.log"
+  max_size: 100
+  max_backups: 7
+  max_age: 30
+  compress: true
+
+# LLM 模型路由网关 (Story 3-1)
+llm:
+  router:
+    circuit_breaker_threshold: 5        # 连续失败次数阈值，触发熔断
+    circuit_breaker_recovery: 60s       # 熔断恢复时间
+    max_tokens_per_call: 16384          # 单次调用最大 token 数
+    health_check_interval: 5m           # 健康检查间隔
+
+  # DeepSeek 配置（主模型，支持思考模式）
+  deepseek:
+    api_key: "CHANGE_ME"                # 生产通过环境变量 PS_LLM_DEEPSEEK_API_KEY 注入
+    base_url: "https://api.deepseek.com"
+    model: "deepseek-v4-flash"
+    weight: 10                          # 路由权重
+    input_cost: 0.002                   # 元/千token（输入）
+    output_cost: 0.008                  # 元/千token（输出）
+    max_tokens: 64192
+    request_timeout: 1200s
+
+  # GLM 智谱配置（轻量对话模型）
+  glm:
+    api_key: "CHANGE_ME"                # 生产通过环境变量 PS_LLM_GLM_API_KEY 注入
+    base_url: "https://open.bigmodel.cn/api/paas/v4"
+    model: "glm-4-flash"
+    weight: 5                           # 路由权重
+    input_cost: 0.001                   # 元/千token（输入）
+    output_cost: 0.001                  # 元/千token（输出）
+    max_tokens: 8096
+    request_timeout: 1200s
+
+# 知识库 embedding（Story 3-2）
+knowledge:
+  embedding:
+    provider: "dashscope"               # deepseek / glm / dashscope
+    api_key: "CHANGE_ME"                # 阿里云 DashScope，生产用 PS_KNOWLEDGE_EMBEDDING_API_KEY
+    base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    model: "qwen3.7-text-embedding"
+    dim: 1024
+    request_timeout: 60s
+
+# 媒体生成（视频/图像/音乐）
+media:
+  ark:
+    # 火山方舟（Seedream 图像 / Seedance 视频）——默认图像引擎。
+    # API Key 获取：火山方舟控制台 https://console.volcengine.com/ark/region:ark+cn-beijing/apikey（需先开通模型服务）
+    api_key: ""                         # 火山方舟 Ark API Key，也可用环境变量 PS_MEDIA_ARK_API_KEY 注入
+    base_url: "https://ark.cn-beijing.volces.com/api/v3"
+    model: "doubao-seedream-5-0-260128" # Seedream 模型 ID（以账号已开通为准；未开通 5.0 用 doubao-seedream-4-5-251128）
+  openai:
+    api_key: "CHANGE_ME"                # 魔搭 modelscope GPT-Image
+    base_url: "https://api-inference.modelscope.cn/v1"
+    model: "gpt-image-2"                # 图像模型 ID。注意：modelscope 图像生成仅支持异步接口且无 gpt-image-2，当前该端点不可用；gpt 引擎需配真实 OpenAI key 方可用，图像生成请用 seedream 引擎
+    
+  mureka:
+    api_key: ""                         # 待配（音乐生成）
+    base_url: "https://api.mureka.cn"
+  # 媒体单价（元/单位）——出厂参考价，用户可在「媒体中心 → 价目设置」覆盖（覆盖值入库）。
+  # 未命中的档位不折算（记 0 元并标记「待定价」，不谎报）。
+  pricing:
+    image:                              # 元/张，按输出尺寸最大边归一
+      1K: 0.20
+      2K: 0.22
+      4K: 0.30
+    video:                              # 元/条，<分辨率>_<时长档>（le5=≤5s，gt5=>5s）；分辨率与接口白名单一致（480p/720p）
+      480p_le5: 2.20
+      480p_gt5: 4.50
+      720p_le5: 5.30
+      720p_gt5: 10.50
+    music:                              # 元/首
+      per_track: 0.35
+
+# P0-06: Playwright 浏览器自动化工具
+browser:
+  enabled: false                        # 是否启用浏览器工具（生产环境按需开启）
+  timeout_sec: 30                       # 默认超时秒数
+  max_concurrent: 3                     # 最大并发页面数
+  domain_whitelist: []                  # 允许访问的域名白名单（空=不限，生产环境强烈建议配置）
+
+# Web 搜索（metaso 中文搜索 + Serper Google 搜索）
+web_search:
+  provider: metaso                      # 默认 provider: metaso / serper / serpapi / bing / custom
+  max_results: 5
+  metaso:
+    api_key: "CHANGE_ME"                # 生产用环境变量 PS_WEB_SEARCH_METASO_API_KEY 注入
+    base_url: "https://metaso.cn/api/v1"
+    scope: webpage
+    size: 10
+  serper:
+    api_key: ""                         # 待配，生产用 PS_WEB_SEARCH_SERPER_API_KEY
+    base_url: "https://google.serper.dev"
+    gl: us
+    hl: en
+    num: 10
+
+# 事件驱动 Agent 系统
+event:
+  batch_size: 20                        # 事件批量处理数量
+  flush_interval: 30s                   # 批量拉取间隔
+
+# Agent 定时调度器
+scheduler:
+  enabled: true                         # 是否启用 Cron 调度器
+
+# 项目账本 / AI 取数看板
+ledger:
+  # AI 生成 SQL 的单条语句执行超时（自然语言取数）。<=0 回落缺省 8s；
+  # 环境变量 PS_AI_SQL_TIMEOUT_MS（毫秒）优先级更高。
+  ai_sql_timeout: 8s
+
+# 通信平台连接器配置（webhook 接收 + 消息发送）
+connectors:
+  # 飞书
+  feishu:
+    app_id: ""
+    app_secret: ""
+    verify_token: ""
+    encrypt_key: ""
+  # Telegram
+  telegram:
+    bot_token: ""
+  # Slack
+  slack:
+    bot_token: ""
+    signing_secret: ""
+  # 钉钉
+  dingtalk:
+    webhook_url: ""
+    secret: ""
+    keyword: ""
+  # Discord
+  discord:
+    bot_token: ""
+    application_id: ""

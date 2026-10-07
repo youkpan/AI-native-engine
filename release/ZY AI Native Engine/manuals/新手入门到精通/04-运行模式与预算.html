@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第04章 运行模式、自主级别与预算 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 04 章 · 第一步：把公司开起来</div>
+    <h1>第04章 运行模式、自主级别与预算</h1>
+    <p class="zy-lead">读完这一章，你能自己拍板三件事：让 AI 有多自由、让它什么时候停下来问你、给它多少钱并且烧不穿。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 15 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：三种模式 / L0–L3 / 预警熔断</span>
+    </div>
+  </header>
+
+  <h2>你将学会</h2>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>分清「运行模式 / 自主级别 / 权限租赁」这三个控制 AI 自由度的旋钮</span></li>
+    <li><input type="checkbox"><span>看懂三种运行模式怎么选，以及「手动」和「人工审核」为什么是同一个意思</span></li>
+    <li><input type="checkbox"><span>说出 AI 在哪些环节会停下来等你点头</span></li>
+    <li><input type="checkbox"><span>讲清楚钱装在三个口袋里，token 到底怎么算</span></li>
+    <li><input type="checkbox"><span>看懂预算的一生：预警 → 熔断 → 补预算 → 恢复</span></li>
+  </ul>
+
+  <h2>一、三个旋钮，控制 AI 有多自由</h2>
+
+  <p>新手最常问的一句是「AI 会不会背着我乱花钱、乱发东西」。答案不是「会」也不是「不会」，而是<strong>你可以用三个旋钮把它的自由度拧到你舒服的位置</strong>。这三个旋钮是不同层次的东西，别混在一起看：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>旋钮一 · 运行模式</h4>
+      <p><span class="zy-badge blue">管「整个项目」的节奏</span></p>
+      <p>这个项目整体按什么节奏跑：全自动一路推，半自动关键处停一下，手动（人工审核）基本每一步都要你看。</p>
+      <p>在<strong>新建项目向导</strong>里选一次，之后还能在自动运营控制台改。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>旋钮二 · 自主级别（L0–L3）</h4>
+      <p><span class="zy-badge green">管「某一件具体的事」</span></p>
+      <p>针对单个<strong>人工处理节点</strong>，决定这件事要你多重的确认：L0 完全不管，L3 强制人工审核。</p>
+      <p>这是更细的一层，用在单个节点上，不是整个项目。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>旋钮三 · 权限租赁</h4>
+      <p><span class="zy-badge amber">管「一次敏感动作」的临时授权</span></p>
+      <p>AI 要做一件敏感但偶发的事（如给某个邮箱发信），向你申请一张<strong>有期限、有金额上限</strong>的临时授权。</p>
+      <p>到期或超上限自动回收，不是长期放开。</p>
+    </div>
+  </div>
+
+  <p>打个比方：<strong>运行模式</strong>是你给整个公司定「日常是不是全自动上班」；<strong>自主级别</strong>是你给某一件事单独标「这件事必须我签字」；<strong>权限租赁</strong>是你临时批给下属一张「只能花 50 元、今天有效」的采购卡。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">一句话记住</span>
+    <p>运行模式管全局节奏，自主级别管单件事，权限租赁管一次性授权。<strong>三个加在一起，才构成 AI 的「自由度」。</strong></p>
+  </div>
+
+  <h2>二、三种运行模式，怎么选</h2>
+
+  <p>先说一件容易踩坑的事：<strong>「手动」和「人工审核」是同一个意思，只是出现在不同的页面上。</strong>新建项目向导里它叫「手动」，等你进了项目、在自动运营控制台「调整运行模式」里，它叫「人工审核」。别以为是两种不同的模式。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">两处叫法，别混着记</span>
+    <p><strong>新建项目向导</strong>的选项：全自动 / 半自动 / 手动。<br><strong>自动运营控制台 → 调整运行模式</strong>的选项：全自动 / 半自动 / 人工审核。<br>「手动」和「人工审核」是<strong>同一个意思</strong>，只是两个界面的翻译不一样。</p>
+    <p>补一句给爱较真的人：这两处写入后端的<strong>内部取值其实不是一个字符串</strong>——向导写的是 <code>manual</code>，控制台写的是 <code>manual_review</code>，后端把两者都当成「不启用自动运营循环」，所以效果完全一样、不会出现「选了却没生效」。目前平台侧还没把这两个字段合并成一个，但对你使用没有任何影响，看到两处叫法不同不必惊慌。</p>
+  </div>
+
+  <p>三种模式的官方解释（原文）：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card green">
+      <h4>全自动</h4>
+      <p>AI 自动拆解任务、调度轮次、评审验收，全程自动执行，仅在关键节点通知你。</p>
+      <p><span class="zy-badge green">适合</span> 你已经信任它、且业务动作大多在「内部」的场景。</p>
+    </div>
+    <div class="zy-card blue">
+      <h4>半自动 <span class="zy-badge amber">默认</span></h4>
+      <p>AI 自动执行，但在关键决策节点（目标变更、大额支出、对外动作等）由人工确认后继续。</p>
+      <p><span class="zy-badge green">适合</span> 大多数人——自动干，但碰到「花钱、对外、改方向」这类大事停下来问你。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>人工审核</h4>
+      <p>AI 产出方案后必须人工审核通过才执行，节奏较慢但最可控。</p>
+      <p><span class="zy-badge green">适合</span> 刚开始用、想看清 AI 每一步，或业务红线多的团队。</p>
+    </div>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">重要：人工审核不启动自动运营循环</span>
+    <p>只有 <strong>全自动 / 半自动</strong> 两种模式会启动「自动运营循环」，AI 才会自己一轮一轮往下推。选了<strong>人工审核</strong>，系统<strong>不会</strong>自动跑循环——任务靠你手动触发，AI 每次产出方案后等你审核。所以：<strong>想让它「自己动起来」，就别选人工审核。</strong></p>
+  </div>
+
+  <h3>怎么选：看你的红线在哪</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>你的情况</th>
+          <th>建议模式</th>
+          <th>为什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>刚上手，第一次用</td>
+          <td><strong>半自动</strong></td>
+          <td>既能体验「自动推」，又在大事上把着关，最不容易出岔子</td>
+        </tr>
+        <tr>
+          <td>要看清 AI 每一步、业务对合规要求高</td>
+          <td><strong>人工审核</strong></td>
+          <td>每步都要你点头，节奏慢但完全可控</td>
+        </tr>
+        <tr>
+          <td>已跑熟、动作都在内部、信任 AI</td>
+          <td><strong>全自动</strong></td>
+          <td>只在关键节点通知你，省心</td>
+        </tr>
+        <tr>
+          <td>先看看 AI 怎么干、不想它自己动</td>
+          <td><strong>人工审核</strong></td>
+          <td>不启动循环，任务你手动触发</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">模式随时能改，不用一次选对</span>
+    <p>运行模式不是一锤子买卖。你随时可以在<strong>自动运营控制台</strong>里「调整运行模式」。从一个保守的模式起步（比如半自动），跑顺了再切全自动，是最稳的打法。</p>
+  </div>
+
+  <p>切换模式时，系统会给你一句明确提示（原文）：「<strong>切换后将暂停自动运营循环，仅保留人工审核驱动的执行，可在之后重新启动或调整</strong>」。意思是：如果你从全自动/半自动切到人工审核，正在跑的自动循环会停下来，之后每一件事都要你人工审过才执行；你想让它再自动起来，再切回全自动或半自动即可。</p>
+
+  <h2>三、AI 什么时候停下来等你</h2>
+
+  <p>知道了「模式」，你大概还想知道：<strong>它到底会在哪些地方停下来问我？</strong>把「停下来等你」的节点列清楚，你心里才有底。它停下等你，主要通过两套东西：<strong>三通道</strong>（红/黄/绿）和<strong>自主级别</strong>（L0–L3）。</p>
+
+  <h3>三通道：按风险分颜色</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>通道</th>
+          <th>触发</th>
+          <th>处理</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="zy-badge green">绿</span> 例行</td>
+          <td>常规内部事项</td>
+          <td>按级别处理，L0 直接执行归档</td>
+        </tr>
+        <tr>
+          <td><span class="zy-badge amber">黄</span> 敏感</td>
+          <td>敏感写操作（发布 / 删除 / 付费 / 外发等）</td>
+          <td>生成权限租赁，超权限上限需你授权</td>
+        </tr>
+        <tr>
+          <td><span class="zy-badge red">红</span> 强制</td>
+          <td>命中红通道禁止清单</td>
+          <td>强制 L3 人工审核，AI 不得代行</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>自主级别：一件事要你多重的确认</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>级别</th>
+          <th>行为</th>
+          <th>要不要等你</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>L0</td>
+          <td>全自主执行，不创建节点、不通知</td>
+          <td>不等，直接干</td>
+        </tr>
+        <tr>
+          <td>L1</td>
+          <td>通知不等待：创建节点 + 通知，AI 继续推进</td>
+          <td>通知你，但不拦</td>
+        </tr>
+        <tr>
+          <td><strong>L2（默认）</strong></td>
+          <td>一键确认：AI 暂停等待，面板一键确认后继续</td>
+          <td><strong>停下来，等你点一下</strong></td>
+        </tr>
+        <tr>
+          <td>L3</td>
+          <td>强制人工审核：必须审核通过（可多人 / 审批流）才继续</td>
+          <td><strong>停下来，等你正式审核</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这些「停下来等你」的节点，最终都会集中到一个页面：<strong>人工处理节点</strong>。你在那里看到一张张卡片，每张标注「通道 / 自主级别 L{n} / SLA（秒）/ 处理人」，然后点<strong>确认完成</strong>，AI 才继续往下走。通知也会推到<strong>通知中心</strong>和飞书/Telegram，你手机上就能批。</p>
+
+  <p>哪些具体动作会「停下来等你」？记住这四类最常见的：</p>
+  <ul>
+    <li><strong>对外动作</strong>：发布内容、发营销邮件、给客户回复，这类对外的都要过你。</li>
+    <li><strong>花钱动作</strong>：调用第三方付费接口、大额支出。</li>
+    <li><strong>敏感改动</strong>：删除、覆盖、装软件这类可能破坏现状的动作。</li>
+    <li><strong>改方向</strong>：目标变更、KR 调整这类「往哪走」的决策。</li>
+  </ul>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">SLA 是什么</span>
+    <p>每个节点带一个 SLA 超时（秒）。它停着等你，如果超过这个时间你还没处理，系统会按配置<strong>降级为 L1（通知不等待，继续跑）</strong>或<strong>沿升级链逐级升级</strong>（项目负责人 → 平台超管），不会一直卡死。</p>
+  </div>
+
+  <h2>四、预算装在三个口袋里</h2>
+
+  <p>钱的事，新手容易糊涂，是因为系统里其实有<strong>三层账</strong>，各自独立：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card red">
+      <h4>口袋一 · 平台账户（真实资金）</h4>
+      <p>你往平台<strong>真金白银充的钱</strong>。扣的是 AI 算力费、云服务器费、媒体生成费等真实开销。</p>
+      <p>在<strong>公司账本</strong>页看，余额不足会提示「请及时充值避免实例熔断」。</p>
+    </div>
+    <div class="zy-card blue">
+      <h4>口袋二 · 项目预算（虚拟核算）</h4>
+      <p>每个项目自己的一本<strong>虚拟账</strong>，记收入、支出、预算消耗，用来算这个项目赚不赚钱。</p>
+      <p>在<strong>项目账本</strong>和项目详情的<strong>预算明细</strong>页看。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>口袋三 · AI 运行预算（熔断线）</h4>
+      <p>专门给<strong>模型调用（token）</strong>设的一条额度线。超了它就<strong>暂停循环</strong>，防止 AI 无脑烧 token。</p>
+      <p>在<strong>自动运营控制台</strong>看「AI 预算消耗」。</p>
+    </div>
+  </div>
+
+  <p>这三层账的关系是：<strong>平台账户</strong>是「银行余额」，你往里充钱；<strong>项目预算</strong>和<strong>AI 运行预算</strong>是「这个项目的两本花销账」，分别用来算「这单生意赚不赚」和「AI 烧 token 超没超」。平时盯项目时，你主要看后面两个；担心「平台账户够不够扣」时，才去看公司账本。</p>
+
+  <p>新建项目时，预算设定页会要你填几个额度，单位都是人民币（元），<strong>0 表示不限制</strong>：</p>
+  <ul>
+    <li><strong>总预算</strong>：覆盖整个项目所有支出（含 token、第三方接口、算力、人工等）。</li>
+    <li><strong>Token 额度</strong>：AI 运行预算，模型调用这一条线。</li>
+    <li><strong>图片 / 视频 / 服务器额度</strong>：媒体生成和云服务器各自的口袋。</li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">预算科目怎么记</span>
+    <p>系统把开销归到几个科目（原文）：<strong>token_fee（模型调用）/ third_party_api（第三方接口）/ compute_fee（算力）/ human_intervention（人工介入）</strong>。留空科目不计入，所以填的时候想清楚哪些要计入预算。</p>
+  </div>
+
+  <h2>五、钱到底怎么算</h2>
+
+  <p>AI 花得最多的是<strong>模型调用</strong>，按 token 计费。默认单价（元 / 百万 token，可在「运行配置 → 定价」里改）：</p>
+
+  <div class="zy-kpi">
+    <div class="zy-kpi-label">输入</div>
+    <div class="zy-kpi-value">1 元 / 百万 token</div>
+  </div>
+  <div class="zy-kpi">
+    <div class="zy-kpi-label">输出</div>
+    <div class="zy-kpi-value">2 元 / 百万 token</div>
+  </div>
+  <div class="zy-kpi">
+    <div class="zy-kpi-label">缓存读</div>
+    <div class="zy-kpi-value">0.02 元 / 百万 token</div>
+  </div>
+
+  <p>每次模型调用，系统读会话日志里的 usage 统计 token，乘单价算出这笔钱，写进计费流水，累进 AI 运行预算。单价按<strong>发生时快照落库</strong>，你之后改了单价，不改历史流水。</p>
+
+  <p>举个具体的例子，帮你建立「钱花在哪」的直觉：</p>
+  <div class="zy-card tinted">
+    <h4>一笔调用是怎么算钱的</h4>
+    <p>假设 AI 回答你一个问题，这一轮模型读进去 <strong>100 万 token</strong> 的上下文，吐出来 <strong>0.5 万 token</strong> 的回答：</p>
+    <ul>
+      <li>输入 100 万 token × 1 元 / 百万 = <strong>1 元</strong></li>
+      <li>输出 0.5 万 token × 2 元 / 百万 = <strong>0.01 元</strong></li>
+      <li>缓存读（如果命中缓存的那部分按 0.02 元 / 百万另算，几乎可忽略）</li>
+    </ul>
+    <p>这一笔大约 1 元出头。你一天跑几百轮、每轮调几次模型，钱就是这么一点点累起来的。所以系统的<strong>预算预警和熔断</strong>才那么重要——它盯着这个累计值，到线就提醒你。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">关于「估算计费」，原文提醒你</span>
+    <p>计费明细页有一句 tooltip 原文：「<strong>其中包含按文本长度估算的兜底计费（上游未回 usage 时产生），非精确账单，请勿直接作为账单核销</strong>。」意思是：偶尔上游模型没回 token 用量时，系统会按文本长度估一个数记上，目的是「不留黑洞」。它不是精确账单，别拿它当发票去核销。</p>
+  </div>
+
+  <p>技术细节放这里，进阶再展开：</p>
+  <details class="zy-acc">
+    <summary>三种计费口径：measured / estimated / unmetered</summary>
+    <div class="zy-acc-body">
+      <p>系统记账时分三种口径：</p>
+      <ul>
+        <li><strong>measured（实测）</strong>：上游回了真实 usage，按真实 token 数算钱，这是绝大多数情况。</li>
+        <li><strong>estimated（估算）</strong>：上游没回 usage，按文本长度估算一个数，流水前缀标 <code>est:</code>。就是上面 tooltip 说的那部分。</li>
+        <li><strong>unmetered（未计量）</strong>：确实无法计量的调用，记 0 元留个痕，前缀标 <code>unmetered:</code>，保证「有这笔调用」可查。</li>
+      </ul>
+      <p>同一笔调用只记一次，靠「项目 ID + 日志引用」去重，不会重复扣费。</p>
+    </div>
+  </details>
+
+  <h2>六、预算的一生：预警 → 熔断 → 补预算 → 恢复</h2>
+
+  <p>预算不是「花完了才提醒你」，它有一条完整的安全链：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>80% 预警</h4>
+      <p>AI 运行预算用到 80%（默认线），系统发通知提醒你，并<strong>自动降级运行</strong>——把模型切到低成本路由、放慢节奏，先稳住不直接停。</p>
+      <div class="zy-path">通知中心 <span class="sep">›</span> 预算预警</div>
+    </li>
+    <li>
+      <h4>超限熔断</h4>
+      <p>预算耗尽（AI 运行预算或总预算任一条超了），系统<strong>暂停循环</strong>，AI 不再继续烧钱。计费页和预算运行态会显示「已熔断」。</p>
+      <div class="zy-path">自动运营 <span class="sep">›</span> 预算运行态（熔断：是）</div>
+    </li>
+    <li>
+      <h4>补预算</h4>
+      <p>你去充值（平台账户）或调高预算（项目预算 / AI 运行预算）。这一步是你的事，AI 不会替你拍板投多少钱。</p>
+      <div class="zy-path">项目详情 <span class="sep">›</span> 预算明细 <span class="sep">›</span> 调整预算</div>
+    </li>
+    <li>
+      <h4>恢复</h4>
+      <p>补完预算，到自动运营控制台点 <span class="zy-btn">恢复</span> 或 <span class="zy-btn">启动</span>，系统复核两条预算线确实解除了，清掉熔断标记，继续跑。</p>
+      <div class="zy-path">自动运营控制台 <span class="sep">›</span> 恢复 / 启动</div>
+    </li>
+  </ol>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">两条熔断线是分开的</span>
+    <p>系统有两条独立的熔断线：<strong>AI 运行预算线</strong>（token 烧超了）和<strong>总预算线</strong>（整个项目花超了）。哪条先到哪条先停，各自独立记录、独立通知，不会一条把另一条的通知吃掉。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">还有一道「单轮上限」，专治一轮烧太多</span>
+    <p>除了上面两条「累计」线，项目详情的运行配置里还有一个 <strong>「单轮最大预算」</strong>（参数名 <code>single_round_max_budget</code>，默认 <strong>100 元</strong>，<strong>0 表示不限</strong>）。它盯的不是累计值，而是<strong>单独一轮的实际花费</strong>：每轮结束结算时，如果这一轮花的钱超过了它，系统会立刻发一条「<strong>单轮预算超限</strong>」通知并<strong>暂停项目循环</strong>，提示你去查这一轮是不是太长、或者循环重试太多次，处理好、调好额度再恢复。</p>
+    <p>新手容易忽略它：总预算还有一大截，为什么项目突然停了？多半就是某轮（比如一次跑飞了的长任务）单轮超了这个上限。它和 80% 预警、超限熔断一样，都是防止「一次意外烧掉一大笔」的保险。</p>
+  </div>
+
+  <p>「降级运行」具体降的是什么？放在折叠块里，进阶再看：</p>
+  <details class="zy-acc">
+    <summary>「降级运行」到底做了什么</summary>
+    <div class="zy-acc-body">
+      <p>当 AI 运行预算用到预警线（默认 80%）且你开了降级开关，系统不会马上停，而是<strong>降级继续跑</strong>：</p>
+      <ul>
+        <li>把模型路由切到<strong>低成本模型</strong>，同样的事花更少的钱先顶着。</li>
+        <li>降级是<strong>按项目隔离</strong>的——只影响这个项目，不会拖累你旗下其他项目一起变慢。</li>
+        <li>降级后仍超预算，才会进入真正的「熔断」暂停。</li>
+      </ul>
+      <p>一句话：预警是「先别停，勒紧裤腰带」，熔断才是「真停」。这样你能在「提示」和「硬停」之间多一次缓冲。</p>
+    </div>
+  </details>
+
+  <h2>七、兜底保护，和「项目怎么不动了」</h2>
+
+  <p>除了预算熔断，系统还有一道更「兜底」的保险：当 AI 反复失败、或触发了异常，它不会硬着头皮烧钱，而是<strong>自动停下来等你</strong>。</p>
+
+  <p>失败兜底分三级，越到后面停得越彻底：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>层级</th>
+          <th>发生什么</th>
+          <th>结果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>第 1–2 次失败</td>
+          <td>降级重试：换引擎 → 换角色版本 → 缩小任务范围</td>
+          <td>尽量自己救回来</td>
+        </tr>
+        <tr>
+          <td>第 3 次失败</td>
+          <td>升级：管理者 Agent 复盘 + 创建人工处理节点</td>
+          <td>转成人工节点等你处理</td>
+        </tr>
+        <tr>
+          <td>超上限</td>
+          <td>告警退出：通知 + 暂停项目循环</td>
+          <td>停下，防烧钱</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这就是「兜底保护」。它会在两个地方提醒你，<strong>措辞不一样，但指的是同一件事</strong>：项目详情页说「自动运营已因兜底保护暂停」，自动运营控制台说「项目已因兜底保护暂停」。看到任一句，都按下面处理：</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">兜底保护原文（两个页面各一句）</span>
+    <p><strong>自动运营控制台</strong>横幅标题是「<strong>项目已因兜底保护暂停</strong>」，正文「兜底暂停为持久状态（跨重启保留），需人工在运行配置 / 任务面板处理后，点击「恢复」继续。」——注意这里<strong>只让你点「恢复」</strong>：兜底暂停时页面顶部的状态标签会显示红色的「<strong>已暂停（兜底）</strong>」，不会再绿油油地写着「运行中」；而「启动」按钮此时是灰的、点不动（内部状态还没切走），所以别再惦记它，直接点「恢复」。<br>
+    <strong>项目详情页</strong>横幅标题是「<strong>自动运营已因兜底保护暂停</strong>」，正文里那句「在自动运营控制台点击「恢复」或「启动」继续」是旧文案——实际能用的就是控制台的「恢复」。<br>
+    两条横幅都会显示「原因」和「暂停时间」——<strong>先看原因</strong>。</p>
+    <p>翻译成人话：它停下来了，而且<strong>重启服务器也不会自己又跑起来</strong>（持久状态）。你要先看它为什么停、处理好，再去点「恢复」。</p>
+  </div>
+
+  <p>所以，「项目怎么突然不动了」，通常是下面几种之一，对着查：</p>
+  <ul>
+    <li><strong>预算熔断</strong>——去补预算，再点恢复。</li>
+    <li><strong>兜底保护暂停</strong>——看失败原因，处理好再点恢复。</li>
+    <li><strong>你或同事手动点了「暂停」</strong>——点「恢复」即可。</li>
+    <li><strong>选了人工审核</strong>——本来就不自动跑，任务靠你手动触发。</li>
+    <li><strong>停在某个人工节点等你确认</strong>——去人工处理节点页点确认完成。</li>
+  </ul>
+
+  <h2>八、终止项目与结项</h2>
+
+  <p>项目不是只能「暂停」和「恢复」，也可以<strong>正式收尾</strong>。当目标达成、或你决定不做了，可以<strong>终止项目</strong>。</p>
+
+  <p>在自动运营控制台点 <span class="zy-btn danger">终止项目</span>，系统会要你输入终止原因，然后：</p>
+  <ul>
+    <li>把项目置为<strong>终止态</strong>，轮前检查返回「停止推进」，AI 不再跑。</li>
+    <li>自动生成一份<strong>结项报告</strong>：目标达成率、任务完成率、验收返工率、Token 花费、收入、ROI、知识沉淀清单、经验总结。</li>
+    <li>全程留痕，之后还能在<strong>结项报告</strong>页翻看。</li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">终止 vs 暂停，别搞混</span>
+    <p><strong>暂停</strong>是可逆的「歇一会」，随时恢复继续跑。<strong>终止</strong>是正式收尾，会生成结项报告。想清楚了再终止。</p>
+  </div>
+
+  <h2>九、不同规模团队，预算怎么给</h2>
+
+  <p>「我该设多少预算」没有标准答案，但可以按组织阶段给个量级参考（来自产品文档的阶段性估算，<strong>不是承诺</strong>）：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>阶段</th>
+          <th>组织形态</th>
+          <th>典型月成本（估算）</th>
+          <th>在干什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>起步期</td>
+          <td>一人全能</td>
+          <td>约 $10–30</td>
+          <td>一个人跑一个项目，少量 token + 一台小服务器</td>
+        </tr>
+        <tr>
+          <td>成长期</td>
+          <td>小组分工</td>
+          <td>约 $50–150</td>
+          <td>多任务并行、营销上量、开始生成媒体</td>
+        </tr>
+        <tr>
+          <td>规模化期</td>
+          <td>部门建制</td>
+          <td>约 $200–800</td>
+          <td>多项目、更大并发、更多连接器调用</td>
+        </tr>
+        <tr>
+          <td>成熟期</td>
+          <td>事业部自治</td>
+          <td>约 $500–2000+</td>
+          <td>多业务线并行、自动扩编、高频使用</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这是量级参考，不是账单</span>
+    <p>实际花费取决于任务量、模型调用频率、媒体生成量、服务器规格，差别会很大。真正的账单以平台「公司账本」和项目「计费明细」为准。</p>
+  </div>
+
+  <p>给新手一个实操建议：<strong>先少后多。</strong>第一次把 AI 运行预算设成一个「烧穿了也不心疼」的数（比如起步期先设个几百元），跑顺了、看懂了钱花在哪，再逐步调高。宁可先熔断一次、补预算，也别一上来设个「不限制」。</p>
+
+  <p>还有一点能让你安心：系统有三道保险是<strong>强制开启、开关不可关</strong>的（参数可调，但关不掉）——<strong>资源治理、预算熔断、渐进式信任</strong>。也就是说，无论你怎么折腾设置，「预算熔断」这道防烧钱的闸门永远在线，不会因为误操作被关掉。你能调的只是预算给多少、预警线设多少，而不是「要不要这道闸」。</p>
+
+  <h2>十、本章小结与下一步</h2>
+
+  <p>开始下一章之前，把最常见的几个疑问快速过一遍：</p>
+  <details class="zy-acc faq">
+    <summary>「手动」和「人工审核」到底是不是一回事？</summary>
+    <div class="zy-acc-body"><p>意思是同一个。新建项目向导里叫「手动」，进项目后在自动运营控制台里叫「人工审核」，两个界面的翻译不同；内部取值一个是 <code>manual</code>、一个是 <code>manual_review</code>，但语义一致——都表示「不启用自动运营循环」。</p></div>
+  </details>
+  <details class="zy-acc faq">
+    <summary>我选了全自动，它会不会背着我乱花钱？</summary>
+    <div class="zy-acc-body"><p>不会失控。全自动只是「节奏」上不等你，但花钱、对外发布、敏感改动这些仍会走人工节点或权限租赁停下来等你；更重要的是预算预警和熔断在兜底——花到 80% 提醒你，花超了直接暂停。</p></div>
+  </details>
+  <details class="zy-acc faq">
+    <summary>预算设成 0（不限制）会怎样？</summary>
+    <div class="zy-acc-body"><p>0 表示这条预算线「不限制」，也就是它不会触发熔断。新手建议别设 0，先设一个「烧穿也不心疼」的数，跑顺了再放宽。</p></div>
+  </details>
+  <details class="zy-acc faq">
+    <summary>项目不动了，怎么判断是哪种「停」？</summary>
+    <div class="zy-acc-body"><p>对着本章第七节查：预算熔断（去补预算）、兜底保护暂停（看失败原因）、手动暂停（点恢复）、选了人工审核（本来就不自动跑）、停在人工节点（去点确认完成）。</p></div>
+  </details>
+
+  <ul>
+    <li><strong>三个旋钮</strong>：运行模式管全局节奏，自主级别（L0–L3）管单件事，权限租赁管一次性授权。</li>
+    <li><strong>三种模式</strong>：全自动（关键节点通知）、半自动（关键决策处人工确认，默认）、人工审核（每步审核）。「手动」与「人工审核」是同一个意思（内部取值分别为 <code>manual</code> / <code>manual_review</code>，语义一致）。</li>
+    <li><strong>关键事实</strong>：只有全自动 / 半自动才启动自动运营循环；人工审核不启动，任务靠你手动触发。</li>
+    <li><strong>三个口袋</strong>：平台账户（真实资金）、项目预算（虚拟核算）、AI 运行预算（token 熔断线）。</li>
+    <li><strong>钱怎么算</strong>：输入 1 元 / 输出 2 元 / 缓存读 0.02 元（每百万 token），有少量「估算计费」不是精确账单。</li>
+    <li><strong>预算的一生</strong>：80% 预警（降级）→ 超限熔断（暂停）→ 补预算 → 恢复。</li>
+    <li><strong>兜底保护</strong>：三级失败兜底，最后「持久暂停」等人工处理，重启也不会自己跑。</li>
+    <li><strong>下一步</strong>：现在你会设模式、定预算了，去 <a href="05-界面导览-平台.html">第 05 章 界面导览（上）：平台侧页面</a>，把大服务平台的每个页面走一遍。</li>
+  </ul>
+
+  <div class="zy-quick">
+    <a href="index.html">回到首页</a>
+    <a href="03-创建项目.html">上一章：创建项目与信息影响</a>
+    <a href="05-界面导览-平台.html">下一步：界面导览（上）平台侧页面</a>
+    <a href="20-术语表与路线图.html">看不懂名词？查术语表</a>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

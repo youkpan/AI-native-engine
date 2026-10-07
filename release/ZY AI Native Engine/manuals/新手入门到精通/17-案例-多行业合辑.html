@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第17章 案例：内容媒体 / 咨询 / 制造 / 本地服务 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 17 章 · 实战案例</div>
+    <h1>第17章 案例：内容媒体 / 咨询 / 制造 / 本地服务</h1>
+    <p class="zy-lead">四个不同行业的精简案例。每个都回答同一组问题：这个行业的活该建哪些 Agent、开哪些开关、派什么任务、盯什么指标、最容易在哪里翻车。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 45 分钟</span>
+      <span class="zy-badge green">可对照自己的行业</span>
+      <span class="zy-badge amber">重点：行业特有的坑</span>
+      <span class="zy-badge purple">附 4 个附录</span>
+    </div>
+  </header>
+
+  <p>第 <a href="15-案例-跨境电商.html">15 章</a>和第 <a href="16-案例-软件开发与网站设计.html">16 章</a>是两个<strong>完整的长案例</strong>：一个跨境电商独立站，从第 0 天写到第 90 天；一个软件产品加一个接单业务，从想法写到交付验收。它们把「一个人 + 一个 AI 班子」的完整路线走了一遍，每一步都标了页面和按钮。那两章是「慢镜头」，值得你摊在桌上跟着做一遍。</p>
+
+  <p>但你多半已经发现一件事：那两章的主角都不是你的行业。你做的可能是内容、是咨询、是工厂、是同城服务。硬套那两章的每一步，会有一半对不上——不是系统不通用，而是<strong>每个行业的「关键工序」不一样，AI 该插进去的位置就不一样</strong>。</p>
+
+  <p>所以这一章换个写法：<strong>不再逐日展开，而是四个精简案例</strong>。每个案例只讲同一组问题——这个行业特有的问题是什么？该建哪些 Agent？开哪些能力开关？派什么任务？盯什么指标？最容易踩哪五个坑？四个案例之后再给一张横向大表，回答「什么行业适合先上、什么行业要谨慎」。读完它，你应该能说出「我这门生意，第一步该动哪里」。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">贯穿全章的一句话：本章不承诺任何结果</span>
+    <p>下面的公司档案、金额、周期、订阅数、询盘量、转化率，<strong>全部是示例设定</strong>，作用是把「操作顺序」和「判断逻辑」讲清楚，<strong>不是效果承诺，也不是业绩预测</strong>。真实的钱，请一律以「计费明细」「项目账本」「公司账本」里显示的数字为准。同样一套配置，有人做得起来、有人做不起来，差别在你的产品、定价、市场和你自己花的工夫，AI 不替你做这个保证。</p>
+  </div>
+
+  <h2>你将学会</h2>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>内容媒体、咨询工作室、传统制造、本地服务这四个行业，各自<strong>第一批该建哪些 Agent</strong>、第一批该派哪些任务</span></li>
+    <li><input type="checkbox"><span>每个行业<strong>该开哪几个能力开关</strong>、该建几层知识库、各自盯哪几个指标</span></li>
+    <li><input type="checkbox"><span>每个行业最容易翻车的<strong>五个坑</strong>，以及具体的规避动作（不是「要小心」这种空话）</span></li>
+    <li><input type="checkbox"><span>用「计费明细」算<strong>单篇成本</strong>、用「项目账本」算<strong>单项目利润率</strong>的方法</span></li>
+    <li><input type="checkbox"><span>一张<strong>可以照着抄的</strong>跨行业 Agent 与任务卡清单，和一张判断「我的行业适不适合」的自检表</span></li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">读法建议</span>
+    <p>先只读<strong>第一节的对照大表</strong>，找到最像你的那一行；然后跳到对应案例精读。四个案例的写法完全一样（档案卡 → 行业特点 → Agent → 任务 → 开关 → 知识库 → 指标 → 五个坑），所以横向跳读很快。第六节的判断标准<strong>不管你属于哪个行业都要读</strong>，它回答「我这门生意值不值得用这套系统」。附录 A 是十个行业的生长路线，附录 B 是可以照抄的清单，附录 C 是自检表，附录 D 是二十条万能任务卡。</p>
+  </div>
+
+  <h2>一、四个案例，一张对照表</h2>
+
+  <p>先把四个行业的骨架并排摊开。你一眼就能看出：同样是「建公司、建项目、建 Agent」，落到不同行业，重点完全不同。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr>
+        <th>行业</th>
+        <th>生意模式</th>
+        <th>交付物</th>
+        <th>早期必建 Agent</th>
+        <th>成长期新增</th>
+        <th>关键指标</th>
+        <th>主要风险</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>内容媒体</strong></td>
+        <td>用内容换订阅与广告；收入靠续订，可重复</td>
+        <td>一期期的内容 + 一份订阅名单</td>
+        <td>内容主笔助理（1 个全能，含写作）</td>
+        <td>内容创作 / 编辑校对 / SEO 分发 / 社区运营</td>
+        <td>订阅数、内容产出量、单篇成本</td>
+        <td><strong>质量崩塌</strong>——一次批量生产，稿子全垮</td>
+      </tr>
+      <tr>
+        <td><strong>咨询服务</strong></td>
+        <td>卖方案与判断；复购靠口碑</td>
+        <td>一份客户认可的方案 + 一套可复用的方法</td>
+        <td>研究分析 + 客户对接</td>
+        <td>方案撰写 / 案例沉淀</td>
+        <td>单项目利润率、方法论复用次数、案例沉淀量</td>
+        <td><strong>机密外泄</strong>——客户资料串库</td>
+      </tr>
+      <tr>
+        <td><strong>智能制造 / 传统制造</strong></td>
+        <td>卖实体产品；已有工厂、客户、线下流程</td>
+        <td>结构化的产品资料、站点、报价、询盘</td>
+        <td>产品资料整理（先把既有资产搬进来）</td>
+        <td>技术支持 / 报价辅助 / 外贸内容 / 生产数据分析</td>
+        <td>询盘量、报价响应时长、资料结构化进度</td>
+        <td><strong>技术参数发错</strong>——AI 的话被当成准数</td>
+      </tr>
+      <tr>
+        <td><strong>本地服务</strong></td>
+        <td>线下交付；服务过程发生在线下</td>
+        <td>到店 / 上门的实际服务</td>
+        <td>内容获客</td>
+        <td>客户跟进 / 客服问答</td>
+        <td>线索量、到店转化、响应时长、复购率</td>
+        <td><strong>许诺做不到</strong>——AI 话术越界</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>看这张表的时候，请记住一个总原则：<strong>起步时不必一次配齐，随业务按需「招聘」。</strong>内容媒体刚开始时只有你一个人，装四个 Agent 只会让你每天在四个对话框之间来回切，反而更慢。系统里有一套<strong>组织进化</strong>机制（第 <a href="08-智能体.html">08 章</a>、第 <a href="13-经营指标.html">13 章</a>讲透了），它会根据你的运营数据建议「该增员了」，你确认才生效。所以这一章给你的不是「第一天就要全建」的清单，而是<strong>一张生长路线图</strong>：现在建一个，等业务推着你，再拆成两个、四个。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">关于下面这些 Agent 名字</span>
+    <p>「内容主笔助理」「报价辅助 Agent」这类名字，是<strong>本书为了讲清楚职责而起的示例命名</strong>，不是系统预置的岗位。你在「智能体中心 → 组织」点 <span class="zy-btn">新建 Agent</span> 时，名字自己取；系统里也有一个「岗位模板库」可以参考，具体模板清单<strong>以你界面上的实际内容为准</strong>。名字不重要，<strong>职责边界</strong>才重要——每个案例我都会写清「这个 Agent 能干什么、不能干什么」。</p>
+  </div>
+
+  <h2>二、案例一：内容媒体——用内容换订阅</h2>
+
+  <p>这是四个行业里「AI 最能直接顶上」的一个，因为核心工序——写——本身就是文本。但也正因为写得太顺，它是最容易<strong>批量翻车</strong>的一个。</p>
+
+  <h3>示例公司档案卡</h3>
+
+  <div class="zy-card blue">
+    <h4>示例设定（不是效果承诺）</h4>
+    <div class="zy-table-wrap">
+    <table class="zy-table">
+      <tbody>
+        <tr><td><strong>业务</strong></td><td>面向「跨境电商中小卖家」的<strong>付费行业观察专栏</strong>：每周两期深度观察，每月一份行业月报。变现靠<strong>订阅费</strong>加少量<strong>赞助位</strong>。</td></tr>
+        <tr><td><strong>团队</strong></td><td>你一个人（内容主笔），加一支 AI 班子。没有编辑、没有设计、没有运营。</td></tr>
+        <tr><td><strong>预算</strong></td><td>项目总预算 ¥6,000（示例）；Token 月度额度 ¥400。</td></tr>
+        <tr><td><strong>周期</strong></td><td>90 天。第 1 周搭好写作流水线，第 2 周开始稳定出稿，第 1 个月复盘一次。</td></tr>
+        <tr><td><strong>目标</strong></td><td>跑通「选题研究 → 长文撰写 → 多平台改写 → 分发 → 数据回收」这条链路，积累第一批免费订阅，并转化出一小批付费订阅。</td></tr>
+        <tr><td><strong>前置资产</strong></td><td>手上 30 篇旧文、200 条读者留言与问卷、十几份行业报告 PDF、一个已注册的公众号与一份 Newsletter 邮箱列表。</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <h3>这个行业特有的问题</h3>
+
+  <p>内容媒体的三个特点，决定了你该怎么配 AI：</p>
+
+  <ul>
+    <li><strong>内容产出是核心工序，不是辅助工作。</strong>别的行业里「写东西」是副产品，这里它就是产品本身。所以你不能像别的行业那样「顺手让 AI 写一下」，而要把它当成一条<strong>流水线</strong>来设计：谁选题、谁起草、谁核事实、谁定稿。</li>
+    <li><strong>分发渠道多。</strong>同一篇稿子，newsletter 要一个版本、公众号要一个版本、社媒要拆成几条。这是纯体力活，恰好是 AI 最擅长的部分。</li>
+    <li><strong>变现靠订阅与广告，都依赖「长期信任」。</strong>一篇稿子出事实错误，掉的是订阅，不是一次点击。所以<strong>核查</strong>这件事在这个行业里权重极高。</li>
+  </ul>
+
+  <h3>Agent 配置：起步一个，长成四个</h3>
+
+  <p><strong>起步期（第一个月）只建一个</strong>「内容主笔助理」，全能型，技能里带上<strong>内容写作、检索、摘要、数据整理</strong>。这个阶段你的稿量不大，一个 Agent 足够，而且要让它「看着你怎么改稿」，你改得越多，它越懂你的调性。</p>
+
+  <p>到了<strong>成长期</strong>（大致是「稳定周更、开始有人催更」的时候），组织进化会开始给你增员建议，这时候把全能拆成四个专职：</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4>内容创作 Agent</h4>
+      <p><strong>干什么</strong>：按选题写长文初稿，给出结构、论点、数据引用位置。</p>
+      <p><strong>边界</strong>：只交草稿，<strong>不发布、不定价、不回复读者</strong>；不确定的数据必须标「待核实」，不许自己编。</p>
+      <p><strong>技能</strong>：内容写作、检索、结构化输出。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>编辑 / 校对 Agent</h4>
+      <p><strong>干什么</strong>：逐条核对事实与出处、检查结构、术语一致性、错别字；有权把稿子<strong>退回重写</strong>。</p>
+      <p><strong>边界</strong>：不改你的观点和结论，只改「站不住的地方」。</p>
+      <p><strong>技能</strong>：事实核查清单、风格一致性检查。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>SEO / 分发 Agent</h4>
+      <p><strong>干什么</strong>：起标题、写摘要、把长文改写成不同平台的版本、排发布日历草稿。</p>
+      <p><strong>边界</strong>：产出的是<strong>发布草稿</strong>，真正点「发布」前要你确认。</p>
+      <p><strong>技能</strong>：SEO、多平台改写、排期。</p>
+    </div>
+    <div class="zy-card purple">
+      <h4>社区运营 Agent</h4>
+      <p><strong>干什么</strong>：把读者来信、留言分类（提问 / 纠错 / 合作 / 退订原因），提炼高频问题，攒下一期选题。</p>
+      <p><strong>边界</strong>：不直接回复读者，尤其不承诺退款、合作条件。</p>
+      <p><strong>技能</strong>：意图识别、分类、摘要。</p>
+    </div>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">为什么让「编辑」和「创作」分开</span>
+    <p>这是这套系统「三权分立验收」思路在内容行业的用法：<strong>写的人和检查的人不是同一个</strong>，才能防止「自己写自己觉得好」。你可以在智能体中心给编辑 Agent 配上不同的模型或不同的提示词，让它站在读者角度挑毛病。一个小技巧：把最常见的错误做成一份<strong>核查清单</strong>放进编辑 Agent 的知识范围，它每次都会照着清单过一遍。</p>
+  </div>
+
+  <h3>任务结构：六张可以直接照抄的任务卡</h3>
+
+  <p>在「任务管理」点 <span class="zy-btn">新建任务</span>，填下面这些字段。<strong>引擎</strong>怎么选：写长文、要反复打磨的活，用<strong>循环执行（loop）</strong>；信息整合、改写、分类这类快活，用 <strong>Agent 智能体</strong>。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>任务名称</th><th>描述要点</th><th>类型</th><th>引擎</th><th>权重</th><th>优先级</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>本期选题研究</td><td>围绕一个主题，产出 8 个候选选题 + 每个选题的角度、读者价值、可查数据源</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>2</td><td>长文撰写</td><td>选定 1 个选题，写 2000–3000 字深度稿；要求给出结构、论点、引用出处</td><td>通用任务</td><td>循环执行</td><td>4</td><td>P0</td></tr>
+      <tr><td>3</td><td>二次改写（多平台）</td><td>把定稿改写成 newsletter / 公众号 / 社媒三条版本，社媒再拆成 5 条短帖</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>4</td><td>排版与配图</td><td>给出排版结构建议；配图走「媒体生成中心」，先出 2 张看风格</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P2</td></tr>
+      <tr><td>5</td><td>分发排期与发布</td><td>排出发布日历草稿；<strong>实际发布前需人工确认</strong></td><td>通用任务</td><td>Agent 智能体</td><td>1</td><td>P1</td></tr>
+      <tr><td>6</td><td>数据回收与复盘</td><td>汇总本期产出量、花费、读者反馈分类，给出下一期调整建议</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">「长文撰写」为什么给 P0、权重 4</span>
+    <p>时间片权重的意思是「这个任务每轮能分到多少精力」（1–10）。你有四张任务卡同时在队列里，如果平均分配，写长文的那张每轮只能分到一点点，稿子会一周出不来。把撰写设成 <strong>P0 + 权重 4</strong>，改写和排版设成 <strong>权重 2</strong>，系统就会<strong>先把精力压在关键路径上</strong>，其他活等主稿跑完再上。这是这套系统最实用的一个调节旋钮。</p>
+  </div>
+
+  <p>这六张卡串起来，就是一条流水线：</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>选题研究</b>8 个候选，定 1 个</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node hot"><b>长文撰写</b>初稿</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node warn"><b>编辑校对</b>事实核查，可退回</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>二次改写</b>多平台版本</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>排版配图</b></div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node ok"><b>人工确认发布</b></div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>数据回收</b></div>
+  </div>
+
+  <h3>能力开关：开哪几个</h3>
+
+  <p>能力开关在「设置 → 功能管理」里，先选项目，再逐项打开。内容媒体建议先开这三个：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>开关</th><th>作用</th><th>什么时候开</th></tr></thead>
+    <tbody>
+      <tr><td><strong>营销自动化</strong>（marketing）</td><td>管理营销活动、生成内容、梳理潜在客户、邮件营销</td><td>开始做订阅转化时开</td></tr>
+      <tr><td><strong>自动报告 / 智能报告</strong>（report / auto_report）</td><td>定期生成经营与内容报告，省掉你自己汇总的工夫</td><td>有第一份稳定产出后开</td></tr>
+      <tr><td><strong>社交媒体运营</strong>（social_media）</td><td>社媒侧的内容分发支持</td><td>确定要主攻社媒渠道时开</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">别一口气全开</span>
+    <p>功能管理页里还有一个 <span class="zy-btn">分析项目并建议</span>（AI 智能建议），它会根据你项目现在的状态，分析「该开哪些高级功能」，给出的建议带<strong>高 / 中 / 低</strong>优先级和 <span class="zy-btn">开启</span> 按钮，暂时不需要的标「暂不需要」。<strong>先让它建议，你挑优先级高的开</strong>，比你自己猜准。开关开多了不会直接花钱，但会带来一堆你没看的报告和通知，反而淹掉真正重要的提醒——拿不准的留「暂不需要」，以后随时能开。</p>
+  </div>
+
+  <h3>知识库怎么用：三个库各装什么</h3>
+
+  <p>内容行业的知识库不是「越多越好」，而是「<strong>让 AI 写稿时能查到三样东西：我的调性、我的素材、我写过什么</strong>」。所以在「知识库」页建三个：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>品牌与风格库（公司级）</h4>
+      <p>调性说明、标题风格、<strong>禁用词清单</strong>、常用术语表。放公司级，这样你以后开第二个内容项目也能用。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>素材库（项目级）</h4>
+      <p>行业报告、数据表、采访记录、可引用的原始出处。每份素材最好标上<strong>日期和来源</strong>，AI 引用时才带得出出处。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>往期文章与读者反馈库（项目级）</h4>
+      <p>你写过的旧文（让 AI 别重复自己）+ 读者留言与问卷（让 AI 知道读者关心什么）。</p>
+    </div>
+  </div>
+
+  <p>上传完，务必去「知识库 → RAG 检索」（页面标题「分层知识库（公司级 → 项目级）」）搜几个关键词自检，比如搜「调性」「禁用词」「上一期主题」。检索结果会显示「相似度 N%」，如果搜出来的东西不对，说明文档没解析好或者放错了库，先修知识库，再派任务。</p>
+
+  <h3>该盯什么指标</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>指标</th><th>在哪看</th><th>怎么读</th></tr></thead>
+    <tbody>
+      <tr><td><strong>内容产出量</strong></td><td>任务管理的「已完成」筛选</td><td>本月完成了多少张撰写/改写任务。它是产能指标，不是质量指标。</td></tr>
+      <tr><td><strong>订阅数</strong></td><td>以你的 newsletter / 公众号后台为准</td><td>订阅总数是账户级指标，在你的发布平台后台看。引擎侧的「营销自动化 → 营销活动」里能看到单个活动的「活动效果」统计，但那是活动维度的数据。</td></tr>
+      <tr><td><strong>打开率、点击率</strong></td><td>「营销自动化」的活动效果 + 你的邮件服务商后台</td><td>在营销活动列表点开某次活动的「活动效果」可以看到统计数据；具体展示哪几项<strong>以实际界面为准</strong>。更完整的打开 / 点击数据，建议以你的邮件服务商后台为准。</td></tr>
+      <tr><td><strong>单篇成本</strong></td><td>自动运营控制台 → <strong>计费明细</strong></td><td>见下面这段「怎么算」。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">怎么用「计费明细」算出单篇成本</span>
+    <p>打开「自动运营控制台 → 计费明细」，看卡片上的「累计花费」。假设某个自然月的累计花费是 <strong>¥260</strong>，这个月你发布了 <strong>18 篇</strong>（含分发稿），那么单篇成本大约是 <strong>¥14.4</strong>。你真正要看的不是绝对值，而是<strong>趋势</strong>：上个月 ¥22、这个月 ¥14，说明你的提示词和知识库收紧了，AI 一次过的比例提高了。<strong>注意口径</strong>：计费明细卡片上有一句说明——它包含「上游未回 usage 时按文本长度估算的兜底计费」，<strong>不是精确账单，别拿它当发票核销</strong>。用它看趋势足够，用它报销不够。</p>
+  </div>
+
+  <h3>这个行业的 5 个坑</h3>
+
+  <div class="zy-do-dont">
+    <div class="no">
+      <h4>❌ 别这样做</h4>
+      <p><strong>1. 让 AI 一次写 10 篇。</strong>你看到它写得快，就想「一次来一批」。结果是十篇稿子一个味道、互相重复，读者两周就看出来了。</p>
+      <p><strong>2. 不做事实核查。</strong>AI 给的数据看着特别像真的，出处却是编的。发出去被人抓一次，掉的是信任。</p>
+      <p><strong>3. 忽视版权。</strong>随便抓网图当配图、整段翻译别人的文章当原创、引文不写出处。</p>
+      <p><strong>4. 把 AI 生成的行业数据当真数。</strong>「据某报告，该市场年增 37%」——这句话里每个字都可能是幻觉。</p>
+      <p><strong>5. 只写不发，或只追数量。</strong>攒了 30 篇稿子躺在文件夹里；或者每周硬凑 5 篇，打开率一路下滑还不停。</p>
+    </div>
+    <div class="yes">
+      <h4>✅ 这样做</h4>
+      <p><strong>1. 一次一篇，人工过稿。</strong>派任务时把「撰写」拆成单篇，跑完一篇你审一篇。前 10 篇你必须逐字读，读的过程就是把你的调性「喂」给 AI 的过程。</p>
+      <p><strong>2. 设双闸。</strong>让编辑 Agent 过一遍「事实核查清单」，你再过一遍。<strong>规则是：没有出处的数字，不许进正文</strong>——要么补出处，要么删掉换成定性描述。</p>
+      <p><strong>3. 配图走「媒体生成中心」自己生成</strong>，或用你有授权的素材；引文一律标出处和作者；翻译不等于原创，注明来源。</p>
+      <p><strong>4. 数据要么带出处、要么标「待核实」。</strong>把这条写进创作 Agent 的提示词，「缺什么就明说缺什么」。</p>
+      <p><strong>5. 发布用人工节点卡住，并每月看一次打开趋势。</strong>连续两期下滑就停下来换选题方向，而不是加量。</p>
+    </div>
+  </div>
+
+  <h2>三、案例二：咨询工作室——卖的是判断</h2>
+
+  <p>咨询这个行业和内容行业正好相反：它<strong>最吃知识库，最怕串库</strong>。你手上握着好几家客户的机密资料，一个知识库放错层级，就可能把 A 客户的成本结构喂给 B 客户的方案。</p>
+
+  <h3>示例公司档案卡</h3>
+
+  <div class="zy-card green">
+    <h4>示例设定（不是效果承诺）</h4>
+    <div class="zy-table-wrap">
+    <table class="zy-table">
+      <tbody>
+        <tr><td><strong>业务</strong></td><td>面向中小制造企业的<strong>供应链优化咨询</strong>工作室：帮企业梳理采购、库存、交付流程，出诊断报告和落地方案。</td></tr>
+        <tr><td><strong>团队</strong></td><td>你和一位合伙人，加一支 AI 班子。项目多的时候会请 1 名外部顾问按项目计酬。</td></tr>
+        <tr><td><strong>预算</strong></td><td>项目总预算 ¥20,000（示例）；Token 月度额度 ¥800。</td></tr>
+        <tr><td><strong>周期</strong></td><td>90 天，目标交付 2 个付费项目，并把方法沉淀成可复用的 SOP。</td></tr>
+        <tr><td><strong>目标</strong></td><td>把「接单 → 研究 → 出方案 → 交付 → 沉淀」这条链路跑顺，让第二个项目比第一个省一半力气。</td></tr>
+        <tr><td><strong>前置资产</strong></td><td>20 份历史方案（已脱敏）、3 个可公开引用的客户案例、一套讲解方法论的 PPT、若干行业报告。</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <h3>这个行业特有的问题</h3>
+
+  <p>咨询的三个特点，决定了它和内容媒体的打法完全不同：</p>
+
+  <ul>
+    <li><strong>交付物是「方案与判断」，不是「产量」。</strong>你卖的是「我看过你的情况，我认为该这么办」。这种东西最难标准化，也最依赖你脑子里的积累。</li>
+    <li><strong>需要行业知识与案例沉淀。</strong>一个成熟顾问的价值，一半在于他做过多少类似的项目。AI 在这里的作用是<strong>把你散落各处的经验变成能随时调取的库</strong>。</li>
+    <li><strong>复购靠口碑。</strong>一个项目做完，客户满意就会介绍下一个。所以「案例能不能沉淀下来、下次能不能省力」直接决定你的利润。</li>
+  </ul>
+
+  <h3>Agent 配置</h3>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4>研究分析 Agent</h4>
+      <p><strong>干什么</strong>：对接「深度研究」功能，把一个课题拆成子问题，逐条查网络与企业知识库，汇总成结构化研究报告。</p>
+      <p><strong>边界</strong>：结论必须带来源；无来源的判断只能写成「待验证假设」。</p>
+      <p><strong>技能</strong>：检索、结构化分析、来源核验。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>方案撰写 Agent</h4>
+      <p><strong>干什么</strong>：把研究报告 + 客户情况整理成诊断报告与落地方案草稿。</p>
+      <p><strong>边界</strong>：只出草稿，<strong>对外交付前必须你和合伙人复核</strong>；不擅自替客户做决策承诺。</p>
+      <p><strong>技能</strong>：方案写作、结构化输出。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>客户对接 Agent</h4>
+      <p><strong>干什么</strong>：整理客户往来沟通、会议记录，提炼需求与未决事项，起草跟进邮件草稿。</p>
+      <p><strong>边界</strong>：邮件<strong>只出草稿、不发送</strong>；不承诺报价与周期。</p>
+      <p><strong>技能</strong>：会议整理、需求提炼、摘要。</p>
+    </div>
+    <div class="zy-card purple">
+      <h4>案例沉淀 Agent</h4>
+      <p><strong>干什么</strong>：项目结项时，把「问题类型 → 我们的判断 → 用了什么方法 → 结果」抽成一份脱敏 SOP 和一条案例卡。</p>
+      <p><strong>边界</strong>：脱敏是硬要求——客户名称、金额、人名一律替换成代号。</p>
+      <p><strong>技能</strong>：SOP 提炼、脱敏改写。</p>
+    </div>
+  </div>
+
+  <h3>任务结构：从研究到沉淀</h3>
+
+  <p>咨询的活几乎全是「信息整合」，所以引擎基本都选 <strong>Agent 智能体</strong>，只有大篇幅方案成文时用 <strong>循环执行</strong> 慢慢打磨。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>任务名称</th><th>描述要点</th><th>类型</th><th>引擎</th><th>权重</th><th>优先级</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>行业研究（深度研究）</td><td>用「深度研究」发起，主题如「XX 行业中小厂库存周转改善路径」，4–6 个子问题，开网络搜索 + 知识库检索</td><td>通用任务</td><td>Agent 智能体</td><td>3</td><td>P0</td></tr>
+      <tr><td>2</td><td>客户资料整理</td><td>把会谈录音转写稿、客户给的表册，用「会议导入」梳理出参会人 / 摘要 / 决策 / 行动项</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P0</td></tr>
+      <tr><td>3</td><td>诊断报告撰写</td><td>基于研究 + 客户资料，出诊断报告草稿；每个结论标注依据来源</td><td>通用任务</td><td>循环执行</td><td>4</td><td>P0</td></tr>
+      <tr><td>4</td><td>落地方案撰写</td><td>把诊断转成分阶段行动方案，含责任人建议、里程碑、风险点</td><td>通用任务</td><td>循环执行</td><td>3</td><td>P1</td></tr>
+      <tr><td>5</td><td>交付物复核</td><td>人工节点：你和合伙人逐页过一遍对外交付的文档</td><td>通用任务</td><td>Agent 智能体</td><td>1</td><td>P0</td></tr>
+      <tr><td>6</td><td>案例沉淀与 SOP 提炼</td><td>结项时抽一份脱敏案例卡 + 一份可复用 SOP，写入案例库</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>知识库：这是最吃知识库的行业</h3>
+
+  <p>别的行业知识库是「有了更好」，咨询行业是「没有就干不了」。建议建<strong>三层</strong>，而且层与层之间的边界要划得很清楚：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>层</th><th>类型</th><th>装什么</th><th>关键设置</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>方法论库</strong></td>
+        <td>公司级</td>
+        <td>你的诊断框架、分析模型、常用工具、提问清单。这是工作室的「内功」。</td>
+        <td>开「共享下级」，所有项目都能用</td>
+      </tr>
+      <tr>
+        <td><strong>案例库</strong></td>
+        <td>公司级</td>
+        <td>脱敏后的历史案例卡。写方案时 AI 会参照「类似问题我们以前怎么解」。</td>
+        <td>开「共享下级」；<strong>入库前必须脱敏</strong></td>
+      </tr>
+      <tr>
+        <td><strong>行业数据库</strong></td>
+        <td>项目级</td>
+        <td>某个客户的行业报告、公开数据、政策文件。<strong>按项目分库</strong>，互不串。</td>
+        <td>项目级，<strong>不要</strong>开共享下级</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">这一节最重要的一句话：客户机密绝不进公司级</span>
+    <p>知识库有个字段叫「<strong>共享下级</strong>」——「开启后下级项目可检索到本知识库」。它的意思是：放公司级 + 开共享下级，<strong>你所有项目在检索时都能看到它</strong>。所以客户给的原始资料、报价、成本结构、人员信息，<strong>只能放该项目的项目级知识库，并且不要开共享下级</strong>。能进公司级的，只有两样：你自己的方法论，和你已经<strong>脱敏到认不出客户</strong>的案例。这条规矩在咨询行业是红线，记死了。</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">「会议导入」怎么用</span>
+    <p>打开「研究与获客 → 会议导入」，页面标题是「会议内容导入梳理」。你可以「上传文件」（支持 txt / md / docx / pdf / xlsx / pptx，<strong>暂不支持音视频</strong>），也可以直接「粘贴文本」把会谈记录贴进去。梳理完成后会产出<strong>参会人 / 会议摘要 / 决策 / 行动项</strong>四块，每一条行动项后面有个 <span class="zy-btn">转 auto-ops 任务</span> 按钮，点了会问你「将该行动项转为 auto-ops 任务？」，确认后这条行动项就变成一条正式任务进入队列。这是咨询行业把「客户会议」直接转成「工作项」的最快路径。</p>
+  </div>
+
+  <h3>能力开关</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>能力</th><th>为什么咨询行业要开</th></tr></thead>
+    <tbody>
+      <tr><td><strong>深度研究</strong> <span class="zy-badge green">已上线</span></td><td>行业研究的核心工具。它会把主题拆成子问题，逐条查网络 + 你的知识库，最后汇总成带来源的报告。</td></tr>
+      <tr><td><strong>自动报告 / 智能报告</strong></td><td>定期给你出经营报告，省掉自己汇总项目进度和花费的工夫。</td></tr>
+      <tr><td><strong>会议导入</strong> <span class="zy-badge green">已上线</span></td><td>客户会议、访谈记录的入口，把线下沟通变成结构化资料。</td></tr>
+      <tr><td><strong>客户页面</strong> <span class="zy-badge green">已上线</span></td><td>给客户做一个<strong>只读的行业问答页</strong>。见下面这段。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">给客户一个「只读的行业问答页」</span>
+    <p>「研究与获客 → 客户页面」可以生成一个分享链接，客户用浏览器打开就能向 AI 提问，而 AI 只回答你允许它看的内容。这对咨询工作室特别有用：你可以做一个「XX 行业政策问答」页面，把<strong>行业数据库</strong>设为白名单让客户自助查，既省你答疑的工夫，又是个专业形象。三个要点：<strong>一</strong>，知识库白名单<strong>只勾行业数据库，别勾案例库</strong>（案例里有别的客户信息）；<strong>二</strong>，创建成功时会弹一句提醒——「请立即复制访问链接，token 仅本次展示，关闭后不可再查看」，所以链接一定当场复制下来；<strong>三</strong>，配上「每分钟限流」和「每日上限」，防止被人拿去刷你的 token。客户看到的页面标题是「AI 智能问答」，输入框提示「请输入您的问题…」，限 2000 字。</p>
+  </div>
+
+  <h3>该盯什么指标</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>指标</th><th>怎么算 / 在哪看</th></tr></thead>
+    <tbody>
+      <tr><td><strong>单项目利润率</strong></td><td>用「项目账本」：把该项目的收入记进去（记一笔 → 类型「收入」→ 分类「营业收入」），支出按分类记（第三方服务 / 采购成本 / 薪酬 / 其它）；利润率 =（收入 − 支出）÷ 收入。项目账本是<strong>虚拟核算</strong>，和公司账本（真实资金流水）是两本账，别混。</td></tr>
+      <tr><td><strong>方法论复用次数</strong></td><td>看案例库里被引用的次数。一个方法被第二个、第三个项目复用，才是真的资产。</td></tr>
+      <tr><td><strong>案例沉淀量</strong></td><td>结项报告里的「知识沉淀清单」会列出知识文档 / 优秀案例 / 角色 SOP 的数量。每结一个项目，这个数应该往上走。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>这个行业的 5 个坑</h3>
+
+  <div class="zy-do-dont">
+    <div class="no">
+      <h4>❌ 别这样做</h4>
+      <p><strong>1. 把客户机密资料放进公司级知识库。</strong>开了「共享下级」，B 项目做检索时就把 A 客户的数据捞出来了，方案里可能直接引用。</p>
+      <p><strong>2. AI 生成的行业数据没核实。</strong>「深度研究」的报告是带来源的，但来源本身可能不权威，或者被 AI 理解偏了。</p>
+      <p><strong>3. 方法论只装在脑子里，不沉淀。</strong>第三个项目还在从头想框架，AI 帮不上忙，利润上不去。</p>
+      <p><strong>4. 方案直接发给客户，不经人工复核。</strong>报价、工期、承诺写错一个字，赔的是信誉。</p>
+      <p><strong>5. 什么活都接，没有细分定位。</strong>库越建越杂，案例永远复用不上。</p>
+    </div>
+    <div class="yes">
+      <h4>✅ 这样做</h4>
+      <p><strong>1. 客户资料一律放项目级、不开共享下级。</strong>公司级只放方法论和脱敏案例。建库时把这条当成检查项，和建知识库的动作绑在一起。</p>
+      <p><strong>2. 开「来源引用」，逐条点开看。</strong>深度研究的详情里能看到每个子问题的结论和它引用的来源（网络 / 知识库，带相似度）。<strong>写进方案前，关键数据你必须自己点开原始链接看一眼</strong>。</p>
+      <p><strong>3. 每个项目结项必跑一次「案例沉淀」。</strong>把它设成固定动作，产出脱敏案例卡 + SOP。半年后你会感谢自己。</p>
+      <p><strong>4. 交付物走人工节点。</strong>把「交付物复核」做成一个人工处理节点，处理人写你和合伙人，SLA 给宽松一点（比如 2 天）。</p>
+      <p><strong>5. 定一个细分方向，只接挨着的活。</strong>让案例库和方法论库能真正叠加。</p>
+    </div>
+  </div>
+
+  <h2>四、案例三：传统制造——已有生意怎么上 AI</h2>
+
+  <p>前两个行业的共同点是「从零开始」。制造不一样：<strong>工厂已经开了很多年，有产品、有客户、有流程、有一堆历史资料</strong>。<strong>这场戏的关键不是「AI 帮你造」，而是「AI 帮你把已经有的东西用起来」</strong>，以及——<strong>别让 AI 对着客户把技术参数说错</strong>。</p>
+
+  <h3>示例公司档案卡</h3>
+
+  <div class="zy-card amber">
+    <h4>示例设定（不是效果承诺）</h4>
+    <div class="zy-table-wrap">
+    <table class="zy-table">
+      <tbody>
+        <tr><td><strong>业务</strong></td><td>一家做<strong>精密五金零部件</strong>的中小厂（CNC 加工），客户一半国内、一半海外中小品牌。有稳定老客户，也想开拓外贸。</td></tr>
+        <tr><td><strong>团队</strong></td><td>老板（你）+ 1 名外贸业务 + 1 名技术工程师，加一支 AI 班子。</td></tr>
+        <tr><td><strong>预算</strong></td><td>项目总预算 ¥50,000（示例）；Token 月度额度 ¥1,500。</td></tr>
+        <tr><td><strong>周期</strong></td><td>90 天：先把资料结构化，再上外贸站与客户问答库，最后跑获客。</td></tr>
+        <tr><td><strong>目标</strong></td><td>既有产品资料结构化入库；一个可对外的产品页 / 外贸站；一套能回答技术参数的客户问答知识库；一批可跟进的外贸询盘。</td></tr>
+        <tr><td><strong>前置资产</strong></td><td>产品目录 PDF、各产品的工艺文件与公差表、近三年历史报价 Excel、客户名单 Excel、若干本地图纸文件（在工程师电脑里）。</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <h3>这个行业特有的问题</h3>
+
+  <ul>
+    <li><strong>不是从 0 开始。</strong>你不缺内容，你缺的是<strong>把几十年攒下来的东西整理成 AI 能用的形式</strong>。所以第一步不是「让 AI 写东西」，而是「把资产搬进来」。</li>
+    <li><strong>资料里有「对错」。</strong>工艺参数、公差、材质、认证——这些东西错一个小数点就是事故。<strong>内容行业写错一句是掉粉，制造行业写错一个数是掉单、甚至出事</strong>。所以必须有「待确认」这道闸。</li>
+    <li><strong>要接内部系统。</strong>ERP、报价系统、图纸库都在内部，AI 要碰这些，就得通过<strong>连接器</strong>，而连接器的写操作必须有人把关。</li>
+  </ul>
+
+  <h3>第一步：导入既有资产（这一步价值最高）</h3>
+
+  <p>别急着建 Agent。制造企业的第一周应该全部花在<strong>导入</strong>上，顺序是：先把散乱资料搬进系统，再加一道「待确认」的闸。三个入口：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>用「现有项目导入」把资料一次性搬进来</h4>
+      <p>在「AI 问答」页或项目管理里找到「现有项目导入」，页面标题是「现有项目导入」。左边卡片填<strong>项目名称</strong>（提示「已进行中项目的名称」）、<strong>项目描述</strong>（「一句话说明项目定位」），然后把产品目录 PDF、工艺文件、历史报价 Excel 拖进<strong>「既有资料」</strong>（提示「支持 txt/md/docx/pdf/xlsx/csv 等，单文件 ≤ 50MB；需先创建会话」）。如果之前和老客户的沟通要点散在聊天记录里，贴进「聊天记录」框。<strong>点「创建导入会话」，再点「上传到会话」</strong>。右边「AI 整理的项目上下文」会帮你归纳出项目背景 / 当前阶段 / 关键联系人 / 未决事项，确认没问题点「整理并完成建项」。</p>
+    </li>
+    <li>
+      <h4>用「知识库」把资料分成可检索的几层</h4>
+      <p>导入只是把文件放进来，要能被检索还得建知识库。建议建：<strong>产品库</strong>（产品型号、规格、材质、应用场景）、<strong>工艺与质量库</strong>（工艺流程、公差标准、检测方法、认证证书）、<strong>客户与报价库</strong>（客户名单、历史报价）。<strong>前两个可以放公司级并开共享下级</strong>（全厂通用）；<strong>「客户与报价库」务必放项目级、不要共享</strong>——报价成本是命根子。</p>
+    </li>
+    <li>
+      <h4>用「待确认知识清单」过一道闸（最关键）</h4>
+      <p>这是制造行业<strong>必用</strong>的一个功能。页面标题是「待确认知识清单」，顶部提示原文写着：「以下知识条目需人工确认后才会写入正式知识库并参与全局检索」。系统从你上传的资料里抽出的条目会先停在这里，<strong>状态是「待确认」</strong>，你（或者让技术工程师）逐条核对：工艺参数对不对、公差对不对、这是不是已经作废的旧版本。核对无误点 <span class="zy-btn ok">确认入库</span>，状态变成「已入库」才真正进入检索范围。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">为什么这道闸对制造企业是命门</span>
+    <p>你上传的工艺文件里，可能同时躺着 2019 版和 2023 版的公差表。如果直接入库，AI 检索时可能捞到旧的那份，然后对客户答出一个<strong>已经不用的参数</strong>。轻则客户觉得你不专业，重则按旧参数下单一整批报废。<strong>所以：凡是涉及具体数值的知识，一律走「待确认知识清单」，由懂技术的人点「确认入库」。</strong>这一步多花一天，能省掉后面的大麻烦。旧版本文件建议直接不上传，或者上传时就标清楚「已作废」。</p>
+  </div>
+
+  <h3>Agent 配置</h3>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4>技术支持 Agent</h4>
+      <p><strong>干什么</strong>：回答客户关于产品参数、材质、工艺能力、交期规则的问题。</p>
+      <p><strong>边界</strong>：<strong>只能引用「已入库」的知识回答</strong>；知识库里没有的，必须回答「我需要与技术确认后回复」，不许推测。</p>
+      <p><strong>技能</strong>：知识库检索、FAQ 应答、意图识别。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>报价辅助 Agent</h4>
+      <p><strong>干什么</strong>：根据历史报价和工艺复杂度，起草一份报价单草稿供你参考。</p>
+      <p><strong>边界</strong>：<strong>只出草稿，绝不自动发出</strong>；成本、利润率数据只在项目级知识库内使用。</p>
+      <p><strong>技能</strong>：数据整理、模板填充。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>外贸内容 Agent</h4>
+      <p><strong>干什么</strong>：把中文产品资料改写成英文产品页、英文邮件草稿、展会资料。</p>
+      <p><strong>边界</strong>：涉及<strong>认证、标准、参数</strong>的英文表述，必须经技术人员确认；邮件只出草稿。</p>
+      <p><strong>技能</strong>：翻译改写、产品文案、邮件写作。</p>
+    </div>
+    <div class="zy-card purple">
+      <h4>生产数据分析 Agent</h4>
+      <p><strong>干什么</strong>：分析良率、交期、成本的趋势，出分析报告。</p>
+      <p><strong>边界</strong>：需要数据接入时走<strong>连接器</strong>，且默认只读。</p>
+      <p><strong>技能</strong>：数据整理、趋势分析、报告输出。</p>
+    </div>
+  </div>
+
+  <h3>任务结构</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>任务名称</th><th>描述要点</th><th>类型</th><th>引擎</th><th>权重</th><th>优先级</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>产品资料结构化</td><td>把产品目录拆成一条条结构化条目（型号 / 材质 / 规格 / 应用），逐条走「待确认」</td><td>通用任务</td><td>Agent 智能体</td><td>4</td><td>P0</td></tr>
+      <tr><td>2</td><td>外贸产品页文案</td><td>每个主推型号出一份英文产品页：标题 / 卖点 / 参数表 / 应用场景</td><td>通用任务</td><td>Agent 智能体</td><td>3</td><td>P1</td></tr>
+      <tr><td>3</td><td>客户问答知识库整理</td><td>把技术支持 Agent 要回答的问题做成一套 FAQ，逐条配标准答案</td><td>通用任务</td><td>Agent 智能体</td><td>3</td><td>P0</td></tr>
+      <tr><td>4</td><td>报价单模板</td><td>做一套报价单模板（含成本项、有效期、付款条款占位）</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>5</td><td>展会 / 邮件获客素材</td><td>展会邀请函、产品手册、客户跟进邮件草稿；<strong>发送前走人工审批</strong></td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>连接器与边缘：制造行业绕不开的两个「物理接口」</h3>
+
+  <p>这是制造行业和前两个行业最大的不同：<strong>AI 要碰真实系统、要碰真实文件</strong>。这两件事分别靠「连接器」和「边缘客户端」解决。</p>
+
+  <h4>连接器（MCP）：AI 连接内部系统的插头</h4>
+
+  <p>在「接入与执行 → 连接器」打开，页面标题是「连接器（MCP）」，分「连接器 / 审计」两个页签。点 <span class="zy-btn">注册连接器</span>，填名称、类型、提供商、权限模式、配置、描述、数据范围、审核策略。类型有三类：<strong>通信与协同 / 开发与代码 / 数据与分析</strong>（你接 ERP、报价系统属于「数据与分析」）。</p>
+
+  <p><strong>权限模式</strong>这一项要特别小心，它有三个值：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>权限模式</th><th>含义</th><th>制造行业建议</th></tr></thead>
+    <tbody>
+      <tr><td>只读</td><td>只能读，不能改</td><td><strong>接 ERP、报价系统、数据库，一律先选这个</strong></td></tr>
+      <tr><td>写需审核</td><td>想执行写操作时，先送人工审核，批准后才执行</td><td>确实需要 AI 改数据时用这个</td></tr>
+      <tr><td>写自动（高危）</td><td>写操作直接自动执行</td><td><strong>起步期不要用</strong>。名字里就写了「高危」。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>还有一个「审核策略」字段，你可以直接写上你的规矩，比如「所有发送操作需人工审核」——这就是那条通用提示里的例子。选「写需审核」时，AI 发起写操作后，你会看到结果提示「<strong>已送人工审核，待批准后执行</strong>」；这时候去「审计」页签，会看到这条记录的状态是「待审核」，批准后才变成「已执行」。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">Kill-Switch 与审计日志</span>
+    <p>每个连接器后面都有一个 <span class="zy-btn danger">Kill-Switch</span> 按钮，点下去会问你「紧急切断该连接器全部调用？」——确认后这个连接器的所有调用立即停掉。<strong>这是你的保险丝</strong>：万一 AI 通过某个连接器做出了异常动作，不用去改权限，直接切断就行。「审计」页签会记录每一次调用的连接器、操作、方向（读 / 写）、状态、Agent、任务、时间，出问题第一个来这儿查。</p>
+  </div>
+
+  <h4>边缘客户端：本地图纸怎么进来</h4>
+
+  <p>工程师电脑里的图纸、扫描件、本地文档，不需要你手动一个个传。装「本地边缘客户端」（第 <a href="07-知识与资料导入.html">07 章</a>讲过怎么装），它在你电脑上跑一个小工具，自动扫描、上传。「接入与执行 → 边缘接入」页能看到：连接状态（已连接 / 未连接）、在线客户端数、客户端版本、累计上传文件数、WebSocket 端点和最近心跳。上传的文件有四种状态：<strong>已上传 / 处理中 / 已索引 / 失败</strong>。看到「失败」就点文件名查原因，通常是格式不支持或文件太大。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">边缘客户端界面是英文的，别慌</span>
+    <p>这个小工具本身是英文界面（托盘菜单只有 <code>Status</code>、<code>Open Logs</code>、<code>Quit</code> 三项），这是正常的。它的<strong>状态和上传记录，你在网页端的「边缘接入」页看中文就行</strong>，不用去研究那个小工具。两点提醒：<code>Open Logs</code> 现在点开会直接打开日志目录，排查断连时很好用；原来那个 <code>Reconnect</code> 菜单项<strong>已经移除</strong>了，客户端会自动重连（指数退避），不要再去找它。</p>
+  </div>
+
+  <h3>该盯什么指标</h3>
+
+  <div class="zy-grid c3">
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">询盘量</div>
+      <div class="zy-kpi-value">—</div>
+      <div class="zy-kpi-hint">外贸站 / 邮件带来的有效询盘数。引擎侧看任务产出与客户页面日志，实际询盘以你的邮箱和表单为准。</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">报价响应时长</div>
+      <div class="zy-kpi-value">—</div>
+      <div class="zy-kpi-hint">从客户询价到你把报价发出去用了多久。用报价辅助 Agent 出草稿能明显压缩这一段。</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">资料结构化进度</div>
+      <div class="zy-kpi-value">—</div>
+      <div class="zy-kpi-hint">「待确认知识清单」里已入库条目 / 总条目。这个数往上走，AI 才越来越有用。</div>
+    </div>
+  </div>
+
+  <h3>这个行业的 5 个坑</h3>
+
+  <div class="zy-do-dont">
+    <div class="no">
+      <h4>❌ 别这样做</h4>
+      <p><strong>1. 把 AI 生成的技术参数当准数发给客户。</strong>知识库里没有的参数，AI 有可能「顺着说下去」，答出一个看着专业但错的数字。</p>
+      <p><strong>2. 内部资料权限过宽。</strong>客户名单、历史报价、成本表放进公司级开共享下级，等于对全公司所有项目开放。</p>
+      <p><strong>3. 一上来就改造所有流程。</strong>想一次把 ERP、报价、生产、客服全接上，结果每个都做一半。</p>
+      <p><strong>4. 用「写自动」模式接内部系统。</strong>AI 直接改你的生产数据，出事了都不知道哪一步错了。</p>
+      <p><strong>5. 图纸和工艺文件不分版本就入库。</strong>旧版公差表和新版混在一起，AI 引用哪个全看运气。</p>
+    </div>
+    <div class="yes">
+      <h4>✅ 这样做</h4>
+      <p><strong>1. 给技术支持 Agent 定死一条规矩：只答已入库的知识，没有就说「需与技术确认」。</strong>把这条写进它的提示词。对外正式报出的参数，一律由技术工程师复核。</p>
+      <p><strong>2. 报价、成本、客户名单放项目级、不开共享</strong>；只有产品公开资料和通用工艺标准可以放公司级。</p>
+      <p><strong>3. 先做一到两个场景。</strong>建议从「产品资料结构化 + 客户问答库」开始，跑顺了再谈生产数据。</p>
+      <p><strong>4. 内部系统一律先「只读」</strong>，确需写操作再升到「写需审核」，永远别用「写自动」。每个连接器记住 Kill-Switch 在哪。</p>
+      <p><strong>5. 过「待确认知识清单」这道闸，旧版本文件宁可不上传。</strong>入库前让技术工程师点「确认入库」。</p>
+    </div>
+  </div>
+
+  <h2>五、案例四：本地服务——AI 管前端，线下靠人</h2>
+
+  <p>这是四个案例里<strong>能力边界最需要讲清楚</strong>的一个。本地服务（家政、保洁、装修、教培、维修……）的交付发生在<strong>线下</strong>：师傅要上门，老师要进教室，装修队要到现场。AI 不能替你去干活。所以你唯一正确的期待是——<strong>让 AI 把「获客 → 跟进 → 沉淀」这条前端链路管起来，把线下那部分的人解放出来</strong>。</p>
+
+  <h3>示例公司档案卡</h3>
+
+  <div class="zy-card purple">
+    <h4>示例设定（不是效果承诺）</h4>
+    <div class="zy-table-wrap">
+    <table class="zy-table">
+      <tbody>
+        <tr><td><strong>业务</strong></td><td>同城<strong>家庭保洁与家电清洗</strong>服务（后续可扩到局部装修）。服务半径覆盖本市主城区。</td></tr>
+        <tr><td><strong>团队</strong></td><td>你（负责接单与派工）+ 2 名师傅，加一支 AI 班子。</td></tr>
+        <tr><td><strong>预算</strong></td><td>项目总预算 ¥8,000（示例）；Token 月度额度 ¥300。</td></tr>
+        <tr><td><strong>周期</strong></td><td>90 天：先跑本地内容获客，再把跟进与回访标准化。</td></tr>
+        <tr><td><strong>目标</strong></td><td>把「本地内容 → 咨询线索 → 上门转化 → 回访复购」这条链路跑顺，让师傅的档期尽量排满。</td></tr>
+        <tr><td><strong>前置资产</strong></td><td>几百张完工前后对比照、一批老客户微信群、两位师傅（含服务话术与常见问题）。</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <h3>先划边界：AI 能做什么，不能做什么</h3>
+
+  <p>这一节是本章最重要的教学点，请慢读。把这张表当成你和 AI 的「分工合同」：</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>✅ AI 能做的（前端 + 后端）</h4>
+      <p><strong>内容获客</strong>：写本地服务介绍页、案例稿、科普问答，做本地 SEO 选题。</p>
+      <p><strong>话术准备</strong>：给咨询客户准备应答话术、报价说明、异议处理草稿。</p>
+      <p><strong>排期跟进</strong>：提醒你哪些线索该跟进了、哪些客户该回访了；生成跟进消息草稿。</p>
+      <p><strong>客户问答页</strong>：给客户一个只读的服务问答页（价格区间、服务流程、注意事项）。</p>
+      <p><strong>复盘</strong>：汇总线索来源、转化情况、复购情况，出复盘报告。</p>
+    </div>
+    <div class="no">
+      <h4>❌ AI 不能做的（线下环节）</h4>
+      <p><strong>上门服务</strong>：师傅到客户家做保洁、清洗，AI 去不了。</p>
+      <p><strong>现场勘察</strong>：装修类的量房、定方案，必须人到现场看。</p>
+      <p><strong>面对面成交</strong>：最终那句「行，就按这个价，明天来」是人谈的，AI 替代不了。</p>
+      <p><strong>质量兜底</strong>：服务出问题，赔礼道歉、补救，得你亲自处理。</p>
+    </div>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">最常见的翻车：让 AI 说它做不到的事</span>
+    <p>如果你的销售话术、客户问答页里，AI 写出了「<strong>保证全屋无尘</strong>」「<strong>不满意全额退</strong>」「<strong>当天预约当天上门</strong>」这类话，而你的师傅实际做不到，那每一条都是纠纷的种子。<strong>硬要求</strong>：所有对外话术，涉及<strong>承诺、时效、退款、效果</strong>的四类内容，必须由你逐字审过再发布；客户问答页的知识库白名单里，<strong>只放官方确认过的服务说明，不放销售临时发挥的话术</strong>。</p>
+  </div>
+
+  <h3>Agent 配置</h3>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>内容获客 Agent</h4>
+      <p><strong>干什么</strong>：写本地服务页、案例稿、科普问答；做本地 SEO 选题。</p>
+      <p><strong>边界</strong>：涉及价格、时效、承诺的表述，标「待人工确认」，不自作主张。</p>
+      <p><strong>技能</strong>：内容写作、本地 SEO、案例改写。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>客户跟进 Agent</h4>
+      <p><strong>干什么</strong>：整理线索、生成跟进消息与电话话术草稿、提醒该跟进的人。</p>
+      <p><strong>边界</strong>：<strong>不自动发消息、不自动打电话</strong>；电话和上门都做成人工节点，由你或师傅执行。</p>
+      <p><strong>技能</strong>：线索整理、话术草稿、待办提醒。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>客服问答 Agent</h4>
+      <p><strong>干什么</strong>：通过「客户页面」回答客户关于服务流程、价格区间、注意事项的问题。</p>
+      <p><strong>边界</strong>：只答服务说明；不承诺具体上门时间、不报最终价、不接投诉（投诉转人工）。</p>
+      <p><strong>技能</strong>：FAQ 应答、意图识别、转人工判断。</p>
+    </div>
+  </div>
+
+  <h3>任务结构</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>任务名称</th><th>描述要点</th><th>类型</th><th>引擎</th><th>权重</th><th>优先级</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>本地服务内容与 SEO</td><td>写「本市 + 服务词」的内容页与科普问答，做 20 个本地选题</td><td>通用任务</td><td>Agent 智能体</td><td>3</td><td>P1</td></tr>
+      <tr><td>2</td><td>案例包装</td><td>把完工前后对比照配成案例稿：问题 → 服务内容 → 前后对比 → 客户反馈（须经客户同意）</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>3</td><td>客户跟进话术</td><td>针对不同咨询场景准备话术草稿（价格询问 / 对比同行 / 犹豫不决）</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>4</td><td>回访与复购</td><td>服务完成后按周期生成回访清单与回访话术草稿，标记复购时机</td><td>通用任务</td><td>Agent 智能体</td><td>2</td><td>P2</td></tr>
+      <tr><td>5</td><td>客户页面维护</td><td>维护服务问答页的知识库，按客户常见问题更新答案</td><td>通用任务</td><td>Agent 智能体</td><td>1</td><td>P2</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>人工节点怎么用：把「线下动作」放进系统</h3>
+
+  <p>本地服务最有价值的用法，是把「<strong>需要打电话</strong>」「<strong>需要上门勘察</strong>」这类线下动作，做成一个个<strong>人工处理节点</strong>。这样它们就不会散落在你脑子里和微信里，而是变成有<strong>处理人、有期限、会催办</strong>的待办。</p>
+
+  <p>在「自动运营控制台 → 人工节点」点 <span class="zy-btn">新建节点</span>，字段和本书第 <a href="09-自动运营.html">09 章</a>一致：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>字段</th><th>含义</th><th>本案例怎么填</th></tr></thead>
+    <tbody>
+      <tr><td><strong>标题</strong></td><td>这件事叫什么</td><td>如「给张女士回电确认上门时间」「周六上午现场勘察」</td></tr>
+      <tr><td><strong>描述</strong></td><td>要做什么、有什么背景</td><td>写清客户的诉求、已知信息、你要问清什么</td></tr>
+      <tr><td><strong>自主级别</strong></td><td>L0-全自主执行 / L1-通知不等待 / L2-一键确认 / L3-强制人工审核</td><td>线下动作一律 <strong>L3-强制人工审核</strong>，因为 AI 根本做不了</td></tr>
+      <tr><td><strong>关联任务 ID</strong></td><td>这个节点属于哪条任务</td><td>如关联「客户跟进话术」那条</td></tr>
+      <tr><td><strong>SLA 超时（秒）</strong></td><td>多久没处理就算超时</td><td>见下面那个坑——别设太短</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>通道分三种：<strong>红-强制 / 黄-敏感 / 绿-例行</strong>。你的事大多走<strong>黄</strong>（敏感，需要确认）或<strong>红</strong>（强制，比如客户投诉）。建成之后，节点卡片上会显示「通道 / 自主级别 L{n} / SLA（秒）/ 处理人 / 描述」，处理时有四个按钮：<span class="zy-btn">确认完成</span>、<span class="zy-btn ghost">通知催促</span>、<span class="zy-btn warn">升级处理</span>、<span class="zy-btn ghost">移动审批</span>。人在外面跑的时候，用手机打开移动端审批页就能处理，页面上会显示「描述 / 通道 / 自主级别 L{n} / SLA(秒) / 处理人 / 已有回复」，底下两个按钮 <span class="zy-btn danger">拒绝</span> 和 <span class="zy-btn ok">批准</span>。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">SLA 设太短，反而会积压</span>
+    <p>新手很容易想「越快越好」，把电话跟进节点的 SLA 设成 15 分钟。结果你正在客户家里干活，一堆节点全部超时、全部升级、通知炸屏，你反而更乱。<strong>正确做法</strong>：按「你实际能处理的节奏」设。电话类节点，工作时间给 2–4 小时；上门勘察类，给 1–2 天；并且<strong>只在服务时段内设置超时</strong>（深夜不会有人接电话）。SLA 的意义是「不漏掉」，不是「催命」。</p>
+  </div>
+
+  <h3>该盯什么指标</h3>
+
+  <div class="zy-grid c4">
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">线索量</div>
+      <div class="zy-kpi-value">—</div>
+      <div class="zy-kpi-hint">每周新增咨询数。来源：客户页面日志 + 你自己的渠道后台。</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">上门 / 到店转化</div>
+      <div class="zy-kpi-value">—</div>
+      <div class="zy-kpi-hint">线索 → 实际上门的比例。这是本地服务最核心的一个数。</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">响应时长</div>
+      <div class="zy-kpi-value">—</div>
+      <div class="zy-kpi-hint">客户咨询到第一次回应的间隔。监控指标里有「客户响应时间 P95」可以直接参考。</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">复购率</div>
+      <div class="zy-kpi-value">—</div>
+      <div class="zy-kpi-hint">老客户二次下单比例。本地服务的利润一半在这里。</div>
+    </div>
+  </div>
+
+  <h3>这个行业的 5 个坑</h3>
+
+  <div class="zy-do-dont">
+    <div class="no">
+      <h4>❌ 别这样做</h4>
+      <p><strong>1. 让 AI 承诺做不到的服务。</strong>话术里冒出「保证」「当天必达」「全退」，师傅做不到就是纠纷。</p>
+      <p><strong>2. 线上线索丢了没人跟。</strong>咨询进来了，没人管，两天后客户找了别家。</p>
+      <p><strong>3. SLA 设得太短，反而积压。</strong>全部超时升级，通知把你淹没，真正急的反而漏了。</p>
+      <p><strong>4. 客户住址、电话放公司级共享库。</strong>这属于个人隐私，一旦串库就是大事。</p>
+      <p><strong>5. 用 AI 生成「好评」或刷评价。</strong>这是明确的红线，别碰。</p>
+    </div>
+    <div class="yes">
+      <h4>✅ 这样做</h4>
+      <p><strong>1. 对外话术四类内容必须人工过：「承诺 / 时效 / 退款 / 效果」。</strong>客户问答页只放官方确认过的服务说明。</p>
+      <p><strong>2. 每条线索都生成一个人工跟进节点，带处理人和 SLA。</strong>「不漏掉」靠机制，不靠记性。</p>
+      <p><strong>3. SLA 按你实际节奏设</strong>，电话 2–4 小时、勘察 1–2 天，并且只在服务时段超时。</p>
+      <p><strong>4. 客户个人信息一律项目级、不开共享，能脱敏就脱敏。</strong></p>
+      <p><strong>5. 评价就老老实实请客户留，</strong>AI 可以用来写「请客户留评的话术草稿」，但不能代写评价内容。</p>
+    </div>
+  </div>
+
+  <h2>六、四个案例的横向总结</h2>
+
+  <p>为什么偏偏是这四个行业？因为它们刚好落在两个坐标轴上，能把各种情况都覆盖到。<strong>第一个轴是「文本化程度」</strong>：内容媒体和咨询的交付物几乎全是文字，AI 能直接顶上；制造和本地服务的交付物是实物或现场服务，AI 只能当帮手。<strong>第二个轴是「是否依赖线下」</strong>：内容媒体和咨询全程在线，制造和本地服务都有一大块发生在物理世界。</p>
+
+  <p>把这两条轴交叉一下，你会得到四个象限：<strong>内容媒体</strong>是「高文本 + 全线上」，<strong>咨询</strong>是「高文本 + 半线下（要见客户）」，<strong>制造</strong>是「低文本 + 半线下」，<strong>本地服务</strong>是「低文本 + 全线下」。你的行业一定落在其中某一格或某两格之间——找到最接近的那一格，就知道该照哪个案例的力度用 AI：<strong>右上角放开用，左下角收着用，中间那两格「前端放手、后端把关」。</strong>这比记住任何一条具体配置都有用，因为你换个细分行业，坐标轴不变。</p>
+
+  <p>四个案例走完，把它们并排再看一次。这张表是本章最值得截图保存的一页。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>行业</th><th>早期 Agent</th><th>必开能力</th><th>核心指标</th><th>AI 能力边界</th><th>最容易翻车的地方</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>内容媒体</strong></td>
+        <td>内容主笔助理（1 个全能）</td>
+        <td>营销自动化、自动报告、社交媒体运营</td>
+        <td>订阅数、内容产出量、单篇成本</td>
+        <td>能写到成稿，但<strong>事实核查和最终定稿必须人做</strong></td>
+        <td>批量生产导致质量崩塌；编造数据与出处</td>
+      </tr>
+      <tr>
+        <td><strong>咨询服务</strong></td>
+        <td>研究分析 + 客户对接</td>
+        <td>深度研究、自动报告、会议导入、客户页面</td>
+        <td>单项目利润率、方法论复用次数、案例沉淀量</td>
+        <td>能出研究与方案草稿，但<strong>客户资料隔离与交付复核必须人把关</strong></td>
+        <td>客户机密串库；行业数据未核实</td>
+      </tr>
+      <tr>
+        <td><strong>传统制造</strong></td>
+        <td>产品资料整理（先导入资产）</td>
+        <td>连接器（只读起步）、边缘接入、客户页面、自动报告</td>
+        <td>询盘量、报价响应时长、资料结构化进度</td>
+        <td>能整理与应答，但<strong>技术参数、报价、对外承诺必须人确认</strong></td>
+        <td>把 AI 生成的技术参数当真数发给客户</td>
+      </tr>
+      <tr>
+        <td><strong>本地服务</strong></td>
+        <td>内容获客</td>
+        <td>营销自动化、客户页面、通知中心</td>
+        <td>线索量、上门转化、响应时长、复购率</td>
+        <td>只能管<strong>前端获客与后端跟进</strong>；上门、勘察、成交做不了</td>
+        <td>对外许诺做不到的服务；线索丢失没人跟</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>什么行业适合先上 AI，什么行业要谨慎</h3>
+
+  <p>这套系统不是「所有行业都一样好用」。你可以用下面四个问题快速判断，它们的权重从高到低。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>判断维度</th><th>适合先上</th><th>要谨慎</th><th>为什么</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>交付物能否文本化</strong></td>
+        <td>方案、内容、代码、资料、话术、报表——本质是文字与信息</td>
+        <td>实物制造、现场施工、面对面服务——本质是物理动作</td>
+        <td>AI 最擅长处理文本。文本占比越高，AI 越能直接顶上；物理动作占比越高，AI 越只能当「帮手」。</td>
+      </tr>
+      <tr>
+        <td><strong>结果能否验证</strong></td>
+        <td>写错了你能一眼看出来（错别字、逻辑不通、数据不对）</td>
+        <td>错误很隐蔽、要很久才发现（工艺参数、合规条款、医疗建议）</td>
+        <td>能快速验证的活，敢放开让 AI 多做；验证成本高的活，必须人工复核每一个对外输出。</td>
+      </tr>
+      <tr>
+        <td><strong>是否需要证照与监管</strong></td>
+        <td>普通商业服务，发错了改就行</td>
+        <td>医疗、金融、法律、教育——一句话说错就可能违规</td>
+        <td>强监管行业里，AI 的输出必须先过「合规审查」这一关，且所有对外内容必须留痕可追溯。</td>
+      </tr>
+      <tr>
+        <td><strong>是否依赖线下</strong></td>
+        <td>交付全程在线（软件、内容、咨询报告）</td>
+        <td>交付必须到场（装修、家政、维修、教培）</td>
+        <td>线下的活 AI 干不了，只能用人工节点把「人该做的事」管起来，别指望 AI 替代。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一句话结论</span>
+    <p><strong>越「文本化、可验证、无证照、无线下」的行业，越适合先上、放开用；越相反，越要先划定 AI 的边界、把人工关加厚。</strong>但注意——这不代表「物理行业不能用」。制造和本地服务这两个案例都说明：<strong>哪怕交付在线下，前端获客、资料整理、话术准备、跟进提醒、复盘这些环节 AI 一样能省你大量时间</strong>。只是你要把期待放对位置：AI 是「把重复活接走的助手」，不是「帮你干活的替身」。</p>
+  </div>
+
+  <h3>从一个行业抄到另一个行业：什么能抄，什么不能抄</h3>
+
+  <p>你如果做过一个行业的项目，想复制到另一个行业，下面这份清单能帮你少走弯路。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>✅ 可以放心抄的</h4>
+      <p><strong>操作顺序</strong>：建公司 → 建项目 → 喂资料 → 建 Agent → 派任务 → 复盘。四个行业完全一样。</p>
+      <p><strong>能力开关的用法</strong>：设置 → 功能管理选项目、逐个开关、用「分析项目并建议」拿建议，套路通用。</p>
+      <p><strong>人工节点的做法</strong>：任何「需要人点一下」的环节，都可以做成节点，带通道 / 自主级别 / SLA / 处理人。</p>
+      <p><strong>预算与熔断的节奏</strong>：80% 预警 → 超限熔断 → 补预算恢复，全行业通用。</p>
+      <p><strong>任务卡的字段结构</strong>：任务名称 / 描述 / 类型 / 优先级 / 时间片权重 / 引擎，全行业通用。</p>
+    </div>
+    <div class="no">
+      <h4>❌ 不能照搬的</h4>
+      <p><strong>Agent 的职责划分</strong>：内容行业的「创作 / 编辑 / 分发」到制造行业就不成立，要按业务工序重新拆。</p>
+      <p><strong>知识库的分层方式</strong>：内容行业按「素材 / 往期」分，咨询按「方法论 / 案例 / 行业数据」分，制造按「产品 / 工艺 / 客户报价」分。层级跟着业务走。</p>
+      <p><strong>指标</strong>：内容看订阅和单篇成本，本地服务看线索与复购。指标抄错了，你会盯着一堆和你无关的数字。</p>
+      <p><strong>时间片权重</strong>：哪个任务是关键路径，每个行业都不一样，必须按自己的业务重排。</p>
+      <p><strong>风险清单</strong>：每个行业最容易翻车的地方不同，那一栏要自己重写，别照抄别人的坑。</p>
+    </div>
+  </div>
+
+  <h3>第一次上手：不管你选哪个行业，先做这五件事</h3>
+
+  <p>四个案例的行业不同，但「第一次动手」的动作高度重合。如果你读完还在犹豫「从哪儿开始」，按下面这个顺序走，一周内能跑起来。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>把「生意的定义」写清楚，别急着建 Agent</h4>
+      <p>建项目时，「项目描述」和「项目目标」是两个真正会改变 AI 行为的字段（第 <a href="03-创建项目.html">03 章</a>讲过）。描述回答「这是个什么生意」，目标回答「做到什么程度算赢」。四个案例里没有一个是从「先建一堆 Agent」开始的，都是从「把话说明白」开始的。写不清就先别建，写清了再往下。</p>
+    </li>
+    <li>
+      <h4>先喂资料，再看产出</h4>
+      <p>不管哪个行业，第一周都该花在「把资料搬进知识库」上。内容是旧文与素材，咨询是方法论与脱敏案例，制造是产品目录与工艺文件，本地服务是完工照片与服务说明。<strong>资料越具体，AI 写出来的东西越像你的，而不是像路人。</strong>搬完记得去「RAG 检索」搜几个关键词自检。</p>
+    </li>
+    <li>
+      <h4>只建一个全能 Agent，跑通一件小事</h4>
+      <p>不要一上来就拆四个岗。建一个「什么都能干一点」的 Agent，让它先完成一件具体的小事——写一篇稿、整理一份资料、答一类客户问题。跑通之后你就知道它的脾气了，也才知道该往哪个方向拆。拆岗是「组织进化」按数据建议的，你确认才生效。</p>
+    </li>
+    <li>
+      <h4>把「对外的东西」全设成人工关</h4>
+      <p>发邮件、发布内容、给客户报价、承诺时效——这四类内容，不管哪个行业都要有一道人工审批。做法是把它们关进<strong>人工处理节点</strong>，自主级别设成 L3（强制人工审核），处理人写你自己。这不是不信任 AI，是这几个位置本来就该有人签字。</p>
+    </li>
+    <li>
+      <h4>一个月后只做一件事：看账本和复盘</h4>
+      <p>第一个月结束时，打开「计费明细」看花了多少、打开「项目账本」看收入支出、打开「经营驾驶舱」看任务完成率与预算消耗率。然后只问自己一个问题：<strong>这个月，哪一类活最占用我的时间？</strong>答案就是你下个月该交给 AI 的那件事。不要一次列十件，一个月推进一件，比什么都强。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">为什么这五件事四个行业都一样</span>
+    <p>因为它们的本质都是「<strong>把一个人的经验，变成系统能重复执行的东西</strong>」。行业决定了「建哪些 Agent、盯哪些指标、防哪些坑」，但这五步是「怎么开始」的通用答案。你如果在自己的行业里卡住了，回到这五步检查一遍，八成能找到漏掉的那一步。</p>
+  </div>
+
+  <h2>七、本章小结与下一步</h2>
+
+  <ul>
+    <li><strong>先找和你最像的一行，别四章全读。</strong>对照第一节的大表定位自己的行业，再精读那一个案例。四个案例的写法完全一样，跳读很快。</li>
+    <li><strong>Agent 起步一个就够，随业务再拆。</strong>组织进化会按数据给你增员建议，你确认才生效。第一天就建四个只会让你更慢。</li>
+    <li><strong>每个行业的关键工序不同，AI 插进去的位置就不同。</strong>内容的命门是「核查」，咨询的命门是「隔离」，制造的命门是「参数」，本地服务的命门是「边界」。</li>
+    <li><strong>对外的东西一律人工过。</strong>邮件、发布、报价、承诺、技术参数——不管哪个行业，这些环节都要有一道人工关。</li>
+    <li><strong>知识库里「共享下级」是双向的。</strong>开了它，别的项目能查到；客户机密、报价成本、个人信息一律放项目级、不开共享。</li>
+    <li><strong>指标抄不得。</strong>订阅数、询盘量、复购率是三种完全不同的生意，盯错指标等于没盯。</li>
+    <li><strong>判断值不值得用，看四件事</strong>：交付物能否文本化、结果能否验证、是否需要证照、是否依赖线下。附录 C 有完整自检表。</li>
+  </ul>
+
+  <p>到这里，四个行业的路都走完了。你会发现一个共同点：<strong>这套系统真正难的地方，从来不是「AI 会不会干活」，而是「你有没有想清楚要什么、有没有把规矩写下来、有没有在该点头的地方点头」</strong>。四个案例里，翻车的原因几乎全在后者。</p>
+
+  <p>下一章是全书最实用的一章：<strong>100 个问题 FAQ</strong>。上面这些案例里你可能会冒出的疑问——「预算设多少合适」「Agent 不干活怎么办」「知识库检索不到东西怎么修」——都会在那里集中回答。</p>
+
+  <div class="zy-quick">
+    <a href="15-案例-跨境电商.html">回顾：第 15 章 跨境电商完整案例</a>
+    <a href="16-案例-软件开发与网站设计.html">回顾：第 16 章 软件产品与网站设计</a>
+    <a href="13-经营指标.html">回顾：该盯哪些指标</a>
+    <a href="18-FAQ-100问.html">下一步：第 18 章 100 问 FAQ</a>
+  </div>
+
+  <h2>附录 A · 分行业生长模板表</h2>
+
+  <p>这张表给你十个行业的「生长路线」：起步时必须建什么，成长期、规模化期再加什么。用法是——<strong>找到和你最像的一行，只照抄「早期必建」那一列，后面的等业务推着你走</strong>。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">关于「参考公司类型」这一列</span>
+    <p>它<strong>只是类比，不是对标承诺</strong>。列这些公司的意思是「它们的组织形态和这个行业有点像」，帮你建立一个直观印象；<strong>不是说你照着做就能变成它们</strong>，也不是说这些公司用了这套系统。请看个感觉，不要当成目标。</p>
+  </div>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>公司类型</th><th>早期必建 Agent</th><th>成长期新增</th><th>规模化期新增</th><th>参考公司类型</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>SaaS / 软件</strong></td><td>产品经理、全栈开发</td><td>增长运营、客服、DevOps</td><td>安全、数据、架构</td><td>Basecamp、Notion</td></tr>
+      <tr><td><strong>跨境电商</strong></td><td>选品、建站开发</td><td>营销推广、客服、物流、合规</td><td>多市场运营、供应链、财务</td><td>Shein、Anker</td></tr>
+      <tr><td><strong>内容媒体</strong></td><td>内容创作、编辑</td><td>SEO、社交媒体、社区运营</td><td>商业化、版权、多平台分发</td><td>Morning Brew、The Hustle</td></tr>
+      <tr><td><strong>咨询服务</strong></td><td>研究分析、客户对接</td><td>案例沉淀、方法论</td><td>行业专家矩阵、培训</td><td>McKinsey 数字化</td></tr>
+      <tr><td><strong>智能制造 / 传统制造</strong></td><td>产品资料整理、技术支持</td><td>报价辅助、外贸内容、生产数据分析</td><td>供应链协同、质量管理、多厂区</td><td>隐形冠军型工厂</td></tr>
+      <tr><td><strong>本地服务</strong></td><td>内容获客</td><td>客户跟进、客服问答</td><td>多门店排班、师傅绩效、区域扩张</td><td>连锁家政 / 装修工作室</td></tr>
+      <tr><td><strong>教育培训</strong></td><td>课程内容、招生获客</td><td>学员服务、教研沉淀</td><td>多校区运营、师资培训、课程迭代</td><td>小型精品教培机构</td></tr>
+      <tr><td><strong>医疗健康服务</strong></td><td>科普内容、预约客服（严格合规）</td><td>随访管理、案例整理</td><td>多科室协同、合规审查、质量体系</td><td>私立诊所 / 健康管理机构</td></tr>
+      <tr><td><strong>电商（平台型）</strong></td><td>选品、详情页文案</td><td>活动运营、客服、评价管理</td><td>多店群运营、供应链、投流</td><td>平台店群卖家</td></tr>
+      <tr><td><strong>设计工作室</strong></td><td>客户对接、方案提案</td><td>作品集整理、比稿素材</td><td>设计系统沉淀、多项目排期</td><td>品牌 / 空间设计工作室</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">这张表怎么改才适合你</span>
+    <p>把「早期必建」设成你第一个月唯一要建的，其余先不动；「成长期新增」留着当提醒——等你发现某类活反复占用你的时间，就来看看这一列里有没有对应的 Agent；「规模化期新增」现在完全不用管。表里没列出的行业，用同一套逻辑推：<strong>把你最容易堆积、最重复、最不依赖现场的工序，变成一个 Agent</strong>。</p>
+  </div>
+
+  <h2>附录 B · 四案例的 Agent 与任务卡清单（可照抄）</h2>
+
+  <p>这张表把四个案例里的 Agent 和任务卡汇总在一起，共 30 行。<strong>「技能」一列指你在智能体中心给这个 Agent 装配的技能方向</strong>（系统有技能库，可按项目或组织级装配）；<strong>引擎</strong>一列，写「循环执行」的适合复杂 / 长时任务，写「Agent 智能体」的适合信息整合与快速任务。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>行业</th><th>Agent 名</th><th>职责</th><th>技能</th><th>任务名</th><th>引擎</th><th>权重</th><th>优先级</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>内容媒体</td><td>内容主笔助理（全能）</td><td>选题、撰写、改写、排版建议</td><td>内容写作、检索、摘要</td><td>本期选题研究</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>内容媒体</td><td>内容创作 Agent</td><td>写长文初稿</td><td>内容写作、结构化输出</td><td>长文撰写</td><td>循环执行</td><td>4</td><td>P0</td></tr>
+      <tr><td>内容媒体</td><td>编辑 / 校对 Agent</td><td>事实核查、风格一致、退回重写</td><td>核查清单、校对</td><td>二次改写（多平台）</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>内容媒体</td><td>SEO / 分发 Agent</td><td>标题、摘要、多平台版本、排期草稿</td><td>SEO、改写、排期</td><td>排版与配图</td><td>Agent 智能体</td><td>2</td><td>P2</td></tr>
+      <tr><td>内容媒体</td><td>社区运营 Agent</td><td>读者反馈分类、攒选题</td><td>意图识别、分类、摘要</td><td>分发排期与发布（需人工确认）</td><td>Agent 智能体</td><td>1</td><td>P1</td></tr>
+      <tr><td>内容媒体</td><td>（同上）</td><td>—</td><td>—</td><td>数据回收与复盘</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>咨询</td><td>研究分析 Agent</td><td>课题拆解、深度研究、来源核验</td><td>检索、结构化分析</td><td>行业研究（深度研究）</td><td>Agent 智能体</td><td>3</td><td>P0</td></tr>
+      <tr><td>咨询</td><td>客户对接 Agent</td><td>会议整理、需求提炼、邮件草稿</td><td>会议整理、摘要</td><td>客户资料整理（会议导入）</td><td>Agent 智能体</td><td>2</td><td>P0</td></tr>
+      <tr><td>咨询</td><td>方案撰写 Agent</td><td>诊断报告与落地方案草稿</td><td>方案写作、结构化输出</td><td>诊断报告撰写</td><td>循环执行</td><td>4</td><td>P0</td></tr>
+      <tr><td>咨询</td><td>案例沉淀 Agent</td><td>结项抽 SOP 与脱敏案例卡</td><td>SOP 提炼、脱敏改写</td><td>落地方案撰写</td><td>循环执行</td><td>3</td><td>P1</td></tr>
+      <tr><td>咨询</td><td>（人工节点）</td><td>交付物逐页复核</td><td>—</td><td>交付物复核</td><td>Agent 智能体</td><td>1</td><td>P0</td></tr>
+      <tr><td>咨询</td><td>（同上）</td><td>—</td><td>—</td><td>案例沉淀与 SOP 提炼</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>制造</td><td>技术支持 Agent</td><td>按已入库知识回答客户技术问题</td><td>知识库检索、FAQ 应答</td><td>产品资料结构化</td><td>Agent 智能体</td><td>4</td><td>P0</td></tr>
+      <tr><td>制造</td><td>报价辅助 Agent</td><td>起草报价单草稿</td><td>数据整理、模板填充</td><td>外贸产品页文案</td><td>Agent 智能体</td><td>3</td><td>P1</td></tr>
+      <tr><td>制造</td><td>外贸内容 Agent</td><td>英文产品页与邮件草稿</td><td>翻译改写、产品文案</td><td>客户问答知识库整理</td><td>Agent 智能体</td><td>3</td><td>P0</td></tr>
+      <tr><td>制造</td><td>生产数据分析 Agent</td><td>良率 / 交期 / 成本趋势分析</td><td>数据分析、报告输出</td><td>报价单模板</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>制造</td><td>（同上）</td><td>—</td><td>—</td><td>展会 / 邮件获客素材</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>本地服务</td><td>内容获客 Agent</td><td>本地内容、案例稿、SEO 选题</td><td>内容写作、本地 SEO</td><td>本地服务内容与 SEO</td><td>Agent 智能体</td><td>3</td><td>P1</td></tr>
+      <tr><td>本地服务</td><td>客户跟进 Agent</td><td>线索整理、跟进话术草稿、提醒</td><td>线索整理、话术草稿</td><td>案例包装</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>本地服务</td><td>客服问答 Agent</td><td>客户页面问答、转人工判断</td><td>FAQ 应答、意图识别</td><td>客户跟进话术</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>本地服务</td><td>（人工节点）</td><td>电话跟进 / 上门勘察</td><td>—</td><td>回访与复购</td><td>Agent 智能体</td><td>2</td><td>P2</td></tr>
+      <tr><td>本地服务</td><td>（同上）</td><td>—</td><td>—</td><td>客户页面维护</td><td>Agent 智能体</td><td>1</td><td>P2</td></tr>
+      <tr><td>通用</td><td>管理者 Agent</td><td>协调、拆任务、review 重排</td><td>目标拆解、协调</td><td>全局重排（手动 review）</td><td>Agent 智能体</td><td>1</td><td>P1</td></tr>
+      <tr><td>通用</td><td>验收 Agent</td><td>独立验收，出 pass / redo / reject</td><td>验收、评分</td><td>任务验收复核</td><td>Agent 智能体</td><td>1</td><td>P1</td></tr>
+      <tr><td>通用</td><td>内审 Agent</td><td>审计与风险登记</td><td>审计、风险识别</td><td>月度内审</td><td>Agent 智能体</td><td>1</td><td>P2</td></tr>
+      <tr><td>通用</td><td>（人工节点）</td><td>对外内容审批</td><td>—</td><td>对外发布审批</td><td>Agent 智能体</td><td>1</td><td>P0</td></tr>
+      <tr><td>通用</td><td>（财务助手）</td><td>账本核对、成本汇总</td><td>数据整理</td><td>月度经营分析</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>通用</td><td>（资料整理助手）</td><td>文档整理、待确认清单维护</td><td>文档处理</td><td>知识库扩容与自检</td><td>Agent 智能体</td><td>2</td><td>P2</td></tr>
+      <tr><td>通用</td><td>（报告助手）</td><td>定期报告生成与解读</td><td>报告输出</td><td>周报 / 月报生成</td><td>Agent 智能体</td><td>1</td><td>P2</td></tr>
+      <tr><td>通用</td><td>（客户页面维护）</td><td>问答页知识库维护与日志查看</td><td>FAQ 维护</td><td>客户页面问答自测</td><td>Agent 智能体</td><td>1</td><td>P1</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">权重与优先级的关系</span>
+    <p>这两个字段容易混。简单记：<strong>优先级（P0–P3）决定「先做哪条」，时间片权重（1–10）决定「每轮给多少精力」</strong>。一条任务可以既高优先（P0）又低权重（1）——比如「对外发布审批」，它很重要（不做就有风险），但本身花不了几秒钟。反过来，「长文撰写」是 P0 + 权重 4，因为它既重要又耗时。系统默认有 10 个时间片，任务按权重占用，队列会自动轮转。</p>
+  </div>
+
+  <h2>附录 C · 判断表：我的行业适不适合用这套系统</h2>
+
+  <p>下面 15 个问题，请你诚实地打勾。<strong>每题按「是 = 2 分 / 部分 = 1 分 / 否 = 0 分」</strong>，满分 30 分。不要为了拿高分而勾「是」——这张表是给你自己看的，勾错了只会害你。</p>
+
+  <h3>第一组：交付物形态（文本化程度）</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>我生意的主要交付物，本质是<strong>文字、数据、方案或代码</strong>（而不是实物、现场施工）。</span></li>
+    <li><input type="checkbox"><span>我日常有大量<strong>重复性的文字工作</strong>（写文案、写邮件、整资料、做报表、答客户问题）。</span></li>
+    <li><input type="checkbox"><span>我的资料、案例、话术<strong>可以整理成文档</strong>放进知识库。</span></li>
+    <li><input type="checkbox"><span>我的产品 / 服务说明<strong>不太依赖现场演示</strong>，写清楚就能让客户理解。</span></li>
+  </ul>
+
+  <h3>第二组：验证成本（错了多快能发现）</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>AI 写的东西如果错了，我<strong>能很快看出来</strong>（半小时内、看一遍就能发现）。</span></li>
+    <li><input type="checkbox"><span>我的业务<strong>允许「先出草稿、再人工修」</strong>这种工作方式。</span></li>
+    <li><input type="checkbox"><span>我的行业<strong>不需要执业证照</strong>，或虽然有证照但对外内容不涉及受监管承诺。</span></li>
+    <li><input type="checkbox"><span>错了之后的代价<strong>是可挽回的</strong>（改稿、道歉、重做），不至于触犯法律或出安全事故。</span></li>
+  </ul>
+
+  <h3>第三组：业务节奏与获客</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>我有<strong>持续的获客需求</strong>（要找新客户，而不只服务几个老客户）。</span></li>
+    <li><input type="checkbox"><span>我的获客<strong>有一部分可以在线上完成</strong>（内容、邮件、问答页、搜索）。</span></li>
+    <li><input type="checkbox"><span>我每天 / 每周有<strong>固定的重复动作</strong>，值得交给系统自动跑。</span></li>
+    <li><input type="checkbox"><span>我愿意<strong>花时间把规矩和资料写下来</strong>（写提示词、整理知识库），而不只是想要一个「点一下就好」的按钮。</span></li>
+  </ul>
+
+  <h3>第四组：组织与预算</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>我的团队很小（1–10 人），<strong>缺人但缺的不是「再加一个打杂的」</strong>，而是缺能持续产出的产能。</span></li>
+    <li><input type="checkbox"><span>我能接受<strong>每月几百元量级</strong>的 AI 运行成本（起步期），并愿意先用小预算试水。</span></li>
+    <li><input type="checkbox"><span>我愿意<strong>每天花 15–30 分钟</strong>看产出、做审批、改提示词，而不是建完就不管。</span></li>
+  </ul>
+
+  <h3>怎么读你的分数</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>分数</th><th>结论</th><th>建议路径</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>24–30 分</strong></td>
+        <td><span class="zy-badge green">优先上，可以放开用</span></td>
+        <td>你的行业和这套系统高度契合。按第 15 / 16 章的长案例走完整流程：建公司 → 建项目 → 喂资料 → 建 1 个全能 Agent → 派第一批任务。起步就用<strong>半自动</strong>，跑顺一个月后再考虑放开。四个案例里「内容媒体」「咨询」通常落在这个区间。</td>
+      </tr>
+      <tr>
+        <td><strong>12–23 分</strong></td>
+        <td><span class="zy-badge amber">从一个场景起步，别铺开</span></td>
+        <td>你的行业能用，但不是「全面接管」，而是「局部提效」。<strong>只选一个最痛的场景</strong>（比如资料整理、客户问答、内容获客），做深做透，再考虑第二个。制造和本地服务通常落在这个区间——把 AI 用在前端和后端，线下环节用人工节点管起来。</td>
+      </tr>
+      <tr>
+        <td><strong>0–11 分</strong></td>
+        <td><span class="zy-badge red">谨慎，先想清楚再动</span></td>
+        <td>不是「不能用」，而是<strong>现在这个形态下，AI 能帮你的地方有限</strong>，或者风险太高（强监管、错误代价大、全靠线下）。建议先做两件事：<strong>一</strong>，把业务里最文本化的一小块单独拿出来试（比如只做「客户问答页」）；<strong>二</strong>，把合规与人工关加到最厚，所有对外输出一律人工过。<strong>不要</strong>一上来就承诺别人「我们用 AI 全自动」。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">低分不等于放弃</span>
+    <p>这张表测的是「AI 能不能大范围替你干活」，不是「这套系统对你有没有用」。就算你落在 0–11 分，只要你<strong>有重复的文字工作、有客户要跟进、有一堆资料要整理</strong>，那几条也是实打实的省时间。<strong>把它当成「用多少」的标尺，而不是「用不用」的开关。</strong></p>
+  </div>
+
+  <h2>附录 D · 跨行业通用任务卡 20 条（拿来就用）</h2>
+
+  <p>这 20 条任务，<strong>不管你做什么行业都能用</strong>。在「任务管理 → 新建任务」里照抄即可。「引擎」一列已经给了建议，「权重」按你的实际情况微调——<strong>越关键、越耗时的，权重调大</strong>。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>任务名称</th><th>这条任务做什么</th><th>引擎</th><th>权重</th><th>优先级</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>公司简介与品牌故事</td><td>写一份对外可用的公司简介（150–300 字）+ 一段品牌故事</td><td>Agent 智能体</td><td>1</td><td>P1</td></tr>
+      <tr><td>2</td><td>产品 / 服务介绍页文案</td><td>把产品资料改写成客户看得懂的介绍页，含卖点与适用场景</td><td>Agent 智能体</td><td>3</td><td>P1</td></tr>
+      <tr><td>3</td><td>常见问题 FAQ 整理</td><td>按客户真实提问整理一份 FAQ，逐条配标准答案</td><td>Agent 智能体</td><td>2</td><td>P0</td></tr>
+      <tr><td>4</td><td>产品图 / 场景图生成</td><td>走「媒体生成中心」生成产品图，先试 2 张确认风格再批量</td><td>Agent 智能体</td><td>2</td><td>P2</td></tr>
+      <tr><td>5</td><td>月度经营分析</td><td>汇总本月收入、支出、任务完成率、预算消耗率，给三条改进建议</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>6</td><td>会议纪要整理</td><td>用「会议导入」把会议记录整理成摘要 + 决策 + 行动项</td><td>Agent 智能体</td><td>1</td><td>P2</td></tr>
+      <tr><td>7</td><td>客户名单梳理与分层</td><td>把现有客户按活跃度、贡献度分层，标出该重点维护的人</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>8</td><td>竞品调研</td><td>调研 3–5 家竞品的定位、定价、卖点，输出对比表</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>9</td><td>定价与成本核算</td><td>按成本结构算出建议售价区间与毛利，供你决策（<strong>不外发</strong>）</td><td>Agent 智能体</td><td>2</td><td>P0</td></tr>
+      <tr><td>10</td><td>知识库自检与补齐</td><td>检索 20 个高频关键词，找出知识库答不上来的缺口并列补料清单</td><td>Agent 智能体</td><td>2</td><td>P2</td></tr>
+      <tr><td>11</td><td>对外邮件草稿（系列）</td><td>写一组客户跟进 / 通知邮件草稿，每条标「待审核」</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>12</td><td>案例稿撰写</td><td>把一个已完成的项目 / 订单写成脱敏案例稿</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>13</td><td>客户问答页搭建</td><td>建一个只读的客户问答页，配好白名单、限流、过期时间</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>14</td><td>周报 / 月报生成</td><td>按固定模板生成周报 / 月报，含进度、花费、风险</td><td>Agent 智能体</td><td>1</td><td>P2</td></tr>
+      <tr><td>15</td><td>流程 SOP 沉淀</td><td>把一件反复做的事写成 SOP（触发条件 / 步骤 / 验收标准）</td><td>Agent 智能体</td><td>2</td><td>P2</td></tr>
+      <tr><td>16</td><td>风险清单梳理</td><td>列出当前业务的 10 个主要风险，标注概率、影响、应对动作</td><td>Agent 智能体</td><td>1</td><td>P1</td></tr>
+      <tr><td>17</td><td>目标与 KR 拆解</td><td>把一个季度目标拆成 3–4 个关键结果，并关联到任务</td><td>Agent 智能体</td><td>2</td><td>P1</td></tr>
+      <tr><td>18</td><td>合同 / 协议要点核对</td><td>对照清单核对合同关键条款（<strong>仅提示，不替代法律意见</strong>）</td><td>循环执行</td><td>2</td><td>P0</td></tr>
+      <tr><td>19</td><td>招聘 / 外包需求说明</td><td>写一份岗位或外包需求说明（做什么、要求、交付物）</td><td>Agent 智能体</td><td>1</td><td>P2</td></tr>
+      <tr><td>20</td><td>全局重排（手动 review）</td><td>审视进度 / 预算 / 收益，重排任务集与时间片权重</td><td>Agent 智能体</td><td>1</td><td>P1</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这 20 条里，有三条必须人工把关</span>
+    <p>第 <strong>9</strong> 条（定价与成本核算）、第 <strong>11</strong> 条（对外邮件）、第 <strong>18</strong> 条（合同要点核对），产出都<strong>不能直接对外</strong>。定价算错直接损失利润，邮件发出去收不回来，合同条款看漏可能有法律风险。<strong>给它们关联人工节点（L3-强制人工审核），处理人写你自己。</strong>这不是不信任 AI，是这几个位置本来就该有人签字。</p>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

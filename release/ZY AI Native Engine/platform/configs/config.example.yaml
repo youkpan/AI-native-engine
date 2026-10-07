@@ -1,0 +1,150 @@
+# 大服务平台配置示例文件
+# 复制本文件为 config.yaml 后按环境填写。
+# 生产环境敏感字段建议用环境变量覆盖（AE_JWT_SECRET、AE_DATABASE_PASSWORD 等），勿写入版本库。
+
+server:
+  port: 18000
+  read_timeout: 15s
+  # 1200s：SSE 流式接口（plan/chat 对齐对话等）长连接传输，write_timeout 过短会在
+  # 输出中途强制切断连接（表现为 AI 回复约 500 字后卡死），需按最长单次流式调用放宽。
+  write_timeout: 1200s
+  shutdown_timeout: 10s
+  # 前端静态代理（release 打包模式）：web_port>0 时额外监听该端口，服务 static_dir
+  # （相对可执行文件目录）静态页面，/api、/ws 反向代理到主端口。
+  # dev 模式（vite 5176）建议保持 web_port: 0 关闭。
+  static_dir: ../web
+  web_port: 80
+
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: "CHANGE_ME"                 # 数据库密码
+  name: ai_native_engine
+  ssl_mode: disable
+  max_open_conns: 50
+  max_idle_conns: 10
+  conn_max_lifetime: 1h
+
+jwt:
+  secret: "CHANGE_ME_LONG_RANDOM_STRING"  # 生产用环境变量 AE_JWT_SECRET 注入
+  access_expiry: 2h
+  refresh_expiry: 168h
+  issuer: ai-native-engine
+
+cors:
+  allow_origins:
+    - "http://localhost:3000"
+    - "http://localhost:5173"
+
+# WebSocket 来源白名单（缺陷修复：WS 握手不再全放行）。
+# Origin 为空（非浏览器客户端）与同源请求恒放行；部署域名请追加到下方列表，
+# 或用环境变量 AE_WS_ALLOWED_ORIGINS 覆盖。
+ws:
+  allowed_origins:
+    - "http://localhost:5176"
+    - "http://localhost:5173"
+    - "http://localhost:3000"
+
+log:
+  level: info
+
+# 腾讯云 CVM 配置（敏感字段用环境变量覆盖：
+#   AE_TENCENT_CLOUD_SECRET_ID / AE_TENCENT_CLOUD_SECRET_KEY）
+tencent_cloud:
+  secret_id: ""
+  secret_key: ""
+  default_region: "ap-guangzhou"
+  default_zone: "ap-guangzhou-3"
+  default_image_id: ""               # 替换为实际 Ubuntu 22.04 镜像 ID
+  default_vpc_id: ""
+  default_subnet_id: ""
+  default_security_group_ids: []
+  # 规格白名单：用户只能从中选择，不能输入指定之外的规格
+  allowed_instance_types:
+    - "S5.MEDIUM4"      # 2核4G
+    - "S5.LARGE8"       # 4核8G
+    - "S5.2XLARGE16"    # 8核16G
+    - "SA5.MEDIUM4"     # 2核4G (AMD)
+
+# SSH 自动部署
+ssh:
+  default_user: "root"
+  default_port: 22
+  deploy_timeout: 20m
+  cvm_ready_timeout: 10m
+
+# LLM 网关配置
+# 与 project-server 使用相同的 API keys
+llm:
+  deepseek:
+    api_key: "CHANGE_ME"                # 生产用环境变量 AE_LLM_DEEPSEEK_API_KEY 注入
+    base_url: "https://api.deepseek.com"
+    model: "deepseek-v4-flash"
+    max_tokens: 64192
+    request_timeout: 1200s
+
+  glm:
+    api_key: "CHANGE_ME"                # 生产用环境变量 AE_LLM_GLM_API_KEY 注入
+    base_url: "https://open.bigmodel.cn/api/paas/v4"
+    model: "glm-4-flash"
+    max_tokens: 64096
+    request_timeout: 1200s
+
+# 平台 Chat 到项目服务器转发的配置
+project_server_forward:
+  enabled: true                       # true=转发到项目服务器 / false=平台本地处理
+  base_url: "http://localhost:8090"   # 项目服务器地址
+  hmac_secret: "CHANGE_ME_HMAC_SECRET_AT_DEPLOY"   # 需与 project-server 端一致
+  # 本实例绑定的项目 ID（单机/单实例部署必填，SaaS 多租户留 0）。
+  # 复评 N-02：请求不带任何项目标识时，转发只认这个绑定身份；未绑定则一律 403，
+  # 不再退回用全局密钥签名的静态 client（否则任意注册用户可读写默认实例租户数据）。
+  # 环境变量覆盖：AE_PROJECT_SERVER_FORWARD_BOUND_PROJECT_ID
+  #
+  # 【静态兜底可用性约束（复评 N-02 第 5 条）】单机静态兜底转发真正可用，还需 project-server
+  # 侧 platform.project_id（或环境变量 PS_PROJECT_ID）与本值一致，且为数字项目 ID：
+  #   - 平台静态 client 以 PS_PROJECT_ID 作为 X-Project-ID 发请求（默认是
+  #     "proj-00000000-…" 占位符，未覆盖时与实例项目 ID 不符）；
+  #   - project-server 的 hmac 中间件要求 X-Project-ID 必须等于本实例配置的项目 ID，
+  #     否则回 2005「X-Project-ID 与实例项目不匹配」。
+  # 即：bound_project_id 与 project-server 的 platform.project_id 必须同时配置为同一数字 ID。
+  bound_project_id: 0
+  # ---- FIX-012 多项目执行面（默认全部关闭 = 现网零变化）----
+  # SSRF 闸「受信本机例外」：精确 host:port 白名单，仅 YAML/env
+  # （AE_PROJECT_SERVER_FORWARD_TRUSTED_INSTANCE_HOSTS）可配、UI 不可写、改动需重启。
+  # 例：["127.0.0.1:8090"]；不接受 CIDR/通配。放行必留审计日志（step=instance_host_trusted）。
+  trusted_instance_hosts: []
+  # 宿主 grant 下发（方案 B）：开通/登记/换钥后用宿主密钥签名 push 项目 grant 到宿主 PS。
+  # 仅「本地/单机测试部署形态」开启；host_url 启动期校验（http 只允许环回，非环回必须 https）。
+  grant_push:
+    enabled: false
+    host_url: ""                     # 例：http://127.0.0.1:8090
+    host_admin_secret: ""            # = 宿主 PS 的 platform.hmac_secret（勿写入文档/日志）
+
+# FIX-012：开通流程行为。true = ConfirmProvision 执行域自检失败拒绝置 running；
+# 默认 false（warn 非阻断）。env: AE_PROVISION_CONFIRM_STRICT
+provision:
+  confirm_strict: false
+
+# Linode (Akamai Cloud) 配置
+# 敏感字段用环境变量覆盖：AE_LINODE_API_TOKEN
+linode:
+  api_token: ""
+  default_region: "us-east"
+  default_image: "linode/ubuntu22.04"
+  # 规格白名单：用户只能从中选择
+  allowed_instance_types:
+    - "g6-nanode-1"      # 1C 1G
+    - "g6-standard-1"    # 1C 2G
+    - "g6-standard-2"    # 2C 4G
+    - "g6-standard-4"    # 4C 8G
+
+# 机器码授权（激活 + 有效期）
+license:
+  enabled: true
+  auth_server_url: "https://zyinfo.pro:19999/auth"
+  auth_key: ""                          # 敏感，用 AE_LICENSE_AUTH_KEY 覆盖
+  trial_minutes: 20
+  trial_random_minutes: 10
+  max_grace_days: 365
+  check_interval: 24h

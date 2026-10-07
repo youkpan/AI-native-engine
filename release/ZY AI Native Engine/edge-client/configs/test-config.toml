@@ -1,0 +1,37 @@
+[edge]
+client_id = "test-client-001"
+device_name = "Test-PC"
+enable_systray = false
+auto_start = false
+
+[server]
+base_url = "ws://localhost:8090"
+ws_endpoint = "/ws"
+token = "test-token-for-edge-client"
+heartbeat_interval = "30s"
+reconnect_initial_delay = "1s"
+reconnect_max_delay = "60s"
+insecure_skip_verify = true
+
+[scan]
+watch_dirs = ["F:/github/AI-native-engine/temp/edge-test"]
+file_types = [".txt", ".md"]
+debounce_interval = "2s"
+max_file_size_mb = 50
+enabled = true
+
+[database]
+path = "./data/test-edge.db"
+
+[log]
+level = "info"
+file = "./logs/test-edge.log"
+max_size = 10
+max_backups = 3
+max_age = 7
+compress = false
+
+[upload]
+concurrency = 1
+timeout = "10s"
+max_retries = 1

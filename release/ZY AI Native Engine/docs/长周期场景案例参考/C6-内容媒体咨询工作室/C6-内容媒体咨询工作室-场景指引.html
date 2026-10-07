@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C6 内容与媒体咨询工作室 — 场景指引</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --green: #34a853;
+    --green-light: #e6f4ea;
+    --red: #ea4335;
+    --red-light: #fce8e6;
+    --yellow: #f9ab00;
+    --yellow-light: #fef7e0;
+    --gray-50: #f8f9fa;
+    --gray-100: #f1f3f4;
+    --gray-200: #e8eaed;
+    --gray-600: #5f6368;
+    --gray-800: #3c4043;
+    --gray-900: #202124;
+    --code-bg: #1e1e2e;
+    --code-text: #cdd6f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    color: var(--gray-900);
+    background: var(--gray-50);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+  /* 左侧导航 */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: #fff;
+    border-right: 1px solid var(--gray-200);
+    overflow-y: auto;
+    padding: 20px 0;
+    z-index: 100;
+  }
+  .sidebar-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 0 20px 12px;
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 8px;
+  }
+  .sidebar a {
+    display: block;
+    padding: 6px 20px;
+    color: var(--gray-600);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .sidebar a:hover { background: var(--primary-light); color: var(--primary); }
+  .sidebar a.level-2 { padding-left: 32px; font-size: 12.5px; }
+  .sidebar a.level-3 { padding-left: 44px; font-size: 12px; color: var(--gray-600); }
+  /* 主内容 */
+  .main {
+    margin-left: 260px;
+    max-width: 1200px;
+    padding: 30px 48px 80px;
+  }
+  /* 面包屑 */
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 24px;
+  }
+  .breadcrumb a { color: var(--primary); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb span { margin: 0 6px; }
+  /* 标题 */
+  h1 { font-size: 28px; font-weight: 700; color: var(--gray-900); margin: 32px 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary); }
+  h2 { font-size: 22px; font-weight: 600; color: var(--gray-800); margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+  h3 { font-size: 18px; font-weight: 600; color: var(--gray-800); margin: 24px 0 10px; }
+  h4 { font-size: 15px; font-weight: 600; color: var(--gray-600); margin: 18px 0 8px; }
+  p { margin: 8px 0 12px; }
+  /* 表格 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+    font-size: 13.5px;
+  }
+  th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--gray-50); }
+  tr:hover td { background: var(--primary-light); }
+  /* 代码块 */
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 16px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 12px 0 18px;
+  }
+  code {
+    font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+    font-size: 13px;
+  }
+  p code, li code, td code {
+    background: var(--gray-100);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--red);
+    font-size: 12.5px;
+  }
+  /* 提示框 */
+  .callout {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  .callout-info { background: var(--primary-light); border-left: 4px solid var(--primary); }
+  .callout-warn { background: var(--yellow-light); border-left: 4px solid var(--yellow); }
+  .callout-danger { background: var(--red-light); border-left: 4px solid var(--red); }
+  .callout-success { background: var(--green-light); border-left: 4px solid var(--green); }
+  .callout strong { display: block; margin-bottom: 4px; }
+  /* 标签 */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .tag-pass { background: var(--green-light); color: var(--green); }
+  .tag-fail { background: var(--red-light); color: var(--red); }
+  .tag-warn { background: var(--yellow-light); color: #b06000; }
+  .tag-info { background: var(--primary-light); color: var(--primary); }
+  /* 列表 */
+  ul, ol { padding-left: 24px; margin: 6px 0 12px; }
+  li { margin: 4px 0; }
+  /* 元信息 */
+  .meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 12px 0 20px;
+    padding: 14px 18px;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+  }
+  .meta-item { font-size: 13px; }
+  .meta-item .label { color: var(--gray-600); }
+  .meta-item .value { font-weight: 600; color: var(--gray-900); }
+  /* 响应式 */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 左侧导航 -->
+<nav class="sidebar">
+  <div class="sidebar-title">C6 场景指引目录</div>
+  <a href="#overview" class="level-1">场景概述</a>
+  <a href="#goals" class="level-1">场景目标与主战场能力</a>
+  <a href="#goals-capability" class="level-2">主战场能力矩阵</a>
+  <a href="#goals-fix004" class="level-2">FIX-004 一票否决项</a>
+  <a href="#goals-org" class="level-2">组织裂变与回滚</a>
+  <a href="#prereq" class="level-1">预置条件与环境配置</a>
+  <a href="#prereq-project" class="level-2">项目基础设定</a>
+  <a href="#prereq-meeting" class="level-2">会议资料与品牌包</a>
+  <a href="#prereq-pollution" class="level-2">污染知识演练</a>
+  <a href="#t1" class="level-1">T1 生存期操作指引</a>
+  <a href="#t1-ui" class="level-2">UI 全链路路径</a>
+  <a href="#t1-meeting" class="level-2">会议导入流程</a>
+  <a href="#t1-knowledge" class="level-2">知识入库人工确认</a>
+  <a href="#t1-event" class="level-2">事件注入</a>
+  <a href="#t2" class="level-1">T2 扩张期操作指引</a>
+  <a href="#t2-parallel" class="level-2">3 客户并行</a>
+  <a href="#t2-expand" class="level-2">组织裂变与扩编</a>
+  <a href="#t2-cooldown" class="level-2">驳回与冷却期验证</a>
+  <a href="#t3" class="level-1">T3 规模化期操作指引</a>
+  <a href="#t3-sla" class="level-2">SLA 超时升级链</a>
+  <a href="#t3-conflict" class="level-2">跨客户并发冲突</a>
+  <a href="#t3-amoeba" class="level-2">阿米巴核算</a>
+  <a href="#t3-rollback" class="level-2">组织回滚演练</a>
+  <a href="#acceptance" class="level-1">验收判定表</a>
+  <a href="#evidence" class="level-1">取证口径</a>
+  <a href="#appendix" class="level-1">附录：环境信息</a>
+  <a href="#appendix-ports" class="level-2">端口映射</a>
+  <a href="#appendix-tables" class="level-2">关键表清单</a>
+  <a href="#appendix-harness" class="level-2">harness 脚本用法</a>
+</nav>
+
+<!-- 主内容 -->
+<div class="main">
+
+<!-- 面包屑 -->
+<div class="breadcrumb">
+  <a href="#">首页</a><span>&gt;</span>
+  <a href="#">长周期场景案例</a><span>&gt;</span>
+  <strong>C6 内容与媒体咨询工作室</strong>
+</div>
+
+<h1>C6 — 内容与媒体咨询工作室 · 场景指引</h1>
+
+<div class="meta">
+  <div class="meta-item"><span class="label">编号：</span><span class="value">core-C6</span></div>
+  <div class="meta-item"><span class="label">行业：</span><span class="value">内容 / 媒体 / 咨询服务</span></div>
+  <div class="meta-item"><span class="label">主战场：</span><span class="value">evo 全链路 + 会议导入与分层知识库</span></div>
+  <div class="meta-item"><span class="label">项目名：</span><span class="value">lts_c6_media / lts_c6_studio</span></div>
+  <div class="meta-item"><span class="label">AI 预算：</span><span class="value">¥2,500</span></div>
+  <div class="meta-item"><span class="label">总预算：</span><span class="value">¥7,000</span></div>
+  <div class="meta-item"><span class="label">平台余额：</span><span class="value">¥1,500</span></div>
+  <div class="meta-item"><span class="label">测试状态：</span><span class="value"><span class="tag tag-warn">部分成功 · D1-D3 已执行</span></span></div>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="overview">一、场景概述</h2>
+
+<p>本场景是 ZY AI Native Engine 长周期业务场景测试六张核心故事卡之一，编号 core-C6，定位为 <strong>evo 组织进化全链路总压测</strong> 与 <strong>会议导入及分层知识库</strong> 的联合演练场。场景模拟一家品牌内容与增长代运营工作室，从一位全能顾问加一名 AI 助手起步，通过承接客户内容咨询订单，逐步沉淀方法论，最终成长为拥有策略、内容、客户、职能四大组共十五个 AI 角色的规模化组织。整个过程横跨三个阶段——T1 生存期（1-3 编制，首单交付与方法论沉淀）、T2 扩张期（4-10 编制，三家客户并行与组织裂变）、T3 规模化期（11-30 编制，部门建制与可回退可审计）——完整覆盖了 evo 组织进化引擎从阶段感知、缺口检测、扩编建议、一键采纳、上岗测试、进入调度、阶段切换到组织回滚的全部核心链路。</p>
+
+<p>与 C1 跨境电商侧重端到端闭环、C2 预测市场侧重资金安全不同，C6 的核心价值在于验证平台能否支撑一个知识密集型服务场景的完整生命周期：从 kickoff 会议的转写文本导入，到纪要与待办自动提取，再到知识入库时的人工确认与冲突检测，最终将会议产出转化为可执行的任务。这条「会议 → 纪要 → 待办 → 任务」的链路是知识沉淀飞轮的第一推动力，也是本场景区别于其他五张故事卡的独特压测面。与此同时，随着客户数量从一家增长到三家，系统需要自动感知负载缺口、产出扩编建议、在人工一键确认后完成新角色的上岗并立即纳入调度——这条 evo 全链路是本场景的命脉所在，也是 FIX-004 一票否决项的判定焦点。</p>
+
+<p>在 D1 至 D3 的实际测试中，我们已经取得了若干关键结论：冷启动六步（注册 → 建公司 → 建项目 → 自挂实例 → 策略确认 → 组织起步）的真实 UI 路径全部通过；evo 的「一键扩编 → 新角色下一 tick 被派活」闭环在 C6 形态下实测打通（FIX-004/A 销号）；但 evo 的入口腿——阶段感知与缺口检测——在新建项目上因 <code>project_config.config</code> 为 NULL 导致 JSON 解析错误而恒返 500（ISSUE-W4-14），该缺陷在 D2 修复后恢复。D3 进一步揭示了批量扩编无规模闸门（ISSUE-W4-51）、跨分类串模板（ISSUE-W4-52）、成熟度门两条路径不一致（ISSUE-W4-53）以及拒绝通道不写冷却期（ISSUE-W4-49）等深层问题。这些发现不仅指导了后续的修复优先级，也为本场景指引的编写提供了实证基础。</p>
+
+<p>本场景还特别关注知识污染的拦截能力：在品牌资料包中预埋一条与客户既有口径矛盾的「污染知识」，验证系统在知识入库环节能否通过冲突检测将其拦下，防止错误信息进入分层知识库后影响后续所有 AI 产出。这一演练直接关联到故事卡中「知识入库防污染」的 P1 建议项，也是三权分立验收体系在知识管理维度的延伸。通过会议导入、知识入库、任务转化、组织扩编、阶段切换、组织回滚这六大核心流程的联合压测，C6 场景为平台的组织进化能力与知识管理能力提供了一次全面而深入的压力检验。</p>
+
+<!-- ============================================================ -->
+<h2 id="goals">二、场景目标与主战场能力</h2>
+
+<p>C6 场景的核心目标可以概括为三个层次：第一层验证 evo 组织进化引擎在全生命周期中的可靠性，包括阶段感知的准确性、缺口检测的有效性、扩编建议的合理性、一键扩编的原子性以及新角色进入调度后的实际产出；第二层验证会议导入与分层知识库在知识密集型服务场景中的实用性，包括会议转写文本的纪要提取质量、待办事项的任务转化率、知识入库的冲突检测能力以及公司级与项目级知识的分层检索命中率；第三层验证组织在规模化后的治理能力，包括部门级阿米巴核算的准确性、SLA 超时升级链的时效性、跨客户资源冲突的仲裁留痕以及组织回滚后任务零丢失的原子性保证。</p>
+
+<h3 id="goals-capability">2.1 主战场能力矩阵</h3>
+
+<p>本场景必需的能力涵盖以下六大模块，每一模块都有明确的 API 路径与数据库落点：</p>
+
+<table>
+<tr><th>能力模块</th><th>核心 API</th><th>数据库落点</th><th>判定要点</th></tr>
+<tr><td>evo 扩编全链路</td><td><code>POST /org/stage/sense</code> → <code>GET /org/advice</code> → <code>POST /org/advice/:id/accept</code> → 上岗测试 → 进调度 → <code>POST /org/transition</code>（含 rollback）</td><td><code>growth_advice</code>、<code>agents</code>、<code>org_charts</code>、<code>role_versions</code>、<code>change_logs</code>、<code>decision_traces</code></td><td>新角色 3 轮内被调度且有产出（FIX-004 硬判定）</td></tr>
+<tr><td>知识库（分层）</td><td><code>POST /meetings/import-file</code>、<code>POST /meetings/import-text</code>、<code>/knowledge/*</code> 清洗分块向量化</td><td><code>knowledge_documents</code>、<code>knowledge_chunks</code>、<code>meetings</code>、<code>meeting_action_items</code></td><td>公司级 ↔ 项目级分层；<code>needs_review</code> 入库确认；冲突检测拦截污染知识</td></tr>
+<tr><td>auto-ops 轮次</td><td><code>POST /autoops/start</code>、<code>POST /autoops/stop</code>、<code>GET /autoops/rounds</code></td><td><code>auto_ops_rounds</code>、<code>auto_ops_tasks</code>、<code>auto_ops_schedules</code></td><td>每客户一个任务组，review 轮注入阶段感知与组织建议</td></tr>
+<tr><td>三权分立验收</td><td>独立验收 Agent 把关</td><td><code>acceptance_records</code>（verdict: pass/redo/reject）</td><td>执行/验收/批准三方分离，客户批准 = RACI 的 A</td></tr>
+<tr><td>账本预算</td><td><code>GET /autoops/billing</code>、<code>GET /ledger/budget/state</code></td><td><code>token_billing_records</code>、<code>budget_states</code>、<code>amoeba_daily_stats</code></td><td>客户级独立核算 + 阿米巴单位 token 附加值</td></tr>
+<tr><td>RACI + 连接器</td><td><code>POST /connectors</code>（email 交付、feishu 审批）</td><td><code>connector_audit_logs</code>、<code>human_task_nodes</code></td><td>对外发布/报价/合同条款走人工审批</td></tr>
+</table>
+
+<div class="callout callout-info">
+  <strong>知识库（分层）判定状态同步（2026-10-07 · V3-01）</strong>
+  公司级知识库上传闭环已修复（commit <code>9cedee0</code>，公司身份纳入 HMAC 身份段 v3）。W4-80 归属闸门（<code>da5938c</code>，2026-09-27）曾使经平台转发的公司级/共享库上传恒 403（「知识库不属于当前可信项目上下文」）——若本场景在 2026-09-27 ~ 2026-10-07 窗口内执行，品牌资料包入库与「公司级 ↔ 项目级分层检索命中率」的证据需按「公司级上传不可用」口径判读。现行口径：项目级库维持项目归属校验不变；公司级/共享库上传按平台注入的可信公司归属校验（身份缺失或归属不符均 403 fail-close）；会议导入（<code>/meetings/import-*</code>）走服务端内部通道，不受该闸门影响。
+</div>
+
+<h3 id="goals-fix004">2.2 FIX-004 一票否决项</h3>
+
+<div class="callout callout-danger">
+  <strong>一票否决项声明</strong>
+  FIX-004（扩编 → auto-ops 调度闭环）是本场景的一票否决项。新角色无人调度则 T2/T3 指标全失真。在 D1-D3 的实际测试中，FIX-004 的「轮前角色解析/再绑定」主闭环已在码面修复并入库（<code>internal/autoops/engine.go:1102-1108</code>），C6 形态下的硬判定——「扩编 → 上岗 → 下一 tick 被派活」——在 D2 实测通过。但在专业岗面上（阶段切换批量扩编），产品自动通道仍未主动将新扩专业岗纳入调度，依赖人工在任务文案中点名岗位才能触发派活。
+</div>
+
+<p>FIX-004 的完整取证要求五线交叉验证：① <code>auto_ops_tasks.role_id</code> 绑定数；② <code>auto_ops_rounds</code> 轮次归因数与首个 done 轮号；③ <code>token_billing_records.role_id</code> 计费归因行数；④ 被绑任务的 <code>round_count</code> 累计；⑤ <code>auto_ops_progress.task_summary</code> 非空行数（产出摘要）。锚点取新岗创建前最后一轮，计算首调轮与锚点的差值 Δ，判据为 Δ ≤ 3 轮。D3 实测中 8 个新岗仅 1 个走产品自动通道（Δ=4，仍差 1 轮），5 个依赖人工点名（Δ=18~38），2 个整窗零消费。</p>
+
+<h3 id="goals-org">2.3 组织裂变与回滚</h3>
+
+<p>组织裂变是本场景最具特色的压测面。从 T1 的「1 人 + 1 AI 全能顾问」到 T2 的「1 人 + 15 AI 四组分工」，组织需要经历多次扩编与阶段切换。每一次扩编都必须满足三个条件：缺口检测产出合理建议（含成本增量与证据）、人工一键确认后新角色立即上岗、新角色在 3 轮内被实际调度并产生执行痕迹。阶段切换则需要验证成熟度门的执行一致性——在 D3 测试中发现，建议腿要求成熟度达标才能产出 <code>stage_upgrade</code> 建议，但执行腿的 <code>ApplyTransition</code> 完全不检查成熟度，导致在 <code>maturity=not_reached</code> 的状态下仍能一路从 startup 切到 scale。</p>
+
+<p>组织回滚是 T3 的核心演练项。通过 <code>POST /org/advice/:id/rollback</code> 或 <code>POST /org/transition/rollback</code> 触发回滚后，系统必须恢复旧的组织快照，删除扩编角色并解除调度绑定，同时在 <code>change_logs</code> 中留痕，且保证任务零丢失（回滚前后未完成任务集 diff = ∅）。D3 测试中发现 UI 面板对 <code>scale_out</code> 类型不渲染「回滚扩编」按钮（ISSUE-W4-35），这意味着在 UI 修复前，组织回滚只能通过 API 路径执行，计为一次人工干预。</p>
+
+<!-- ============================================================ -->
+<h2 id="prereq">三、预置条件与环境配置</h2>
+
+<h3 id="prereq-project">3.1 项目基础设定</h3>
+
+<p>C6 场景的测试项目命名为 <code>lts_c6_media</code>（D1-D3 实际使用的项目 ID 为 1113，公司 ID 为 972），运行模式设定为「全自动」（<code>run_mode=full_auto</code>，D1 实际使用 <code>semi_auto</code> 作为测试口径），总预算 ¥7,000，AI 运行预算 ¥2,500，平台余额 ¥1,500。项目类型选择「内容」（<code>type=content</code>），这将影响引导流中的业务背景模板与岗位推荐集。实例绑定到本机 <code>127.0.0.1:8090</code> 的 project-server，通过 HMAC 认证完成自挂。</p>
+
+<table>
+<tr><th>配置项</th><th>设定值</th><th>数据库落点</th><th>备注</th></tr>
+<tr><td>项目名称</td><td><code>lts_c6_studio</code></td><td><code>projects.name</code></td><td>D1 实际名含时间戳后缀</td></tr>
+<tr><td>运行模式</td><td>全自动 / 半自动</td><td><code>project_config.run_mode</code></td><td>故事卡口径为全自动</td></tr>
+<tr><td>总预算</td><td>¥7,000</td><td><code>project_budgets.total_budget</code> / <code>budget_states.total_budget</code></td><td>含平台真实账本</td></tr>
+<tr><td>AI 运行预算</td><td>¥2,500</td><td><code>project_config.ai_budget</code> / <code>budget_states.ai_budget</code></td><td>80% 预警线 = ¥2,000</td></tr>
+<tr><td>单轮上限</td><td>¥2</td><td><code>project_config.single_round_max_budget</code></td><td>D1 通过 API 设定（UI 无入口）</td></tr>
+<tr><td>实例绑定</td><td><code>127.0.0.1:8090</code></td><td><code>instance_project_grants</code></td><td>HMAC 认证 + 自检双真</td></tr>
+<tr><td>所有者</td><td><code>lts_c6_*@test.com</code></td><td><code>project_config.owner_user_id</code></td><td>测试账号前缀 lts_</td></tr>
+</table>
+
+<h3 id="prereq-meeting">3.2 会议资料与品牌包</h3>
+
+<p>C6 场景的核心输入数据包括三部分：kickoff 会议转写文本、客户品牌资料包以及方法论 SOP 模板。kickoff 会议转写文本模拟首次客户对接会议的完整录音转写内容，包含客户业务背景、目标受众画像、品牌调性要求、内容交付节奏与验收标准等关键信息。该文本通过 <code>POST /projects/:id/meetings/import-text</code> 或 <code>POST /projects/:id/meetings/import-file</code> 导入系统，由 AI 自动提取纪要与待办事项，并存储到 <code>meetings</code> 与 <code>meeting_action_items</code> 表中。品牌资料包包含客户的视觉规范、历史内容样本、竞品分析摘要等，通过边缘客户端上传或 API 直接导入知识库。</p>
+
+<p>在 D1-D3 的测试中，会议导入与知识入库流程尚未实际执行（<code>knowledge_documents=0</code>），这被列为 D4 的最高优先事项。完整的会议导入流程应当包含以下步骤：上传转写文本 → AI 生成纪要与待办 → 人工审核纪要准确性 → 将待办 <code>convert</code> 成任务（<code>POST /projects/:id/meetings/:meeting_id/action-items/:item_id/convert</code>）→ 验证每条任务携带原始片段回链。这一流程的完整性直接影响「纪要 → 任务转化率 100%」这一 T1 核心判据。</p>
+
+<h3 id="prereq-pollution">3.3 污染知识演练</h3>
+
+<p>在品牌资料包中，需要预埋一条故意与客户既有口径矛盾的「污染知识」。例如，客户在 kickoff 会议中明确要求「所有案例数据须可溯源」，但在品牌资料包中插入一条「案例引用无需标注数据来源」的规范。这条污染知识应当在知识入库的 <code>needs_review</code> 环节被冲突检测机制拦截，系统需要识别出它与已入库的会议口径存在矛盾，并强制要求人工确认。</p>
+
+<p>如果系统未能拦截这条污染知识（D1-D3 中因知识库流程未执行而无法判定），则记录为缺陷并降级为观察项。冲突检测的实现依赖于 <code>knowledge_documents</code> 表中的 <code>needs_review</code> 状态链，以及知识清洗分块向量化过程中的语义相似度比对。在取证时，需要验证 <code>knowledge_documents</code> 表中该条记录的状态是否停留在 <code>needs_review</code> 而非直接进入 <code>active</code>，同时检查 <code>change_logs</code> 中是否有对应的冲突检测留痕。</p>
+
+<!-- ============================================================ -->
+<h2 id="t1">四、T1 生存期操作指引</h2>
+
+<p>T1 生存期的核心目标是完成首单交付并开始方法论沉淀。编制为 1 人 + 1 AI（全能顾问），需要验证的关键判据包括：自主率 ≥ 40%、人工干预 ≤ 16 次、单位交付 token 成本 ≤ ¥60、人工分钟 ≤ 40/交付、纪要 → 任务转化率 100%、首次交付被客户接受、知识库可被后续任务 RAG 命中。</p>
+
+<h3 id="t1-ui">4.1 UI 全链路路径</h3>
+
+<p>T1 的完整 UI 操作路径如下，每一步都需要截图取证并记录网络请求：</p>
+
+<ol>
+  <li><strong>登录</strong>：访问 <code>http://localhost:5176/login</code>，输入 <code>lts_c6_*@test.com</code> / <code>test123</code>，点击登录，验证跳转到 <code>/dashboard</code> 全局面板。</li>
+  <li><strong>建公司</strong>：全局面板点击「新建公司」，填写名称 <code>LTS-C6 内容媒体工作室</code>，确认创建。验证 <code>companies</code> 表新增一行 <code>status=active</code>。</li>
+  <li><strong>建项目</strong>：进入公司后点击「新建项目」，走三步向导——选择类型「内容」、设定运行模式「全自动」/「半自动」、填写总预算 ¥7,000 与 AI 运行预算 ¥2,500。确认页回显预算金额。验证 <code>projects</code> 与 <code>project_budgets</code> 表落库。</li>
+  <li><strong>引导流</strong>：进入项目后自动触发引导流四步——业务介绍（粘贴品牌背景）→ 组织（建 1 管理者 + 2 员工）→ 定义（任务模板与交付标准）→ 启动。验证 <code>guided_sessions</code> 表 <code>strategy_confirmed=t</code>。</li>
+  <li><strong>会议导入</strong>：在知识库域点击「会议导入」，上传 kickoff 会议转写文本（或调用 API）。等待 AI 生成纪要与待办。验证 <code>meetings</code> 与 <code>meeting_action_items</code> 表有记录。</li>
+  <li><strong>知识入库</strong>：对 8 条待入库知识逐条审核（含 1 条污染知识）。在 <code>needs_review</code> 弹窗中核实无客户机密、与既有口径不冲突后批准入库。污染知识应被冲突检测拦下。</li>
+  <li><strong>AI 出策略与撰稿</strong>：启动 auto-ops 引擎（<code>POST /autoops/start</code> 或 UI「启动」按钮），观察轮次自动推进。AI 自主产出策略报告、选题库、撰稿内容。</li>
+  <li><strong>验收与交付</strong>：独立验收 Agent 对撰稿内容进行审核（<code>acceptance_records</code>），人工在审批弹窗中批准 2 次交付外发（邮件通道，走 <code>connector_audit_logs</code> pending → executed）。1 次客户需求变更后需人工确认更新后的 <code>done_when</code>。</li>
+</ol>
+
+<div class="callout callout-info">
+  <strong>D1 实测发现</strong>
+  UI「启动」按钮在 <code>status=active</code> 时被错误置灰（ISSUE-W4-15），需改走 <code>POST /autoops/start</code> API。岗位模板库下拉默认为「软件开发」四岗，需手工切换到「内容创作」分类（ISSUE-W4-16A）。这两处缺陷兜底各计一次人工干预。
+</div>
+
+<h3 id="t1-meeting">4.2 会议导入流程详解</h3>
+
+<p>会议导入是 C6 场景最核心的知识沉淀入口，完整流程分为五个阶段：</p>
+
+<h4>阶段一：上传转写文本</h4>
+<p>通过 UI 的「会议导入」入口或 API <code>POST /projects/:id/meetings/import-text</code> 上传 kickoff 会议的转写文本。文本应包含完整的会议对话内容，涵盖客户需求描述、品牌调性讨论、交付节奏约定、验收标准确认等关键议题。上传后系统自动调用 LLM 进行纪要提取，生成结构化的会议纪要（包含议题摘要、关键决策、待办事项三部分）。</p>
+
+<h4>阶段二：审核纪要与待办</h4>
+<p>AI 生成的纪要需要人工审核确认准确性。在 UI 中查看纪要内容，核对关键决策是否与会议实际内容一致，待办事项是否完整覆盖了会议中约定的后续动作。如有遗漏或错误，可手动编辑修正。审核通过后，纪要状态从 <code>draft</code> 变为 <code>confirmed</code>。</p>
+
+<h4>阶段三：待办转化为任务</h4>
+<p>对每一条待办事项（存储在 <code>meeting_action_items</code> 表中），调用 <code>POST /projects/:id/meetings/:meeting_id/action-items/:item_id/convert</code> 将其转化为 <code>auto_ops_tasks</code> 表中的正式任务。转化时必须验证每条任务携带原始片段回链——即任务的描述中应包含对应会议原话的引用，防止需求漂移。判据为「纪要 → 任务转化率 100%」，即所有 <code>meeting_action_items</code> 都必须建立对应的任务。</p>
+
+<h4>阶段四：任务进入调度</h4>
+<p>转化完成的任务进入 auto-ops 调度队列。引擎在下一个 tick 按轮前角色解析机制将任务分配给最合适的角色实例。在 T1 阶段，由于组织只有 1 个管理者 + 2 个员工（seo_expert + copywriter），大部分任务会分配给 copywriter 或 general_executor。验证点为 <code>auto_ops_tasks.role_id</code> 非空且 <code>auto_ops_rounds</code> 中出现该任务的执行记录。</p>
+
+<h4>阶段五：产出与验收</h4>
+<p>任务执行完成后，独立验收 Agent 对照 <code>done_when</code> 产出验收结论。通过的任务标记 <code>finished=true</code> 并回写 <code>finished_at</code>（D3 已验证 pass → 任务终态回写生效，delta_ms ≈ 1ms）。redo/reject 的任务进入返工队列，等待下一轮调度。</p>
+
+<h3 id="t1-knowledge">4.3 知识入库人工确认（8 条含污染知识拦截）</h3>
+
+<p>知识入库是知识沉淀的第二条路径。品牌资料包中的文档经过清洗、分块、向量化后进入 <code>knowledge_documents</code> 表，但状态为 <code>needs_review</code>，需要人工逐条确认后才能变为 <code>active</code> 供 RAG 检索使用。T1 阶段需要确认 8 条知识文档，其中包含 1 条故意预埋的污染知识。</p>
+
+<table>
+<tr><th>序号</th><th>知识类型</th><th>预期判定</th><th>验证要点</th></tr>
+<tr><td>1</td><td>品牌视觉规范</td><td><span class="tag tag-pass">批准入库</span></td><td>无客户机密、与既有口径一致</td></tr>
+<tr><td>2</td><td>目标受众画像</td><td><span class="tag tag-pass">批准入库</span></td><td>与会议口径一致</td></tr>
+<tr><td>3</td><td>竞品分析摘要</td><td><span class="tag tag-pass">批准入库</span></td><td>数据来源合规</td></tr>
+<tr><td>4</td><td>历史内容样本 A</td><td><span class="tag tag-pass">批准入库</span></td><td>无敏感信息</td></tr>
+<tr><td>5</td><td>历史内容样本 B</td><td><span class="tag tag-pass">批准入库</span></td><td>无敏感信息</td></tr>
+<tr><td>6</td><td>内容交付 SOP</td><td><span class="tag tag-pass">批准入库</span></td><td>流程合理</td></tr>
+<tr><td>7</td><td>客户沟通模板</td><td><span class="tag tag-pass">批准入库</span></td><td>语气与品牌调性一致</td></tr>
+<tr><td>8</td><td><strong>污染知识</strong>：「案例引用无需标注数据来源」</td><td><span class="tag tag-fail">应被拦截</span></td><td>与会议中「案例数据须可溯源」矛盾，冲突检测应拦下</td></tr>
+</table>
+
+<div class="callout callout-warn">
+  <strong>污染知识拦截验证</strong>
+  如果系统未能拦截第 8 条污染知识（即其状态直接变为 active 而非停留在 needs_review），则记录为缺陷（知识入库防污染 P1 建议项未落地），降级为观察项。取证时需截图 <code>knowledge_documents</code> 表中该条记录的状态字段以及 <code>change_logs</code> 中的冲突检测留痕。
+</div>
+
+<h3 id="t1-event">4.4 事件注入（client.change）</h3>
+
+<p>T1 阶段需要注入两类关键事件：客户需求变更与首笔项目款入账。客户需求变更事件通过 harness 的 <code>ingest-event.mjs</code> 脚本或直接调用 <code>POST /api/v1/events</code> 注入，完整 JSON 如下：</p>
+
+<pre><code>{
+  "source": "email",
+  "event_type": "client.change",
+  "title": "客户需求变更：案例数据须可溯源",
+  "content": "{\"client\":\"A\",\"section\":\"语气\",\"new_done_when\":\"案例数据须可溯源\",\"original\":\"无特殊要求\"}",
+  "priority": "important"
+}</code></pre>
+
+<p>该事件注入后，期望系统产生以下反应：① <code>events</code> 表新增一行，<code>status</code> 从 pending 变为 processed；② 事件→Agent 协调器将该事件分配给相关角色（<code>event_assignments</code> 表新增记录）；③ 相关任务的 <code>done_when</code> 字段需要人工确认更新（RACI 人工节点 <code>human_task_nodes</code> 新增一条审批记录）。需要注意的是，D1-D3 测试中事件→派单链路存在 <code>event_assignments=0</code> 的问题（ISSUE-W4-26），事件能被接收和分类但不会被自动分配给 Agent，这一缺陷需在 D4 复测。</p>
+
+<p>首笔项目款入账事件通过 <code>ingest-event.mjs --type payment</code> 注入，自动附带项目账本收入分录（<code>project_ledger</code> 表），验证双线账本的虚拟核算入口。</p>
+
+<!-- ============================================================ -->
+<h2 id="t2">五、T2 扩张期操作指引</h2>
+
+<p>T2 扩张期的核心目标是实现三家客户并行，组织从一人全能裂变为有分工的小所。编制从 1+1 扩展到 1+15，新增四组：策略组、内容组（撰稿 ×3/校对/视觉）、客户组（经理 ×2/交付）、职能组（财务/内审/知识管理）。核心判据包括：自主率 ≥ 65%、人工干预 ≤ 10 次/周、单位交付 ≤ ¥40、扩编后毛利不降、SOP 复用使返工率降 ≥ 30%。</p>
+
+<h3 id="t2-parallel">5.1 三家客户并行</h3>
+
+<p>新增两家客户的理想路径是通过「新项目 + 预算事件」实现客户级隔离（每个客户一个独立项目，天然等价于客户级熔断）。但在 D3 测试中，由于 grant active 已达上限（10/12）且产品无客户实体写入口（营销面板「潜在客户」页新增按钮数 = 0），实际采用降级方案：在 lts_c6_studio 项目内建两条客户任务组（北极星健身会员留存、云澜咖啡本周新品），以任务级隔离代替项目级隔离。这一降级方案的局限性在于：一家客户超支会暂停整个项目循环（<code>BudgetController</code> 以 <code>projectID</code> 为键），无法实现「不牵连其他」的客户级独立熔断。</p>
+
+<h3 id="t2-expand">5.2 组织裂变与扩编 5 岗</h3>
+
+<p>组织裂变由 evo 的缺口检测驱动。当未完成任务数超过阈值（默认 20），系统通过 <code>POST /org/stage/sense</code> 触发阶段感知，<code>DetectGaps</code> 产出扩编建议（<code>growth_advice</code> 表 <code>type=scale_out</code> 或 <code>role_add</code>），建议中包含角色类型、成本估算与负载证据。人工在组织面板点击「确认」→「确认采纳」，调用 <code>POST /org/advice/:id/accept</code> 完成一键扩编。</p>
+
+<p>D3 实测中，通过 UI 一键扩编与两次阶段切换批量扩编共新增 8 个岗位（超过故事卡要求的 5 岗），组织从 5 → 13 实例。但暴露了三个关键问题：① 批量扩编无规模/成本闸门（ISSUE-W4-51），一次点击越过目标带 30%；② 跨分类串模板（ISSUE-W4-52），内容工作室被装配了电商/制造业画像；③ 扩编产出的实例技能白名单全空（ISSUE-W4-34），<code>capabilities</code> 13/13 全为 <code>{}</code>。</p>
+
+<div class="callout callout-danger">
+  <strong>FIX-004 关键复测点</strong>
+  每个新角色在 3 轮内真被调度且有产出。D3 实测：8 个新岗中 0/8 满足「≤3 轮」判据。1 个同岗扩容实例 Δ=4（最接近但仍超标），5 个依赖人工点名（Δ=18~38），2 个整窗零消费。产品自动通道（不点名）从未主动把专业新岗纳入调度。
+</div>
+
+<h3 id="t2-cooldown">5.3 驳回过早扩编与冷却期验证</h3>
+
+<p>故事卡要求「驳回 1 条过早扩编并验证冷却期不重复打扰」。D3 通过双臂对照实验验证了这一判据：对同一条 pending 建议分别执行「拒绝」与「暂缓 7 天」操作，然后连续两圈点击「重新评估」观察同 <code>(type, role_key)</code> 键位是否重产新卡。</p>
+
+<p>实验结果：「暂缓」臂——两圈零重产，<code>cooldown_until</code> 写入 7 天后的时间戳，冷却期机制生效；「拒绝」臂——两圈后同键重产 1 行新卡（拒绝后 3 秒即重产），<code>cooldown_until</code> 为空。缺陷精确定位在拒绝通道不写冷却期（<code>gap.go:640-657</code>），已建 ISSUE-W4-49。主控裁决：判产品缺陷（P1），故事卡 T2-6 判据优先。修复批须把在册单测 <code>TestStory49</code> 的断言改严（冷却期内不得重产、到期后方可重产）。</p>
+
+<!-- ============================================================ -->
+<h2 id="t3">六、T3 规模化期操作指引</h2>
+
+<p>T3 规模化期的核心目标是验证部门建制下的治理能力，包括 SLA 超时升级链、跨客户冲突仲裁、阿米巴核算与组织回滚。判据包括：自主率 ≥ 75%、人工升级 ≤ 6 次/周、单位交付 ≤ ¥28、人效比 ≥ T1 的 3 倍。</p>
+
+<h3 id="t3-sla">6.1 关键人休假 → SLA 超时升级链</h3>
+
+<p>注入关键人休假场景后，系统需要触发 SLA 超时升级链。具体验证路径为：审核人节点在 <code>escalate_at</code> 时刻到达后未被处理，<code>SLASweep</code>（<code>internal/autoops/human.go:1508-1524</code>）扫描到该节点后自动推进升级链（审核人 → 负责人），同时通知链上下位。验证要点包括：</p>
+
+<ul>
+  <li><code>human_task_nodes</code> 表中 <code>escalation_level</code> 字段递增</li>
+  <li><code>notifications</code> 表中出现升级通知记录</li>
+  <li>升级后新审批人能够正常处理该节点</li>
+</ul>
+
+<p>D1 判据修正中已确认 SLA 升级链在码面生效（两把 sweeper 真在跑，ticker 30s/60s），但需注意前置条件：<code>human_task_nodes</code> 中节点的 <code>escalate_at</code> 必须非空且链已建，否则读到的是「节点不在扫描面」而非「升级链失效」。T3 注入超时事件前，必须先确认节点 <code>escalate_at</code> 非空。</p>
+
+<h3 id="t3-conflict">6.2 跨客户并发冲突仲裁</h3>
+
+<p>当三家客户同时需要同一角色（如 copywriter）的服务时，会产生跨客户资源争用。系统需要通过 <code>arbitration_cases</code> 表记录仲裁过程，<code>decision_logs</code> 表留痕决策依据。验证要点为：仲裁留痕完整（不互相覆盖）、被仲裁的任务在下一轮得到优先调度、仲裁结论可追溯到 <code>decision_traces</code> 表。</p>
+
+<h3 id="t3-amoeba">6.3 部门级阿米巴核算</h3>
+
+<p>阿米巴核算通过 <code>amoeba_daily_stats</code> 表实现岗位级成本与产出的独立核算。D1 判据修正中发现，<code>SaveDailyStats</code> 与 <code>AggregateDailyStats</code> 在生产代码中零调用点，<code>amoeba_daily_stats</code> 表的数据全部来自 e2e 夹具直接 INSERT。因此，阿米巴/人效类判据降级为观察项，成本取证改走 <code>GET /autoops/billing?group_by=role|task|round</code>（源表 <code>token_billing_records</code>）。</p>
+
+<p>岗位维成本可用 <code>?group_by=role</code> 取得，客户维只有当客户 = 项目时可取 <code>?project_id=</code>。单位 token 附加值的计算公式为：全项目累计计费 ÷ <code>acceptance_records.verdict='pass'</code> 条数。D3 实测值为 ¥0.606782 ÷ 2 = ¥0.303391/条（样本仅 2 条，不外推）。</p>
+
+<h3 id="t3-rollback">6.4 组织回滚演练</h3>
+
+<p>组织回滚是 T3 最重要的演练项。通过 <code>POST /org/advice/:id/rollback</code> 触发回滚后，系统需要完成以下原子操作：</p>
+
+<ol>
+  <li>将目标角色实例标记为软删除（<code>agents.deleted_at</code> 非空）</li>
+  <li>解除该角色与所有任务的调度绑定（<code>auto_ops_tasks.role_id</code> 清空或重新分配）</li>
+  <li>在 <code>change_logs</code> 中写入回滚操作记录（<code>action=rollback</code>）</li>
+  <li>在 <code>decision_traces</code> 中留痕回滚决策</li>
+  <li>保证未完成任务零丢失（回滚前后 <code>auto_ops_tasks</code> 中 <code>finished=false</code> 的任务集 diff = ∅）</li>
+</ol>
+
+<div class="callout callout-warn">
+  <strong>UI 入口缺失</strong>
+  D3 测试中发现，组织面板的「回退」按钮只对 <code>role_add/stage_upgrade</code> 类型渲染，对 <code>scale_out</code> 类型不渲染（ISSUE-W4-35§B）。在 UI 修复前，组织回滚只能通过 API 路径执行，计为一次人工干预。回滚前务必确认只动目标实例，不影响其他正常角色。
+</div>
+
+<p>回滚验证的完整取证流程为：① 回滚前拍快照（记录当前 <code>agents</code> 表全量、<code>auto_ops_tasks</code> 未完成任务集、<code>auto_ops_rounds</code> 最大 round_no）；② 执行回滚 API；③ 回滚后拍快照（验证 <code>agents</code> 软删、<code>change_logs</code> 留痕）；④ 对比回滚前后未完成任务集（diff 必须为空）；⑤ 继续运行 3-5 轮，验证引擎不因回滚而异常停止或跳过任务。</p>
+
+<!-- ============================================================ -->
+<h2 id="acceptance">七、验收判定表</h2>
+
+<p>以下为 C6 场景三阶段的验收判定标准，基于 D1-D3 实测数据给出当前状态评估：</p>
+
+<table>
+<tr><th>指标</th><th>阶段</th><th>通过</th><th>观察</th><th>失败</th><th>D3 实测值</th></tr>
+<tr><td>自主率（轮次口径）</td><td>T1/T2/T3</td><td>≥ 40%/65%/75%</td><td>差距 ≤ 20%</td><td>&lt; 阈值 或含未批写动作</td><td><span class="tag tag-pass">100% 全阶段达标</span></td></tr>
+<tr><td>自主率（交付物口径）</td><td>T1/T2/T3</td><td>≥ 30%/50%/60%</td><td>差距 ≤ 20%</td><td>&lt; 阈值</td><td><span class="tag tag-fail">2.7%（2/73 轮）</span></td></tr>
+<tr><td>人工干预次数</td><td>T1</td><td>≤ 16</td><td>17-18（FIX 兜底 > 50%）</td><td>> 18 或审批链断裂</td><td><span class="tag tag-pass">8 次（D1）</span></td></tr>
+<tr><td>人工干预次数</td><td>T2</td><td>≤ 10/周</td><td>11-12/周</td><td>> 12/周</td><td><span class="tag tag-fail">22 次/58 分钟（D3）</span></td></tr>
+<tr><td>单位交付 token 成本</td><td>T1</td><td>≤ ¥60</td><td>≤ ¥72</td><td>> ¥72</td><td><span class="tag tag-pass">¥0.3034/条（样本 2）</span></td></tr>
+<tr><td>单位交付 token 成本</td><td>T2</td><td>≤ ¥40</td><td>≤ ¥48</td><td>> ¥48</td><td>同上</td></tr>
+<tr><td>纪要 → 任务转化率</td><td>T1</td><td>100%</td><td>≥ 80%</td><td>&lt; 80%</td><td><span class="tag tag-warn">未执行（knowledge_documents=0）</span></td></tr>
+<tr><td>RAG 命中率</td><td>T1</td><td>后续任务引用入库知识</td><td>有入库但引用率低</td><td>0 命中</td><td><span class="tag tag-warn">未执行</span></td></tr>
+<tr><td>新角色 3 轮内被调度</td><td>T2</td><td>全部 ≤ 3 轮</td><td>部分 ≤ 3 轮</td><td>0 个达标 或扩而不用</td><td><span class="tag tag-fail">0/8 达标（自动通道）</span></td></tr>
+<tr><td>扩编后毛利不降</td><td>T2</td><td>毛利持平或上升</td><td>降幅 ≤ 10%</td><td>降幅 > 10%</td><td><span class="tag tag-warn">不可计算（revenue=0）</span></td></tr>
+<tr><td>组织回滚任务零丢失</td><td>T3</td><td>diff = ∅</td><td>diff ≤ 2 且可解释</td><td>任务丢失</td><td><span class="tag tag-warn">未执行（UI 无入口）</span></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="evidence">八、取证口径</h2>
+
+<p>C6 场景的取证遵循「页面 + 网络 + psql」三重交叉原则，单层不定论。以下为各核心验证项的取证数据库表与关键 SQL：</p>
+
+<h3>8.1 会议导入与知识沉淀</h3>
+<pre><code>-- 会议纪要与待办
+SELECT m.id, m.title, m.status, count(ai.id) AS action_items
+FROM meetings m LEFT JOIN meeting_action_items ai ON ai.meeting_id = m.id
+WHERE m.project_id = '1113' GROUP BY m.id;
+
+-- 知识入库状态链
+SELECT status, count(*) FROM knowledge_documents
+WHERE project_id = '1113' GROUP BY status;
+
+-- 知识分块向量化
+SELECT count(*) FROM knowledge_chunks
+WHERE document_id IN (SELECT id FROM knowledge_documents WHERE project_id = '1113');</code></pre>
+
+<h3>8.2 evo 组织进化全链路</h3>
+<pre><code>-- 扩编建议状态链
+SELECT type, role_key, status, count(*),
+       count(*) FILTER (WHERE cooldown_until IS NOT NULL) AS with_cooldown
+FROM growth_advice WHERE project_id = '1113' AND deleted_at IS NULL
+GROUP BY 1, 2, 3;
+
+-- 角色实例三面（能力/职责/红线）
+SELECT agent_id, name, role,
+       CASE WHEN coalesce(responsibility_boundary,'') = '' THEN '空' ELSE '有' END AS resp,
+       capabilities::text AS caps
+FROM agents WHERE project_id = '1113' AND deleted_at IS NULL;
+
+-- 组织变更日志
+SELECT action, operator, count(*) FROM change_logs
+WHERE project_id = '1113' GROUP BY action, operator ORDER BY action;
+
+-- 角色版本快照
+SELECT count(*) FROM role_versions WHERE project_id = '1113';
+
+-- 决策追踪
+SELECT count(*) FROM decision_traces WHERE project_id = '1113';</code></pre>
+
+<h3>8.3 调度与计费归因</h3>
+<pre><code>-- 新角色调度验证（FIX-004 五线交叉）
+-- 线 1：任务绑定
+SELECT t.role_id, count(*) FROM auto_ops_tasks t
+WHERE t.project_id = '1113' AND t.role_id = ':agent_id' GROUP BY 1;
+
+-- 线 2：轮次归因
+SELECT r.round_no, r.status, r.cost FROM auto_ops_rounds r
+JOIN auto_ops_tasks t ON t.task_id = r.task_id
+WHERE t.project_id = '1113' AND t.role_id = ':agent_id' ORDER BY r.round_no;
+
+-- 线 3：计费归因
+SELECT count(*), round(sum(cost)::numeric, 6) FROM token_billing_records
+WHERE project_id = '1113' AND role_id = ':agent_id';
+
+-- 线 4：任务累计轮
+SELECT t.name, t.round_count FROM auto_ops_tasks t
+WHERE t.project_id = '1113' AND t.role_id = ':agent_id';
+
+-- 线 5：产出摘要
+SELECT count(*) FROM auto_ops_progress
+WHERE project_id = '1113' AND coalesce(task_summary, '') &lt;&gt; '';</code></pre>
+
+<h3>8.4 预算与账本</h3>
+<pre><code>-- 预算状态
+SELECT ai_budget, ai_used, total_budget, warned, meltdown, ai_meltdown
+FROM budget_states WHERE project_id = '1113';
+
+-- 计费分桶（验证无估算行）
+SELECT CASE WHEN log_ref LIKE 'round:%' THEN 'round:'
+            WHEN log_ref LIKE 'direct:%' THEN 'direct:'
+            WHEN log_ref LIKE 'est:%' THEN 'est:'
+            ELSE 'other' END AS bucket,
+       count(*), round(sum(cost)::numeric, 6)
+FROM token_billing_records WHERE project_id = '1113'
+GROUP BY 1 ORDER BY 1;</code></pre>
+
+<!-- ============================================================ -->
+<h2 id="appendix">九、附录：环境信息</h2>
+
+<h3 id="appendix-ports">9.1 端口映射</h3>
+
+<table>
+<tr><th>服务</th><th>端口</th><th>说明</th></tr>
+<tr><td>PostgreSQL 17</td><td><code>localhost:5432</code></td><td>双库：<code>ai_native_engine</code>（平台）/ <code>project_server</code>（实例）</td></tr>
+<tr><td>platform 后端</td><td><code>http://localhost:18000</code></td><td>公司/项目/实例/平台真实账本/超管后台</td></tr>
+<tr><td>project-server</td><td><code>http://localhost:8090</code></td><td>AI 执行引擎，轮次/审批/账本/连接器/事件</td></tr>
+<tr><td>前端（vite dev）</td><td><code>http://localhost:5176</code></td><td>三端同机，playwright baseURL</td></tr>
+<tr><td>外网代理</td><td><code>127.0.0.1:7890</code></td><td>新加坡 IP，出海网络代理</td></tr>
+</table>
+
+<h3 id="appendix-tables">9.2 关键表清单</h3>
+
+<h4>project_server 库</h4>
+<table>
+<tr><th>表名</th><th>用途</th><th>C6 相关度</th></tr>
+<tr><td><code>meetings</code> / <code>meeting_action_items</code></td><td>会议导入与待办</td><td><span class="tag tag-info">核心</span></td></tr>
+<tr><td><code>knowledge_documents</code> / <code>knowledge_chunks</code></td><td>知识库文档与分块</td><td><span class="tag tag-info">核心</span></td></tr>
+<tr><td><code>growth_advice</code></td><td>evo 扩编建议</td><td><span class="tag tag-info">核心</span></td></tr>
+<tr><td><code>agents</code> / <code>org_charts</code> / <code>role_versions</code></td><td>角色实例与组织快照</td><td><span class="tag tag-info">核心</span></td></tr>
+<tr><td><code>change_logs</code></td><td>组织变更留痕</td><td><span class="tag tag-info">核心</span></td></tr>
+<tr><td><code>decision_traces</code></td><td>组织决策追踪</td><td><span class="tag tag-info">核心</span></td></tr>
+<tr><td><code>auto_ops_rounds</code> / <code>auto_ops_tasks</code></td><td>轮次与任务</td><td><span class="tag tag-info">核心</span></td></tr>
+<tr><td><code>acceptance_records</code></td><td>三权验收记录</td><td><span class="tag tag-pass">重要</span></td></tr>
+<tr><td><code>token_billing_records</code></td><td>token 计费明细</td><td><span class="tag tag-pass">重要</span></td></tr>
+<tr><td><code>budget_states</code> / <code>budget_alerts</code></td><td>预算状态与告警</td><td><span class="tag tag-pass">重要</span></td></tr>
+<tr><td><code>human_task_nodes</code></td><td>RACI 人工节点</td><td><span class="tag tag-pass">重要</span></td></tr>
+<tr><td><code>connector_audit_logs</code></td><td>连接器审计日志</td><td><span class="tag tag-pass">重要</span></td></tr>
+<tr><td><code>arbitration_cases</code> / <code>decision_logs</code></td><td>仲裁与决策日志</td><td><span class="tag tag-pass">重要</span></td></tr>
+<tr><td><code>amoeba_daily_stats</code></td><td>阿米巴日统计</td><td><span class="tag tag-warn">观察</span></td></tr>
+<tr><td><code>events</code> / <code>event_assignments</code></td><td>事件与分配</td><td><span class="tag tag-pass">重要</span></td></tr>
+</table>
+
+<h4>ai_native_engine 库（platform）</h4>
+<table>
+<tr><th>表名</th><th>用途</th></tr>
+<tr><td><code>companies</code> / <code>members</code> / <code>projects</code></td><td>公司/成员/项目</td></tr>
+<tr><td><code>project_budgets</code></td><td>项目预算（total_budget / used_amount）</td></tr>
+<tr><td><code>instances</code> / <code>instance_project_grants</code></td><td>实例与授权</td></tr>
+<tr><td><code>platform_balances</code> / <code>platform_transactions</code></td><td>平台真实账本</td></tr>
+<tr><td><code>token_billing_reports</code></td><td>计费上报（status: settled/duplicated）</td></tr>
+</table>
+
+<h3 id="appendix-harness">9.3 harness 脚本用法</h3>
+
+<p>C6 场景使用的 harness 脚本位于 <code>wiki/long_term_testing/harness/</code>，采用 Node ESM（<code>.mjs</code>）编写，零第三方依赖。</p>
+
+<h4>drive.mjs — 推进/观察 auto-ops</h4>
+<pre><code># 观察轮（只读采集 + 快照 + 台账，零副作用）
+node drive.mjs
+
+# 触发 review（轮询等 auto_ops_rounds 最大 id 增长）
+node drive.mjs --mode review --wait 240
+
+# 指定场景标签
+node drive.mjs --scenario C6 --label "T1-D4"</code></pre>
+
+<h4>ingest-event.mjs — 外部事件注入</h4>
+<pre><code># 注入客户需求变更事件
+node ingest-event.mjs --type email.reply --scenario C6 \
+  --subject "需求变更" --text "案例数据须可溯源"
+
+# 注入项目款入账（自动附带项目账本收入分录）
+node ingest-event.mjs --type payment --scenario C6 --amount 5000
+
+# 续跑：重投未成功的事件
+node ingest-event.mjs --replay-pending</code></pre>
+
+<h4>approve.mjs — 审批模拟器</h4>
+<pre><code># 审批队列（human + acceptance + connector）
+node approve.mjs --scenario C6
+
+# 只出判定，零副作用
+node approve.mjs --dry-run
+
+# 端到端自证
+node approve.mjs --selftest</code></pre>
+
+<h4>幂等约定</h4>
+<p>事件键 = <code>&lt;SCENARIO&gt;/&lt;YYYY-MM-DD&gt;/&lt;NNN&gt;</code>，文件即锁。同键已 <code>fed</code> 则不重复投喂。审批幂等键 <code>&lt;SCENARIO&gt;/&lt;YYYY-MM-DD&gt;/appr-&lt;queue&gt;-&lt;id&gt;</code>，同键已 <code>ok</code> 则跳过。drive 幂等键允许同日多行（观察性质）。</p>
+
+<h4>断点续跑</h4>
+<ol>
+  <li>读 <code>STATUS.md</code>（战役状态板）→ 当前位置与拦路虎</li>
+  <li>读 <code>ledger/ops-log.md</code> 尾部 20 行 → 最近操作</li>
+  <li>读 <code>ledger/state.json</code> → 非 <code>fed</code> 的事件 <code>--replay-pending</code></li>
+  <li><code>node lib.mjs</code> 复检三端 + token + 两库</li>
+  <li>按故事卡排当轮：drive → ingest-event → 引擎跑 → approve → 记报告</li>
+</ol>
+
+<div class="callout callout-success">
+  <strong>文档版本</strong>
+  本文档基于 D1-D3 测试报告（2026-09-24）与判据修正（2026-09-27 主控现算锚 <code>2d4aa14</code>）编写。所有 API 路径、数据库表名与缺陷编号均已核实。后续修复批落地后需同步更新本文档中的判定状态与实测值。2026-10-07 已同步 V3-01（公司级知识库上传闭环修复，commit <code>9cedee0</code>），见 2.1 知识库（分层）判定状态同步。
+</div>
+
+</div>
+</body>
+</html>

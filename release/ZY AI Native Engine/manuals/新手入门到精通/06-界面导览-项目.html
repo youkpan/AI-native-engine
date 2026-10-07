@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第06章 界面导览（下）：项目内页面 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 06 章 · 第二步：看懂界面</div>
+    <h1>第06章 界面导览（下）：项目内页面</h1>
+    <p class="zy-lead">进入项目以后，侧边栏会突然多出 6 个分组、40 多个页面，这是整个产品最让人迷路的地方。这一章给你一张完整地图：每个页面在哪、是干什么的、什么时候才需要点进去。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 25 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：6 大分组 / 40+ 页面 / 功能门控</span>
+    </div>
+  </header>
+
+  <h3>你将学会</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>说清「为什么我进项目以后，侧边栏突然多出一截菜单」</span></li>
+    <li><input type="checkbox"><span>把项目内 6 个分组背下来：建项与定义 / 组织与运营 / 接入与执行 / 研究与获客 / 治理与资源 / 运维与报告</span></li>
+    <li><input type="checkbox"><span>知道 40 多个项目页各自是干什么的，哪几个是你每天要看、哪几个按需才看</span></li>
+    <li><input type="checkbox"><span>看懂「功能开关」这道门：为什么有些页面点进去提示「加载失败，请确认……功能已启用」</span></li>
+    <li><input type="checkbox"><span>遇到「我想干某件事」时，能立刻查到该去哪个页面、点哪个按钮</span></li>
+  </ul>
+
+  <h3>先给你一张全景图</h3>
+
+  <p>平台侧的 10 个一级页面你已经在<a href="05-界面导览-平台.html">第 05 章</a>看过了。这一章只看<strong>项目内页面</strong>——也就是你从「项目管理」点进某一个具体项目以后，才会出现在左侧的那一截菜单。</p>
+
+  <p>先记住一件事：<strong>所有项目内页面，都是围着「这一个项目」转的</strong>。它们读的是这个项目自己的服务器、自己的账本、自己的知识库；你在 A 项目干的事，不会跑到 B 项目去。这是「单实例单项目物理隔离」在界面上的体现。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>分组名</th>
+          <th>页面数</th>
+          <th>一句话定位</th>
+          <th>你多久来一次</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>建项与定义</strong></td>
+          <td>2</td>
+          <td>项目还没定型时，用对话把方向、策略、资料喂给 AI；项目模板。</td>
+          <td>项目头一两周常来，之后偶尔</td>
+        </tr>
+        <tr>
+          <td><strong>组织与运营</strong></td>
+          <td>4（含 16 个快捷子页）</td>
+          <td>AI 团队本身：谁在干活、组织要不要扩编、任务和轮次跑到哪了。</td>
+          <td>几乎每天</td>
+        </tr>
+        <tr>
+          <td><strong>接入与执行</strong></td>
+          <td>3</td>
+          <td>AI 怎么跟外部世界打交道：连接器（邮箱/CRM）、审批流程、你本地电脑。</td>
+          <td>接新工具时集中来</td>
+        </tr>
+        <tr>
+          <td><strong>研究与获客</strong></td>
+          <td>4</td>
+          <td>对外那一半：找资料、做营销、把会议变成任务、给客户一个问答页。</td>
+          <td>每周一到两次</td>
+        </tr>
+        <tr>
+          <td><strong>治理与资源</strong></td>
+          <td>6</td>
+          <td>管方向、管钱、管权限、管冲突——「当老板」的那一摊事。</td>
+          <td>按需，出问题时必来</td>
+        </tr>
+        <tr>
+          <td><strong>运维与报告</strong></td>
+          <td>2</td>
+          <td>报告与备份：把项目现状定期存档、定期汇报。</td>
+          <td>每周或每月</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">这 6 个分组不是「按重要性」排的，是「按项目生命周期」排的</span>
+    <p>从上到下，恰好是一个项目从「还在定义方向」→「搭班子干活」→「接外部世界」→「对外获客」→「老板做治理」→「定期存档复盘」的顺序。你迷路时问自己一句「我这件事属于哪一段」，基本就能找到入口。</p>
+  </div>
+
+  <h2>零、先进项目：从平台走到项目里</h2>
+
+  <p>项目内页面不是单独的一个网址，你必须先「进入项目上下文」，侧边栏才会长出那 6 个分组。入口只有一个：</p>
+
+  <div class="zy-path">项目管理 <span class="sep">›</span> 项目列表 <span class="sep">›</span> 点某张项目卡片 <span class="sep">›</span> 项目详情页</div>
+
+  <p>路径说明：左侧一级菜单点 <strong>项目管理</strong>，页面标题是「项目管理」，右上角是 <span class="zy-btn">新建项目</span>。下面是一张张项目卡片，每张卡片显示项目名、状态标签、描述、类型、行业、创建时间，卡片右下角还有一个 <span class="zy-btn ghost">连接测试</span> 按钮（用来探测这个项目的服务器通不通）。</p>
+
+  <p>点卡片任意位置，就会跳到<strong>项目详情页</strong>。这时候你会注意到左侧边栏变了：在「项目管理」下方，多出了 6 个可以展开的分组。此时浏览器地址里带了这一段：<code>/project/34/...</code>——里面的 <code>34</code> 就是项目 ID。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">交互事实：路由里带 projectId，侧边栏才显示这 6 个分组</span>
+    <p>侧边栏是「看地址认人」的：只有当前网址里含 <code>project/:projectId</code> 时，才渲染这 6 个分组。这也是为什么你分享一个项目内页面的网址给同事，他打开后侧边栏会直接展开到对应分组、并高亮当前页；而如果你在某项目页面按浏览器刷新，也不会掉回平台首页——只要网址里的项目 ID 还在，侧边栏就不会塌掉。</p>
+  </div>
+
+  <h3>项目详情页本身是什么</h3>
+
+  <p>项目详情页是「这个项目的体检报告」，页面头部按钮有：<span class="zy-btn">返回</span> <span class="zy-btn ok">启动</span> <span class="zy-btn warn">暂停</span> <span class="zy-btn ok">恢复</span> <span class="zy-btn danger">停止</span> <span class="zy-btn">标记完成</span> <span class="zy-btn ghost">编辑</span>（按钮会按当前状态互斥显示，不是一直都能点）。下面是 5 个页签：<strong>概览 / 预算明细 / 服务器实例 / 开通日志 / 运行配置</strong>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>页签</th><th>里面有什么</th><th>你什么时候看</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>概览</td><td>项目基本信息、当前状态、运行模式摘要</td><td>每次进项目第一眼</td></tr>
+        <tr><td>预算明细</td><td>按钮 <span class="zy-btn">调整预算</span>，「已消耗 ¥x / ¥y」，额度项 Token / 图片 / 视频 / 服务器</td><td>想知道还剩多少钱时</td></tr>
+        <tr><td>服务器实例</td><td>IP 地址 / SSH 端口 / 项目服务器端口 8090 / 规格 / 地域 / Provider / 实例状态 / HMAC Secret（<span class="zy-btn ghost">显示</span> <span class="zy-btn ghost">复制</span> <span class="zy-btn warn">重新生成</span>）；按钮 <span class="zy-btn">编辑实例</span> <span class="zy-btn ghost">查看部署脚本</span> <span class="zy-btn">录入服务器</span> <span class="zy-btn ok">确认部署完成</span> <span class="zy-btn">录入服务器 IP</span></td><td>开通项目、换服务器时</td></tr>
+        <tr><td>开通日志</td><td>部署过程的逐条日志，空态「暂无日志」</td><td>服务器起不来时排查</td></tr>
+        <tr><td>运行配置</td><td>调度配置、执行器配置、定价（元/百万 token），按钮 <span class="zy-btn">保存配置</span></td><td>调性能/调价时，进阶</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这里有个对新手非常重要的提醒：<strong>你不需要 SSH 登录到项目服务器</strong>。项目服务器没有独立的前端界面，它的能力全部由平台透传给你，你在平台点的每个按钮，背后才是那台服务器在干活。所以「登录服务器去操作」这种说法在本产品里是不成立的。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">兜底暂停是持久状态，别以为重启就好</span>
+    <p>如果自动运营因为异常触发了兜底保护，项目详情页的运行配置区会出现一条告警，原文是<strong>「自动运营已因兜底保护暂停」</strong>。它是<strong>持久状态（跨重启保留）</strong>，你必须人工处理完问题，再去「自动运营控制台」点 <span class="zy-btn ok">恢复</span> 才会继续。注意：兜底暂停时控制台顶部的状态标签会变成红色的「<strong>已暂停（兜底）</strong>」，不会再显示绿色「运行中」；旁边的「启动」按钮是灰的、点不动，请认准「恢复」。详见<a href="04-运行模式与预算.html">第 04 章</a>。</p>
+  </div>
+
+  <h2>一、建项与定义</h2>
+
+  <p>这个分组只有 2 个入口，但它是「项目的大脑对话区」。项目刚开始的时候，你的方向、策略、资料，绝大多数是从这里喂进去的。</p>
+
+  <h3>AI 问答</h3>
+
+  <div class="zy-path">建项与定义 <span class="sep">›</span> AI 问答 <span class="sep">›</span> 页面标题「AI 问答」</div>
+
+  <p>页头三个按钮：<span class="zy-btn ghost">返回项目</span> <span class="zy-btn">引导建项</span> <span class="zy-btn ok">项目导入</span>。中间是一张大卡片「AI 问答」，右上是三个复选项：<strong>知识库检索</strong>、<strong>案例 Few-Shot</strong>、<strong>联网搜索</strong>。</p>
+
+  <p>这三个复选项用大白话说：</p>
+
+  <ul>
+    <li><strong>知识库检索</strong>：让 AI 先翻你的项目/公司资料再回答（行业黑话叫 RAG）。默认开。</li>
+    <li><strong>案例 Few-Shot</strong>：让 AI 先看几个你标过的「优秀案例」当范例再回答，回答会更贴你的口味。默认开。</li>
+    <li><strong>联网搜索</strong>：允许 AI 上网找新信息。默认关——因为联网会变慢、也会额外花钱。</li>
+  </ul>
+
+  <p>输入框的占位提示原文是「<span class="zy-field">请输入你的问题，例如：如何搭建获客流程？</span>」。下面三个按钮 <span class="zy-btn">提问</span>（回答中是 <span class="zy-btn">回答中…</span>）<span class="zy-btn ghost">停止</span> <span class="zy-btn ghost">清空</span>。没提问之前，对话区显示占位文案「输入问题，AI 将基于项目知识库与优秀案例进行引导式回答」。</p>
+
+  <p>这一页还承载着「数据飞轮」——你给回答的每一次反馈、每一个「优秀案例」，都会反哺 AI 以后的表现。反馈有<strong>两条路</strong>：最顺手的是直接挂在回答卡片上，右侧的两张小卡片则是兜底入口。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">不用再手填「交互 ID」了</span>
+    <p>以前要给某次回答反馈，得先在卡片里手输一个「交互 ID」，很多人根本不知道去哪找。现在改了：你提完一个问题、AI 给出回答后，<strong>回答卡片下方会直接出现一排按钮</strong>——<span class="zy-btn">采纳</span> <span class="zy-btn">拒绝</span> <span class="zy-btn">修改</span> <span class="zy-btn ok">提升为案例</span>，旁边还写着「本条回答（交互 ID xxx）」。点哪个，系统就自动带上这条回答对应的交互 ID 和会话凭证，<strong>你不用填任何东西</strong>。</p>
+    <p>页面右侧那两张卡片（「反馈提交」「案例晋级」）<strong>仍然保留</strong>，但已降级为「只读展示 + 复制」的兜底路径：「交互 ID」一栏变成一枚只读标签，旁边一个 <span class="zy-btn ghost">复制</span> 按钮（复制成功提示「交互 ID 已复制」），还没提问时显示「提问后自动获取」。卡片里的「提交反馈」「提升为案例」按钮在没拿到 ID 前是灰的、点不动。</p>
+  </div>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>入口</th><th>你会看到什么</th><th>作用</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>回答卡片上的按钮（推荐）</td>
+          <td><span class="zy-btn">采纳</span> <span class="zy-btn">拒绝</span> <span class="zy-btn">修改</span> <span class="zy-btn ok">提升为案例</span></td>
+          <td>一键对这条回答表态，自动带上交互 ID 与会话凭证，系统据此学习你的偏好</td>
+        </tr>
+        <tr>
+          <td>右侧「反馈提交」卡</td>
+          <td>只读的「交互 ID」+ <span class="zy-btn ghost">复制</span>；反馈类型（采纳 / 拒绝 / 修改）、备注，按钮 <span class="zy-btn">提交反馈</span></td>
+          <td>兜底路径：想填备注、或回答卡片上的按钮不见了时，用它补交反馈</td>
+        </tr>
+        <tr>
+          <td>右侧「案例晋级」卡</td>
+          <td>只读的「交互 ID」+ <span class="zy-btn ghost">复制</span>；标签（占位「逗号分隔，如：获客,营销」），按钮 <span class="zy-btn ok">提升为案例</span></td>
+          <td>把一次好回答「提升为优秀案例」，之后就能被 Few-Shot 引用。成功后提示「已提升为优秀案例」</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">反馈不会记到别人头上</span>
+    <p>服务端会<strong>强制校验归属</strong>：提交反馈 / 晋级案例时必须带会话凭证，而且它必须和那条交互记录对得上。如果 ID 或凭证对不上，会直接返回错误（<strong>403</strong> 无权限，或 <strong>404</strong> 记录不存在），<strong>绝不会把反馈写到别人的交互记录上</strong>。所以哪怕你手动粘贴了一个来路不明的 ID，也只会失败，不会造成数据错乱。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">它和平台级「AI 对话」的区别</span>
+    <p>平台一级菜单里也有个 <strong>AI 对话</strong>（第 05 章讲过），那是通用聊天。这里的「AI 问答」是<strong>绑死在这个项目上</strong>的：它默认去查本项目的知识库和优秀案例，回答带着项目上下文。所以「跟我项目有关的问题」问这里，「随便聊聊」去平台 AI 对话。</p>
+    <p>另外提醒一句：案例晋级需要先选好公司上下文，否则会提示「缺少公司上下文，请先在右上角选择公司」。</p>
+  </div>
+
+  <details class="zy-acc">
+    <summary>进阶：「引导建项」和「项目导入」这两个按钮通向哪</summary>
+    <div class="zy-acc-body">
+      <p>页头的 <span class="zy-btn">引导建项</span> 跳到「引导建项」页（页面标题就是「引导建项」）。它是一套分阶段会话：阶段依次是 <strong>research 调研 / input 信息录入 / summarize 摘要整理 / strategy 策略生成 / import 导入 / done 已完成</strong>。页面里有一张「项目执行策略」卡，按钮 <span class="zy-btn ghost">重新生成</span> <span class="zy-btn">确认策略</span> <span class="zy-btn ok">完成建项</span>。这里有一条硬规则要记住：<strong>没确认策略时，启动自动运营会被拦住</strong>（界面上的告警原文是「未确认策略时，启动自动运营会被拦（/autoops/start 要求已确认策略）」）。</p>
+      <p><span class="zy-btn ok">项目导入</span> 跳到「现有项目导入」页，用于把「已经进行中的项目」搬进来：左卡填项目名称（占位「已进行中项目的名称」）、项目描述（「一句话说明项目定位」）、既有资料（拖拽上传，提示「支持 txt/md/docx/pdf/xlsx/csv 等，单文件 ≤ 50MB；需先创建会话」）、聊天记录；按钮 <span class="zy-btn">上传到会话</span> <span class="zy-btn">创建导入会话</span>；右卡是「AI 整理的项目上下文」（项目背景 / 当前阶段 / 关键联系人 / 未决事项），按钮 <span class="zy-btn ok">整理并完成建项</span>，最后 <span class="zy-btn">下一步：确认执行策略</span>。这两页的完整操作放在第 07 章讲。</p>
+    </div>
+  </details>
+
+  <h3>模板</h3>
+
+  <div class="zy-path">建项与定义 <span class="sep">›</span> 模板 <span class="sep">›</span> 页面标题「项目模板」</div>
+
+  <p>注意一个小细节：<strong>侧边栏里这一项叫「模板」，点进去页面标题是「项目模板」</strong>，是同一个页面。它管的是「可复用的项目配方」。</p>
+
+  <p>页面主体是一张模板表，工具条有：<span class="zy-field">类型筛选</span>（电商 / SaaS / 内容媒体 / 区块链 / 通用）、<span class="zy-field">行业筛选</span>，按钮 <span class="zy-btn">从项目导出模板</span> 和 <span class="zy-btn ghost">沉淀项目为模板</span>。表格列有：图标、名称、分类、行业、描述、使用次数、来源（内置 / 自定义），行操作是 <span class="zy-btn ghost">详情</span> <span class="zy-btn">应用</span>。空态「暂无项目模板」。</p>
+
+  <p>两个「导出」方向要分清：</p>
+
+  <ul>
+    <li><strong>从项目导出模板</strong>：对着某个项目，把它的 Agent 配置等打包成模板，弹窗要你填模板名称（占位「给模板起个名字」）、分类、描述（占位「模板用途说明」）。</li>
+    <li><strong>沉淀项目为模板</strong>：一句话确认「将当前项目沉淀为可复用模板（自动收集 Agent 配置、审批节点快照、预算预设）？」，成功后提示「项目已沉淀为模板」。</li>
+  </ul>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">页面在，但要先开功能开关</span>
+    <p>「模板」属于「项目模板」功能。如果后端没给这个项目开 <code>project_template</code>，你会看到「项目模板功能未启用，请在功能开关中开启 project_template」。开启方法见本章第五节末尾的「功能开关」小节。</p>
+  </div>
+
+  <h2>二、组织与运营</h2>
+
+  <p>这是项目内<strong>最重、最常用</strong>的分组。前面几章反复出现的「AI 团队」「自动运营」「三权分立验收」，操作界面全在这里。侧边栏只列了 4 个入口：<strong>智能体 / 组织进化 / 自动运营 / 目标管理</strong>，但「自动运营」下面还挂着 16 个快捷子页。</p>
+
+  <h3>智能体</h3>
+
+  <div class="zy-path">组织与运营 <span class="sep">›</span> 智能体 <span class="sep">›</span> 页头「智能体中心」</div>
+
+  <p>如果你直接用小网址打开这一页、而地址里没有项目 ID，页面会警告：<strong>「请先进入具体项目（URL 含 projectId）后再访问智能体中心」</strong>。正常从侧边栏进就不会看到这句。</p>
+
+  <p>页面用 4 个页签组织：<strong>组织 / 任务 / 配置 / 运行</strong>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>页签</th><th>你会看到什么</th><th>关键按钮</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>组织</td>
+          <td>标题「Agent 组织（管理者 → 员工）」；组织架构树 + 成员列表（列：名称 / 岗位 / 类型 / 状态 / 操作）；下方「岗位模板库」（按行业筛：软件开发 / 电商运营 / 内容创作 / 智能制造 / 通用）和「技能库」（列：名称 / skill_id / 版本 / 分类 / 范围 / 状态）</td>
+          <td><span class="zy-btn ghost">刷新</span> <span class="zy-btn">新建 Agent</span>（成员行：详情 / 技能 / 暂停|启用）；<span class="zy-btn">新增模板</span>（岗位模板库）；技能行有编辑、以及 <span class="zy-btn">提升为组织级</span></td>
+        </tr>
+        <tr>
+          <td>任务</td>
+          <td>标题「Agent 任务编排」；任务表（列：标题 / 类型 / 优先级 / 状态 / 岗位 / 创建时间）</td>
+          <td><span class="zy-btn ghost">刷新</span> <span class="zy-btn">目标拆解</span> <span class="zy-btn">新建任务</span>；行操作：日志 / 注入 / 暂停 / 恢复 / 通过 / 拒绝</td>
+        </tr>
+        <tr>
+          <td>配置</td>
+          <td>标题「Agent 运行配置」；配置表（列：Agent 名称 / 角色 / 运行模式 / Cron / 工具 / 启用 / 版本）</td>
+          <td><span class="zy-btn ghost">刷新</span> <span class="zy-btn">导入 XML</span> <span class="zy-btn">新建配置</span>；行操作 编辑 / 删除</td>
+        </tr>
+        <tr>
+          <td>运行</td>
+          <td>标题「Agent 运行实例与状态」；运行实例表 + 运行记录表（列含 Agent / 触发模式 / 状态 / Token / 费用(¥) / 耗时 / 创建时间）</td>
+          <td><span class="zy-btn ghost">刷新</span> <span class="zy-btn">启动运行</span>；行操作 详情 / 停止</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>「新建 Agent」弹窗字段：名称、岗位角色（下拉可自定义输入）、类型（管理者 / 员工）、上级管理者、负责人、角色描述、职责边界、人工红线。点成员行的「详情」，还能看到<strong>绩效汇总</strong>：平均质量分、任务数、<strong>返工率（rework_rate）</strong>、主要返工原因。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">返工率是判断「这个 AI 员工行不行」的第一指标</span>
+    <p>返工率 = 它交付的活儿被验收打回重做的比例。返工率高，说明提示词、技能或岗位说明书没写对。第 08 章会教你对着这个数字怎么调。</p>
+  </div>
+
+  <p>技能库里的「范围」分<strong>组织级</strong>和<strong>项目级</strong>；项目级技能旁边有「提升为组织级」按钮，意思是从「只在本项目用」升级为「全公司共用」。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">本章只做导览</span>
+    <p>建 Agent、绑技能、岗位模板、版本、自动扩编的完整操作，全部放在<a href="08-智能体.html">第 08 章 智能体</a>。</p>
+  </div>
+
+  <h3>组织进化</h3>
+
+  <div class="zy-path">组织与运营 <span class="sep">›</span> 组织进化 <span class="sep">›</span> 页面标题「组织进化」</div>
+
+  <p>这个页面回答一个问题：<strong>「我这个 AI 团队，现在该多大、该配哪些岗？」</strong> 页头按钮 <span class="zy-btn ghost">返回项目</span> <span class="zy-btn">阶段切换</span> <span class="zy-btn ghost">刷新</span>。下面从上到下五块：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>阶段状态</h4>
+      <p>标题「阶段状态」，右上 <span class="zy-btn ghost">重新评估</span>。展示两个徽章：<strong>阶段</strong>（起步期 / 成长期 / 规模化期 / 成熟期）和<strong>成熟度</strong>（未达成 / 接近 / 已达成），下面一句话说明判定理由。展开「判定证据」，会看到一张表：指标 / 当前值 / 阈值 / 命中（命中|未命中）/ 可用（可用|缺失）。<strong>具体指标包括任务完成数、账本营收、知识库文档数、活跃 Agent 数、任务队列长度、轮次等待时间、CRM 线索数、客户咨询量</strong>——其中「可用=缺失」的指标不参与判定。</p>
+    </li>
+    <li>
+      <h4>组织架构</h4>
+      <p>一棵树，每个节点显示月成本、负载、成功率、产出。部门节点用橙色标签区分。空态「暂无组织节点」。</p>
+    </li>
+    <li>
+      <h4>AI 建议</h4>
+      <p>标题形如「AI 建议（N 条待处理）」。每条建议带<strong>类型标签</strong>（增员 / 扩容 / 技能装配 / 阶段升级）和<strong>状态标签</strong>（待确认 / 已确认 / 已应用 / 已拒绝 / 暂缓 / 已过期）。可展开「职责边界 / 技能草稿 / 成本估算」（含估算月成本、扩编后总成本变化）和「为什么（证据）」两段。状态是「待确认」时才出现操作按钮：<span class="zy-btn">确认</span> <span class="zy-btn ghost">暂缓</span> <span class="zy-btn danger">拒绝</span>。</p>
+    </li>
+    <li>
+      <h4>能力开启</h4>
+      <p>标题「能力开启（已开启 X / 阶段推荐 Y）」，一条进度条 + 能力清单，每项显示所属阶段徽章和「已开启 / 未开启」。</p>
+    </li>
+    <li>
+      <h4>定量调控（八维）</h4>
+      <p>八个可调的旋钮，用下拉或滑块调：<strong>预算 / 自主权限 / 优化频率 / 优化强度 / 模型等级 / 并发数 / 技能数 / 汇报频率</strong>。每项右侧标出是哪个引擎在管它（资源治理 / 渐进式信任 / 角色优化 / 模型路由 / 任务调度 / 技能库 / 报告引擎），强制项会挂一个红色「强制」标签且不允许关到 0。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">阶段切换是「批量动作」，会先做校验</span>
+    <p>点 <span class="zy-btn">阶段切换</span> 会弹窗，提示原文：<strong>「阶段切换会批量创建缺失岗位、更新组织节点与阶段状态。提交前系统会做检查：已存在的岗位自动跳过；技能库中缺失的技能跳过装配并生成人工提醒；预算不足仅预警、不阻断（MVP 策略）。」</strong>——这句话就是它的真实行为，逐条理解：<strong>已存在的岗位不会重复建</strong>；<strong>缺技能不会阻断，只是跳过装配并给你留一条人工提醒</strong>；<strong>预算不够也只是预警、不拦着你切</strong>。字段有「目标阶段」和「岗位集（可选，留空使用阶段推荐默认岗位）」，按钮有 <span class="zy-btn ghost">回退上次切换</span> <span class="zy-btn ghost">取消</span> <span class="zy-btn">确认切换</span>。<strong>阶段只是建议，切换永远要你人工确认，而且支持回退。</strong></p>
+  </div>
+
+  <p>确认采纳一条 AI 建议时，文案是「确认采纳建议「X」？系统将自动完成扩编/装配并上岗。」；暂缓需要你输入冷却天数；拒绝需要你输入原因。本版本给扩编加了<strong>名称唯一约束</strong>：就算你手快连点两下，也不会再冒出两个同名角色；重复创建会返回明确的业务错误，而不是默默建一条。详细玩法见<a href="08-智能体.html">第 08 章</a>。</p>
+
+  <h3>自动运营</h3>
+
+  <div class="zy-path">组织与运营 <span class="sep">›</span> 自动运营 <span class="sep">›</span> 页面标题「自动运营控制台」</div>
+
+  <p>这是你每天真正要盯着的那一页。页头右上有一个大状态标签（运行中 / 已暂停 / 已暂停（兜底）/ 已停止 / 未知）。操作按钮一整排：<span class="zy-btn ok">启动</span> <span class="zy-btn warn">暂停</span> <span class="zy-btn">恢复</span> <span class="zy-btn danger">停止</span> <span class="zy-btn danger">终止项目</span> <span class="zy-btn">触发重排</span> <span class="zy-btn ghost">刷新</span>。<span class="zy-btn">触发重排</span> 会二次确认「将在下一轮调度时触发一次 review 重排（AI 重新评估任务集）。确定触发？」——等于手动催 AI 在下一轮重新评估一遍任务集、重排优先级，平时不用点。</p>
+
+  <p>四张状态卡：<strong>运行模式</strong>（带 <span class="zy-btn ghost">修改</span>）、<strong>自主级别</strong>、<strong>任务数</strong>、<strong>累计花费</strong>。往下是「AI 预算消耗」进度条（本轮预算 / 已用，达到预警线会出现红色「预警」标签）、「终止目标」卡，和「预算运行态」卡——三个标签 <strong>熔断：是/否</strong>、<strong>降级：是/否</strong>、<strong>已终止：是/否</strong>，鼠标悬停每个标签都有说明，熔断时会写明下一步该做什么。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">预警线不再是写死的 90%，以项目配置为准</span>
+    <p>控制台和「计费明细」页的「预警」标签、配色，统一由后端的预警阈值字段 <code>warn_line_pct</code>（对应预算配置 <code>budget_warn_pct</code>）驱动，<strong>默认 80%</strong>。也就是说，进度条到 80% 就会亮预警色，不再是以前那个写死的 90%。你要改提前量，去项目预算配置里改，两个页面会一起变，不会再出现「控制台一个数、计费页另一个数」的对不上。</p>
+  </div>
+
+  <p>点「运行模式」的 <span class="zy-btn ghost">修改</span>，会打开「调整运行模式与预算科目」弹窗。三种模式是单选：<strong>全自动 / 半自动 / 人工审核</strong>，官方解释原文：</p>
+
+  <ul>
+    <li><strong>全自动</strong>：AI 自动拆解任务、调度轮次、评审验收，全程自动执行，仅在关键节点通知你。</li>
+    <li><strong>半自动</strong>：AI 自动执行，但在关键决策节点（目标变更、大额支出、对外动作等）由人工确认后继续。</li>
+    <li><strong>人工审核</strong>：AI 产出方案后必须人工审核通过才执行，节奏较慢但最可控。选它还会出现警告「切换后将暂停自动运营循环，仅保留人工审核驱动的执行，可在之后重新启动或调整」。</li>
+  </ul>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">两种「运行模式」文案确实不一样，别混淆</span>
+    <p>「新建项目向导」里的三个选项是 <strong>全自动 / 半自动 / 手动</strong>；进项目后这里叫 <strong>全自动 / 半自动 / 人工审核</strong>。<strong>创建时叫「手动」，进项目后叫「人工审核」，是同一个意思。</strong>另外记住：只有「全自动 / 半自动」会真正启用自动运营循环，「人工审核」不启用，任务要靠你手动触发。</p>
+    <p>小细节：这个单选组<strong>永远有一个选中项</strong>，不会再出现「三个选项一个都没亮」的尴尬——虽然这两处写入的内部取值不完全相同（向导 <code>manual</code> / 控制台 <code>manual_review</code>），但打开弹窗时系统会自动落到正确的那一项上，你照着当前状态改就行。</p>
+  </div>
+
+  <p>弹窗下半部分是「预算科目（金额/元）」：可以增删科目行，提示原文是「常用科目：token_fee（模型调用）/ third_party_api（第三方接口）/ compute_fee（算力）/ human_intervention（人工介入），留空科目将不计入。」</p>
+
+  <h4>快捷入口：16 个子页，全在这儿</h4>
+
+  <p>控制台最下面一张卡叫「快捷入口」，16 个按钮一字排开。它们各自是一个独立页面，但侧边栏不单独列出，必须从这张卡进（子页左上角的返回按钮写的是「返回控制台」）。这张表请收好：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>入口名</th>
+          <th>路径（在项目 ID 后面）</th>
+          <th>一句话</th>
+          <th>什么时候来</th>
+          <th>详见</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>任务管理</td><td>/autoops/tasks</td><td>AI 的待办清单，可按状态筛选</td><td>想知道 AI 今天在干啥</td><td>第 09 章</td></tr>
+        <tr><td>运行轮次</td><td>/autoops/rounds</td><td>AI 的「班次」记录与每轮日志</td><td>任务卡住、想看日志</td><td>第 09 章</td></tr>
+        <tr><td>日志面板</td><td>/autoops/logs</td><td>按任务聚合的执行日志</td><td>排查某任务为什么失败</td><td>第 09 / 19 章</td></tr>
+        <tr><td>计费明细</td><td>/autoops/billing</td><td>Token 花在哪儿了</td><td>每周对一次账</td><td>第 04 / 13 章</td></tr>
+        <tr><td>人工节点</td><td>/autoops/human</td><td>等你点头才能继续的节点</td><td>有红色待办时</td><td>第 09 / 14 章</td></tr>
+        <tr><td>角色管理</td><td>/autoops/roles</td><td>岗位能力图谱、角色版本、经验沉淀</td><td>想优化某个 AI 员工</td><td>第 08 章</td></tr>
+        <tr><td>目标管理</td><td>/autoops/objectives</td><td>目标树与关键结果（KR）</td><td>季度定方向时</td><td>第 09 章</td></tr>
+        <tr><td>审计治理</td><td>/autoops/audit</td><td>内审、红队、风险登记册、KillSwitch</td><td>月度体检</td><td>第 14 章</td></tr>
+        <tr><td>经营日报</td><td>/autoops/daily</td><td>AI 自动写的经营日报/分析报告</td><td>每天早上扫一眼</td><td>第 13 章</td></tr>
+        <tr><td>监控指标</td><td>/autoops/metrics</td><td>AI 产出质量、客户响应、人类参与率</td><td>每周看趋势</td><td>第 13 章</td></tr>
+        <tr><td>结项报告</td><td>/autoops/closing-report</td><td>项目收尾时的总结算</td><td>项目终止后</td><td>第 13 章</td></tr>
+        <tr><td>验收记录</td><td>/autoops/acceptance</td><td>三权分立验收的每一份结论</td><td>质疑「谁验收的」时</td><td>第 09 章</td></tr>
+        <tr><td>测试运行</td><td>/autoops/test-runs</td><td>验收里的测试执行记录</td><td>验收结论存疑时</td><td>第 09 章</td></tr>
+        <tr><td>阿米巴核算</td><td>/autoops/amoeba</td><td>把每个岗位当独立小账本算投入产出</td><td>月度算账</td><td>第 13 章</td></tr>
+        <tr><td>经营驾驶舱</td><td>/autoops/cockpit</td><td>收入/成本/完成率总览与预警</td><td>想看大局</td><td>第 13 章</td></tr>
+        <tr><td>权限租赁</td><td>/autoops/leases</td><td>临时把某个高危动作授权给某个 AI</td><td>对外发信等高风险动作前</td><td>第 14 章</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>逐页各一个关键点：</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card">
+      <h4>任务管理</h4>
+      <p>标题「任务管理」，按钮 <span class="zy-btn">新建任务</span>，状态筛选项是待执行 / 运行中 / 已暂停 / 已完成 / 失败 / <strong>规划中</strong>。列表列有任务名称、状态、优先级、时间片、引擎、类型、模型（路由自动）、创建时间。行内按钮按任务状态给：<span class="zy-btn ghost">编辑</span>、<span class="zy-btn ghost">继续规划</span>、<span class="zy-btn ghost">查看规划</span>、<span class="zy-btn ghost">继续修改</span>、<span class="zy-btn ghost">恢复</span>、<span class="zy-btn ghost">暂停</span>。<strong>只有「规划中」的任务右侧会多一个 <span class="zy-btn danger">删除</span></strong>（带二次确认「将删除规划中的任务「X」，删除后不可恢复。仅规划中的任务可删除。」）——这是给你清理中途放弃的向导任务用的；已在跑的任务没有删除入口，防止误删。空态「暂无任务」。</p>
+      <p>再说两个和「软件工程 / 软件修改向导」相关的按钮：<span class="zy-btn ghost">继续规划</span> / <span class="zy-btn ghost">继续修改</span> 只在任务还是「规划中」时出现，点它可以<strong>从上次中断的那一步接着往下走</strong>——关窗、刷新都不影响，不会让你从头再聊一遍；任务一旦提交执行，这个按钮就换成 <span class="zy-btn ghost">查看规划</span>，进去是<strong>只读回看</strong>（可以看到当时的提示词，但不能再改、也不会重复提交）。</p>
+      <p>两个容易踩的点：一是<strong>编辑弹窗里有些字段是只读的</strong>——任务描述、时间片权重、角色 ID 创建时定死，编辑时只显示、不能改（描述是独立验收的对照依据，时间片权重决定排班）。想补充或纠偏信息，请写进弹窗下方的<strong>任务级提示词</strong>，那里才是有效的补充入口（界面没有独立的「注入」按钮）。二是<strong>「时限」留空 = 保持原值不变</strong>，不会被静默重置——你只想改优先级，就别动时限那一格。另外，引擎类型选项现在写成 <strong>「Agent 智能体（Agent 引擎）」</strong>，和文档里「Agent 引擎」是同一个东西（另一种叫法是「loop 引擎 / 循环引擎」）。</p>
+    </div>
+    <div class="zy-card">
+      <h4>运行轮次</h4>
+      <p>标题「运行轮次与日志」。上表是轮次（轮次 / 状态 / 模式 / 引擎 / 耗时（秒）/ 花费（元）/ 开始时间），点开某轮可看该轮日志。空态「暂无运行轮次」「暂无日志」。</p>
+    </div>
+    <div class="zy-card">
+      <h4>日志面板</h4>
+      <p>标题「日志面板」。左侧是按任务聚合的「日志绑定」列表，右侧是选中任务的日志流。空态很有意思：「暂无日志绑定（任务开始执行后自动生成）」——说明任务还没跑起来。</p>
+      <p>看日志时会碰到两种「没内容」，别搞混：<strong>404</strong> 是正常的空态，提示「该轮次暂无日志（任务开始执行后自动生成）」；其它错误码才是真故障，会显示「日志加载失败（HTTP X）」并提醒你「检查实例是否在线」。面板上的自动刷新还有个体贴的细节：<strong>开着自动刷新时</strong>实时更新，<strong>一旦你手动暂停刷新</strong>，会提示「已暂停自动刷新，内容可能已过期」，提醒你看到的是旧内容。</p>
+    </div>
+    <div class="zy-card">
+      <h4>计费明细</h4>
+      <p>四张卡，<strong>标题口径已分清</strong>：「累计花费」是这个项目一路烧掉的总额，「AI 预算已用」是本轮 AI 运行预算的花销，鼠标悬停在标题上都有说明；另有 输入 Token / 输出 Token 两张卡。进度条「预算 ¥x / 已用 ¥y」，会出现「已熔断」和「预警」标签——预警线同样走后端 <code>warn_line_pct</code>（默认 80%），和控制台一致。空态「暂无计费数据」。</p>
+      <p><strong>关于兜底计费和没被计到的部分，现在不再是藏在 tooltip 里的一句话，而是常显小字，并给了精确账单的直达入口</strong>：运行轮次（按轮看花费）、阿米巴核算（按岗位看投入产出）、项目账本（项目维度的收支）。也就是说，这张卡的数字和那三个账单页能对上，对账不会再抓瞎。</p>
+    </div>
+    <div class="zy-card">
+      <h4>人工节点</h4>
+      <p>标题「人工处理节点」，按钮 <span class="zy-btn">新建节点</span>，状态筛选 待处理 / 处理中 / 已完成 / 已驳回 / 已升级。节点行按钮 <span class="zy-btn ok">确认完成</span> <span class="zy-btn">通知催促</span> <span class="zy-btn warn">升级处理</span> <span class="zy-btn ghost">移动审批</span>。空态「暂无待处理人工节点」。</p>
+    </div>
+    <div class="zy-card">
+      <h4>角色管理</h4>
+      <p>几个区：岗位能力图谱（<span class="zy-btn ghost">刷新图谱</span>）、角色列表（行内 版本 / 优化）、版本列表（版本状态 候选 / 激活 / 已停用，按钮 <span class="zy-btn ok">启用</span>）、经验沉淀（<span class="zy-btn warn">生成 SOP 草稿</span> <span class="zy-btn">新增经验</span>）。</p>
+    </div>
+    <div class="zy-card">
+      <h4>审计治理</h4>
+      <p>标题「审计与治理」，页头按钮 <span class="zy-btn">执行内审</span> <span class="zy-btn warn">红队演练</span>，底部一个红色 <span class="zy-btn danger">紧急停止（KillSwitch）</span>。6 个页签：审计报告 / 风险登记册 / 变更日志 / 经营日报 / 组织文档 / 恢复评估。<strong>KillSwitch 的确认原文是「紧急停止所有自动运营任务？此操作不可逆」——不可逆，慎点。</strong></p>
+    </div>
+    <div class="zy-card">
+      <h4>经营日报</h4>
+      <p>标题「经营日报」，按钮 <span class="zy-btn">生成日报</span> <span class="zy-btn ghost">刷新</span>。列表按类型分 daily 经营日报 / analysis 分析报告 / audit 内审报告 / redteam 红队演练。空态「暂无经营日报，点击「生成日报」创建」。</p>
+    </div>
+    <div class="zy-card">
+      <h4>监控指标</h4>
+      <p>标题「监控指标」。四张卡：AI 产出质量评分（均值 0-10）、客户响应时间 P95（秒）、人类参与率（%、人工节点介入占比）、知识库增长量（近 30 天新增条目）。</p>
+    </div>
+    <div class="zy-card">
+      <h4>结项报告</h4>
+      <p>标题「结项报告」。卡片：报告概览 / 目标达成（达成率 %）/ 任务完成（完成率 %、验收返工率 %）/ 花费与收益（Token 花费 ¥、收入 ¥、ROI x）/ 知识沉淀清单（知识文档、优秀案例、角色 SOP）/ 经验总结。空态「暂无结项报告，触发终止后可生成」——所以它平时是空的，别慌。</p>
+    </div>
+    <div class="zy-card">
+      <h4>验收记录</h4>
+      <p>标题「验收记录」，筛选「验收结论」「人工状态」「按任务 ID 筛选」，按钮 <span class="zy-btn">查询</span>。详情里同时显示「执行者」和「验收 Agent」，这就是三权分立看得见的地方。空态「暂无验收记录」。</p>
+    </div>
+    <div class="zy-card">
+      <h4>测试运行</h4>
+      <p>标题「测试运行记录」，筛选「是否通过」「按任务 ID 筛选」。空态「暂无测试运行记录」。属于验收链路的细粒度证据。</p>
+    </div>
+    <div class="zy-card">
+      <h4>阿米巴核算</h4>
+      <p>标题「阿米巴核算」，按钮 <span class="zy-btn">内部计价</span> <span class="zy-btn warn">重新聚合</span>。卡片：Token 成本 / 价值贡献 / 单位 Token 价值 / 内部收入·成本 / 任务数 / 成功任务；下面分「岗位级核算」「任务级核算」。<strong>岗位列现在显示岗位中文名</strong>（以前是英文 role_id，对不上人），月度算账时会顺手很多。空态「暂无阿米巴汇总数据」。</p>
+    </div>
+    <div class="zy-card">
+      <h4>经营驾驶舱</h4>
+      <p>标题「经营驾驶舱」，按钮 <span class="zy-btn">刷新</span> <span class="zy-btn">运行预警评估</span>。指标：总收入 / 总成本 / 净收入 / 任务完成率 / 预算消耗率 / 活跃预警。预警有级别（警告 / 严重）和状态（活跃 / 已解决），活跃的可点 <span class="zy-btn ghost">解决</span>。</p>
+    </div>
+    <div class="zy-card">
+      <h4>权限租赁</h4>
+      <p>标题「权限租赁」，按钮 <span class="zy-btn">新建授权</span>，状态筛选 生效中 / 已吊销 / 已过期。列有 Agent / 授权动作 / 授权范围 / 成本上限 / 授权人 / 状态 / 过期时间 / 操作（<span class="zy-btn ghost">续期</span> <span class="zy-btn danger">吊销</span>）。新建字段：被授权 Agent ID、授权动作（占位「如 send_email(to=customer@x.com)」）、关联任务（可选）、授权范围、成本上限、过期时间。</p>
+    </div>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">这 16 页里，新手真正每天要看的只有 4 个</span>
+    <p><strong>任务管理、运行轮次、人工节点、经营日报</strong>。其余 12 个属于「按需」：出问题（日志面板 / 验收记录 / 测试运行）、对账（计费明细 / 阿米巴核算 / 经营驾驶舱）、调优（角色管理 / 权限租赁）、体检（审计治理 / 监控指标 / 结项报告）。别被数量吓到。</p>
+  </div>
+
+  <details class="zy-acc">
+    <summary>进阶：16 个子页的路径有规律，记住它就不用翻菜单</summary>
+    <div class="zy-acc-body">
+      <p>这 16 个页面的路径全部以 <code>/autoops/</code> 开头，所以侧边栏的「自动运营」项在你打开任意子页时都会高亮——它用的是「最长前缀匹配」。据此你可以直接手改网址跳转，例如把 <code>…/autoops/tasks</code> 手动改成 <code>…/autoops/rounds</code>，比回控制台再点一次快。</p>
+      <p>三个例外要注意：<strong>目标管理</strong>虽然也是 <code>/autoops/objectives</code>，但它在侧边栏<strong>单独列了一项</strong>（因为它是老板视角的入口，不只属于运营日常）；<strong>阿米巴核算</strong>和<strong>经营驾驶舱</strong>的数据其实来自项目账本模块，只是入口挂在自动运营下；<strong>验收记录 / 测试运行</strong>是验收链路的证据页，日常很少点，出争议时才用。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>进阶：自动运营控制台上那几张卡，分别回答什么问题</summary>
+    <div class="zy-acc-body">
+      <p>很多人第一次看控制台会觉得「信息太多」。其实每张卡只回答一个问题：</p>
+      <ul>
+        <li><strong>运行模式</strong>——AI 现在有多少自由度？（全自动 / 半自动 / 人工审核）</li>
+        <li><strong>自主级别</strong>——遇到需要拍的板，是等你还是自己过？（L0–L3）</li>
+        <li><strong>任务数</strong>——手上还有多少活？</li>
+        <li><strong>累计花费</strong>——这个项目一共烧了多少钱？</li>
+        <li><strong>AI 预算消耗</strong>——本轮的钱还剩多少？（达到预警线出红色「预警」，默认 80%）</li>
+        <li><strong>预算运行态</strong>——有没有触发刹车？（熔断 / 降级 / 已终止）</li>
+      </ul>
+      <p>顺序建议：先看「预算运行态」，再看「AI 预算消耗」，最后扫一眼「任务数」。这三眼看不出问题，就当它健康。</p>
+    </div>
+  </details>
+
+  <h3>目标管理</h3>
+
+  <div class="zy-path">组织与运营 <span class="sep">›</span> 目标管理 <span class="sep">›</span> 页面标题「目标管理」</div>
+
+  <p>按钮 <span class="zy-btn">新建目标</span>。目标有三个状态：<strong>active 进行中 / achieved 已达成 / archived 已归档</strong>。点某条目标进详情，会看到三块内容：<strong>关键结果（KR）</strong>、<strong>关联任务</strong>、<strong>权衡权重</strong>（成本 cost / 质量 quality / 风险 risk / 速度 speed）。空态分别是「暂无目标」「暂无 KR」「暂未关联任务」。</p>
+
+  <p>新建目标的字段有标题（占位「如：Q3 市场份额增长 15%」）、描述、父目标 ID（占位「0 为顶级目标」）。<strong>「权衡权重」是这一页最值得琢磨的东西</strong>：它告诉 AI 在「快、好、省、稳」之间怎么取舍。你的目标如果是「尽快上线」，就把速度调高；如果是「对外发布的品牌内容」，就把质量、风险调高。第 09 章会给你几组现成配比。</p>
+
+  <h2>三、接入与执行</h2>
+
+  <p>这个分组管的是「AI 和外部世界之间的那根线」。三个页面：<strong>连接器 / 流程 / 边缘接入</strong>。</p>
+
+  <h3>连接器</h3>
+
+  <div class="zy-path">接入与执行 <span class="sep">›</span> 连接器 <span class="sep">›</span> 页头「连接器（MCP）」</div>
+
+  <p>先解释 <strong>MCP / 连接器</strong>是什么：<strong>给 AI 装一个「连接外部系统的插头」</strong>。AI 本身只会思考、只会写字，接不上你的邮箱、CRM、数据库、飞书。连接器就是那个插头，插上以后 AI 才能真的去「发一封邮件」「查一条客户记录」。</p>
+
+  <p>页面有 5 个页签：<strong>连接器 / 审计 / 版本 / 权限治理 / Webhook</strong>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>页签</th><th>标题</th><th>关键动作</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>连接器</td><td>连接器注册中心</td><td><span class="zy-btn ghost">刷新</span> <span class="zy-btn">注册连接器</span>；行操作 执行 / 编辑 / 详情 / <span class="zy-btn danger">Kill-Switch</span>（确认「紧急切断该连接器全部调用？」）。空态「暂无连接器，点击右上角注册」</td></tr>
+        <tr><td>审计</td><td>执行审计日志</td><td>状态筛选 + <span class="zy-btn ghost">刷新</span>；对写操作行有 <span class="zy-btn ok">通过</span> <span class="zy-btn danger">拒绝</span></td></tr>
+        <tr><td>版本</td><td>连接器版本历史</td><td>选连接器 + <span class="zy-btn ghost">刷新</span>；可 <span class="zy-btn">回滚到此版本</span></td></tr>
+        <tr><td>权限治理</td><td>连接器权限治理</td><td>填数据访问范围说明、审核策略（占位「如：所有发送操作需人工审核」），<span class="zy-btn">保存治理配置</span></td></tr>
+        <tr><td>Webhook</td><td>Webhook 订阅配置</td><td><span class="zy-btn">新建 Webhook</span>；行操作 测试 / 编辑 / 删除。空态「暂无 Webhook 配置」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>注册连接器时要填名称、配置（占位里举了飞书的例子 <code>{"app_id":"...","app_secret":"...","verification_token":"..."}</code>）、数据访问范围说明。配置字段旁边<strong>现在有人话提示和示例</strong>——不确定格式时照示例填，或者直接找你的 IT 要。注册时请守住两条原则：</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">「编辑」= 更新同一条连接器并升版本，不是新建一条</span>
+    <p>点某个连接器的 <span class="zy-btn ghost">编辑</span>，弹窗标题写的是<strong>「编辑连接器（重新注册新版本）」</strong>，它会<strong>复用同一个 <code>connector_id</code>、把这个连接器升级一个新版本</strong>，不会再生成一条新的。所以以前那种「编辑几次，列表里冒出一堆同名连接器」的乱象没有了。如果传的 ID 不存在，会明确报 404，而不是悄悄新建一条。</p>
+    <p>另一个必须记住的点：<strong>原有配置永远不会回显</strong>。出于安全考虑，后端加密存储配置、从不下发，所以编辑弹窗里配置那一格是空的，你必须<strong>重新填写完整配置 JSON</strong>——弹窗里也挂了醒目提示：「已有配置不回显。请重新填写完整配置后再保存；若留空，将以空配置注册一个失效的新版本。」点保存前会有二次确认，原文是「将把该连接器更新为新版本（仍是同一条连接器），原配置不会自动保留。确认继续？」（若配置为空，则提示「将把该连接器更新为空配置的新版本，连接器可能因此失效」）。<strong>别以为配置还在、直接点保存</strong>，那样等于把连接器清空了。</p>
+    <p>顺带一提：<strong>历史遗留的重复连接器不会自动清理</strong>。如果你之前已经因为反复编辑攒出了同名多条，需要手工处理（建议按「名称 + 供应商」保留版本号最大的那条，其余软删）。</p>
+  </div>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>这样做</h4>
+      <ul>
+        <li><strong>最小权限</strong>：只给这一个动作需要的权限。要发邮件，就给「发邮件」，别顺手给「读全部邮件」。</li>
+        <li><strong>写操作挂人工审核</strong>：在「权限治理」里把审核策略写清「所有发送操作需人工审核」，然后在「审计」页逐条放行。</li>
+        <li>先在一个项目试通，再考虑推到公司级复用。</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>别这样做</h4>
+      <ul>
+        <li>给 AI 一个「万能钥匙」式的管理员账号。</li>
+        <li>把写操作设成免审核，指望「它应该不会乱发」。</li>
+        <li>把连接器密钥直接写在项目描述、任务描述里（那会进日志）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>流程</h3>
+
+  <div class="zy-path">接入与执行 <span class="sep">›</span> 流程 <span class="sep">›</span> 页头「流程（人在回路）」</div>
+
+  <p>「人在回路」的意思就是：<strong>有些步骤必须由人过一遍，AI 不能自己走完</strong>。这个页面 5 个页签：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>页签</th><th>标题</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>线下任务</td><td>线下任务（飞书卡片）</td><td>要人去线下做的事（跑一趟、打个电话），按钮 <span class="zy-btn">创建任务</span>；行操作 完成 / 拒绝 / 求助 / Thread</td></tr>
+        <tr><td>定义</td><td>流程定义（YAML）</td><td><span class="zy-btn">新建流程</span>；行操作 详情 / 编辑 / 激活 / 禁用</td></tr>
+        <tr><td>实例</td><td>流程实例</td><td><span class="zy-btn">启动实例</span>；行操作 详情 / 推进</td></tr>
+        <tr><td>审批</td><td>待审批请求</td><td>行操作 <span class="zy-btn ok">通过</span> <span class="zy-btn danger">拒绝</span>，简单节点还有 <span class="zy-btn">一键确认</span>。若这条请求已被处理过（比如你重复点、或别人抢先批了），会明确报「审批请求不存在或已处理」/「审批请求已处理」，不再点了没反应</td></tr>
+        <tr><td>合规拦截</td><td>合规拦截（待处理）</td><td>被拦截内容 / 触发 / 层 / 严重度 / 关联实例 / 时间，操作 <span class="zy-btn ok">通过</span> <span class="zy-btn danger">拒绝</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">「合规拦截」是你最该定期清的一个列表</span>
+    <p>当 AI 想说的话、想做的事碰到红线时，会被拦在这里等你处置。别让它堆着——堆着的意思是这个项目的对外动作全卡住了。第 14 章会讲三通道（红/黄/绿）和拦截规则。</p>
+  </div>
+
+  <h3>边缘接入</h3>
+
+  <div class="zy-path">接入与执行 <span class="sep">›</span> 边缘接入 <span class="sep">›</span> 页面标题「边缘接入」</div>
+
+  <p>这个页面看的是<strong>你本地电脑上那个小工具（边缘客户端）</strong>的状态：它连没连上、上传过哪些文件。列表有状态筛选，空态「暂无上传文件」。</p>
+
+  <p>典型用法：你在自己电脑上装一个小托盘工具，本地扫描文档 → 上传到项目服务器。这个页就是控制台侧的「接收记录」。完整玩法（怎么下载、怎么装、怎么选目录）放在<a href="07-知识与资料导入.html">第 07 章</a>。</p>
+
+  <p>这一页最近补了两处贴心改动：一是<strong>没连上时不再给你一片空白</strong>，而是显示「尚未连接边缘客户端」，并列出三步引导（安装并启动客户端 → 确认已登录本平台 → 若仍显示未连接，检查客户端进程是否在跑、这台电脑能否访问平台）——首次进来的人照着做就行。二是把 <strong>WebSocket 端点这类底层连接参数折叠进了「高级信息（排障用）」</strong>，默认收起。普通用户平时看不到这堆术语，出问题排障时再展开，清爽很多。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">边缘客户端是英文界面，别找不到中文菜单</span>
+    <p>本地那个小工具的界面是英文的（<code>ZY Edge Client</code>、<code>Status: Connected</code>、<code>Open Logs</code>、<code>Quit</code>），其中 <code>Open Logs</code> 已经能用（点开日志目录）；<code>Reconnect</code> 菜单项则<strong>已被移除</strong>，断线会自动重连，不用手动点。托盘图标仍是占位图，属正常。</p>
+  </div>
+
+  <h2>四、研究与获客</h2>
+
+  <p>前面三组都是「内部怎么运作」，从这一组开始是<strong>对外的半边天</strong>：找资料、做营销、把会议变成任务、给客户开问答页。</p>
+
+  <h3>深度研究</h3>
+
+  <div class="zy-path">研究与获客 <span class="sep">›</span> 深度研究 <span class="sep">›</span> 页面标题「深度研究」</div>
+
+  <p>按钮 <span class="zy-btn">发起研究</span> <span class="zy-btn ghost">刷新</span>。任务列表每行可以 <span class="zy-btn ghost">详情</span>、<span class="zy-btn">转自动运营任务</span>（转过的显示「已转 {任务 ID}」）、<span class="zy-btn danger">取消</span>。空态「暂无研究任务，点击「发起研究」开始」；没选公司时提示「请先在顶部选择公司」。</p>
+
+  <p>「发起深度研究」弹窗的字段很关键，它决定了这次研究「只查外部」还是「内外结合」：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>字段</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>研究主题</td><td>占位「例如：2026 年东南亚智能制造行业 SaaS 市场机会分析」</td></tr>
+        <tr><td>研究深度</td><td>选项 2 / 3 / 4 / 5 / 6 个子问题——就是 AI 会把主题拆成几个子问题去挖</td></tr>
+        <tr><td>网络搜索</td><td>开关。开了才去公网找资料</td></tr>
+        <tr><td>知识库检索</td><td>开关。<strong>打开它，就是「包含企业内部数据的深度研究」</strong>——AI 会去翻你的公司级/项目级知识库</td></tr>
+        <tr><td>知识库范围</td><td>多选，占位「不选则检索全部项目/公司共享知识库」</td></tr>
+        <tr><td>完成后转任务</td><td>开关，提示「完成后自动转为自动运营任务（智能体引擎）」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>底部按钮 <span class="zy-btn ghost">取消</span> <span class="zy-btn">开始研究</span>。研究跑起来后，右边抽屉里能看到状态、子问题进度（「子问题：x / y」）和来源清单。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">「内部 + 外部」这才是这套研究最值钱的地方</span>
+    <p>纯上网搜，谁都能做。这里能同时打开「网络搜索 + 知识库检索」，让 AI 拿你公司的真实资料去对撞外部市场信息。做「我们该不该进这个赛道」这类判断时，两个都开。</p>
+  </div>
+
+  <h3>营销</h3>
+
+  <div class="zy-path">研究与获客 <span class="sep">›</span> 营销 <span class="sep">›</span> 页面标题「营销自动化」</div>
+
+  <p>注意：侧边栏这一项叫「营销」，点进去页面标题是「营销自动化」。4 个页签：<strong>营销活动 / 营销内容 / 潜在客户 / 邮件营销</strong>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>页签</th><th>干什么</th><th>关键按钮</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>营销活动</td><td>建一场营销活动（有目标、预算、状态）</td><td><span class="zy-btn">新建活动</span>，行内 <span class="zy-btn ghost">效果</span>；空态「暂无营销活动，点击「新建活动」开始」</td></tr>
+        <tr><td>营销内容</td><td>AI 生成的文案/素材，按活动筛选</td><td><span class="zy-btn">生成内容</span>，行内 预览 / 发布</td></tr>
+        <tr><td>潜在客户</td><td>线索池：公司 / 联系人 / 邮箱 / 行业 / 评分 / 状态</td><td><span class="zy-btn">搜索线索</span>，行内 <span class="zy-btn ghost">评分</span>；空态「暂无线索，点击「搜索线索」获取」</td></tr>
+        <tr><td>邮件营销</td><td>邮件序列与发送</td><td>见第 13 章（营销指标）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">「搜索线索」是真的去网上搜，不是编的</span>
+    <p>点「搜索线索」，系统走的是<strong>真实网络搜索 + LLM 提炼</strong>：先在网上找符合条件的目标公司与联系方式，再由模型整理、去重、打分。所以它会花一点钱、也会慢几秒，但拿到的是能用的真实线索，而不是「假数据填充」。</p>
+  </div>
+
+  <p>营销这一组受两个功能开关控制：<code>marketing_engine</code>（营销自动化引擎）和 <code>social_media</code>（社交媒体管理）。没开时点进去会看到「营销引擎功能未启用，请在功能开关中开启 marketing_engine」这类提示。</p>
+
+  <h3>会议导入</h3>
+
+  <div class="zy-path">研究与获客 <span class="sep">›</span> 会议导入 <span class="sep">›</span> 页面标题「会议内容导入梳理」</div>
+
+  <p>这一页是把<strong>会议记录 → 结构化决策 → 任务</strong>的一条流水线，新手特别容易忽略它，但它是「线下讨论怎么进到 AI 执行」的关键通道。</p>
+
+  <p>顶部工具条：「目标知识库（可选）：」，下拉占位「选择知识库，梳理后自动入库 RAG」。两个页签：</p>
+
+  <ul>
+    <li><strong>上传文件</strong>：按钮 <span class="zy-btn">选择会议文件</span>，提示原文「支持 txt / md / docx / pdf / xlsx / pptx，暂不支持音视频」。</li>
+    <li><strong>粘贴文本</strong>：直接贴会议记录，会议标题占位「会议标题（可选，如：产品周会 8/13）」，正文占位「粘贴会议记录文本，AI 将自动梳理摘要、决策与行动项」。</li>
+  </ul>
+
+  <p>下面的列表叫「会议记录」，每行可 <span class="zy-btn ghost">详情</span> / <span class="zy-btn">重新梳理</span> / <span class="zy-btn danger">删除</span>。空态「暂无会议记录，请先导入」。状态有 5 档：<strong>pending 待处理 / parsing 解析中 / analyzing 分析中 / done 已完成 / error 失败</strong>。</p>
+
+  <p>点开详情，会看到四块：<strong>参会人 / 会议摘要 / 决策 / 行动项</strong>。行动项每条带责任人、截止时间、状态标签。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">重点：「转自动运营任务」这个按钮，是会议落地成执行的关键一步</span>
+    <p>每条「open」状态的行动项右侧，都有一个 <span class="zy-btn ghost">转自动运营任务</span> 按钮，点击时弹出确认「<strong>将该行动项转为自动运营任务？</strong>」，确认后这个行动项就变成自动运营里的一条真实任务，AI 会照它去干；按钮位置会变成「已转任务 {任务 ID}」。</p>
+    <p><strong>一句话理解这条路径：</strong>你和团队在会上定了「下周三前把商品详情页文案改一版」——把会议记录粘进来 → AI 梳理出一条行动项 → 你点「转自动运营任务」→ 它就进了 AI 的待办清单。你不用再手打一遍任务。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">两个前提条件</span>
+    <p>第一，需要先选公司上下文，否则提示「请先在顶部选择公司」。第二，梳理要花模型的钱，长会议记录会明显更贵——粘贴前自己删掉无关的寒暄。</p>
+  </div>
+
+  <h3>客户页面</h3>
+
+  <div class="zy-path">研究与获客 <span class="sep">›</span> 客户页面 <span class="sep">›</span> 页面标题「客户页面」</div>
+
+  <p>这个页面是给<strong>外部客户</strong>用的：你创建一个「公开问答页」，把链接发给客户，客户在那个页面上能问问题、得到 AI 回答，但<strong>只能看到你允许它看的内容</strong>。</p>
+
+  <p>页面按钮 <span class="zy-btn">新建分享</span>。列表列有：名称 / 简介 / 知识库（没勾选时显示「未开放（未勾选知识库）」）/ 状态（开关）/ 访问链接（<code>/s/{hint}****</code>，只显示前缀）/ 过期时间（空则「永久有效」）。行操作：<span class="zy-btn ghost">编辑</span> <span class="zy-btn warn">日志</span> <span class="zy-btn ghost">重置链接</span> <span class="zy-btn danger">删除</span>。空态「暂无分享，点击右上角「新建分享」创建对外问答页」。</p>
+
+  <p>「新建分享」弹窗字段：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>字段</th><th>说明与原文占位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>名称</td><td>占位「如：产品手册智能问答」</td></tr>
+        <tr><td>简介</td><td>占位「对外展示的简介」</td></tr>
+        <tr><td>知识库白名单</td><td>多选，占位「<strong>留空表示不开放任何知识库</strong>，请显式勾选要公开的知识库」，下方提示「仅勾选的知识库参与公开问答；<strong>留空 = 不开放任何知识库</strong>（访客只能得到无资料的通用回答）」</td></tr>
+        <tr><td>启用</td><td>开关</td></tr>
+        <tr><td>每分钟限流</td><td>次/分钟（每访客），范围 1–1000</td></tr>
+        <tr><td>每日上限</td><td>次/天（总计），范围 1–100000</td></tr>
+        <tr><td>过期时间</td><td>占位「留空表示永久有效」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>创建成功后会弹一个框，原文警告：<strong>「请立即复制访问链接，token 仅本次展示，关闭后不可再查看」</strong>，下面补一句「关闭后无法再查看此链接。若已遗失，可在列表点「重置链接」生成新链接（旧链接将立即失效）。」按钮 <span class="zy-btn">复制链接</span>、<span class="zy-btn">完成</span>。<strong>这是全流程唯一一次能看到完整 token 的机会，务必当场复制存好。</strong>如果你没复制就想关掉，系统会拦一道：「尚未复制访问链接。关闭后无法再次查看，如需重新获取只能重置生成新链接（旧链接将立即失效）。确定关闭？」——这是防止链接漏存。</p>
+
+  <p>列表里的访问链接平时<strong>只显示前缀</strong>（出于安全考虑），想看完整链接只能点 <span class="zy-btn ghost">重置链接</span> 生成一条新的，旧链接立即失效；重置同样有二次确认。所以「重置链接」不是「查看链接」，是把旧链接作废、换一把新钥匙——想收回已经发出去、可能泄露的客户链接时用它。</p>
+
+  <p>点行内的「日志」，能看到每一次外部访问：问题 / IP / 状态（<strong>ok 正常 / blocked 拦截 / expired 过期</strong>）/ 输出 Token / 成本 / 时间。空态「暂无访问日志」。</p>
+
+  <p>客户打开的那个公开页叫「AI 智能问答」（网址形如 <code>/s/{token}</code>），输入框占位「请输入您的问题…」，限 <strong>2000 字</strong>，右下角显示「N / 2000」字数。页面顶部有一行说明原文：<strong>「对话记录仅保存在本机浏览器，刷新后可继续；关闭标签页后清除。」</strong>——所以客户手滑刷新不会丢对话，但关掉标签页就没了，别指望它像登录用户那样长期留痕（共用电脑上这也是隐私保护）。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">这里有条被传歪了的规则，必须掰正：留空 = 「什么都不开放」</span>
+    <p>先纠正一个流传很广的<strong>错误说法</strong>：很多人以为「知识库白名单留空 = 对项目全部知识库开放」。<strong>恰恰相反。</strong>后端一直是<strong>「不勾选 = 不开放任何知识库」</strong>（安全上的 fail-closed 默认）——留空的公开页检索不到任何企业资料，访客只能得到没有项目资料支撑的通用回答。这个语义后端一直没变过，偏的是以前的界面文案把话说反了，本批把界面改对了：列表里没勾选就显示「未开放（未勾选知识库）」，勾选处有醒目提示，而且<strong>留空直接保存时会弹二次确认</strong>「未勾选任何知识库，保存后公开页面将无法检索到任何企业资料（只做通用回答）。确认继续？」（按钮「确认保存」/「返回勾选」）。</p>
+    <p>但别因此放松警惕：<strong>只要你勾了一个库，那个库的内容就对公开页开放检索</strong>。所以真正要守的纪律是——<strong>千万不要把内部资料（成本表、客户名单、供应商报价、未发布方案）放进会被勾选的知识库</strong>；勾选时的提示原文就是「公开问答可能引用所选知识库中的原文，请确认其中不含成本价、供应商报价等敏感信息」。最稳妥的做法：专门给对外场景建一个「对外知识库」，白名单只勾它一个。</p>
+  </div>
+
+  <h2>五、治理与资源</h2>
+
+  <p>这个分组 6 个页面，是「老板视角」：管方向、管钱、管权限、管矛盾。多数页面<strong>平时不用天天看</strong>，但出问题时你必须知道它在哪。</p>
+
+  <h3>战略</h3>
+
+  <p><span class="zy-badge green">已上线</span> 功能开关：<code>strategy</code></p>
+
+  <div class="zy-path">治理与资源 <span class="sep">›</span> 战略 <span class="sep">›</span> 页面标题「战略规划」</div>
+
+  <p>3 个页签：<strong>战略计划 / 里程碑 / 健康检查</strong>。</p>
+
+  <ul>
+    <li><strong>战略计划</strong>：按钮 <span class="zy-btn">生成战略计划</span> <span class="zy-btn ghost">刷新</span>。空态「暂无战略计划，点击「生成战略计划」开始」。生成后分「市场分析」（行业趋势 / 目标市场 / 市场规模 / 增长潜力 / 竞品 / 战略建议）和「路线图」两块。</li>
+    <li><strong>里程碑</strong>：列 里程碑 / 描述 / 目标日期 / 状态 / 完成时间，状态可直接下拉改。空态「暂无里程碑，请先生成战略计划」。</li>
+    <li><strong>健康检查</strong>：按钮 <span class="zy-btn">触发健康检查</span>。输出「发现的问题 / 风险 / 建议」三块。空态「暂无健康报告，点击「触发健康检查」或先生成战略计划」。</li>
+  </ul>
+
+  <p>什么时候来：项目开工第一周，生成一次战略计划当「方向锚」；之后每季度跑一次健康检查。</p>
+
+  <h3>资源治理</h3>
+
+  <p><span class="zy-badge red">安全底线</span> 强制开启，开关不可关（参数可调）</p>
+
+  <div class="zy-path">治理与资源 <span class="sep">›</span> 资源治理 <span class="sep">›</span> 页面标题「资源治理」</div>
+
+  <p>这一页管「别把钱烧超了」的第一道闸。按钮 <span class="zy-btn ghost">返回项目</span> <span class="zy-btn ghost">刷新</span>，卡片区有 <span class="zy-btn">设置预算</span> 和 <span class="zy-btn warn">解除熔断（临时）</span>。下面两张表：消费记录（ID / Agent / 模型 / 输入 Token / 输出 Token / 花费 / 周期 / 时间）和预算数据。</p>
+
+  <p>「设置预算」弹窗字段：<strong>日预算（元）/ 周预算（元）/ 月预算（元）/ 总额度（元）/ 预警阈值（%）/ 熔断阈值（%）/ 启用预算控制</strong>。列表上会出现三种状态：<strong>已熔断 / 已停用 / 正常</strong>；熔断的条目会显示「熔断原因：…」。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">「解除熔断（临时）」是临时的</span>
+    <p>它只是让你在这一次先过去，不改预算规则。真正的解法是去「设置预算」把额度或阈值调对，或者去「自动运营控制台」补充预算。<strong>别把「解除熔断」当日常操作。</strong></p>
+  </div>
+
+  <h3>项目账本</h3>
+
+  <div class="zy-path">治理与资源 <span class="sep">›</span> 项目账本 <span class="sep">›</span> 页面标题「项目账本」</div>
+
+  <p>副标题原文是「<strong>项目虚拟核算：收入、支出与预算消耗</strong>」。注意这是「虚拟核算」，跟一级菜单里的「公司账本」（平台账户真实资金流水：充值、AI 算力费、云服务器费等）是两本不同的账，别搞混。</p>
+
+  <p>页头按钮 <span class="zy-btn">记一笔</span> 和 <span class="zy-btn ghost">项目预算</span>。</p>
+
+  <ul>
+    <li><strong>记一笔</strong>：字段 类型（收入/支出）、分类（第三方服务 / 采购成本 / 薪酬 / 营业收入 / 其它）、金额、描述、关联单号。</li>
+    <li><strong>项目预算</strong>：字段 预算总额 / 预警阈值(%) / 告急阈值(%)。</li>
+  </ul>
+
+  <p>项目预算的告警文案会出现在通知里，原文有三档：「项目预算已耗尽，请及时补充预算避免项目暂停。」「项目预算已用 x%，处于告急状态。」「接近预警阈值。」（公司余额那本账的告警是另一句：「余额 … 已低于预警阈值 …，请及时充值避免实例熔断。」）</p>
+
+  <p>这一页还有几个进阶区域：看板卡片（可 <span class="zy-btn">新建卡片</span>）、AI SQL 控制台（用自然语言生成 SQL 查账）、分类统计、预算预警。项目流水空态「暂无项目流水」。</p>
+
+  <h3>渐进式信任</h3>
+
+  <p><span class="zy-badge red">安全底线</span> 强制开启，开关不可关（参数可调）</p>
+
+  <div class="zy-path">治理与资源 <span class="sep">›</span> 渐进式信任 <span class="sep">›</span> 页面标题「渐进式信任」</div>
+
+  <p>「渐进式信任」人话就是：<strong>按 AI 的表现，逐步给它更大的权限</strong>。干得稳就多放权，出过错就收回来。两个页签：</p>
+
+  <ul>
+    <li><strong>信任档案</strong>：列 Agent / 信任等级 / 评分 / 成功 / 失败 / 最近成功 / 备注，行内按钮 <span class="zy-btn">调整等级</span>。空态「暂无信任档案」。</li>
+    <li><strong>审计记录</strong>：列 时间 / Agent / 变更类型 / 评分变化 / 等级变化 / 原因 / 审批人。空态「暂无审计记录」。</li>
+  </ul>
+
+  <p>「调整信任等级」弹窗字段：Agent、当前等级、目标等级、原因。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这一页打不开时，先看功能开关</span>
+    <p>这一页是产品设计里的<strong>安全底线</strong>，正常应始终开启。如果加载不出来，页面会提示「<strong>加载信任数据失败，请确认渐进式信任功能已启用</strong>」——按本节末尾的步骤去「设置 → 功能管理」确认 <code>trust_model</code> 是开着的。</p>
+  </div>
+
+  <h3>冲突仲裁</h3>
+
+  <p><span class="zy-badge amber">部分可用</span> 功能开关门控：<code>arbitrator</code></p>
+
+  <div class="zy-path">治理与资源 <span class="sep">›</span> 冲突仲裁 <span class="sep">›</span> 页面标题「冲突仲裁」</div>
+
+  <p>当两个 AI（比如「增长派」和「风控派」）给出互相矛盾的建议时，把议题丢到这里，由仲裁 Agent 分析并给最终结论。页头 <span class="zy-btn">新建案件</span> <span class="zy-btn ghost">刷新</span>。两个页签：</p>
+
+  <ul>
+    <li><strong>仲裁案件</strong>：列 ID / 议题 / 状态 / 参与 Agent / 冲突点 / 决策方 / 创建时间，操作 <span class="zy-btn ghost">收集</span> <span class="zy-btn">仲裁</span> <span class="zy-btn warn">升级</span>。空态「暂无仲裁案件」。</li>
+    <li><strong>决策日志</strong>：列 ID / Agent / 原始提案 / 是否采纳 / 拒绝原因 / 时间。空态「暂无决策日志（请先选中案件）」。</li>
+  </ul>
+
+  <p>新建案件字段：议题（必填，占位「需要仲裁的议题标题」）、参与 Agent（必填）等。没开 <code>arbitrator</code> 时提示「加载仲裁案件失败，请确认冲突仲裁功能已启用（功能开关 arbitrator）」。</p>
+
+  <h3>事件总线</h3>
+
+  <div class="zy-path">治理与资源 <span class="sep">›</span> 事件总线 <span class="sep">›</span> 页面标题「事件总线」</div>
+
+  <p>「事件总线」是系统内部各模块之间传递消息的『广播站』。对普通读者来说，可以理解成<strong>「系统内部发生的事情的流水账」</strong>：什么模块在什么时候丢了一条什么事件、被谁领走处理了。页头 <span class="zy-btn">新建事件</span> <span class="zy-btn ghost">刷新</span>，可按「全部状态」筛。列表列：ID / 来源 / 类型 / 标题 / 优先级 / 状态 / 评分 / 创建时间，操作 <span class="zy-btn ghost">处理</span> <span class="zy-btn ghost">分配</span>。空态「暂无事件」。</p>
+
+  <p>什么时候来：排查「某个动作到底有没有被触发」，或者想手动补一条事件。平时不用管。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：这三本「账」和三种「权限」别搞混</summary>
+    <div class="zy-acc-body">
+      <p><strong>三本账</strong>：平台账本（一级菜单「公司账本」，真实资金流水：充值、AI 算力费、云服务器费）、项目账本（本分组里的「项目账本」，项目自己的虚拟核算：收入、支出、预算）、阿米巴核算（把每个岗位当独立小账本算投入产出）。前者是真钱，后两者是管理口径。</p>
+      <p><strong>三种权限机制</strong>：「自主级别 L0–L3」决定 AI 遇到事情要不要等你；「渐进式信任」决定同一个 AI 表现得越好、能拿到多大权限；「权限租赁」是临时放行某一次高危动作（比如这一次允许它给客户发一封邮件）。一句话区分：级别是<strong>长期人设</strong>，信任是<strong>表现评分</strong>，租赁是<strong>一次性通行证</strong>。</p>
+    </div>
+  </details>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">治理与资源这几个页面打不开？八成是功能开关没开</span>
+    <p>现在受<strong>功能开关</strong>门控的页面变多了，而且门是真的会拦：开关没开时请求会返回 <strong>403</strong> 并明确报「功能未启用，请在功能开关中开启 xxx」，例如「战略规划功能未启用，请在功能开关中开启 strategy」「渐进式信任功能未启用，请在功能开关中开启 trust_model」「自动构建部署功能未启用，请在功能开关中开启 deploy」；「资源治理 / 冲突仲裁」也会报「资源治理功能未启用」或「加载仲裁案件失败，请确认冲突仲裁功能已启用」。<strong>这一批真正生效的开关有 6 个</strong>：<code>deploy</code>（构建部署）、<code>report</code>（自动报告 / 复盘报告）、<code>auto_report</code>（智能报告）、<code>marketing</code>（营销自动化）、<code>strategy</code>（战略）、<code>trust_model</code>（渐进式信任）。看到这类提示先按下面的步骤检查开关，多数情况就是门没开。</p>
+    <p><strong>开法：</strong>一级菜单 <strong>设置</strong> → 页签 <strong>功能管理</strong> → 先用「选择项目：」下拉选中这个项目（卡片顶部会显示「当前配置：XX」，避免改错项目；没选时提示「请先选择一个项目以管理其功能开关」）→ 在分组卡片里把对应开关打开。卡片是<strong>按后端下发的分组动态渲染</strong>的（形如「基础功能」「高级功能」），分组名和功能名都以后端字典为唯一来源，归不进去的会进「其它功能」——所以你看到的分组可能和文档举例略有出入，按实际显示的走即可。<strong>带「安全底线」标签的项是灰色锁死的</strong>，开关点不动，鼠标悬停提示「该功能为安全底线，不允许关闭」，后端也会拒绝关闭（如「「XX」为安全底线功能，不允许关闭」），这是有意的安全设计（渐进式信任、资源治理属于这一类）。旁边还有个「AI 智能建议」：点 <span class="zy-btn">分析项目并建议</span>，AI 会列出建议开的高级功能（带高/中/低优先级和「开启」按钮）。想全部回到出厂设置，点 <span class="zy-btn">重置为默认</span>（会有二次确认）。若页面显示「功能开关加载失败」或「项目列表加载失败」，都有<strong>失败态与重试按钮</strong>，不会静默变成空列表。</p>
+  </div>
+
+  <h2>六、运维与报告</h2>
+
+  <h3>报告</h3>
+
+  <div class="zy-path">运维与报告 <span class="sep">›</span> 报告 <span class="sep">›</span> 页面标题「自动报告」</div>
+
+  <p>侧边栏叫「报告」，页面标题是「自动报告」。按钮 <span class="zy-btn ghost">刷新</span>。上方是三档推送配置：<strong>日报 / 周报 / 月报</strong>（各是一个开关），「推送渠道」可勾 <strong>飞书 / 邮件 / Telegram</strong>，按钮 <span class="zy-btn">保存配置</span>。下方是报告历史表，可按类型筛选（日报 / 周报 / 月报），按钮 <span class="zy-btn">生成报告</span>；行操作 <span class="zy-btn ghost">查看</span> <span class="zy-btn">推送</span>。空态「暂无报告记录」。</p>
+
+  <p>什么时候来：开项目时配一次推送渠道，之后就让它自动发。</p>
+
+  <h3>备份</h3>
+
+  <div class="zy-path">运维与报告 <span class="sep">›</span> 备份 <span class="sep">›</span> 页面标题「自动备份」</div>
+
+  <p>侧边栏叫「备份」，页面标题是「自动备份」。两个页签：</p>
+
+  <ul>
+    <li><strong>备份历史</strong>：按钮 <span class="zy-btn">立即备份</span>。列 ID / 类型 / 大小 / 状态 / 校验和 / 开始时间 / 结束时间，操作 <span class="zy-btn ghost">校验</span> <span class="zy-btn warn">还原</span>（只有状态是已完成才可点）<span class="zy-btn danger">删除</span>。空态「暂无备份记录」。</li>
+    <li><strong>备份配置</strong>：字段 备份类型、Cron 表达式（占位「例如 0 3 * * *（每天凌晨3点）」）、保留天数、启用，按钮 <span class="zy-btn">保存配置</span>。</li>
+  </ul>
+
+  <p>什么时候来：开工时设好「每天凌晨自动备份 + 保留 N 天」，之后基本不用管。要改代码/改结构前，先点一次「立即备份」，给自己留个后悔药。</p>
+
+  <h2>七、项目内页面地图（总表）</h2>
+
+  <p>下面这张表覆盖项目上下文里的全部页面（含侧边栏入口和隐藏子页）。星级含义：<strong>★★★ 每天看 / ★★ 每周看 / ★ 按需看</strong>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>分组</th><th>页面名</th><th>路径（/project/:id 之后）</th><th>一句话</th><th>星级</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>（项目根）</td><td>项目详情</td><td>空（即 /project/:id）</td><td>项目体检报告：状态、预算、服务器、运行配置</td><td>★★★</td></tr>
+        <tr><td>建项与定义</td><td>AI 问答</td><td>/guided</td><td>绑死本项目的 AI 对话，带知识库与案例</td><td>★★</td></tr>
+        <tr><td>建项与定义</td><td>引导建项</td><td>/guided/strategy-confirm</td><td>分阶段把方向讲清楚，产出执行策略</td><td>★★</td></tr>
+        <tr><td>建项与定义</td><td>项目导入</td><td>/guided/import</td><td>把已有的进行中项目搬进来</td><td>★</td></tr>
+        <tr><td>建项与定义</td><td>模板</td><td>/templates</td><td>可复用的项目配方</td><td>★</td></tr>
+        <tr><td>组织与运营</td><td>智能体</td><td>/agent</td><td>AI 团队本体：组织/任务/配置/运行</td><td>★★★</td></tr>
+        <tr><td>组织与运营</td><td>组织进化</td><td>/org</td><td>该不该扩编、该配哪些岗</td><td>★★</td></tr>
+        <tr><td>组织与运营</td><td>自动运营</td><td>/autoops</td><td>AI 排班干活的总控台</td><td>★★★</td></tr>
+        <tr><td>组织与运营</td><td>目标管理</td><td>/autoops/objectives</td><td>目标树、KR、权衡权重</td><td>★★</td></tr>
+        <tr><td>组织与运营</td><td>任务管理</td><td>/autoops/tasks</td><td>AI 的待办清单</td><td>★★★</td></tr>
+        <tr><td>组织与运营</td><td>运行轮次</td><td>/autoops/rounds</td><td>班次与每轮日志</td><td>★★★</td></tr>
+        <tr><td>组织与运营</td><td>日志面板</td><td>/autoops/logs</td><td>按任务聚合的日志</td><td>★★</td></tr>
+        <tr><td>组织与运营</td><td>计费明细</td><td>/autoops/billing</td><td>Token 花在哪</td><td>★★</td></tr>
+        <tr><td>组织与运营</td><td>人工节点</td><td>/autoops/human</td><td>等你点头的节点</td><td>★★★</td></tr>
+        <tr><td>组织与运营</td><td>角色管理</td><td>/autoops/roles</td><td>角色版本与经验沉淀</td><td>★</td></tr>
+        <tr><td>组织与运营</td><td>审计治理</td><td>/autoops/audit</td><td>内审、红队、KillSwitch</td><td>★</td></tr>
+        <tr><td>组织与运营</td><td>经营日报</td><td>/autoops/daily</td><td>AI 写的经营日报</td><td>★★★</td></tr>
+        <tr><td>组织与运营</td><td>监控指标</td><td>/autoops/metrics</td><td>质量、响应、参与率、知识增长</td><td>★★</td></tr>
+        <tr><td>组织与运营</td><td>结项报告</td><td>/autoops/closing-report</td><td>项目收尾总结算</td><td>★</td></tr>
+        <tr><td>组织与运营</td><td>验收记录</td><td>/autoops/acceptance</td><td>三权分立验收结论</td><td>★</td></tr>
+        <tr><td>组织与运营</td><td>测试运行</td><td>/autoops/test-runs</td><td>验收链路的测试证据</td><td>★</td></tr>
+        <tr><td>组织与运营</td><td>阿米巴核算</td><td>/autoops/amoeba</td><td>岗位级投入产出小账本</td><td>★</td></tr>
+        <tr><td>组织与运营</td><td>经营驾驶舱</td><td>/autoops/cockpit</td><td>收入成本总览与预警</td><td>★★</td></tr>
+        <tr><td>组织与运营</td><td>权限租赁</td><td>/autoops/leases</td><td>临时授权高危动作</td><td>★</td></tr>
+        <tr><td>接入与执行</td><td>连接器</td><td>/connector</td><td>给 AI 装外部系统插头（MCP）</td><td>★</td></tr>
+        <tr><td>接入与执行</td><td>流程</td><td>/flow</td><td>人在回路：审批、合规拦截、线下任务</td><td>★★</td></tr>
+        <tr><td>接入与执行</td><td>边缘接入</td><td>/edge</td><td>本地客户端状态与上传记录</td><td>★</td></tr>
+        <tr><td>研究与获客</td><td>深度研究</td><td>/research</td><td>内部+外部数据的自动化研究</td><td>★★</td></tr>
+        <tr><td>研究与获客</td><td>营销</td><td>/marketing</td><td>活动、内容、线索、邮件</td><td>★★</td></tr>
+        <tr><td>研究与获客</td><td>会议导入</td><td>/meetings</td><td>会议记录 → 摘要决策 → 行动项转任务</td><td>★★</td></tr>
+        <tr><td>研究与获客</td><td>客户页面</td><td>/shares</td><td>给外部客户的公开问答页</td><td>★</td></tr>
+        <tr><td>治理与资源</td><td>战略</td><td>/strategy</td><td>战略计划、里程碑、健康检查</td><td>★</td></tr>
+        <tr><td>治理与资源</td><td>资源治理</td><td>/resource</td><td>预算闸门与熔断</td><td>★★</td></tr>
+        <tr><td>治理与资源</td><td>项目账本</td><td>/ledger</td><td>项目虚拟核算：收入、支出、预算</td><td>★★</td></tr>
+        <tr><td>治理与资源</td><td>渐进式信任</td><td>/trust</td><td>按表现逐步放权</td><td>★</td></tr>
+        <tr><td>治理与资源</td><td>冲突仲裁</td><td>/arbitrator</td><td>AI 意见冲突时裁判</td><td>★</td></tr>
+        <tr><td>治理与资源</td><td>事件总线</td><td>/events</td><td>系统内部事件流水</td><td>★</td></tr>
+        <tr><td>运维与报告</td><td>报告</td><td>/reports</td><td>日报周报月报的推送与历史</td><td>★</td></tr>
+        <tr><td>运维与报告</td><td>备份</td><td>/backup</td><td>自动备份与还原</td><td>★</td></tr>
+        <tr><td>（侧栏外）</td><td>待确认知识</td><td>/kb/review</td><td>知识条目人工确认后才进正式知识库</td><td>★★</td></tr>
+        <tr><td>（侧栏外）</td><td>公开问答页</td><td>/s/{token}（无项目 ID）</td><td>外部客户看到的那个页面</td><td>★</td></tr>
+        <tr><td>（侧栏外）</td><td>移动端审批</td><td>/approval/{nodeId}</td><td>手机上批一个人工节点</td><td>★</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">数一数：确实是 40 多个页面</span>
+    <p>侧边栏常显 21 个 + 自动运营隐藏子页 15 个 + 侧栏外 3 个，共 39 个；再把「项目详情」「引导建项」「项目导入」（这三个在侧边栏不占独立位置但有独立页面）算进来，就是 40 出头。你没有看错，这个产品在项目里确实「东西很多」——但每天真正要看的，就是上表里标 ★★★ 的那 6 个。</p>
+  </div>
+
+  <h2>八、本章小结与下一步</h2>
+
+  <ul>
+    <li><strong>先区分「在哪」</strong>：平台侧 10 个一级页面（第 05 章）管账号、公司、项目、知识库、账本、通知；项目内 6 个分组管这一个项目的一切。网址里带 <code>project/:projectId</code>，侧边栏才长出这 6 个分组。</li>
+    <li><strong>6 个分组背下来</strong>：建项与定义 / 组织与运营 / 接入与执行 / 研究与获客 / 治理与资源 / 运维与报告。按「项目生命周期」排，迷路时问「我这件事属于哪一段」。</li>
+    <li><strong>每天只看 6 个页</strong>：项目详情、智能体、自动运营、任务管理、运行轮次、人工节点（再加经营日报）。其余 30 多个按需。</li>
+    <li><strong>自动运营 16 个快捷子页</strong>只在「自动运营控制台」底部的「快捷入口」卡里出现，子页返回按钮写「返回控制台」。</li>
+    <li><strong>会议导入 → 转自动运营任务</strong>是把线下讨论变成 AI 执行的最短路径，别忽略。</li>
+    <li><strong>客户页面权限最小</strong>：token 只展示一次，白名单别偷懒。</li>
+    <li><strong>打不开先看功能开关</strong>：设置 → 功能管理 → 选项目 → 开开关。「资源治理 / 预算熔断 / 渐进式信任」三项是安全底线，强制开启不可关。</li>
+    <li><strong>下一步</strong>：界面认全了，去<a href="07-知识与资料导入.html">第 07 章 知识库与资料导入</a>，把项目自己的「大脑」喂饱。</li>
+  </ul>
+
+  <div class="zy-quick">
+    <a href="index.html">回到首页</a>
+    <a href="05-界面导览-平台.html">上一章：界面导览（上）平台侧</a>
+    <a href="07-知识与资料导入.html">下一步：知识库与资料导入</a>
+  </div>
+
+  <h2>附录 A · 项目内入口倒排索引</h2>
+
+  <p>用法：心里想着「我要做某件事」，来这张表查到该去哪个页面、点哪个按钮。路径都省略了前面的 <code>/project/{你的项目 ID}</code>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>我想做 X</th><th>去哪个页面</th><th>点什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>看这个项目现在什么状态</td><td>项目详情</td><td>看头部状态标签 + 概览页签</td></tr>
+        <tr><td>启动 / 暂停这个项目</td><td>项目详情 或 自动运营</td><td><span class="zy-btn ok">启动</span> / <span class="zy-btn warn">暂停</span></td></tr>
+        <tr><td>让 AI 帮我理一下项目方向</td><td>AI 问答</td><td>输入问题 → <span class="zy-btn">提问</span></td></tr>
+        <tr><td>把一次好回答存成范例</td><td>AI 问答</td><td>案例晋级 → <span class="zy-btn ok">提升为案例</span></td></tr>
+        <tr><td>把已在进行中的项目搬进来</td><td>AI 问答 → 项目导入</td><td><span class="zy-btn ok">项目导入</span> → 上传资料 → <span class="zy-btn ok">整理并完成建项</span></td></tr>
+        <tr><td>让 AI 分阶段帮我定执行策略</td><td>AI 问答 → 引导建项</td><td><span class="zy-btn">引导建项</span> → <span class="zy-btn ok">完成建项</span></td></tr>
+        <tr><td>用现成模板开一个类似项目</td><td>模板</td><td>选模板行 → <span class="zy-btn">应用</span></td></tr>
+        <tr><td>把这个项目存成模板给以后用</td><td>模板</td><td><span class="zy-btn ghost">沉淀项目为模板</span></td></tr>
+        <tr><td>新建一个 AI 员工</td><td>智能体 → 组织</td><td><span class="zy-btn">新建 Agent</span></td></tr>
+        <tr><td>给某个 AI 员工加技能</td><td>智能体 → 组织</td><td>成员行 <span class="zy-btn ghost">技能</span></td></tr>
+        <tr><td>看某个 AI 员工干得怎么样</td><td>智能体 → 组织</td><td>成员行 <span class="zy-btn ghost">详情</span> → 绩效汇总（含返工率）</td></tr>
+        <tr><td>把一个项目级技能升级成全公司共用</td><td>智能体 → 组织 → 技能库</td><td><span class="zy-btn">提升为组织级</span></td></tr>
+        <tr><td>把一个大目标拆成小任务</td><td>智能体 → 任务</td><td><span class="zy-btn">目标拆解</span></td></tr>
+        <tr><td>让 AI 团队现在扩编</td><td>组织进化</td><td>AI 建议 → <span class="zy-btn">确认</span></td></tr>
+        <tr><td>看看团队该不该进下一阶段</td><td>组织进化</td><td><span class="zy-btn ghost">重新评估</span> → 看阶段状态</td></tr>
+        <tr><td>手动切到成长期 / 规模化期</td><td>组织进化</td><td><span class="zy-btn">阶段切换</span> → <span class="zy-btn">确认切换</span></td></tr>
+        <tr><td>调 AI 的自主权限 / 并发数</td><td>组织进化 → 定量调控（八维）</td><td>拉滑块 / 选选项</td></tr>
+        <tr><td>新建一条任务</td><td>任务管理</td><td><span class="zy-btn">新建任务</span></td></tr>
+        <tr><td>看 AI 今天干了哪些活</td><td>运行轮次</td><td>看轮次表</td></tr>
+        <tr><td>查某任务为什么失败</td><td>日志面板</td><td>选任务 → 看日志流</td></tr>
+        <tr><td>看钱花在哪了</td><td>计费明细</td><td>看卡片 + 进度条</td></tr>
+        <tr><td>处理等我点头的节点</td><td>人工节点</td><td><span class="zy-btn ok">确认完成</span></td></tr>
+        <tr><td>催一下某个节点的处理人</td><td>人工节点</td><td><span class="zy-btn">通知催促</span></td></tr>
+        <tr><td>用手机批一个节点</td><td>人工节点</td><td><span class="zy-btn ghost">移动审批</span>（生成 H5 链接）</td></tr>
+        <tr><td>看谁验收的、结论是什么</td><td>验收记录</td><td>行内 <span class="zy-btn ghost">详情</span></td></tr>
+        <tr><td>改运行模式（全自动/半自动/人工审核）</td><td>自动运营</td><td>运行模式卡 <span class="zy-btn ghost">修改</span></td></tr>
+        <tr><td>按科目分配预算</td><td>自动运营</td><td>修改弹窗 → 预算科目</td></tr>
+        <tr><td>项目终止并出总结</td><td>自动运营</td><td><span class="zy-btn danger">终止项目</span>（要填终止原因）</td></tr>
+        <tr><td>紧急停掉全部自动运营</td><td>审计治理</td><td><span class="zy-btn danger">紧急停止（KillSwitch）</span></td></tr>
+        <tr><td>新建一个目标</td><td>目标管理</td><td><span class="zy-btn">新建目标</span></td></tr>
+        <tr><td>设定成本/质量/风险/速度的取舍</td><td>目标管理 → 目标详情</td><td>看「权衡权重」</td></tr>
+        <tr><td>给 AI 接上邮箱 / CRM</td><td>连接器</td><td><span class="zy-btn">注册连接器</span></td></tr>
+        <tr><td>放行某次连接器调用</td><td>连接器 → 审计</td><td><span class="zy-btn ok">通过</span></td></tr>
+        <tr><td>一键切断某个连接器</td><td>连接器</td><td><span class="zy-btn danger">Kill-Switch</span></td></tr>
+        <tr><td>批一个流程审批</td><td>流程 → 审批</td><td><span class="zy-btn ok">通过</span> / <span class="zy-btn">一键确认</span></td></tr>
+        <tr><td>处理被拦下的内容</td><td>流程 → 合规拦截</td><td><span class="zy-btn ok">通过</span> / <span class="zy-btn danger">拒绝</span></td></tr>
+        <tr><td>看本地电脑上传了什么</td><td>边缘接入</td><td>看上传列表</td></tr>
+        <tr><td>做一次行业调研</td><td>深度研究</td><td><span class="zy-btn">发起研究</span></td></tr>
+        <tr><td>把调研结论直接变成任务</td><td>深度研究</td><td>行内 <span class="zy-btn">转自动运营任务</span></td></tr>
+        <tr><td>办一场营销活动</td><td>营销 → 营销活动</td><td><span class="zy-btn">新建活动</span></td></tr>
+        <tr><td>找一批潜在客户</td><td>营销 → 潜在客户</td><td><span class="zy-btn">搜索线索</span></td></tr>
+        <tr><td>让 AI 写一批营销文案</td><td>营销 → 营销内容</td><td><span class="zy-btn">生成内容</span></td></tr>
+        <tr><td>把会议记录变成任务</td><td>会议导入</td><td>导入 → 详情 → <span class="zy-btn ghost">转自动运营任务</span></td></tr>
+        <tr><td>给客户开一个公开问答页</td><td>客户页面</td><td><span class="zy-btn">新建分享</span> → 复制链接</td></tr>
+        <tr><td>看外部客户问了什么</td><td>客户页面 → 日志</td><td>行内 <span class="zy-btn warn">日志</span></td></tr>
+        <tr><td>作废一个泄露了的客户链接</td><td>客户页面</td><td><span class="zy-btn ghost">重置链接</span></td></tr>
+        <tr><td>生成一次战略计划</td><td>战略 → 战略计划</td><td><span class="zy-btn">生成战略计划</span></td></tr>
+        <tr><td>跑一次项目健康检查</td><td>战略 → 健康检查</td><td><span class="zy-btn">触发健康检查</span></td></tr>
+        <tr><td>设日/周/月预算和熔断阈值</td><td>资源治理</td><td><span class="zy-btn">设置预算</span></td></tr>
+        <tr><td>临时解除熔断先撑过去</td><td>资源治理</td><td><span class="zy-btn warn">解除熔断（临时）</span></td></tr>
+        <tr><td>手工记一笔项目收支</td><td>项目账本</td><td><span class="zy-btn">记一笔</span></td></tr>
+        <tr><td>设项目预算与告急阈值</td><td>项目账本</td><td><span class="zy-btn ghost">项目预算</span></td></tr>
+        <tr><td>看某个 AI 的信任等级</td><td>渐进式信任 → 信任档案</td><td>行内 <span class="zy-btn">调整等级</span></td></tr>
+        <tr><td>两个 AI 意见打架要裁判</td><td>冲突仲裁</td><td><span class="zy-btn">新建案件</span> → <span class="zy-btn">仲裁</span></td></tr>
+        <tr><td>排查某动作有没有被触发</td><td>事件总线</td><td>按状态筛选</td></tr>
+        <tr><td>让日报自动推到飞书</td><td>报告</td><td>勾日报 + 飞书 → <span class="zy-btn">保存配置</span></td></tr>
+        <tr><td>手动生成一份报告</td><td>报告</td><td><span class="zy-btn">生成报告</span></td></tr>
+        <tr><td>改代码前先存一份档</td><td>备份</td><td><span class="zy-btn">立即备份</span></td></tr>
+        <tr><td>把项目回滚到某个备份</td><td>备份 → 备份历史</td><td>行内 <span class="zy-btn warn">还原</span></td></tr>
+        <tr><td>确认一条待入库的知识</td><td>待确认知识</td><td><span class="zy-btn">确认入库</span></td></tr>
+        <tr><td>看团队月度投入产出</td><td>阿米巴核算</td><td>看卡片 + 岗位级核算</td></tr>
+        <tr><td>看整体经营盘子</td><td>经营驾驶舱</td><td><span class="zy-btn">运行预警评估</span></td></tr>
+        <tr><td>临时授权 AI 发一封对外邮件</td><td>权限租赁</td><td><span class="zy-btn">新建授权</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 B · 项目内状态字典全表</h2>
+
+  <p>你在项目内页面看到的所有状态标签，原文与含义都在这张表。找不到某个词时来这里查。</p>
+
+  <h3>任务与轮次</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>类别</th><th>状态码（原文）</th><th>界面中文</th><th>含义</th><th>出现页面</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>任务状态</td><td>pending</td><td>待执行</td><td>已排进队列，还没轮到</td><td>任务管理</td></tr>
+        <tr><td>任务状态</td><td>running</td><td>运行中</td><td>正在被这个时间片处理</td><td>任务管理</td></tr>
+        <tr><td>任务状态</td><td>paused</td><td>已暂停</td><td>人工或系统暂停，等恢复</td><td>任务管理</td></tr>
+        <tr><td>任务状态</td><td>done</td><td>已完成</td><td>输出出现收尾标记，已送验收</td><td>任务管理</td></tr>
+        <tr><td>任务状态</td><td>failed</td><td>失败</td><td>执行异常，可能进降级重试</td><td>任务管理</td></tr>
+        <tr><td>任务状态</td><td>planning</td><td>规划中</td><td>正在被拆解/规划的软件工程类任务</td><td>任务管理</td></tr>
+        <tr><td>轮次状态</td><td>pending</td><td>待执行</td><td>这一班还没开始</td><td>运行轮次</td></tr>
+        <tr><td>轮次状态</td><td>running</td><td>运行中</td><td>这一班正在跑</td><td>运行轮次</td></tr>
+        <tr><td>轮次状态</td><td>passed</td><td>已通过</td><td>本轮产出验收通过</td><td>运行轮次</td></tr>
+        <tr><td>轮次状态</td><td>redo</td><td>需重做</td><td>验收判定返工</td><td>运行轮次</td></tr>
+        <tr><td>轮次状态</td><td>rejected</td><td>已驳回</td><td>验收直接驳回</td><td>运行轮次</td></tr>
+        <tr><td>轮次状态</td><td>failed</td><td>失败</td><td>本轮执行异常</td><td>运行轮次</td></tr>
+        <tr><td>轮次模式</td><td>task</td><td>—（按 code 显示）</td><td>正常干活轮</td><td>运行轮次</td></tr>
+        <tr><td>轮次模式</td><td>review</td><td>—（按 code 显示）</td><td>复盘轮：AI 审视全局后重排任务</td><td>运行轮次</td></tr>
+        <tr><td>轮次模式</td><td>free</td><td>—（按 code 显示）</td><td>空闲等待轮：任务都完成了，只做常规检查</td><td>运行轮次</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>轮次日志标签</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>标签</th><th>谁产生的</th><th>含义</th></tr></thead>
+      <tbody>
+        <tr><td>assistant</td><td>AI</td><td>AI 说的话（正文产出）</td></tr>
+        <tr><td>user</td><td>你 / 系统</td><td>喂给 AI 的输入</td></tr>
+        <tr><td>system</td><td>系统</td><td>系统级指令与上下文</td></tr>
+        <tr><td>summary</td><td>系统</td><td>本轮小结/接力摘要</td></tr>
+        <tr><td>thinking</td><td>AI</td><td>AI 的思考过程（思维链）</td></tr>
+        <tr><td>tool_use</td><td>AI</td><td>AI 决定调用某个工具/连接器</td></tr>
+        <tr><td>tool_result</td><td>系统</td><td>工具/连接器返回的结果</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>人工节点、决策与验收</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>类别</th><th>状态码（原文）</th><th>界面中文</th><th>含义</th><th>出现页面</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>人工节点状态</td><td>pending</td><td>待处理</td><td>等你处理</td><td>人工节点</td></tr>
+        <tr><td>人工节点状态</td><td>in_progress</td><td>处理中</td><td>已有人接手</td><td>人工节点</td></tr>
+        <tr><td>人工节点状态</td><td>completed</td><td>已完成</td><td>处理完毕，AI 可继续</td><td>人工节点</td></tr>
+        <tr><td>人工节点状态</td><td>rejected</td><td>已驳回</td><td>被拒绝，AI 需改方案</td><td>人工节点</td></tr>
+        <tr><td>人工节点状态</td><td>escalated</td><td>已升级</td><td>超时或人工升级到更高级</td><td>人工节点</td></tr>
+        <tr><td>自主级别</td><td>L0</td><td>全自主执行</td><td>AI 自己干，不打扰你</td><td>人工节点、自动运营</td></tr>
+        <tr><td>自主级别</td><td>L1</td><td>通知不等待</td><td>干完通知你，不阻塞</td><td>人工节点、自动运营</td></tr>
+        <tr><td>自主级别</td><td>L2</td><td>一键确认</td><td>默认档：要你点一下才继续</td><td>人工节点、自动运营</td></tr>
+        <tr><td>自主级别</td><td>L3</td><td>强制人工审核</td><td>最严：必须人工审过才动</td><td>人工节点、自动运营</td></tr>
+        <tr><td>通道</td><td>red</td><td>红-强制</td><td>强制人工介入</td><td>人工节点</td></tr>
+        <tr><td>通道</td><td>yellow</td><td>黄-敏感</td><td>敏感动作，需确认</td><td>人工节点</td></tr>
+        <tr><td>通道</td><td>green</td><td>绿-例行</td><td>例行通知即可</td><td>人工节点</td></tr>
+        <tr><td>验收结论</td><td>pass</td><td>通过</td><td>独立验收 Agent 认可产出</td><td>验收记录</td></tr>
+        <tr><td>验收结论</td><td>redo</td><td>返工</td><td>打回重做（会拉高返工率）</td><td>验收记录</td></tr>
+        <tr><td>验收结论</td><td>reject</td><td>驳回</td><td>不认，整条任务作废/重排</td><td>验收记录</td></tr>
+        <tr><td>验收人工状态</td><td>pending</td><td>待审批</td><td>等人工最终点头</td><td>验收记录</td></tr>
+        <tr><td>验收人工状态</td><td>approved</td><td>已批准</td><td>人工通过</td><td>验收记录</td></tr>
+        <tr><td>验收人工状态</td><td>rejected</td><td>已拒绝</td><td>人工否掉</td><td>验收记录</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>组织、报告、权限与审计</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>类别</th><th>状态码（原文）</th><th>界面中文</th><th>含义</th><th>出现页面</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>组织阶段</td><td>startup</td><td>起步期</td><td>一人全能，0→1</td><td>组织进化</td></tr>
+        <tr><td>组织阶段</td><td>growth</td><td>成长期</td><td>小组分工，1→10</td><td>组织进化</td></tr>
+        <tr><td>组织阶段</td><td>scale</td><td>规模化期</td><td>部门建制，10→100</td><td>组织进化</td></tr>
+        <tr><td>组织阶段</td><td>maturity</td><td>成熟期</td><td>事业部自治，100+</td><td>组织进化</td></tr>
+        <tr><td>组织成熟度</td><td>not_reached / approaching / reached</td><td>未达成 / 接近 / 已达成</td><td>当前阶段达成度</td><td>组织进化</td></tr>
+        <tr><td>AI 建议类型</td><td>role_add</td><td>增员</td><td>建议新增一个岗位</td><td>组织进化</td></tr>
+        <tr><td>AI 建议类型</td><td>scale_out</td><td>扩容</td><td>建议同岗位增加人手</td><td>组织进化</td></tr>
+        <tr><td>AI 建议类型</td><td>skill_attach</td><td>技能装配</td><td>建议给某岗位加技能</td><td>组织进化</td></tr>
+        <tr><td>AI 建议类型</td><td>stage_upgrade</td><td>阶段升级</td><td>建议进入下一阶段</td><td>组织进化</td></tr>
+        <tr><td>建议状态（六态）</td><td>pending</td><td>待确认</td><td>等你处置</td><td>组织进化</td></tr>
+        <tr><td>建议状态（六态）</td><td>accepted</td><td>已确认</td><td>你点了确认</td><td>组织进化</td></tr>
+        <tr><td>建议状态（六态）</td><td>applied</td><td>已应用</td><td>扩编/装配已生效</td><td>组织进化</td></tr>
+        <tr><td>建议状态（六态）</td><td>declined</td><td>已拒绝</td><td>你否掉了</td><td>组织进化</td></tr>
+        <tr><td>建议状态（六态）</td><td>deferred</td><td>暂缓</td><td>延后，要填冷却天数</td><td>组织进化</td></tr>
+        <tr><td>建议状态（六态）</td><td>expired</td><td>已过期</td><td>太久没处理，自动失效</td><td>组织进化</td></tr>
+        <tr><td>报告类型</td><td>daily / analysis / audit / redteam</td><td>经营日报 / 分析报告 / 内审报告 / 红队演练</td><td>四种报告</td><td>经营日报、审计治理</td></tr>
+        <tr><td>报告状态</td><td>draft / confirmed / applied</td><td>草稿 / 已确认 / 已应用</td><td>从草稿到落地</td><td>经营日报</td></tr>
+        <tr><td>权限租赁</td><td>active / revoked / expired</td><td>生效中 / 已吊销 / 已过期</td><td>临时授权的三态</td><td>权限租赁</td></tr>
+        <tr><td>审计报告类型</td><td>internal_audit</td><td>内审报告</td><td>独立内审 Agent 产出</td><td>审计治理、超管</td></tr>
+        <tr><td>审计报告类型</td><td>management_transcript</td><td>管理转录</td><td>管理过程的转录审计</td><td>审计治理、超管</td></tr>
+        <tr><td>审计报告类型</td><td>risk_registry_snapshot</td><td>风险登记册快照</td><td>某一时点的风险清单</td><td>审计治理、超管</td></tr>
+        <tr><td>审计报告类型</td><td>redteam_report</td><td>红队演练</td><td>模拟攻击找漏洞</td><td>审计治理、超管</td></tr>
+        <tr><td>审计报告类型</td><td>change_log</td><td>变更日志</td><td>改了什么</td><td>审计治理、超管</td></tr>
+        <tr><td>审计严重度</td><td>info / warn / critical</td><td>信息 / 警告 / 严重</td><td>三级严重度</td><td>审计治理、流程合规</td></tr>
+        <tr><td>客户页面访问状态</td><td>ok / blocked / expired</td><td>正常 / 拦截 / 过期</td><td>外部访问结果</td><td>客户页面日志</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 C · 功能开关清单（13 项）</h2>
+
+  <p>位置：一级菜单 <strong>设置</strong> → 页签 <strong>功能管理</strong>。先选项目，再逐项开关。系统预置 13 个开关，分成「基础功能」和「高级功能」两类，默认都是开启的（下面「默认」列写的就是出厂状态）。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>名称</th><th>标识</th><th>类别</th><th>作用</th><th>关掉会怎样</th><th>何时开启</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>自动构建部署</td><td><code>deploy</code></td><td>基础</td>
+          <td>代码提交后自动构建、测试、部署</td>
+          <td>软件类任务无法自动上线</td>
+          <td>默认开。做软件项目就别关</td>
+        </tr>
+        <tr>
+          <td>通知中心</td><td><code>notification</code></td><td>基础</td>
+          <td>推送任务进度、审批请求、预算告警到飞书/钉钉</td>
+          <td>你就收不到提醒了，得自己盯着</td>
+          <td>默认开。强烈建议保持</td>
+        </tr>
+        <tr>
+          <td>自动备份</td><td><code>backup</code></td><td>基础</td>
+          <td>定时备份项目数据（数据库、知识库、配置）</td>
+          <td>「备份」页面失效，出事无法回滚</td>
+          <td>默认开。别关</td>
+        </tr>
+        <tr>
+          <td>自动报告（周报/月报）</td><td><code>report</code></td><td>基础</td>
+          <td>自动生成周报/月报，含进度、消耗、里程碑</td>
+          <td>记录该能力是否启用（与下面的 <code>auto_report</code> 区分开）</td>
+          <td>默认开</td>
+        </tr>
+        <tr>
+          <td>营销自动化</td><td><code>marketing</code></td><td>高级</td>
+          <td>AI 生成营销内容、发社媒文案、发推广邮件</td>
+          <td>营销相关能力关闭</td>
+          <td>有获客需求时开</td>
+        </tr>
+        <tr>
+          <td>战略规划</td><td><code>strategy</code></td><td>高级</td>
+          <td>AI 深度分析市场/竞品/内部数据，生成战略计划</td>
+          <td>记录该能力是否启用；当前版本页面本身仍可打开</td>
+          <td>项目开局、季度复盘时开</td>
+        </tr>
+        <tr>
+          <td>渐进式信任</td><td><code>trust_model</code></td><td>高级</td>
+          <td>高风险操作前需累积信任积分，低信任强制人工审核</td>
+          <td>信任能力停用（安全底线项，正常不应关闭）</td>
+          <td><strong>安全底线，强制开启</strong></td>
+        </tr>
+        <tr>
+          <td>冲突仲裁</td><td><code>arbitrator</code></td><td>高级</td>
+          <td>多 Agent 冲突时由仲裁 Agent 给最终决策</td>
+          <td>「冲突仲裁」页面加载失败</td>
+          <td>Agent 多了、意见开始打架时开</td>
+        </tr>
+        <tr>
+          <td>资源治理</td><td><code>resource_governor</code></td><td>基础</td>
+          <td>监控资源使用、预测消耗趋势，高消耗时限流或告警</td>
+          <td>「资源治理」页面失效，缺少熔断闸门</td>
+          <td><strong>安全底线，强制开启</strong></td>
+        </tr>
+        <tr>
+          <td>营销自动化引擎</td><td><code>marketing_engine</code></td><td>高级</td>
+          <td>AI 创建营销活动、生成文案、搜索潜在客户、发营销邮件</td>
+          <td>营销端点返回「营销引擎功能未启用」</td>
+          <td>要做营销自动化时开</td>
+        </tr>
+        <tr>
+          <td>社交媒体管理</td><td><code>social_media</code></td><td>高级</td>
+          <td>通过 Twitter/LinkedIn 连接器发布内容、分析互动</td>
+          <td>社媒发布端点报「社交媒体功能未启用」</td>
+          <td>有社媒渠道且配好连接器后开</td>
+        </tr>
+        <tr>
+          <td>自动报告（与上面 <code>report</code> 同名）</td><td><code>auto_report</code></td><td>基础</td>
+          <td>自动生成日报/周报/月报并经飞书/邮件推送</td>
+          <td>报告类端点报「auto_report 功能未启用」，报告页打不开</td>
+          <td>默认开。别关，否则「报告」页用不了</td>
+        </tr>
+        <tr>
+          <td>项目模板</td><td><code>project_template</code></td><td>基础</td>
+          <td>用预设模板快速建项目（含 Agent 配置、流程、预算）</td>
+          <td>「模板」页报「项目模板功能未启用」</td>
+          <td>默认开</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">安全底线三项：强制开启，开关不可关（参数可调）</span>
+    <p>下面三项是产品设计的<strong>安全底线，强制开启、不可关闭</strong>，但它们的<em>参数</em>可以调：</p>
+    <ul>
+      <li><strong>资源治理（resource_governor）</strong>：预算闸门与限流。可以调日/周/月预算、预警阈值、熔断阈值，但不能整个关掉。</li>
+      <li><strong>预算熔断</strong>：预算耗尽自动暂停循环，防止无感烧钱。它是「资源治理 + 自动运营」共同保证的机制，不能绕过。</li>
+      <li><strong>渐进式信任（trust_model）</strong>：高风险操作要攒信任分、低信任强制人工审核。可以调等级，但不能关。</li>
+    </ul>
+    <p>一句话：<strong>「让 AI 更自由」的旋钮有很多，「让 AI 失去刹车」的开关一个都没有。</strong></p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">两点提醒</span>
+    <p>第一，<code>report</code> 和 <code>auto_report</code> 是<strong>两个不同的开关，但界面上显示名都叫「自动报告」</strong>，只能靠后面的标识区分；真正让「报告」页打得开的是 <code>auto_report</code>。第二，改完开关如果页面还是报「功能未启用」，先点一下页面右上角的刷新，再确认你选中的项目是不是当前这个项目。</p>
+  </div>
+
+  <h2>附录 D · 项目侧边栏分组设计说明</h2>
+
+  <p>为什么产品要把 40 多个页面塞成 6 个分组，而不是按功能平铺？这一节讲清背后的取舍，也给你每个分组的「使用节奏」。</p>
+
+  <h3>分组依据：项目生命周期，不是功能相似度</h3>
+
+  <p>如果按「功能相似度」分组，会变成「所有 AI 相关的放一起」「所有钱的放一起」——那样对新手更糟，因为新手的问题是「我现在这个阶段该干什么」，而不是「这个功能属于哪个类别」。所以分组是<strong>按一个项目的生命周期</strong>排的：</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>建项与定义</b>还在定方向</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>组织与运营</b>搭班子干活</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>接入与执行</b>接外部世界</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node ok"><b>研究与获客</b>对外拿结果</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node warn"><b>治理与资源</b>老板做决策</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>运维与报告</b>存档与复盘</div>
+  </div>
+
+  <p>这不是「越往下越重要」——恰恰相反，越往下越<strong>低频但越高权</strong>。你日常在中间（组织与运营），偶尔去两头（建项、治理）。</p>
+
+  <h3>每个分组的典型使用节奏</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>分组</th><th>典型使用节奏</th><th>只看哪一两个页就够</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>建项与定义</td><td>项目第一周密集用；之后只在「方向要改」时回来</td><td>AI 问答</td></tr>
+        <tr><td>组织与运营</td><td>几乎每天，早一次晚一次</td><td>任务管理、人工节点、经营日报</td></tr>
+        <tr><td>接入与执行</td><td>接新工具那一两天集中用；日常只在「流程」里清审批</td><td>流程 → 审批/合规拦截</td></tr>
+        <tr><td>研究与获客</td><td>每周一到两次：做一次研究、发一批内容、开一次会</td><td>会议导入、营销</td></tr>
+        <tr><td>治理与资源</td><td>月度或出问题时；预算告警一响必来</td><td>资源治理、项目账本</td></tr>
+        <tr><td>运维与报告</td><td>配置一次，之后几乎不碰</td><td>报告（开推送）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">给新手的一个小建议</span>
+    <p>刚开始用的一两周，别急着把 6 个分组都点一遍。先把侧边栏<strong>收起来只留「组织与运营」</strong>那一组，把「任务管理 / 人工节点 / 经营日报」三个页面用熟。等你对「AI 一天在干什么、钱怎么花、哪里要拍板」有了手感，再往两头的分组探索。一次学一个分组，比一次吞 40 页舒服得多。</p>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

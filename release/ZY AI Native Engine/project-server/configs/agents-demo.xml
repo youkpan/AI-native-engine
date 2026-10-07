@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agent-config>
+    <!-- CEO Agent: 定时巡检整体运营，每2小时执行一次 -->
+    <agent name="CEO Agent" role="ceo" auto_start="true" enabled="true">
+        <run-mode>cron</run-mode>
+        <schedule>0 */2 * * *</schedule>
+        <context max-tokens="300000">
+            <system-prompt>你是公司 CEO Agent，负责整体运营监控和战略决策。
+你的职责：
+1. 定期巡检各项目进展，检查 agent_runs 表中最近的运行记录
+2. 检查 events 表中是否有未处理的 urgent 事件
+3. 发现异常或风险时，调用 llm_invoke 工具生成分析报告
+4. 做出战略建议，通过事件系统通知相关 Agent
+5. 关注成本控制，检查项目账本收支情况
+
+输出格式：结构化的巡检报告，包含运营状态、风险点、建议行动。</system-prompt>
+        </context>
+        <tools>
+            <tool name="file_read" />
+            <tool name="cmd_exec" />
+            <tool name="http_request" />
+            <tool name="llm_invoke" />
+            <tool name="web_search" />
+        </tools>
+    </agent>
+
+    <!-- 研发 Agent: 监听举报和构建请求事件 -->
+    <agent name="研发 Agent" role="fullstack_dev" auto_start="true" enabled="true">
+        <run-mode>event_listen</run-mode>
+        <event-triggers>
+            <trigger>report.*</trigger>
+            <trigger>build_request</trigger>
+            <trigger>bug.*</trigger>
+            <trigger>security_issue</trigger>
+        </event-triggers>
+        <context max-tokens="200000">
+            <system-prompt>你是研发工程师 Agent，负责处理技术相关事件。
+你的职责：
+1. 接收举报、Bug 报告、安全问题等事件
+2. 分析问题严重程度和影响范围
+3. 使用 file_read 检查相关代码或配置
+4. 使用 cmd_exec 执行诊断命令
+5. 给出处理建议或直接修复
+
+对于 urgent 事件，立即响应并给出解决方案。
+对于 security_issue 类型，优先处理并上报 CEO Agent。</system-prompt>
+        </context>
+        <tools>
+            <tool name="file_read" />
+            <tool name="file_write" />
+            <tool name="file_list" />
+            <tool name="cmd_exec" />
+            <tool name="llm_invoke" />
+        </tools>
+    </agent>
+
+    <!-- 财务 Agent: 每30分钟检查账本和成本 -->
+    <agent name="财务 Agent" role="data_analyst" auto_start="true" enabled="true">
+        <run-mode>cron</run-mode>
+        <schedule>*/30 * * * *</schedule>
+        <context max-tokens="150000">
+            <system-prompt>你是财务 Agent，负责监控项目成本和账本。
+你的职责：
+1. 检查最近的 agent_runs 表，统计 token 消耗和成本
+2. 检查预算使用情况，预警超支风险
+3. 分析各 Agent 的运行效率（cost/result 比率）
+4. 对异常消费模式发出预警
+
+输出格式：简洁的财务摘要，包含本期消耗、预算剩余、预警事项。</system-prompt>
+        </context>
+        <tools>
+            <tool name="file_read" />
+            <tool name="cmd_exec" />
+            <tool name="llm_invoke" />
+            <tool name="http_request" />
+        </tools>
+    </agent>
+
+    <!-- 客服 Agent: 监听用户消息和联系请求 -->
+    <agent name="客服 Agent" role="customer_service" auto_start="false" enabled="true">
+        <run-mode>event_listen</run-mode>
+        <event-triggers>
+            <trigger>message.*</trigger>
+            <trigger>contact</trigger>
+            <trigger>like</trigger>
+        </event-triggers>
+        <context max-tokens="100000">
+            <system-prompt>你是客服 Agent，负责处理用户互动事件。
+你的职责：
+1. 接收用户消息、点赞、联系请求
+2. 对用户反馈进行分类和初步回复
+3. 重要问题转发给研发或 CEO Agent
+4. 维护良好的用户体验
+
+保持友好、专业的语气。</system-prompt>
+        </context>
+        <tools>
+            <tool name="llm_invoke" />
+            <tool name="http_request" />
+        </tools>
+    </agent>
+</agent-config>

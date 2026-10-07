@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C5 — 网页 AI 工具矩阵工厂 · 场景指引</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --success: #34a853;
+    --success-light: #e6f4ea;
+    --danger: #ea4335;
+    --danger-light: #fce8e6;
+    --warning: #fbbc04;
+    --warning-light: #fef7e0;
+    --text: #202124;
+    --text-secondary: #5f6368;
+    --border: #dadce0;
+    --bg: #f8f9fa;
+    --code-bg: #1e1e2e;
+    --code-text: #cdd6f4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+  /* 左侧导航 */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: #fff;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 20px 0;
+    z-index: 100;
+  }
+  .sidebar-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 8px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .sidebar a {
+    display: block;
+    padding: 6px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .sidebar a:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-left-color: var(--primary);
+  }
+  .sidebar a.level-2 { padding-left: 32px; font-size: 12.5px; }
+  .sidebar a.level-3 { padding-left: 44px; font-size: 12px; }
+  /* 主内容 */
+  .main {
+    margin-left: 260px;
+    max-width: 1200px;
+    padding: 30px 48px 80px;
+  }
+  /* 面包屑 */
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+  .breadcrumb a { color: var(--primary); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb span { margin: 0 6px; }
+  /* 标题 */
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary);
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 28px 0 12px;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 20px 0 8px;
+  }
+  p { margin-bottom: 12px; }
+  /* 副标题信息 */
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+  /* 表格 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+  th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:nth-child(even) td { background: #f8f9fa; }
+  tr:nth-child(odd) td { background: #fff; }
+  tr:hover td { background: var(--primary-light); }
+  /* 代码块 */
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 16px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 12px 0 20px;
+    font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  }
+  code {
+    background: #e8eaed;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
+  /* 卡片 */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .card-info { border-left: 4px solid var(--primary); }
+  .card-success { border-left: 4px solid var(--success); background: var(--success-light); }
+  .card-danger { border-left: 4px solid var(--danger); background: var(--danger-light); }
+  .card-warning { border-left: 4px solid var(--warning); background: var(--warning-light); }
+  .card-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  /* 标签 */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .tag-primary { background: var(--primary-light); color: var(--primary); }
+  .tag-success { background: var(--success-light); color: var(--success); }
+  .tag-danger { background: var(--danger-light); color: var(--danger); }
+  .tag-warning { background: var(--warning-light); color: #e37400; }
+  /* 列表 */
+  ul, ol { margin: 8px 0 16px 24px; }
+  li { margin-bottom: 6px; }
+  /* 分隔线 */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+  /* 响应式 */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 20px; }
+  }
+  @media print {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 左侧导航 -->
+<nav class="sidebar">
+  <div class="sidebar-title">C5 场景指引目录</div>
+  <a href="#overview">一、场景概述</a>
+  <a href="#goals">二、场景目标与主战场能力</a>
+  <a href="#goals-seo" class="level-2">2.1 SEO/营销自动化</a>
+  <a href="#goals-fairness" class="level-2">2.2 调度公平性</a>
+  <a href="#goals-efficiency" class="level-2">2.3 坪效分析</a>
+  <a href="#prerequisites">三、预置条件与环境配置</a>
+  <a href="#prereq-project" class="level-2">3.1 项目与预算</a>
+  <a href="#prereq-tools" class="level-2">3.2 工具选题清单</a>
+  <a href="#prereq-kb" class="level-2">3.3 知识库预置</a>
+  <a href="#prereq-fix" class="level-2">3.4 FIX 修复项影响</a>
+  <a href="#t1">四、T1 生存期操作指引</a>
+  <a href="#t1-ui" class="level-2">4.1 UI 操作路径</a>
+  <a href="#t1-observe" class="level-2">4.2 核心观察</a>
+  <a href="#t1-events" class="level-2">4.3 事件注入</a>
+  <a href="#t1-human" class="level-2">4.4 人工动作</a>
+  <a href="#t1-fairness" class="level-2">4.5 调度公平性断言</a>
+  <a href="#t2">五、T2 扩张期操作指引</a>
+  <a href="#t2-pulse" class="level-2">5.1 流量脉冲注入</a>
+  <a href="#t2-review" class="level-2">5.2 review 轮重排</a>
+  <a href="#t2-expand" class="level-2">5.3 扩编与饿死判定</a>
+  <a href="#t3">六、T3 规模化期操作指引</a>
+  <a href="#t3-conflict" class="level-2">6.1 并发写冲突仲裁</a>
+  <a href="#t3-penalty" class="level-2">6.2 Google 处罚与红通道</a>
+  <a href="#t3-rollback" class="level-2">6.3 批量下架与回滚</a>
+  <a href="#acceptance">七、验收判定表</a>
+  <a href="#evidence">八、取证口径</a>
+  <a href="#evidence-rounds" class="level-2">8.1 轮次矩阵</a>
+  <a href="#evidence-schedule" class="level-2">8.2 槽位权重</a>
+  <a href="#evidence-starvation" class="level-2">8.3 饿死统计</a>
+  <a href="#appendix">九、附录：环境信息</a>
+  <a href="#appendix-ports" class="level-2">9.1 端口映射</a>
+  <a href="#appendix-tables" class="level-2">9.2 关键表清单</a>
+  <a href="#appendix-harness" class="level-2">9.3 harness 脚本用法</a>
+</nav>
+
+<!-- 主内容 -->
+<div class="main">
+
+<!-- 面包屑 -->
+<div class="breadcrumb">
+  <a href="#">首页</a><span>&gt;</span><a href="#">长周期场景案例</a><span>&gt;</span>C5 网页 AI 工具矩阵工厂
+</div>
+
+<h1>C5 — 网页 AI 工具矩阵工厂 · 场景指引</h1>
+<p class="subtitle">
+  <span class="tag tag-primary">core-C5</span>
+  <span class="tag tag-warning">auto-ops 调度总压测</span>
+  <span class="tag tag-success">T1/T2/T3 三阶段</span>
+  &nbsp; 版本：2026-09-27 &nbsp;|&nbsp; 故事卡：<code>stories/core-C5-网页AI工具批量设计.md</code>
+</p>
+
+<!-- ============================================================ -->
+<h2 id="overview">一、场景概述</h2>
+
+<p>
+C5 场景模拟一位独立开发者（"工厂主"）利用 AI 流水线批量制造 20 至 40 个单页小工具（如 JSON 格式化器、图片压缩器、二维码生成器、PDF 转换器、文本清洗器等），这些工具共用一套统一外壳与账号体系，通过搜索引擎优化（SEO）与目录站导流获取自然流量，最终通过 Google AdSense 广告与 Pro 版一次性付费实现变现。这个场景的核心矛盾并非产品设计或市场策略，而是<strong>平台的并发轮次调度与算力/预算分配机制能否真正扛住高并发、长周期的压力测试</strong>。
+</p>
+
+<p>
+本场景是六张核心故事卡中对 <strong>auto-ops 时间片轮次调度</strong> 压测最重的一张。在 T3 规模化阶段，项目将同时维护 30 个在线工具，对应 30+ 并行任务队列，每个任务拥有独立的优先级、权重与时间片配额。调度器需要在每一轮（tick）中根据权重分配算法从任务池中选出本轮的执行组合，同时保证高优先级任务不被低优先级任务"饿死"——即长期得不到执行资源。当所有待办任务处理完毕后，系统进入 <strong>free 维护模式</strong>，此时调度器不应误停仍在建设中的任务，这是一个看似简单但在工程实现上极易出错的边界条件。
+</p>
+
+<p>
+权重分配算法是本场景的核心机制之一。每个任务被赋予一个权重值（如 1/2/3），权重越高，在轮次调度中被选中的概率越大。然而，权重机制必须与"公平性保障"并行运作：即便某任务权重为 1（最低），也不能出现其连续 5 轮以上未被选中的情况——这就是所谓的"饿死判定"。T1-D1 首跑数据已经揭示了一个关键事实：在 68 轮调度中，同权重（w=1）的三个任务实际被选中次数分别为 3、5、14，差异高达 4.7 倍，且全部 5 条在跑任务都命中了"连续 5 轮以上未被选中"的饿死条件。这一发现直接指向了 <code>ISSUE-W4-45</code> 中记录的槽位序与空槽重定向机制的公平性缺陷。
+</p>
+
+<p>
+<strong>review 重排</strong>是另一个关键机制。系统每隔 N 轮（由 <code>review_every_rounds</code> 配置，典型值为 6）自动进入一次 review 模式，在此模式下，调度器会重新评估所有任务的优先级与权重分配，根据最新的业务数据（如 RPM、流量、收录情况）进行动态调整。例如，一个 RPM 持续走低的工具应当被降权甚至砍掉，而流量表现优异的工具应当获得更多算力投入。review 轮本身也会产生 LLM 调用成本（T1-D1 数据显示 11 个 review 轮中有 7 个失败，主因是 <code>invalid_xml</code>，对应 FIX-018 待修复项）。
+</p>
+
+<p>
+<strong>失败分级降级→升级→退出兜底</strong>构成了任务生命周期的完整闭环。当一个任务在某轮执行中失败时，系统首先进行降级处理（如降低优先级、减少资源配额）；如果连续多轮失败，则升级为更高级别的告警，通知管理者 Agent 介入决策；当失败次数超过阈值（如验收拒绝次数达到 4 次），系统触发"兜底暂停"机制，将整个项目暂停以防止无效消耗预算。T1-D1 测试中，T5 任务因验收被拒 4 次触发了 <code>acceptance_reject_limit</code> 兜底暂停（<code>ISSUE-W4-46</code>），导致整个项目在 15:37:46 被自动停摆，这一事件虽然暴露了兜底机制的有效性，但也揭示了兜底态下 UI "停止"按钮置灰、收口通道不可达的次生问题。
+</p>
+
+<p>
+<strong>预算抢占不饿死</strong>是本场景的另一个关键约束。在 30 个任务同时争抢有限预算的场景下，必须保证没有单个任务能够吃满全部预算，也不能因为某个任务预算超支而导致其他在建任务被连带暂停。当前的预算控制机制是项目级的（<code>BudgetController</code> 以 <code>projectID</code> 为键），尚无任务级预算配额的实现。这意味着当单轮预算超过 <code>single_round_max_budget</code>（本场景设为 6 元）时，系统会暂停整个项目而非仅仅暂停超额任务——这是 T3 规模化压测中必须重点验证和记录的行为特征。
+</p>
+
+<!-- ============================================================ -->
+<h2 id="goals">二、场景目标与主战场能力</h2>
+
+<p>
+C5 场景的主战场能力可以归纳为三大维度：<strong>SEO/营销自动化</strong>、<strong>调度公平性</strong>和<strong>坪效分析</strong>。这三个维度分别对应了工具矩阵工厂的业务增长引擎、平台调度基础设施的健康度、以及长期可持续运营的经济性验证。
+</p>
+
+<h3 id="goals-seo">2.1 SEO/营销自动化</h3>
+
+<p>
+工具矩阵的流量获取完全依赖 SEO 与内容营销，不投入广告预算。AI 系统需要自动完成以下全链路：关键词调研（通过 Agent 引擎调用搜索 API）→ 关键词排序与分配（根据搜索量、竞争度分配到具体工具）→ 内容生成（loop 引擎驱动 qianshou 子进程编写工具页面代码）→ 部署上线（通过 deploy 模块发布到 mail1 增量目录）→ sitemap 提交 → 持续的内容更新与内链优化。
+</p>
+
+<p>
+在 T1 阶段，系统需要完成 3 个基础工具的上线并争取被 Google 收录。T2 阶段扩展到 15 个工具，此时需要批量内链与合集页来增强站点权重。T3 阶段达到 30 个工具，需要跨工具推荐位、竞品监控以及数据驱动的长尾淘汰机制。整个过程中，外部事件流（GSC 收录周报、AdSense 收益、流量脉冲等）驱动内容任务的自动创建与优先级调整，形成"数据→决策→执行→反馈"的闭环。
+</p>
+
+<p>
+营销自动化还包括社媒导流帖的生成与发布。系统需要根据每个工具的特点自动生成适合 Hacker News、Reddit、Twitter 等平台发布的导流文案，这些文案经过人工审批后通过连接器发布。FIX-002 待 e2e 验证前，所有导流帖停留在 <code>pending_review</code> 状态，脉冲流量事件改为人工注入模式。
+</p>
+
+<h3 id="goals-fairness">2.2 调度公平性</h3>
+
+<p>
+调度公平性是本场景的<strong>王牌断言</strong>，也是区别于其他五张故事卡的核心特色。在 20+ 任务并行的场景下，调度器必须保证每个任务都能获得与其权重相匹配的执行机会，同时不能出现任何任务被"饿死"（长期得不到执行资源）的情况。
+</p>
+
+<p>
+公平性的量化判定依赖以下核心指标：
+</p>
+<ul>
+  <li><strong>同权重实得轮数比</strong>：相同权重的任务，其实际被选中执行的轮次应当大致相等。T1-D1 数据显示同权重（w=1）任务实得轮数差达 4.7 倍，远超可接受范围。</li>
+  <li><strong>饿死判定</strong>：任何任务不得连续 5 轮未被选中。在轮次间隔约 60-110 秒的机制下，5 轮未选中意味着 5-9 分钟墙钟时间内该任务完全停滞。T1-D1 中 5/5 条在跑任务全部命中此条件，最长等待达 18 轮。</li>
+  <li><strong>空槽重定向份额</strong>：当高权重任务完成或空闲时，其时间片应当被公平地重新分配给其他任务。T1-D1 的份额预测模型（30/30/10/10/20%）与实测值（27.5/29.4/5.9/9.8/21.6%）基本吻合，说明空槽重定向机制在工作但分配比例存在偏差。</li>
+  <li><strong>优先级不插队</strong>：高优先级任务不应持续抢占低优先级任务的时间片，导致后者饿死。</li>
+</ul>
+
+<p>
+由于"调度可观测面板"（P0 建议项）尚未落地，本场景的公平性判定目前依赖 psql 离线计算：从 <code>auto_ops_rounds</code> 表提取轮次-任务矩阵，按窗口统计每个任务被选中的频次与最长等待轮数，生成饿死统计表由 harness 每日贴入 daily 报告。这一取证方式虽然可行，但效率较低且不够直观，是后续产品改进的重要方向。
+</p>
+
+<h3 id="goals-efficiency">2.3 坪效分析</h3>
+
+<p>
+坪效（收入/维护成本）是衡量每个工具经济可行性的核心指标。在 T3 阶段，系统需要能够按工具维度计算坪效，并据此进行长尾淘汰决策。具体而言，每个工具的研发成本（token 消耗）、维护成本（每轮调度分配的时间片）与收入（AdSense RPM × 流量）需要可追溯、可对比。
+</p>
+
+<p>
+当前坪效分析面临的主要瓶颈是 <code>FIX-006</code>（计费明细页缺失）：单工具成本与坪效只能依赖 amoeba 模块与 SQL 手算。T1-D1 的实测数据显示，loop 引擎单价（约 0.0554 元/轮）是 Agent 引擎单价（约 0.0059 元/轮）的 9.4 倍，这一系数直接影响 T3 阶段"单工具 18 元上限"的判据计算。在 amoeba 模块的生产调用点为零（<code>SaveDailyStats</code> 与 <code>AggregateDailyStats</code> 全仓零调用点）的现状下，坪效判据改走 <code>GET /autoops/billing?group_by=task|round</code> 接口，源表为 <code>token_billing_records</code>（现库约 2,583 行覆盖 13 个项目），"单工具"成本须自行按 task_id 与工具的映射关系进行归因。
+</p>
+
+<!-- ============================================================ -->
+<h2 id="prerequisites">三、预置条件与环境配置</h2>
+
+<h3 id="prereq-project">3.1 项目与预算配置</h3>
+
+<p>
+C5 场景使用专用项目 <code>lts_c5_tools</code>（实际项目 ID 以创建时生成为准，T1-D1 中使用的是项目 1117 <code>lts_c5_toolforge_1790227852226_5150</code>），归属于公司 <code>LTS-C5 网页AI工具矩阵</code>（公司 976）。项目的核心配置参数如下：
+</p>
+
+<table>
+  <tr><th>配置项</th><th>值</th><th>说明</th></tr>
+  <tr><td>运行模式</td><td>全自动（full_auto）</td><td>AI 自主拆解轮次、双引擎执行、审批与人在回路</td></tr>
+  <tr><td>总预算</td><td>10,000 元</td><td>平台侧 <code>project_budgets.total_budget</code></td></tr>
+  <tr><td>AI 运行预算</td><td>3,500 元</td><td><code>project_config.ai_budget</code>，宿主 <code>budget_states.ai_budget</code></td></tr>
+  <tr><td>single_round_max_budget</td><td>6 元</td><td>单轮预算上限，超限暂停整个项目</td></tr>
+  <tr><td>review_every_rounds</td><td>6</td><td>每 6 轮触发一次 review 重排</td></tr>
+  <tr><td>parallel_enabled</td><td>true</td><td>启用并行任务执行</td></tr>
+  <tr><td>max_parallel</td><td>6</td><td>最大并行任务数</td></tr>
+  <tr><td>max_exec_sec</td><td>7200</td><td>单任务最大执行时间（秒）</td></tr>
+  <tr><td>预警线</td><td>80%</td><td><code>budget_states.warn_percent</code>，触发预警通知</td></tr>
+</table>
+
+<p>
+需要特别注意的是，轮次间隔（tick interval）在实测中约为 63-68 秒，而 <code>project_config.default_interval_sec</code> 的值为 30，<code>tick_interval_sec</code> 为 0——这两个控件实际上未被引擎装配（<code>ISSUE-W4-44</code> 记录），引擎硬编码使用 60 秒间隔（<code>engine.go:52</code>、<code>:875</code>）。加上每轮执行时间，实际轮次节奏约为每轮 60-110 秒墙钟时间。
+</p>
+
+<h3 id="prereq-tools">3.2 壳 + 3 工具选题清单</h3>
+
+<p>
+项目启动时需要预置一套共用工具壳与首批 3 个工具的选题定义。壳（shell）包含统一的用户界面框架、埋点系统、登录/支付模块、跨工具推荐位等公共组件。首批 3 个工具选题如下：
+</p>
+
+<table>
+  <tr><th>编号</th><th>工具名称</th><th>类型</th><th>目标关键词（示例）</th><th>任务权重</th></tr>
+  <tr><td>T1</td><td>JSON 格式化器</td><td>开发者工具</td><td>json formatter, json beautifier</td><td>3（最高）</td></tr>
+  <tr><td>T2</td><td>图片压缩器</td><td>媒体工具</td><td>image compressor, reduce image size</td><td>2</td></tr>
+  <tr><td>T3</td><td>二维码生成器</td><td>营销工具</td><td>qr code generator, free qr code</td><td>1</td></tr>
+</table>
+
+<p>
+T1-D1 实际创建了 6 条任务（T1-T6），权重分别为 3/2/1/1/2/1，包含 1 条 P0 优先级、1 条 P3 优先级和 1 条 loop 建页任务。这 6 条任务在 68 轮调度中产生了 57 个任务轮和 11 个 review 轮，总成本约 1.12 元。
+</p>
+
+<h3 id="prereq-kb">3.3 知识库预置</h3>
+
+<p>
+为防止 AI 重复造轮或互相覆盖，需要在项目知识库中预置以下文档：
+</p>
+<ul>
+  <li><strong>壳规范文档</strong>：定义共用外壳的组件清单、样式规范、埋点接口、部署清单，确保所有工具使用统一的技术栈和接口标准。</li>
+  <li><strong>已建工具索引</strong>：记录每个已建工具的 URL、技术实现、关键词分配，避免新建工具与已有工具产生功能重叠或 SEO 内耗。</li>
+  <li><strong>SEO 规范</strong>：标题模板、meta 描述规范、内链策略、sitemap 格式要求。</li>
+  <li><strong>组件清单</strong>：可复用的 UI 组件（代码高亮、文件上传、进度条等）及其 API 文档。</li>
+</ul>
+
+<p>
+注意：T1-D1 实测中 <code>knowledge_documents=0</code>，即知识库未被写入任何内容。这属于"未做写入动作"的测试纪律约束，不代表产品能力缺失。在正式测试中，应在引导流阶段或首轮调度前完成知识库预置。
+</p>
+
+<h3 id="prereq-fix">3.4 FIX 修复项影响</h3>
+
+<p>
+C5 场景受多个 FIX 修复项状态影响，以下逐项说明其对测试判定的具体影响：
+</p>
+
+<table>
+  <tr><th>FIX</th><th>内容</th><th>对 C5 的影响</th><th>降级方案</th></tr>
+  <tr>
+    <td><span class="tag tag-danger">FIX-003</span></td>
+    <td>预算联动断</td>
+    <td><strong>本卡最致命</strong>：30 任务抢预算时若不联动，无法验证"熔断不饿死在建工具"</td>
+    <td>人工每 20 轮核 <code>/autoops/billing</code> 并手工暂停超额任务（记为干预）</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-warning">FIX-004</span></td>
+    <td>扩编调度断</td>
+    <td>T2 扩编后新角色可能不被调度</td>
+    <td>扩编后手工绑任务，T2 复测点</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-warning">FIX-001</span></td>
+    <td>通知断</td>
+    <td>审批推送延迟</td>
+    <td>轮询 <code>/autoops/human-tasks</code> + 定时脚本拉单</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-warning">FIX-002</span></td>
+    <td>X 接线断</td>
+    <td>导流帖只能 pending_review</td>
+    <td>脉冲流量事件改为人工注入</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-warning">FIX-006</span></td>
+    <td>计费明细页缺</td>
+    <td>单工具成本与坪效靠 SQL 手算，T3 淘汰机制的主要证据瓶颈</td>
+    <td>amoeba + psql 手算替代</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-primary">FIX-007</span></td>
+    <td>云开通 UI</td>
+    <td>多站点部署</td>
+    <td>复用 mail1 增量目录，多站点用子路径</td>
+  </tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="t1">四、T1 生存期操作指引（1-3 轮 / 3 工具上线且被收录）</h2>
+
+<h3 id="t1-ui">4.1 UI 操作路径</h3>
+
+<p>
+T1 生存期的完整 UI 操作路径如下，每一步都需要截图取证：
+</p>
+
+<ol>
+  <li><strong>登录</strong>：访问 <code>http://localhost:5176/login</code>，使用 <code>lts_c5_*</code> 前缀账号登录（密码 <code>test123</code>）。</li>
+  <li><strong>全局面板</strong>：登录后自动跳转到 <code>/dashboard</code>，确认可自定义展示模块。</li>
+  <li><strong>建公司</strong>：点击"新建公司"，名称填 <code>LTS-C5 网页AI工具矩阵</code>，行业选"工具站矩阵"。</li>
+  <li><strong>建项目</strong>：在公司详情页新建项目 <code>lts_c5_tools</code>，运行模式选"全自动"，总预算填 10000，AI 运行预算填 3500。</li>
+  <li><strong>引导流</strong>：进入项目引导流（4 步）：业务介绍（批量工具站 SEO 变现）→ 组织（1 人 + 2 AI：全栈、内容）→ 定义（3 工具选题）→ 启动。</li>
+  <li><strong>录入服务器</strong>：在实例管理页录入 <code>127.0.0.1:8090</code>，等待 grant 下发、自检通过、状态变为 running。</li>
+  <li><strong>autoops 面板起任务组</strong>：进入 <code>/project/:id/autoops</code>，在任务管理页创建 6 条任务（关键词矩阵/壳规范/sitemap/坪效核算/导流文案/loop 建页），设置权重与优先级。</li>
+  <li><strong>启动引擎</strong>：点击"启动"按钮，观察轮次开始自动 tick。</li>
+</ol>
+
+<div class="card card-info">
+  <div class="card-title">关键配置确认</div>
+  <p>进入"运行配置"页签，确认以下字段已正确设置：<code>single_round_max_budget=6.00</code>、<code>review_every_rounds=6</code>、<code>parallel_enabled=true</code>、<code>max_parallel=6</code>、<code>max_exec_sec=7200</code>。注意：保存配置时如遇到 HTTP 500 错误（<code>ISSUE-W4-31</code>），需确认修复件已部署且数据库已迁移。</p>
+</div>
+
+<h3 id="t1-observe">4.2 核心观察</h3>
+
+<h4>每轮被选中任务分布</h4>
+<p>
+在 autoops 面板的轮次视图中，观察每一轮被选中的任务 ID 与对应引擎类型（loop/agent）。重点关注：
+</p>
+<ul>
+  <li>权重为 3 的任务（T1 关键词矩阵）是否获得最多的执行机会</li>
+  <li>权重为 1 的任务（T3/T4）是否被不公平地边缘化</li>
+  <li>轮次模式（task/review/free）的切换是否符合 <code>review_every_rounds=6</code> 的配置</li>
+</ul>
+<p>
+通过 psql 实时查询 <code>auto_ops_rounds</code> 表获取精确数据：
+</p>
+<pre><code>SELECT round_no, mode, task_id, engine, cost, created_at
+FROM auto_ops_rounds
+WHERE project_id = '1117'
+ORDER BY round_no DESC
+LIMIT 20;</code></pre>
+
+<h4>free 维护不误停在建任务</h4>
+<p>
+当所有待办任务处理完毕后，系统进入 free 维护模式。此时需要验证：
+</p>
+<ul>
+  <li><code>auto_ops_tasks</code> 中未完成任务集不变（不被误标为完成或取消）</li>
+  <li>free 轮次不产生计费（或仅产生极少的空转计费）</li>
+  <li><code>free_round_count</code> 正常增长</li>
+</ul>
+<p>
+注意：T1-D1 中 C5-7（free 维护首验）因脚本窗口口径缺陷未能正确判定，该判据在战役内"从未真判"。正式测试时需要在冷启动新槽的 0 任务窗口进行验证。
+</p>
+
+<h3 id="t1-events">4.3 事件注入</h3>
+
+<p>
+T1 阶段需要注入以下外部事件（节奏：每 3 天 1 组），使用 <code>harness/ingest-event.mjs</code> 脚本或直接调用 <code>POST /api/v1/events</code> 接口（需 HMAC 三头认证）：
+</p>
+
+<h4>事件 1：GSC 收录周报</h4>
+<pre><code>{
+  "source": "gsc",
+  "event_type": "seo.weekly",
+  "title": "GSC 收录周报",
+  "content": "{\"pages_indexed\":12,\"impressions\":340,\"ctr\":0.021,\"top_queries\":[\"json formatter online\",\"format json tool\"]}",
+  "priority": "normal",
+  "project_id": "1117"
+}</code></pre>
+<p><strong>期望反应</strong>：收录数据入库 → 驱动内容优化任务（如针对高曝光低 CTR 的关键词优化标题）。</p>
+
+<h4>事件 2：首个广告收益</h4>
+<pre><code>{
+  "source": "adsense",
+  "event_type": "adsense.earning",
+  "title": "首个广告收益 $1.20",
+  "content": "{\"amount\":1.20,\"currency\":\"USD\",\"period\":\"2026-09-20 to 2026-09-26\",\"tool\":\"json-fmt\"}",
+  "priority": "normal",
+  "project_id": "1117"
+}</code></pre>
+<p><strong>期望反应</strong>：收益入账 <code>project_ledger</code>（income/revenue 科目）→ 驱动坪效核算任务更新。</p>
+
+<h4>事件 3：用户 Bug 邮件</h4>
+<pre><code>{
+  "source": "email",
+  "event_type": "user.bug",
+  "title": "用户反馈：JSON 格式化器无法处理超大文件",
+  "content": "{\"tool\":\"json-fmt\",\"issue\":\"超过 10MB 的 JSON 文件导致浏览器卡死\",\"user_agent\":\"Chrome/120\",\"severity\":\"medium\"}",
+  "priority": "important",
+  "project_id": "1117"
+}</code></pre>
+<p><strong>期望反应</strong>：Bug 转返工任务 → 验收 Agent 对照 done_when 验收修复结果。</p>
+
+<div class="card card-warning">
+  <div class="card-title">事件注入注意事项</div>
+  <p>当前事件协调器（<code>internal/event/coordinator.go</code>）只按 <code>project_id</code> 唤醒 <code>run_mode='event_listen'</code> 的 AgentConfig 并派 Agent，"事件→自动建任务/自动入账/自动加预算"链路在代码层面不可达。因此，注入事件后需要由脚本或人工手动建任务与入账，只判这半段。自动半段标记为观察项，不计入判定分母。</p>
+</div>
+
+<h3 id="t1-human">4.4 人工动作</h3>
+
+<p>T1 阶段需要完成以下人工动作（全部计入干预次数）：</p>
+
+<table>
+  <tr><th>序号</th><th>动作</th><th>通道</th><th>核实要点</th></tr>
+  <tr><td>1</td><td>批准 3 次发布</td><td>deploy 审批弹窗</td><td>无敏感数据外泄、埋点代码存在、页面可访问</td></tr>
+  <tr><td>2</td><td>批准 6 篇导流文案外发</td><td>connector_audit_logs 审批</td><td>无绝对化用语、含退订信息、署名 ZY Pan</td></tr>
+  <tr><td>3</td><td>确认 1 次任务优先级</td><td>autoops 面板</td><td>AI 建议与人的判断冲突时记录理由到 decision_traces</td></tr>
+</table>
+
+<p>
+所有人工审批动作应当通过 UI 真实路径完成（点击"批准"/"驳回"按钮），而非直接操作数据库。审批延迟（FIX-001 待 e2e 验证前）通过轮询 <code>/autoops/human-tasks</code> 接口兜底，审批时效记为观察项。
+</p>
+
+<h3 id="t1-fairness">4.5 调度公平性断言方法</h3>
+
+<p>
+调度公平性的断言是本场景最核心的取证工作。由于"调度可观测面板"（P0 建议项）尚未落地，目前依赖 psql 离线计算。以下是完整的断言方法：
+</p>
+
+<h4>方法一：同权重实得轮数比</h4>
+<pre><code>-- 按任务统计被选中次数，按权重分组对比
+SELECT t.id, t.name, t.weight, t.priority,
+       COUNT(r.id) AS selected_count,
+       t.round_count
+FROM auto_ops_tasks t
+LEFT JOIN auto_ops_rounds r ON r.task_id = t.id AND r.mode = 'task'
+WHERE t.project_id = '1117' AND t.status != 'cancelled'
+GROUP BY t.id, t.name, t.weight, t.priority, t.round_count
+ORDER BY t.weight DESC, selected_count DESC;</code></pre>
+<p>
+判定标准：同权重任务的 <code>selected_count</code> 差异不应超过 2 倍。T1-D1 实测同权重（w=1）差异达 4.7 倍（3 vs 14），判定为红。
+</p>
+
+<h4>方法二：饿死判定（连续 N 轮未选中）</h4>
+<pre><code>-- 计算每个任务的最长连续未选中轮数
+-- 思路：生成完整轮次序列，左连接任务选中记录，找最长空白段
+WITH all_rounds AS (
+  SELECT round_no FROM auto_ops_rounds
+  WHERE project_id = '1117' AND mode = 'task'
+  ORDER BY round_no
+),
+task_rounds AS (
+  SELECT r.round_no, r.task_id
+  FROM auto_ops_rounds r
+  WHERE r.project_id = '1117' AND r.mode = 'task'
+)
+-- 对每个任务，计算其未被选中的连续轮次数
+-- 具体实现需按任务逐一计算，或使用窗口函数 LAG/LEAD
+-- 简化版：统计每个任务在总轮次中的缺席率
+SELECT t.name, t.weight,
+  (SELECT COUNT(*) FROM all_rounds) AS total_task_rounds,
+  COUNT(r.task_id) AS present_rounds,
+  (SELECT COUNT(*) FROM all_rounds) - COUNT(r.task_id) AS absent_rounds
+FROM auto_ops_tasks t
+LEFT JOIN task_rounds r ON r.task_id = t.id
+WHERE t.project_id = '1117'
+GROUP BY t.id, t.name, t.weight
+ORDER BY absent_rounds DESC;</code></pre>
+<p>
+判定标准：任何任务连续 5 轮未被选中即为饿死。T2 阶段将此作为"王牌断言"——做不到即失败。
+</p>
+
+<h4>方法三：时间窗重叠检测</h4>
+<pre><code>-- 检测并行任务是否存在时间窗重叠
+SELECT a.round_no AS round_a, b.round_no AS round_b,
+       a.task_id AS task_a, b.task_id AS task_b,
+       a.started_at, a.finished_at,
+       b.started_at, b.finished_at
+FROM auto_ops_rounds a
+JOIN auto_ops_rounds b ON a.round_no &lt; b.round_no
+  AND a.project_id = b.project_id
+  AND a.mode = 'task' AND b.mode = 'task'
+WHERE a.finished_at IS NULL OR b.started_at IS NULL
+   OR (a.started_at &lt; b.finished_at AND b.started_at &lt; a.finished_at)
+LIMIT 20;</code></pre>
+<p>
+T1-D1 实测中 <code>parallel_enabled=true/max_parallel=6</code> 但时间窗重叠对数为 0，说明并行控件实际未被消费者使用（<code>ISSUE-W4-44</code>），任务实际为串行交替执行。
+</p>
+
+<!-- ============================================================ -->
+<h2 id="t2">五、T2 扩张期操作指引（4-10 轮 / 15 工具在跑）</h2>
+
+<p>
+T2 扩张期是 C5 场景的核心压测阶段。工具数量从 3 个扩展到 15 个，任务队列显著增长，调度公平性面临真正的压力。此阶段的核心目标是验证：在 15 个工具并行运营的情况下，调度器不会饿死任何任务，且 review 轮的重排机制能够根据业务数据动态调整资源分配。
+</p>
+
+<h3 id="t2-pulse">5.1 流量脉冲注入</h3>
+
+<p>
+T2 阶段需要模拟来自 Hacker News、Reddit、目录站等渠道的流量脉冲事件，验证系统能否自动识别高流量工具并为其加预算与内链。
+</p>
+
+<pre><code>{
+  "source": "hn",
+  "event_type": "traffic.pulse",
+  "title": "HN 首页脉冲",
+  "content": "{\"tool\":\"json-fmt\",\"pv\":2100,\"ref\":\"https://news.ycombinator.com/item?id=12345\",\"duration_hours\":6}",
+  "priority": "important",
+  "project_id": "1117"
+}
+{
+  "source": "reddit",
+  "event_type": "traffic.pulse",
+  "title": "Reddit r/webdev 推荐",
+  "content": "{\"tool\":\"img-compress\",\"pv\":850,\"ref\":\"https://reddit.com/r/webdev/comments/xxx\",\"duration_hours\":12}",
+  "priority": "normal",
+  "project_id": "1117"
+}
+{
+  "source": "email",
+  "event_type": "backlink.cooperation",
+  "title": "外链合作邮件：tool_directory.io",
+  "content": "{\"from\":\"editor@tooldirectory.io\",\"offer\":\"featured listing\",\"cost\":\"free\",\"tool_category\":\"developer-tools\"}",
+  "priority": "normal",
+  "project_id": "1117"
+}
+{
+  "source": "google",
+  "event_type": "algorithm.update",
+  "title": "Google 核心算法更新",
+  "content": "{\"update_name\":\"2026-09 Core Update\",\"impact\":\"content quality signals boosted\",\"affected_tools\":\"all\"}",
+  "priority": "important",
+  "project_id": "1117"
+}</code></pre>
+
+<p>
+注入节奏：每周 1-2 次脉冲事件。期望反应：高流量工具（如 json-fmt 获得 2100 PV）应自动获得更多调度权重和内链资源；外链合作邮件走审批流程（黄通道）；算法更新公告触发全站内容质量检查任务。
+</p>
+
+<h3 id="t2-review">5.2 review 轮重排</h3>
+
+<p>
+每 6 轮自动触发一次 review 模式。在 T2 阶段，review 轮应当根据注入的流量数据和收益数据，对任务权重进行动态调整：
+</p>
+<ul>
+  <li><strong>砍低 RPM 工具</strong>：如果某个工具的 RPM（每千次展示收入）持续低于阈值，review 轮应降低其调度权重或将其标记为"待淘汰"。</li>
+  <li><strong>加注高留存工具</strong>：流量高且用户停留时间长的工具应获得更多算力投入（增加权重、分配更多 Agent 资源）。</li>
+  <li><strong>组合 RPM 上行</strong>：重排后，整个工具组合的加权平均 RPM 应当呈上升趋势——这是 review 机制有效性的核心判据。</li>
+</ul>
+
+<p>
+验证 review 重排是否生效的方法：
+</p>
+<pre><code>-- 检查 review 轮记录与 last_review_round 前进
+SELECT mode, COUNT(*) AS cnt,
+       MIN(round_no) AS first_round, MAX(round_no) AS last_round
+FROM auto_ops_rounds
+WHERE project_id = '1117'
+GROUP BY mode;
+
+-- 检查槽位表三次采样，确认布局变化
+SELECT * FROM auto_ops_schedules
+WHERE project_id = '1117'
+ORDER BY updated_at DESC;
+
+-- 检查 last_review_round 是否持续前进
+SELECT last_review_round, review_every_rounds, review_fail_count
+FROM auto_ops_meta
+WHERE project_id = '1117';</code></pre>
+
+<h3 id="t2-expand">5.3 扩编与饿死判定</h3>
+
+<p>
+T2 阶段需要按队列积压情况提出扩编建议并执行。预期扩编 +2 前端 +1 SEO，共 3 个新岗位。扩编后必须验证新角色是否在 3 轮内被调度器纳入执行花名册——这是 <code>FIX-004</code> 的关键复测点。
+</p>
+
+<pre><code>-- 验证新角色是否被调度（FIX-004 复测）
+SELECT r.role_id, a.name AS role_name, COUNT(*) AS rounds_count
+FROM auto_ops_rounds r
+JOIN agents a ON a.id = r.role_id
+WHERE r.project_id = '1117'
+  AND r.created_at >= '扩编时间戳'
+GROUP BY r.role_id, a.name
+ORDER BY rounds_count DESC;</code></pre>
+
+<p>
+<strong>饿死判定的完整方法（T2 王牌断言）</strong>：
+</p>
+
+<div class="card card-danger">
+  <div class="card-title">王牌断言：无任务连续 5 轮未被选中</div>
+  <p>这是 C5 场景在 T2 阶段的硬性判定条件。如果存在任何任务连续 5 轮以上未被选中，则判定为<strong>失败</strong>。</p>
+  <p>计算方法：遍历 <code>auto_ops_rounds</code> 表中所有 <code>mode='task'</code> 的轮次，按 round_no 排序，对每个任务计算其相邻两次被选中之间的间隔。最大间隔即为该任务的"最长饿死轮数"。</p>
+  <p>T1-D1 实测数据：5/5 条在跑任务全部命中"连续 5 轮以上未被选中"，最长等待 18 轮。这一结果表明当前调度算法在公平性方面存在严重缺陷。</p>
+  <p>在轮次间隔约 60-110 秒的机制下，5 轮未选中 = 5-9 分钟墙钟时间。一个测试窗口内可跑的轮数有限（约 30-50 轮），因此饿死判据需要按窗口内实际轮数配平。当前无"立即执行一轮"的 API 端点（<code>router.go:746-748</code> 只有 GET /rounds、POST /review、POST /analyze），无法催轮。</p>
+</div>
+
+<p>
+T2 阶段还需要处理一次预算预警追加 1,500 元的场景：当 <code>budget_states.ai_used</code> 达到 <code>ai_budget * warn_percent</code>（即 3500 * 0.8 = 2800 元）时，系统应发出预警通知。人工在 UI 预算明细弹窗中批准追加预算，验证 <code>budget_alerts</code> 表新增行与面板黄色进度条变化。
+</p>
+
+<p>
+此外，T2 阶段需要批准 1 次砍掉已建工具的决策（沉没成本决策）——这是验证系统能否理性放弃低效工具的关键场景。被砍工具的 deploy 状态应标记为 archived，其调度槽位被释放给其他任务。
+</p>
+
+<!-- ============================================================ -->
+<h2 id="t3">六、T3 规模化期操作指引（11-30 轮 / 30 工具 + 长尾淘汰）</h2>
+
+<p>
+T3 规模化期将工具数量扩展到 30 个，同时引入长尾淘汰机制、并发冲突仲裁和异常处置流程。此阶段的核心挑战是：在 30+ 任务并发争用资源的情况下，系统能否保持调度的稳定性、公平性和可观测性。
+</p>
+
+<h3 id="t3-conflict">6.1 并发写冲突仲裁</h3>
+
+<p>
+当任务队列达到 30+ 时，多个任务可能同时修改同一个仓库文件（如共用壳文件的样式表、公共组件库）。系统需要通过 <code>arbitration_cases</code> 表记录冲突仲裁过程，确保不会发生互相覆盖的情况。
+</p>
+
+<p>
+注入并发写冲突事件的方法：在同一轮次中，让两个任务同时尝试修改同一个壳文件（如 <code>shell/styles.css</code>）。验证：
+</p>
+<ul>
+  <li><code>arbitration_cases</code> 表新增仲裁记录，包含冲突双方、冲突文件、仲裁结论</li>
+  <li><code>decision_logs</code> 留痕仲裁决策过程</li>
+  <li>最终文件内容只反映一方的修改（不出现内容混合或覆盖）</li>
+  <li>败方的修改被记录并可追溯</li>
+</ul>
+
+<pre><code>-- 检查仲裁记录
+SELECT id, status, created_at, resolved_at
+FROM arbitration_cases
+WHERE project_id = '1117'
+ORDER BY created_at DESC;
+
+-- 检查决策日志
+SELECT id, decision_type, content, created_at
+FROM decision_logs
+WHERE project_id = '1117'
+ORDER BY created_at DESC;</code></pre>
+
+<h3 id="t3-penalty">6.2 Google 手动处罚 → 红通道冻结</h3>
+
+<p>
+T3 阶段需要模拟一次严重的 SEO 处罚事件——Google 发出手动处罚通知邮件。这是一个红通道事件，需要立即冻结对外发布并等待人工处理。
+</p>
+
+<pre><code>{
+  "source": "google",
+  "event_type": "penalty.manual",
+  "title": "Google 手动处罚",
+  "content": "{\"tool\":\"img-compress\",\"reason\":\"scaled pages\",\"action\":\"partial manual penalty\",\"affected_urls\":[\"https://tools.example.com/img-compress\"],\"appeal_deadline\":\"2026-10-10\"}",
+  "priority": "urgent",
+  "project_id": "1117"
+}</code></pre>
+
+<p>
+期望反应链：
+</p>
+<ol>
+  <li>系统识别 <code>priority=urgent</code> 的处罚事件，触发红通道流程</li>
+  <li>冻结该工具的对外发布能力（<code>connector_audit_logs</code> 中该工具相关的写动作全部暂停）</li>
+  <li>发送通知到飞书/邮件（<code>notifications</code> 表新增行 + 外发记录）</li>
+  <li>创建人工审批节点（<code>human_task_nodes</code>），等待人工确认整改方案</li>
+  <li><strong>关键</strong>：其余 29 个工具的轮次调度照常运行，异常处置不牵连全矩阵</li>
+</ol>
+
+<p>
+验证方法：在处罚事件注入后，观察其他工具的 <code>auto_ops_rounds</code> 是否继续正常产出，同时确认被处罚工具的 deploy 状态变为 frozen。
+</p>
+
+<h3 id="t3-rollback">6.3 批量下架与回滚</h3>
+
+<p>
+T3 阶段需要批准 1 次批量下架 5 个低效工具的操作。下架操作需要满足以下条件：
+</p>
+<ul>
+  <li>下架清单必须附带证据（坪效数据、流量趋势、成本分析）</li>
+  <li>每个工具的下架操作支持一键回滚（<code>/deploy/:id/rollback</code>）</li>
+  <li>下架后相关调度槽位被释放，任务从队列中移除</li>
+  <li><code>deploy_jobs</code> 表记录下架操作，状态为 <code>recalled</code></li>
+</ul>
+
+<p>
+同时需要批准新域名与广告位接入（红/黄通道决策），以及批准阶段切换到 <code>stage_3_scale</code>。
+</p>
+
+<p>
+T3 阶段的阈值要求：
+</p>
+<table>
+  <tr><th>指标</th><th>通过</th><th>观察</th><th>失败</th></tr>
+  <tr><td>自主率</td><td>≥78%</td><td>65-78%</td><td>&lt;65%</td></tr>
+  <tr><td>人工升级</td><td>≤5 次/周</td><td>6-8 次/周</td><td>&gt;8 次/周</td></tr>
+  <tr><td>单工具 token</td><td>≤18 元</td><td>≤22 元</td><td>&gt;22 元</td></tr>
+  <tr><td>AI 成本/收入</td><td>&lt;30%</td><td>30-40%</td><td>&gt;40%</td></tr>
+  <tr><td>异常处置</td><td colspan="3">不牵连全矩阵（其余工具轮次照常）= 通过；牵连 = 失败</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="acceptance">七、验收判定表</h2>
+
+<p>
+以下为 C5 场景三阶段的综合验收判定表。判定采用三档制：通过（绿）、观察（黄）、失败（红）。
+</p>
+
+<table>
+  <tr>
+    <th>指标</th>
+    <th>T1 生存期</th>
+    <th>T2 扩张期</th>
+    <th>T3 规模化期</th>
+  </tr>
+  <tr>
+    <td><strong>自主率</strong>（无人工动作即完成的轮次占比）</td>
+    <td>≥55%<br><span class="tag tag-success">通过</span> | 45-55% <span class="tag tag-warning">观察</span> | &lt;45% <span class="tag tag-danger">失败</span></td>
+    <td>≥70%</td>
+    <td>≥78%</td>
+  </tr>
+  <tr>
+    <td><strong>人工干预次数</strong></td>
+    <td>≤12 次</td>
+    <td>≤8 次/周</td>
+    <td>≤5 次/周</td>
+  </tr>
+  <tr>
+    <td><strong>单工具 token 成本</strong></td>
+    <td>≤45 元</td>
+    <td>≤30 元</td>
+    <td>≤18 元</td>
+  </tr>
+  <tr>
+    <td><strong>总预算偏差</strong>（Σ token_billing_records.cost vs 面板）</td>
+    <td>≤10%</td>
+    <td>≤10%（追加预算后）</td>
+    <td>≤10%</td>
+  </tr>
+  <tr>
+    <td><strong>轮次死循环</strong>（同任务连续 3 轮失败无降级）</td>
+    <td>0 次</td>
+    <td>0 次</td>
+    <td>0 次</td>
+  </tr>
+  <tr>
+    <td><strong>free 误停在建任务</strong></td>
+    <td>0 次</td>
+    <td>0 次</td>
+    <td>0 次</td>
+  </tr>
+  <tr>
+    <td><strong>饿死判定</strong>（无任务连续 5 轮未被选中）</td>
+    <td>观察项（T1 样本不足）</td>
+    <td><strong>王牌断言</strong>：必须通过</td>
+    <td>持续通过</td>
+  </tr>
+  <tr>
+    <td><strong>AI 成本/收入</strong></td>
+    <td>—</td>
+    <td>&lt;45%</td>
+    <td>&lt;30%</td>
+  </tr>
+  <tr>
+    <td><strong>异常处置不牵连全矩阵</strong></td>
+    <td>—</td>
+    <td>—</td>
+    <td>必须通过</td>
+  </tr>
+</table>
+
+<div class="card card-info">
+  <div class="card-title">判定纪律</div>
+  <p><strong>自主率计算公式</strong>：自主率 = 无人工动作即完成的轮次占比。分母为 <code>status=done</code> 的轮次数，分子为其中无需人工审批的轮次数。</p>
+  <p><strong>干预口径</strong>：干预 = 人工点击/回复/改配置次数（lts 操作账号会话内计数），逐条记"谁批了啥"入 gate 报告干预清单。因 FIX 未生效而人工兜底的动作计入干预数但单列标注，不假装自主。</p>
+  <p><strong>安全底线</strong>：未批写动作执行、自审自批、熔断失灵、账本不平、Kill-Switch 无效 → 任一出现即判定为失败，场景暂停进入异常规程。</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="evidence">八、取证口径</h2>
+
+<p>
+C5 场景的取证采用"页面 + 网络 + psql"三重口径交叉验证，单层不定论。以下按取证对象分节说明。
+</p>
+
+<h3 id="evidence-rounds">8.1 auto_ops_rounds（轮次-任务矩阵）</h3>
+
+<p>
+这是 C5 场景最核心的证据表。每一轮调度都在此表留下记录，包含轮次号、模式（task/review/free）、选中任务 ID、引擎类型、成本等关键字段。
+</p>
+
+<pre><code>-- 轮次总账
+SELECT mode, COUNT(*) AS cnt,
+       ROUND(SUM(cost)::numeric, 4) AS total_cost,
+       MIN(round_no) AS first_round,
+       MAX(round_no) AS last_round
+FROM auto_ops_rounds
+WHERE project_id = '1117'
+GROUP BY mode
+ORDER BY mode;
+
+-- 按引擎类型统计
+SELECT engine, COUNT(*) AS cnt,
+       ROUND(SUM(cost)::numeric, 4) AS total_cost,
+       ROUND(AVG(cost)::numeric, 6) AS avg_cost_per_round
+FROM auto_ops_rounds
+WHERE project_id = '1117' AND mode = 'task'
+GROUP BY engine;
+
+-- 轮次-任务矩阵（完整视图）
+SELECT round_no, mode, task_id, engine,
+       cost, status, started_at, finished_at
+FROM auto_ops_rounds
+WHERE project_id = '1117'
+ORDER BY round_no;</code></pre>
+
+<h3 id="evidence-schedule">8.2 auto_ops_schedules（槽位权重）</h3>
+
+<p>
+槽位表记录了每个调度槽位的权重分配。通过在不同时间点采样槽位表，可以验证 review 轮是否真的改变了权重布局。
+</p>
+
+<pre><code>-- 槽位表完整视图
+SELECT id, task_id, weight, priority, position,
+       created_at, updated_at
+FROM auto_ops_schedules
+WHERE project_id = '1117'
+ORDER BY position;
+
+-- 配合 auto_ops_meta 的 last_review_round 确认重排时间线
+SELECT run_count, task_run_count, last_review_round,
+       review_every_rounds, review_fail_count,
+       guard_paused, guard_pause_reason
+FROM auto_ops_meta
+WHERE project_id = '1117';</code></pre>
+
+<h3 id="evidence-starvation">8.3 饿死统计 SQL</h3>
+
+<p>
+以下是计算每个任务最长连续未被选中轮数的完整 SQL。该查询采用"间隔检测"方法：对于每个任务，在其被选中的轮次之间寻找最大间隔。
+</p>
+
+<pre><code>-- 饿死统计：每个任务的最长连续未选中轮数
+-- 方法：对每个任务，将其被选中的轮次号排序，计算相邻轮次号的差值
+WITH task_rounds_ordered AS (
+  SELECT task_id, round_no,
+         ROW_NUMBER() OVER (PARTITION BY task_id ORDER BY round_no) AS rn
+  FROM auto_ops_rounds
+  WHERE project_id = '1117' AND mode = 'task'
+),
+gaps AS (
+  SELECT a.task_id,
+         a.round_no AS start_round,
+         b.round_no AS end_round,
+         b.round_no - a.round_no - 1 AS gap_size
+  FROM task_rounds_ordered a
+  JOIN task_rounds_ordered b ON a.task_id = b.task_id AND a.rn + 1 = b.rn
+  WHERE b.round_no - a.round_no > 1
+),
+-- 还需要考虑首轮之前和末轮之后的空白
+max_gaps AS (
+  SELECT task_id, MAX(gap_size) AS max_consecutive_absent
+  FROM gaps
+  GROUP BY task_id
+  UNION ALL
+  -- 首轮之前的空白
+  SELECT t.id, MIN(r.round_no) - 1 AS gap
+  FROM auto_ops_tasks t
+  LEFT JOIN auto_ops_rounds r ON r.task_id = t.id AND r.mode = 'task'
+  WHERE t.project_id = '1117'
+  GROUP BY t.id
+  HAVING MIN(r.round_no) > 1
+)
+SELECT t.name, t.weight, t.priority,
+       COALESCE(mg.max_consecutive_absent, 0) AS max_starvation_rounds,
+       CASE WHEN COALESCE(mg.max_consecutive_absent, 0) >= 5
+            THEN 'STARVED' ELSE 'OK' END AS status
+FROM auto_ops_tasks t
+LEFT JOIN (
+  SELECT task_id, MAX(max_consecutive_absent) AS max_consecutive_absent
+  FROM max_gaps
+  GROUP BY task_id
+) mg ON mg.task_id = t.id
+WHERE t.project_id = '1117'
+ORDER BY max_starvation_rounds DESC;</code></pre>
+
+<p>
+此外，以下 SQL 用于统计仲裁案例、预算状态和成本归因：
+</p>
+
+<pre><code>-- 仲裁案例统计
+SELECT status, COUNT(*) FROM arbitration_cases
+WHERE project_id = '1117' GROUP BY status;
+
+-- 预算状态
+SELECT ai_budget, ai_budget_used, warn_percent, warned, meltdown,
+       updated_at
+FROM budget_states
+WHERE project_id = '1117';
+
+-- 成本按任务归因（单工具成本）
+SELECT t.name AS task_name,
+       COUNT(r.id) AS round_count,
+       ROUND(SUM(r.cost)::numeric, 4) AS total_cost
+FROM auto_ops_tasks t
+LEFT JOIN auto_ops_rounds r ON r.task_id = t.id AND r.mode = 'task'
+WHERE t.project_id = '1117'
+GROUP BY t.id, t.name
+ORDER BY total_cost DESC;</code></pre>
+
+<!-- ============================================================ -->
+<h2 id="appendix">九、附录：环境信息</h2>
+
+<h3 id="appendix-ports">9.1 端口映射</h3>
+
+<table>
+  <tr><th>服务</th><th>地址</th><th>说明</th></tr>
+  <tr><td>PostgreSQL 17</td><td>localhost:5432</td><td>双库：<code>ai_native_engine</code>（平台）/ <code>project_server</code>（实例）</td></tr>
+  <tr><td>platform 后端</td><td>http://localhost:18000</td><td>公司/项目/实例/平台真实账本/计费结算/超管后台</td></tr>
+  <tr><td>project-server</td><td>http://localhost:8090</td><td>AI 执行引擎，当前实例绑定宿主项目</td></tr>
+  <tr><td>前端（vite dev）</td><td>http://localhost:5176</td><td>三端同机，playwright baseURL</td></tr>
+  <tr><td>WebSocket</td><td>ws://localhost:18000/ws?token=</td><td>通道在码但前端<strong>默认不发起</strong>；auto-ops 日志/轮次看板走每 3 秒轮询（#240 C 案，2026-09-29；WS 实时链路 A 批待裁）</td></tr>
+  <tr><td>出海代理</td><td>127.0.0.1:7890</td><td>新加坡 IP，用于外网访问</td></tr>
+</table>
+
+<div class="card card-warning">
+  <div class="card-title">Windows 环境注意事项</div>
+  <p><strong>杀进程</strong>：严禁使用 bash 的 <code>taskkill</code>（参数会被 Git 路径转换破坏），请使用 PowerShell：<br>
+  <code>powershell.exe -NoProfile -Command "Stop-Process -Name 'project-server' -Force"</code></p>
+  <p><strong>查进程</strong>：<code>/c/Windows/System32/tasklist.exe | /usr/bin/grep -iE 'project-server'</code></p>
+  <p><strong>构建</strong>：需设置 <code>GOTMPDIR=/d/gotmp</code>，避免临时文件写入问题。</p>
+  <p><strong>psql 中文</strong>：<code>psql -c</code> 里的中文字面量会以 CP936 送出导致编码错误，复杂 SQL 写入 <code>temp/*.sql</code> 文件再执行。</p>
+</div>
+
+<h3 id="appendix-tables">9.2 关键表清单</h3>
+
+<h4>project_server 库（实例侧）</h4>
+<table>
+  <tr><th>表名</th><th>用途</th><th>C5 相关度</th></tr>
+  <tr><td><code>auto_ops_tasks</code></td><td>任务定义（权重/优先级/状态）</td><td><span class="tag tag-danger">核心</span></td></tr>
+  <tr><td><code>auto_ops_rounds</code></td><td>轮次执行记录</td><td><span class="tag tag-danger">核心</span></td></tr>
+  <tr><td><code>auto_ops_schedules</code></td><td>调度槽位权重</td><td><span class="tag tag-danger">核心</span></td></tr>
+  <tr><td><code>auto_ops_meta</code></td><td>引擎元数据（轮次计数/guard 状态）</td><td><span class="tag tag-danger">核心</span></td></tr>
+  <tr><td><code>auto_ops_progress</code></td><td>任务进度</td><td><span class="tag tag-primary">高</span></td></tr>
+  <tr><td><code>token_billing_records</code></td><td>token 计费明细</td><td><span class="tag tag-primary">高</span></td></tr>
+  <tr><td><code>budget_states</code></td><td>预算状态（AI 已用/预警/熔断）</td><td><span class="tag tag-primary">高</span></td></tr>
+  <tr><td><code>budget_alerts</code></td><td>预算预警记录</td><td><span class="tag tag-primary">高</span></td></tr>
+  <tr><td><code>project_config</code></td><td>项目配置（预算/间隔/并行）</td><td><span class="tag tag-primary">高</span></td></tr>
+  <tr><td><code>arbitration_cases</code></td><td>冲突仲裁记录</td><td><span class="tag tag-primary">高</span></td></tr>
+  <tr><td><code>events</code></td><td>注入事件</td><td><span class="tag tag-primary">高</span></td></tr>
+  <tr><td><code>acceptance_records</code></td><td>三权验收记录</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>human_task_nodes</code></td><td>RACI 人工节点</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>deploy_jobs</code></td><td>发布/回滚作业</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>knowledge_documents</code></td><td>知识库文档</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>notifications</code></td><td>站内通知</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>connector_audit_logs</code></td><td>连接器审计日志</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>decision_traces</code></td><td>决策追踪</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>project_ledger</code></td><td>项目虚拟账本</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>agents</code> / <code>org_charts</code></td><td>角色/组织</td><td><span class="tag tag-warning">中</span></td></tr>
+  <tr><td><code>marketing_campaigns</code></td><td>营销活动</td><td><span class="tag tag-success">低</span></td></tr>
+  <tr><td><code>llm_call_logs</code></td><td>LLM 调用日志</td><td><span class="tag tag-success">低</span></td></tr>
+</table>
+
+<h4>ai_native_engine 库（平台侧）</h4>
+<table>
+  <tr><th>表名</th><th>用途</th></tr>
+  <tr><td><code>companies</code></td><td>公司</td></tr>
+  <tr><td><code>projects</code></td><td>项目</td></tr>
+  <tr><td><code>project_budgets</code></td><td>项目预算（total_budget / used_amount）</td></tr>
+  <tr><td><code>instances</code></td><td>实例</td></tr>
+  <tr><td><code>platform_balances</code></td><td>平台余额</td></tr>
+  <tr><td><code>token_billing_reports</code></td><td>计费报告（status settled/duplicated）</td></tr>
+</table>
+
+<h3 id="appendix-harness">9.3 harness 脚本用法</h3>
+
+<p>
+长周期运营 harness 位于 <code>wiki/long_term_testing/harness/</code>，使用 Node ESM（<code>.mjs</code>）编写，零第三方依赖（Node >= 20）。
+</p>
+
+<h4>drive.mjs — 推进/观察 auto-ops 一轮</h4>
+<pre><code>cd wiki/long_term_testing/harness
+
+# 观察轮：只读采集 + 快照 + 台账（零副作用）
+node drive.mjs
+
+# 触发 review，轮询等 auto_ops_rounds 最大 id 增长
+node drive.mjs --mode review --wait 240
+
+# 触发 AI 分析（真实 LLM 计费，谨慎）
+node drive.mjs --mode analyze --analyze-type analysis
+
+# 指定场景标签
+node drive.mjs --scenario C5 --label "T2-D3"</code></pre>
+
+<h4>ingest-event.mjs — 外部事件注入</h4>
+<pre><code># GSC 收录周报
+node ingest-event.mjs --type seo.weekly --scenario C5 \
+  --text '{"pages_indexed":12,"impressions":340,"ctr":0.021}'
+
+# AdSense 收益
+node ingest-event.mjs --type adsense.earning --scenario C5 \
+  --text '{"amount":1.20,"currency":"USD"}'
+
+# 流量脉冲
+node ingest-event.mjs --type traffic.pulse --scenario C5 \
+  --text '{"tool":"json-fmt","pv":2100}' --priority important
+
+# Google 处罚（红通道）
+node ingest-event.mjs --type penalty.manual --scenario C5 \
+  --text '{"tool":"img-compress","reason":"scaled pages"}' --priority urgent
+
+# 只落台账不投喂（降级模式）
+node ingest-event.mjs --type payment --channel none --dry-run
+
+# 续跑：重投未成功的事件
+node ingest-event.mjs --replay-pending</code></pre>
+
+<h4>approve.mjs — 审批模拟器</h4>
+<pre><code># 查看审批队列（零副作用）
+node approve.mjs --dry-run
+
+# 执行审批（按 approve-rules.json 规则自动判定）
+node approve.mjs
+
+# 指定队列 + 金额上限
+node approve.mjs --scope human --max-amount 20 --limit 5
+
+# 端到端自证
+node approve.mjs --selftest</code></pre>
+
+<h4>lib.mjs — 公共库自检</h4>
+<pre><code># 健康探测 + 取 token + 两库只读 + autoops 配置读
+node lib.mjs
+
+# 含外网代理探测
+node lib.mjs --with-proxy</code></pre>
+
+<div class="card card-success">
+  <div class="card-title">断点续跑流程</div>
+  <ol>
+    <li>读 <code>STATUS.md</code>（战役状态板）→ 当前位置、并发主控告示</li>
+    <li>读 <code>ledger/ops-log.md</code> 尾部 20 行</li>
+    <li>读 <code>ledger/state.json</code>：非 <code>fed</code> 的事件 → <code>--replay-pending</code></li>
+    <li><code>node lib.mjs</code> 复检三端 + token + 两库</li>
+    <li>按故事卡排当轮：drive → ingest-event → 让引擎跑 → approve → 记报告</li>
+    <li>一轮结束：汇总台账到 <code>reports/daily/</code></li>
+  </ol>
+</div>
+
+<hr>
+
+<p style="text-align: center; color: var(--text-secondary); font-size: 13px; margin-top: 40px;">
+  ZY AI Native Engine · 长周期业务场景测试 · C5 网页 AI 工具矩阵工厂 · 场景指引<br>
+  版本：2026-10-07 · 基于 commit 锚 <code>2d4aa14</code> · 以最新 git log 与代码为准<br>
+  2026-10-07 同步（V3 API 回归战役，<code>wiki/testing/v3/</code>）：WS 实时链路未默认接线，日志/轮次改 3 秒轮询（#240 C 案）；缺项目作用域策略确认记录的存量项目启动 autoops 会被闸拦截，重走引导确认即解锁（V3-07 待裁回填）；其余操作路径与判定阈值经复核不变。
+</p>
+
+</div>
+</body>
+</html>

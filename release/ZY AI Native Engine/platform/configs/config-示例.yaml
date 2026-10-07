@@ -1,0 +1,144 @@
+# 大服务平台本地开发配置
+# 生产环境请使用环境变量覆盖敏感字段（AE_JWT_SECRET、AE_DATABASE_PASSWORD 等）
+
+server:
+  port: 18000
+  read_timeout: 15s
+  # 1200s：SSE 流式接口（plan/chat 对齐对话等）长连接传输，write_timeout 过短会在
+  # 输出中途强制切断连接（表现为 AI 回复约 500 字后卡死），需按最长单次流式调用放宽。
+  write_timeout: 1200s
+  shutdown_timeout: 10s
+  # 前端静态代理（release 打包模式）：web_port>0 时额外监听该端口，服务 static_dir
+  # （相对可执行文件目录）静态页面，/api、/ws 反向代理到主端口。
+  # dev 模式（vite 5176）建议保持 web_port: 0 关闭。
+  static_dir: ../web
+  web_port: 80
+
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: "CHANGE_ME"                 # 数据库密码
+  name: ai_native_engine
+  ssl_mode: disable
+  max_open_conns: 50
+  max_idle_conns: 10
+  conn_max_lifetime: 1h
+
+jwt:
+  secret: "change-me-in-production-use-long-random-string"
+  access_expiry: 2h
+  refresh_expiry: 168h
+  issuer: ai-native-engine
+
+cors:
+  allow_origins:
+    - "http://localhost:3000"
+    - "http://localhost:5173"
+
+# WebSocket 来源白名单（缺陷修复：WS 握手不再全放行）。
+# Origin 为空（非浏览器客户端）与同源请求恒放行；部署域名请追加到下方列表，
+# 或用环境变量 AE_WS_ALLOWED_ORIGINS 覆盖。
+ws:
+  allowed_origins:
+    - "http://localhost:5176"
+    - "http://localhost:5173"
+    - "http://localhost:3000"
+
+log:
+  level: info
+
+# 腾讯云 CVM 配置（敏感字段用环境变量覆盖：
+#   AE_TENCENT_CLOUD_SECRET_ID / AE_TENCENT_CLOUD_SECRET_KEY）
+tencent_cloud:
+  secret_id: ""
+  secret_key: ""
+  default_region: "ap-guangzhou"
+  default_zone: "ap-guangzhou-3"
+  default_image_id: ""               # 替换为实际 Ubuntu 22.04 镜像 ID
+  default_vpc_id: ""
+  default_subnet_id: ""
+  default_security_group_ids: []
+  # 规格白名单：用户只能从中选择，不能输入指定之外的规格
+  allowed_instance_types:
+    - "S5.MEDIUM4"      # 2核4G
+    - "S5.LARGE8"       # 4核8G
+    - "S5.2XLARGE16"    # 8核16G
+    - "SA5.MEDIUM4"     # 2核4G (AMD)
+
+# SSH 自动部署
+ssh:
+  default_user: "root"
+  default_port: 22
+  deploy_timeout: 20m
+  cvm_ready_timeout: 10m
+
+# LLM 网关配置
+# 与 project-server 使用相同的 API keys
+llm:
+  deepseek:
+    api_key: "CHANGE_ME"                # 生产用环境变量 AE_LLM_DEEPSEEK_API_KEY 注入
+    base_url: "https://api.deepseek.com"
+    model: "deepseek-v4-flash"
+    max_tokens: 64192
+    request_timeout: 1200s
+
+  glm:
+    api_key: "CHANGE_ME"                # 生产用环境变量 AE_LLM_GLM_API_KEY 注入
+    base_url: "https://open.bigmodel.cn/api/paas/v4"
+    model: "glm-4-flash"
+    max_tokens: 64096
+    request_timeout: 1200s
+
+# 平台 Chat 到项目服务器转发的配置
+project_server_forward:
+  enabled: true                       # true=转发到项目服务器 / false=平台本地处理
+  base_url: "http://localhost:8090"   # 项目服务器地址
+  hmac_secret: "CHANGE_ME_HMAC_SECRET_AT_DEPLOY"   # 需与 project-server 端一致
+  # 本地单机开发：本实例即绑定 project-server 侧的项目 34（见 project-server/configs/config.yaml）。
+  # 复评 N-02：不绑定则该路由身份缺失的转发一律 403（生产多租户部署应保持 0）。
+  # change here 修改这里
+  bound_project_id: 34
+  # ---- FIX-012 多项目执行面（默认全部关闭 = 现网零变化）----
+  # ⚠ 本地测试档专用（W4 C3 战役阶段 1「新项目自挂」）：随发布包外发前必须回退为默认关闭。
+  # SSRF 闸「受信本机例外」：精确 host:port 白名单（仅 YAML/env 可配，UI 不可写）。
+  # 例：["127.0.0.1:8090"]。默认空 ⇒ 环回/私网/元数据全拒（A4，D-103 口径不变）。
+  trusted_instance_hosts:
+    - "127.0.0.1:8090"
+  # 宿主 grant 下发：开通/登记/换钥后把项目实例密钥 push 给多项目宿主 PS（方案 B）。
+  # host_url 仅允许环回 http 或 https；host_admin_secret = 宿主 PS platform.hmac_secret
+  # （env: AE_PROJECT_SERVER_FORWARD_GRANT_PUSH_HOST_ADMIN_SECRET，密钥值勿写入文档/日志）。
+  # 此处 host_admin_secret 与 project-server/configs/config.yaml → platform.hmac_secret 同值
+  # （该值已在库，本行不引入新密钥；生产环境两端均走环境变量注入）。
+  grant_push:
+    enabled: true
+    host_url: "http://127.0.0.1:8090"
+    host_admin_secret: "xxxxxxxxxxxxxxxxchangehere"
+
+# FIX-012：开通流程行为。true 时 ConfirmProvision 执行域自检失败将拒绝置 running；
+# 默认 false（warn 非阻断，不打断「先确认后部署」人工流程）。env: AE_PROVISION_CONFIRM_STRICT
+provision:
+  confirm_strict: false
+
+# Linode (Akamai Cloud) 配置
+# 敏感字段用环境变量覆盖：AE_LINODE_API_TOKEN
+linode:
+  api_token: ""
+  default_region: "us-east"
+  default_image: "linode/ubuntu22.04"
+  # 规格白名单：用户只能从中选择
+  allowed_instance_types:
+    - "g6-nanode-1"      # 1C 1G
+    - "g6-standard-1"    # 1C 2G
+    - "g6-standard-2"    # 2C 4G
+    - "g6-standard-4"    # 4C 8G
+
+# 机器码授权（激活 + 有效期）
+license:
+  enabled: true
+  auth_server_url: "https://zyinfo.pro:19999/auth"
+  auth_key: ""          # 敏感，用 AE_LICENSE_AUTH_KEY 覆盖
+  trial_minutes: 20
+  trial_random_minutes: 10
+  max_grace_days: 365
+  check_interval: 24h

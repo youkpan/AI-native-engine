@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第14章 团队、权限与治理 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 14 章 · 第四步：当 CEO 看经营</div>
+    <h1>第14章 团队、权限与治理</h1>
+    <p class="zy-lead">这一章回答一个最实在的问题：人和 AI 在一个组织里怎么各就各位、谁能干什么、出了事怎么追溯。读完你就能给每个成员和每个 Agent 定好边界。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 20 分钟</span>
+      <span class="zy-badge green">CEO / 管理员向</span>
+      <span class="zy-badge amber">重点：权限 14 项 / 三通道 / 审计留痕</span>
+    </div>
+  </header>
+
+  <h2>你将学会</h2>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>说清一个组织里有哪四种角色，以及为什么 AI Agent 永远拿不到管理权限</span></li>
+    <li><input type="checkbox"><span>把 14 项权限逐条对上人话，知道哪 5 项是高风险、该给谁</span></li>
+    <li><input type="checkbox"><span>看懂 L0–L3 自主级别与红黄绿三通道，知道 AI 什么时候必须停下来问你</span></li>
+    <li><input type="checkbox"><span>从收到通知到处理完，走通一次人工处理节点（含手机审批）</span></li>
+    <li><input type="checkbox"><span>出了事知道去哪查：审计报告、风险登记册、变更日志、管理转录</span></li>
+    <li><input type="checkbox"><span>会给不同规模的团队配一套合适的治理方案</span></li>
+  </ul>
+
+  <p>先说这一章的核心观点，一句话：<strong>治理不是给 AI 上枷锁，而是让「你敢把事交给它」这件事成立</strong>。</p>
+
+  <p>很多人一听「权限」「审计」就头疼，觉得这是给 AI 添堵。恰恰相反。你之所以不敢让 AI 自己去发邮件、自己去下单、自己去改线上系统，不是因为它能力不够，而是因为<strong>出了问题你兜不住</strong>。治理做的就是把「兜得住」变成默认状态：该拦的拦住、该问的问你、该花的在额度内、做过的事有记录。当这四件事都成立时，你才敢把一整条业务线交出去。</p>
+
+  <p>这一章要讲的四种治理手段，管的是四件不同的事，别混着看：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>手段</th><th>回答的问题</th><th>在哪个界面</th><th>打个比方</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>权限</strong></td>
+        <td>它<strong>能不能做</strong>这件事</td>
+        <td>公司管理 <span class="sep">›</span> 成员管理 <span class="sep">›</span> 编辑成员 <span class="sep">›</span> 权限</td>
+        <td>门禁卡：没有这张卡，门就打不开</td>
+      </tr>
+      <tr>
+        <td><strong>自主级别</strong></td>
+        <td>做之前<strong>要不要问你</strong></td>
+        <td>自动运营 <span class="sep">›</span> 人工节点（L0–L3）</td>
+        <td>刹车灵敏度：越保守，越早踩</td>
+      </tr>
+      <tr>
+        <td><strong>预算</strong></td>
+        <td>它<strong>最多能花多少</strong></td>
+        <td>项目详情 <span class="sep">›</span> 预算明细、治理与资源 <span class="sep">›</span> 资源治理</td>
+        <td>钱包上限：花超了自动停</td>
+      </tr>
+      <tr>
+        <td><strong>审计</strong></td>
+        <td><strong>做了什么、谁做的</strong></td>
+        <td>自动运营 <span class="sep">›</span> 审计治理</td>
+        <td>行车记录仪：出事能回放</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">给你的判断标准</span>
+    <p>你不需要精通这四样。你只需要在每次「要不要把这件事交给 AI」时，问四个问题：它有权限吗？它会问我吗？最多花多少？出了事我查得到吗？四个答案都满意，就可以交。</p>
+  </div>
+
+  <h2>一、一个组织里有谁</h2>
+
+  <p>先认人。系统里的成员角色只有四种，界面上显示的中文名就是这四行（在公司管理 <span class="sep">›</span> 成员管理里能看到<strong>角色</strong>列）：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>角色</th><th>标识</th><th>它是谁</th><th>能做什么</th><th>不能做什么</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>超级管理员</strong></td>
+        <td><code>super_admin</code></td>
+        <td>公司的所有者（owner）本人，或 owner 亲自授予的人</td>
+        <td>公司里所有事：改组织架构、增减成员、分配角色与权限、转让所有权、解散公司</td>
+        <td>没有（是系统的最高层）</td>
+      </tr>
+      <tr>
+        <td><strong>管理员</strong></td>
+        <td><code>admin</code></td>
+        <td>你请来帮忙管事的骨干</td>
+        <td>管比自己层级低的成员：改角色、改部门、改权限、移除；发邀请</td>
+        <td>动不了超级管理员，也动不了同级管理员；不能授予超级管理员角色</td>
+      </tr>
+      <tr>
+        <td><strong>普通成员</strong></td>
+        <td><code>member</code></td>
+        <td>干活的同事</td>
+        <td>参与项目、看自己权限内的东西、处理被指派的人工节点</td>
+        <td>看不到成员管理的「操作」列；管不了别人</td>
+      </tr>
+      <tr>
+        <td><strong>AI Agent</strong></td>
+        <td><code>ai_agent</code></td>
+        <td>被编进组织图的数字员工</td>
+        <td>按权限做执行类工作：读、写、跑任务、调外部接口</td>
+        <td><strong>三个管理权限一律拿不到</strong>：暂停项目、暂停任务、用户管理</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>这里有一条<strong>硬规则</strong>，请一定记住：<strong>AI Agent 不可授予管理权限</strong>。你在「编辑成员」弹窗里把角色选成「AI Agent」后，权限区的「管理权限」那一组会整体变灰，下面会显示一行提示：</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">界面上你会看到的原话</span>
+    <p><strong>AI Agent 不可授予管理权限</strong></p>
+    <p>对应的三项是「暂停项目 / 暂停任务 / 用户管理」，它们在界面上被单独分在「管理权限（仅人类成员可选）」这一组里，和「通用权限（人 + Agent 共有）」分开。</p>
+  </div>
+
+  <h3>为什么不让 AI 管人、管项目开关</h3>
+
+  <p>这不是保守，是逻辑上的闭环。想想这三项权限的本质：</p>
+
+  <ul>
+    <li><strong>用户管理</strong>是「谁能进门」的权力。如果 AI 能改权限，它就能给自己或别的 Agent 扩权，等于把门禁卡发给了保安机器人，而保安机器人还能自己复制卡。</li>
+    <li><strong>暂停项目 / 暂停任务</strong>是「让不让它继续干」的权力。这是刹车。如果正在干活的 AI 自己握着刹车，那刹车就不再是刹车了。</li>
+  </ul>
+
+  <p>换句话说：<strong>可以被授予的权限，必须是「做事」类；不能被授予的权限，必须是「改规则」类</strong>。管理权限属于后者。这条规则在所有规模的公司里都成立，包括一人公司。</p>
+
+  <div class="zy-note">
+    <span class="zy-note-title">诚实说明：这条规则目前靠界面把住</span>
+    <p>上一段说的"变灰点不了"，是<strong>界面级的强制</strong>：在「编辑成员」的权限矩阵里，给 AI Agent 选管理权限时那一组会直接禁用，你根本无法勾选。要如实知道一点：<strong>后端接口目前还没有独立拦截</strong>——如果有人绕过界面、直接构造请求给 AI Agent 塞管理权限，后端不会把它拒绝掉。对正常使用（你只在界面上操作）没有影响，这条边界记在心里即可。</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">顺带说一句层级</span>
+    <p>系统内部给角色排了层级：超级管理员 &gt; 管理员 &gt; 普通成员 &gt; AI Agent。变更有两条规矩：<strong>只能管层级比自己低的</strong>（管理员管不了管理员），<strong>只能授予比自己低的角色</strong>。所以你看到某个角色选项是灰的，多半是层级不够，不是系统坏了。</p>
+  </div>
+
+  <h2>二、把人和 AI 编进同一张组织图</h2>
+
+  <p>治理的第一步是「先有图」。你不需要一开始就画得很复杂，但至少要能回答：谁在哪个部门、管哪条线、对什么负责。</p>
+
+  <h3>部门：组织架构</h3>
+
+  <div class="zy-path">公司管理 <span class="sep">›</span> 组织架构</div>
+
+  <p>这个页签里你会看到一个部门树。</p>
+
+  <ul>
+    <li>按钮 <span class="zy-btn">新增部门</span>：新建一个部门节点。</li>
+    <li>新建/编辑部门弹窗里的字段有三个：<strong>部门名称</strong>（<span class="zy-field">请输入部门名称</span>）、<strong>上级部门</strong>（<span class="zy-field">无（顶级部门）</span>，不选就是顶级）、<strong>排序</strong>（同级之间的先后顺序）。</li>
+    <li>没有部门时显示「暂无部门」。</li>
+  </ul>
+
+  <p>如果你是<strong>普通成员</strong>点进来，会看到一条说明：</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">无权限时的界面原文</span>
+    <p><strong>仅公司所有者/管理员可调整组织架构</strong></p>
+    <p>这意味着你能看见组织长什么样，但改不了。想调整就找 owner 或管理员。</p>
+  </div>
+
+  <h3>成员属性：一张表填一个人</h3>
+
+  <div class="zy-path">公司管理 <span class="sep">›</span> 成员管理 <span class="sep">›</span> 某成员 <span class="sep">›</span> 编辑</div>
+
+  <p>成员列表的列是「姓名 / 邮箱 / 员工ID / 角色 / 状态 / 加入时间 / 操作」。点「编辑」后弹出的<strong>编辑成员</strong>弹窗，字段就下面这几个（都是界面上的原话）：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>字段</th><th>界面提示</th><th>填它有什么用</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>成员</strong></td><td>显示姓名 + 邮箱，不可改</td><td>确认你没改错人</td></tr>
+      <tr><td><strong>角色</strong></td><td>超级管理员 / 管理员 / 普通成员 / AI Agent</td><td>决定这个人在公司里的话语权层级</td></tr>
+      <tr><td><strong>部门</strong></td><td><span class="zy-field">选择部门</span></td><td>把他挂到组织图的某个节点上</td></tr>
+      <tr><td><strong>员工ID</strong></td><td><span class="zy-field">员工工号（可选）</span></td><td>对齐你公司已有的工号体系，方便对账</td></tr>
+      <tr><td><strong>方向</strong></td><td><span class="zy-field">所属方向/条线（可选）</span></td><td>按业务条线分组（下面单独讲）</td></tr>
+      <tr><td><strong>负责人指派</strong></td><td>方向负责人 / 项目负责人 / 任务负责人</td><td>标记他在哪一层的什么位置上负责</td></tr>
+      <tr><td><strong>权限</strong></td><td>「通用权限」+「管理权限」两组勾选框</td><td>决定他到底能动手做什么</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>「方向」怎么用</h3>
+
+  <p><strong>方向</strong>就是一个自由文本的标签，用来标记这个人（或 Agent）属于哪条业务线，比如「获客」「交付」「财务」「供应链」。它的价值在于：</p>
+
+  <ul>
+    <li>当公司不止一条业务线时，你一眼能看出谁是干什么的，不用靠记忆。</li>
+    <li>和「方向负责人」这个指派配合，形成「这条线谁说了算」的答案。</li>
+    <li>它对权限本身没有直接约束力——<strong>方向是标签，不是门禁</strong>。真正的门禁是「权限」那一组勾选框。</li>
+  </ul>
+
+  <h3>三种负责人指派，分别在说什么</h3>
+
+  <p>「负责人指派」可以多选，它回答的是「这个人在哪一层扛责任」：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>方向负责人</h4>
+      <p><strong>管一条线</strong>。比如「获客方向负责人」，这条线上的人、Agent、任务之间的冲突由他协调。</p>
+      <p>适合：公司有 2 条以上业务线，需要有人为整条线的结果负责。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>项目负责人</h4>
+      <p><strong>管一个项目</strong>。项目的预算、节奏、目标由他拍板。</p>
+      <p>适合：多个项目并行时，每个项目有个明确的"老板"。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>任务负责人</h4>
+      <p><strong>管一件具体的事</strong>。某个任务卡住了、要返工了，找他。</p>
+      <p>适合：给关键任务指定"背锅人"，这也是人工节点升级链的落点。</p>
+    </div>
+  </div>
+
+  <p>三个可以同时挂在一个人身上。一人公司里，你一个人就是全部三种负责人——这很正常，但请<strong>至少把「项目负责人」标出来</strong>，因为系统在人工节点超时升级、通知投递时，需要知道该找谁。</p>
+
+  <h3>两种典型的组织图</h3>
+
+  <p>不用纠结"标准答案"。下面两种覆盖了绝大多数情况。</p>
+
+  <div class="zy-card tinted">
+    <h4>形态一 · 一人公司（1 个人 + N 个 Agent）</h4>
+    <p>组织架构很简单，甚至可以只有一个「总部」部门。真正的分工体现在 Agent 身上：</p>
+    <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>成员</th><th>角色</th><th>方向</th><th>负责人指派</th><th>权限要点</th></tr></thead>
+      <tbody>
+        <tr><td>你</td><td>超级管理员</td><td>—</td><td>方向 + 项目 + 任务负责人</td><td>14 项全开</td></tr>
+        <tr><td>研发 Agent</td><td>AI Agent</td><td>产品</td><td>—</td><td>读 / 写 / 运行任务 / 装插件 / 加 MCP；不给花钱、不给外发邮件</td></tr>
+        <tr><td>营销 Agent</td><td>AI Agent</td><td>获客</td><td>—</td><td>读 / 写 / 运行任务；外发邮件靠权限租赁逐次授权</td></tr>
+        <tr><td>客服 Agent</td><td>AI Agent</td><td>交付</td><td>—</td><td>读 / 运行任务；不碰钱、不碰对外发布</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>关键点：<strong>一人公司也别把权限全给 Agent</strong>。你只有一双眼睛，全开等于没人看门。</p>
+  </div>
+
+  <div class="zy-card tinted">
+    <h4>形态二 · 10 人公司 + 部门制</h4>
+    <p>组织架构建议四层：总部 →（产品部 / 研发部 / 市场部 / 交付部）。人员和 Agent 混编在部门里：</p>
+    <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>部门</th><th>人</th><th>Agent</th><th>负责人</th><th>典型权限</th></tr></thead>
+      <tbody>
+        <tr><td>总部</td><td>CEO（超级管理员）+ 运营主管（管理员）</td><td>管理者 Agent</td><td>方向 + 项目</td><td>全开（运营主管除用户管理外）</td></tr>
+        <tr><td>产品部</td><td>产品经理 2 人</td><td>调研 Agent</td><td>方向负责人</td><td>读 / 写 / 运行任务 / 优化提示词</td></tr>
+        <tr><td>研发部</td><td>工程师 3 人</td><td>研发 Agent 2 个</td><td>任务负责人</td><td>+ 装插件 / 装软件 / 加 MCP / 运行命令行</td></tr>
+        <tr><td>市场部</td><td>市场 2 人</td><td>营销 Agent 2 个</td><td>方向负责人</td><td>+ 外发邮件（走权限租赁）</td></tr>
+        <tr><td>交付部</td><td>客服 2 人</td><td>客服 Agent</td><td>任务负责人</td><td>读 / 运行任务</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>关键点：<strong>让「方向负责人」和「部门」对齐</strong>，一个人既是某部门的人、又是某方向的负责人，责任链条才不会断。</p>
+  </div>
+
+  <h2>三、权限：14 项权限逐条讲人话</h2>
+
+  <p>这是本章最核心的一节。系统一共 14 项权限，界面上分成两组显示：<strong>通用权限（人 + Agent 共有）</strong>共 11 项，<strong>管理权限（仅人类成员可选）</strong>共 3 项。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>权限（界面中文）</th><th>标识</th><th>人话：它到底能干什么</th><th>风险</th><th>建议授予谁</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>读</strong></td><td><code>read</code></td><td>看项目里的任务、文档、日志、知识库、账本</td><td><span class="zy-badge green">低</span></td><td>所有人和所有 Agent，默认给</td></tr>
+      <tr><td><strong>写</strong></td><td><code>write</code></td><td>改任务、改文档、往知识库写东西</td><td><span class="zy-badge amber">中</span></td><td>所有干活的人与 Agent</td></tr>
+      <tr><td><strong>运行任务</strong></td><td><code>run_task</code></td><td>让 AI 开始跑一个任务、推进一个轮次</td><td><span class="zy-badge amber">中</span></td><td>所有干活的人与 Agent</td></tr>
+      <tr><td><strong>花钱</strong></td><td><code>spend_money</code></td><td>触发付费调用、下单、买量——直接动钱</td><td><span class="zy-badge red">高</span></td><td>只给项目负责人，且必须配合预算与权限租赁</td></tr>
+      <tr><td><strong>外发邮件</strong></td><td><code>send_email</code></td><td>用项目身份对外发邮件（改不回来的那种）</td><td><span class="zy-badge red">高</span></td><td>只给市场方向负责人；Agent 走权限租赁逐次授权</td></tr>
+      <tr><td><strong>装插件</strong></td><td><code>install_plugin</code></td><td>给项目装插件，扩能力</td><td><span class="zy-badge amber">中</span></td><td>研发负责人、产品负责人</td></tr>
+      <tr><td><strong>装软件</strong></td><td><code>install_software</code></td><td>在项目服务器上装软件——动了运行环境</td><td><span class="zy-badge red">高</span></td><td>只给研发负责人；建议 Agent 永远走人工节点确认</td></tr>
+      <tr><td><strong>加 MCP</strong></td><td><code>add_mcp</code></td><td>接入一个新的外部系统连接器（邮箱、CRM、数据库……）</td><td><span class="zy-badge amber">中高</span></td><td>研发负责人；每加一个新连接器都要人工过一遍</td></tr>
+      <tr><td><strong>优化提示词</strong></td><td><code>optimize_prompt</code></td><td>改 AI 的提示词与角色配置——改的是"AI 怎么想"</td><td><span class="zy-badge amber">中</span></td><td>负责人 + 管组织进化的人</td></tr>
+      <tr><td><strong>运行命令行</strong></td><td><code>run_command</code></td><td>在项目服务器上执行命令——权力最大的一项</td><td><span class="zy-badge red">高</span></td><td>尽量只给人；给 Agent 要非常克制</td></tr>
+      <tr><td><strong>调权重</strong></td><td><code>adjust_weight</code></td><td>改任务调度的权重、模型路由的权重</td><td><span class="zy-badge amber">中</span></td><td>项目负责人</td></tr>
+      <tr><td><strong>暂停项目</strong></td><td><code>pause_project</code></td><td>停掉整个项目的自动运营循环</td><td><span class="zy-badge red">高（管理权限）</span></td><td>仅人类成员：超级管理员 / 管理员</td></tr>
+      <tr><td><strong>暂停任务</strong></td><td><code>pause_task</code></td><td>停掉单个任务</td><td><span class="zy-badge amber">中高（管理权限）</span></td><td>仅人类成员：超级管理员 / 管理员 / 项目负责人</td></tr>
+      <tr><td><strong>用户管理</strong></td><td><code>user_manage</code></td><td>加人、改角色、改权限——发门禁卡的权力</td><td><span class="zy-badge red">高（管理权限）</span></td><td>仅超级管理员（owner）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>高风险权限清单：这 5 项要单独拿出来看</h3>
+
+  <p>14 项里，有 5 项属于「给出去就要想清楚」的级别。<strong>花钱、外发邮件、运行命令行、装软件、用户管理</strong>。逐条说风险在哪：</p>
+
+  <details class="zy-acc">
+    <summary>花钱（spend_money）：风险在于「一次调用可能就是一笔真钱」</summary>
+    <div class="zy-acc-body">
+      <p>它不经过你确认就能触发付费接口、下单、买流量。单次金额可能不大，但 AI 的特点是<strong>高频</strong>——一次 5 块，一天 300 次就是 1500。</p>
+      <p>防护组合：给权限 + 设项目预算 + 设资源治理的日/周/月预算 + 对 Agent 用权限租赁带成本上限。四层里任何一层都能兜住。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>外发邮件（send_email）：风险在于「发出去了就收不回来」</summary>
+    <div class="zy-acc-body">
+      <p>对内改错了可以改回来，对外发错了就是既成事实。客户看到的每一封邮件，都代表你公司的脸。</p>
+      <p>防护组合：不要常驻授予，改用<strong>权限租赁</strong>——「对某个客户、发一次、额度 XX 元、24 小时内有效」。这也是系统设计权限租赁的首要场景。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>运行命令行（run_command）：风险在于「这是最大的权限」</summary>
+    <div class="zy-acc-body">
+      <p>命令行能做几乎任何事：删文件、改配置、装东西、往外传数据。系统有工作目录限制（只能动项目自己的目录），但这条权限本身的破坏半径仍然是 14 项里最大的。</p>
+      <p>建议：默认只给人。如果必须给 Agent，那么给它分配的任务应该是「跑构建 / 跑测试」这类可预期的命令，并且把自主级别设成 L3（强制人工审核）。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>装软件（install_software）：风险在于「动了环境，可能连带搞坏别的」</summary>
+    <div class="zy-acc-body">
+      <p>装软件的副作用经常是延迟出现的：版本冲突、依赖被替换，过两天别的任务莫名其妙失败。</p>
+      <p>建议：只给研发负责人。Agent 要装东西时，让它创建一个人工处理节点，你确认后再装。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>用户管理（user_manage）：风险在于「它可以改变规则本身」</summary>
+    <div class="zy-acc-body">
+      <p>其他 13 项权限管的是「做事」，这一项管的是「谁能做事」。它是唯一一项能把其他权限重新分配出去的权限。</p>
+      <p>建议：只给 owner。这条也是最不需要犹豫的一条。</p>
+    </div>
+  </details>
+
+  <h3>一人公司也别全开</h3>
+
+  <p>很多一人公司 CEO 的想法是「就我一个人，还分什么权限」。但这里要分清两件事：<strong>给「你自己」全开没问题；给「Agent」全开是另一回事</strong>。你自己点按钮时会有直觉判断，Agent 没有。所以即使只有你一个人，对 Agent 也建议这么起：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>读、写、运行任务</strong>：给。不给这三个，Agent 基本干不了活。</span></li>
+    <li><input type="checkbox"><span><strong>花钱、外发邮件</strong>：不给常驻，改成用权限租赁逐次放。</span></li>
+    <li><input type="checkbox"><span><strong>运行命令行、装软件</strong>：先不给。等某个 Agent 稳定跑了 2–4 周、返工率可控，再单独评估。</span></li>
+    <li><input type="checkbox"><span><strong>调权重、优化提示词</strong>：先只给你自己。这两项会改变 AI 的行为方式，属于「调方向盘」。</span></li>
+    <li><input type="checkbox"><span><strong>暂停项目、暂停任务、用户管理</strong>：本来就给不了 Agent，不用操心。</span></li>
+  </ul>
+
+  <h3>权限矩阵页的两个分组，别搞反</h3>
+
+  <p>在「编辑成员」弹窗里，权限区是这么分组的（界面原文）：</p>
+
+  <div class="zy-card blue">
+    <h4>通用权限（人 + Agent 共有）</h4>
+    <p>11 项：读 / 写 / 运行任务 / 花钱 / 外发邮件 / 装插件 / 装软件 / 加 MCP / 优化提示词 / 运行命令行 / 调权重。</p>
+    <p>人和 Agent 都能勾。</p>
+  </div>
+
+  <div class="zy-card amber">
+    <h4>管理权限（仅人类成员可选）</h4>
+    <p>3 项：暂停项目 / 暂停任务 / 用户管理。</p>
+    <p>角色选成「AI Agent」时这一组整体禁用，并提示「AI Agent 不可授予管理权限」。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">怎么记这两组</span>
+    <p>通用权限 = <strong>干活的手</strong>；管理权限 = <strong>改规则的手</strong>。人的两只手都能有，Agent 只能有第一只。</p>
+  </div>
+
+  <h2>四、自主级别与三通道：AI 什么时候必须问你</h2>
+
+  <p>权限回答「能不能做」，自主级别回答「做之前要不要问你」。这是两个独立维度：一个 Agent 可以有「花钱」的权限，但仍然被要求每次花钱都问你一声。</p>
+
+  <h3>四个自主级别（L0–L3）</h3>
+
+  <p>界面上新建人工节点时的下拉框就是这四个选项，原文如下（默认是 L2）：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>级别</th><th>界面原文</th><th>AI 的行为</th><th>你的负担</th><th>适合的任务</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>L0</strong></td>
+        <td>L0 - 全自主执行</td>
+        <td>直接干完，不创建节点、不通知你</td>
+        <td>零。你事后从日志/审计里看</td>
+        <td>低风险、高频、错了也不心疼的例行活：整理日志、归档知识、生成草稿</td>
+      </tr>
+      <tr>
+        <td><strong>L1</strong></td>
+        <td>L1 - 通知不等待</td>
+        <td>干的同时发个通知给你，然后继续往下推，不等你</td>
+        <td>看通知。事后想拦还来得及（去暂停）</td>
+        <td>需要你知情但不必你点头的事：例行内容产出、常规客户回访</td>
+      </tr>
+      <tr>
+        <td><strong>L2</strong>（默认）</td>
+        <td>L2 - 一键确认</td>
+        <td>停下来等你，你在面板点一下「确认完成」才继续</td>
+        <td>点一下。这是最常用的档位</td>
+        <td>有一定影响、但你看一眼就能判断的事：发文前审阅、方案定稿</td>
+      </tr>
+      <tr>
+        <td><strong>L3</strong></td>
+        <td>L3 - 强制人工审核</td>
+        <td>必须审核通过才能继续，可以多人复核（双签）</td>
+        <td>认真看、认真写意见。可能要两个人分别签</td>
+        <td>高风险、不可逆的事：对外发布、付费动作、删除、合规敏感内容</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>三条通道（红 / 黄 / 绿）</h3>
+
+  <p>通道是<strong>由事情的性质决定的，不是你选的</strong>。系统按这件事属于哪一类，自动走对应通道：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card green">
+      <h4>绿 · 例行</h4>
+      <p>界面标签：<span class="zy-badge green">绿-例行</span></p>
+      <p>例行事项。按你设的自主级别处理——L0 就直接执行并归档，L2 就停下来等你点一下。</p>
+      <p>典型：写文档、整理资料、生成草稿、内部查询。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>黄 · 敏感</h4>
+      <p>界面标签：<span class="zy-badge amber">黄-敏感</span></p>
+      <p>敏感写操作：对外发布、删除、付费调用、外发邮件等。系统会要求一份<strong>临时授权</strong>（也就是权限租赁）；超出授权上限的，必须你去授权。</p>
+      <p>典型：给某个客户发一封邮件、调一次付费接口。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>红 · 强制</h4>
+      <p>界面标签：<span class="zy-badge red">红-强制</span></p>
+      <p>命中禁止清单的动作，系统<strong>强制升级为 L3 人工审核，AI 不得代行</strong>。</p>
+      <p>典型：法律承诺、对外署名身份声明、资金打款。</p>
+    </div>
+  </div>
+
+  <h3>红通道的实质：协议级禁止</h3>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">红通道不是"要你确认"，而是"AI 根本不能做"</span>
+    <p>黄通道和红通道的区别很容易搞混。记住这一句：</p>
+    <p><strong>黄通道 = 你可以授权它做</strong>；<strong>红通道 = 你再怎么授权，AI 也不能代你做</strong>。</p>
+    <p>红通道是协议级的禁止动作——直接拦截、转人工。这不是"权限不够"，这是"设计上就不允许"。哪怕你把所有权限都打开、自主级别全设 L0，红通道的动作仍然会落到你头上。</p>
+  </div>
+
+  <h2>五、人工处理节点实战：从收到通知到处理完</h2>
+
+  <p>人工处理节点（界面上就叫<strong>人工处理节点</strong>）是「人和 AI 交接」的唯一入口。凡是需要你决策、授权、线下完成、或者被合规拦下来的事，都会变成这里的一张卡片。</p>
+
+  <div class="zy-path">项目 <span class="sep">›</span> 自动运营 <span class="sep">›</span> 人工节点</div>
+
+  <h3>页面上你会看到什么</h3>
+
+  <ul>
+    <li>顶部按钮：<span class="zy-btn ghost">返回控制台</span>、<span class="zy-btn">新建节点</span>、<span class="zy-btn ghost">刷新</span>。</li>
+    <li>状态筛选下拉，五个选项原文：<strong>待处理</strong>、<strong>处理中</strong>、<strong>已完成</strong>、<strong>已驳回</strong>、<strong>已升级</strong>。不选就是全看。</li>
+    <li>每个节点是一张卡片，卡片上的字段：<strong>通道</strong>、<strong>自主级别</strong>（显示成 L1 / L2 这样）、<strong>SLA(秒)</strong>、<strong>处理人</strong>、<strong>描述</strong>；卡片右上角是状态标签。</li>
+    <li>卡片底部四个按钮：<span class="zy-btn ok">确认完成</span>、<span class="zy-btn ghost">通知催促</span>、<span class="zy-btn warn">升级处理</span>、<span class="zy-btn ghost">移动审批</span>。</li>
+    <li>一张都没有时显示「暂无待处理人工节点」。</li>
+  </ul>
+
+  <h3>四个按钮分别干什么</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>按钮</th><th>点下去发生什么</th><th>什么时候用</th></tr></thead>
+    <tbody>
+      <tr><td><span class="zy-btn ok">确认完成</span></td><td>先弹一个可留空的意见框；节点标记为「已完成」，AI 从断点继续推进；填了意见提示「节点已确认完成，意见已沉淀」，留空则提示「节点已确认完成」</td><td>你已经看过、认可了，放行</td></tr>
+      <tr><td><span class="zy-btn ghost">通知催促</span></td><td>重新给处理人发一次通知；界面提示「已发送通知」</td><td>节点挂在那儿没人管，你想催一下</td></tr>
+      <tr><td><span class="zy-btn warn">升级处理</span></td><td>按升级链往上推一级；界面提示「已升级处理」，状态变「已升级」</td><td>当前处理人处理不了，或者一直不动</td></tr>
+      <tr><td><span class="zy-btn ghost">移动审批</span></td><td>新开一个手机友好的审批页面（下面的「移动端审批」）</td><td>你人在外面，想用手机点一下</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">提醒：桌面端「确认完成」也会问你要一句意见</span>
+    <p>桌面上的「确认完成」现在会<strong>弹出一个可留空的意见输入框</strong>（此前是没有的）：填了内容就记进这条节点的「已有回复」，并作为该角色的经验条目存档；直接留空也能完成，只是节点上只有"已完成"状态。移动审批页的「审批意见（可选）」是同一个口径。</p>
+    <p>有一点必须如实知道：无论从哪一端填写，<strong>意见都不会自动改变正在运行的任务，也不会实时改写 AI 对同类事项的处理</strong>——经验条目要在你做角色优化、生成 SOP 草稿时才会被引用。所以想留下「为什么」，还是得自己写清楚。</p>
+  </div>
+
+  <h3>自己新建一个节点</h3>
+
+  <p>有时候是你（而不是 AI）需要建一个节点，等着别人来处理。点 <span class="zy-btn">新建节点</span> 后，弹窗标题是「新建人工节点」，字段如下：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>字段</th><th>界面提示 / 选项</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td><strong>标题</strong>（必填）</td><td><span class="zy-field">如：审核营销文案</span></td><td>不填会提示「请输入节点标题」</td></tr>
+      <tr><td><strong>描述</strong></td><td><span class="zy-field">需要人工处理的具体内容</span></td><td>写得越清楚，处理的人越省事</td></tr>
+      <tr><td><strong>自主级别</strong></td><td>L0 - 全自主执行 / L1 - 通知不等待 / L2 - 一键确认 / L3 - 强制人工审核</td><td>默认 L2 - 一键确认</td></tr>
+      <tr><td><strong>关联任务 ID</strong></td><td><span class="zy-field">可选</span></td><td>挂到某个任务上，节点处理完能接着推进那个任务</td></tr>
+      <tr><td><strong>SLA 超时(秒)</strong></td><td>数字，向上按 3600 秒（1 小时）递增，默认 86400（24 小时）</td><td>超时后按配置升级或降级（见下）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>创建成功后提示「人工节点已创建」。</p>
+
+  <h3>移动端审批：在手机上点一下就行</h3>
+
+  <p>点卡片上的「移动审批」，会打开一个专门为手机做的页面。这个页面就是你在外面吃饭时收到飞书通知、点开链接看到的那一屏。</p>
+
+  <ul>
+    <li>页面上是个卡片：标题 + 状态标签，下面按行列出<strong>描述</strong>、<strong>通道</strong>、<strong>自主级别</strong>（显示成 L2 这样）、<strong>SLA(秒)</strong>、<strong>处理人</strong>，以及<strong>已有回复</strong>（如果之前有人回过）。</li>
+    <li>一个输入框，提示文字是 <span class="zy-field">审批意见（可选）</span>。</li>
+    <li>两个按钮：<span class="zy-btn danger">拒绝</span>、<span class="zy-btn ok">批准</span>。</li>
+    <li>批准后提示「已批准」，页面显示「已批准 / 该节点已处理完成」；拒绝后提示「已拒绝」，页面显示「已拒绝」。</li>
+    <li>节点已经处理过了，点进来只会看到结果，不再显示输入框。</li>
+  </ul>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">报错原文：缺少项目上下文</span>
+    <p>如果你直接用浏览器输地址打开这个页面、或者链接里的项目信息丢了，会看到：</p>
+    <p><strong>缺少项目上下文（请通过通知链接打开，携带 project_id）</strong></p>
+    <p>解决办法很简单：<strong>别手动敲地址，从通知里的链接点进去</strong>。另外这个页面需要你已登录——没登录会先把你送到登录页，登录完自动跳回来。</p>
+  </div>
+
+  <h3>SLA 超时会怎样</h3>
+
+  <p>SLA 就是「这件事最晚什么时候要处理完」。超时之后系统有两种走法：</p>
+
+  <ol class="zy-steps">
+    <li><strong>升级</strong>（默认）：按升级链往上推——处理人 → 备选人 → 项目负责人 → 平台超管。级别越高，能拍板的事越大。</li>
+    <li><strong>降级</strong>：如果这个节点被配置成「超时可降级」，它会降成 L1（通知不等待），AI 继续往下推，不再卡住整个循环。</li>
+  </ol>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">升级链走完了会怎样</span>
+    <p>如果升级链一路走到底还是没人处理，节点会<strong>保持挂起</strong>——注意，是挂起，不是自动放行。涉及敏感动作的节点绝不会因为"没人管"就自己通过。这是刻意的设计：宁可停下，不可乱来。</p>
+  </div>
+
+  <h3>怎么避免审批积压</h3>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>设合理 SLA</strong>。别所有节点都设 24 小时——对外发布这种要设短（比如 4 小时），内部归档可以设长。全设一样等于没设。</span></li>
+    <li><input type="checkbox"><span><strong>指定处理人</strong>。「处理人」字段空着，通知就没人接。哪怕写你自己，也比空着强。</span></li>
+    <li><input type="checkbox"><span><strong>用通知渠道</strong>。飞书 / Telegram / 邮件的通知打开，别让自己靠"想起来去翻页面"。</span></li>
+    <li><input type="checkbox"><span><strong>把低价值节点降到 L1</strong>。如果一个节点你每次都秒批、从不驳回，那它其实不需要你——降成 L1 通知不等待，把注意力省给真正要判断的事。</span></li>
+    <li><input type="checkbox"><span><strong>每天固定看一次</strong>。「待处理」筛选 + 一键处理，五分钟能清完。</span></li>
+  </ul>
+
+  <h2>六、审计与治理：出了事怎么查</h2>
+
+  <div class="zy-path">项目 <span class="sep">›</span> 自动运营 <span class="sep">›</span> 审计治理</div>
+
+  <p>这个页面是「行车记录仪」。它平时你不需要看，但一旦出了问题——预算莫名超了、某个 Agent 动了不该动的东西、你想知道某个决定是谁下的——你就来这里。</p>
+
+  <h3>六个页签，什么时候来、看什么</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>页签</th><th>什么时候来</th><th>看什么</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>审计报告</strong></td>
+        <td>想主动体检时；怀疑有权限异常、token 异常时</td>
+        <td>列表含「风险等级 / 发现项 / 审计时间」，每个发现项带一个严重度标签。空态显示「暂无审计报告」</td>
+      </tr>
+      <tr>
+        <td><strong>风险登记册</strong></td>
+        <td>做季度复盘、或者刚出过一次事故时</td>
+        <td>表头是「风险名称 / 等级 / 概率 x 影响 / 状态 / 缓解措施」。状态 active 表示还活着</td>
+      </tr>
+      <tr>
+        <td><strong>变更日志</strong></td>
+        <td>「这个东西什么时候被改的？」</td>
+        <td>表头是「操作 / 详情 / 时间」。改预算、删任务、换调度、动角色配置这类重大变更会留痕。<strong>注意：目前没有单独的「操作人 / 谁改的」列</strong>，想定位"谁干的"只能从「详情」内容里推断</td>
+      </tr>
+      <tr>
+        <td><strong>经营日报</strong></td>
+        <td>每天早上，两分钟扫一遍</td>
+        <td>一张卡片，含「状态 / 轮次数 / 完成任务 / 消耗 Token / 花费 / 待处理人工」，下面还有「重点摘要」</td>
+      </tr>
+      <tr>
+        <td><strong>组织文档</strong></td>
+        <td>新人入职、要交接时</td>
+        <td>表头是「标题 / 类型 / 标签 / 更新时间」——组织级的活文档都在这里</td>
+      </tr>
+      <tr>
+        <td><strong>恢复评估</strong></td>
+        <td>项目停过一阵子、要重新跑起来时</td>
+        <td>表头是「中断原因 / 中断天数 / 评估决策 / 恢复信息 / 评估时间」。决策是 resume（直接续）还是要求调整</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>两个按钮：执行内审、红队演练</h3>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4><span class="zy-btn">执行内审</span></h4>
+      <p>跑一次「内部审计」。点完提示「内审已触发」，报告出现在「审计报告」页签里。</p>
+      <p>内审重点查四类事：<strong>权限有没有漂移</strong>（该只有一个人有的权限，悄悄扩散了）、<strong>token 消耗有没有异常</strong>（某天突然比平时高出好几倍）、<strong>有没有越权调用</strong>、<strong>角色经验有没有退化</strong>。</p>
+      <p>为什么要独立内审？因为执行的人自己评自己不可信。审计的和干活的不是同一方，这和三权分立验收是同一个道理。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4><span class="zy-btn warn">红队演练</span></h4>
+      <p>让 AI 扮演攻击者，去试探自己系统的边界：能不能越权、能不能被提示词劫持、预算能不能被绕过。点完提示「红队演练已触发」。</p>
+      <p>听起来有点"自己打自己"，但这恰恰是最有效的体检——它测的是"如果有人想钻空子，钻得进去吗"。</p>
+      <p>建议频率：新项目上线后跑一次，之后每个季度一次。</p>
+    </div>
+  </div>
+
+  <h3>紧急停止（KillSwitch）</h3>
+
+  <p>页面底部有一个红色区域，按钮是 <span class="zy-btn danger">紧急停止（KillSwitch）</span>。点下去会先弹一个确认框：</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">确认框原文</span>
+    <p><strong>紧急停止所有自动运营任务？此操作不可逆</strong></p>
+    <p>确认后提示「紧急停止已执行」。</p>
+  </div>
+
+  <p>这是最后的保险。什么时候用：你发现 AI 正在做一件明显不对的事，而正常的暂停来不及了。它会一次性停掉所有自动运营任务。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">两个提醒</span>
+    <p>第一，<strong>"不可逆"指的是这次停止动作不可撤销</strong>——不是数据没了。停完之后你要人工评估、处理、再手动恢复。</p>
+    <p>第二，设计上 KillSwitch 是<strong>分级</strong>的（全局硬停 / 按动作类别停 / 按工具吊销凭据），但当前界面上开放的是<strong>全局硬停</strong>这一个按钮。也就是说，你按下去就是"全停"，没有"只停对外发布"这种细选项。所以宁可早用，用完再慢慢挑哪条线恢复。</p>
+  </div>
+
+  <h3>审计报告的五种类型</h3>
+
+  <p>系统里落库的治理审计报告，类型原文如下（你会在审计报告、以及超管后台的治理审计汇总里看到）：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>类型</th><th>中文</th><th>它是什么</th></tr></thead>
+    <tbody>
+      <tr><td><code>internal_audit</code></td><td>内审报告</td><td>「执行内审」产出的报告</td></tr>
+      <tr><td><code>management_transcript</code></td><td>管理转录</td><td>AI 做决策时的意图与推理链（见下）</td></tr>
+      <tr><td><code>risk_registry_snapshot</code></td><td>风险登记册快照</td><td>某个时点的风险清单定格</td></tr>
+      <tr><td><code>redteam_report</code></td><td>红队演练</td><td>「红队演练」产出的报告</td></tr>
+      <tr><td><code>change_log</code></td><td>变更日志</td><td>重大变更的留痕</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>每条发现/报告还带一个严重度，三档原文：<strong>info 信息</strong>、<strong>warn 警告</strong>、<strong>critical 严重</strong>。看到 critical，当天处理。</p>
+
+  <h3>值得单独讲：管理转录</h3>
+
+  <div class="zy-card purple">
+    <h4>管理转录（Management Transcript）</h4>
+    <p>普通日志记录的是「做了什么」，管理转录记录的是<strong>「为什么这么做」</strong>——AI 在那一轮决策时的意图与推理摘要。</p>
+    <p>为什么它重要？因为将来有一天你（或者监管、或者投资人、或者客户）会问：「你们这个 AI，当初为什么把预算全压在 A 渠道上？」如果只有操作日志，你只知道它压了；有管理转录，你能说清它的判断依据。</p>
+    <p>它同时还是三样东西的原料：合规辩护的证据、角色进化的素材、超管审计的输入。</p>
+    <p>管理转录<strong>只增不改</strong>——写进去就不动了。这一点是刻意的：能被修改的记录，不能当证据用。</p>
+  </div>
+
+  <h3>变更日志留痕的意义</h3>
+
+  <p>「变更日志」页签看着最朴素（操作 / 详情 / 时间），但它可能是整章里最有长期价值的一样东西。</p>
+
+  <p>想象三个月后的一个场景：项目突然不赚钱了。你翻变更日志，发现 47 天前有人把某个任务的权重从 3 调到了 9，导致资源全被一个低价值任务吸走。如果没有这条记录，你会一直以为是"AI 变笨了"。</p>
+
+  <p>系统对重大变更会自动留痕，记录<strong>操作类型、详情和时间</strong>，并留下回滚点。要如实说明：目前这张表<strong>没有单独的「谁」列</strong>，「为什么」也不在列里——需要你自己从「详情」和上下文推断是哪个操作触发的。所谓重大变更，就是这几类：</p>
+
+  <ul>
+    <li>删除任务</li>
+    <li>调整预算</li>
+    <li>修改运行配置（提示词、引擎、调度参数等）</li>
+    <li>调整目标与关键结果</li>
+    <li>更换调度方案（review 轮重排任务集与时间片）</li>
+  </ul>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">换个说法</span>
+    <p>变更日志就是<strong>给未来的自己留后路</strong>。今天的你觉得「改一下而已」，三个月后的你会感谢今天的记录。这也是为什么系统把「回滚点」和变更记录绑在一起——记录不只是为了知道，也是为了能退回去。</p>
+  </div>
+
+  <h2>七、渐进式信任：AI 也能"转正"</h2>
+
+  <div class="zy-path">项目 <span class="sep">›</span> 治理与资源 <span class="sep">›</span> 渐进式信任</div>
+
+  <p>新人入职你不会第一天就给他签支票的权力，而是先看表现。AI 也一样。渐进式信任解决的就是「怎么把权限安全地越给越大」这个问题。</p>
+
+  <h3>机制：按表现逐步放权</h3>
+
+  <p>核心逻辑就一句话：<strong>先给小的自主权试跑，用证据积累信任分，达到阈值就自动升一级</strong>。系统会周期性（默认每 10 轮）根据成功率和违规情况给每个 Agent 打分，分数越高、自主级别越高；表现变差，级别会掉回来。</p>
+
+  <p>页面上有两个页签：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>页签</th><th>你会看到</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>信任档案</strong></td>
+        <td>每个 Agent 一行：<strong>Agent</strong>、<strong>信任等级</strong>、<strong>评分</strong>（进度条）、<strong>成功</strong>、<strong>失败</strong>、<strong>最近成功</strong>、<strong>备注</strong>，操作列有 <span class="zy-btn">调整等级</span>。空态「暂无信任档案」</td>
+      </tr>
+      <tr>
+        <td><strong>审计记录</strong></td>
+        <td>每次信任变化一行：<strong>时间 / Agent / 变更类型 / 评分变化 / 等级变化 / 原因 / 审批人</strong>。空态「暂无审计记录」</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>信任等级的取值和界面中文是这四档：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>等级</th><th>界面中文</th><th>大意</th></tr></thead>
+    <tbody>
+      <tr><td><code>none</code></td><td>无权限</td><td>还没跑出成绩，只读或受限</td></tr>
+      <tr><td><code>draft</code></td><td>草稿</td><td>产出算"草稿"，要人过一遍</td></tr>
+      <tr><td><code>execute</code></td><td>可执行</td><td>可以真的动手做</td></tr>
+      <tr><td><code>autonomous</code></td><td>完全自主</td><td>可以在约定范围内自己拍板</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>你随时可以人工介入：点「调整等级」，弹窗里有<strong>Agent</strong>（只读）、<strong>当前等级</strong>、<strong>目标等级</strong>、<strong>原因</strong>（<span class="zy-field">调整原因（可选）</span>），确认后提示「信任等级已更新」。人工调整会以「人工覆盖」的类型记进审计记录——也就是说，<strong>你手动放的权，同样留痕</strong>。</p>
+
+  <h3>怎么用它：三步走</h3>
+
+  <ol class="zy-steps">
+    <li><strong>先小权限试跑。</strong>新 Agent 上岗，权限给到"能干活但碰不到钱和对外动作"。让它跑一两周，观察「成功 / 失败」两个数字和返工率。</li>
+    <li><strong>稳定后放权。</strong>失败数稳定在低位，再把它往上一档调。别一步到位。</li>
+    <li><strong>出问题立即回收。</strong>只要出现一次越权或者严重返工，立刻手动下调等级，或者去「成员管理」把权限收掉。信任是攒出来的，也是可以花掉的。</li>
+  </ol>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">如实说明：它是"安全底线三项"之一</span>
+    <p>在项目的设计口径里，<strong>资源治理、预算熔断、渐进式信任</strong>这三项被称为<strong>安全底线三项</strong>：设计上强制开启，开关不可关闭，但参数可以调。也就是说，你可以调它的评估频率和阈值，但不应把它整个关掉。</p>
+    <p>不过要提醒你：在「设置 <span class="sep">›</span> 功能管理」里，功能清单中确实列着 <code>trust_model</code>（渐进式信任）这一项开关。所以如果你打开「渐进式信任」页面时看到 <strong>加载信任数据失败，请确认渐进式信任功能已启用</strong> 这类提示，请去 设置 <span class="sep">›</span> 功能管理 把它打开（或者点「重置为默认」）。</p>
+  </div>
+
+  <h2>八、权限租赁：临时放权，到期自动回收</h2>
+
+  <div class="zy-path">项目 <span class="sep">›</span> 自动运营 <span class="sep">›</span> 权限租赁</div>
+
+  <p>这是本章最实用的一节。如果你只学会一样东西，学这个。</p>
+
+  <h3>它解决什么问题</h3>
+
+  <p>权限有个两难：不给人干不了活，给了又怕失控。传统做法是「给就长期给」，这正是权限事故的根源——一次授权，永久生效，慢慢就没人记得这个 Agent 还有这个权力。</p>
+
+  <p>权限租赁把它拆成四个具体的限定：</p>
+
+  <div class="zy-grid c4">
+    <div class="zy-card blue"><h4>哪个 Agent</h4><p>只授权给指定的那个 Agent（<strong>被授权 Agent ID</strong>）</p></div>
+    <div class="zy-card green"><h4>哪个动作</h4><p>只授权这一件事（<strong>授权动作</strong>）</p></div>
+    <div class="zy-card amber"><h4>多少额度</h4><p><strong>成本上限</strong>到了就自动回收</p></div>
+    <div class="zy-card purple"><h4>多长时间</h4><p><strong>过期时间</strong>到了就自动失效</p></div>
+  </div>
+
+  <p>四个限定叠起来，就成了一个<strong>有边界、会自动消失的授权</strong>。这就是它和"直接勾权限"最大的区别。</p>
+
+  <h3>页面与字段</h3>
+
+  <ul>
+    <li>按钮：<span class="zy-btn ghost">返回控制台</span>、<span class="zy-btn ghost">刷新</span>、<span class="zy-btn">新建授权</span>。</li>
+    <li>筛选：状态下拉三个选项原文 <strong>生效中</strong>（active）、<strong>已吊销</strong>（revoked）、<strong>已过期</strong>（expired）；还有一个按 Agent 搜索的输入框 <span class="zy-field">按 Agent 筛选</span>。</li>
+    <li>表格列：<strong>Agent / 授权动作 / 授权范围 / 成本上限 / 授权人 / 状态 / 过期时间 / 操作</strong>。操作列里「生效中」的行有两个按钮：<span class="zy-btn ghost">续期</span>、<span class="zy-btn danger">吊销</span>。</li>
+    <li>成本上限显示为金额，如果没设（0）会显示「不限」。没有记录时显示「暂无权限租赁记录」。</li>
+  </ul>
+
+  <p>点「新建授权」弹出标题为<strong>新建权限租赁</strong>的弹窗，字段如下（都是界面原文）：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>字段</th><th>界面提示</th><th>怎么填</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Agent</strong>（必填）</td><td><span class="zy-field">被授权 Agent ID</span></td><td>只授权给这一个 Agent</td></tr>
+      <tr><td><strong>授权动作</strong>（必填）</td><td><span class="zy-field">如 send_email(to=customer@x.com)</span></td><td>把动作写得尽可能具体——写成"对某一个客户发一封邮件"，而不是"发邮件"</td></tr>
+      <tr><td><strong>任务 ID</strong></td><td><span class="zy-field">关联任务（可选）</span></td><td>绑定到具体任务，任务结束授权也就没意义了</td></tr>
+      <tr><td><strong>授权范围</strong></td><td><span class="zy-field">{"max_recipients": 10}</span></td><td>一段 JSON，写额外的边界条件。<strong>目前只做语法校验</strong>：填错格式会提示「授权范围 JSON 格式错误」，但里面写的字段不会被逐项强制。真正生效的硬边界是「授权动作」这串文字和「成本上限」</td></tr>
+      <tr><td><strong>成本上限</strong></td><td>数字，精度到分；0 表示不限</td><td>强烈建议给个数——这是防烧穿的最后一层</td></tr>
+      <tr><td><strong>过期时间</strong>（必填）</td><td><span class="zy-field">选择过期时间</span></td><td>能多短就多短。48 小时的授权已经算很宽了</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>底部按钮是 <span class="zy-btn ghost">取消</span> 和 <span class="zy-btn">授权</span>，成功后提示「授权已创建」。</p>
+
+  <p>「续期」会打开<strong>续期权限租赁</strong>弹窗，只有<strong>过期时间</strong>和<strong>成本上限</strong>两个字段，按钮「确认续期」，成功提示「已续期」。「吊销」会先弹确认框：</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">吊销确认原文</span>
+    <p><strong>确定吊销 Agent「X」的授权「Y」？</strong></p>
+    <p>确认后提示「已吊销」。</p>
+  </div>
+
+  <h3>三个典型用法</h3>
+
+  <div class="zy-card green">
+    <h4>用法一：让 AI 给某个客户发一次邮件</h4>
+    <p>动作填 <code>send_email(to=某客户@example.com)</code>，成本上限填个很小的数，过期时间设 24 小时。</p>
+    <p>效果：营销 Agent 能发这一封，发完 24 小时后自动失效，想再发就得重新申请。哪怕哪天这个 Agent 判断跑偏了，它也没有"对任意客户群发"的权力。</p>
+  </div>
+
+  <div class="zy-card blue">
+    <h4>用法二：让 AI 在额度内调用某个付费接口</h4>
+    <p>动作填这个接口的调用，成本上限填你愿意为这次任务花的钱（比如 20 元），过期时间设到任务预计结束之后一点。</p>
+    <p>效果：接口烧到 20 元自动回收授权并转人工。这一层和项目预算熔断是两道独立的闸门，任何一道都能兜住。</p>
+  </div>
+
+  <div class="zy-card amber">
+    <h4>用法三：让 AI 临时执行一次部署</h4>
+    <p>动作写明部署目标，成本上限照设，过期时间给 2–4 小时。</p>
+    <p>效果：这是一次性的通行证，不是常驻的许可。部署完就收回了，不会留下一个"随时能发布到线上"的 Agent。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一句话原则</span>
+    <p>凡是"一次性的对外动作"，都用权限租赁，不要用常驻权限。常驻权限是给"每天都做、做错了成本低"的事准备的。</p>
+  </div>
+
+  <h2>九、冲突仲裁与资源治理</h2>
+
+  <p>这两个页面都在「治理与资源」分组下，也都被列为<strong>安全底线类能力</strong>（跟预算熔断、渐进式信任同一批）。你平时可能很少点开，但知道它们存在很重要。</p>
+
+  <h3>冲突仲裁：多个 Agent 目标打架时谁来裁决</h3>
+
+  <div class="zy-path">项目 <span class="sep">›</span> 治理与资源 <span class="sep">›</span> 冲突仲裁</div>
+
+  <p>想象这个场景：营销 Agent 想加大投放拿线索，财务 Agent 要控制成本。两个 Agent 都有道理，但资源只有一份。传统的做法是把矛盾交给你——但你会被这种琐事淹没。</p>
+
+  <p>冲突仲裁页的做法是：把冲突变成一个案子，让系统按规则裁。页面有两个页签：</p>
+
+  <ul>
+    <li><strong>仲裁案件</strong>：列「ID / 议题 / 状态 / 参与 Agent / 冲突点 / 决策方 / 创建时间」，操作列有 <span class="zy-btn">收集</span>、<span class="zy-btn">仲裁</span>、<span class="zy-btn warn">升级</span>。状态有「收集中 / 审阅中 / 仲裁中 / 已达成一致 / 已升级」。</li>
+    <li><strong>决策日志</strong>：点某一行案件后，这里显示它的历史——「ID / Agent / 原始提案 / 是否采纳 / 拒绝原因 / 时间」。<strong>被拒绝的提案也记下来了，包括拒绝原因</strong>，这一点很重要：将来复盘"为什么没走那条路"时有据可查。</li>
+  </ul>
+
+  <p>新建案件（弹窗标题「新建仲裁案件」）只要两样：<strong>议题</strong>（<span class="zy-field">需要仲裁的议题标题</span>）和<strong>参与 Agent</strong>（<span class="zy-field">至少选择 2 个 Agent（可输入 Agent ID）</span>）。少于 2 个会提示「至少需要 2 个 Agent 参与仲裁」。</p>
+
+  <p>如果系统裁不了、或者你觉得裁得不对，点「升级」→ 弹出「升级到人工处理」，填<strong>原因</strong>（<span class="zy-field">需要人工介入的原因</span>）→ 确认，提示「已升级到人工处理」。<strong>最终裁决权始终在你手上。</strong></p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">打不开？先确认功能已开</span>
+    <p>如果页面提示<strong>加载仲裁案件失败，请确认冲突仲裁功能已启用（功能开关 arbitrator）</strong>，去 设置 <span class="sep">›</span> 功能管理 打开「冲突仲裁」。</p>
+  </div>
+
+  <h3>资源治理：防止某个 Agent 吃光资源</h3>
+
+  <div class="zy-path">项目 <span class="sep">›</span> 治理与资源 <span class="sep">›</span> 资源治理</div>
+
+  <p>如果说项目预算是"整个项目"的总闸，资源治理就是<strong>按时间维度的分级闸门</strong>。它管四张卡：<strong>日预算</strong>、<strong>周预算</strong>、<strong>月预算</strong>、<strong>累计消耗</strong>（下面标注「总额度 ¥x」）。每张卡下面有进度条，用了多少一眼看清。</p>
+
+  <p>下面一张卡是「预算控制状态」，右上角三种标签：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>标签</th><th>含义</th><th>你该做什么</th></tr></thead>
+    <tbody>
+      <tr><td><span class="zy-badge green">正常</span></td><td>在阈值以内</td><td>不用管</td></tr>
+      <tr><td><span class="zy-badge red">已熔断</span></td><td>触到熔断阈值，相关消耗被挡住</td><td>看「熔断原因：…（时间）」，处理后在按钮区点「解除熔断（临时）」（会提示「熔断已临时解除（24 小时）」）或「设置预算」调高额度</td></tr>
+      <tr><td><span class="zy-badge amber">已停用</span></td><td>你把「启用预算控制」关掉了</td><td>建议打开。这是安全底线之一</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>它同时会显示三个阈值：<strong>预警阈值 x%</strong>、<strong>限速阈值 x%</strong>、<strong>熔断阈值 x%</strong>。可以理解为三级：到预警线通知你，到限速线放慢节奏，到熔断线直接挡。</p>
+
+  <p>「设置预算」弹窗里的字段：<strong>日预算（元）/ 周预算（元）/ 月预算（元）/ 总额度（元）/ 预警阈值（%）/ 熔断阈值（%）/ 启用预算控制</strong>，保存后提示「预算已更新」。</p>
+
+  <p>还有一张「消费记录」表：<strong>ID / Agent / 模型 / 输入 Token / 输出 Token / 花费 / 周期 / 时间</strong>。这张表回答一个问题：<strong>钱是被谁花掉的</strong>。按 Agent 排序，你一眼能看出哪个 Agent 是耗钱大户。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">资源治理 vs 项目预算，有什么不同</span>
+    <p>项目预算是「这个项目总共能给多少钱」；资源治理是「每天 / 每周 / 每月最多烧多少」。前者管总量，后者管速度。两个都要设——只设总量的话，一个失控的 Agent 可能三天就把一个月的量烧光。</p>
+  </div>
+
+  <h2>十、合规与红线：AI 永远不替你做的事</h2>
+
+  <p>前面九节讲的都是"怎么让 AI 做的事成立"，这一节讲反面：<strong>哪些事，无论你怎么配置，AI 都不该替你做</strong>。</p>
+
+  <h3>红线清单</h3>
+
+  <p>下面这些事，请把它们当成"必须由人来做"的清单。它们中的大部分会命中红通道，被系统直接拦住转人工；剩下的靠你自己的治理配置兜住。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>红线动作</th><th>为什么不能交给 AI</th><th>系统的兜法</th></tr></thead>
+    <tbody>
+      <tr><td><strong>对外发布</strong>（公开网站、社交账号、客户可见内容）</td><td>发布即公开，撤回也已经被看到了。声誉风险不可逆</td><td>黄/红通道 + L3 审核；建议一律走人工节点</td></tr>
+      <tr><td><strong>发邮件给外部</strong>（客户、合作方）</td><td>每一封都代表公司，写错话是真实损失</td><td>黄通道 + 权限租赁（逐次授权、限定收件人）</td></tr>
+      <tr><td><strong>付费与打款</strong>（下单、充值、转账）</td><td>钱出去就出去了</td><td>黄通道 + 成本上限 + 预算熔断 + 双重账本</td></tr>
+      <tr><td><strong>删除数据</strong>（删任务、删文档、删知识库）</td><td>删了常常恢复不回来</td><td>变更日志留痕 + 回滚点；建议 L3 审核</td></tr>
+      <tr><td><strong>修改权限</strong>（改角色、改谁有什么权力）</td><td>改权限就是改规则，是所有风险的上游</td><td>管理权限仅人类可持有；AI Agent 一律拿不到</td></tr>
+      <tr><td><strong>法律与合规承诺</strong>（签合同、承诺服务条款、承诺赔偿）</td><td>一句话可能构成法律义务</td><td>红通道：协议级禁止，AI 不得代行</td></tr>
+      <tr><td><strong>对外署名与身份声明</strong>（以公司名义做正式表态）</td><td>身份声明错了会引发误解甚至纠纷</td><td>红通道：转人工</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>三层防护怎么配合</h3>
+
+  <p>这三层不是重复，是纵深。任何一层单独都能拦下大部分问题，三层叠加是为了"万一前面漏了"。顺序是这样的：</p>
+
+  <ol class="zy-steps">
+    <li><strong>第一层 · 三通道决策</strong>：动作一进来就分类。绿的直接按级别走，黄的先要临时授权，红的直接拦截转人工。这一层管"这件事本身危不危险"。</li>
+    <li><strong>第二层 · 合规拦截</strong>：运行过程中如果触发了合规判断（比如疑似违规内容、命中禁止清单），系统自动熔断，并实时通知到飞书 / Telegram 等你配置的渠道，等你审核。这一层管"这次具体的行为有没有踩线"。</li>
+    <li><strong>第三层 · KillSwitch</strong>：前两层都失效了、你看到它正在做错事，一按全停。这一层管"兜底"。它是不可逆的，所以不要犹豫——停下来最多损失一点时间，不停可能损失客户。</li>
+  </ol>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">还有一个隐形的第四层</span>
+    <p>前面那三层是"拦"；还有一层是"限"：<strong>预算熔断</strong>。它拦不住错误的动作，但能保证错误不会无限放大——一个跑偏的 Agent 最多烧掉一个预算周期的钱，就会被停下来。所以别把预算设成 0（不限制）。</p>
+  </div>
+
+  <h3>如果 AI 做了你不认可的事，怎么止损</h3>
+
+  <p>按这个顺序做，从快到慢、从粗到细：</p>
+
+  <ol class="zy-steps">
+    <li><strong>先暂停。</strong>去自动运营控制台点 <span class="zy-btn">暂停</span>。注意，暂停是"当前轮跑完后停下"，不杀正在跑的进程——所以它不是瞬时的。如果事态急，直接跳到第 3 步。</li>
+    <li><strong>再收权。</strong>去「权限租赁」把相关的授权<strong>吊销</strong>，去「成员管理」把相关 Agent 的高风险权限取消掉。这一步保证它暂停恢复后也没有能力再犯。</li>
+    <li><strong>紧急就 KillSwitch。</strong>去 审计治理 页面底部，点「紧急停止（KillSwitch）」，确认「紧急停止所有自动运营任务？此操作不可逆」。这一下会停掉所有自动运营，不只是出问题的那个。</li>
+    <li><strong>然后查日志定位。</strong>去「审计治理 <span class="sep">›</span> 审计报告」看有没有对应发现项；去「变更日志」看最近改了什么；去看管理转录搞清它为什么这么判断；去「消费记录」看有没有异常花费。把原因搞清楚再恢复，别急着点启动。</li>
+  </ol>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">一个心态上的建议</span>
+    <p>不要因为一次失误就"再也不敢让 AI 碰任何东西"。正确的做法是<strong>把这次失误变成一个规则</strong>：是权限给大了？那就收；是级别设低了？那就升；是没有成本上限？那就补。系统里的每一项治理配置，本质上都是你踩过的坑的化石。</p>
+  </div>
+
+  <h2>十一、给三种规模团队的治理配置建议</h2>
+
+  <p>治理配置没有标准答案，但有"该配到哪一步"的参考。下面按三种典型规模给。</p>
+
+  <h3>形态一 · 一人公司（你自己 + 几个 Agent）</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>要配的</th><th>怎么配</th></tr></thead>
+    <tbody>
+      <tr><td>你自己的权限</td><td>14 项全开。你就是 owner，不用给自己设障</td></tr>
+      <tr><td>Agent 起步权限</td><td>读 / 写 / 运行任务。别的先不给</td></tr>
+      <tr><td>对外与花钱动作</td><td><strong>全部走人工节点</strong>（L2 一键确认），或者用权限租赁逐次放</td></tr>
+      <tr><td>自主级别</td><td>项目整体半自动；关键节点设 L3</td></tr>
+      <tr><td>预算</td><td>项目预算设一个"烧穿也不心疼"的数；资源治理的日/周预算设起来</td></tr>
+      <tr><td>审计</td><td>每周执行一次内审；经营日报每天扫一眼</td></tr>
+      <tr><td>渐进式信任</td><td>开着，让它自己攒证据；不要手动拔苗助长</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>形态二 · 3–10 人的小团队</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>要配的</th><th>怎么配</th></tr></thead>
+    <tbody>
+      <tr><td>角色划分</td><td>1 个超级管理员（老板）+ 1–2 个管理员（业务负责人）+ 其余普通成员</td></tr>
+      <tr><td>按职能分权限</td><td>研发给「装插件 / 装软件 / 加 MCP / 运行命令行」；市场给「外发邮件」；其余按需</td></tr>
+      <tr><td>明确审批人</td><td>每个方向都设「方向负责人」；每个项目设「项目负责人」；关键任务设「任务负责人」</td></tr>
+      <tr><td>SLA</td><td>对外发布类 4 小时以内；内部归档类 24–48 小时。别全设一样</td></tr>
+      <tr><td>对外动作</td><td>常驻权限 + 范围限制，或继续用权限租赁。二选一，别两边都没有</td></tr>
+      <tr><td>审计</td><td>每月执行内审；每季度跑一次红队演练；变更日志出问题时必查</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>形态三 · 有合规压力的公司（金融、医疗、涉外等）</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>要配的</th><th>怎么配</th></tr></thead>
+    <tbody>
+      <tr><td>审计留痕常态化</td><td>内审从"想起来才跑"改成固定周期；管理转录必须保持开启（它只增不改，是证据）</td></tr>
+      <tr><td>高风险动作双签</td><td>红通道、合规类节点默认双人独立复核（两个人分别批准才算过，同一个人不能签两次）</td></tr>
+      <tr><td>权限最小化</td><td>AI Agent 一律不带「运行命令行 / 装软件」；确实要用的，逐次走权限租赁并把过期时间压到最短</td></tr>
+      <tr><td>定期内审 + 红队</td><td>内审月度、红队季度；critical 级发现在当天处理并记录处置动作</td></tr>
+      <tr><td>变更管理</td><td>所有重大变更必须有记录和回滚点；变更日志在对外审计时可直接导出作为证据链</td></tr>
+      <tr><td>KillSwitch 演练</td><td>至少演练一次，确认团队知道按钮在哪、按下后谁来恢复</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>十二、本章小结与下一步</h2>
+
+  <ul>
+    <li><strong>四种角色</strong>：超级管理员 / 管理员 / 普通成员 / AI Agent。硬规则是 <strong>AI Agent 不可授予管理权限</strong>（暂停项目 / 暂停任务 / 用户管理）。</li>
+    <li><strong>四种治理手段</strong>：权限（能不能做）、自主级别（要不要问你）、预算（能花多少）、审计（做没做、谁做的）。</li>
+    <li><strong>权限 14 项分两组</strong>：通用权限 11 项（人 + Agent 共有），管理权限 3 项（仅人类）。高风险 5 项：花钱 / 外发邮件 / 运行命令行 / 装软件 / 用户管理。</li>
+    <li><strong>自主级别 L0–L3</strong>：L0 全自主、L1 通知不等待、L2 一键确认（默认）、L3 强制人工审核。<strong>三通道</strong>：绿按级别走、黄要临时授权、红强制 L3 且 AI 不得代行。</li>
+    <li><strong>人工节点</strong>把你的决策收进一个列表：待处理 / 处理中 / 已完成 / 已驳回 / 已升级；手机上打开审批页，填意见，点批准或拒绝。</li>
+    <li><strong>审计六页签</strong>：审计报告 / 风险登记册 / 变更日志 / 经营日报 / 组织文档 / 恢复评估。<strong>管理转录记录"为什么"</strong>，变更日志是给未来的自己留后路。</li>
+    <li><strong>权限租赁</strong>是最实用的工具：限定"哪个 Agent、哪个动作、多少额度、多长时间"，到期自动回收。一次性对外动作，永远用它。</li>
+    <li><strong>止损顺序</strong>：暂停 → 吊销授权 → KillSwitch → 查审计日志。</li>
+    <li><strong>下一步</strong>：概念都通了，去看真实案例怎么跑。翻到 <a href="15-案例-跨境电商.html">第 15 章 案例：跨境电商独立站</a>。</li>
+  </ul>
+
+  <div class="zy-quick">
+    <a href="index.html">回到首页</a>
+    <a href="13-经营指标.html">上一章：该盯哪些指标</a>
+    <a href="15-案例-跨境电商.html">下一步：跨境电商独立站案例</a>
+    <a href="04-运行模式与预算.html">回顾：运行模式、自主级别与预算</a>
+    <a href="20-术语表与路线图.html">看不懂名词？查术语表</a>
+  </div>
+
+  <h2>附录 A · 权限矩阵模板</h2>
+
+  <p>下面这张表可以直接当模板用：横向是六种典型角色，纵向是 14 项权限。符号含义——<strong>✅ 建议给</strong>、<strong>⚠️ 谨慎给 / 有条件给</strong>、<strong>❌ 不建议给</strong>。</p>
+
+  <p>注意最后三个 Agent 列：管理权限那一组（暂停项目 / 暂停任务 / 用户管理）在界面上对 AI Agent 是整体禁用的，一律 ❌，<strong>不是"建议"，是界面强制</strong>（后端拦截尚在规划，见本章第二节的边界说明）。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr>
+        <th>权限</th>
+        <th>超级管理员<br>（owner）</th>
+        <th>管理员<br>（业务负责人）</th>
+        <th>普通成员<br>（同事）</th>
+        <th>研发 Agent</th>
+        <th>营销 Agent</th>
+        <th>客服 Agent</th>
+        <th>理由（一句话）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>读 <code>read</code></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>不读什么都做不了，默认全给</td></tr>
+      <tr><td>写 <code>write</code></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>⚠️</td><td>Agent 只写自己职责范围内的产出；客服 Agent 建议只写客户记录</td></tr>
+      <tr><td>运行任务 <code>run_task</code></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>⚠️</td><td>客服 Agent 的对外回复建议先走审核再跑</td></tr>
+      <tr><td>花钱 <code>spend_money</code></td><td>✅</td><td>⚠️</td><td>❌</td><td>❌</td><td>⚠️</td><td>❌</td><td>管理员给但要配资源治理额度；营销 Agent 只在权限租赁 + 成本上限之内</td></tr>
+      <tr><td>外发邮件 <code>send_email</code></td><td>✅</td><td>⚠️</td><td>❌</td><td>❌</td><td>⚠️</td><td>❌</td><td>营销 Agent 必须绑定权限租赁（限定收件人 + 过期时间），不做常驻</td></tr>
+      <tr><td>装插件 <code>install_plugin</code></td><td>✅</td><td>⚠️</td><td>❌</td><td>⚠️</td><td>❌</td><td>❌</td><td>研发 Agent 装了插件要报备；别的角色没必要</td></tr>
+      <tr><td>装软件 <code>install_software</code></td><td>✅</td><td>❌</td><td>❌</td><td>⚠️</td><td>❌</td><td>❌</td><td>动了运行环境，副作用延迟出现；Agent 装软件应走人工节点确认</td></tr>
+      <tr><td>加 MCP <code>add_mcp</code></td><td>✅</td><td>⚠️</td><td>❌</td><td>⚠️</td><td>❌</td><td>❌</td><td>每接入一个新外部系统都是一次新的数据出口，必须人工过一遍</td></tr>
+      <tr><td>优化提示词 <code>optimize_prompt</code></td><td>✅</td><td>✅</td><td>⚠️</td><td>✅</td><td>⚠️</td><td>❌</td><td>改的是"AI 怎么想"；给到能对结果负责的人</td></tr>
+      <tr><td>运行命令行 <code>run_command</code></td><td>✅</td><td>⚠️</td><td>❌</td><td>⚠️</td><td>❌</td><td>❌</td><td>破坏半径最大的一项；研发 Agent 也建议限定在构建/测试类命令并配 L3</td></tr>
+      <tr><td>调权重 <code>adjust_weight</code></td><td>✅</td><td>✅</td><td>❌</td><td>⚠️</td><td>⚠️</td><td>❌</td><td>改调度权重等于改"AI 先干谁"；只有对全局负责的人才该有</td></tr>
+      <tr><td>暂停项目 <code>pause_project</code></td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td><strong>管理权限</strong>，界面强制不给 AI Agent</td></tr>
+      <tr><td>暂停任务 <code>pause_task</code></td><td>✅</td><td>✅</td><td>⚠️</td><td>❌</td><td>❌</td><td>❌</td><td><strong>管理权限</strong>；普通成员可给"自己负责的任务"这个范围</td></tr>
+      <tr><td>用户管理 <code>user_manage</code></td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td><strong>管理权限</strong>；发门禁卡的权力，只留在 owner 手上</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">怎么用这张表</span>
+    <p>不要照抄。先照抄一遍，然后问自己三个问题：① 那个 ⚠️ 我有能力盯住吗？盯不住就改成 ❌。② 某个 ✅ 在这家公司真的会用到吗？用不到就改成 ❌（权限只有被使用才有价值，闲置的权限只有风险）。③ 三个月后我还会记得为什么给吗？不记得，就现在写进备注里。</p>
+  </div>
+
+  <h2>附录 B · 三通道 × 四级别决策矩阵</h2>
+
+  <p>下面这张 4×3 的表，把「自主级别」和「通道」两个维度叠在一起。两者的关系是：<strong>通道决定"这件事的性质"，级别决定"你设的严格程度"；当两者冲突时，以更严格的那个为准</strong>——所以红通道那一列，不管级别是什么，结果都是 L3。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>级别</th><th>通道</th><th>含义</th><th>典型场景</th><th>AI 行为</th><th>你的负担</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>L0</td><td><span class="zy-badge green">绿-例行</span></td><td>完全放手</td><td>整理日志、归档知识库、生成内部草稿</td><td>直接做完并归档，不创建节点、不通知</td><td>无。事后从审计里看</td></tr>
+      <tr><td>L0</td><td><span class="zy-badge amber">黄-敏感</span></td><td>级别再高也越不过敏感动作</td><td>Agent 突然要调一次付费接口</td><td>先检查有没有有效的权限租赁；有且在额度内则放行，没有则拦截转人工</td><td>提前把额度/授权划好；否则要临时处理节点</td></tr>
+      <tr><td>L0</td><td><span class="zy-badge red">红-强制</span></td><td>L0 在红通道上无效</td><td>合同承诺、正式对外署名</td><td>强制升级为 L3 人工审核，AI 不得代行</td><td>必须你来。级别设得再高也一样</td></tr>
+      <tr><td>L1</td><td><span class="zy-badge green">绿-例行</span></td><td>做了告诉你，不等你</td><td>例行内容产出、常规客户回访</td><td>执行 + 创建节点 + 发通知，然后继续推进</td><td>看通知；觉得不对就赶紧去暂停</td></tr>
+      <tr><td>L1</td><td><span class="zy-badge amber">黄-敏感</span></td><td>知情不等于放行</td><td>Agent 要对外发一封邮件</td><td>需要有效的权限租赁才放行；没有就转人工</td><td>收到通知后立刻判断，必要时补一份授权</td></tr>
+      <tr><td>L1</td><td><span class="zy-badge red">红-强制</span></td><td>强制升级</td><td>法律与合规承诺</td><td>强制 L3 人工审核</td><td>必须你来</td></tr>
+      <tr><td>L2<br>（默认）</td><td><span class="zy-badge green">绿-例行</span></td><td>最常用的档位</td><td>发文前审阅、方案定稿</td><td>暂停等待，创建节点 + 通知，你点「确认完成」后继续</td><td>点一下。看一遍内容</td></tr>
+      <tr><td>L2</td><td><span class="zy-badge amber">黄-敏感</span></td><td>确认 + 授权两件事</td><td>给某客户发一次邮件；调一次付费接口</td><td>创建节点等待；你批准的同时，系统按授权范围授予一次性权限</td><td>看内容 + 划边界（额度、时间、对象）</td></tr>
+      <tr><td>L2</td><td><span class="zy-badge red">红-强制</span></td><td>强制升到 L3</td><td>删除数据、合规敏感内容</td><td>强制 L3，可能要求双人复核</td><td>认真看。可能要两个人分别签</td></tr>
+      <tr><td>L3</td><td><span class="zy-badge green">绿-例行</span></td><td>关键路径也用最严档</td><td>项目上线前的最后确认、核心交付物</td><td>必须审核通过才继续</td><td>认真审核。这是你自己选的严</td></tr>
+      <tr><td>L3</td><td><span class="zy-badge amber">黄-敏感</span></td><td>审核 + 授权双重要求</td><td>大额付费动作、正式对外发布</td><td>审核通过 + 在授权范围内，才执行</td><td>最高。两件事都要你确认</td></tr>
+      <tr><td>L3</td><td><span class="zy-badge red">红-强制</span></td><td>标准配置</td><td>对外署名与身份声明、法律承诺</td><td>强制人工审核，可多人/审批流；AI 不得代行</td><td>必须你（们）亲自完成</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">关于这张表的说明</span>
+    <p>其中 L0/L1/L2/L3 的定义、绿/黄/红三通道的定义，以及「红通道强制 L3、AI 不得代行」「黄通道需临时授权（权限租赁）」「L2 默认一键确认」这些关键规则，都来自系统的明确定义。个别格子的组合行为（比如 L0 × 黄、L1 × 黄在"通知"与"拦截"上的先后细节）属于<strong>基于通道与级别定义推导</strong>，具体以系统实际行为为准。真正要记住的只有一句：<strong>通道管性质，级别管严格度，冲突时从严</strong>。</p>
+  </div>
+
+  <h2>附录 C · 治理动作速查表</h2>
+
+  <p>「我想做 X，该去哪点，有什么风险」。按"想做"倒排。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>我想做什么</th><th>去哪里点</th><th>有什么风险 / 注意</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>收紧某个 Agent 的权限</td>
+        <td>公司管理 <span class="sep">›</span> 成员管理 <span class="sep">›</span> 编辑该 Agent <span class="sep">›</span> 权限 <span class="sep">›</span> 保存</td>
+        <td>立刻生效，不需要重启。但要注意：收权不等于停它正在跑的活——必要时配合「暂停任务」</td>
+      </tr>
+      <tr>
+        <td>临时给 AI 放一次权</td>
+        <td>自动运营 <span class="sep">›</span> 权限租赁 <span class="sep">›</span> 新建授权</td>
+        <td>过期时间别给太长；成本上限一定要填。授权动作写得越具体越安全</td>
+      </tr>
+      <tr>
+        <td>撤销一次已发出的授权</td>
+        <td>自动运营 <span class="sep">›</span> 权限租赁 <span class="sep">›</span> 找到该行 <span class="sep">›</span> 吊销</td>
+        <td>确认框会显示是哪两个 Agent 和动作，看准了再点。吊销不影响已经执行完的动作</td>
+      </tr>
+      <tr>
+        <td>给一次授权续命</td>
+        <td>自动运营 <span class="sep">›</span> 权限租赁 <span class="sep">›</span> 续期</td>
+        <td>续期时顺手把成本上限重设一遍——很多人只改时间不改额度</td>
+      </tr>
+      <tr>
+        <td>处理积压的审批</td>
+        <td>自动运营 <span class="sep">›</span> 人工节点 <span class="sep">›</span> 筛选「待处理」</td>
+        <td>桌面「确认完成」会弹出可留空的意见框，建议写下「为什么批准」；别不看内容一键盘批</td>
+      </tr>
+      <tr>
+        <td>手机上批一个节点</td>
+        <td>从通知链接打开 <code>/approval/…</code>，或节点卡片点「移动审批」</td>
+        <td>必须已登录、且链接带 <code>project_id</code>；否则报「缺少项目上下文」</td>
+      </tr>
+      <tr>
+        <td>催一下没人处理的节点</td>
+        <td>人工节点卡片 <span class="sep">›</span> 通知催促</td>
+        <td>它只重发通知，不会改变节点状态。催两次还没人动，直接用「升级处理」</td>
+      </tr>
+      <tr>
+        <td>把超时的节点往上推</td>
+        <td>人工节点卡片 <span class="sep">›</span> 升级处理</td>
+        <td>升级会改变处理人。升级链走完还没人处理，节点会挂起（不会自动放行）</td>
+      </tr>
+      <tr>
+        <td>查"谁改了什么、什么时候"</td>
+        <td>自动运营 <span class="sep">›</span> 审计治理 <span class="sep">›</span> 变更日志</td>
+        <td>列表显示「操作 / 详情 / 时间」。这是复盘"为什么变差了"的第一站</td>
+      </tr>
+      <tr>
+        <td>查某个 Agent 花了多少钱</td>
+        <td>治理与资源 <span class="sep">›</span> 资源治理 <span class="sep">›</span> 消费记录</td>
+        <td>按 Agent / 模型 / 花费排一下，耗钱大户一眼看出来。也可对照 自动运营 <span class="sep">›</span> 计费明细</td>
+      </tr>
+      <tr>
+        <td>主动做一次体检</td>
+        <td>自动运营 <span class="sep">›</span> 审计治理 <span class="sep">›</span> 执行内审</td>
+        <td>查四类：权限漂移、token 异常、越权调用、经验退化。发现 critical 当天处理</td>
+      </tr>
+      <tr>
+        <td>让 AI 试着攻击自己</td>
+        <td>自动运营 <span class="sep">›</span> 审计治理 <span class="sep">›</span> 红队演练</td>
+        <td>新项目上线后跑一次，之后每季度一次。演练结果进审计记录</td>
+      </tr>
+      <tr>
+        <td>紧急停止一切</td>
+        <td>自动运营 <span class="sep">›</span> 审计治理 <span class="sep">›</span> 紧急停止（KillSwitch）</td>
+        <td>会停下来<strong>所有</strong>自动运营任务，不只是出问题的那个。停止动作不可逆，需人工评估后手动恢复</td>
+      </tr>
+      <tr>
+        <td>回滚一次变更</td>
+        <td>先在 审计治理 <span class="sep">›</span> 变更日志 里找到那条记录和回滚点</td>
+        <td>当前界面上没有"一键回滚"按钮，回滚需要按记录里的信息手工恢复。所以变更日志里的「详情」越完整越值钱</td>
+      </tr>
+      <tr>
+        <td>给新 Agent 放宽自主权</td>
+        <td>治理与资源 <span class="sep">›</span> 渐进式信任 <span class="sep">›</span> 调整等级</td>
+        <td>手动调级会记成「人工覆盖」进审计记录。别一次升两档，一档一档来</td>
+      </tr>
+      <tr>
+        <td>裁一个 AI 之间的争议</td>
+        <td>治理与资源 <span class="sep">›</span> 冲突仲裁 <span class="sep">›</span> 收集 / 仲裁</td>
+        <td>裁不了就点「升级」转人工。决策日志连"被拒绝的提案和原因"都留着，别删</td>
+      </tr>
+      <tr>
+        <td>限制某个 Agent 的烧钱速度</td>
+        <td>治理与资源 <span class="sep">›</span> 资源治理 <span class="sep">›</span> 设置预算</td>
+        <td>日/周/月三个预算都设上。只设总额度的话，失控的 Agent 可能几天烧光一个月</td>
+      </tr>
+      <tr>
+        <td>换一条业务线的负责人</td>
+        <td>公司管理 <span class="sep">›</span> 成员管理 <span class="sep">›</span> 编辑成员 <span class="sep">›</span> 负责人指派 / 方向</td>
+        <td>改了之后，人工节点的升级链和通知投递会跟着变。记得同步告诉团队</td>
+      </tr>
+      <tr>
+        <td>调整组织架构</td>
+        <td>公司管理 <span class="sep">›</span> 组织架构 <span class="sep">›</span> 新增部门</td>
+        <td>只有公司所有者 / 管理员能改；普通成员会看到「仅公司所有者/管理员可调整组织架构」</td>
+      </tr>
+      <tr>
+        <td>查某天项目干了什么</td>
+        <td>自动运营 <span class="sep">›</span> 审计治理 <span class="sep">›</span> 经营日报</td>
+        <td>含轮次数、完成任务、消耗 Token、花费、待处理人工 + 重点摘要。五分钟扫完</td>
+      </tr>
+      <tr>
+        <td>项目停了很久，想重启</td>
+        <td>自动运营 <span class="sep">›</span> 审计治理 <span class="sep">›</span> 恢复评估</td>
+        <td>看「中断原因 / 中断天数 / 评估决策」。评估决策是 resume 才直接续；要求调整就先改再起</td>
+      </tr>
+      <tr>
+        <td>确认某个功能到底开没开</td>
+        <td>设置 <span class="sep">›</span> 功能管理</td>
+        <td>渐进式信任 / 冲突仲裁 / 资源治理都在这里。打不开某个治理页面时先来这里看</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>附录 D · 审批意见常用话术模板</h2>
+
+  <p>审批意见不是走过场——但也要如实知道它现在的作用范围。你在移动审批页写下的意见会记进该节点的「已有回复」留痕，并作为该角色的经验条目沉淀下来，<strong>之后你做角色优化、生成 SOP 草稿时会用到它</strong>；不过它<strong>不会自动改变正在运行的任务，也不会自动注入到 AI 对同类事项的实时处理里</strong>。所以"拒绝"时更要把理由写清楚——它的第一受益人是未来回看这条记录的你自己，以及后续的角色调优。</p>
+
+  <h3>批准（通过）</h3>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">批准 · 标准</span>
+    <p>已阅，内容与目标一致，按此执行。后续同类事项可沿用本次口径。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">批准 · 附条件</span>
+    <p>同意执行。附加两个条件：① 金额/额度不得超过本次范围；② 执行后把结果回写到对应任务，我要在经营日报里看到。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">批准 · 限定范围</span>
+    <p>批准本次动作，仅限本次、仅限当前对象。不要扩大范围，不要在本次之外重复执行。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">批准 · 小改后放行</span>
+    <p>整体通过。执行前把标题/措辞按【具体修改点】调整一下，其余不动，调整完直接走，不用再问我。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">批准 · 鼓励沉淀</span>
+    <p>通过。这次的做法可以沉淀成模板，下次同类任务直接复用，减少重新摸索的成本。</p>
+  </div>
+
+  <h3>拒绝（驳回）</h3>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">写拒绝意见的两条纪律</span>
+    <p>① <strong>说清"哪里不对"</strong>，不要只说"不好"；② <strong>说清"怎么改才对"</strong>，给出可执行的下一步。这两条都写到了，AI 下一轮才可能做对。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">拒绝 · 方向错</span>
+    <p>方向不对，不同意执行。理由：当前阶段我们的优先级是【留存/交付】而不是【拉新】，这件事会挤占关键路径的资源。改法：先回到目标与关键结果上重新对齐，再提方案。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">拒绝 · 事实/数据不可靠</span>
+    <p>不同意。理由：方案里的数据来源不明，无法核实。改法：把关键数字的出处列出来（哪个报表、哪个时间段），并且注明样本量；数据无法核实的部分不要写进结论。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">拒绝 · 风险不可控</span>
+    <p>不同意，风险太大。理由：这是一次不可逆的对外动作，一旦出错没有回退路径。改法：先做一份灰度方案（小范围、可回滚），验证通过再全量。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">拒绝 · 成本不合理</span>
+    <p>不同意。理由：单次成本超出我愿意为这个结果支付的上限。改法：给出至少两个更低成本的替代方案，并说明各自的效果差距。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">拒绝 · 越界</span>
+    <p>不同意。理由：这件事超出了当前授予的范围（对象/额度/时间任一越界）。改法：把范围收敛到授权边界之内重新提交；确实需要扩大范围的，单独说明理由申请新授权。</p>
+  </div>
+
+  <h3>要求返工（重做，但方向认可）</h3>
+
+  <p>「要求返工」和「拒绝」的区别是：拒绝是这件事不该做，返工是这件事该做但没做好。返工意见要给<strong>明确的完成标准</strong>。</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">返工 · 标准不达标</span>
+    <p>方向认可，但质量不达标，需重做。完成标准：①【具体维度一】要达到【具体水平】；②【具体维度二】不能出现【具体问题】。达到这两条就直接提交，不用再问我。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">返工 · 补证据</span>
+    <p>结论方向可以，但论据太薄。请补上：① 支持这个结论的三个具体事实；② 反方可能怎么反驳、你怎么回应。补完再提交。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">返工 · 分步交付</span>
+    <p>东西太大，拆成三步交付：第一步只做【最小可验证的部分】，我看过之后再往下。不要一次性做完再来找我。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">返工 · 换角度重做</span>
+    <p>当前这版是"从我们自己的角度"写的。请换成客户视角重写一遍：假设你是一个从没听说过我们的潜在客户，你第一眼会关心什么。</p>
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">返工 · 上次问题没解决</span>
+    <p>和上一版相比，【上次指出的问题】仍然存在，请先解决这个问题再谈别的。同时请说明：你这次打算用什么办法避免它再出现。</p>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

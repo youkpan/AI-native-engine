@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第11章 发起任务后，系统做了什么 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 11 章 · 第三步：指挥 AI 干活</div>
+    <h1>第11章 发起任务后，系统做了什么</h1>
+    <p class="zy-lead">从你点下「新建任务」那一刻，到收到成品，中间到底发生了什么。这一章给你一条完整的链路，让你能预判「接下来会看到什么、要等多久、什么时候轮到我」。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 18 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：执行时序 / 引擎选择 / 验收</span>
+    </div>
+  </header>
+
+  <h2>你将学会</h2>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>说清楚「发起一个任务」到底触发了什么，以及它为什么不一定会立刻执行</span></li>
+    <li><input type="checkbox"><span>读懂时间片和优先级，知道任务在排队时怎么让它更快被处理</span></li>
+    <li><input type="checkbox"><span>看懂系统是「自动调智能体」还是「派循环执行」，两级决定分别由谁拍板</span></li>
+    <li><input type="checkbox"><span>跟上「一轮」的完整生命周期：组装提示词 → 执行 → 记日志 → 花钱 → 交接班 → 完成判定</span></li>
+    <li><input type="checkbox"><span>明白为什么验收不是干活的 AI 自己说了算，以及三种验收结论各触发什么</span></li>
+    <li><input type="checkbox"><span>遇到「任务不动了」时，能自己顺着排查树找到原因</span></li>
+  </ul>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">先给一句总答案</span>
+    <p>你点的不是「调用某个人」，而是<strong>把活放进一张排班表</strong>。系统会按<strong>运行模式</strong>（要不要自动跑循环）、<strong>任务类型</strong>、<strong>引擎选择</strong>（怎么干）、<strong>角色配置</strong>（谁来干）自动决定后续的一切。你不必指定谁来干，但你可以随时插手改。</p>
+  </div>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node"><b>你</b>新建任务</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node"><b>平台界面</b>写入任务</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node hot"><b>自动运营循环</b>按时间片排班</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node hot"><b>引擎执行</b>loop 或 agent</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node ok"><b>独立验收</b>对照任务描述判定</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node warn"><b>通知你</b>或等你介入</div>
+  </div>
+
+  <p>这张图是本章的地图。下面我们按顺序把每一步拆开讲：点击之前系统已决定的事、任务怎么入队、调度器怎么排班、谁来干、一轮里发生了什么、验收怎么判、你什么时候会被叫到、全局怎么重排。最后一节用一个小案例把所有概念串起来。</p>
+
+  <h2>一、第 0 步：一次点击之前，系统已经决定的事</h2>
+
+  <p>很多人以为「点了新建任务，AI 就开始干了」。其实在你点击之前，有一整套环境已经配置好了，任务只是<strong>落进这套环境里</strong>。同一句任务描述，在不同环境里的命运可能完全不同：有的 3 分钟就跑起来，有的一直躺着不动。所以先认识这五件事。</p>
+
+  <h3>1. 项目运行模式：决定有没有「自动循环」</h3>
+
+  <p>这是最上面的开关。项目有三个模式，在自动运营控制台「调整运行模式」里是这套叫法：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card green">
+      <h4>全自动</h4>
+      <p>AI 自动拆解任务、调度轮次、评审验收，全程自动执行，仅在关键节点通知你。</p>
+      <p><span class="zy-badge green">循环会跑</span></p>
+    </div>
+    <div class="zy-card blue">
+      <h4>半自动 <span class="zy-badge amber">默认</span></h4>
+      <p>AI 自动执行，但在关键决策节点（目标变更、大额支出、对外动作等）由人工确认后继续。</p>
+      <p><span class="zy-badge green">循环会跑</span></p>
+    </div>
+    <div class="zy-card amber">
+      <h4>人工审核</h4>
+      <p>AI 产出方案后必须人工审核通过才执行，节奏较慢但最可控。</p>
+      <p><span class="zy-badge red">循环不跑</span></p>
+    </div>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这是新手最常踩的一个坑</span>
+    <p>只有<strong>全自动 / 半自动</strong>会启动「自动运营循环」。选了<strong>人工审核</strong>（在新建项目向导里叫「手动」），系统<strong>不会</strong>自动跑循环，你建的任务会一直停在「待执行」——直到你自己去触发它。如果你建完任务发现它纹丝不动，先回来看看这个模式。</p>
+  </div>
+
+  <h3>2. 执行策略是否已确认</h3>
+
+  <p>建项阶段，AI 会生成一份「项目执行策略」（目标拆解、关键路径、所需岗位、预算建议、里程碑），需要你确认。这是启动自动运营的一道门槛。官方告警原文是：</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">告警原文</span>
+    <p>「未确认策略时，启动自动运营会被拦（/autoops/start 要求已确认策略）。」</p>
+    <p>换句话说：策略没确认，你连「启动」都点不动。去「引导建项」页面的「项目执行策略」卡里点「确认策略」「完成建项」。</p>
+  </div>
+
+  <h3>3. 钱够不够：项目预算与 AI 运行预算</h3>
+
+  <p>任务是要花钱的（模型按 token 计费）。系统在每一轮开始前都会先看一眼预算余额：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>预算水位</th><th>系统会做什么</th><th>你该做什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>正常</td><td>照常跑</td><td>什么都不用做</td></tr>
+        <tr><td>达 <strong>80%</strong></td><td>发「预算预警」通知，进入降级运行</td><td>评估要不要补预算</td></tr>
+        <tr><td>超<strong>限</strong></td><td>熔断：暂停循环，等补充预算</td><td>去自动运营控制台点「恢复」或「启动」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>补充一点：预算熔断是「项目 AI 运行预算」这一层；它和平台真实账本的余额熔断是两本账，别混淆。计费明细页的「已熔断 / 预警」标签就是这一层的状态。</p>
+
+  <h3>4. 已经有哪些智能体、它们会什么</h3>
+
+  <p>任务最终要落到某个<strong>角色（岗位）</strong>头上执行。这个角色决定了用哪套提示词、带哪些技能白名单。如果项目里还没建 Agent，系统会用默认角色兜底，但效果不如你配好的专业角色。所以：<strong>想让活儿干得专业，先建好对应的 Agent。</strong></p>
+
+  <h3>5. 哪些功能开关开着</h3>
+
+  <p>设置页「功能管理」里有一排开关，界面按<strong>中文名</strong>展示、并分为「基础 / 高级」两组：<strong>自动构建部署</strong>（deploy）、<strong>通知中心</strong>（notification）、<strong>自动备份</strong>（backup）、<strong>自动报告</strong>（report）、<strong>智能报告</strong>（auto_report）、<strong>项目模板</strong>（project_template）、<strong>营销自动化</strong>（marketing）、<strong>营销自动化引擎</strong>（marketing_engine）、<strong>社交媒体管理</strong>（social_media）、<strong>战略规划</strong>（strategy）、<strong>渐进式信任</strong>（trust_model）、<strong>冲突仲裁</strong>（arbitrator）、<strong>资源治理</strong>（resource_governor）等。开关关着的功能，相关任务即使建了也不会真的产生对外动作。</p>
+
+  <p>两点容易看错：其一，<strong>「自动报告」（report）</strong>和<strong>「智能报告」（auto_report）</strong>是两个不同的开关，别把它们当成同一个；其二，「渐进式信任」「资源治理」属于<strong>安全底线项</strong>，界面上置灰、<strong>不可关闭</strong>，后端也会拒绝关闭请求，这是刻意的保护而非故障。系统遇到未登记的新开关 key 时会归入「其它」，不会凭空隐藏。</p>
+
+  <p>别小看这一排开关，它们决定「AI 有没有真正对外出手的权限」：比如 marketing 关着，AI 就算写出了营销文案，也不会真的去发布；deploy 关着，AI 不会自动把代码构建部署上线。所以<strong>如果你发现「文案写了却没发出去」「代码改完了却没上线」，先来查这里</strong>——很可能不是任务失败，而是对应开关没开。</p>
+
+  <p>新手建议：先只开确实需要的（比如通知、报告），等流程跑顺了再逐个打开「对外动作」类的开关，避免 AI 在你还没准备好时就替你做决定。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一句话记住这一节</span>
+    <p>任务不是凭空执行的，它落在一套<strong>已配置好的环境</strong>里。模式、策略、预算、Agent、开关，这五样都在你点击之前就位。任务卡住时，先回头查这五样。</p>
+  </div>
+
+  <h2>二、第 1 步：任务入队（你点下「新建任务」之后）</h2>
+
+  <div class="zy-path">自动运营 <span class="sep">›</span> 任务管理 <span class="sep">›</span> 新建任务</div>
+
+  <p>点开「新建任务」，弹窗里的字段不多，但每一个都会影响任务后面的命运。完整列一遍：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>字段</th><th>填什么</th><th>影响</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>任务名称 <span class="zy-badge red">必填</span></td><td>如「市场定向调研」</td><td>列表展示、验收报告引用</td></tr>
+        <tr><td>描述</td><td>一句话说清要什么、<strong>什么算做完</strong></td><td><strong>验收的唯一依据</strong>（见第六节，界面没有单独的验收标准输入框）</td></tr>
+        <tr><td>任务类型</td><td>通用任务 general / 新建软件工程 eng / 软件修改 mod</td><td>eng、mod 会走软件工程向导，工作区按项目维度共享</td></tr>
+        <tr><td>优先级</td><td>P0 - 紧急 / P1 - 高 / P2 - 常规 / P3 - 低</td><td>排班顺序参考，P0 排前面</td></tr>
+        <tr><td>时间片权重</td><td>1–10 的整数</td><td>每轮能分到多少时间（下面第三节细讲）</td></tr>
+        <tr><td>引擎类型</td><td>循环执行 loop / Agent 智能体 agent（界面选项显示为「Agent 智能体（Agent 引擎）」）</td><td>用哪种方式干（第四节细讲）</td></tr>
+        <tr><td>AI 模型</td><td>placeholder「路由自动」</td><td>留空即按路由自动选模型；也可指定</td></tr>
+        <tr><td>关联软件工程</td><td>mod 类型必填</td><td>软件修改挂到哪个源工程上</td></tr>
+        <tr><td>时限(秒)</td><td>默认 7200</td><td>单轮执行上限，超时强杀后进入下一轮</td></tr>
+        <tr><td>角色 ID</td><td>placeholder「指派 Agent 角色 ID（可选）」</td><td>由哪个岗位的提示词与技能来干</td></tr>
+        <tr><td>提示词模板</td><td>placeholder「任务执行提示词模板」</td><td>任务级提示词，覆盖角色级、项目级</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>填完点「确定」，立刻会发生三件事：表单校验通过 → 任务写入 → 任务出现在列表里，状态是 <span class="zy-badge blue">待执行 pending</span>。</p>
+
+  <p>然后，<strong>就暂时停下了</strong>。任务不会瞬间开跑，它在等调度器在下一轮把它选中。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">「不发生的什么」比「发生的什么」更重要</span>
+    <p>点完按钮之后<strong>不会</strong>发生：不会立刻弹出一个 AI 开始跟你对话，不会立刻产生日志，不会立刻花钱。真正开跑的时点是「调度器选中它」，通常要等到下一个轮次。<strong>如果你建完任务就去日志面板刷新，多半什么都看不到——这是正常的。</strong></p>
+  </div>
+
+  <h3>为什么会一直「待执行」</h3>
+
+  <p>状态长期停在 pending，几乎都是下面几种原因，按出现频率排：</p>
+
+  <ol class="zy-steps">
+    <li><h4>项目没启动</h4><p>项目状态不是「运行中」。去项目详情页点「启动」。</p></li>
+    <li><h4>自动运营没开</h4><p>项目在跑，但没启动自动运营循环。去自动运营控制台点「启动」。</p></li>
+    <li><h4>运行模式是人工审核</h4><p>这个模式不启用循环，任务必须你手动触发。</p></li>
+    <li><h4>任务在排队</h4><p>循环在跑，但这一轮排到别的任务，你的任务还没轮到。看运行轮次页确认。</p></li>
+    <li><h4>任务自身被暂停</h4><p>任务的 status 被置成了 paused，去列表点「恢复」。</p></li>
+  </ol>
+
+  <p>这五种原因的详细排查步骤，见附录 B 的排查树。</p>
+
+  <h3>软件工程类任务多一个前置阶段</h3>
+
+  <p>任务类型选「新建软件工程」或「软件修改」时，建完之后<strong>不会立刻进入排班</strong>，而是先走一段<strong>规划阶段</strong>：系统先把它拆成可执行的工程步骤（动哪些文件、分几步、怎么验证），方案定了再交出去干。所以这类任务刚建完的状态可能是「规划中」，而不是「待执行」——这是正常的。</p>
+
+  <p>两个常见疑问，一次说清：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>「规划中」要我做什么吗？</strong>通常不用，等它规划完会自动转为可执行。如果它停在「规划中」不动，去任务列表点「继续规划」或「继续修改」，把它推完。</span></li>
+    <li><input type="checkbox"><span><strong>eng 和 mod 差在哪？</strong>eng 是从零新建一个工程；mod 是在已有工程上改，必须指定「关联软件工程」。关联选错了就会改错地方——填写时务必核对。</span></li>
+  </ul>
+
+  <p>还要记住一点：软件工程类任务的<strong>设计文档</strong>是按软件名称分目录隔离的——每个「新建软件工程」任务的设计文档写进自己软件名对应的子目录（<span class="zy-field">{项目工作区}/{软件名称}/</span>），各写各的 PRD/TAD，不会互相覆盖。软件修改任务读写的也是它「关联软件工程」对应的那个文档目录。<strong>注意区分</strong>：隔离的是<strong>文档</strong>；<strong>代码工作目录仍是项目级共享的</strong>（整个项目一个代码库），所以同一个项目里做两个互不相干的软件时，代码文件仍可能互相看见、互相影响——真要完全隔离，建议<strong>拆成两个项目</strong>。这类任务更适合用循环执行引擎——它必须能真正读写工作区里的文件。</p>
+
+  <h2>三、第 2 步：调度器排班——时间片是怎么回事</h2>
+
+  <p>这是整套机制里最「反直觉」、也最值得花五分钟搞懂的部分。搞懂它，你就能预判「我的任务大概多久轮一次」。</p>
+
+  <h3>3.1 排班表长什么样</h3>
+
+  <p>系统维护一张<strong>排班表</strong>，默认有 <strong>10 个时间片</strong>（你可以理解成 10 个工位）。每个时间片里放一个任务编号（或者空着）。任务通过「时间片权重」占据多个时间片：权重填 5，就占 5 个工位。</p>
+
+  <p>假设你有三个任务：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>任务</th><th>优先级</th><th>时间片权重</th><th>占用的工位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>t1 上线支付回调</td><td>P0 - 紧急</td><td>5</td><td>0、1、2、3、4</td></tr>
+        <tr><td>t2 写营销邮件</td><td>P1 - 高</td><td>3</td><td>5、6、7</td></tr>
+        <tr><td>t3 整理周报</td><td>P2 - 常规</td><td>2</td><td>8、9</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>每推进一轮，系统从<strong>下一个时间片</strong>开始，往后找到第一个「还没完成」的任务，把它交出去执行。起始位置每轮往后挪一格，任务就自然轮流获得处理时间。</p>
+
+  <h3>3.2 三个任务 × 10 轮的排班示意</h3>
+
+  <p>假设三个任务都没完成、没有新任务插入，10 轮的实际选中情况是这样的：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>轮次</th><th>起始时间片</th><th>选中任务</th><th>这一轮谁在干活</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>第 1 轮</td><td>0</td><td>t1</td><td>上线支付回调</td></tr>
+        <tr><td>第 2 轮</td><td>1</td><td>t1</td><td>上线支付回调</td></tr>
+        <tr><td>第 3 轮</td><td>2</td><td>t1</td><td>上线支付回调</td></tr>
+        <tr><td>第 4 轮</td><td>3</td><td>t1</td><td>上线支付回调</td></tr>
+        <tr><td>第 5 轮</td><td>4</td><td>t1</td><td>上线支付回调</td></tr>
+        <tr><td>第 6 轮</td><td>5</td><td>t2</td><td>写营销邮件</td></tr>
+        <tr><td>第 7 轮</td><td>6</td><td>t2</td><td>写营销邮件</td></tr>
+        <tr><td>第 8 轮</td><td>7</td><td>t2</td><td>写营销邮件</td></tr>
+        <tr><td>第 9 轮</td><td>8</td><td>t3</td><td>整理周报</td></tr>
+        <tr><td>第 10 轮</td><td>9</td><td>t3</td><td>整理周报</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>10 轮下来，t1 拿到 5 次、t2 拿到 3 次、t3 拿到 2 次——<strong>正好等于它们的时间片权重</strong>。这就是「时间片权重」的准确含义：<strong>它不是你想象的「分多少秒」，而是「每 10 轮里占几轮」。</strong></p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">为什么用时间片，而不是排队做完一个再做下一个</span>
+    <p>因为真实项目里，任务往往是<strong>并行推进、需要往复迭代</strong>的（写完要等反馈、改完要重跑）。如果一次只做一件、做完才做下一件，一个卡住的长任务会拖垮全局。时间片让每个任务都能周期性获得关注：<strong>谁更急，就给它更多片</strong>。设计原文见 TAD-v2/04（附录 D 有摘录）。</p>
+  </div>
+
+  <h3>3.3 任务完成后会发生什么</h3>
+
+  <p>任务一旦被标记完成，它的时间片会被自动跳过。上例里如果 t1 在第 5 轮后完成了，那么第 6 轮起，起始片 5、6、7 仍指向 t2，而原本落到 t1 的空档会由后面的任务补上——你的其他任务会「提速」。这也是为什么<strong>先干完一个任务，往往能让剩下的任务跑得更快</strong>。</p>
+
+  <h3>3.4 「为什么我建了任务但它在排队」以及「怎么更快」</h3>
+
+  <p>排队是正常现象。你想让它更快被处理，有四个办法，按推荐度排：</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>✅ 这样做</h4>
+      <ul>
+        <li><strong>提高时间片权重</strong>：从 1 提到 3–10，它在每 10 轮里占的轮数变多。</li>
+        <li><strong>提高优先级</strong>：P2 改 P1 或 P0，排班时被排在前面。</li>
+        <li><strong>减少同时进行的任务数</strong>：任务少，每个分到的轮数自然变多。</li>
+        <li><strong>缩短单轮时限</strong>：长任务把单轮卡满，减小「时限(秒)」能让轮转更快。</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>❌ 别这样做</h4>
+      <ul>
+        <li>不要把所有任务都调成 P0 权重 10——等于没调，反而整体变慢。</li>
+        <li>不要为了「让它快点」而反复暂停/恢复，这不会插队。</li>
+        <li>不要在预算已预警时猛加任务，熔断后全部停摆。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>四、第 3 步：谁来干——引擎与角色的两级决定</h2>
+
+  <p>「我发起任务，是自动调用智能体还是怎样？」——答案分两层：<strong>引擎</strong>决定「用什么方式干」，<strong>角色</strong>决定「由哪个岗位的提示词与技能来干」。这是两个独立的决定，很多人都混成了一件。</p>
+
+  <h3>4.1 引擎决定「怎么干」</h3>
+
+  <p>系统有两套干活的引擎，人话解释是：</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4>循环执行 loop <span class="zy-badge amber">默认</span></h4>
+      <p>派一个<strong>外部执行工具</strong>去跑（类似一个能干活的命令行助手），适合复杂、编码、构建、长时任务。</p>
+      <p>它能在你的项目工作目录里真正读写文件、跑命令、改代码，产出完整交付物。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>Agent 智能体 agent</h4>
+      <p>系统<strong>内部直接调 AI + 工具调用</strong>，不开外部进程，适合信息整合、接口调用、快速任务。</p>
+      <p>反应快、成本低，但不擅长交付完整软件。</p>
+    </div>
+  </div>
+
+  <p>系统怎么选？有一条明确的<strong>优先级</strong>：</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>任务级</b>任务里指定了引擎</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node"><b>角色级</b>角色 RunConfig 里配的引擎</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node"><b>项目默认</b></div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node ok"><b>兜底 loop</b></div>
+  </div>
+
+  <p>也就是说：<strong>任务里明确指定了就用它</strong>；没指定就看执行角色有没有配；还没有就用项目默认；全都没有，兜底用循环执行。</p>
+
+  <h3>4.2 你没指定时，系统怎么猜</h3>
+
+  <p>任务没写引擎类型时，系统会按描述里的关键词做一次启发式预测：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>出现「编码 / 开发 / 构建 / 部署 / 测试 / 脚本 / 长时」这类词 → 猜 <strong>loop</strong></span></li>
+    <li><input type="checkbox"><span>出现「查询 / 汇总 / 翻译 / 分类 / 问答 / 生成文案 / 接口调用」这类词 → 猜 <strong>agent</strong></span></li>
+    <li><input type="checkbox"><span>拿不准 → 兜底 <strong>loop</strong></span></li>
+  </ul>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">界面上的官方警告，务必读一遍</span>
+    <p>在新建任务弹窗里，当任务类型是「新建软件工程 / 软件修改」、且引擎类型选中「Agent 智能体」时，界面会弹出一条警告（原文）：</p>
+    <p><strong>「Agent 引擎可能无法完成软件交付，仅适合简单项目，建议使用循环执行」</strong></p>
+    <p>翻译成决策建议：<strong>要交付软件、要产出可运行的东西，就用循环执行（loop）；只是问一句、汇总一份、发个通知，用 Agent 智能体（agent）。</strong>不确定就用 loop，它是安全的默认值。</p>
+  </div>
+
+  <h3>4.3 角色决定「谁来干」</h3>
+
+  <p>引擎定了「方式」，角色定了「人」。角色的作用有两块：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>提示词继承</strong>：任务提示词按「任务级 &gt; 角色级 &gt; 项目级」继承，写在哪一层就覆盖哪一层。</span></li>
+    <li><input type="checkbox"><span><strong>技能白名单</strong>：角色能调用哪些工具、连接器，由它的 RunConfig 限定。白名单会写进角色上下文，任务执行时以此为准。要说明的是：目前这份白名单是<strong>建议性</strong>的——它进入上下文引导 AI 选技能，但还没在调用层做强制拦截。也就是说，别把它当成"硬门禁"，配好它主要是为了让 AI 少用错工具。</span></li>
+  </ul>
+
+  <p>打个比方：引擎是「派去的是外包工人还是内部员工」，角色是「派了个会计还是派了个程序员」。同样是「内部员工」，会计不会去改代码。</p>
+
+  <h3>4.4 两级决定对照表：10 个典型任务会落到哪</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>你的任务</th><th>会落到哪个引擎</th><th>由谁干（角色）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>新建软件工程：实现 JWT 登录模块</td><td><strong>loop</strong>（编码/长时）</td><td>全栈开发角色</td></tr>
+        <tr><td>修改现有代码里的一个 Bug</td><td><strong>loop</strong>（软件修改 mod）</td><td>全栈开发角色</td></tr>
+        <tr><td>把本周销售数据汇总成一份报告</td><td><strong>agent</strong>（信息整合）</td><td>数据分析角色</td></tr>
+        <tr><td>翻译一份英文产品说明成中文</td><td><strong>agent</strong>（快速任务）</td><td>内容角色</td></tr>
+        <tr><td>给 20 个客户批量发跟进邮件</td><td><strong>agent</strong>（工具调用为主）</td><td>销售/营销角色（需人工审核外发）</td></tr>
+        <tr><td>长时构建并部署上线到服务器</td><td><strong>loop</strong>（构建/部署）</td><td>运维/开发角色</td></tr>
+        <tr><td>基于知识库回答「我们的目标客户是谁」</td><td><strong>agent</strong>（问答/检索）</td><td>通用业务角色</td></tr>
+        <tr><td>生成 3 篇英文营销邮件文案</td><td><strong>agent</strong>（生成文案）</td><td>营销内容角色</td></tr>
+        <tr><td>跑单元测试并修复失败用例</td><td><strong>loop</strong>（测试/编码）</td><td>全栈开发角色</td></tr>
+        <tr><td>竞品调研并整合成一份对比表</td><td><strong>agent</strong>（搜索/整合）</td><td>市场研究角色</td></tr>
+        <tr><td>描述很含糊，不知道算哪类</td><td><strong>loop</strong>（兜底）</td><td>按角色 ID，未指定则默认角色</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">想省钱的读者看这里</span>
+    <p>agent 引擎不开外部进程，通常更便宜更快；loop 引擎干得重、花得多。如果你的任务其实是「问一句、汇总一下」，把它建成 agent 往往能省下不少 token。反之，你拿 agent 去交付软件，多半会得到一堆「看起来像但不完整」的产出。这个取舍见附录 C。</p>
+  </div>
+
+  <h3>4.5 想换引擎，或一开始就定死，怎么做</h3>
+
+  <p>你有两个时机可以定引擎，而且都<strong>可以事后改</strong>：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>建任务时定死</strong>：在「新建任务」弹窗的「引擎类型」里直接选。这是<strong>任务级</strong>配置，优先级最高，之后角色或项目怎么改都覆盖不了它。</span></li>
+    <li><input type="checkbox"><span><strong>事后改</strong>：在任务列表点该任务的「编辑」，改「引擎类型」后保存。下一轮生效（正在跑的那一轮不会中途换）。</span></li>
+  </ul>
+
+  <p>一个实用建议：<strong>拿不准的任务先别指定引擎</strong>，让系统的关键词启发式自己判断；等你发现它总选错，再手动定死。这样既省心，又能在需要时精确控制。反过来，如果是「一定要交付软件」的任务，<strong>建议一开始就明确指定循环执行</strong>，省得它被猜成 agent 白烧几轮。</p>
+
+  <h2>五、第 4 步：一轮里到底发生了什么（最重要的一节）</h2>
+
+  <p>现在进入正题：调度器选中你的任务，接下来这一轮（一班）里，系统按顺序做这几件事。请对照着看，每一小步我都标注了「你在哪个页面能看到」。</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>① 组装提示词</b>任务+接力+角色+知识库</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node hot"><b>② 调用引擎执行</b>产生日志</div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node"><b>③ 消耗 token 记账</b></div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node"><b>④ 生成交接班记录</b></div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node ok"><b>⑤ 完成判定</b></div>
+    <span class="zy-flow-arrow">→</span>
+    <div class="zy-flow-node warn"><b>⑥ 撞上人工节点就等你</b></div>
+  </div>
+
+  <h3>5.1 组装提示词</h3>
+
+  <p>在把活交出去之前，系统会先「把这一轮要说的话拼好」。拼进去的有五块：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>拼进去的内容</th><th>它是什么</th><th>为什么需要</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>任务描述</td><td>你在任务里填的 name / desc</td><td>告诉它这一轮干什么</td></tr>
+        <tr><td>接力摘要</td><td>上一轮留下的「本轮目标 / 已完成 / 未完成点 / 下一步」</td><td>让它接得上，不用每次从零理解</td></tr>
+        <tr><td>角色设定</td><td>这个岗位的提示词（按任务级 &gt; 角色级 &gt; 项目级继承）</td><td>决定它用什么身份、什么风格干</td></tr>
+        <tr><td>知识库检索结果</td><td>从项目/公司知识库里按相关性取出的资料</td><td>让它基于你的资料回答，少瞎编</td></tr>
+        <tr><td>优秀案例</td><td>历史上被采纳的优质产出（动态 Few-Shot）</td><td>给它看范例，产出更贴近你的口味</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这一步你在界面上<strong>看不到</strong>直接的东西——它是后台组装。但你会在日志里看到它的「痕迹」：如果提示词里带了知识库内容，AI 的回答通常会引用到你的资料。</p>
+
+  <h3>5.2 调用引擎执行，期间产生日志</h3>
+
+  <p>引擎开始干活。你在这个阶段应该去的地方是：</p>
+
+  <div class="zy-path">自动运营 <span class="sep">›</span> 运行轮次 <span class="sep">›</span> 选中某一轮 <span class="sep">›</span> 日志</div>
+
+  <p>日志面板里每一条都带一个<strong>标签</strong>，标签是英文的，这里逐个给你翻译：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>日志标签</th><th>人话解释</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>assistant</td><td>AI 的正式输出（你会读到的「正文」）</td></tr>
+        <tr><td>thinking</td><td>AI 的思考过程（它怎么想的，可能比较啰嗦）</td></tr>
+        <tr><td>tool_use</td><td>AI 决定调用某个工具（比如读文件、跑命令、发请求）</td></tr>
+        <tr><td>tool_result</td><td>那个工具返回的结果（成功或报错）</td></tr>
+        <tr><td>user</td><td>投喂给 AI 的输入（多半是系统组装的那段提示词）</td></tr>
+        <tr><td>system</td><td>系统级信息（环境、配置、警告等）</td></tr>
+        <tr><td>summary</td><td>本轮的收尾摘要（也就是下一节要讲的「交接班记录」）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>标签看着多，读日志的顺序其实很简单，按这四步看就够：</p>
+
+  <ol class="zy-steps">
+    <li><h4>先看 user，确认「这轮让它干什么」</h4><p>这一段是系统拼好的提示词。如果这里就已经跑题（比如漏带了关键资料、角色选错了），后面它再努力也白搭——问题出在配置，不在 AI。</p></li>
+    <li><h4>再看 tool_use / tool_result，看它「查了什么、拿到什么」</h4><p>工具调用失败、权限不够、文件找不到，这类报错通常就出现在 tool_result 里。排错第一现场在这里。</p></li>
+    <li><h4>然后看 assistant，看它「交出来什么」</h4><p>这是你真正会读到的正文，也是验收 Agent 主要看的部分。判断任务有没有跑偏，主要看这一块。</p></li>
+    <li><h4>最后看 summary 和 system，看它「自评干到哪 + 花了多少」</h4><p>summary 是它给自己写的交接班记录；system 里有本轮用了多少 token、跑了多久。</p></li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">日志是实时推的</span>
+    <p>运行轮次页和日志面板会通过 WebSocket <strong>实时推送</strong>日志，你不用手动刷新。如果连接不稳，页面会在 3 秒内自动回退到定时轮询，你看不到「断流」，只会看到刷新稍慢一点。面板上还会有一行小字告诉你当前是<strong>「自动刷新中，内容会随轮次更新」</strong>还是<strong>「已暂停自动刷新，内容可能已过期」</strong>——看到后者时，先手动刷新再读，别拿旧内容下判断。</p>
+  </div>
+
+  <div class="zy-note">
+    <span class="zy-note-title">「暂无日志」和「加载失败」是两回事</span>
+    <p>面板把两种情况分开显示，别混淆：<strong>「该轮次暂无日志（任务开始执行后自动生成）」</strong>是正常空态——这一轮还没产生日志（底层接口返回 404，按空态处理），等它跑起来就有；<strong>「日志加载失败（HTTP 状态码），请稍后重试；若持续失败请检查实例是否在线」</strong>才是真出错，说明请求拿到了非 404 的错误状态，这时先确认项目实例是否在线，再重试。</p>
+  </div>
+
+  <h3>5.3 消耗 token，自动记账</h3>
+
+  <p>这一轮 AI 说了多少字、读了多少字，都折算成 token，按单价计费：</p>
+
+  <div class="zy-grid c4">
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">输入单价</div>
+      <div class="zy-kpi-value">¥1</div>
+      <div class="zy-kpi-hint">每百万 token · 你喂给 AI 的内容</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">输出单价</div>
+      <div class="zy-kpi-value">¥2</div>
+      <div class="zy-kpi-hint">每百万 token · AI 产出的内容</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">缓存读取单价</div>
+      <div class="zy-kpi-value">¥0.02</div>
+      <div class="zy-kpi-hint">每百万 token · 复用的上下文，极便宜</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">记账位置</div>
+      <div class="zy-kpi-value">2 处</div>
+      <div class="zy-kpi-hint">计费明细 + 项目账本</div>
+    </div>
+  </div>
+
+  <p>单价不是死的，可以在项目详情页「运行配置 → 定价（元/百万 token）」里改。花出去的钱会写进两个地方：一是「计费明细」页（累计花费、输入/输出 Token、预算已用），二是项目账本（虚拟核算）。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">计费明细里有一个「估算」的口径，别当发票</span>
+    <p>计费明细页有一条 tooltip 原文：<strong>「其中包含按文本长度估算的兜底计费（上游未回 usage 时产生），非精确账单，请勿直接作为账单核销」</strong>。意思是：极少数情况下上游没返回精确用量，系统会按文本长度估算一笔。看趋势可以，别拿它对账。</p>
+  </div>
+
+  <h3>5.4 执行结束，生成本轮的「交接班记录」</h3>
+
+  <p>一轮干完，系统不会让这轮的成果随风而去。它会把「本轮目标 / 已完成动作 / 未完成原因 / 下一步建议」存成一份<strong>交接班记录</strong>。下一轮轮到同一个任务时，这份记录会被自动拼进提示词——这就是 5.1 里说的「接力摘要」。</p>
+
+  <p>设计上有一条硬约束：<strong>如果这一轮没干完，交接班记录必须保留「未完成点 + 下一步」</strong>，保证下一轮能续上，而不是每次重新开始。</p>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">为什么要接力，而不是一轮干到底</span>
+    <p>因为一个复杂任务（比如写一个模块）可能要几十轮、跨越好几个小时甚至几天。中间可能被人工审批、预算暂停、实例重启打断。接力摘要让 AI「睡一觉回来还记得干到哪」——这是长期运行的命脉。设计理由见附录 D。</p>
+  </div>
+
+  <h3>5.5 判断是否完成</h3>
+
+  <p>怎么算这一轮把任务干完了？规则很朴素：<strong>系统看这一轮输出的末尾有没有出现完成标记</strong>。出现了，就进入验收；没出现，就说明还没干完，下一轮接着干（带着交接班记录）。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：这个「标记」具体是看哪里</summary>
+    <div class="zy-acc-body">
+      <p>系统会在本轮输出的<strong>末尾一小段（约 50 字以内）</strong>里找约定的完成标记。之所以只看末尾，是为了避免正文里讨论到「完成」两个字就被误判为干完了。</p>
+      <p>这个细节对你的意义：<strong>如果你自己写提示词模板，别让任务的收尾语把标记的位置挤掉</strong>（比如在标记后面又加一大段总结）。想让它干净收尾，提示词里明确要求「最后单独一行输出完成标记」最稳妥。</p>
+    </div>
+  </details>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">这条规则对你有直接影响</span>
+    <p>因为「完成」是靠一个<strong>约定好的标记</strong>来判定的，所以：<strong>不要指望 AI「差不多写完了」就算完成</strong>。它是按标记来的。这也解释了很多人看到的「任务跑了很久还在跑」——不是卡住了，是还没到收尾那一刻。你可以在日志里找 summary 标签，看看它每轮觉得自己干到哪了。</p>
+  </div>
+
+  <h3>5.6 撞上人工节点 / 预算预警 / 敏感动作，就停下来等你</h3>
+
+  <p>一轮的执行不是一路畅通的。有三种情况会让它<strong>主动停下来等你</strong>：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card amber">
+      <h4>人工处理节点</h4>
+      <p>AI 要你确认某件事（审核文案、批准外发等），就建一个节点等你。</p>
+      <p>去「人工处理节点」页看。</p>
+    </div>
+    <div class="zy-card purple">
+      <h4>预算预警 / 熔断</h4>
+      <p>预算到 80% 发预警；超限直接熔断暂停。</p>
+      <p>去「计费明细」和「自动运营控制台」看。</p>
+    </div>
+    <div class="zy-card blue">
+      <h4>敏感动作</h4>
+      <p>对外发布、删除、付费、打款等被拦下，转人工。</p>
+      <p>去「人工处理节点」页看。</p>
+    </div>
+  </div>
+
+  <p>注意一个细节：你点了「暂停」之后，<strong>系统不会杀掉正在执行的那一轮</strong>，而是等它跑完再停。这是故意的——半路掐断会丢上下文。恢复后从下一轮继续，进度不丢。</p>
+
+  <h3>5.7 中断之后还能接上吗——续跑机制</h3>
+
+  <p>长期项目难免遇到中断：实例重启、你手动暂停、预算熔断。很多人的担心是「停了这么久，是不是要从头再来」。答案是不用，但系统会按停机时长分档处理：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>中断时长</th><th>系统怎么处理</th><th>你看到什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>很短（约两天内）</td><td>直接干净续跑，不额外检查</td><td>恢复后接着上一轮往下走，几乎无感</td></tr>
+        <tr><td>较长（数天到一个月）</td><td>先做一次「环境漂移检查」：比对代码有没有被改、依赖装没装、接口凭证是否还有效、数据结构变没变、知识库更新没有</td><td>恢复时可能多出一份检查结论</td></tr>
+        <tr><td>很久（超过一个月）</td><td>认为原计划可能已过时，重新规划任务集，而不是硬续</td><td>会看到任务被重排或新增</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>为什么要做「环境漂移检查」？因为 AI 上一轮是在某个环境里干到一半的。如果中间有人改过代码、换过凭证、动过数据结构，它拿着旧记忆接着干就会出错。先检查一遍再续，是防止「带病续跑」。这也是为什么<strong>长期停摆后恢复，前几轮可能看起来在「重新摸底」——那是正常的安全动作，不是它在摸鱼</strong>。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：续跑时系统到底比对了哪几项</summary>
+    <div class="zy-acc-body">
+      <p>环境漂移检查会逐项比对：代码仓库有没有新提交、运行依赖是否与上一轮一致、对外接口凭证是否仍然有效、数据结构版本有没有变化、知识库有没有新增资料。任何一项漂移达到阈值，就会从「直接续跑」降级为「带调整续跑」；漂移过大则干脆重新规划。</p>
+      <p>对普通读者来说，你只需要记住：<strong>恢复后如果任务被重排，通常是系统判断环境变了，而不是你哪里设置错了。</strong></p>
+    </div>
+  </details>
+
+  <h2>六、第 5 步：验收——为什么不是干活的 AI 自己说了算</h2>
+
+  <p>任务跑到完成标记之后，<strong>不会</strong>直接算完成。它会先过一道验收，而且这道验收是由一个<strong>独立的验收 Agent</strong>做的——这就是常说的<strong>三权分立</strong>：干活的人、验收的人、批准的人，三方分开，防止「自己给自己判及格」。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>角色</th><th>谁在担</th><th>干什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>执行（R）</td><td>员工 Agent（任务指定的角色）</td><td>真正干活、产出</td></tr>
+        <tr><td>验收</td><td>独立验收 Agent（与执行者不同的角色）</td><td>对照任务描述判定合格与否</td></tr>
+        <tr><td>批准（A）</td><td>负责人 / 管理者 Agent 或你本人</td><td>高风险产出必须人工批准</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>6.1 三种验收结论，各触发什么</h3>
+
+  <div class="zy-grid c3">
+    <div class="zy-card green">
+      <h4>通过 pass <span class="zy-badge green">完成</span></h4>
+      <p>任务标记完成，记录总轮次/总耗时，发「任务完成」通知，后续时间片跳过它。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>返工 redo <span class="zy-badge amber">重做</span></h4>
+      <p>任务重新回到调度队列（不标记完成），验收意见注入下一轮提示词，反复重做超过上限会升级人工。</p>
+    </div>
+    <div class="zy-card purple">
+      <h4>驳回 reject <span class="zy-badge red">升级</span></h4>
+      <p>任务转失败，升级到管理者 Agent 或人工处理节点，由人来判后路。</p>
+    </div>
+  </div>
+
+  <h3>6.2 去验收记录页看「两个 ID」</h3>
+
+  <div class="zy-path">自动运营 <span class="sep">›</span> 验收记录 <span class="sep">›</span> 详情</div>
+
+  <p>打开一条验收记录的详情，你会看到两个关键的 ID：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>执行者</strong>：干活的 Agent 角色 ID。</span></li>
+    <li><input type="checkbox"><span><strong>验收 Agent</strong>：判分的 Agent，<strong>和上一个是两个不同的 ID</strong>。</span></li>
+  </ul>
+
+  <p>列表上你还看得到「结论」（通过 / 返工 / 驳回）、「评分」「抽样」「成本」「人工状态」（待审批 / 已批准 / 已拒绝）。评分和报告就是验收 Agent 给出的依据。</p>
+
+  <p>另外有个「抽样」标签：低风险任务不会每次都验收，可能会按比例抽样（抽不中的本次直接放行，零成本）；高风险、对外发布、财务、合规类任务则强制全量验收，必要时还要人工批准。验收强度按任务风险分级，大致是这样：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>任务风险</th><th>验收强度</th><th>要不要人工批准</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>关键 critical</td><td>全量验收</td><td>必须人工批准</td></tr>
+        <tr><td>高 high</td><td>全量验收</td><td>视情况（对外动作、财务类需要）</td></tr>
+        <tr><td>中 medium</td><td>全量验收</td><td>一般不需要</td></tr>
+        <tr><td>低 low</td><td>按比例抽样（约三成）</td><td>不需要</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这就解释了为什么有些任务「跑完就完了」，有些却会停下来等你批——差别在风险等级。所以重要任务不要含糊描述，写得越像「关键任务」，系统给它的把关就越严。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">最重要的一句提醒：什么算「做完」必须写进描述</span>
+    <p>当前界面上<strong>没有</strong>一个单独让你填「验收标准」的输入框（该字段在接口层存在，但没开放到界面）。验收 Agent 判定时，主要依据是你写的<strong>任务描述</strong>。而且<strong>任务描述创建之后不能修改</strong>——所以更要一次写准：<strong>「什么算做完」务必写进任务描述里</strong>，而且要可验证。</p>
+    <p>反面例子：「优化一下官网」——验收 Agent 无法判定合格与否。<br>正面例子：「产出 3 篇英文营销邮件，每篇 200 词以内，包含明确 CTA 链接，保存在项目 marketing 目录下」——可逐条对照。</p>
+  </div>
+
+  <h2>七、第 6 步：通知与你的介入点</h2>
+
+  <p>前面说过，系统会在关键处停下来等你。但「等你」之前，它得先<strong>通知到你</strong>。</p>
+
+  <h3>7.1 你会收到什么</h3>
+
+  <p>通知中心里，通知按类型分（原文标签）：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>类型</th><th>含义</th><th>通常什么时候出现</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>budget_alert 预算预警</td><td>钱快不够了</td><td>预算达 80% / 熔断时</td></tr>
+        <tr><td>approval_required 审批请求</td><td>有件事等你点头</td><td>撞上人工节点 / 敏感动作时</td></tr>
+        <tr><td>task_complete 任务完成</td><td>某个任务验收通过了</td><td>验收 pass 后</td></tr>
+        <tr><td>milestone 里程碑</td><td>阶段成果达成</td><td>目标树 KR 达成时</td></tr>
+        <tr><td>campaign_update 营销更新</td><td>营销活动有进展</td><td>开营销自动化时</td></tr>
+        <tr><td>system 系统通知</td><td>系统级消息</td><td>异常、暂停、终止等</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>通知的<strong>渠道</strong>有：站内通知中心、飞书、Telegram，以及移动端审批页（手机上直接「批准 / 拒绝」）。优先级分 urgent 紧急 / important 重要 / normal 普通 / info 信息，紧急的会走多渠道推送。</p>
+
+  <h3>7.2 你的四种介入动作</h3>
+
+  <p>当系统等你时，你手上的牌其实只有四张。逐个说清「什么时候用哪张」：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>审批（批准 / 拒绝）</h4>
+      <p><strong>什么时候用</strong>：收到「审批请求」，AI 停在人工节点上。<br>
+      <strong>去哪做</strong>：人工处理节点页点「确认完成」；或打开「移动审批」页（手机端点「批准 / 拒绝」，可填审批意见）。<br>
+      <strong>效果</strong>：批准 → 任务继续推进；拒绝 → 该动作终止，转人工决策后续。<br>
+      <strong>点了没反应？不会。</strong>如果任务/节点已经不在待审批状态（状态已变更、已被他人处理、或对象不存在），系统会<strong>返回明确的中文错误</strong>（例如「任务当前状态不可审批（仅 waiting_approval 可审批；任务不存在或状态已变更）」），而不是显示成功却没改动任何东西。</p>
+    </li>
+    <li>
+      <h4>注入信息（纠偏）</h4>
+      <p><strong>什么时候用</strong>：AI 理解偏了，或你有新要求，但不想推翻任务重来。<br>
+      <strong>去哪做</strong>：到「智能体中心 → 任务」对运行中的任务点「注入」，输入新信息（placeholder「运行中注入的新信息」）；也可以把补充要求写进任务的「提示词模板」（自动运营的任务列表点「编辑」可改）。<br>
+      <strong>效果</strong>：新信息会在下一轮拼进提示词，AI 下一轮就按新信息调整。<br>
+      <strong>要特别注意</strong>：任务的<strong>描述在创建之后不能改</strong>——「编辑」只开放优先级、引擎、时限、模型、提示词模板这几项。所以「什么算做完」这类关键信息，建任务时就得一次写准。</p>
+    </li>
+    <li>
+      <h4>暂停 / 恢复</h4>
+      <p><strong>什么时候用</strong>：你想先停一停看清楚，或者不想再烧钱。<br>
+      <strong>去哪做</strong>：项目详情页「暂停 / 恢复」；自动运营控制台「暂停 / 恢复」；任务列表里对运行中的任务点「暂停」，对已暂停的点「恢复」。<br>
+      <strong>效果</strong>：当前轮跑完再停（不杀在途进程）；恢复后从下一轮继续，进度不丢。</p>
+    </li>
+    <li>
+      <h4>调整预算</h4>
+      <p><strong>什么时候用</strong>：收到预算预警或熔断，且你决定继续投钱。<br>
+      <strong>去哪做</strong>：项目详情页「预算明细 → 调整预算」；或在自动运营控制台改 AI 运行预算。<br>
+      <strong>效果</strong>：补足预算后点「恢复」，循环继续。注意兜底暂停是持久状态（跨重启保留），必须人工处理后手动恢复；此时页面上指向的是「恢复」而不是「启动」。</p>
+    </li>
+  </ol>
+
+  <h3>7.3 SLA 与超时升级</h3>
+
+  <p>人工节点不是无限期等你的。每个节点有 SLA（超时秒数）和处理人。如果你没在 SLA 内处理：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>系统按升级链通知下一位（负责人 → 管理者 → 管理员/超管），节点状态变「已升级」。</span></li>
+    <li><input type="checkbox"><span>部分节点配置了超时降级，会降级为「通知不等待」，让流程先走下去，避免整条链卡死。</span></li>
+    <li><input type="checkbox"><span>你也可以主动点「通知催促」（提醒处理人）或「升级处理」（直接跳级）。</span></li>
+  </ul>
+
+  <p>节点的「通道」分三种：<strong>红（强制人工，如对外发布、打款）/ 黄（敏感，需确认）/ 绿（例行，通知即可）</strong>。「自主级别」分 L0–L3：L0 全自主、L1 通知不等、L2 一键确认（默认）、L3 强制审核。级别越高，AI 越自由；级别越低，越依赖你。</p>
+
+  <h3>7.4 通知会不会太多？</h3>
+
+  <p>不会。系统按优先级做<strong>分渠道路由</strong>：紧急（urgent）级别的通知会<strong>多渠道同时推送</strong>（站内 + 飞书 / Telegram + 移动端），确保找到你；普通级别的则以站内通知中心为主，你有空再翻。原则就是一句话：<strong>必须现在拍板的，主动找到你；可以先放放的，安静待在通知中心。</strong></p>
+
+  <p>如果你不确定有没有漏掉什么，打开「通知中心」扫一眼就行——它<strong>是所有通知的兜底收件箱</strong>：哪怕某个外部渠道没送达，站内这条也一定在。按类型过滤，几秒钟就能看完。另外，某个通道暂时没配（比如还没接飞书）时，系统会<strong>降级为站内提示</strong>，不会让通知凭空消失。</p>
+
+  <h2>八、第 7 步：轮次推进与全局重排</h2>
+
+  <p>你已经理解了单轮和验收，现在把它放大到全局。整个项目是一个不断推进的循环，每一轮做上面那一套。除此之外还有两种特殊轮次，是你看到「界面变化」的来源。</p>
+
+  <h3>8.1 任务轮：按时间片轮流推进</h3>
+
+  <p>绝大多数轮次是任务轮——就是第 4 步讲的那一套，按排班表轮流选中任务执行。</p>
+
+  <h3>8.2 review 轮：全局重排，你会看到「任务变了」</h3>
+
+  <p>每推进一定轮数（默认距上次 review 达 20 轮），或当所有任务都完成时，系统会插入一个 <strong>review 轮</strong>。这一轮不干活，而是让 AI <strong>停下来审视全局</strong>（看代码提交记录、进度、预算、收益），然后重新排布任务集与时间片。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">看到「任务顺序变了、多了新任务」，是正常的</span>
+    <p>很多人被这个吓到：明明没动过任务，怎么列表里多出来几条、顺序也变了？这是 review 轮在起作用——AI 觉得该加新任务、该调顺序、该改权重，就会重排。重排前系统会校验（任务 id 不重复、优先级合法、时间片合法等），校验不过就保留原排班，下一轮重试，不会把排班弄坏。</p>
+    <p>手动触发 review 的能力：目前<strong>后台已经具备</strong>，但<strong>界面上还没有直接按钮</strong>（<span class="zy-badge amber">部分可用</span>）。所以现阶段你主要靠它自动触发。</p>
+  </div>
+
+  <h3>8.3 free 等待：全干完了，它也不空转烧钱</h3>
+
+  <p>如果任务全完成了（或者任务集是空的），系统会进入 <strong>free 等待</strong>模式：不再跑深度任务，只做常规检查，按间隔再 review。这个状态下<strong>不消耗 LLM</strong>。系统会给你发一条通知，原文是：</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">空闲等待通知原文</span>
+    <p>「项目已完成全部任务并空闲等待 N 轮（不再消耗 LLM）。如需继续运营，请注入新信息并触发 review 重排任务」</p>
+  </div>
+
+  <p>翻译成人话：活儿干完了，我先歇着，不花钱了。你想让它继续干，就<strong>注入新信息</strong>（给任务补充要求）或<strong>触发一次 review</strong>，让它重排任务集。</p>
+
+  <h3>8.4 我该什么时候做什么：时间轴</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>你看到的状态</th><th>意味着什么</th><th>你现在该做什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>任务待执行 pending，一直不动</td><td>循环没跑 / 在排队</td><td>查运行模式、自动运营开关、轮次页</td></tr>
+        <tr><td>轮次运行中 running</td><td>正在干活</td><td>可以看日志，什么都不用做</td></tr>
+        <tr><td>人工节点「待处理」</td><td>它在等你</td><td>尽快去「确认完成」或「批准」（注意 SLA）</td></tr>
+        <tr><td>预算「预警」标签</td><td>钱到 80%</td><td>评估补预算</td></tr>
+        <tr><td>预算「已熔断」</td><td>循环已暂停</td><td>补预算 → 点「恢复」</td></tr>
+        <tr><td>验收「返工 redo」</td><td>产出不合格，在重做</td><td>看验收报告，必要时改任务描述</td></tr>
+        <tr><td>验收「驳回 reject」</td><td>升级人工了</td><td>去人工节点拍板</td></tr>
+        <tr><td>通知中心「空闲等待」</td><td>活儿干完了</td><td>注入新信息或触发 review 继续</td></tr>
+        <tr><td>出现兜底保护暂停横幅（控制台「项目已因兜底保护暂停」／详情页「自动运营已因兜底保护暂停」）</td><td>连续失败触发了兜底</td><td>查日志找原因，处理后点「恢复」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8.5 轮间间隔：为什么不是连轴转</h3>
+
+  <p>你可能会发现，两轮之间有一段空白期，不是一停就立刻接着下一轮。这是<strong>故意的节流</strong>。轮与轮之间默认有约 60 秒的间隔，它有三个作用：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>让外部动作有时间生效</strong>：上一轮发出的请求、写入的文件、触发的构建，需要一点时间才能看到结果，急着开下一轮会读到旧状态。</span></li>
+    <li><input type="checkbox"><span><strong>给你一个插手的窗口</strong>：如果你看到日志不对，可以利用这个间隙暂停或注入新信息，而不必等它烧完一整轮。</span></li>
+    <li><input type="checkbox"><span><strong>降低资源争抢</strong>：连续多轮高负载会推高成本与失败率，留出间隔让系统喘口气。</span></li>
+  </ul>
+
+  <p>所以「下一轮怎么还没开始」通常不是故障，是在等间隔。真正要警惕的是<strong>轮次号长时间不推进、又没有任何通知</strong>——那才需要回去查附录 B 的排查树。这个间隔可以在项目详情页「运行配置 → 调度配置」里调（对应「默认间隔（秒）」一项）。</p>
+
+  <h3>8.6 轮次列表为什么只显示最近一段</h3>
+
+  <p>项目跑久了，轮次会有几百上千条。系统<strong>只保留最近一段轮次历史</strong>（大约最近 30 轮），更早的会被滚动清理。这不是丢数据，是控制体积的常规做法。</p>
+
+  <p>对你的影响是：<strong>想回溯早期某一轮到底发生了什么，要趁它还在列表里的时候看</strong>。如果你需要长期留档，建议在任务或项目层面定期把产出导出，或把重要结论沉淀进知识库——知识库不会被轮次清理影响。这也解释了很多人的疑惑：「我明明记得跑过上百轮，怎么列表里只剩几十条？」——属正常清理。</p>
+
+  <h2>九、一次完整案例走查：给独立站写 3 篇英文营销邮件</h2>
+
+  <p>把前面所有概念串一遍。假设你是一个跨境电商独立站的 OPC 创业者，运行模式是<strong>半自动</strong>，自动运营已启动，项目预算充足。你新建了这样一个任务：</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">任务描述示例（可复制改）</span>
+    <p>为我的【家居收纳类独立站】产出 3 篇英文营销邮件：分别面向「购物车放弃用户」「首单新客」「复购老客」三类人群；每篇不超过 200 词，包含一个明确 CTA 链接占位符，语气友好专业；产出保存到项目文档区，文件名 mail-1/2/3.txt。</p>
+  </div>
+
+  <p>下面是「典型情况」下接下来会发生什么（时间是量级示意，实际因模型与项目而异）：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>10:00 · 点击「确定」，任务入队</h4>
+      <p>任务状态变成 <span class="zy-badge blue">待执行 pending</span>，出现在任务管理列表。此刻没有日志、没有花费。你在日志面板刷新看不到东西——正常。</p>
+    </li>
+    <li>
+      <h4>10:03 · 第 1 轮：调度器选中它</h4>
+      <p>当前排班轮到它。系统组装提示词（任务描述 + 角色设定 + 从知识库检索到的「产品卖点」资料），交给引擎执行。因为描述里是「生成文案」，系统多会选 <strong>agent</strong> 引擎。</p>
+      <p><strong>你在界面看到</strong>：运行轮次页出现一轮，状态 运行中；日志面板开始滚动出 assistant / thinking / tool_use 条目。</p>
+    </li>
+    <li>
+      <h4>10:14 · 第 1 轮结束，没完成</h4>
+      <p>输出末尾没有出现完成标记，所以不算完成。系统生成本轮<strong>交接班记录</strong>：「已完成：邮件 1、2 草稿；未完成：邮件 3 与统一 CTA；下一步：补齐第 3 篇并统一格式」。</p>
+      <p><strong>你在界面看到</strong>：日志里出现一条 summary 标签，内容就是上面那段。</p>
+    </li>
+    <li>
+      <h4>10:15 · 轮间短暂间隔后进入下一轮</h4>
+      <p>如果排班表里还有别的任务，会先轮到别的任务；这里假设只有这一个任务，于是第 2 轮又轮到它。</p>
+    </li>
+    <li>
+      <h4>10:20 · 第 2 轮撞上人工节点，停下来等你</h4>
+      <p>AI 认为需要「确认邮件里的 CTA 链接指向」且这属于对外动作，于是创建一个<strong>人工处理节点</strong>（可能是黄通道，L2 一键确认），任务推进暂停等待。</p>
+      <p><strong>你在界面看到</strong>：通知中心出现「审批请求」；人工处理节点页出现一条「待处理」，带通道、SLA、处理人；你也可以在手机上打开「移动审批」直接批准。</p>
+    </li>
+    <li>
+      <h4>10:25 · 你批准</h4>
+      <p>你点「批准」（或人工节点页点「确认完成」）。节点状态转「已完成」，任务恢复推进。</p>
+    </li>
+    <li>
+      <h4>10:40 · 第 3 轮：出现完成标记，进入验收</h4>
+      <p>这一轮输出末尾出现完成标记。系统触发<strong>独立验收 Agent</strong>（和写文案的不是同一个 Agent）。</p>
+      <p><strong>你在界面看到</strong>：验收记录页新增一条，结论暂未定，评分与报告随后写入。</p>
+    </li>
+    <li>
+      <h4>10:42 · 验收返工（本次故意安排一次 redo）</h4>
+      <p>验收 Agent 对照你的任务描述发现：只产出了 2 篇（描述要求 3 篇），CTA 也没统一。结论 <strong>redo 返工</strong>，理由写进报告。任务回到调度队列，验收意见注入下一轮提示词。</p>
+      <p><strong>你在界面看到</strong>：验收记录结论「返工」，报告里逐条列了未达成项。</p>
+    </li>
+    <li>
+      <h4>11:05 · 第 4 轮：带着反馈补齐</h4>
+      <p>这一轮提示词里带了上一轮验收的返工理由，AI 补齐第 3 篇并统一了 CTA。再次出现完成标记 → 再次验收。</p>
+    </li>
+    <li>
+      <h4>11:07 · 验收通过，任务完成</h4>
+      <p>结论 <strong>pass 通过</strong>，任务状态转「已完成」，记录总轮次/总耗时，发一条「任务完成」通知给你。</p>
+      <p><strong>你在界面看到</strong>：任务列表状态「已完成」；验收记录结论「通过」，执行者与验收 Agent 是两个不同 ID；计费明细里能看到这个任务这几轮花掉的钱。</p>
+    </li>
+  </ol>
+
+  <p>整个链路约 1 小时出头（含一次人工审批等待）。你全程只做了一件事：点了一下「批准」。其余都是系统按排班表自动推进的。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">这个案例想教你什么</span>
+    <p>你会注意到：<strong>返工不是失败，是正常质量把关</strong>；<strong>人工节点不是卡壳，是设计上要你拍板</strong>；<strong>钱是按轮次一点点花的，不是一次性扣掉</strong>。理解了这三点，你就不会一看到 redo 或「待处理」就慌。</p>
+  </div>
+
+  <h2>十、什么时候「不自动」：人工审核模式下的链路</h2>
+
+  <p>前面讲的都是全自动 / 半自动下的自动链路。如果你选的是<strong>人工审核</strong>（新建项目向导里叫「手动」），链路完全不同：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>环节</th><th>全自动 / 半自动</th><th>人工审核（手动）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>自动运营循环</td><td>启动，自动一轮轮跑</td><td><strong>不启动</strong></td></tr>
+        <tr><td>任务怎么开始</td><td>调度器自动选中</td><td><strong>靠你手动触发</strong></td></tr>
+        <tr><td>轮次推进</td><td>自动按时间片推进</td><td>你点一次，跑一次</td></tr>
+        <tr><td>review 重排</td><td>≥20 轮或全完成时自动触发</td><td>不自动触发</td></tr>
+        <tr><td>预算熔断</td><td>轮前自动检查</td><td>每次执行时检查</td></tr>
+        <tr><td>适合谁</td><td>想让 AI 自己往前推</td><td>想看清每一步、红线多的团队</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>一个容易踩的坑：你在控制台把模式从「半自动」改成「人工审核」时，界面会提示：</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">切换提示原文</span>
+    <p>「切换后将暂停自动运营循环，仅保留人工审核驱动的执行，可在之后重新启动或调整」</p>
+    <p>也就是说，切过去之后循环会停。想让它重新自己动起来，得切回全自动 / 半自动再启动。</p>
+  </div>
+
+  <h3>人工审核模式下，一次任务是这样跑的</h3>
+
+  <p>因为少了自动调度器，人工审核模式更像「你按一下、它动一下」：</p>
+
+  <ol class="zy-steps">
+    <li><h4>你建任务</h4><p>和平时一样，填描述、优先级、角色，建完状态是「待执行」。</p></li>
+    <li><h4>你手动推动它</h4><p>循环不跑，任务不会自己开始。你需要通过任务列表里的操作把任务推向执行，它才会真正开跑。</p></li>
+    <li><h4>跑一轮，产出交给你审</h4><p>AI 按当前任务设定执行一轮，产出方案或结果，然后等你审核。</p></li>
+    <li><h4>你审核通过才继续</h4><p>审核通过，任务才进入下一步或下一轮；不通过就退回修改，反复直到你满意。</p></li>
+  </ol>
+
+  <p>一句话记住差别：<strong>全自动 / 半自动是「系统推着你走」，人工审核是「你推着系统走」。</strong>红线多、对外动作谨慎、希望每一步都亲眼确认的团队适合后者；想省人力、让 AI 自己迭代的选前者。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">模式可以中途改</span>
+    <p>三种模式不是建项时一锤定音——你可以在自动运营控制台「调整运行模式」里随时改。但要注意：切到人工审核会<strong>停掉循环</strong>，切回全自动 / 半自动后还需要重新点「启动」。改之前想清楚，别在任务跑到一半时来回切。</p>
+  </div>
+
+  <h2>十一、本章小结与下一步</h2>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>你点的不是「调用某个人」，而是<strong>把活放进排班表</strong>；系统按运行模式、任务类型、引擎、角色自动决定后续。</span></li>
+    <li><input type="checkbox"><span>任务入队后是 <strong>pending 待执行</strong>，要等调度器选中才开跑；一直 pending 基本上是「循环没跑 / 在排队 / 人工审核模式」。</span></li>
+    <li><input type="checkbox"><span><strong>时间片权重</strong>决定每 10 轮里占几轮；想更快就提权重、提优先级、减任务数。</span></li>
+    <li><input type="checkbox"><span>引擎两级决定：<strong>引擎</strong>（loop 还是 agent）定「怎么干」，<strong>角色</strong>定「谁来干」；优先级是任务级 &gt; 角色级 &gt; 项目默认。</span></li>
+    <li><input type="checkbox"><span>一轮里：组装提示词 → 执行出日志 → 记 token 账 → 生成交接班记录 → 判定完成 → 撞人工节点就停。</span></li>
+    <li><input type="checkbox"><span>验收是<strong>三权分立</strong>的，干活的不能自己判分；三种结论 通过 / 返工 / 驳回 各触发不同后续。</span></li>
+    <li><input type="checkbox"><span>你的四张牌：<strong>审批、注入信息、暂停恢复、调整预算</strong>。什么时候用哪张，看第七节。</span></li>
+    <li><input type="checkbox"><span><strong>review 轮会自动重排任务</strong>（任务变多是正常的）；全干完进 free 空闲等待，不烧钱。</span></li>
+  </ul>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">最重要的一句话</span>
+    <p>「什么算做完」必须写进<strong>任务描述</strong>。界面没有单独的验收标准输入框，验收 Agent 就靠你这段描述判分。</p>
+  </div>
+
+  <h3>三个最常见的误解，趁热澄清</h3>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>误解一：「点完任务就该马上动」</strong>。真相：任务只是入队，要等调度器在下一轮选中它，通常要等一个轮间间隔。建完就去刷日志，看不到东西是正常的。</span></li>
+    <li><input type="checkbox"><span><strong>误解二：「任务在跑就一直在烧钱」</strong>。真相：钱是按轮次花的，空闲等待（free）完全不消耗 LLM；真正持续烧钱的是「反复失败重试」，所以系统才要兜底暂停。</span></li>
+    <li><input type="checkbox"><span><strong>误解三：「验收返工就是任务失败了」</strong>。真相：返工是质量把关的正常环节，返工后带着验收意见继续干；只有「驳回」才是升级人工的信号。</span></li>
+  </ul>
+
+  <p>到这里，你已经知道「发起任务之后系统做了什么」。下一章我们把镜头转向你自己：<strong>怎么把话说对</strong>——同样一件事，说法不同，AI 的产出质量天差地别。第 12 章会给你 100 多个可直接复制的提问模板。</p>
+
+  <div class="zy-quick">
+    <a href="12-提问的艺术.html">下一章：提问的艺术（100+ 模板）</a>
+    <a href="09-自动运营.html">回看：自动运营：任务、轮次与验收</a>
+    <a href="10-软件功能开发与修改.html">回看：软件功能的开发与修改</a>
+  </div>
+
+  <h2>附录 A · 端到端时序全表</h2>
+
+  <p>把「从点击到收到成品」的每一步摊开。失败会怎样一列，是这一表最值钱的部分。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>#</th><th>步骤</th><th>触发者</th><th>系统做什么</th><th>你在界面看到什么</th><th>大概耗时</th><th>失败会怎样</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>配置就绪</td><td>你</td><td>定运行模式、确认策略、配预算、建 Agent、开功能开关</td><td>自动运营控制台、引导建项、功能管理</td><td>一次性</td><td>缺配置 → 启动被拦或任务不动</td></tr>
+        <tr><td>2</td><td>新建任务</td><td>你</td><td>表单校验 → 写库 → 状态 pending</td><td>任务管理列表多一行「待执行」</td><td>秒级</td><td>校验不过 → 弹错误提示，不入库</td></tr>
+        <tr><td>3</td><td>等调度</td><td>循环</td><td>按排班表，下一轮选中该任务</td><td>轮次页出现新轮次</td><td>一个轮间间隔内</td><td>循环未跑 → 一直 pending</td></tr>
+        <tr><td>4</td><td>轮前预算检查</td><td>循环</td><td>查 AI 运行预算；≥80% 预警，超限熔断</td><td>计费明细「预警 / 已熔断」</td><td>-</td><td>熔断 → 暂停循环 + 通知</td></tr>
+        <tr><td>5</td><td>组装提示词</td><td>系统</td><td>拼任务描述 + 接力摘要 + 角色设定 + RAG + 优秀案例</td><td>日志里可间接看到知识库引用</td><td>秒级</td><td>角色/RAG 缺失 → 用默认值兜底</td></tr>
+        <tr><td>6</td><td>选择引擎</td><td>系统</td><td>任务级 &gt; 角色级 &gt; 项目默认 → loop/agent</td><td>轮次页「引擎」列</td><td>即时</td><td>引擎未就绪 → 跳过该轮并记录</td></tr>
+        <tr><td>7</td><td>执行一轮</td><td>引擎</td><td>loop 起子进程 / agent 进程内 LLM+ToolCall</td><td>状态「运行中」，日志实时滚动</td><td>分钟级（视任务）</td><td>超时 → 强杀，进入下一轮（不算失败）</td></tr>
+        <tr><td>8</td><td>计费入账</td><td>系统</td><td>按 token 单价折算，写计费明细 + 项目账本</td><td>计费明细累计花费、输入/输出 Token</td><td>轮末</td><td>上游无 usage → 按长度估算（标注「估算」）</td></tr>
+        <tr><td>9</td><td>生成交接班记录</td><td>系统</td><td>提取「目标/动作/未完成/下一步」存档</td><td>日志「summary」标签</td><td>轮末</td><td>超长截断，不影响流程</td></tr>
+        <tr><td>10</td><td>完成判定</td><td>系统</td><td>看输出末尾有无完成标记</td><td>无直接入口，但从轮次状态推断</td><td>即时</td><td>无标记 → 下一轮继续（不是失败）</td></tr>
+        <tr><td>11</td><td>人工/敏感拦截</td><td>系统</td><td>红/黄通道 → 建人工节点，任务暂停等待</td><td>通知中心「审批请求」；人工处理节点「待处理」</td><td>等你</td><td>超 SLA → 升级或降级（见附录 B）</td></tr>
+        <tr><td>12</td><td>独立验收</td><td>验收 Agent</td><td>对照任务描述判定 pass / redo / reject</td><td>验收记录页新增记录</td><td>分钟级</td><td>解析失败 → 降级 redo + 转人工复核</td></tr>
+        <tr><td>13</td><td>结论流转</td><td>系统</td><td>pass→完成；redo→回队列；reject→升级人工</td><td>任务状态与验收结论变化</td><td>即时</td><td>redo 超上限 → 转人工复核</td></tr>
+        <tr><td>14</td><td>通知你</td><td>系统</td><td>按类型与优先级走站内/飞书/Telegram/移动审批</td><td>通知中心 / 手机</td><td>秒级</td><td>渠道异常 → 降级为站内提示</td></tr>
+        <tr><td>15</td><td>轮次推进</td><td>循环</td><td>sleep 间隔后进入下一轮；达 20 轮或全完成转 review</td><td>轮次页轮次号递增</td><td>间隔默认 60 秒</td><td>调度损坏 → 从备份回退</td></tr>
+        <tr><td>16</td><td>失败兜底</td><td>系统</td><td>1–2 次降级重试 → 第 3 次升级人工 → 超限告警退出</td><td>兜底保护暂停横幅（控制台「项目已因兜底保护暂停」／详情页「自动运营已因兜底保护暂停」）</td><td>-</td><td>退出后需人工处理再「恢复」</td></tr>
+        <tr><td>17</td><td>全完成空闲</td><td>循环</td><td>进入 free 等待，不消耗 LLM，按间隔再 review</td><td>通知「项目已完成全部任务并空闲等待 N 轮」</td><td>持续</td><td>注入新信息 / 触发 review 可继续</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 B · 「我的任务为什么没动」排查树</h2>
+
+  <p>从上往下，一层层问自己。每一支都给了「怎么确认」和「怎么办」。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>症状</th><th>怎么确认</th><th>怎么办</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>项目没启动</strong></td>
+          <td>项目详情页头部状态不是「运行中」；项目状态可能是 paused / stopped</td>
+          <td>点「启动」或「恢复」</td>
+        </tr>
+        <tr>
+          <td><strong>自动运营没开</strong></td>
+          <td>自动运营控制台状态不是「运行中」，或卡片显示未启用</td>
+          <td>点「启动」；若被策略门槛拦住，先去确认执行策略</td>
+        </tr>
+        <tr>
+          <td><strong>策略未确认</strong></td>
+          <td>引导建项页「策略确认」显示「策略未确认」</td>
+          <td>去项目执行策略卡点「确认策略」「完成建项」，再启动</td>
+        </tr>
+        <tr>
+          <td><strong>人工审核模式</strong></td>
+          <td>运行模式显示「人工审核」</td>
+          <td>这是设计行为——循环不跑。要么手动触发任务，要么切回全自动/半自动再启动</td>
+        </tr>
+        <tr>
+          <td><strong>任务在排队</strong></td>
+          <td>运行轮次页有轮次在跑，但选中的是别的任务</td>
+          <td>正常。想更快：提时间片权重、提优先级、减任务数</td>
+        </tr>
+        <tr>
+          <td><strong>任务自身被暂停</strong></td>
+          <td>任务列表该行状态是「已暂停」</td>
+          <td>点该行的「恢复」</td>
+        </tr>
+        <tr>
+          <td><strong>任务在「规划中」</strong></td>
+          <td>任务是 eng / mod 类型，状态是「规划中 planning」</td>
+          <td>规划中的任务不参与调度。点「继续规划」或「继续修改」把向导走完</td>
+        </tr>
+        <tr>
+          <td><strong>等待人工节点</strong></td>
+          <td>人工处理节点页有「待处理」，且关联到该任务</td>
+          <td>去审批（确认完成 / 批准 / 移动审批）</td>
+        </tr>
+        <tr>
+          <td><strong>预算熔断</strong></td>
+          <td>计费明细显示「已熔断」；自动运营控制台「熔断：是」</td>
+          <td>补足预算 → 点「恢复」继续（页面引导指向「恢复」）</td>
+        </tr>
+        <tr>
+          <td><strong>兜底暂停</strong></td>
+          <td>控制台显示「项目已因兜底保护暂停」（项目详情页措辞为「自动运营已因兜底保护暂停」）</td>
+          <td>兜底是持久状态。查日志找连续失败原因，处理后在控制台点「恢复」继续（兜底暂停时不再引导去点已禁用的「启动」）</td>
+        </tr>
+        <tr>
+          <td><strong>空闲等待 free</strong></td>
+          <td>收到「已完成全部任务并空闲等待 N 轮」通知</td>
+          <td>不是故障。注入新信息或触发 review 重排任务即可继续</td>
+        </tr>
+        <tr>
+          <td><strong>验收返工中</strong></td>
+          <td>验收记录里该任务最近一条结论是「返工」</td>
+          <td>正常质量把关。看验收报告，必要时修改任务描述让标准更明确</td>
+        </tr>
+        <tr>
+          <td><strong>引擎执行超时</strong></td>
+          <td>轮次耗时接近「时限(秒)」，状态可能为超时</td>
+          <td>超时后自动进入下一轮（不算失败）。任务太大就拆分，或调大「时限(秒)」</td>
+        </tr>
+        <tr>
+          <td><strong>连续失败退出</strong></td>
+          <td>任务 fail_count 高，系统通知里有告警</td>
+          <td>降级重试→升级人工→告警退出。查日志定位根因（依赖缺失、权限不足等），处理后恢复</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">排查口诀</span>
+    <p>先看<strong>模式</strong>（人工审核？），再看<strong>开关</strong>（循环启动了吗？），再看<strong>钱</strong>（熔断了吗？），再看<strong>轮次</strong>（排到了吗？），最后看<strong>节点</strong>（在等你吗？）。九成的「任务不动」逃不出这五问。</p>
+  </div>
+
+  <h2>附录 C · 引擎选择决策表</h2>
+
+  <p>拿不准用哪个引擎时查这里。默认建议：<strong>不确定就用 loop</strong>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>任务特征</th><th>推荐引擎</th><th>原因</th><th>风险</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>写代码、改代码、修 Bug</td><td><strong>loop</strong></td><td>需要真正读写文件、跑命令</td><td>agent 做会只出「伪代码/片段」</td></tr>
+        <tr><td>构建、部署上线</td><td><strong>loop</strong></td><td>长时、多步骤、涉及环境</td><td>agent 无法执行构建</td></tr>
+        <tr><td>跑测试并修复</td><td><strong>loop</strong></td><td>需要反复执行与验证</td><td>agent 无法实跑</td></tr>
+        <tr><td>复杂多步骤工程任务</td><td><strong>loop</strong></td><td>长上下文、可迭代</td><td>轮次多、花费高</td></tr>
+        <tr><td>查询一条信息</td><td><strong>agent</strong></td><td>快、便宜</td><td>复杂任务会不堪重负</td></tr>
+        <tr><td>汇总 / 翻译 / 分类</td><td><strong>agent</strong></td><td>信息整合，无外部副作用</td><td>需注意输出准确度</td></tr>
+        <tr><td>生成文案、邮件草稿</td><td><strong>agent</strong></td><td>内容生成为主</td><td>对外发送仍需人工审核</td></tr>
+        <tr><td>基于知识库问答</td><td><strong>agent</strong></td><td>检索 + 生成，轻量</td><td>知识库没料会答得空</td></tr>
+        <tr><td>调用外部接口 / 发通知 / 发邮件</td><td><strong>agent</strong></td><td>以工具调用为主</td><td>写操作要人工审核</td></tr>
+        <tr><td>数据分析出报表</td><td><strong>agent</strong></td><td>整合 + 计算</td><td>数据源未接则无数据</td></tr>
+        <tr><td>描述含糊、不确定</td><td><strong>loop</strong>（兜底）</td><td>安全默认值，能力更强</td><td>费用相对高</td></tr>
+        <tr><td>要交付一个能跑的东西</td><td><strong>loop</strong></td><td>软件交付必须 loop</td><td>用 agent 会拿不到可用交付物</td></tr>
+        <tr><td>想先低成本探路</td><td><strong>agent</strong> 试跑，再切 loop</td><td>先小成本验证方向</td><td>要记得在正式交付前切回 loop</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">界面原文再强调一次</span>
+    <p>软件工程 / 软件修改类任务选中 Agent 智能体时弹的警告是：<strong>「Agent 引擎可能无法完成软件交付，仅适合简单项目，建议使用循环执行」</strong>。这不是客套话，是实打实的交付边界。</p>
+  </div>
+
+  <h2>附录 D · 设计依据摘录（为什么这么设计）</h2>
+
+  <p>下面每条都是从设计文档里摘的「意图」，配上人话解释。想深入了解的读者，出处文件在本节末尾。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>设计点</th><th>设计文档的意图</th><th>人话解释</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>时间片 + 轮次制</td>
+          <td>「按『时间片 + 轮次制』将多任务轮流推进，保证每个任务周期性获得处理时间」</td>
+          <td>不让一个卡住的长任务拖垮全局；急的任务给更多片，大家轮流获得关注。</td>
+        </tr>
+        <tr>
+          <td>接力摘要（task_summary）</td>
+          <td>「每轮结束保存 task_summary（本轮目标/动作/未完成点/下一步），下一轮注入继续」</td>
+          <td>让 AI「睡一觉回来还记得干到哪」，支撑跨小时、跨天的长期运行。</td>
+        </tr>
+        <tr>
+          <td>完成标记驱动</td>
+          <td>「输出末尾出现 [Task finished] 标记 → 触发独立验收」</td>
+          <td>用一条明确信号决定「这一轮算不算干完」，避免「差不多」的模糊判定。</td>
+        </tr>
+        <tr>
+          <td>三权分立验收</td>
+          <td>「执行（员工 Agent）/ 验收（独立验收 Agent）/ 批准（负责人）三方分离，防止自审自批」</td>
+          <td>干活的和判分的不能是同一个 AI，否则质量没人把关。</td>
+        </tr>
+        <tr>
+          <td>review 轮</td>
+          <td>「定期让 AI 审视全局（git log、进度、预算、收益），重排任务集与时间片」</td>
+          <td>项目跑久了方向会偏，需要定期停下来重新看全局、重新排活。</td>
+        </tr>
+        <tr>
+          <td>free 空闲等待</td>
+          <td>「任务集为空或全完成时进入，只做常规检查、按间隔再 review，避免空转烧钱」</td>
+          <td>活儿干完了就歇着，别让 AI 为了「有事做」而空烧 token。</td>
+        </tr>
+        <tr>
+          <td>失败兜底三级</td>
+          <td>「第 1–2 次降级重试 → 第 3 次升级 → 超上限告警退出（通知 + 暂停循环，防烧钱）」</td>
+          <td>出问题先自救、再找人、最后停下来；绝不无限重试烧钱。</td>
+        </tr>
+        <tr>
+          <td>暂停不杀子进程</td>
+          <td>「pause 是当前轮执行完成后进入等待，不杀正在执行的子进程，避免丢上下文」</td>
+          <td>半路掐断会让 AI 忘记进度，所以停要停得「文明」。</td>
+        </tr>
+        <tr>
+          <td>只有全自动/半自动跑循环</td>
+          <td>「run_mode=full_auto/semi_auto 才启用 auto-ops；manual_review 不启用」</td>
+          <td>人工审核模式就是要人盯，不能背着人自动跑。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>出处</strong>：以上分别摘自 <code>wiki/TAD-v2/04-autoops-调度与轮次.md</code>（模块一 1.1、模块四 4.4.3/4.4.4/4.4.6、模块五 5.4）与 <code>wiki/TAD-v2/02-项目服务器执行引擎.md</code>（模块二 2.1/2.4.3/2.4.7）。空转与兜底的原文另见 <code>wiki/manuals/zy-engine/release/04-autoops调度与轮次/使用手册.md</code> 第一节与第六节。</p>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

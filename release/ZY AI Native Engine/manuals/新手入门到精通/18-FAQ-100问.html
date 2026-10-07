@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第18章 100 问 FAQ · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 18 章 · 随时查阅</div>
+    <h1>第18章 100 问 FAQ</h1>
+    <p class="zy-lead">100 个最常被问到的实操问题，按 10 类折叠速查。遇到卡点先来这里搜关键词，照着做就能解决。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 45 分钟</span>
+      <span class="zy-badge green">急救手册</span>
+      <span class="zy-badge amber">重点：结论 + 操作路径 + 坑</span>
+    </div>
+  </header>
+
+  <h2>你将学会</h2>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>用「类别 → 关键词 → 照做」三步，在 30 秒内找到你要的答案</span></li>
+    <li><input type="checkbox"><span>看懂 100 问覆盖的 10 个类别，知道什么问题该去哪一类</span></li>
+    <li><input type="checkbox"><span>遇到「项目不动了」「熔断：是」「一直待执行」这类急症时，直接跳到指定问题处置</span></li>
+    <li><input type="checkbox"><span>记住一批能背下来的口诀，不用每次都回来翻手册</span></li>
+    <li><input type="checkbox"><span>知道哪些事永远不该交给 AI，看到红线警告时立刻停手</span></li>
+  </ul>
+
+  <h2>一、这一章怎么用</h2>
+
+  <p>前面十七章是「从头读到尾」的教程，这一章不一样——它是<strong>急救手册</strong>。你不需要读完，只需要在卡住的那一刻，用最快速度找到那一条，照着做。所以每一问都按同一个结构写：<strong>先给结论，再给操作路径，最后提醒坑和延伸阅读</strong>。任何一问单独拿出来都能解决问题，不用回头读上下文。</p>
+
+  <h3>100 问分成 10 类</h3>
+
+  <p>这 100 个问题按「你正在做什么」分了 10 类，每类 10 问。先看这张表，确定你的问题属于哪一类，再往下翻。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>类别</th><th>问题数</th><th>典型问题举例</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>一、账号与公司</strong></td><td>10</td><td>收不到验证邮件？公司名称能改吗？怎么邀请同事？解散公司会怎样？</td></tr>
+        <tr><td><strong>二、项目与预算</strong></td><td>10</td><td>能不能只建项目？预算填多少合适？0 表示什么？超了会怎样？</td></tr>
+        <tr><td><strong>三、运行模式与自主级别</strong></td><td>10</td><td>全自动和半自动差在哪？L0–L3 是什么？怎么临时放权？怎么紧急停止？</td></tr>
+        <tr><td><strong>四、智能体与组织</strong></td><td>10</td><td>AI 团队会自动配好吗？技能库有现成的吗？一键扩编能撤销吗？管理权限能给 AI 吗？</td></tr>
+        <tr><td><strong>五、任务与自动运营</strong></td><td>10</td><td>怎么新建任务？为什么一动不动？时间片是什么？失败了会一直重试吗？</td></tr>
+        <tr><td><strong>六、验收与返工</strong></td><td>10</td><td>谁验收？返工和驳回差在哪？验收标准写在哪？能不能跳过验收？</td></tr>
+        <tr><td><strong>七、知识库与资料</strong></td><td>10</td><td>支持哪些格式？一直「解析中」怎么办？该传哪一层？客户能问吗？</td></tr>
+        <tr><td><strong>八、账本与花费</strong></td><td>10</td><td>两条账本有什么区别？钱花在哪看？怎么省钱？能当发票吗？</td></tr>
+        <tr><td><strong>九、软件功能与开发</strong></td><td>10</td><td>想加个功能怎么弄？向导走一半会丢吗？怎么部署？为什么功能用不了？</td></tr>
+        <tr><td><strong>十、出错与排障</strong></td><td>10</td><td>项目一直不动？兜底暂停怎么恢复？英文报错看不懂？还是搞不定怎么办？</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>三步找到答案</h3>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>先按类别找</h4>
+      <p>用上面那张分类表，确定你的问题属于哪一类，直接翻到对应的小节。每类的标题里都写明了编号范围，比如「项目与预算（Q11–Q20）」。</p>
+    </li>
+    <li>
+      <h4>再用浏览器 Ctrl+F 搜关键词</h4>
+      <p>按 <strong>Ctrl+F</strong>（Mac 上按 <strong>Command+F</strong>），搜你<strong>在界面上看到的原话</strong>，比搜你脑子里的术语更快。最有效的一批关键词：<strong>熔断、兜底、待执行、返工、解析中、排队、离线、Disconnected、邀请码、解析、充值、导出、回滚、权限租赁、时间片</strong>。搜到之后，答案就在那一段里。</p>
+    </li>
+    <li>
+      <h4>照着「操作路径」做</h4>
+      <p>每条答案里都有一条蓝色底的<strong>界面路径</strong>，从上到下点一遍即可。做到一半发现和书里不一样？先检查功能开关（deploy / backup），再以实际界面为准。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">两条查找捷径</span>
+    <p>① 附录 A 是 100 问的<strong>索引总表</strong>（编号 / 问题 / 关键提醒），适合快速扫读定位。<br>
+    ② 附录 B 是<strong>症状处置速查卡</strong>，把「你看到的症状」和「第一步做什么」直接对上，可以单独打印贴在工位上。</p>
+  </div>
+
+  <h3>急症索引：你看到的症状 → 直接跳到第几问</h3>
+
+  <p>如果你现在<strong>正卡着</strong>，别按类别找了，直接在这张表里找你看到的那行，跳到对应问题。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>你在界面上看到</th><th>最可能是</th><th>跳到</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>项目一直不动、自动运营没动静</td><td>循环没开 / 模式是人工审核 / 兜底暂停</td><td><strong>Q91</strong></td></tr>
+        <tr><td>任务状态一直是「待执行」</td><td>循环没跑，或在排队等时间片</td><td><strong>Q42</strong>、Q43</td></tr>
+        <tr><td>控制台横幅「项目已因兜底保护暂停」／项目详情页横幅「自动运营已因兜底保护暂停」</td><td>连续失败或异常被兜底刹停</td><td><strong>Q93</strong>、Q98</td></tr>
+        <tr><td>预算运行态「熔断：是」</td><td>预算已耗尽，循环被拉闸</td><td><strong>Q76</strong>、Q16</td></tr>
+        <tr><td>「项目已完成全部任务并空闲等待 N 轮」</td><td>没活了，不是故障</td><td><strong>Q50</strong>、Q44</td></tr>
+        <tr><td>「降级」「熔断」「已终止」分不清</td><td>三种预算运行态，严重程度递增</td><td><strong>Q92</strong></td></tr>
+        <tr><td>边缘客户端一直 <code>Status: Disconnected</code></td><td>进程 / 网络 / 服务器配置问题</td><td><strong>Q69</strong></td></tr>
+        <tr><td>文档一直「解析中」或停在「待处理」</td><td>状态链没走完，或文件本身有问题</td><td><strong>Q61</strong></td></tr>
+        <tr><td>知识库里搜不到刚传的资料</td><td>文档没到「就绪」或层级放错</td><td><strong>Q64</strong>、Q63</td></tr>
+        <tr><td>邀请同事进不来 / 提示已过期</td><td>过了 7 天有效期，或用错邮箱登录</td><td><strong>Q40</strong>、Q6</td></tr>
+        <tr><td>任务动不了，发现停在「规划中」</td><td>软件工程向导没走完</td><td><strong>Q83</strong>、Q82</td></tr>
+        <tr><td>验收结论老出「返工」</td><td>「什么算做完」没写清楚</td><td><strong>Q55</strong>、Q53</td></tr>
+        <tr><td>验收结论「驳回」，任务转人工了</td><td>任务前提有问题，需回到定义层</td><td><strong>Q56</strong>、Q52</td></tr>
+        <tr><td>「余额 … 已低于预警阈值 …」</td><td>公司账户余额快见底</td><td><strong>Q77</strong></td></tr>
+        <tr><td>账单数字和你的估算对不上</td><td>含估算 / 未计量计费，别强行对账</td><td><strong>Q74</strong>、Q72</td></tr>
+        <tr><td>点「确认创建任务」提示草稿为空</td><td>没先跟 AI 对话生成提示词</td><td><strong>Q85</strong></td></tr>
+        <tr><td>点了部署 / 备份没反应</td><td>deploy / backup 功能开关没开</td><td><strong>Q87</strong>、Q90</td></tr>
+        <tr><td>AI 好像在做不该做的事</td><td>立刻紧急停止，再排查</td><td><strong>Q30</strong>、Q100</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h2>二、账号与公司（Q1–Q10）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q1. 我注册了，但一直没收到验证邮件，是不是注册失败了？</summary>
+    <div class="zy-acc-body">
+      <p>不是。当前注册流程<strong>不需要邮箱验证</strong>——你在注册页填完「用户名 / 邮箱 / 密码 / 确认密码」点注册，系统直接提示「注册成功，请登录」并跳回登录页。所以压根没有「等验证邮件」这一步。</p>
+      <p>如果注册没成功，真正的原因通常是这两种：<strong>邮箱已被注册</strong>（提示「用户已存在」，那就直接去登录）；或者<strong>字段没通过校验</strong>（用户名 1–64 位、密码 6–64 位、两次密码要一致、邮箱格式要合法）。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">邮箱不是随便填的</span>
+        <p>邮箱就是你以后的<strong>登录账号</strong>，也是系统识别「你是谁」的唯一凭据。用户名只是显示名，可以重复、可以改；邮箱一旦注册就唯一。请填你长期在用的真实邮箱，别用临时邮箱。</p>
+      </div>
+      <p>相关：见第 02 章「从注册到登录」。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q2. 建公司时行业选错了，会不会影响 AI 干活？</summary>
+    <div class="zy-acc-body">
+      <p>结论：<strong>不影响，而且随时能改。</strong>公司这一层的「行业类型」目前只用于展示和统计（我的公司列表里的「行业」列、超管按行业搜索），<strong>不会注入到 AI 的执行逻辑里</strong>，不影响模板推荐、也不影响 AI 策略。</p>
+      <p>想改就去改：</p>
+      <div class="zy-path">公司管理 <span class="sep">›</span> 公司设置 <span class="sep">›</span> 行业类型 <span class="sep">›</span> 保存修改</div>
+      <p>注意这里已经变成<strong>自由文本框</strong>，可以输入任意文字，不必局限在建公司时的 14 个下拉选项里。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">别和项目里的「行业」搞混</span>
+        <p>真正可能影响 AI 的，是<strong>项目</strong>里那个另建的「行业」字段（自由文本，建项目时自己填）。公司行业和项目行业是两回事，填错公司行业不用慌。</p>
+      </div>
+      <p>相关：见第 02 章「这些信息对后续有什么影响」、第 03 章字段影响表。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q3. 公司名称能改吗？改了会不会出问题？</summary>
+    <div class="zy-acc-body">
+      <p>能改，代价极低。路径：<div class="zy-path">公司管理 <span class="sep">›</span> 公司设置 <span class="sep">›</span> 公司名称 <span class="sep">›</span> 保存修改</div>保存成功会提示「保存成功」，系统内即时生效。</p>
+      <p>公司名称会出现在「我的公司」列表、顶栏公司切换器、面包屑、公司账本等处，也可能成为对外内容署名的一部分。改名本身没有历史成本，但<strong>如果你已经在对外材料（名片、邮件签名、宣传页）里署了旧名，那些站外的地方要你自己同步改</strong>。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">口诀：名称是招牌，不是指令</span>
+        <p>公司名称只是标识，<strong>不会改变 AI 的行为</strong>。所以起名时想的是「客户看了认不认」，不用琢磨「怎么写才能让 AI 更聪明」。</p>
+      </div>
+      <p>相关：见第 02 章、Q10（多公司）。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q4. 我最多能建几家公司？</summary>
+    <div class="zy-acc-body">
+      <p>系统层面对公司数量<strong>没有硬性上限</strong>，你想建几家都行。但这不是「多多益善」——建议按<strong>业务主体</strong>来划：不同业务主体、需要隔离风险和账的两摊生意，才值得各建一家公司。</p>
+      <p>判断标准就三条：<strong>是不是不同业务主体</strong>（跨境电商 vs 咨询业务）；<strong>要不要分开核算</strong>（财务或战略上要分开算）；<strong>要不要隔离风险</strong>（一条线出问题不牵连另一条）。满足任一，就分开建。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">早期别拆一堆空壳公司</span>
+        <p>公司是<strong>组织容器</strong>，项目才是<strong>生意容器</strong>——同一家公司下可以挂多个项目。一上来就建好几家公司，注意力全分散了，反而不如先把一条业务线跑通。真出现第二个业务主体再开也不迟。</p>
+      </div>
+      <p>相关：见第 02 章「多公司的用法」、Q10。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q5. 怎么邀请同事加入公司？</summary>
+    <div class="zy-acc-body">
+      <p>路径：<div class="zy-path">公司管理 <span class="sep">›</span> 成员邀请 <span class="sep">›</span> 生成邀请</div>弹窗里可以填「邮箱」（留空则不限邮箱，谁拿到码都能用）和「角色」（管理员 / 普通成员 / AI Agent），点「生成」，成功提示「邀请生成成功」。</p>
+      <p>然后把<strong>邀请码或链接</strong>发给对方，对方注册/登录后通过「接受邀请」加入公司。列表里能看到「邀请码 / 邮箱 / 角色 / 状态 / 过期时间」，状态分待接受 / 已接受 / 已过期。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">这里选不了「超级管理员」</span>
+        <p>邀请弹窗的角色只有管理员 / 普通成员 / AI Agent 三种。<strong>超级管理员不能通过邀请发放</strong>，只能由公司所有者在「成员管理 → 编辑成员」里授予。另外，只有所有者或管理员才能管理邀请，其他人看到的是一条「仅公司所有者/管理员可管理邀请」的提示。</p>
+      </div>
+      <p>相关：见第 02 章「成员邀请」、第 14 章（团队与治理）。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q6. 邀请码过期了怎么办？</summary>
+    <div class="zy-acc-body">
+      <p>重新生成一个就行。邀请码的<strong>有效期是 7 天</strong>，超过就变成「已过期」状态，对方再点会失败。</p>
+      <p>做法：<div class="zy-path">公司管理 <span class="sep">›</span> 成员邀请 <span class="sep">›</span> 生成邀请</div>生成一条新的，把新码发出去。列表里旧的那条会显示「已过期」，可以直接忽略，不影响新码使用。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">过期不是故障</span>
+        <p>7 天有效期是刻意的安全设计——邀请码相当于一张短期门禁卡，长期有效会变成风险。所以别把邀请码贴在群里长期挂着，也别为了「永久有效」反复折腾，直接重新生成即可。</p>
+      </div>
+      <p>相关：见第 02 章、Q5。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q7. 怎么把某个权限单独给同事，而不是让他当管理员？</summary>
+    <div class="zy-acc-body">
+      <p>用权限矩阵逐项开。<div class="zy-path">公司管理 <span class="sep">›</span> 成员管理 <span class="sep">›</span> 编辑 <span class="sep">›</span> 权限</div>里面有 <strong>14 项权限开关</strong>：通用 11 项（读 / 写 / 运行任务 / 花钱 / 外发邮件 / 装插件 / 装软件 / 加 MCP / 优化提示词 / 运行命令行 / 调权重）+ 管理 3 项（暂停项目 / 暂停任务 / 用户管理，<strong>仅人类可选</strong>）。</p>
+      <p>默认分配是：超级管理员和管理员拿满 14 项，普通成员和 AI Agent 只有 11 项通用权限。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">层级门控：你不能改平级或上级</span>
+        <p>点「编辑」或「移除」时，如果对方层级不比你低，按钮会被禁用并提示「无权管理该成员：需公司所有者，或角色层级高于对方」。另外，<strong>界面上 AI Agent 拿不到那 3 项管理权限</strong>，选了会提示「AI Agent 不可授予管理权限」。<span class="zy-badge amber">部分可用</span>要如实说：当前这层限制做在<strong>前端</strong>，后端强制拦截仍在排期中，别把它当成一道服务端已生效的防线。</p>
+      </div>
+      <p>相关：见第 02 章「成员与权限速查」、第 14 章。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q8. 我能把公司转让给别人吗？转让后还能收回吗？</summary>
+    <div class="zy-acc-body">
+      <p>能转让，但<strong>不能收回</strong>。<div class="zy-path">公司管理 <span class="sep">›</span> 公司设置 <span class="sep">›</span> 转让与解散 <span class="sep">›</span> 选择公司成员 <span class="sep">›</span> 确认转让</div>确认弹窗原文是「确定要转让公司所有权吗？此操作不可撤销。」</p>
+      <p>转让后，对方成为所有者（最高权限），你不再是最高权限。所有者才能解散公司、再次转让、授予超级管理员，公司的项目和计费主体也挂在所有者名下。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">这是不可撤销操作</span>
+        <p>转出去就收不回来了，系统没有「撤销转让」的按钮。点之前务必确认对方是可信的团队成员。<strong>千万不要把它当测试点着玩。</strong></p>
+      </div>
+      <p>相关：见第 02 章「公司设置」、Q9。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q9. 解散公司会发生什么？数据还能找回来吗？</summary>
+    <div class="zy-acc-body">
+      <p>解散后<strong>无法恢复</strong>。界面说明原文是「解散后公司将无法恢复，所有数据将被软删除。仅所有者可操作。」按钮是红色的「解散公司」，需要二次确认。</p>
+      <p>注意「软删除」这个词——它指的是数据被标记为删除、从你的正常视图里消失，但<strong>对普通用户来说效果就是没了</strong>，系统没有给你一个「回收站」去恢复。所以别把「软删除」理解成「随时能撤回」。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">先停一停再决定</span>
+        <p>想停掉一条业务线，正确做法是<strong>暂停或停止项目</strong>（可逆），而不是解散公司（不可逆）。只有当你确定这个公司主体彻底不要了，才用解散。而且这一步<strong>只有所有者能做</strong>。</p>
+      </div>
+      <p>相关：见第 02 章、Q8、Q19（项目能不能删）。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q10. 我一个人能同时管几家公司？怎么切换？</summary>
+    <div class="zy-acc-body">
+      <p>可以同时拥有/加入多家公司，没有数量限制。切换用<strong>顶栏的公司切换器</strong>：placeholder 是「选择公司」，第一项固定是「全部公司」（等于不指定公司），下面是每一家你加入的公司。</p>
+      <p>选中某一家，它就变成「当前公司」，之后建项目、看知识库、进账本都会落在它下面。选「全部公司」相当于清空当前公司，各处的数据会变成跨公司汇总或不指定。切换公司时系统会顺手清掉残留的项目上下文，避免串台。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">口诀：切公司 = 换桌面</span>
+        <p>看到「新建项目」按钮变灰、知识库提示「请先在顶部选择公司」，八成就是当前没选公司。先看顶栏，再操作。</p>
+      </div>
+      <p>相关：见第 02 章「多公司的用法」、Q4。</p>
+    </div>
+  </details>
+
+  <h2>三、项目与预算（Q11–Q20）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q11. 建项目必须先建公司吗？能不能只建项目？</summary>
+    <div class="zy-acc-body">
+      <p>必须先有公司。项目不是独立存在的，它一定要挂在某家公司下面——公司是「组织容器」（放人、放钱、放共用知识），项目是「生意容器」（一条业务线，独立服务器、独立预算、独立账本）。</p>
+      <p>不选公司会出现两个拦截：项目管理页顶部黄色提示「请先选择或创建一个公司」，同时「新建项目」按钮变灰；就算你绕过它打开向导，点到最后一步「提交创建」时也会弹「请先选择公司」，不让提交。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">口诀：公司 → 项目 → 任务</span>
+        <p>这是三层容器，迷路时先问自己「我现在在哪一层」。建项目前的第一个动作，永远是回头看顶栏公司切换器选对了没有。</p>
+      </div>
+      <p>相关：见第 03 章「建项目前必须知道的一件事」、Q10。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q12. 项目类型和行业会影响 AI 干活吗？选错要不要紧？</summary>
+    <div class="zy-acc-body">
+      <p>不影响执行逻辑，选一个最接近的就行，拿不准就选「通用业务」。「项目类型」有五个选项（软件开发 / 电商运营 / 内容创作 / 智能制造 / 通用业务），「行业」是自由文本。两者当前都<strong>不参与自动运营的执行逻辑</strong>——不会因为选了「软件开发」就让 AI 自动去写代码。</p>
+      <p>它们的实际用途只有三处：项目列表上的分类标签；提示词模板按类型和行业做筛选；走「引导建项」时作为项目档案的种子信息喂给 AI。所以它是「分类口径」，不是「开关」。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">真正影响 AI 的是描述和目标</span>
+        <p>向导里<strong>描述</strong>和<strong>目标</strong>才是真正喂给 AI 的强影响字段：AI 据此生成执行策略、拆初始任务、判断优先级。类型行业随便填，描述目标要花心思。</p>
+      </div>
+      <p>相关：见第 03 章字段影响总表、Q13。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q13. 项目描述和目标写错了 / 写少了，还能改吗？</summary>
+    <div class="zy-acc-body">
+      <p>能改，但要知道改完有一个「不会自动生效」的坑。<div class="zy-path">项目详情页 <span class="sep">›</span> 编辑</div>在这里改描述、目标、名称、类型、行业、运行模式都可以。</p>
+      <p>关键区别在于：名称 / 类型 / 行业改了只是换个标签，影响很小；<strong>描述和目标改了，AI 不会自动重读</strong>。它们当初是在「引导建项」时被写进项目上下文、用来生成策略的，你改了字段本身，不等于 AI 已经重新理解。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">想让它按新描述重来，要再推一把</span>
+        <p>两个办法：①给任务<strong>补充信息</strong>（在任务「编辑」里改<strong>任务级提示词模板</strong>，把新要求追加进去——注意任务「描述」创建后不可修改，它是独立验收的对照依据）；②重新走一遍<strong>「引导建项」</strong>，让它按新的描述和目标重新拆任务。只改字段不推这一把，AI 可能还按老理解干。</p>
+      </div>
+      <p>相关：见第 03 章、第 09 章「中途想补充信息怎么办」、Q48。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q14. 预算到底填多少合适？我第一次建项目完全没概念。</summary>
+    <div class="zy-acc-body">
+      <p>没有标准答案，但有一条硬建议：<strong>先少后多</strong>。第一次把 AI 运行预算设成一个「烧穿了也不心疼」的数（比如起步期先设个几百元），跑顺了、看懂了钱花在哪，再逐步调高。宁可先熔断一次、补预算，也别一上来设「不限制」。</p>
+      <p>向导第二步的默认值是：总预算 1000、Token 月度额度 500、图片 100、视频 0、服务器 500（单位：元）。按组织阶段的量级参考是：起步期约 $10–30/月、成长期约 $50–150/月、规模化期约 $200–800/月、成熟期约 $500–2000+/月。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">这是量级参考，不是账单</span>
+        <p>实际花费取决于任务量、模型调用频率、媒体生成量、服务器规格，差别很大。真正的账单以公司账本和项目计费明细为准。另外有三道保险是<strong>强制开启、关不掉</strong>的：资源治理、预算熔断、渐进式信任——你能调的是给多少钱，不是要不要这道闸。</p>
+      </div>
+      <p>相关：见第 04 章「预算装在三个口袋里」、Q15、Q16。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q15. 预算里填 0 是什么意思？是没钱还是无限？</summary>
+    <div class="zy-acc-body">
+      <p><strong>0 表示不限制</strong>，不是「没钱」。向导预算设定页顶部那行说明原文就是：「预算单位为人民币（元），0 表示不限制」。也就是说，某项额度填 0，就等于这条预算线不会触发熔断。</p>
+      <p>五个额度项分别是：总预算（覆盖所有支出）、Token 月度额度（AI 运行预算）、图片额度、视频额度、服务器额度。视频默认就是 0——意思是「不限制视频生成」，如果你不打算做视频，这个 0 其实等于没设防。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">新手建议别用 0</span>
+        <p>0 虽然省事，但等于把这道闸门敞开。正确姿势是<strong>给每个你真正会用到的额度都填一个具体数字</strong>，用一个「烧穿也不心疼」的小数先跑起来。看到某条额度是 0 时，心里要清楚它是「无限」而不是「关闭」。</p>
+      </div>
+      <p>相关：见第 04 章、Q14、Q16。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q16. 预算花超了会怎样？会不会突然就停了？</summary>
+    <div class="zy-acc-body">
+      <p>不会「突然」停，它有预警缓冲。整条链是四步：<strong>预警 → 熔断 → 补预算 → 恢复</strong>。</p>
+      <p>AI 运行预算用到预警线（默认 80%）时，系统发通知提醒并<strong>自动降级运行</strong>（切低成本模型、放慢节奏）先稳住；真的耗尽（AI 运行预算或总预算任一条超限）才<strong>熔断</strong>——暂停循环，界面显示「已熔断」、控制台「熔断：是」。此时你补预算，再去控制台点「恢复」或「启动」，系统复核两条预算线确实解除后清掉熔断标记继续跑。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">熔断后不补钱，点「恢复」是没用的</span>
+        <p>如果预算仍然超限，点恢复会被拒绝，提示「预算已耗尽，请补充预算后继续」。顺序永远是<strong>先补预算，再点恢复</strong>。另外，两条熔断线（AI 运行预算线、总预算线）是分开的，哪条先到哪条先停。</p>
+      </div>
+      <p>相关：见第 04 章「预算的一生」、Q76。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q17. 项目跑着跑着钱不够了，怎么加预算？</summary>
+    <div class="zy-acc-body">
+      <p>两个入口，按你缺的是哪种钱来选。缺<strong>项目预算</strong>（额度），去：</p>
+      <div class="zy-path">项目详情页 <span class="sep">›</span> 预算明细 <span class="sep">›</span> 调整预算</div>
+      <p>缺<strong>平台账户余额</strong>（真钱），去一级菜单「公司账本」点「充值」。另外，资源治理页也有「设置预算」（日 / 周 / 月 / 总额度、预警阈值、熔断阈值），控制台还能调整预算科目。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">加完钱别忘了点「恢复」</span>
+        <p>预算补上不等于项目自动重启——如果之前已经熔断暂停，还要到自动运营控制台点「恢复」或「启动」。只加钱不点恢复，项目还是停着的。别把「解除熔断（临时）」当日常操作，它只是这一次先过去，不改规则。</p>
+      </div>
+      <p>相关：见第 04 章、第 06 章「资源治理」、Q76。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q18. 项目能暂停多久？放一个月不管会不会坏？</summary>
+    <div class="zy-acc-body">
+      <p>暂停本身<strong>没有时限</strong>，停多久都行，服务器也不会因为你停着就自动清掉。但「放很久再回来」有一个你要知道的机制：系统按「断了多久」区别对待恢复方式。</p>
+      <p>豁免期（默认 <strong>2 天</strong>）内恢复，不做 AI 评估，直接干净续接。超过豁免期，系统会先做<strong>环境漂移检查</strong>（代码有没有改、依赖有没有变、凭据有没有失效、数据库结构有没有动、知识库有没有更新），再按中断时长分级（小于 7 天 / 7–30 天 / 超过 30 天），给出三种结论之一：直接续接、调整后续接、重新规划。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">断得越久越要「重新对齐」</span>
+        <p>像出差两周回来，客户需求、代码、API Key 都可能变了。所以长期停摆后恢复，别指望它一定「接着上次的原样干」——它可能会重排任务。这些评估结论和最终决定都会留痕，方便回看。</p>
+      </div>
+      <p>相关：见第 09 章「中断恢复」、第 04 章。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q19. 项目能删掉吗？不想要了怎么彻底结束？</summary>
+    <div class="zy-acc-body">
+      <p>当前项目详情页头部的按钮是：返回 / 启动 / 暂停 / 恢复 / 停止 / 标记完成 / 编辑——<strong>里面没有「删除项目」</strong>。想让项目不再跑，用「停止」（硬停循环，服务重启也不会自动拉起）；想正式收尾，用「终止项目」。</p>
+      <p>「终止项目」会要求你填写终止原因，然后把项目置为终止态（不再有新轮次），并<strong>自动生成一份结项报告</strong>（目标达成率、任务完成率、验收返工率、Token 花费、收入、ROI、知识沉淀、经验总结）。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">终止不可逆，等价于「正式结项」</span>
+        <p>只是想让项目歇一歇，请用<strong>暂停</strong>（可恢复）或<strong>停止</strong>（需重新启动），不要用终止。项目删除入口当前界面上没有，若后续版本开放，以实际界面为准。</p>
+      </div>
+      <p>相关：见第 04 章「终止项目与结项」、第 09 章、Q9。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q20. 一个公司下面能建几个项目？</summary>
+    <div class="zy-acc-body">
+      <p>数量上没有限制，想建几个建几个。但要记住一条成本事实：<strong>每个项目对应一台独立的项目服务器</strong>（单实例单项目物理隔离）。好处是项目之间数据隔离、互不影响，一个跑崩了不牵连另一个；代价是每个项目都要一台服务器，是要花钱的。</p>
+      <p>所以「一个公司能建几个项目」的真实约束不是系统限制，而是<strong>你的服务器成本和注意力</strong>。同一家公司下挂多条业务线是正常用法（公司是组织容器，项目是生意容器）。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">新手建议：一次只跑一个项目</span>
+        <p>第一个项目没跑顺之前，别急着开第二个。多开一个项目 = 多一台服务器 + 多一份预算 + 多一摊要盯的账。等第一条业务线跑通、你知道该看哪些指标了，再复制到第二条。</p>
+      </div>
+      <p>相关：见第 03 章「服务器实例是怎么来的」、第 13 章（经营指标）。</p>
+    </div>
+  </details>
+
+  <h2>四、运行模式与自主级别（Q21–Q30）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q21. 全自动和半自动到底差在哪？听起来差不多。</summary>
+    <div class="zy-acc-body">
+      <p>差别只在<strong>「关键决策要不要你点头」</strong>。半自动下 AI 照样自动干活，但碰到目标变更、大额支出、对外动作这类关键节点，会停下来等你确认后继续；全自动下这些也不等你，只在关键节点<strong>通知</strong>你一声。</p>
+      <p>三种模式的官方解释原文：全自动「AI 自动拆解任务、调度轮次、评审验收，全程自动执行，仅在关键节点通知你」；半自动「AI 自动执行，但在关键决策节点（目标变更、大额支出、对外动作等）由人工确认后继续」；人工审核「AI 产出方案后必须人工审核通过才执行，节奏较慢但最可控」。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">半自动不是「AI 少干活」</span>
+        <p>很多人误以为半自动=AI 干一半。不是。半自动是<strong>速度一样、关卡更多</strong>。第一周建议就用半自动，你能看懂 AI 的行为逻辑，再决定要不要放开。</p>
+      </div>
+      <p>相关：见第 04 章「三种运行模式」、Q23。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q22. 建项目时选了「手动」，进项目后看到「人工审核」，是两回事吗？</summary>
+    <div class="zy-acc-body">
+      <p>指的是同一种模式，只是两个界面的叫法不一样。新建项目向导里这一项的选项是<strong>全自动 / 半自动 / 手动</strong>；进项目后在自动运营控制台「调整运行模式」里，同一档叫<strong>人工审核</strong>。别以为项目里冒出了第四种模式。</p>
+      <p>记住一句话就行：<strong>创建时叫「手动」，进项目后叫「人工审核」</strong>。两处可以随时互相切换，切换不影响项目已有数据。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">选了它，AI 不会自己动</span>
+        <p>只有<strong>全自动 / 半自动</strong>会启用自动运营循环。选了人工审核，系统不自动跑循环，任务靠你手动触发、AI 产出方案后等你审核。所以「想让它自己动起来」，就别选人工审核。</p>
+      </div>
+      <p>相关：见第 04 章、第 03 章、Q91。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q23. 什么时候该从全自动切回人工审核？</summary>
+    <div class="zy-acc-body">
+      <p>四种情况该切回去：<strong>①它开始做你不确定的事</strong>（比如要对外发邮件、动生产数据）；<strong>②业务进入高合规期</strong>（结算、对外承诺、合同相关）；<strong>③你刚改了方向或目标</strong>，想看清它怎么理解；<strong>④你暂时不想它花钱</strong>。</p>
+      <p>切法：<div class="zy-path">自动运营控制台 <span class="sep">›</span> 运行模式卡片 <span class="sep">›</span> 修改 <span class="sep">›</span> 人工审核</div>切换时界面会提示原文：「切换后将暂停自动运营循环，仅保留人工审核驱动的执行，可在之后重新启动或调整」。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">切完循环就停了</span>
+        <p>这不是报错，是设计行为。想让它重新自己跑，得再切回全自动 / 半自动并点「启动」。如果你的目的是「临时叫停一下」，其实用「暂停」更轻——暂停不改变模式，恢复后接着原来的进度干。</p>
+      </div>
+      <p>相关：见第 04 章、第 09 章「运营控制台」、Q18。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q24. L0–L3 是什么？我该关心吗？</summary>
+    <div class="zy-acc-body">
+      <p>L0–L3 是<strong>自主级别</strong>，管的是「某一件具体的事，要你多重的确认」。它和运行模式不是一层东西：运行模式管整个项目的节奏，自主级别管单个人工处理节点的松紧。</p>
+      <p>四个级别的行为：<strong>L0</strong> 全自主执行，不创建节点、不通知；<strong>L1</strong> 通知不等待，AI 继续推进；<strong>L2（默认）</strong> 一键确认，AI 暂停等你点一下；<strong>L3</strong> 强制人工审核，必须审核通过（可多人 / 审批流）才继续。你在「人工处理节点」页每张卡片上都能看到「自主级别 L{n}」。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">三通道和自主级别会叠加</span>
+        <p>除了级别，还有按风险分颜色的三通道：绿=例行（按级别处理）、黄=敏感（生成权限租赁，超上限需你授权）、红=强制（命中禁止清单，强制 L3，AI 不得代行）。所以「会不会停下来问你」是级别 + 通道共同决定的。</p>
+      </div>
+      <p>相关：见第 04 章「AI 什么时候停下来等你」、第 14 章。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q25. 默认是哪个级别？我需要调吗？</summary>
+    <div class="zy-acc-body">
+      <p>默认是 <strong>L2（一键确认）</strong>——AI 停下来，等你点一下才继续。控制台的「自主级别」卡片显示的就是这个当前值。对绝大多数新手来说，<strong>默认值就是最合适的，不用动</strong>。</p>
+      <p>什么时候才需要调？只有两种情况：你非常确定某类例行动作完全不用打扰你（可考虑 L1 或 L0，但要想清楚）；或者某件事你要求正式审批流（L3）。调级别是在<strong>新建人工处理节点</strong>时选的，不是全局一个开关。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">调级别 = 调「打扰频率」</span>
+        <p>级别越高（L0/L1），AI 越自由、你越省心，但也越容易在你没看见时做错事；级别越低（L3），最可控但节奏最慢。新手阶段，把注意力放在提示词和任务描述上，回报比调级别高得多。</p>
+      </div>
+      <p>相关：见第 04 章、Q24、第 08 章「运行配置」。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q26. 怎么让 AI 别自己发邮件给客户？</summary>
+    <div class="zy-acc-body">
+      <p>三重防护，建议都做：<strong>①模式留在半自动或人工审核</strong>（对外动作会停下来等你）；<strong>②确认它的「外发邮件」权限状态</strong>（权限矩阵里的 send_email，以及黄通道对敏感写操作的拦截）；<strong>③别把权限模式切成 auto-run</strong>（角色运行配置里 auto-run 表示自动执行不等人，默认是 approve 审批模式）。</p>
+      <p>另外记住一条设计事实：<strong>对外动作属于触发人工节点的四类动作之一</strong>（另外三类是花钱、敏感改动、改方向）。所以只要模式不是全自动、或对方动作走了黄通道，AI 就发不出去，得等你点头。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">auto-run 是高危开关</span>
+        <p>不要为了图省事把权限模式切到 auto-run。让 AI 未经确认就自动发邮件、自动改生产数据，风险远大于你省下的那几次点击。项目级默认就是审批模式，保持它。</p>
+      </div>
+      <p>相关：见第 08 章「运行配置（RunConfig）」、第 04 章「三通道：按风险分颜色」、Q23、Q27。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q27. 有一次必须让 AI 做件敏感的事，怎么临时给它放权？</summary>
+    <div class="zy-acc-body">
+      <p>用<strong>权限租赁</strong>——给它一张「有期限、有金额上限」的临时通行证，而不是长期放开。</p>
+      <div class="zy-path">自动运营控制台 <span class="sep">›</span> 权限租赁 <span class="sep">›</span> 新建授权</div>
+      <p>新建字段有：Agent（被授权 Agent ID）、授权动作（如 <code>send_email(to=customer@x.com)</code>）、任务 ID、授权范围、成本上限、过期时间。列表里能看到「Agent / 授权动作 / 授权范围 / 成本上限 / 授权人 / 状态 / 过期时间」，操作列有「续期 / 吊销」。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">授权要写到具体动作，别写「全部」</span>
+        <p>截图里的示例是把动作写得很具体（发给哪个邮箱）。你写得越具体，这张通行证能覆盖的范围就越小，风险越低。另外，每次授权都会留痕（授权人、过期时间都在列表里），事后可查。</p>
+      </div>
+      <p>相关：见第 04 章「三个旋钮」、第 14 章、Q28。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q28. 权限租赁什么时候过期？会不会一直有效？</summary>
+    <div class="zy-acc-body">
+      <p>不会一直有效——它<strong>按期 + 按额双重回收</strong>。你在新建授权时填的「过期时间」到点就失效；「成本上限」用满也会自动收回。列表状态有三种：生效中 / 已吊销 / 已过期，你可以随时手动「吊销」或「续期」。</p>
+      <p>如果你没设过期时间（或以实际界面为准），就等于是长期放行——所以<strong>切记填一个明确的过期时间</strong>，哪怕只给一天。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">权限租赁 vs 自主级别，别搞混</span>
+        <p>一句话区分：自主级别是<strong>长期人设</strong>（这个 AI 平时要不要等你），权限租赁是<strong>一次性通行证</strong>（这一次放它做一件敏感事）。还有一个「渐进式信任」是按表现给权限的评分机制。三者叠加才构成 AI 的自由度。</p>
+      </div>
+      <p>相关：见第 04 章、第 06 章「渐进式信任」、Q27。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q29. 能不能让 AI 只做不花钱的事，一分钱都不许花？</summary>
+    <div class="zy-acc-body">
+      <p>做不到「绝对不花钱」，因为 AI 每干一次活都要调模型，调模型就产生 token 费用——这是它的「燃料」。但你可以把支出<strong>压到很低、并且设死上限</strong>：把 AI 运行预算设成一个很小的数（比如几十元）；优先用「Agent 智能体」引擎做轻量短活；关掉或不用媒体生成（图片 / 视频最费钱）；把任务描述写清楚，减少返工轮次。</p>
+      <p>真正的兜底是预算熔断：花到线就暂停循环，不会无上限烧。这也是三道强制开启、关不掉的安全底线之一。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">「免费跑 AI」不存在，只有「便宜地跑」</span>
+        <p>如果预算设成 0（不限制），反而等于把闸门敞开——那就不是「不花钱」，而是「不设防」。想控成本，设一个具体的小数字，而不是填 0。</p>
+      </div>
+      <p>相关：见第 04 章、第 09 章「计费明细」、Q75（怎么省钱）。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q30. 出大事了，怎么一键停掉所有 AI？</summary>
+    <div class="zy-acc-body">
+      <p>用<strong>紧急停止（KillSwitch）</strong>。路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 审计治理 <span class="sep">›</span> 紧急停止（KillSwitch）</div>
+      <p>确认原文是「<strong>紧急停止所有自动运营任务？此操作不可逆</strong>」。它的效果等价于「停止」：硬停循环、状态置为已停止，服务重启也不会自动拉起。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">红色按钮，想清楚再点</span>
+        <p>①它是<strong>不可逆</strong>的，点了之后要重新走「启动」流程才能恢复；②日常临时叫停请用「暂停」（可恢复、不丢上下文），KillSwitch 只留给「AI 正在做明显危险的事」这种极端情况；③停掉之后不要马上重启，先去看日志和验收记录，搞清楚它刚才在干什么。</p>
+      </div>
+      <p>相关：见第 09 章「紧急停止」、第 06 章、Q91、Q100。</p>
+    </div>
+  </details>
+
+  <h2>五、智能体与组织（Q31–Q40）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q31. 我建了一个项目，AI 团队会自动配好吗？还是要我自己一个个建 Agent？</summary>
+    <div class="zy-acc-body">
+      <p>不需要你一个个手建。项目创建后，系统会按你选的项目类型和行业，<strong>生成一套默认的智能体组织</strong>：一个管理者 Agent 带若干员工 Agent，各自挂好岗位档案和初始技能。你要做的是「审一遍、再调」，而不是「从空开始搭」。</p>
+      <p>做检查的路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 智能体组织</div>
+      <p>看到组织架构后，重点看三件事：①有没有哪个岗位明显缺人（比如做电商却没有运营岗）；②每个 Agent 的职责描述是否贴合你的业务；③技能栏是不是空的——技能库没有内置种子，空是正常的，需要后天装配或从具体经验里沉淀。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：先审后调，不要推倒重来</span>
+        <p>默认组织是可用的起点，不是必须替换的模板。大多数人只需要补一两个岗位、改几段职责描述，就能开工。</p>
+      </div>
+      <p>相关：见第 08 章「管理者 Agent 与员工 Agent」、Q32、Q36。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q32. 管理者 Agent 和员工 Agent 到底差在哪？</summary>
+    <div class="zy-acc-body">
+      <p>一句话：<strong>管理者只管协调，不下场干活</strong>。管理者 Agent 负责拆任务、排时间片、盯进度、做复盘、在需要时把任务指派给合适的员工；员工 Agent 才是真正执行具体活的角色。</p>
+      <p>这个分工带来一个很实用的好处——你改组织结构，不会影响单个员工的专业能力。比如你想让某个员工专注写代码，就把他从杂事里摘出来，管理者的协调逻辑不用动。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">别把活派给管理者</span>
+        <p>如果你发现「管理者 Agent 自己在写文案」，通常不是设计问题，而是员工 Agent 缺技能或任务没拆细，管理者只能顶上去。这时候该去补员工的能力，而不是让管理者继续下场。</p>
+      </div>
+      <p>相关：见第 08 章、Q31、Q34。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q33. 技能（Skill）是什么？技能库里有现成的吗？</summary>
+    <div class="zy-acc-body">
+      <p>技能就是「一个 Agent 会做的一件具体事」——比如写产品文案、做数据清洗、调某个接口。技能挂到 Agent 身上，Agent 才知道自己有哪些手段可用。</p>
+      <p>技能库<strong>没有内置的现成技能种子</strong>，打开时是空的，这是正常的。技能主要来自两个途径：①你在项目里给 Agent 手动装配；②组织进化引擎从实际执行经验里沉淀出可复用的技能，建议你装配。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：技能是长出来的，不是发下来的</span>
+        <p>先让项目跑起来，用着用着，好用的做法会被沉淀成技能。一开始就追求「技能库满满当当」，反而是本末倒置。</p>
+      </div>
+      <p>相关：见第 08 章「技能库与技能装配」、Q34、Q36。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q34. 把技能「提升为组织级」是什么意思？为什么还要审批？</summary>
+    <div class="zy-acc-body">
+      <p>技能默认只在某个项目、某个 Agent 范围内用。把它「提升为组织级」，就是让它变成<strong>整个公司可复用的公共技能</strong>，别的项目、别的 Agent 也能挂上。</p>
+      <p>因为影响面从「一个项目」扩大到「整个公司」，系统不让你一键生效，而是生成一条申请，进入一个<strong>人工确认节点</strong>，原文提示是「<strong>需人工审批确认后生效</strong>」。你确认之后，其他项目才能引用它。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">提升前先问一句：这东西别人能用吗</span>
+        <p>把一次性、强依赖本项目上下文的技能提上去，只会污染公共技能库。只有当它是「通用做法」时，才值得提升。</p>
+      </div>
+      <p>相关：见第 08 章「技能库与技能装配」、Q36。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q35. 什么是「运行配置（RunConfig）」？改了会出什么事？</summary>
+    <div class="zy-acc-body">
+      <p>运行配置是一个 Agent 的「工作参数包」：用哪段提示词、能用哪些技能、输出成什么格式、用哪个执行引擎、CLI 传什么参数。改它，等于改这个 Agent 的工作方式。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 智能体组织 <span class="sep">›</span> 选择某个 Agent <span class="sep">›</span> 运行配置</div>
+      <div class="zy-note danger">
+        <span class="zy-note-title">auto-run 是高风险开关</span>
+        <p>运行配置里若开启自动运行（auto-run），Agent 会在无人确认的情况下自行执行。调试期请保持关闭，让每次执行都过你一眼；确认稳定后再考虑打开。</p>
+      </div>
+      <p>相关：见第 08 章「运行配置（RunConfig）」、Q37。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q36. 组织进化引擎是什么？它给的建议会自动执行吗？</summary>
+    <div class="zy-acc-body">
+      <p>组织进化引擎是一个<strong>「组织体检 + 开药方」</strong>的模块。它盯着项目实际运行数据，发现「某个岗位人手不够」「这项技能该固化了」「该进入下一个阶段了」，就生成一条建议。它<strong>只出建议，不自动执行</strong>，主动权在你手上。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 组织进化 <span class="sep">›</span> 待处理建议（N 条）</div>
+      <p>建议主要有几类：加岗位、扩编制、装配技能、阶段升级。每条都可以<strong>采纳、暂缓或拒绝</strong>。暂缓默认保留 7 天，过期就失效，需要它会重新出现。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：AI 提建议，人拍板</span>
+        <p>别把「建议多」当成「系统要我改」的压力。建议是观察结果，采纳与否取决于你对业务的判断。</p>
+      </div>
+      <p>相关：见第 08 章「组织进化引擎」、Q37、Q38。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q37. 「一键扩编」点了会发生什么？能撤销吗？</summary>
+    <div class="zy-acc-body">
+      <p>一键扩编是把一条「扩容建议」变成实际动作：系统会走一串自动步骤——建 Agent、挂岗位档案、装配技能、接通连接器、登记上岗，确认原文是「<strong>确认采纳建议「X」？系统将自动完成扩编/装配并上岗。</strong>」</p>
+      <p>能撤销。这类由建议触发的操作会<strong>留下一个回滚点</strong>，如果你想退回扩编前的状态，可以从回滚点恢复。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">扩编前先想清楚「谁来管」</span>
+        <p>人多了，协调成本也上去了。如果一个管理者已经带不过来，再多招员工只会更乱。扩编的同时，看看要不要调时间片权重或再分一层管理。</p>
+      </div>
+      <p>相关：见第 08 章、Q36、Q38。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q38. 项目的「阶段」是什么意思？谁来切换？</summary>
+    <div class="zy-acc-body">
+      <p>项目阶段描述组织当前处在哪个发展档位，一般有四档：<strong>起步期、成长期、规模化期、成熟期</strong>。阶段不同，组织该配多少人、该有哪些技能、该盯哪些指标都不一样。</p>
+      <p>切换有两种方式：①组织进化引擎根据运行数据建议「该升级了」，你确认后执行；②你手动切换。切换会<strong>留下回退点</strong>，如果切上去发现不合适，可以退回上一个阶段。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：阶段匹配规模，不匹配心情</span>
+        <p>别因为「想显得更专业」就跳到规模化期，那会让系统按大团队的方式协调几个人，反而拖慢节奏。阶段跟着真实工作量走。</p>
+      </div>
+      <p>相关：见第 08 章「阶段切换」、Q36。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q39. 我想给某个成员加权限，能加到「管理」类吗？</summary>
+    <div class="zy-acc-body">
+      <p>能，但只能加给<strong>人</strong>。权限一共 14 项，其中 11 项是通用权限，另外 3 项是管理权限：<strong>暂停项目、暂停任务、成员管理</strong>。这三项是「刹车」和「人事」级别的权限，风险最高。</p>
+      <p>路径：</p>
+      <div class="zy-path">公司管理 <span class="sep">›</span> 成员与权限 <span class="sep">›</span> 选择成员 <span class="sep">›</span> 权限设置</div>
+      <div class="zy-note danger">
+        <span class="zy-note-title">AI Agent 不给管理权限（目前是前端拦截）</span>
+        <p>原则是硬红线：管理权限只能落在人身上，AI Agent 无论多「能干」，都不给它暂停项目、暂停任务、管成员的权力，防止 AI 误操作或失控时你连刹车都踩不到。要如实说明的是：<span class="zy-badge amber">部分可用</span>当前这层限制做在<strong>前端</strong>（界面会拦，并提示「AI Agent 不可授予管理权限」），<strong>后端强制拦截还在排期</strong>，暂不要把它当成服务端已生效的安全边界。</p>
+      </div>
+      <p>相关：见第 02 章「成员与权限速查」、Q40。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q40. 邀请团队成员，对方一直没进来，邀请会过期吗？</summary>
+    <div class="zy-acc-body">
+      <p>会。<strong>邀请有效期是 7 天</strong>，过期后那条邀请就失效了，对方再点链接进不来。这时候需要你重新发一次邀请。</p>
+      <p>路径：</p>
+      <div class="zy-path">公司管理 <span class="sep">›</span> 成员与权限 <span class="sep">›</span> 邀请成员</div>
+      <div class="zy-note warn">
+        <span class="zy-note-title">对方没收到，多半不是过期的锅</span>
+        <p>先确认对方是不是用了你发过去的那个邮箱登录——邀请是绑定邮箱的。如果邮箱对、时间没超 7 天，再让管理员检查成员列表里是不是已经存在同邮箱的账号。</p>
+      </div>
+      <p>相关：见第 02 章「成员邀请」、Q39。</p>
+    </div>
+  </details>
+
+  <h2>六、任务与自动运营（Q41–Q50）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q41. 怎么新建一个任务？最少的必填项是什么？</summary>
+    <div class="zy-acc-body">
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 任务 <span class="sep">›</span> 新建任务</div>
+      <p>最少要填的是<strong>标题</strong>和<strong>描述</strong>。描述就是给 AI 的指令，写得越具体，AI 跑偏的概率越低。另外两个常被忽略的字段：①<strong>时限</strong>（默认 7200，单位秒，超时会按兜底逻辑处理）；②<strong>验收标准</strong>——注意系统<strong>没有单独的「done_when」输入框</strong>，验收标准要写进描述里，用「完成后应满足……」这类句子表达。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：描述里写验收，没有第二个框</span>
+        <p>很多人找不到「验收标准」输入框就以为系统不支持，其实它就在描述里。把「做成什么样算完成」直接写进指令，验收 Agent 才有的对照。</p>
+      </div>
+      <p>相关：见第 09 章「新建任务时每个字段怎么填」、Q42、Q51。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q42. 任务建好了，为什么它一动不动？</summary>
+    <div class="zy-acc-body">
+      <p>先看三件事，按顺序排除。</p>
+      <p>第一，<strong>项目循环有没有启动</strong>。任务不会自己跑，必须项目处于运行态，auto-ops 才会调度它。路径：项目内 › 组织与运营 › 运营控制台，看「启动/停止」当前是什么状态。</p>
+      <p>第二，<strong>是不是人工审核模式</strong>。只有全自动和半自动会跑自动运营循环；人工审核模式下，任务要等人批准才动，这是设计如此，不是故障。</p>
+      <p>第三，<strong>是不是没有可用时间片</strong>。时间片就 10 个格子，被别的任务占满时，新任务只能排队。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">别急着反复点「启动」</span>
+        <p>重复启动不会让它跑得更快，反而可能把状态搅乱。先确认上面三点，再去动它。</p>
+      </div>
+      <p>相关：见第 09 章、第 11 章、Q43、Q21。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q43. 「时间片」是什么？为什么我的总是满的？</summary>
+    <div class="zy-acc-body">
+      <p>你可以把时间片想成<strong>AI 的「工位」</strong>。默认 10 个格子，每个任务占用一个（或按权重占用不等份），同一时刻能并行推进的任务数量受它限制。满格意味着：想开新任务，得先等某个在跑的任务结束。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 运营控制台 <span class="sep">›</span> 时间片</div>
+      <p>系统支持<strong>自动扩容</strong>，任务积压时会自动加格子，不必你手动改。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">时间片多不等于快</span>
+        <p>并行任务越多，对模型额度和预算的消耗越集中，也越容易撞上预算熔断。如果总是满格，先想想是不是任务拆得太碎、太多，而不是把格子加到无限。</p>
+      </div>
+      <p>相关：见第 09 章「时间片」、Q44。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q44. 「轮次」是什么意思？一个任务要跑多少轮才算完？</summary>
+    <div class="zy-acc-body">
+      <p>轮次是「AI 推进一个任务的一小步」。系统按时间片轮流调度任务，每轮到某个任务，它往前做一点：干活（task）、复盘（review）或待命（free）。一个任务通常要跑很多轮才收口。</p>
+      <p>有个关键阈值：单个任务跑满 <strong>20 轮</strong>（或所有任务都完成）时，会触发一次<strong>复盘/评审</strong>，重新审视方向和优先级，必要时重排任务。所以轮次不是简单的「计数」，它到点会带来一次结构调整。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：轮次到 20，必有复盘</span>
+        <p>如果你发现任务跑了很久还在原地打转，别一直等——第 20 轮的复盘就是系统给的检查点，去复盘记录里看它怎么判断的。</p>
+      </div>
+      <p>相关：见第 09 章「轮次」、Q43、Q50。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q45. 任务能不能删掉？列表越堆越多。</summary>
+    <div class="zy-acc-body">
+      <p>要分状态看。已经进入执行的任务（待执行 / 运行中 / 已完成 / 失败）<strong>没有删除按钮</strong>——任务记录是运营历史和审计的一部分，删掉会让「这个任务当时为什么失败」永远说不清，系统对它们只提供状态流转。</p>
+      <p><strong>但「规划中」的任务可以直接删除</strong>：它还没提交执行，在列表操作列点删除、二次确认后即移除。已执行的任务想「收尾」，就把它<strong>标记为完成或终止</strong>，让它退出调度——不再占用时间片，但仍留在列表里可查。（后端同样只允许删「规划中」任务，删已执行的会返回明确错误。）</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：规划中可删，执行后只收尾</span>
+        <p>还没提交的规划草稿，删干净不留痕；已经跑过的记录，留着有据可查——那正是经营数据的一部分。</p>
+      </div>
+      <p>相关：见第 09 章「任务：给工厂安排机床」、Q48。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q46. 任务用「循环执行」还是「Agent 引擎」？选错会怎样？</summary>
+    <div class="zy-acc-body">
+      <p>两个引擎定位不同。<strong>循环执行</strong>适合复杂、编码类、长时任务，是默认也更稳的选择；<strong>Agent 引擎</strong>在进程内跑 LLM+ToolCall，适合信息整合、接口调用这类轻活。</p>
+      <p>如果给一个软件交付类任务选了 Agent 引擎，界面会弹告警，原文意思很明确：<strong>Agent 引擎可能无法完成软件交付，仅适合简单项目，建议使用循环执行</strong>。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">软件类任务，别赌 Agent 引擎</span>
+        <p>看到那条告警就说明你选错了工具。选引擎的优先级是「任务级 &gt; 角色级 &gt; 项目默认」，所以就算项目默认设了 Agent 引擎，也可以在单个任务上改回来。</p>
+      </div>
+      <p>相关：见第 09 章「引擎怎么选」、Q81。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q47. 任务失败了会怎样？会一直重试吗？</summary>
+    <div class="zy-acc-body">
+      <p>不会无限重试，系统有一套<strong>三级兜底</strong>：</p>
+      <p>第 1–2 次失败会<strong>降级重试</strong>（换更稳的策略/模型再试）；第 3 次失败<strong>升级为人工处理</strong>，在待办里等你介入；如果人工处理后仍超过上限，就<strong>告警并暂停项目循环</strong>，避免一直空烧预算。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：两次自己扛，三次找人帮</span>
+        <p>所以看到任务变成「待人工处理」，不是系统坏了，是它在按规矩喊你。你的介入本身就是流程的一环，不是异常。</p>
+      </div>
+      <p>相关：见第 09 章「连续失败的三级兜底」、Q91、Q98。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q48. AI 做了一半卡住了，我能往里塞点新信息吗？</summary>
+    <div class="zy-acc-body">
+      <p>能，这正是发挥你价值的地方。做法是给任务<strong>补充任务级提示词</strong>，让任务带着更新后的上下文继续推进；必要时可以先暂停任务、补充完再恢复。要注意：自动运营任务的<strong>「描述」创建后不可修改</strong>（它是独立验收的对照依据），所以补充信息别去改描述，走<strong>任务级提示词模板</strong>。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 自动运营 <span class="sep">›</span> 任务管理 <span class="sep">›</span> 选择任务 <span class="sep">›</span> 编辑 <span class="sep">›</span> 提示词模板</div>
+      <div class="zy-note warn">
+        <span class="zy-note-title">补充内容要讲清「和之前有什么不同」</span>
+        <p>新要求最好写成一段追加说明：「补充：之前的方向作废，改为……，原因是……」，保留来龙去脉，AI 才不会把之前的进度当成没发生过。</p>
+      </div>
+      <p>相关：见第 09 章、第 11 章「通知与你的介入点」、Q49。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q49. 项目在跑，我怎么一眼看出它现在到底在干什么？</summary>
+    <div class="zy-acc-body">
+      <p>去运营控制台。一块屏幕上分几组信息：<strong>状态卡</strong>（运行态、预算运行态）、<strong>快捷入口</strong>（十几个常用跳转）、以及正在执行任务的实时进度。预算运行态会用标签直接告诉你现在是不是正常、降级、还是已熔断。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 运营控制台</div>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：先看标签，再看任务</span>
+        <p>先扫一眼预算运行态标签——如果是「熔断」或「已终止」，那任务不动的原因就不在任务本身，先解决预算。</p>
+      </div>
+      <p>相关：见第 09 章「自动运营控制台」、Q92、Q76。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q50. 我听人说「接力推进」「free 维护」，可界面上找不到这些词？</summary>
+    <div class="zy-acc-body">
+      <p>因为这些是<strong>内部机制的说法，界面上不会直接显示</strong>成文字。你真正能看到的，是任务如何被轮次调度、复盘如何重排、以及待命状态如何不消耗模型额度。</p>
+      <p>对应关系是这样的：所谓「接力推进」，你看到的现象是任务完成一段后自动交到下一个环节、不需要你手动接力；所谓「free 维护」，你看到的现象是项目在空闲时也保持待命，但<strong>空闲等待不消耗 LLM 调用</strong>，不会偷偷烧钱。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：看现象，不记黑话</span>
+        <p>你不需要记住内部术语，只要抓住三条可观察事实：任务会自动往下走、复盘会重排、空闲不烧钱。</p>
+      </div>
+      <p>相关：见第 09 章「时间片与轮次」、第 11 章、Q44。</p>
+    </div>
+  </details>
+
+  <h2>七、验收与返工（Q51–Q60）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q51. 「三权分立」到底是什么？为什么非要把一件事拆给三方？</summary>
+    <div class="zy-acc-body">
+      <p>三权分立指的是把「做、验、批」拆成三个独立角色：<strong>执行</strong>的干活、<strong>验收</strong>的独立核对产出、<strong>批准</strong>的做最终放行。关键是「独立」——验收方不是干活的那个 Agent。</p>
+      <p>为什么值得这么麻烦？因为 AI 有个很隐蔽的毛病叫「自审自批」：它对自己做的东西天然宽容，会给自己打高分。让同一个 Agent 既干又验，等于让考生自己判卷，错的地方永远发现不了。拆开之后，验收 Agent 手里只有你定的标准，没有「我做过」的包袱。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：干活的不判卷</span>
+        <p>这套机制的价值不在形式，而在「有没有一个只认标准、不认人情的角色」。</p>
+      </div>
+      <p>相关：见第 09 章、第 11 章、Q52、Q54。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q52. 验收结论有哪几种？「返工」和「驳回」差在哪？</summary>
+    <div class="zy-acc-body">
+      <p>验收结论有三种：<strong>通过（pass）、返工（redo）、驳回（reject）</strong>。</p>
+      <p>区别在「问题出在哪一层」：<strong>返工</strong>的意思是「方向对，但活没干到位」，任务回到执行环继续改，标准不变；<strong>驳回</strong>更重，通常意味着这件事本身不成立——标准有问题、前提错了、或者根本不该做，需要你重新审视任务定义，而不是让它再改一遍。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">驳回不是「再多试几次」</span>
+        <p>看到驳回，先别急着恢复任务让它重跑。驳回来的是「这件事的前提」，多半要你先改任务、改标准，或者干脆取消。把驳回当返工处理，只会反复撞墙。</p>
+      </div>
+      <p>相关：见第 09 章「验收：三权分立」、Q55、Q56。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q53. 验收标准写在哪？我怎么知道 AI 拿什么对照打分？</summary>
+    <div class="zy-acc-body">
+      <p>写在你<strong>任务的描述里</strong>。系统没有单独的「done_when」输入框——这一点容易踩坑，很多人以为找不到就是没有这个功能。实际上，验收 Agent 对照的就是描述里你写下的完成条件。</p>
+      <p>写得好的标准长这样：「完成后应满足：①输出一份不超过 800 字的英文产品介绍；②包含 3 个卖点；③语气面向 B 端采购负责人。」——三条都是可核对的。写得差的标准是「做好一点」「写得专业些」，这种话 AI 只能靠猜。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：能数得出来的，才叫标准</span>
+        <p>判断标准写得好不好，就问自己一句：这句话能不能被人拿尺子量？能量，AI 就能对照；量不了，验收就是走过场。</p>
+      </div>
+      <p>相关：见第 09 章、Q41、Q51。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q54. 让同一个 AI 自己验收自己的产出，不行吗？</summary>
+    <div class="zy-acc-body">
+      <p>不行，这正好是系统要避免的事。就算技术上做得到，结果也没有意义——同一个模型的判断偏好跟它执行时是一致的，它会觉得「我这么做是有道理的」，于是把没做到的地方也判成通过。</p>
+      <p>独立验收 Agent 换的是「立场」：它没有执行过程的记忆，只有你的标准和最终产出。它的任务不是「理解你当初为什么这么干」，而是「对着标准逐条核」。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">省掉验收，省下的是假象</span>
+        <p>有的用户为了提速，手动跳过验收直接标记完成。这样做，自动化跑得越快，积累的隐患越多。验收是系统里最不该省的一环。</p>
+      </div>
+      <p>相关：见第 09 章、Q51、Q57。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q55. 任务被判「返工」了，我该做什么？</summary>
+    <div class="zy-acc-body">
+      <p>先看验收记录里写清楚「哪条标准没过」。绝大多数返工，问题都出在标准或指令不清楚，而不是 AI 能力不够。</p>
+      <p>你要做的是<strong>把模糊处补具体</strong>：在任务描述里追加一条说明，指出具体差在哪、正确应该是什么样，然后让任务继续。不要只说「重做一遍」，那不叫修复，只是再赌一次。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：返工改指令，不是催进度</span>
+        <p>返工次数多，往往不是 AI 笨，是你在用一句模糊的话期待一个精确的结果。把话说明白，一次就够。</p>
+      </div>
+      <p>相关：见第 09 章、Q52、Q59。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q56. 任务被「驳回」了，是不是等于前面白做了？</summary>
+    <div class="zy-acc-body">
+      <p>不白做，但确实要停下来想一想。驳回代表验收方认为「这件事的前提有问题」：可能是任务目标和项目方向不一致，也可能是标准本身就是错的。前面执行产生的内容还在，只是不能直接用了。</p>
+      <p>正确动作是<strong>回到任务定义层</strong>：这个任务要不要继续？目标该改成什么？如果确实不该做，就把它终止，把精力挪到更该做的事上。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">驳回是信号，不是失败</span>
+        <p>一个任务被驳回，说明你的验收机制在工作——它拦下了一件方向不对的事。这比「一路绿灯跑到最后发现跑错了」要好得多。</p>
+      </div>
+      <p>相关：见第 09 章、Q52、Q60。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q57. 「验收强度」是什么？能调吗？调了有什么用？</summary>
+    <div class="zy-acc-body">
+      <p>验收强度指的是验收方<strong>查得多严</strong>。风险高的任务，验收会对照更多维度、更细的标准；风险低的任务，验收相对宽松。这就是所谓「按风险分级」。</p>
+      <p>调它的意义在于平衡速度和质量：把每个小任务都按最严标准验收，会拖慢节奏；反过来，把关键任务当小事放过，风险就压不住了。合理做法是让风险等级决定强度，而不是凭感觉。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：大事严查，小事快过</span>
+        <p>与其纠结某个任务该多严，不如先想清楚它的风险等级。定了等级，强度自然有答案。</p>
+      </div>
+      <p>相关：见第 09 章「验收：三权分立」、Q51。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q58. 人工处理节点提示要在 SLA 内处理，超时会怎样？</summary>
+    <div class="zy-acc-body">
+      <p>SLA 就是「你需要在多长时间内响应」的约定。系统里的人工处理节点带<strong>SLA、升级链和超时降级</strong>三重机制：快到时限时提醒你，超时后按预设路径升级给更高权限的人，如果还是没人处理，系统会按降级策略继续（比如先跳过、或按默认处理推进），而不是无限期卡死。</p>
+      <p>要注意的是，超时降级不等于「问题解决了」，只是系统在「等你」和「卡死」之间选了前者。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">降级是兜底，不是免责</span>
+        <p>如果某个节点的待办一直在超时降级，说明这条流程的责任人配错了，或者 SLA 设得太短。去看一眼「待办」，把该处理的人找出来。</p>
+      </div>
+      <p>相关：见第 11 章「通知与你的介入点」、Q47。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q59. 验收记录在哪看？我想知道某个任务到底为什么没过。</summary>
+    <div class="zy-acc-body">
+      <p>在任务详情里。进到具体任务，能看到它的流转历史、执行记录和验收结论。验收结论通常会写清是「通过 / 返工 / 驳回」以及判定依据。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 任务 <span class="sep">›</span> 选择任务 <span class="sep">›</span> 详情 / 验收记录</div>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：没过，就去读结论，别猜</span>
+        <p>大多数人卡住是因为只看「任务失败了」这四个字，就去乱改指令。先读结论，再动手，改的才是有用的地方。</p>
+      </div>
+      <p>相关：见第 09 章、Q55、Q56。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q60. 我可以直接替 AI 说「通过」吗？会不会破坏流程？</summary>
+    <div class="zy-acc-body">
+      <p>可以，但要想清楚这是「行使决策权」还是「图省事跳过」。你作为负责人有权放行，这在流程里是允许的；但如果明明是没做完的活，你为了让项目往前跑而强行点通过，被跳过的那部分不会消失，只会在后面某个环节冒出来，而且更难查。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">强行通过 = 把问题往后推</span>
+        <p>人工强行通过时，最好在备注里写清「为什么这次可以例外」。留个记录，将来回溯就不会一头雾水。最忌讳的是把「跳过验收」当成提速的常规手段——那不是提速，是欠债。</p>
+      </div>
+      <p>相关：见第 09 章、Q51、Q54。</p>
+    </div>
+  </details>
+
+  <h2>八、知识库与资料（Q61–Q70）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q61. 我传了个文件，它一直卡在「解析中」，怎么办？</summary>
+    <div class="zy-acc-body">
+      <p>先别急着重传。文档从上传到可用会经历几个状态：<strong>待处理 → 解析中 → 已解析 → 分块中 → 向量化中 → 就绪</strong>，任何一步失败都会变成「失败」。卡在中间态通常是还没走完，不等于坏了。</p>
+      <p>另有一个状态叫<strong>「需人工确认」</strong>：解析走了降级路径（文档乱码偏多、结构特殊等）时，系统不会直接标「就绪」，而是等你人工确认内容可用后才正式入库，原因写在文档旁边。看到它不是失败，是系统把把关权交给你。</p>
+      <p>如果长时间不动，按这个顺序看：①文件是不是特别大或页数很多（会慢）；②是不是格式在白名单外的边缘情况；③刷新页面看状态有没有变化。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">失败才需要重传，慢不需要</span>
+        <p>反复上传同一个文件，会产生多条重复记录，反而让知识库变乱。先确认它确实是「失败」，再考虑重新导入。</p>
+      </div>
+      <p>相关：见第 07 章「文档的一生」、Q62。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q62. 为什么我的文件传不上去？格式和大小有什么限制？</summary>
+    <div class="zy-acc-body">
+      <p>知识库上传有明确的白名单：<strong>pdf、txt、md、markdown、docx、xlsx</strong>。不在这个名单里的（比如 csv、pptx、各种图片）不接受直接上传，会当场被拒。docx / xlsx 还会校验文件结构（ZIP 魔数），改后缀伪装的会被识破。单个文件上限是 <strong>50MB</strong>。</p>
+      <p>格式不在白名单时，有个常用绕法：先把内容转成 pdf 或 txt 再传。pptx 可以导出成 pdf，图片可以用文字化的方式重新整理。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">csv 有个例外，别搞混</span>
+        <p>「现有项目导入」那条路径是允许 csv 的，但它和知识库上传是两回事，导入的资料不进知识库。别把两处的格式要求当成同一套。</p>
+      </div>
+      <p>相关：见第 07 章「支持哪些格式」、Q65。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q63. 「公司级」和「项目级」知识库有什么区别？我该往哪传？</summary>
+    <div class="zy-acc-body">
+      <p>分层的意义是「谁能用」。<strong>公司级</strong>知识整个公司共享，适合放公司制度、品牌口径、公共产品资料；<strong>项目级</strong>知识只在这个项目里用，适合放项目专属资料。中间还有「共享」层，用来把某部分内容定向开放给指定范围。</p>
+      <p>检索时不是各占一半：系统会<strong>优先项目级（约 70%），再补公司级共享（约 30%）</strong>。所以同一份资料放哪，会直接影响 AI 答题时的偏好。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：通用放公司，专属放项目</span>
+        <p>拿不准时问一句：这份资料，别的项目用得上吗？用得上放公司级，只跟这个项目有关就放项目级。</p>
+      </div>
+      <p>相关：见第 07 章「公司级 vs 项目级」、Q64。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q64. RAG 搜索答非所问，怎么排查？</summary>
+    <div class="zy-acc-body">
+      <p>按「资料有没有 → 找没找到 → 答得好不好」三步查。</p>
+      <p>第一步，<strong>资料在不在</strong>：去知识库看目标文档状态是不是「就绪」。还在解析中，AI 自然检索不到。第二步，<strong>分层对不对</strong>：资料放在公司级还是项目级，会影响它是否进入检索范围，放错层就等于没放。第三步，<strong>问题问得清不清楚</strong>：问题太笼统，检索命中的片段就会发散。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：先看状态，再看分层，最后改问法</span>
+        <p>顺序不能乱。很多人一上来就改问法，其实资料压根还在「向量化中」。先确认「库里真有它」，再谈别的。</p>
+      </div>
+      <p>相关：见第 07 章「RAG 检索页签」、Q61、Q63。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q65. 我有个已有的项目，资料想一次性导进来，怎么做？</summary>
+    <div class="zy-acc-body">
+      <p>用<strong>「现有项目导入」</strong>这条路径。它一次最多选 <strong>10 个文件</strong>，比知识库上传宽松，允许 csv。</p>
+      <p>但有个关键区别要记住：<strong>通过「现有项目导入」进来的资料，不进知识库</strong>。它的用途是把项目信息喂给创建向导，帮助系统理解你在做什么，而不是建一个可检索的资料库。如果你要的是「以后能问它」，请走知识库上传那条路。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">一次 10 个，是限制也是节奏</span>
+        <p>文件多就分几批导。别指望一次把几百个文件灌进去——先导最能说明项目定位的那几份，剩下的后面在知识库里慢慢补。</p>
+      </div>
+      <p>相关：见第 07 章「已有项目整体导入」、Q62。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q66. 会议录音能导进去吗？我看到有「会议导入」。</summary>
+    <div class="zy-acc-body">
+      <p>能导入会议<strong>内容</strong>，但不支持音视频文件。也就是说，把一场会录成 mp3/mp4 直接丢进来，系统处理不了。你需要先把内容变成文字（比如会议纪要、逐字稿），再走会议导入。</p>
+      <p>导入后，系统会帮你把会议内容整理成结构化的知识沉淀，进入相应的知识层。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：先转文字，再谈导入</span>
+        <p>音视频不是系统的处理对象，文字才是。手头有录音，先用工具转成文本，再进来。</p>
+      </div>
+      <p>相关：见第 07 章「会议记录导入」、Q63。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q67. 「待确认知识」是什么？为什么我在侧边栏找不到入口？</summary>
+    <div class="zy-acc-body">
+      <p>待确认知识是一批「系统提出来、但需要你拍板才算数」的知识条目——通常是 AI 从资料或对话里提炼出的结论，怕它理解偏了，先放在这里让你确认。</p>
+      <p>它确实<strong>没有侧边栏入口</strong>，这是一个真实的设计特点，不是你找不到。要访问它，得直接走路径：</p>
+      <div class="zy-path">项目 /&lt;项目ID&gt;/kb/review</div>
+      <div class="zy-note warn">
+        <span class="zy-note-title">不确认，它就不会进知识库</span>
+        <p>把待确认清单当「收件箱」定期清一次。堆着不管，等于这些知识一直处于「半成品」状态，检索时用不上。</p>
+      </div>
+      <p>相关：见第 07 章「待确认知识」、Q63。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q68. 本地电脑上的文档，怎么批量扫进系统？</summary>
+    <div class="zy-acc-body">
+      <p>用<strong>本地边缘客户端</strong>。它装在你自己电脑上，负责扫描本地文档并上传到服务器，相当于给系统开了一扇连到你本机资料的门。这样你多年积累的本地文档，不用手动一个个传。</p>
+      <p>它的定位是「扫描上传 + 接收指令」，是把本地资料接进项目的桥。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">先想清楚要扫哪个目录</span>
+        <p>本地电脑上的资料很宝贵，扫描范围要你主动规划，不要一上来就整盘扫。挑真正跟项目相关的目录，既能提高信噪比，也避免上传一堆无关文件。</p>
+      </div>
+      <p>相关：见第 07 章、Q69。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q69. 边缘客户端显示「Disconnected」，怎么排查？</summary>
+    <div class="zy-acc-body">
+      <p>「Disconnected」（已断开）表示客户端和服务器之间的连接断了。这个状态是英文的，因为边缘客户端界面本身就是全英文。</p>
+      <p>按四步排查：①确认客户端进程还在运行，没有被关掉或崩掉；②确认本机网络正常，能访问外网；③确认服务器地址/端口配置没有改过；④如果它一直在「Connecting / Reconnecting / Disconnected」之间跳，多半是网络不稳或服务器侧暂时不可达，等一会儿再看。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：先看进程，再看网络，最后看配置</span>
+        <p>顺序排查能省很多时间。多数「Disconnected」都是本机进程或网络的小问题，不是系统故障。</p>
+      </div>
+      <p>相关：见第 07 章「边缘客户端」、Q68。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q70. 外面的人（客户）能直接问我的知识库吗？</summary>
+    <div class="zy-acc-body">
+      <p>可以，用「<strong>客户页面</strong>」就能对外开一个有限权限的问答页。路径：进入项目 <span class="sep">›</span> 左侧「研究与获客」<span class="sep">›</span> 客户页面 <span class="sep">›</span> 新建分享。生成的链接形如 <code>/s/{token}</code>，访客不用注册、不用登录，打开一个标题为「AI 智能问答」的页面就能问，而 AI <strong>只回答你勾进「知识库白名单」的库</strong>。</p>
+      <p>三个关键点：<strong>一</strong>，白名单要<strong>显式勾选</strong>——当前界面的原文是「<strong>留空 = 不开放任何知识库</strong>」（不是"全部开放"，旧文案写反过，这一版已改对），留空时访客只得到无资料的通用回答；<strong>二</strong>，链接在创建成功那一刻只完整展示一次，弹窗原文「请立即复制访问链接，token 仅本次展示，关闭后不可再查看」，弄丢了就用列表里的「重置链接」生成新的（旧链接立即失效）；<strong>三</strong>，配上「每分钟限流」和「每日上限」防止被人刷 token，给客户看的内容只勾对外库，别把含成本价的库勾进去。访客的聊天记录只留在他自己的浏览器里，刷新即清；你能回溯的是「访问日志」（问题 / IP / 状态 / 输出 Token / 成本 / 时间）。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">别把「公司级共享」当成「对外公开」</span>
+        <p>「公司级」和「共享」都是公司内部的概念，不等于互联网公开。任何对外发布的内容，都要经过你自己的把关。</p>
+      </div>
+      <p>相关：见第 07 章、Q63。</p>
+    </div>
+  </details>
+
+  <h2>九、账本与花费（Q71–Q80）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q71. 平台账本和项目账本有什么区别？我要管两个吗？</summary>
+    <div class="zy-acc-body">
+      <p>要，但角色不同。这是<strong>双线账本</strong>设计：</p>
+      <p><strong>平台账本</strong>记真实交易——你的公司账户余额、充值、实际消费。它管的是「你有没有钱」；余额不足会触发熔断。<strong>项目账本</strong>做虚拟核算——每个项目花掉多少、还剩多少，管的是「这个项目的预算够不够」，预算耗尽就暂停该项目的循环。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：公司看钱，项目看预算</span>
+        <p>一个对钱负责，一个对项目负责。项目账本让你看清「哪个项目在烧钱」，平台账本让你看清「公司还撑不撑得住」。</p>
+      </div>
+      <p>相关：见第 04 章「预算装在三个口袋里」、第 05 章、Q72、Q78。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q72. Token 计费是怎么算的？为什么我看到的是「估算」？</summary>
+    <div class="zy-acc-body">
+      <p>按调用量算：系统读取会话日志里的 usage 统计，然后按单价折算。参考单价是<strong>输入 1 元/百万 token、输出 2 元/百万 token、缓存读取 0.02 元/百万 token</strong>。输出比输入贵，是因为模型「生成」比「读取」成本高。</p>
+      <p>之所以会出现「估算」字样，是因为计费明细里包含<strong>估算或未精确计量的部分</strong>——比如某些调用拿不到精确的 usage 数据，系统会按规则折算。所以它适合用来「看趋势、控预算」，不适合拿来当逐条精确的账单。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">它是仪表盘，不是发票</span>
+        <p>计费明细的定位是成本控制工具，不是财务凭证。别指望它精确到分毫，也别拿它对账。</p>
+      </div>
+      <p>相关：见第 04 章「钱到底怎么算」、第 09 章「计费明细」、Q74。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q73. 预算预警线到底是 80% 还是 90%？哪个准？</summary>
+    <div class="zy-acc-body">
+      <p>现在以<strong>后端统一配置的那一条预警线</strong>为准，默认 <strong>80%</strong>。这一版把运营控制台「AI 预算消耗」卡片上的<strong>「预警」标签阈值</strong>也改成由同一条线驱动，和「计费明细」页口径一致——所以不再是"80% 降级、90% 亮标签"两套数字，而是<strong>同一条线、同一个时刻</strong>。</p>
+      <p>也就是说：花到预警线（默认八成）时，系统会发通知、开始降级处理，控制台的「预警」标签也在这一刻亮起。具体百分比可在预算设置里调整，但别把预警线设到 95% 左右——那样等于没有缓冲。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：一条线，亮了就补</span>
+        <p>不用纠结 80 还是 90，只要记住「预警标签一亮，就是该充值的信号」这个动作就够了。</p>
+      </div>
+      <p>相关：见第 04 章「预算的一生」、第 09 章「自动运营控制台」、Q76。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q74. 公司账本的「AI 算力费」和项目计费明细对不上，是 bug 吗？</summary>
+    <div class="zy-acc-body">
+      <p>这一版比过去好，但仍不能保证逐条对齐。新打通的是：项目侧的 token 消耗会<strong>按批上报到平台真实账本</strong>（记为 AI 算力费），平台按上报单号幂等去重、不会重复扣费，上报成功才记账、失败会退避重试不丢单。所以只要部署时配好了上报地址，公司账本的「AI 算力费」里现在<strong>是真实包含了 token 消耗</strong>的。</p>
+      <p>那为什么还会有对不上的时候？两个原因：<strong>一</strong>，如果上报地址没配置，这条链路<strong>不会启用</strong>，此时平台账本不含 AI 算力费（平台账本页有说明）；<strong>二</strong>，项目计费明细本身含"按文本长度估算的兜底计费"，两边口径本就不同。<strong>依然不要拿两处数字做精确对账</strong>——对不齐不代表你算错了。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">各看各的用途，别强行拉平</span>
+        <p>项目账本看「这个项目花了多少」的趋势，平台账本看「公司余额够不够」。跨账本精确核对，现在做不到，也别把它当故障去排查。</p>
+      </div>
+      <p>相关：见第 04 章、第 05 章「公司账本」、Q71。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q75. 怎么才能省点钱？有没有实操的降本方法？</summary>
+    <div class="zy-acc-body">
+      <p>有，而且多数降本来自「少做无用功」，不是「用更便宜的模型」。几个最见效的做法：</p>
+      <p>①<strong>把任务描述写清楚</strong>，减少返工——返工是最贵的浪费，一次跑对抵十次乱跑；②<strong>别把时间片堆满</strong>，并行任务越多，额度消耗越集中，越容易撞熔断；③<strong>按任务难度选引擎</strong>，轻活别用重引擎；④<strong>及时收尾没用完的任务</strong>，让它们退出调度，不占时间片也不空转；⑤<strong>预算设具体数字而非 0</strong>，0 等于不设防。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：写清才是真省钱</span>
+        <p>降本的第一杠杆永远是指令质量。省下的每一轮返工，都是真金白银。</p>
+      </div>
+      <p>相关：见第 09 章「计费明细」、Q41、Q79。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q76. 预算熔断了，我该怎么办？能临时解除吗？</summary>
+    <div class="zy-acc-body">
+      <p>熔断的意思是「花到线，循环暂停」，这是保护机制正常起作用，不是故障。标准处理流程是：<strong>补充预算 → 循环恢复</strong>。</p>
+      <p>如果你只是想让它<strong>临时</strong>再跑一会儿，可以在资源治理里「解除熔断（临时）」。但临时解除是应急手段，不是长期方案——不补预算，它很快会再次熔断。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 / 资源治理 <span class="sep">›</span> 项目预算 / 解除熔断（临时）</div>
+      <div class="zy-note warn">
+        <span class="zy-note-title">临时解除前先问：钱从哪来</span>
+        <p>临时解除只是把暂停往后推。想清楚这次多花的钱值不值，再点。反复临时解除、从不补预算，等于把保护机制架空。</p>
+      </div>
+      <p>相关：见第 06 章「资源治理」、第 09 章、Q77。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q77. 充值怎么充？有金额限制吗？</summary>
+    <div class="zy-acc-body">
+      <p>路径：</p>
+      <div class="zy-path">公司管理 <span class="sep">›</span> 公司账本 <span class="sep">›</span> 充值</div>
+      <p>金额范围是 <strong>0.01 到 1000000</strong>，单笔充值不能超过 <strong>1000000 元</strong>。充值成功后，公司账本余额会相应增加。</p>
+      <p>另外，公司账本可以设置<strong>预警阈值</strong>。当余额低于这个阈值时，系统会提示你及时充值，避免实例因为余额不足而熔断，提示大意是「余额已低于预警阈值，请及时充值避免实例熔断」。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：阈值就是提前量的提醒器</span>
+        <p>把预警阈值设得比「刚好够」高一些，你就有了反应时间。等余额见底再充，中间这段空窗期项目是停着的。</p>
+      </div>
+      <p>相关：见第 05 章「公司账本」、Q76、Q78。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q78. 项目预算和公司余额，到底哪个先兜不住？</summary>
+    <div class="zy-acc-body">
+      <p>看哪条线更近。系统有<strong>两条独立的熔断线</strong>：项目总预算线和 AI 运行预算线。任一条被击穿，对应范围就会暂停。同时，公司余额不足也会从平台侧触发熔断。</p>
+      <p>可能出现两种情形：项目预算还有，但公司余额先见底——那整个平台侧就先卡住了；也可能公司余额充足，但某个项目的预算先用完——那只有这个项目暂停，别的项目照跑。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">别只盯一个数</span>
+        <p>项目里看到「预算还剩不少」不等于高枕无忧，公司账户也得有钱。两边都要留意。而且因为上报链路尚未完全打通，别指望两边的数字严丝合缝地对上。</p>
+      </div>
+      <p>相关：见第 04 章「预算装在三个口袋里」、Q71、Q74。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q79. 预算设成 0 是什么意思？是不花钱还是不限？</summary>
+    <div class="zy-acc-body">
+      <p>在项目预算里，<strong>0 表示「不限制」</strong>，不是「不花钱」。这一点非常容易误解，后果也不小。</p>
+      <p>填空的时候要留神：如果你想要「这个项目最多只能花 500 元」，就<strong>明确写 500</strong>，而不是留 0。填 0 等于告诉系统「随便花」，反而是放开了闸门。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">想省钱，就别填 0</span>
+        <p>「0 = 不限制」是最贵的那个选项。想控成本，永远给一个具体的、你能接受的小数字。这是新手最容易犯、代价也最大的一个错。</p>
+      </div>
+      <p>相关：见第 03 章「预算设定」、第 04 章、Q75。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q80. 计费明细能当发票用吗？财务能拿它入账吗？</summary>
+    <div class="zy-acc-body">
+      <p>不能。计费明细是<strong>成本控制工具，不是财务凭证</strong>。它包含估算和未精确计量的部分，数字粒度上就不适合作为正式的财务依据。</p>
+      <p>它的正确用途是：看趋势、设阈值、判断要不要补预算、评估哪个项目配合优化。财务入账需要的是另一个体系的凭证，不是这里的明细。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">用途错位比数字不准更麻烦</span>
+        <p>拿明细去跟财务「对账」，你会发现怎么也对不平，然后花大量时间去查一个本来就不存在对应关系的东西。先摆正它的定位。</p>
+      </div>
+      <p>相关：见第 09 章「计费明细」、Q72、Q74。</p>
+    </div>
+  </details>
+
+  <h2>十、软件功能与开发（Q81–Q90）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q81. 「新建软件工程」和「通用任务」有什么区别？我要做个网站该选哪个？</summary>
+    <div class="zy-acc-body">
+      <p>任务分三类：<strong>通用任务、新建软件工程、软件修改</strong>。要做一个网站，选<strong>新建软件工程</strong>。</p>
+      <p>区别在于流程深度：通用任务适合一次性的、目标明确的活（写份文档、做个分析）；新建软件工程会带你走<strong>一套七步向导</strong>，把需求、技术方案、目录结构这些前置项问清楚，再进入开发。软件修改则是针对已有工程的增量改动。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：要做「东西」用工程，要做「一件事」用通用</span>
+        <p>产物需要长期维护、要反复迭代的，走工程线；一次交付就结束的，走通用任务。选错了流程，后面会绕远路。</p>
+      </div>
+      <p>相关：见第 10 章「三种任务类型」、Q83、Q89。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q82. 软件工程向导走到一半退出了，进度会丢吗？</summary>
+    <div class="zy-acc-body">
+      <p>不会丢。向导会保存你已经填过的内容，你回到列表里能继续。它本质上是一条「草稿到立项」的流程，中间状态是被保留的。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 任务 <span class="sep">›</span> 软件工程列表 <span class="sep">›</span> 选择未完成的工程 <span class="sep">›</span> 继续规划</div>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：没走完，就点「继续规划」</span>
+        <p>别重新发起一遍——那会生成第二条记录，你的工程列表就多了一份重复的草稿。找到原来那条继续就好。</p>
+      </div>
+      <p>相关：见第 10 章「软件工程向导」、Q83。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q83. 软件工程显示「规划中」，任务为什么不开始执行？</summary>
+    <div class="zy-acc-body">
+      <p>因为「规划中」就是<strong>不执行的状态</strong>。软件工程向导没走完、还在收集信息的阶段，系统不会启动开发任务——它连「要做什么」都还没定，自然不能开工。</p>
+      <p>你要做的是回到这个工程，把向导剩下的步骤走完，或者点「继续规划」，让状态往下推进。状态一旦进入可执行阶段，任务才会真正被调度。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">「规划中」不是卡住</span>
+        <p>看到它不动就以为系统坏了，然后反复新建工程，只会堆出一堆半成品草稿。先确认它是不是还在规划阶段，这多半就是原因。</p>
+      </div>
+      <p>相关：见第 10 章、Q82、Q84。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q84. 「软件修改」弹窗要我选「源软件工程」，这是什么？</summary>
+    <div class="zy-acc-body">
+      <p>这是必填项，指的是<strong>你要改的是哪一个已经存在的软件工程</strong>。软件修改是在已有工程上做增量改动，所以系统必须先知道「改的是哪一栋楼」，才能定位代码和工作区。</p>
+      <p>如果下拉里找不到你想改的工程，通常说明那个工程还没建、或者不在这个项目里。那就不是走「软件修改」，而是要先创建对应的软件工程。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">选错源工程 = 改错地方</span>
+        <p>多个工程名字相近时尤其容易选错。确认清楚再提交，改动落到别的工程上，排查起来非常费劲。</p>
+      </div>
+      <p>相关：见第 10 章「软件修改弹窗」、Q89。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q85. 提示「任务提示词草稿为空，请先与 AI 对话生成」，怎么办？</summary>
+    <div class="zy-acc-body">
+      <p>这条提示的意思是：<strong>你还没让 AI 帮你把需求整理成任务提示词</strong>，草稿栏是空的，不能直接提交。</p>
+      <p>正确做法是先在上面跟 AI 对话，把「你想改成什么样」说清楚，然后点生成草稿，系统会把对话整理成一份结构化的任务提示词，填进草稿栏。生成之后你还能手动微调，再提交。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：先聊清楚，再生成</span>
+        <p>草稿不是让你手写的，是「对话的结果」。跳过对话直接提交，系统就没有依据。先去聊，聊明白再生成。</p>
+      </div>
+      <p>相关：见第 10 章、Q86。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q86. 我点了几次「生成草稿」，会不会把之前改好的覆盖掉？</summary>
+    <div class="zy-acc-body">
+      <p>会。<strong>再次生成会覆盖当前的草稿内容</strong>。所以如果你已经手动改过草稿、补充了细节，再点一次生成，这些手改的内容就没了。</p>
+      <p>稳妥的做法是：<strong>先把手动修改保存或复制出来</strong>，再决定要不要重新生成；如果只是想补充一点内容，就在现有草稿上直接编辑，而不是重新生成。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">「再来一次」= 清空重写</span>
+        <p>把它当成「重置」按钮，而不是「优化」按钮。手改过的内容要留，就先备份。</p>
+      </div>
+      <p>相关：见第 10 章、Q85。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q87. 做完的软件怎么部署上线？为什么我点了没反应？</summary>
+    <div class="zy-acc-body">
+      <p>部署和备份都受<strong>功能开关</strong>控制。自动构建部署对应的是 <strong>deploy</strong> 这个开关，自动备份对应的是 <strong>backup</strong>。如果这两个开关没打开，即使代码开发完了，你也看不到部署真正执行。</p>
+      <p>先检查功能开关的状态（一般在项目设置或运营相关配置里），确认 deploy 是开启的，再发起部署。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">点了没反应，先查开关</span>
+        <p>这一类「功能明明做了却没动静」的问题，八成是功能开关没开。这是设计如此，不是 bug——有些高风险动作默认关闭，需要你主动开启。</p>
+      </div>
+      <p>相关：见第 10 章、Q90。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q88. 自动备份在哪开？备份了能恢复到某个时间点吗？</summary>
+    <div class="zy-acc-body">
+      <p>自动备份由 <strong>backup</strong> 功能开关控制，开启后系统会按策略自动备份，不需要你手动发起。这类开关通常和 deploy 一起，在项目的功能开关配置里。</p>
+      <p>备份的价值在于「出事时有退路」。至于恢复到具体某个时间点，取决于备份策略的记录情况——建议你<strong>在开启后先确认一次备份确实产生了</strong>，而不是等真出事了才发现一直是关着的。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：备份要验，不能只信「已开启」</span>
+        <p>开关打开不等于备份成功。上线前花两分钟看一眼最近一次备份记录，比事后追悔有用得多。</p>
+      </div>
+      <p>相关：见第 10 章、Q87。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q89. 我想改一个已经上线的功能，走「软件修改」还是「通用任务」？</summary>
+    <div class="zy-acc-body">
+      <p>走<strong>软件修改</strong>。因为目标是一个<strong>已经存在的软件工程</strong>，改动要落到既有的代码和结构上，而不是凭空做一件新事。</p>
+      <p>判断口诀很简单：<strong>产物有没有「源代码/工程」这个实体</strong>。有，就走软件工程线（新建或修改）；没有，只是一次性的产出（一份报告、一段文案），才走通用任务。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">别用通用任务去改线上功能</span>
+        <p>通用任务不知道你的工程结构，改出来的东西可能根本没接进现有系统。改已有工程，必须让系统知道「改哪一栋楼」。</p>
+      </div>
+      <p>相关：见第 10 章、Q81、Q84。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q90. 「功能开关」是什么？为什么有的功能我这边用不了？</summary>
+    <div class="zy-acc-body">
+      <p>功能开关就是一组「高危能力的总闸」。有些动作影响面大——自动构建部署、自动备份——默认不放开，需要你主动开启才生效。这不是权限歧视，而是安全设计：<strong>默认安全，明确开启</strong>。</p>
+      <p>典型的两个开关是 <strong>deploy</strong>（自动构建部署）和 <strong>backup</strong>（自动备份）。</p>
+      <p>还有一类开关是<strong>强制开启、关不掉的安全底线</strong>：资源治理、预算熔断、渐进式信任。这三项不属于「可选功能」，任何项目都受它们约束。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：能关的是便利，关不掉的是底线</span>
+        <p>找不到某个功能，先想它是不是个开关；想关掉某个保护，先想它是不是那三条底线之一——是的话，它本来就不给你关。</p>
+      </div>
+      <p>相关：见第 10 章、第 04 章、Q87。</p>
+    </div>
+  </details>
+
+  <h2>十一、出错与排障（Q91–Q100）</h2>
+
+  <details class="zy-acc faq">
+    <summary>Q91. 项目突然不动了，我从哪开始查？</summary>
+    <div class="zy-acc-body">
+      <p>按「由外到内、由大到小」的顺序，四步走：</p>
+      <p><strong>第一步，看运营控制台的状态标签。</strong>预算运行态是不是「熔断」或「已终止」？如果是，问题在钱不在任务，先去解决预算。<strong>第二步，看项目循环状态。</strong>有没有处于「兜底暂停」？这种状态重启服务也不会自己恢复，必须手动处理。<strong>第三步，看有没有待人工处理的节点。</strong>你在等系统，系统也在等你。<strong>第四步，看具体任务记录。</strong>任务是不是在「规划中」、或反复失败。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：先标签，再循环，后任务</span>
+        <p>顺序对了，绝大多数「不动了」都能在两步内定位。反过来先从任务细节下手，容易越查越乱。</p>
+      </div>
+      <p>相关：见第 11 章「排查树」、Q92、Q93。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q92. 控制台显示「降级」「熔断」「已终止」，分别是什么意思？</summary>
+    <div class="zy-acc-body">
+      <p>这是预算运行态的三种状态，严重程度递增：</p>
+      <p><strong>降级</strong>：花到预警线（约 80%）后，系统主动降低运行强度，还在跑，但已经在省着用。<strong>熔断</strong>：击穿阈值，循环暂停，等你去处理——补预算或临时解除。<strong>已终止</strong>：循环被更彻底地停掉了（例如执行了停止操作），比熔断更「死」，需要重新启动流程。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">它们不是「故障」，是「刹车」</span>
+        <p>看到这几个词别慌，也别急着想法子关掉。它们是保护机制在告诉你：「再烧下去会失控，我先停一下」。你要做的是解决触发它的原因。</p>
+      </div>
+      <p>相关：见第 04 章「预算的一生」、第 09 章、Q76、Q91。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q93. 「兜底暂停」是什么？为什么我重启了服务它还是停着？</summary>
+    <div class="zy-acc-body">
+      <p>兜底暂停是系统在出问题时<strong>主动把循环停下来避险</strong>的结果，由一个安全机制触发（比如连续失败超过上限）。它的关键特点是：<strong>这是一个会被持久保存的状态</strong>。</p>
+      <p>所以重启服务不会让它恢复——因为「暂停」这个决定被记下来了，重启只是重新加载了这个状态。你必须<strong>手动恢复</strong>它，并且在恢复前搞清楚是什么触发了暂停。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：兜底暂停，只认手动</span>
+        <p>重启不解决它，这才是设计意图——如果重启就能绕过保护，那保护就没意义了。去找触发原因，处理完再恢复。</p>
+      </div>
+      <p>相关：见第 09 章「兜底保护暂停」、Q91、Q98。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q94. 我看到「待人工处理」，但不知道要处理什么，怎么办？</summary>
+    <div class="zy-acc-body">
+      <p>「待人工处理」是任务失败到一定程度后<strong>升级给你的</strong>，所以它一定带着上下文。不要凭感觉猜，直接去看它的来龙去脉：找到那条待办或那个任务，读它的执行记录和失败原因，通常会写清楚「卡在哪一步」「试过什么」。</p>
+      <p>处理完之后，按流程让它继续——要么补充信息后恢复任务，要么调整任务定义后重跑。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">不看记录就点「继续」，等于让它再撞一次</span>
+        <p>系统把问题交给你，是因为它自己解决不了。你不给新信息，它只会用同样的方式再失败一次，浪费一轮预算。</p>
+      </div>
+      <p>相关：见第 09 章「连续失败的三级兜底」、第 11 章、Q47、Q98。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q95. 我看到一条英文报错/上游错误，看不懂，怎么定位？</summary>
+    <div class="zy-acc-body">
+      <p>先说一个好消息：上游服务的错误信息会<strong>优先原样透传给你看</strong>，不会被系统吞掉或改写成含糊的话。<strong>尤其是 502 / 503 / 504 这类网关类错误</strong>，现在不再退化成干巴巴的「请求错误 (502)」，而是优先显示后端给出的 message；后端没给时，也会补一句<strong>中文解释和下一步动作</strong>。所以你能看到英文原文，反而说明信息是全的，别怕它。</p>
+      <p>再提醒一个容易踩的点：如果报错发生在<strong>写操作</strong>（保存、提交、部署、发布等）上、提示超时或网络异常，文案会告诉你「<strong>可能已在服务端生效，请先刷新确认再重试</strong>」——这时别急着再点一次，先刷新看看到底成没成，避免重复提交。</p>
+      <p>定位方法：<strong>抓关键词 + 看时间点。</strong>把报错里的关键短语（模型名、错误类型、状态码）记下来，对照出错时间，去看那一刻系统在做什么任务。多数「上游错误」来自模型服务或第三方接口，属于外部侧的临时问题。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：原文别丢，时间要对</span>
+        <p>把报错原文和时间点一起记录，是给后续排查留下的最有价值的两条线索。别只截图「出错了」三个字。</p>
+      </div>
+      <p>相关：见第 11 章、Q96、Q100。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q96. 任务一直在「重试」，是不是死循环了？</summary>
+    <div class="zy-acc-body">
+      <p>不一定是死循环。系统的重试是<strong>有上限的</strong>：一般前 1–2 次是降级重试，第 3 次就会升级为人工处理，超过上限则告警并暂停循环。所以它不会永远转下去。</p>
+      <p>如果你觉得它「一直在试」，先确认两点：①是不是多个不同任务在各自重试，看起来像同一个在循环；②是不是每次重试之间还夹着复盘或调度，只是节奏慢。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">重试上限的存在，就是为了兜住这种情况</span>
+        <p>如果确实看到远超 3 次的反复失败，那更值得关注的不是「为什么在试」，而是「为什么每次都失败」——去看失败原因，那才是根。</p>
+      </div>
+      <p>相关：见第 09 章「连续失败的三级兜底」、Q47、Q98。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q97. 我改了 HMAC Secret 之后，项目服务器连不上了？</summary>
+    <div class="zy-acc-body">
+      <p>这是预期行为，不是 bug。HMAC Secret 是平台和项目服务器之间通信的<strong>共享密钥</strong>。你在平台侧重新生成后，<strong>旧密钥立即失效</strong>——如果项目服务器还在用旧密钥，双方就对不上，通信自然断了。</p>
+      <p>正确做法是：重新生成之后，<strong>把新密钥同步到项目服务器侧</strong>，让两边用同一把钥匙。改密钥是一次「换锁」，两把锁必须同时换。</p>
+      <div class="zy-note danger">
+        <span class="zy-note-title">换密钥 = 两端同时换，否则一定断</span>
+        <p>只在一边重新生成、另一边不管，等于把门锁换了却不给屋里人新钥匙。除非你确定能立刻同步到两端，否则不要随手重新生成密钥。</p>
+      </div>
+      <p>相关：见第 03 章「HMAC Secret」、Q91。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q98. 某个任务反复失败，系统提示暂停项目循环，我该从哪下手？</summary>
+    <div class="zy-acc-body">
+      <p>这是三级兜底走到最后一步的结果——「试过降级、也找人帮过，还是不行」，于是系统把整个项目的循环停下来，防止它继续空烧。你的任务不是立刻恢复，而是<strong>先解决那个反复失败的任务</strong>。</p>
+      <p>下手顺序：①打开那个任务，读它的失败原因和验收结论；②判断是「指令问题」还是「能力/外部问题」——指令模糊就改指令，外部依赖挂了就等或绕；③如果这个任务本身不该做，就把它终止；④确认原因消除后，再恢复项目循环。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：先治任务，再启循环</span>
+        <p>直接恢复循环，系统会立刻再试一次，然后再次暂停——你会陷入「恢复/暂停」的循环里。先根治，再重启。</p>
+      </div>
+      <p>相关：见第 09 章「连续失败的三级兜底」、第 11 章、Q47、Q93。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q99. 我把项目暂停了，怎么恢复？找不到恢复按钮。</summary>
+    <div class="zy-acc-body">
+      <p>恢复入口在运营控制台的启动/停止控制区。控制台上有<strong>一组操作按钮</strong>，用于启动、暂停、停止循环，恢复就在这一组里。</p>
+      <p>路径：</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 运营控制台 <span class="sep">›</span> 启动 / 暂停 / 停止</div>
+      <div class="zy-note warn">
+        <span class="zy-note-title">先分清是「暂停」还是「兜底暂停/终止」</span>
+        <p>普通「暂停」手动恢复即可。如果是「兜底暂停」，按下恢复也不一定马上动——得先消除触发它的原因。如果是「已终止」，则需要重新走启动流程。</p>
+      </div>
+      <p>相关：见第 09 章「自动运营控制台」、Q92、Q93。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>Q100. 排查了一圈还是搞不定，最后该做什么？</summary>
+    <div class="zy-acc-body">
+      <p>做三件事，按顺序。</p>
+      <p><strong>第一，把「你看到的现象」和「你已经试过的动作」记下来。</strong>现象包括：状态标签是什么、报错原文、出问题的时间点。试过的动作包括：改了哪里、有没有重启、结果如何。这两部分构成一份能被人接手的描述。</p>
+      <p><strong>第二，回到本章的急症索引，重新对一遍症状。</strong>很多「排查了一圈」，其实是漏看了某个状态的真正含义，比如把「熔断」当成任务故障。</p>
+      <p><strong>第三，如果确实超出你的处理范围，就停下来，带着上面那份描述去找支持。</strong>最忌讳的是在没搞清原因的情况下反复重启、反复恢复——那只会制造更多难查的痕迹。</p>
+      <div class="zy-note tip">
+        <span class="zy-note-title">口诀：记清现象，别乱重启</span>
+        <p>排障最大的敌人是「手比脑快」。多花五分钟记录，能省下后面几小时。</p>
+      </div>
+      <p>相关：见本章急救索引、第 11 章、Q91、Q95。</p>
+    </div>
+  </details>
+
+  <h2>十二、本章小结与下一步</h2>
+
+  <p>这一章不像前十七章那样「从头讲到尾」，它是一份<strong>随时翻、随时查的手册</strong>。你不用记住 100 个答案，只需要记住一件事：<strong>遇到卡点，先来这里搜，再动手。</strong></p>
+
+  <p>如果你现在回头看，会发现这 100 个问题其实围绕几条主线：<strong>「组织怎么搭」「任务怎么跑」「钱怎么花」「错了怎么办」</strong>。把这四条线想清楚，绝大多数提问你都能自己找到答案——甚至不用翻这一章。</p>
+
+  <h3>你现在应该能做到</h3>
+  <ul class="zy-check">
+    <li>拿到一个报错或异常状态，先用「急症索引」定位，而不是乱点按钮；</li>
+    <li>分得清「这是故障」还是「保护机制在工作」——熔断、降级、兜底暂停都不是坏消息；</li>
+    <li>知道哪些问题看一眼运营控制台就能回答（状态标签、循环状态、待办）；</li>
+    <li>记得三条最贵的坑：预算填 0、跳过验收、随手改 HMAC Secret；</li>
+    <li>查不到答案时，知道去第 19 章看深度排障，去第 20 章查完整术语。</li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">本章的正确用法：当字典，不当课本</span>
+    <p>不要试图一次读完 100 问。把它收藏起来，遇到问题按类别或关键词搜。读得越多，说明你遇到的坑越多——这很正常，不代表你笨，只代表你在真正做事。</p>
+  </div>
+
+  <p><strong>下一步：</strong>如果这一章没能解决你的问题，说明它多半是一个「需要看完整排查逻辑」的问题——去 <strong>第 19 章 · 故障自查、安全与红线</strong>，那里有按症状组织的深度排查树和红线清单。如果你只是想搞懂某个词，去 <strong>第 20 章 · 术语表与路线图</strong>，附录 C 只是迷你版。</p>
+
+  <h2>附录 A · 100 问索引总表</h2>
+
+  <p>一页看全 100 问。找不到答案时，先在这里扫一遍，用浏览器 Ctrl+F 搜关键词更快。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>#</th><th>问题</th><th>关键提醒</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>收不到验证邮件</td><td>注册不需要邮箱验证，直接用注册的账号登录</td></tr>
+        <tr><td>2</td><td>建公司时行业选错了</td><td>可改；只影响默认口径，公司设置里行业是自由文本</td></tr>
+        <tr><td>3</td><td>公司名称能不能改</td><td>能改，公司设置里编辑即可</td></tr>
+        <tr><td>4</td><td>最多能建几家公司</td><td>可以建多家，顶部切换器来回切</td></tr>
+        <tr><td>5</td><td>怎么邀请同事</td><td>公司管理 › 成员与权限 › 邀请成员，绑定邮箱</td></tr>
+        <tr><td>6</td><td>邀请码过期</td><td>有效期 7 天，过期重发即可</td></tr>
+        <tr><td>7</td><td>怎么单独给某项权限</td><td>14 项权限逐项勾，不必给管理员</td></tr>
+        <tr><td>8</td><td>能不能转让公司</td><td>能，但不可逆，转让前想清楚</td></tr>
+        <tr><td>9</td><td>解散公司会怎样</td><td>数据软删除、公司不可恢复，仅所有者可操作</td></tr>
+        <tr><td>10</td><td>同时管多家公司</td><td>用顶部公司切换器，一个账号可管多家</td></tr>
+        <tr><td>11</td><td>能不能只建项目不建公司</td><td>不能，公司 → 项目 → 任务是硬顺序</td></tr>
+        <tr><td>12</td><td>项目类型/行业选错要不要紧</td><td>影响分类口径；描述、目标、运行模式影响更直接</td></tr>
+        <tr><td>13</td><td>项目描述/目标写错能改吗</td><td>能改，改了 AI 后续按新的理解走</td></tr>
+        <tr><td>14</td><td>预算填多少合适</td><td>参考默认值，宁小勿 0，看得见消耗再调</td></tr>
+        <tr><td>15</td><td>预算填 0 是什么</td><td>0 = 不限制，是最贵的选项，别当省钱</td></tr>
+        <tr><td>16</td><td>预算花超会怎样</td><td>预警 → 降级 → 熔断暂停，不会无声无息地烧</td></tr>
+        <tr><td>17</td><td>钱不够了怎么加</td><td>补预算 → 循环恢复；急用可临时解除熔断</td></tr>
+        <tr><td>18</td><td>项目能暂停多久</td><td>暂停状态跨重启保留，不会自己跑起来</td></tr>
+        <tr><td>19</td><td>项目能删吗</td><td>任务不提供物理删除，项目按流程收尾</td></tr>
+        <tr><td>20</td><td>一个公司能建几个项目</td><td>多个，各自独立核算预算</td></tr>
+        <tr><td>21</td><td>全自动和半自动差在哪</td><td>都跑自动运营循环，差别在人工介入的频率</td></tr>
+        <tr><td>22</td><td>「手动」和「人工审核」是一回事吗</td><td>是，同一个值，只是不同界面用词不同</td></tr>
+        <tr><td>23</td><td>什么时候切回人工审核</td><td>方向不稳、涉及客户沟通、风险高时</td></tr>
+        <tr><td>24</td><td>L0–L3 是什么</td><td>自主级别，越高 AI 越能自己决定</td></tr>
+        <tr><td>25</td><td>默认是哪个级别</td><td>默认 L2，可调</td></tr>
+        <tr><td>26</td><td>怎么让 AI 别自己发邮件</td><td>把外发类动作纳入人工确认，或降自主级别</td></tr>
+        <tr><td>27</td><td>怎么临时给 AI 放权</td><td>用权限租赁，带过期时间和成本上限</td></tr>
+        <tr><td>28</td><td>权限租赁会不会一直有效</td><td>不会，到期自动失效</td></tr>
+        <tr><td>29</td><td>能不能让 AI 一分钱不花</td><td>不能，AI 干活必然消耗；能控的是多少</td></tr>
+        <tr><td>30</td><td>怎么一键停掉所有 AI</td><td>紧急停止（KillSwitch），不可逆，慎用</td></tr>
+        <tr><td>31</td><td>AI 团队会自动配好吗</td><td>会按类型生成默认组织，你审一遍再调</td></tr>
+        <tr><td>32</td><td>管理者 vs 员工 Agent</td><td>管理者只管协调，员工才下场干活</td></tr>
+        <tr><td>33</td><td>技能库里有现成的吗</td><td>没有内置种子，靠装配和沉淀长出来</td></tr>
+        <tr><td>34</td><td>技能「提升为组织级」</td><td>变成全公司可复用，需人工审批才生效</td></tr>
+        <tr><td>35</td><td>运行配置改了什么</td><td>改 Agent 的工作方式；auto-run 是高风险开关</td></tr>
+        <tr><td>36</td><td>组织进化引擎会自动执行吗</td><td>只提建议，采纳/暂缓/拒绝都在你</td></tr>
+        <tr><td>37</td><td>一键扩编能撤销吗</td><td>能，带回滚点</td></tr>
+        <tr><td>38</td><td>项目阶段谁切换</td><td>AI 建议或你手动，切换带回退点</td></tr>
+        <tr><td>39</td><td>能给成员加管理权限吗</td><td>能给人；AI Agent 不给管理权限（前端拦，后端强制拦截待排期）</td></tr>
+        <tr><td>40</td><td>邀请会不会过期</td><td>7 天，过期需重发</td></tr>
+        <tr><td>41</td><td>怎么新建任务</td><td>必填标题+描述；验收标准写在描述里</td></tr>
+        <tr><td>42</td><td>任务建好为什么不动</td><td>查循环状态、运行模式、时间片是否占满</td></tr>
+        <tr><td>43</td><td>时间片是什么</td><td>AI 的工位，默认 10 格，可自动扩容</td></tr>
+        <tr><td>44</td><td>轮次要跑多少</td><td>满 20 轮或全部完成触发复盘</td></tr>
+        <tr><td>45</td><td>任务能删吗</td><td>「规划中」可删；已执行只收尾不删</td></tr>
+        <tr><td>46</td><td>引擎怎么选</td><td>软件类走循环执行，轻活可走 Agent 引擎</td></tr>
+        <tr><td>47</td><td>任务失败会一直重试吗</td><td>不会，三级兜底：降级 → 转人工 → 暂停循环</td></tr>
+        <tr><td>48</td><td>能中途塞新信息吗</td><td>能，补充说明时讲清「和之前有什么不同」</td></tr>
+        <tr><td>49</td><td>怎么看它在干什么</td><td>看运营控制台的状态标签和任务进度</td></tr>
+        <tr><td>50</td><td>「接力推进」「free」找不到</td><td>内部机制名，界面不显示，看现象即可</td></tr>
+        <tr><td>51</td><td>三权分立是什么</td><td>做、验、批分开，干活的不判卷</td></tr>
+        <tr><td>52</td><td>返工和驳回差在哪</td><td>返工=方向对没干好；驳回=前提有问题</td></tr>
+        <tr><td>53</td><td>验收标准写哪</td><td>没有 done_when 输入框，写进任务描述</td></tr>
+        <tr><td>54</td><td>AI 自己验收自己行吗</td><td>不行，同源判断会自审自批</td></tr>
+        <tr><td>55</td><td>任务被判返工怎么办</td><td>看是哪条标准没过，把指令补具体</td></tr>
+        <tr><td>56</td><td>被驳回是不是白做了</td><td>不是，回到任务定义层重新判断</td></tr>
+        <tr><td>57</td><td>验收强度是什么</td><td>按风险分级，大事严查小事快过</td></tr>
+        <tr><td>58</td><td>SLA 超时会怎样</td><td>提醒 → 升级 → 超时降级，不会无限卡死</td></tr>
+        <tr><td>59</td><td>验收记录在哪看</td><td>任务详情里的流转历史和验收结论</td></tr>
+        <tr><td>60</td><td>我能替 AI 点通过吗</td><td>能，但强行通过等于把问题往后推</td></tr>
+        <tr><td>61</td><td>一直卡在「解析中」</td><td>多半还没走完状态链，失败才需要重传</td></tr>
+        <tr><td>62</td><td>文件传不上去</td><td>白名单 pdf/txt/md/markdown/docx/xlsx，单文件 50MB</td></tr>
+        <tr><td>63</td><td>公司级 vs 项目级知识库</td><td>通用放公司，专属放项目；检索 70/30</td></tr>
+        <tr><td>64</td><td>RAG 答非所问</td><td>先看状态，再看分层，最后改问法</td></tr>
+        <tr><td>65</td><td>已有项目资料怎么导</td><td>「现有项目导入」，一次 10 个文件，不进知识库</td></tr>
+        <tr><td>66</td><td>会议录音能导吗</td><td>不支持音视频，先转文字再导</td></tr>
+        <tr><td>67</td><td>待确认知识在哪</td><td>无侧边栏入口，走 /project/&lt;项目ID&gt;/kb/review</td></tr>
+        <tr><td>68</td><td>本地文档怎么批量扫</td><td>用边缘客户端，先规划扫描目录</td></tr>
+        <tr><td>69</td><td>边缘客户端 Disconnected</td><td>查进程 → 查网络 → 查服务器配置</td></tr>
+        <tr><td>70</td><td>客户能问我的知识库吗</td><td>能，用「客户页面」开有限权限问答；白名单留空=不开放</td></tr>
+        <tr><td>71</td><td>平台账本 vs 项目账本</td><td>公司看钱，项目看预算，两个都要管</td></tr>
+        <tr><td>72</td><td>Token 怎么计费</td><td>输入 1、输出 2、缓存读 0.02 元/百万</td></tr>
+        <tr><td>73</td><td>预警线是 80% 还是 90%</td><td>统一由后端预警线驱动，默认 80%，标签同刻亮</td></tr>
+        <tr><td>74</td><td>公司账本和计费明细对不上</td><td>已按批上报+幂等去重；口径仍不同，别精确对账</td></tr>
+        <tr><td>75</td><td>怎么省钱</td><td>写清指令减少返工，是最有效的降本</td></tr>
+        <tr><td>76</td><td>熔断了怎么办</td><td>补预算恢复；应急可临时解除熔断</td></tr>
+        <tr><td>77</td><td>怎么充值，有上限吗</td><td>公司账本充值，单笔上限 1000000 元</td></tr>
+        <tr><td>78</td><td>哪个先兜不住</td><td>看哪条线更近：项目预算线 or 公司余额</td></tr>
+        <tr><td>79</td><td>预算设 0 是什么意思</td><td>不限制，不是不花钱，想省钱别填 0</td></tr>
+        <tr><td>80</td><td>计费明细能当发票吗</td><td>不能，是成本工具不是财务凭证</td></tr>
+        <tr><td>81</td><td>通用任务 vs 新建软件工程</td><td>做网站选软件工程，一次性活选通用任务</td></tr>
+        <tr><td>82</td><td>向导没走完会丢吗</td><td>不丢，点「继续规划」接着走</td></tr>
+        <tr><td>83</td><td>「规划中」为什么不执行</td><td>规划中就是不执行，走完向导才会开工</td></tr>
+        <tr><td>84</td><td>「源软件工程」是什么</td><td>必填，指要改的那一个已有工程</td></tr>
+        <tr><td>85</td><td>草稿为空怎么办</td><td>先与 AI 对话，再生成草稿</td></tr>
+        <tr><td>86</td><td>重复生成会覆盖吗</td><td>会，手改过的先备份</td></tr>
+        <tr><td>87</td><td>怎么部署，点了没反应</td><td>检查 deploy 功能开关是否开启</td></tr>
+        <tr><td>88</td><td>自动备份在哪开</td><td>backup 功能开关；开启后确认真的备份了</td></tr>
+        <tr><td>89</td><td>改线上功能走哪条</td><td>走软件修改，不是通用任务</td></tr>
+        <tr><td>90</td><td>功能开关是什么</td><td>高危能力总闸；三条安全底线关不掉</td></tr>
+        <tr><td>91</td><td>项目不动从哪查</td><td>先标签，再循环，后任务</td></tr>
+        <tr><td>92</td><td>降级/熔断/已终止</td><td>三种预算运行态，严重程度递增</td></tr>
+        <tr><td>93</td><td>兜底暂停重启也不恢复</td><td>持久状态，只认手动恢复</td></tr>
+        <tr><td>94</td><td>待人工处理要处理什么</td><td>读任务执行记录和失败原因，别猜</td></tr>
+        <tr><td>95</td><td>英文报错看不懂</td><td>原文会透传，抓关键词+对时间点</td></tr>
+        <tr><td>96</td><td>一直重试是死循环吗</td><td>不是，重试有上限，重点查为什么每次都失败</td></tr>
+        <tr><td>97</td><td>改了 HMAC Secret 连不上</td><td>旧密钥立即失效，两端要同时换</td></tr>
+        <tr><td>98</td><td>反复失败导致暂停循环</td><td>先治任务，再启循环</td></tr>
+        <tr><td>99</td><td>暂停后怎么恢复</td><td>运营控制台的启动/暂停/停止按钮组</td></tr>
+        <tr><td>100</td><td>还是搞不定怎么办</td><td>记清现象，别乱重启，带描述找支持</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 B · 症状 → 处置速查卡</h2>
+
+  <p>这一页可以单独打印或截图，贴在手边。左边是你看到的现象，右边是第一步该做什么。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>你看到的症状</th><th>最可能的原因</th><th>第一步做什么</th><th>详见</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>项目整个不动了</td><td>循环停了 / 熔断 / 兜底暂停</td><td>先看运营控制台的预算运行态标签</td><td>Q91 Q92</td></tr>
+        <tr><td>控制台亮「熔断」</td><td>预算击穿阈值</td><td>补预算，或临时解除熔断</td><td>Q76</td></tr>
+        <tr><td>控制台亮「降级」</td><td>花到约 80% 预警线</td><td>准备补预算，检查有没有无谓消耗</td><td>Q73</td></tr>
+        <tr><td>标签是「已终止」</td><td>循环被停止</td><td>确认原因后重新走启动流程</td><td>Q92</td></tr>
+        <tr><td>重启服务还是停着</td><td>兜底暂停是持久状态</td><td>手动恢复，并先消除触发原因</td><td>Q93</td></tr>
+        <tr><td>任务一直「待执行」</td><td>时间片占满 / 循环没启动 / 人工审核模式</td><td>先确认项目循环状态和时间片</td><td>Q42 Q43</td></tr>
+        <tr><td>任务跳到「待人工处理」</td><td>三级兜底走到第 3 级</td><td>读任务失败原因，补充信息后恢复</td><td>Q94</td></tr>
+        <tr><td>任务反复失败</td><td>指令模糊或外部依赖不可用</td><td>读验收结论，改指令而不是催进度</td><td>Q55 Q98</td></tr>
+        <tr><td>任务被判「返工」</td><td>没达到某条验收标准</td><td>看是哪条标准没过，把指令补具体</td><td>Q52 Q55</td></tr>
+        <tr><td>任务被判「驳回」</td><td>任务前提或方向有问题</td><td>回到任务定义层，决定改还是终止</td><td>Q56</td></tr>
+        <tr><td>软件工程一直「规划中」</td><td>向导没走完</td><td>点「继续规划」把向导走完</td><td>Q83</td></tr>
+        <tr><td>提交改动提示草稿为空</td><td>没先跟 AI 对话生成草稿</td><td>先对话，再点生成草稿</td><td>Q85</td></tr>
+        <tr><td>点了部署没动静</td><td>deploy 功能开关没开</td><td>开启 deploy 开关后重试</td><td>Q87</td></tr>
+        <tr><td>文档卡在「解析中」</td><td>状态链还没走完</td><td>等待；确认是「失败」才重传</td><td>Q61</td></tr>
+        <tr><td>文件传不上去</td><td>格式不在白名单 / 超过 50MB</td><td>转成 pdf/txt/md/markdown/docx/xlsx 再传</td><td>Q62</td></tr>
+        <tr><td>RAG 答非所问</td><td>资料没就绪 / 分层放错 / 问题太泛</td><td>先确认文档状态是「就绪」</td><td>Q64</td></tr>
+        <tr><td>找不到「待确认知识」</td><td>它没有侧边栏入口</td><td>直接访问 /project/&lt;项目ID&gt;/kb/review</td><td>Q67</td></tr>
+        <tr><td>边缘客户端 Disconnected</td><td>进程停了 / 网络不通 / 配置变了</td><td>按进程 → 网络 → 配置顺序查</td><td>Q69</td></tr>
+        <tr><td>账本数字对不上</td><td>上报地址未配置 / 两边口径不同</td><td>不强行对账，各看各的用途</td><td>Q74</td></tr>
+        <tr><td>余额低于阈值提醒</td><td>公司余额接近告急</td><td>去公司账本充值</td><td>Q77</td></tr>
+        <tr><td>邀请同事没进来</td><td>超过 7 天 / 用错邮箱登录</td><td>确认邮箱，重新发邀请</td><td>Q40</td></tr>
+        <tr><td>改了密钥就通信中断</td><td>旧 HMAC Secret 已失效</td><td>把新密钥同步到项目服务器侧</td><td>Q97</td></tr>
+        <tr><td>AI 自己发了邮件/动了敏感资源</td><td>自主级别偏高 / 未设人工确认</td><td>把外发类动作纳入人工确认</td><td>Q26 Q27</td></tr>
+        <tr><td>AI 正在做危险的事</td><td>需要立即停止</td><td>用紧急停止（KillSwitch），不可逆</td><td>Q30</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">速查卡的使用前提</span>
+    <p>这张卡给的是「第一步」，不是「完整方案」。照第一步做完还是不行，请翻到对应的 Q 号看完整解答，或去第 19 章看深度排查树。</p>
+  </div>
+
+  <h2>附录 C · 术语速查（迷你版）</h2>
+
+  <p>只给你「一句话就够用」的解释。需要完整定义、来龙去脉和设计依据，请去 <strong>第 20 章 · 术语表与路线图</strong>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>术语</th><th>一句话</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>三端</td><td>平台（你操作的网页）、项目服务器（干活的引擎）、边缘客户端（连你本机资料的桥）。</td></tr>
+        <tr><td>实例</td><td>一个项目对应一台独立运行的项目服务器，物理隔离、互不影响。</td></tr>
+        <tr><td>自动运营（auto-ops）</td><td>AI 自动拆任务、按时间片轮流推进、复盘重排的运行机制。</td></tr>
+        <tr><td>全自动 / 半自动 / 人工审核</td><td>三种运行模式；前两种会跑自动运营循环，第三种等人批准才动。</td></tr>
+        <tr><td>自主级别（L0–L3）</td><td>AI 能自己拍板到什么程度，默认 L2，越高越放手。</td></tr>
+        <tr><td>三通道（红 / 黄 / 绿）</td><td>决策分流：绿=直接做，黄=提醒后做，红=必须人工确认。</td></tr>
+        <tr><td>权限租赁</td><td>临时把某项权力给 AI，带过期时间和成本上限，到期自动收回。</td></tr>
+        <tr><td>渐进式信任</td><td>AI 表现稳定就逐步放开权限，出问题就收紧；属于关不掉的安全底线之一。</td></tr>
+        <tr><td>三权分立</td><td>执行、验收、批准分开，干活的不判卷。</td></tr>
+        <tr><td>验收 Agent</td><td>独立核对产出的角色，只认标准不认人情。</td></tr>
+        <tr><td>通过 / 返工 / 驳回</td><td>验收三种结论；返工=方向对没干好，驳回=前提有问题。</td></tr>
+        <tr><td>done_when（验收标准）</td><td>「做成什么样算完成」；系统没有单独输入框，写在任务描述里。</td></tr>
+        <tr><td>时间片</td><td>AI 的「工位」，默认 10 个，决定同时能推进多少任务，可自动扩容。</td></tr>
+        <tr><td>轮次</td><td>AI 推进任务的一小步；满 20 轮或全部完成会触发复盘。</td></tr>
+        <tr><td>复盘 / 评审</td><td>到点自动重看方向和优先级、必要时重排任务的环节。</td></tr>
+        <tr><td>接力摘要</td><td>上一轮留下的「目标/已完成/未完成/下一步」，让下一轮接得上。</td></tr>
+        <tr><td>空闲等待（free）</td><td>项目待命状态，不消耗 LLM 调用，不会偷偷烧钱。</td></tr>
+        <tr><td>三级兜底</td><td>失败后的处理链：降级重试 → 转人工 → 告警并暂停循环。</td></tr>
+        <tr><td>兜底暂停</td><td>出问题时主动停循环避险的持久状态，重启也不会自动恢复。</td></tr>
+        <tr><td>熔断</td><td>花到预算阈值，循环暂停等处理。</td></tr>
+        <tr><td>降级</td><td>花到预警线后主动降低运行强度，还在跑但在省着用。</td></tr>
+        <tr><td>预算预警线</td><td>后端统一配置的一条线，默认 80%；触发通知与降级，控制台「预警」标签同刻亮起。</td></tr>
+        <tr><td>双线账本</td><td>平台账本管「公司有没有钱」，项目账本管「这个项目预算够不够」。</td></tr>
+        <tr><td>token 计费</td><td>按调用量折算成本，输入 1、输出 2、缓存读 0.02 元/百万；含估算成分。</td></tr>
+        <tr><td>功能开关</td><td>高危能力的总闸，如 deploy（部署）、backup（备份）；默认安全、明确开启。</td></tr>
+        <tr><td>智能体组织</td><td>管理者 Agent（只协调）+ 员工 Agent（专业执行）的岗位结构。</td></tr>
+        <tr><td>技能 / 技能库</td><td>Agent 会做的一件具体事；技能库无内置种子，靠装配与沉淀获得。</td></tr>
+        <tr><td>组织进化引擎</td><td>给组织「体检开药方」的模块，只提建议、由你拍板。</td></tr>
+        <tr><td>知识库分层</td><td>公司级（全公司共享）/ 项目级（仅本项目）/ 共享（定向开放）。</td></tr>
+        <tr><td>RAG</td><td>先检索资料再让 AI 回答，答案有据可依；检索优先项目级约 70%。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 D · 新人最容易犯的 10 个错</h2>
+
+  <p>这 10 条，几乎每个新用户都会踩一到两个。提前看一眼，能省不少钱和时间。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>#</th><th>错误做法</th><th>后果</th><th>正确做法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>预算填 0，以为等于不花钱</td><td>那是「不限制」，闸门全开，最容易烧穿</td><td>填一个具体的、你能接受的小数字</td></tr>
+        <tr><td>2</td><td>任务描述写得含糊（「做好一点」）</td><td>AI 只能猜，反复返工，钱花了事没成</td><td>把验收标准写进描述，且要能量得出来</td></tr>
+        <tr><td>3</td><td>看到熔断/降级就慌，想办法关掉</td><td>架空保护机制，后面失控风险更大</td><td>先搞清楚触发原因，再补预算或调策略</td></tr>
+        <tr><td>4</td><td>为了提速，手动跳过验收</td><td>问题被推到后面，越晚越难查</td><td>该验就验；强行通过也要留备注</td></tr>
+        <tr><td>5</td><td>项目不动就反复重启、反复点启动</td><td>状态被搅乱，排查线索也丢了</td><td>先看状态标签和循环状态，定位了再动手</td></tr>
+        <tr><td>6</td><td>随手重新生成 HMAC Secret</td><td>旧密钥立即失效，平台和项目服务器通信中断</td><td>确定能同时同步两端再换</td></tr>
+        <tr><td>7</td><td>把文件重复上传，指望它解析快点</td><td>产生一堆重复记录，知识库变乱</td><td>先确认状态，失败才重传</td></tr>
+        <tr><td>8</td><td>资料全堆在公司级知识库</td><td>检索信噪比变差，AI 答非所问</td><td>通用放公司级，专属放项目级</td></tr>
+        <tr><td>9</td><td>软件类任务选了 Agent 引擎</td><td>拿不到完整交付，白花额度</td><td>软件交付走循环执行</td></tr>
+        <tr><td>10</td><td>所有活都建通用任务，从不用软件工程</td><td>产物没有工程结构，无法迭代维护</td><td>要长期迭代的东西，走软件工程线</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">最后一句口诀</span>
+    <p>「<strong>先看标签，再查记录，别乱重启，别填 0</strong>」——记住这十二个字，你已经避开了新手 80% 的坑。</p>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

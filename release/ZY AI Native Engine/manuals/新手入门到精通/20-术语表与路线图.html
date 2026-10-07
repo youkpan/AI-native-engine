@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第20章 术语表 · 30/60/90 天路线图 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 20 章 · 随时查阅</div>
+    <h1>第20章 术语表 · 30/60/90 天路线图</h1>
+    <p class="zy-lead">全书 120+ 个术语的人话对照表，三条起步路线的时间表，一份"遇到任何问题该翻哪一章"的总索引。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 25 分钟</span>
+      <span class="zy-badge green">工具章 · 随时回查</span>
+      <span class="zy-badge amber">重点：术语 / 路线图 / 全书索引</span>
+      <span class="zy-badge purple">含 5 个附录</span>
+    </div>
+  </header>
+
+  <h3>你将学会</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>遇到看不懂的名词，30 秒内查到它的人话解释、在哪见到、详见第几章</span></li>
+    <li><input type="checkbox"><span>分清哪些能力"已上线"、哪些"部分可用"、哪些还"规划中"，不再对着找不到的按钮干着急</span></li>
+    <li><input type="checkbox"><span>照着 30 / 60 / 90 天路线图，知道自己这一个月到底该做什么、该盯哪个数</span></li>
+    <li><input type="checkbox"><span>建立每天 10 分钟、每周 30 分钟、每月 90 分钟的固定经营节奏</span></li>
+    <li><input type="checkbox"><span>记住 30 条最佳实践和 15 个认知误区，少走别人踩过的坑</span></li>
+  </ul>
+
+  <p>这一章是全书唯一的"工具章"：它不讲新功能，而是把前面 19 章的东西压成四种你随时会用到的形态。<strong>术语查这里</strong>（第一节 + 附录 A）、<strong>节奏照这里</strong>（第三节 + 第四节 + 附录 C）、<strong>能力现状看这里</strong>（第二节 + 附录 B）、<strong>找章节看索引</strong>（第七节 + 附录 D）。你不必从头读到尾，遇到问题时翻对应的一块即可。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">这一章怎么用</span>
+    <p>读第一遍时，你只需要知道"这里有什么、放在哪一段"；真正用到是在你操作中卡住的时刻：界面上冒出一个不认识的词，翻第一节；界面上找不到某个按钮，翻第二节；不知道该干嘛，翻第三节；不知道这周该看什么数，翻第四节。</p>
+  </div>
+
+  <h2>一、术语总表</h2>
+
+  <p>下面按七个主题分组。每一行给五个信息：<strong>中文术语</strong>、<strong>英文或系统标识</strong>（你在接口、日志或高级配置里可能看到的形式）、<strong>一句话人话解释</strong>、<strong>在哪见到</strong>、<strong>详见第几章</strong>。每条解释都尽量能独立看懂——即使你从没读过前面任何一章，这一节也能当字典用。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一个使用小技巧</span>
+    <p>如果你只想快速认词，直接翻到<strong>附录 A · 术语速查（一页纸）</strong>，那里把最常用的 40 个词压成一张表，可打印。本节的解释更完整，适合你要"搞懂它到底怎么运作"的时候读。</p>
+  </div>
+
+  <h3>1.1 组织与账号</h3>
+
+  <p>这一组是所有操作的<strong>地基</strong>：你的一切动作都发生在"公司 → 项目 → 任务"这个三层结构上，再配上人（成员、角色）和权（权限、信任）。搞不清这一组，后面越用越糊。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>术语</th><th>英文 / 标识</th><th>一句话人话解释</th><th>在哪见到</th><th>详见</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>公司</strong></td><td>company</td><td>你的"组织容器"，用来装人、装钱、装全公司共用的知识；一个账号可以建多家公司，互不打扰。</td><td>左侧菜单「公司管理」</td><td>第 02 章</td></tr>
+      <tr><td><strong>项目</strong></td><td>project</td><td>一条业务线就是一个项目。每个项目背后有自己独立的服务器、预算和账本，相当于"独立核算的一家小公司"。</td><td>左侧菜单「项目管理」</td><td>第 03 章</td></tr>
+      <tr><td><strong>部门</strong></td><td>department</td><td>公司组织架构里的分组节点，用来把人归堆；它管"谁归谁管"，本身不直接决定能干什么。</td><td>公司管理 →「组织架构」</td><td>第 02、14 章</td></tr>
+      <tr><td><strong>成员</strong></td><td>member</td><td>被邀请进公司的人（真人账号）；项目里的 AI 不叫成员，叫 Agent，两者分开管理。</td><td>公司管理 →「成员管理」</td><td>第 02、14 章</td></tr>
+      <tr><td><strong>角色</strong></td><td>super_admin / admin / member / ai_agent</td><td>成员的身上标签，决定权限起点：超级管理员、管理员、普通成员，以及一个特殊的 AI Agent 角色。</td><td>公司管理 →「成员管理」</td><td>第 14 章</td></tr>
+      <tr><td><strong>所有者</strong></td><td>owner</td><td>公司或项目的"最终控制人"，是唯一能转让、解散、删除的角色；换人要走所有权转移，不能凭空改。</td><td>公司/项目详情</td><td>第 02 章</td></tr>
+      <tr><td><strong>方向</strong></td><td>direction</td><td>给公司或项目贴的战略标签（比如"出海电商""智能制造"），帮你在多个项目间做归类与筛选，不参与 AI 决策。</td><td>成员/组织相关设置</td><td>第 14 章</td></tr>
+      <tr><td><strong>负责人指派</strong></td><td>direction_owner / project_owner / task_owner</td><td>三种"挂名问责"：方向负责人管一条战略线，项目负责人管一个项目，任务负责人管一件具体的事。是身份标记，不自动等于操作权限。</td><td>组织/项目详情</td><td>第 14 章</td></tr>
+      <tr><td><strong>邀请码</strong></td><td>invite</td><td>把别人加进公司的凭证；对方凭码注册或被识别，才成为你的成员。没有码的人看不到你的公司。</td><td>公司管理 →「成员邀请」</td><td>第 02 章</td></tr>
+      <tr><td><strong>权限</strong></td><td>permission（共 14 项）</td><td>细到动作级别的开关，比如"能不能花钱""能不能发外发邮件"。默认不给，需要谁干这个才给谁开。</td><td>公司/项目权限设置</td><td>第 14 章</td></tr>
+      <tr><td><strong>权限租赁</strong></td><td>lease</td><td>临时把某项权限借给某个 Agent 一段时间，到期自动回收。用来解决"这一件事它偶尔要干，但不该永久有权限"。</td><td>自动运营 →「权限租赁」</td><td>第 14 章</td></tr>
+      <tr><td><strong>渐进式信任</strong></td><td>trust_model</td><td>按 AI 的长期表现逐步放权的机制：干得好就少问你，干得差就多问你。它的安全底线开关强制开启，关不掉。</td><td>治理与资源 →「渐进式信任」</td><td>第 08、14 章</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1.2 智能体与组织进化</h3>
+
+  <p>干活的不是"一个大模型"，而是<strong>一支有岗位分工的 AI 队伍</strong>。这一组讲这支队伍怎么建、怎么配、怎么自己长大。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>术语</th><th>英文 / 标识</th><th>一句话人话解释</th><th>在哪见到</th><th>详见</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Agent / 智能体</strong></td><td>Agent</td><td>项目里干活的 AI 单元，有岗位、有技能、有运行配置，是被你"雇"进来干活的虚拟员工。</td><td>组织与运营 →「智能体」</td><td>第 08 章</td></tr>
+      <tr><td><strong>管理者 Agent</strong></td><td>manager</td><td>只协调、不下场干活的 AI，负责拆目标、派活、复盘；像是团队里的项目经理。</td><td>智能体中心 →「组织」</td><td>第 08 章</td></tr>
+      <tr><td><strong>员工 Agent</strong></td><td>worker</td><td>真正执行任务的 AI，按自己的岗位技能把活做出来，在组织树上挂在管理者下面。</td><td>智能体中心 →「组织」</td><td>第 08 章</td></tr>
+      <tr><td><strong>岗位模板</strong></td><td>role template</td><td>现成的岗位"简历"：一键套用就能生成一个带职责与默认技能的 Agent，省得你从零想岗位。</td><td>智能体中心 →「岗位模板库」</td><td>第 08 章</td></tr>
+      <tr><td><strong>技能</strong></td><td>skill</td><td>Agent 会做的一件事，比如"写英文营销文案""调某个接口"；技能可以组织级共享，也可以项目级专用。</td><td>智能体中心 →「技能库」</td><td>第 08 章</td></tr>
+      <tr><td><strong>技能白名单</strong></td><td>skill whitelist</td><td>某个 Agent 被允许使用哪些技能的清单；<strong>目前是建议性的</strong>——它只进上下文作为参考，尚未强制拦截调用，所以不在单子上的技能理论上仍可能被调用。强制拦截属待排期能力。</td><td>Agent 详情 →「技能」</td><td>第 08 章</td></tr>
+      <tr><td><strong>技能成熟度</strong></td><td>skill maturity</td><td>用于衡量一个技能被用得多好、多稳的等级；当前版本界面上看不到这个值，属于底层概念。</td><td>（界面暂无）</td><td>第 08 章</td></tr>
+      <tr><td><strong>RunConfig / 运行配置</strong></td><td>run_config</td><td>决定一个角色"怎么跑"的一组参数：用什么提示词、开哪些技能、用哪个引擎、输出什么格式。角色级设置优先于项目默认。</td><td>智能体中心 →「配置」</td><td>第 08、11 章</td></tr>
+      <tr><td><strong>提示词</strong></td><td>prompt</td><td>你对 AI 说的那段指令。它的清晰度直接决定产出质量，是全书反复强调的"最重要的一笔投入"。</td><td>各处提问框/模板</td><td>第 12 章</td></tr>
+      <tr><td><strong>返工率</strong></td><td>rework_rate</td><td>这个 Agent 干的活被验收判为"返工"的比例；越低说明越靠谱，是衡量角色表现的核心指标之一。</td><td>Agent 详情 / 角色管理</td><td>第 08、13 章</td></tr>
+      <tr><td><strong>角色进化</strong></td><td>role evolution</td><td>让岗位自己变好的机制：系统看任务表现、总结经验，产出更优的提示词或技能组合。</td><td>自动运营 →「角色管理」</td><td>第 08 章</td></tr>
+      <tr><td><strong>版本（候选/激活/已停用）</strong></td><td>candidate / active / retired</td><td>每个角色或技能都有多个版本。候选版是"试用装"，激活版是"正在用"，已停用是"下架"。</td><td>角色管理 →「版本列表」</td><td>第 08 章</td></tr>
+      <tr><td><strong>灰度</strong></td><td>canary / A-B</td><td>新版本先小范围试跑、和旧版本比数据，谁好谁上；避免"一升级就翻车"。</td><td>角色管理</td><td>第 08 章</td></tr>
+      <tr><td><strong>经验沉淀</strong></td><td>experience</td><td>把每次干活的教训记下来，变成下次可参考的经验条目；来源可以是任务、用户回复、手动或 SOP。</td><td>角色管理 →「经验沉淀」</td><td>第 08 章</td></tr>
+      <tr><td><strong>SOP</strong></td><td>SOP</td><td>标准作业流程：把"一件事该怎么一步步做"写下来，让 AI 照着走；可以由系统生成草稿再人工改。</td><td>角色管理 →「生成 SOP 草稿」</td><td>第 08 章</td></tr>
+      <tr><td><strong>组织四阶段</strong></td><td>startup / growth / scale / maturity</td><td>组织成长的四档：起步期（一人全能）、成长期（小组分工）、规模化期（部门建制）、成熟期（事业部自治）。</td><td>组织进化 →「阶段状态」</td><td>第 08、13 章</td></tr>
+      <tr><td><strong>阶段成熟度</strong></td><td>未达成 / 接近 / 已达成</td><td>在当前阶段里"长够了没有"的判定，配一份证据清单；它只是建议，换阶段要你点确认。</td><td>组织进化 →「阶段状态」</td><td>第 08 章</td></tr>
+      <tr><td><strong>增员建议</strong></td><td>role_add</td><td>系统发现"人手不够"时给出的加人建议，比如某类任务积压；你可以确认、暂缓或拒绝。</td><td>组织进化 →「AI 建议」</td><td>第 08 章</td></tr>
+      <tr><td><strong>一键扩编</strong></td><td>scale_out / 一键扩编</td><td>确认采纳建议后，系统自动批量创建缺失岗位、配好技能并让它们上岗，不用你一个个手建。</td><td>组织进化 →「AI 建议」</td><td>第 08 章</td></tr>
+      <tr><td><strong>定量调控（八维）</strong></td><td>budget / autonomy / opt_freq / opt_intensity / model_level / concurrency / skill_count / report_freq</td><td>八个可以按阶段自动调档的旋钮：预算、自主权限、优化频率、优化强度、模型等级、并发数、技能数、汇报频率。</td><td>组织进化 →「定量调控」</td><td>第 08 章</td></tr>
+      <tr><td><strong>中台 Agent</strong></td><td>middle-platform agent</td><td>不隶属于单一岗位、为多个岗位提供公共能力的 Agent（如通用检索、通用写作）；用于减少重复建设。</td><td>智能体中心 →「组织」</td><td>第 08 章</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1.3 任务与自动运营</h3>
+
+  <p>这一组讲"活是怎么被派下去、又怎么一轮轮做完的"。自动运营（auto-ops）就是 AI 自己排班干活的那套机制，理解它的关键词是<strong>时间片</strong>和<strong>轮次</strong>。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>术语</th><th>英文 / 标识</th><th>一句话人话解释</th><th>在哪见到</th><th>详见</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>任务</strong></td><td>task</td><td>最小的工作单元，比如"写 10 篇英文商品文案"。任务由你或管理者 Agent 创建，进入排队后按轮次被推进。</td><td>自动运营 →「任务管理」</td><td>第 09、11 章</td></tr>
+      <tr><td><strong>任务类型</strong></td><td>general / eng / mod</td><td>三种：通用任务（信息整合、内容生产）、新建软件工程（从零做软件）、软件修改（改现有工程）。类型决定走不走软件工程向导。</td><td>新建任务弹窗 →「任务类型」</td><td>第 10 章</td></tr>
+      <tr><td><strong>优先级</strong></td><td>P0 / P1 / P2 / P3</td><td>P0-紧急、P1-高、P2-常规、P3-低。它影响排班中的紧急处理顺序，但不取代时间片权重。</td><td>新建任务弹窗 →「优先级」</td><td>第 09 章</td></tr>
+      <tr><td><strong>时间片</strong></td><td>time slice</td><td>把 AI 的一轮时间切成若干格子（默认 10 个），一个任务占一个或几个格子，大家轮流用同一台"机床"。</td><td>自动运营 →「任务管理」</td><td>第 09、11 章</td></tr>
+      <tr><td><strong>时间片权重</strong></td><td>time_slice_weight（1–10）</td><td>这个任务每轮能分到多少时间。权重越大，单位时间内推进越快；权重小不等于不重要，只是排得慢。</td><td>任务列表「时间片」列</td><td>第 09 章</td></tr>
+      <tr><td><strong>轮次</strong></td><td>round</td><td>AI 的一"班"。一轮处理若干任务的一个时间片，干完保存进度，下一轮接着来。</td><td>自动运营 →「运行轮次」</td><td>第 09 章</td></tr>
+      <tr><td><strong>轮次模式</strong></td><td>task / review / free</td><td>一轮的三种性质：task 正常干活、review 抬头看全局重排任务、free 空闲等待（没活时避免空转烧钱）。</td><td>运行轮次列表「模式」列</td><td>第 09 章</td></tr>
+      <tr><td><strong>接力摘要</strong></td><td>task_summary</td><td>每轮结束存下的"交班记录"：本轮目标、做了什么、还剩什么、下一步干嘛；下一轮读它继续，所以 AI 能跨轮接着干。</td><td>运行轮次详情 / 日志</td><td>第 09、11 章</td></tr>
+      <tr><td><strong>review 重排</strong></td><td>review round</td><td>AI 定期（默认距上次 ≥ 20 轮或全部任务完成时）停下来审视全局，重新安排任务和权重；也可以你手动触发。</td><td>自动运营 → 手动触发 review</td><td>第 09 章</td></tr>
+      <tr><td><strong>空闲等待</strong></td><td>free</td><td>任务集空了或全做完时进入的状态，只做常规检查，不再消耗模型调用，等着你注入新信息。</td><td>运行轮次 / 控制台消息</td><td>第 09 章</td></tr>
+      <tr><td><strong>调度</strong></td><td>scheduling</td><td>系统决定"这一轮谁来干、干多久"的过程，核心就是时间片 + 权重 + 引擎/角色的两级选择。</td><td>自动运营控制台</td><td>第 09、11 章</td></tr>
+      <tr><td><strong>并发数</strong></td><td>concurrency</td><td>同一时间允许多少个任务并行跑。调高跑得快、也更烧钱，还更容易撞资源冲突。</td><td>项目详情 →「运行配置」</td><td>第 09 章</td></tr>
+      <tr><td><strong>Tick 间隔</strong></td><td>tick interval（秒）</td><td>调度器"心跳"的间隔：每隔几秒检查一次有没有活要派。太短空转费资源，太长反应迟钝。</td><td>项目详情 →「运行配置」</td><td>第 09 章</td></tr>
+      <tr><td><strong>最大轮数</strong></td><td>max rounds</td><td>循环最多跑多少轮就停（0 表示不限）。它是防"跑飞烧钱"的一道保险，撞上会暂停。</td><td>项目详情 →「运行配置」</td><td>第 09 章</td></tr>
+      <tr><td><strong>引擎</strong></td><td>engine</td><td>干活的两种方式二选一；引擎决定"这个任务交给谁执行"，与"哪个角色干"是两件独立的事。</td><td>新建任务弹窗 →「引擎类型」</td><td>第 08、11 章</td></tr>
+      <tr><td><strong>loop 引擎</strong></td><td>loop</td><td>调用外部命令行工具（qianshou）跑长任务，适合编码、构建、复杂多步工作；是复杂任务的默认选择。</td><td>任务列表「引擎」列</td><td>第 10、11 章</td></tr>
+      <tr><td><strong>agent 引擎</strong></td><td>agent</td><td>系统内部直接调模型 + 工具调用，适合信息整合、接口调用、快速任务；选它时会有"可能无法完成软件交付"的告警。</td><td>任务列表「引擎」列</td><td>第 08、11 章</td></tr>
+      <tr><td><strong>执行器</strong></td><td>executor</td><td>真正把任务跑起来的那层配置（命令、权限模式、输出格式、单轮最大预算等），在「运行配置」里调。</td><td>项目详情 →「运行配置」</td><td>第 09 章</td></tr>
+      <tr><td><strong>时限</strong></td><td>time_limit（秒）</td><td>单个任务单次执行的时间上限，超了会被掐断，防止一个任务卡死整条流水线。</td><td>新建任务弹窗 →「时限(秒)」</td><td>第 09 章</td></tr>
+      <tr><td><strong>交接班记录</strong></td><td>handover / task_summary</td><td>一轮交下一轮的"工作交接单"，是任务能跨轮、跨天延续的关键；暂停时保留它才不会丢上下文。</td><td>日志面板 / 轮次详情</td><td>第 09、11 章</td></tr>
+      <tr><td><strong>日志标签</strong></td><td>assistant / user / system / summary / thinking / tool_use / tool_result</td><td>日志每一行的身份牌：谁说的、是思考还是工具调用、以及汇总。看懂标签才能快速定位问题。</td><td>日志面板</td><td>第 09 章</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1.4 验收与人在回路</h3>
+
+  <p>这一组讲"AI 干完之后，谁来判、什么时候必须问你"。核心原则只有一句：<strong>干活的、验收的、批准的不是同一个 AI</strong>。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>术语</th><th>英文 / 标识</th><th>一句话人话解释</th><th>在哪见到</th><th>详见</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>三权分立</strong></td><td>separation of duties</td><td>执行、验收、批准三个角色分离，防止 AI 自审自批；验收记录里会同时显示"执行者"和"验收 Agent"。</td><td>自动运营 →「验收记录」</td><td>第 09 章</td></tr>
+      <tr><td><strong>独立验收 Agent</strong></td><td>reviewer agent</td><td>专门负责验收的另一个 AI；它对照"什么算做完"来判断，不参与干活，保证结论公正。</td><td>验收记录详情</td><td>第 09 章</td></tr>
+      <tr><td><strong>验收结论</strong></td><td>pass / redo / reject</td><td>通过（放行）、返工（重做）、驳回（不认可）。返工会拉高返工率，驳回通常要人来定性。</td><td>验收记录「结论」列</td><td>第 09 章</td></tr>
+      <tr><td><strong>验收评分</strong></td><td>score</td><td>验收时给的一个分数，用来横向比较质量；分数本身不代表通过与否，两者要分开看。</td><td>验收记录「评分」列</td><td>第 09、13 章</td></tr>
+      <tr><td><strong>抽样</strong></td><td>sampling</td><td>不是每次都全量复核，而是按一定比例抽查，平衡质量与成本；抽样列会标明这条是否被抽中。</td><td>验收记录「抽样」列</td><td>第 09 章</td></tr>
+      <tr><td><strong>人工处理节点</strong></td><td>human node</td><td>需要你（或同事）点一下才能继续的关口，比如"审核营销文案"。不处理，相关任务就停在原地等你。</td><td>自动运营 →「人工节点」</td><td>第 09、14 章</td></tr>
+      <tr><td><strong>自主级别 L0–L3</strong></td><td>L0 / L1 / L2 / L3</td><td>越高级别 AI 越自由：L0 全自主执行、L1 通知不等待、L2 一键确认（默认）、L3 强制人工审核。</td><td>新建人工节点 →「自主级别」</td><td>第 04、14 章</td></tr>
+      <tr><td><strong>三通道</strong></td><td>red / yellow / green</td><td>按风险给节点分色：红=强制人工、黄=敏感需确认、绿=例行通知。颜色决定它有多"挡路"。</td><td>人工节点「通道」</td><td>第 14 章</td></tr>
+      <tr><td><strong>SLA</strong></td><td>SLA（秒）</td><td>给节点设的处理时限；超时会触发升级或催促，防止审批被无限期搁置。</td><td>人工节点「SLA」</td><td>第 09、14 章</td></tr>
+      <tr><td><strong>升级处理</strong></td><td>escalate</td><td>节点超时或搞不定时往上一级推，交给更有权限的人或更高级别的处理方式。</td><td>人工节点按钮「升级处理」</td><td>第 14 章</td></tr>
+      <tr><td><strong>通知催促</strong></td><td>notify</td><td>系统再次提醒处理人"这事还等着你"，通常是 SLA 快到或已过时的温和手段。</td><td>人工节点按钮「通知催促」</td><td>第 14 章</td></tr>
+      <tr><td><strong>移动审批</strong></td><td>mobile approval</td><td>在手机上点一下就能批的轻量通道，适合你不在电脑前、又不想卡住流程的场景。</td><td>人工节点按钮「移动审批」</td><td>第 14 章</td></tr>
+      <tr><td><strong>合规拦截</strong></td><td>compliance block</td><td>碰到红线动作时系统直接熔断、不执行，并通知你；这是"AI 不能替你决定"的硬边界。</td><td>审计治理 / 通知中心</td><td>第 14 章</td></tr>
+      <tr><td><strong>KillSwitch</strong></td><td>KillSwitch</td><td>紧急停止所有自动运营任务的红色按钮，<strong>不可逆</strong>；只在真出事时按，按之前先想清楚。</td><td>审计治理 →「紧急停止」</td><td>第 09、14、19 章</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1.5 知识与数据</h3>
+
+  <p>这一组讲"AI 的脑袋里装了什么"。一句话记住：<strong>AI 答得准不准，八成取决于你喂了什么</strong>，而不是模型多聪明。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>术语</th><th>英文 / 标识</th><th>一句话人话解释</th><th>在哪见到</th><th>详见</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>知识库</strong></td><td>knowledge base</td><td>你上传的资料汇成的"AI 参考资料室"，AI 回答前先来这里查，减少瞎编。</td><td>左侧菜单「知识库」</td><td>第 07 章</td></tr>
+      <tr><td><strong>分层知识库</strong></td><td>公司级 / 项目级 / 共享</td><td>公司级知识所有项目共用，项目级知识本项目专用，共享类型可被授权的下级项目检索到。</td><td>知识库 →「新建知识库」</td><td>第 07 章</td></tr>
+      <tr><td><strong>共享下级</strong></td><td>shared</td><td>知识库上的一个开关：开启后，下级项目也能检索到这份知识，适合总部政策、通用规范。</td><td>新建知识库表单</td><td>第 07 章</td></tr>
+      <tr><td><strong>文档状态</strong></td><td>待处理→处理中→解析中→已解析→分块中→向量化中→就绪／失败（可重试）／失败（重试耗尽）／需人工确认（后端共 10 态）</td><td>一份上传的文档要经过多道工序才算"能用了"；一直停在中间某态、"失败"，或停在「需人工确认」（解析走了降级路径、等你过一眼），都说明还没正式入库。</td><td>知识库文档列表</td><td>第 07 章</td></tr>
+      <tr><td><strong>解析</strong></td><td>parsing</td><td>把 pdf/docx 等格式拆成机器能读的纯文本；格式怪的文件常在这一步失败。</td><td>文档状态列</td><td>第 07 章</td></tr>
+      <tr><td><strong>分块</strong></td><td>chunking</td><td>把长文档切成一段段小片段，方便按需检索；切得太碎或太大都会影响回答质量。</td><td>文档状态列</td><td>第 07 章</td></tr>
+      <tr><td><strong>向量化</strong></td><td>embedding</td><td>把文字转成一串数字向量，让系统能按"意思"而不是"关键词"来找资料。</td><td>文档状态列</td><td>第 07 章</td></tr>
+      <tr><td><strong>RAG</strong></td><td>retrieval-augmented generation</td><td>让 AI 先查你的资料再回答，把"凭记忆瞎编"变成"看着资料说"，是准确率的根本保障。</td><td>知识库 →「RAG 检索」</td><td>第 07 章</td></tr>
+      <tr><td><strong>相似度</strong></td><td>similarity</td><td>检索时每条结果与问题的贴合程度（百分比）；太低说明你的知识库里可能没有相关内容。</td><td>RAG 检索结果</td><td>第 07 章</td></tr>
+      <tr><td><strong>Few-Shot</strong></td><td>few-shot</td><td>给 AI 看几个"优秀案例"当范例，让它照葫芦画瓢，比空口描述效果稳得多。</td><td>AI 问答复选「案例 Few-Shot」</td><td>第 07、12 章</td></tr>
+      <tr><td><strong>优秀案例</strong></td><td>golden case</td><td>被你采纳并"提升"为范本的一次问答或产出，之后会被当作 Few-Shot 反复引用。</td><td>AI 问答 →「已提升为优秀案例」</td><td>第 07、12 章</td></tr>
+      <tr><td><strong>待确认知识</strong></td><td>pending knowledge</td><td>AI 自动提炼出的知识条目，需你人工确认后才写进正式知识库并参与全局检索。</td><td>项目内 →「待确认知识」</td><td>第 07 章</td></tr>
+      <tr><td><strong>深度研究</strong></td><td>deep research</td><td>让 AI 自动做一轮多步的资料调研并成文，可包含企业内部知识库；适合做行业分析、竞品梳理。</td><td>研究与获客 →「深度研究」</td><td>第 07、12 章</td></tr>
+      <tr><td><strong>会议导入</strong></td><td>meeting import</td><td>上传会议记录或粘贴文本，AI 自动梳理出摘要、决策和行动项，行动项还能一键转成任务。</td><td>研究与获客 →「会议导入」</td><td>第 07 章</td></tr>
+      <tr><td><strong>边缘客户端</strong></td><td>edge client</td><td>装在自己电脑上的小工具（托盘图标），负责扫描本地文档并上传，界面目前是英文的。</td><td>接入与执行 →「边缘接入」</td><td>第 07 章</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1.6 钱与指标</h3>
+
+  <p>这一组最容易混。记住两句话：<strong>两条账本要分开看</strong>（真实资金 vs 项目核算），<strong>计费明细不是发票</strong>（含估算口径）。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>术语</th><th>英文 / 标识</th><th>一句话人话解释</th><th>在哪见到</th><th>详见</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>平台账本</strong></td><td>platform ledger</td><td>你公司账户里<strong>真金白银</strong>的流水：充值、AI 算力费、云服务器费、媒体生成费。余额不足会导致熔断。</td><td>左侧菜单「公司账本」</td><td>第 13 章</td></tr>
+      <tr><td><strong>项目账本</strong></td><td>project ledger</td><td>一条业务线的<strong>虚拟经营核算</strong>：收入、支出、预算消耗。它算的是"这条生意赚不赚"，不是账户余额。</td><td>项目内 →「项目账本」</td><td>第 13 章</td></tr>
+      <tr><td><strong>余额</strong></td><td>balance</td><td>公司账户里还剩多少钱；它是所有项目共同的"水池"，某个项目烧猛了会一起见底。</td><td>公司账本</td><td>第 13 章</td></tr>
+      <tr><td><strong>预警阈值</strong></td><td>warning threshold</td><td>余额或预算用到某个百分比（通常是 <strong>80%</strong>）就发通知并降级运行，让你有时间补救。</td><td>账本 →「预警阈值」</td><td>第 04、13 章</td></tr>
+      <tr><td><strong>告警阈值</strong></td><td>critical threshold</td><td>比预警更严重的一档（项目预算里叫"告急阈值"），触发更强烈的提示，再往上就是熔断。</td><td>项目预算设置</td><td>第 04、13 章</td></tr>
+      <tr><td><strong>项目预算</strong></td><td>project budget</td><td>给这个项目设的花钱上限（总预算 / Token / 图片 / 视频 / 服务器各项额度）；0 表示不限制。</td><td>项目详情 →「调整预算」</td><td>第 04 章</td></tr>
+      <tr><td><strong>AI 运行预算</strong></td><td>ai budget</td><td>专门给模型调用留的那部分预算，和服务器、媒体等其它花费分开计；它决定"还能让 AI 干多少活"。</td><td>自动运营控制台「AI 预算消耗」</td><td>第 04 章</td></tr>
+      <tr><td><strong>预算科目</strong></td><td>token_fee / third_party_api / compute_fee / human_intervention</td><td>把花费分类记账的四个常用格子：模型调用、第三方接口、算力、人工介入。分科目记，月底才知道钱去哪了。</td><td>「调整运行模式与预算科目」弹窗</td><td>第 04 章</td></tr>
+      <tr><td><strong>熔断</strong></td><td>circuit break</td><td>预算或余额触到上限时自动切断循环，停止烧钱；这是保护你的硬保险，不是报错。</td><td>计费明细 / 控制台「熔断：是」</td><td>第 04、19 章</td></tr>
+      <tr><td><strong>降级运行</strong></td><td>degraded</td><td>钱快不够时系统自动"省着跑"（少开并行、用更省的模型），保证关键任务还能继续。</td><td>控制台「降级：是」</td><td>第 04 章</td></tr>
+      <tr><td><strong>兜底保护</strong></td><td>guard pause</td><td>出异常时自动停下来防烧钱的保险，暂停是<strong>持久状态</strong>（跨重启保留），必须人工处理后再手动恢复。</td><td>项目详情「自动运营已因兜底保护暂停」</td><td>第 04、19 章</td></tr>
+      <tr><td><strong>token 计费</strong></td><td>token billing</td><td>按模型读写的文字量计费：输入 1 元/百万、输出 2 元/百万、缓存读 0.02 元/百万（单价可在运行配置里改）。</td><td>项目详情 →「定价（元/百万 token）」</td><td>第 13 章</td></tr>
+      <tr><td><strong>缓存读 / 写</strong></td><td>cache read / write</td><td>命中缓存的部分很便宜（读 0.02 元/M）。缓存用得好，同样的活能省不少钱。</td><td>计费明细 / 运行配置</td><td>第 13 章</td></tr>
+      <tr><td><strong>计费明细</strong></td><td>billing detail</td><td>这个项目"钱花在哪、花了多少"的逐项清单；累计花费、输入/输出 Token、预算已用都在这里看。</td><td>自动运营 →「计费明细」</td><td>第 13 章</td></tr>
+      <tr><td><strong>兜底计费（估算口径）</strong></td><td>estimated billing</td><td>上游没回用量时，按文本长度估算的一笔费用；<strong>不是精确账单，别当发票用</strong>（界面上为常显小字说明，并给出精确账单入口）。</td><td>计费明细页（常显小字说明）</td><td>第 13 章</td></tr>
+      <tr><td><strong>经营驾驶舱</strong></td><td>business cockpit</td><td>给老板看的一屏汇总：总收入、总成本、净收入、任务完成率、预算消耗率、活跃预警。</td><td>自动运营 →「经营驾驶舱」</td><td>第 13 章</td></tr>
+      <tr><td><strong>经营日报</strong></td><td>daily / analysis / audit / redteam</td><td>系统按日或按需生成的报告，四种类型：经营日报、分析报告、内审报告、红队演练。</td><td>自动运营 →「经营日报」</td><td>第 13 章</td></tr>
+      <tr><td><strong>监控指标</strong></td><td>metrics</td><td>四个"质量类"信号：AI 产出质量评分、客户响应时间 P95、人类参与率、知识库增长量。</td><td>自动运营 →「监控指标」</td><td>第 13 章</td></tr>
+      <tr><td><strong>阿米巴核算</strong></td><td>amoeba</td><td>把每个岗位当独立小账本，算它的投入（token 成本）和产出（价值贡献），找出"花得多、产出少"的岗位。</td><td>自动运营 →「阿米巴核算」</td><td>第 13 章</td></tr>
+      <tr><td><strong>单位 Token 价值</strong></td><td>value per token</td><td>每花一百万的 token 换回多少价值；数字越高说明这个岗位/任务越"划算"。</td><td>阿米巴核算卡片</td><td>第 13 章</td></tr>
+      <tr><td><strong>内部计价</strong></td><td>internal pricing</td><td>给岗位之间的协作定"内部结算价"，让成本能追到具体环节，而不是一笔糊涂账。</td><td>阿米巴核算 →「内部计价」</td><td>第 13 章</td></tr>
+      <tr><td><strong>结项报告</strong></td><td>closing report</td><td>项目终止后生成的期末总结：目标达成率、任务完成率、返工率、花费与 ROI、知识沉淀清单。</td><td>自动运营 →「结项报告」</td><td>第 13 章</td></tr>
+      <tr><td><strong>ROI</strong></td><td>return on investment</td><td>投入产出比：拿花的钱和换回的收入比。结项报告里会直接给出一个倍数。</td><td>结项报告「花费与收益」</td><td>第 13 章</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1.7 工程与安全</h3>
+
+  <p>这一组偏技术，但每个词你都会在界面上碰到。理解它们能帮你在"AI 说它做了"和"实际真的做了"之间保持清醒。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>术语</th><th>英文 / 标识</th><th>一句话人话解释</th><th>在哪见到</th><th>详见</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>MCP / 连接器</strong></td><td>MCP / connector</td><td>AI 连接外部系统（邮箱、CRM、数据库）的"插头"；按最小权限接入，写操作必须人工审核。</td><td>接入与执行 →「连接器」</td><td>第 14 章</td></tr>
+      <tr><td><strong>连接器注册中心</strong></td><td>connector registry</td><td>统一登记"我们接了哪些外部系统、各自什么权限"的地方，避免散落各处、失控。</td><td>接入与执行 →「连接器」</td><td>第 14 章</td></tr>
+      <tr><td><strong>流程</strong></td><td>flow</td><td>把多个步骤串成一条自动流水线的编排；它能定义"先做 A 再做 B、条件满足才做 C"。</td><td>接入与执行 →「流程」</td><td>第 14 章</td></tr>
+      <tr><td><strong>事件总线</strong></td><td>event bus</td><td>系统内部各模块互相通知"发生了什么"的广播通道，让一个动作能触发别处的响应。</td><td>治理与资源 →「事件总线」</td><td>第 14 章</td></tr>
+      <tr><td><strong>资源治理</strong></td><td>resource_governor</td><td>防止多个任务抢算力、抢额度导致互相拖垮的协调机制；是强制开启的安全底线之一。</td><td>治理与资源 →「资源治理」</td><td>第 14 章</td></tr>
+      <tr><td><strong>冲突仲裁</strong></td><td>arbitrator</td><td>多个 Agent 目标打架时，由中立的一方来裁决"谁先谁后、谁让谁"，避免内部互耗。</td><td>治理与资源 →「冲突仲裁」</td><td>第 14 章</td></tr>
+      <tr><td><strong>审计</strong></td><td>audit</td><td>把关键动作和决策都留痕，出了事能回溯"当时是谁、为什么这么做"。</td><td>自动运营 →「审计治理」</td><td>第 14 章</td></tr>
+      <tr><td><strong>管理转录</strong></td><td>management_transcript</td><td>对管理型 AI 决策过程的文字记录，用来审计"AI 管理者有没有乱来"。</td><td>审计治理 → 报告类型</td><td>第 14 章</td></tr>
+      <tr><td><strong>风险登记册</strong></td><td>risk registry</td><td>把已识别风险登记在册、跟踪状态的地方；避免风险只挂在嘴上、没人跟进。</td><td>审计治理 →「风险登记册」</td><td>第 14 章</td></tr>
+      <tr><td><strong>变更日志</strong></td><td>change log</td><td>记录"系统或配置改了些什么"的流水，用于排查"是不是上次改动引起的"。</td><td>审计治理 →「变更日志」</td><td>第 14 章</td></tr>
+      <tr><td><strong>红队演练</strong></td><td>redteam</td><td>主动扮演"坏人"来攻击自己的系统，提前发现漏洞；是一种自检，不是真出事。</td><td>审计治理 →「红队演练」</td><td>第 14 章</td></tr>
+      <tr><td><strong>内审</strong></td><td>internal audit</td><td>系统对自己做的一次体检，产出内审报告，看有没有越权、异常花费等问题。</td><td>审计治理 →「执行内审」</td><td>第 14 章</td></tr>
+      <tr><td><strong>HMAC</strong></td><td>HMAC Secret</td><td>平台与项目服务器之间通信的"防伪签名密钥"；泄露了别人可能冒充平台发指令，要当密码保管。</td><td>项目详情 →「服务器实例」</td><td>第 03、14 章</td></tr>
+      <tr><td><strong>SSE 流式输出</strong></td><td>SSE</td><td>AI 回答时"一个字一个字往外蹦"的推送方式，让你不用干等整段生成完。</td><td>AI 对话 / AI 问答</td><td>第 05、11 章</td></tr>
+      <tr><td><strong>媒体生成</strong></td><td>media generation</td><td>让 AI 生成视频、图像、歌曲；按"档位单价 × 用量"折算进项目账本，未定价档位显示"待定价"、不谎报金额。</td><td>左侧菜单「媒体生成」</td><td>第 05、13 章</td></tr>
+      <tr><td><strong>客户页面（分享）</strong></td><td>share / /s/{token}</td><td>把一个只读、限权的 AI 问答页生成公网链接发给客户，对方无需登录即可提问。</td><td>研究与获客 →「客户页面」</td><td>第 05、07 章</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>二、能力现状清单：哪些已上线、哪些部分可用、哪些规划中</h2>
+
+  <p>手册里凡是讲到某个能力，都会带一个徽章。这一节把三种徽章的含义讲清，再给你一张覆盖三端的大表。<strong>不要拿着"规划中"的能力去谈生意</strong>——它还没开发出来。</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card green">
+      <h4><span class="zy-badge green">已上线</span></h4>
+      <p>前端界面和后端都齐了，你按手册操作就能用。这类能力占了本书的绝大多数。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4><span class="zy-badge amber">部分可用</span></h4>
+      <p>后端有、但前端入口弱；或只在特定条件下（特定项目类型、特定开关）才可用。用之前先确认条件。</p>
+    </div>
+    <div class="zy-card">
+      <h4><span class="zy-badge sky">规划中</span></h4>
+      <p>PRD 在案、尚未开发。界面上找不到入口是正常的，别花时间去找。</p>
+    </div>
+  </div>
+
+  <h3>2.1 三端能力现状总表</h3>
+
+  <p>下面按"你操作的端"归类。<strong>记住：项目服务器没有独立前端界面</strong>，它的所有能力都通过平台界面透传给你，你不需要（也没法）直接登录它。边缘客户端是唯一需要你单独下载安装的组件。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>能力</th><th>现状</th><th>在哪用</th><th>注意什么</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>注册与登录</td><td><span class="zy-badge green">已上线</span></td><td>登录页 / 注册页</td><td>用户名、邮箱、密码四项；注册后用邮箱登录。</td></tr>
+      <tr><td>创建公司与公司列表</td><td><span class="zy-badge green">已上线</span></td><td>公司管理</td><td>公司是组织容器，项目必须挂在公司下。</td></tr>
+      <tr><td>组织架构（部门）</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「组织架构」</td><td>需先选中一家公司才显示后四个页签。</td></tr>
+      <tr><td>成员管理与邀请</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「成员管理 / 成员邀请」</td><td>邀请角色下拉可选；权限可细调。</td></tr>
+      <tr><td>公司设置 / 转让 / 解散</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「公司设置」</td><td>转让与解散属不可逆动作，谨慎。</td></tr>
+      <tr><td>新建项目向导</td><td><span class="zy-badge green">已上线</span></td><td>项目管理 →「新建项目」</td><td>三步：基本信息 / 预算设定 / 确认提交。</td></tr>
+      <tr><td>项目实例开通与部署</td><td><span class="zy-badge green">已上线</span></td><td>项目详情 →「服务器实例」</td><td>可录入服务器、查看部署脚本、确认部署完成。</td></tr>
+      <tr><td>项目启停 / 标记完成</td><td><span class="zy-badge green">已上线</span></td><td>项目详情头部按钮</td><td>暂停是"本轮跑完再停"，不会杀正在执行的任务。</td></tr>
+      <tr><td>预算调整与明细</td><td><span class="zy-badge green">已上线</span></td><td>项目详情 →「预算明细」</td><td>各额度项分开设；0 表示不限制。</td></tr>
+      <tr><td>运行配置（调度 + 执行器 + 定价）</td><td><span class="zy-badge green">已上线</span></td><td>项目详情 →「运行配置」</td><td>改这里会影响 AI 行为与花费，改完点保存。</td></tr>
+      <tr><td>数据面板</td><td><span class="zy-badge green">已上线</span></td><td>左侧菜单「数据面板」</td><td>跨公司的汇总视图。</td></tr>
+      <tr><td>知识库管理与 RAG 检索</td><td><span class="zy-badge green">已上线</span></td><td>知识库</td><td>分公司级 / 项目级 / 共享。</td></tr>
+      <tr><td>AI 对话 / AI 问答</td><td><span class="zy-badge green">已上线</span></td><td>AI 对话 / 项目内「AI 问答」</td><td>问答页可选知识库、Few-Shot、联网搜索。</td></tr>
+      <tr><td>公司账本 / 项目账本</td><td><span class="zy-badge green">已上线</span></td><td>公司账本 / 项目内账本</td><td>两条账口径不同，不要相加。</td></tr>
+      <tr><td>媒体生成（视频/图像/歌曲）</td><td><span class="zy-badge green">已上线</span></td><td>媒体生成中心</td><td>1080p 档位当前不可达，界面只提供 480p / 720p。</td></tr>
+      <tr><td>通知中心</td><td><span class="zy-badge green">已上线</span></td><td>通知中心 / 顶栏铃铛</td><td>支持全部已读、按类型/优先级筛选。</td></tr>
+      <tr><td>设置（个人/功能管理/授权/Agent 优化）</td><td><span class="zy-badge green">已上线</span></td><td>设置</td><td>功能管理里 13 项开关，按项目配置。</td></tr>
+      <tr><td>超管后台（看板/用户/穿透/实例/Token/Prompt/治理）</td><td><span class="zy-badge green">已上线</span></td><td>超管后台</td><td>超管只读查看用户项目，不可修改。</td></tr>
+      <tr><td>客户页面（公网分享问答）</td><td><span class="zy-badge green">已上线</span></td><td>研究与获客 →「客户页面」</td><td>链接 token 仅创建时展示一次，务必当场复制。</td></tr>
+      <tr><td>移动端审批页</td><td><span class="zy-badge green">已上线</span></td><td>人工节点 →「移动审批」</td><td>页面可打开，但<strong>仍要求登录</strong>（与"通知点开即可批"的移动场景有出入），且需携带项目上下文，否则报"缺少项目上下文"。不要把它当成免登录审批入口。</td></tr>
+      <tr><td>会议内容导入梳理</td><td><span class="zy-badge green">已上线</span></td><td>研究与获客 →「会议导入」</td><td>支持 txt/md/docx/pdf/xlsx/pptx，暂不支持音视频。</td></tr>
+      <tr><td>现有项目整体导入</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「项目导入」</td><td>整理的是"上下文"，不是逐字搬运整站；单文件 ≤ 50MB。</td></tr>
+      <tr><td>引导建项（想法 → 执行策略）</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「引导建项」</td><td>未确认策略时启动自动运营会被拦。</td></tr>
+      <tr><td>智能体中心（组织/任务/配置/运行）</td><td><span class="zy-badge green">已上线</span></td><td>组织与运营 →「智能体」</td><td>四个页签分别管队伍、派活、配置、运行。</td></tr>
+      <tr><td>岗位模板库与技能库</td><td><span class="zy-badge green">已上线</span></td><td>智能体中心 →「组织」</td><td>技能可"提升为组织级"供其它项目复用。</td></tr>
+      <tr><td>角色版本与经验沉淀</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「角色管理」</td><td>版本状态：候选 / 激活 / 已停用。</td></tr>
+      <tr><td>组织进化引擎（阶段/建议/扩编/调控）</td><td><span class="zy-badge green">已上线</span></td><td>组织与运营 →「组织进化」</td><td>阶段判定只是建议，切换要人工确认，可回退。</td></tr>
+      <tr><td>自动运营控制台</td><td><span class="zy-badge green">已上线</span></td><td>组织与运营 →「自动运营」</td><td>16 个快捷入口是主要操作门面。</td></tr>
+      <tr><td>任务管理（新建/编辑/筛选）</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「任务管理」</td><td>三种任务类型，两种引擎。</td></tr>
+      <tr><td>运行轮次与日志</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「运行轮次 / 日志面板」</td><td>模式分 task / review / free。</td></tr>
+      <tr><td>计费明细</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「计费明细」</td><td>含估算口径，别当发票。</td></tr>
+      <tr><td>人工处理节点与 SLA</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「人工节点」</td><td>四个按钮：确认完成 / 通知催促 / 升级处理 / 移动审批。</td></tr>
+      <tr><td>目标管理（含 KR 与权衡权重）</td><td><span class="zy-badge green">已上线</span></td><td>组织与运营 →「目标管理」</td><td>权衡权重含成本/质量/风险/速度四个维度。</td></tr>
+      <tr><td>审计与治理（含 KillSwitch）</td><td><span class="zy-badge green">已上线</span></td><td>治理与资源 →「审计治理」</td><td>KillSwitch 不可逆，慎用。</td></tr>
+      <tr><td>经营日报 / 经营驾驶舱</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「经营日报 / 经营驾驶舱」</td><td>日报有草稿/已确认/已应用三态。</td></tr>
+      <tr><td>监控指标</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「监控指标」</td><td>四项质量类信号。</td></tr>
+      <tr><td>结项报告</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「结项报告」</td><td>需触发终止后才有内容。</td></tr>
+      <tr><td>验收记录（三权分立）</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「验收记录」</td><td>详情同时显示执行者与验收 Agent。</td></tr>
+      <tr><td>测试运行</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「测试运行」</td><td>用于试跑任务、看效果。</td></tr>
+      <tr><td>阿米巴核算与内部计价</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「阿米巴核算」</td><td>岗位级 / 任务级两张明细。</td></tr>
+      <tr><td>权限租赁</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「权限租赁」</td><td>到期自动回收，可续期 / 吊销。</td></tr>
+      <tr><td>渐进式信任 / 冲突仲裁 / 资源治理</td><td><span class="zy-badge green">已上线</span></td><td>治理与资源分组</td><td>资源治理、预算熔断、渐进式信任为强制开启的安全底线。</td></tr>
+      <tr><td>连接器 / 流程 / 事件总线</td><td><span class="zy-badge green">已上线</span></td><td>接入与执行 / 治理与资源</td><td>写操作与对外动作需人工审核。</td></tr>
+      <tr><td>边缘客户端（本地扫描上传）</td><td><span class="zy-badge amber">部分可用</span></td><td>接入与执行 →「边缘接入」+ 本机托盘</td><td>界面为英文；只扫描指定目录与格式。</td></tr>
+      <tr><td>边缘客户端「Open Logs」</td><td><span class="zy-badge green">已上线</span></td><td>边缘客户端托盘菜单</td><td>点它可直接打开日志目录；托盘菜单只有 Status / Open Logs / Quit。</td></tr>
+      <tr><td>边缘客户端「Reconnect」</td><td><span class="zy-badge sky">已移除</span></td><td>—</td><td>该菜单项已移除，客户端改为自动重连（指数退避），不要再去菜单里找它。</td></tr>
+      <tr><td>验收标准（done_when）独立输入框</td><td><span class="zy-badge sky">规划中</span></td><td>新建任务弹窗</td><td>界面上<strong>没有</strong>这个输入框；把"什么算做完"写进任务描述。</td></tr>
+      <tr><td>Slack / Discord 通知通道</td><td><span class="zy-badge sky">规划中</span></td><td>—</td><td>当前只有飞书 / Telegram / 邮件，没有这两个。</td></tr>
+      <tr><td>"一键导入整个网站"</td><td><span class="zy-badge sky">规划中</span></td><td>—</td><td>不存在这类能力，别向客户承诺。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>2.2 明确"目前不成立"的六件事</h3>
+
+  <p>下面这几条是新手最容易误以为"应该有"的。它们不是 bug，而是当前版本的边界。请务必分清。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>项目服务器没有独立前端界面</h4>
+      <p>你<strong>不会</strong>（也不需要）登录项目服务器去操作。项目内的一切能力都通过平台界面透传给你，所以"去项目服务器上看看"这类说法在本版本里不成立。</p>
+    </li>
+    <li>
+      <h4>边缘客户端界面是英文的</h4>
+      <p>托盘程序上的文字是英文（如 <code>ZY Edge Client</code>、<code>Status: Connected</code>、<code>Open Logs</code>、<code>Quit</code>）。<strong>托盘菜单只有 Status / Open Logs / Quit 三项</strong>：点 <code>Open Logs</code> 会打开日志目录；<code>Reconnect</code> 已移除，客户端会自动重连（指数退避）。不要编造中文菜单，也不要照着旧文档去找「重连」。</p>
+    </li>
+    <li>
+      <h4>界面没有 <code>done_when</code> 独立输入框</h4>
+      <p>系统内部有"验收标准"这个字段，但新建任务弹窗里<strong>没有</strong>让你直接填的输入框。正确做法：把"什么算做完"明确写进任务描述里（例如"产出 10 篇各 300 字以上的英文商品文案，含标题与要点"）。</p>
+    </li>
+    <li>
+      <h4>没有 Slack / Discord 通道</h4>
+      <p>当前对外触达通道只有<strong>飞书、Telegram、邮件</strong>三种。谈集成时不要承诺 Slack / Discord。</p>
+    </li>
+    <li>
+      <h4>没有"一键导入整个网站"这类能力</h4>
+      <p>「项目导入」整理出来的是项目<strong>上下文与要点</strong>（背景、阶段、联系人、未决事项），不是把你的旧站点逐字搬进来。不要向客户承诺"一键搬家"。</p>
+    </li>
+    <li>
+      <h4>"接力推进""free 维护"不是界面上的词</h4>
+      <p>这两个词只出现在内部设计文档里。你在界面上看到的是<strong>"任务接力"</strong>与<strong>"空闲等待"</strong>。术语以界面为准。</p>
+    </li>
+  </ol>
+
+  <h3>2.3 遇到"文档说能用、界面找不到"，怎么判断</h3>
+
+  <p>这种情况多数不是你眼瞎，而是有下面几种原因。按顺序排查，一般三步内能定论。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">三步定位法</span>
+    <p><strong>第一步，查功能开关。</strong>部分能力默认关闭，需要你先去「设置 → 功能管理」为该项目开启对应开关，界面才会亮出来。</p>
+    <p><strong>第二步，查版本与条件。</strong>确认你的项目类型、运行模式、甚至套餐版本是否满足该能力的触发条件（例如某些能力只在特定类型的项目里出现）。</p>
+    <p><strong>第三步，以实际界面为准。</strong>前两步都排除后，如果界面上确实没有，就把它当作"本版本尚未开放"。<strong>书与代码都会过时，实际界面不会骗你。</strong></p>
+  </div>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>✅ 这样做</h4>
+      <p>发现按钮找不到，先去功能管理翻开关；还是没有，就记下来、换个方式达成目标（比如用任务描述代替验收标准输入框）。</p>
+    </div>
+    <div class="no">
+      <h4>❌ 别这样做</h4>
+      <p>反复刷新、到处乱点、怀疑系统坏了；或者反过来——认为书上写了就一定有，硬找半天。</p>
+    </div>
+  </div>
+
+  <h2>三、30 / 60 / 90 天路线图</h2>
+
+  <p>下面给你三条并行路线，按读者身份选一条走：<strong>路线 A · 一人公司</strong>、<strong>路线 B · 小团队</strong>、<strong>路线 C · 已有多业务公司</strong>。每条都按 30 / 60 / 90 天分段，每段给出：目标、关键动作、完成标志、该盯的指标、典型月成本量级、最容易犯的错。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">先看清这三个前提</span>
+    <p>一，<strong>成本数字都是估算参考</strong>，来自组织四阶段的量级（起步期约 $10–30 / 月，成长期约 $50–150 / 月，规模化期约 $200–800 / 月），实际以「计费明细」为准。二，本书<strong>不承诺任何效果</strong>——只讲动作和可验证的标志。三，所有路径都从"注册 → 建公司 → 建项目"开始，这里不重复讲，见第 02、03 章。</p>
+  </div>
+
+  <h3>3.1 路线 A · 一人公司（OPC）</h3>
+
+  <p>你一个人，没有技术团队，预算敏感。你的首要目标不是"做大"，而是<strong>在 90 天内跑通一个能看见成果的完整闭环</strong>，顺便把操作手感练出来。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>第 1–30 天：让它跑起来，你先看懂</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>建好第一个项目，亲眼看到 AI 完整做完一件事。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 注册并创建公司（公司管理 → <span class="zy-btn">创建公司</span>）；② 项目管理 → <span class="zy-btn">新建项目</span>，运行模式选<strong>半自动</strong>；③ 项目内「引导建项」把项目目标、现状写清楚，确认执行策略；④ 到「AI 问答」提 3–5 个问题，顺手把项目资料传进知识库；⑤ 在「任务管理」新建 1 个简单的通用任务（如"写 5 条英文产品卖点"），观察它跑到验收。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td>你能指着「验收记录」说清这个任务是怎么被判"通过"的；知识库里至少有 1 份就绪文档。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>任务完成率、返工率、累计花费（第 13 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $10–30（估算参考）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>第一周就选全自动；任务描述只说"做什么"，不说"什么算做完"。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+    <li>
+      <h4>第 31–60 天：给 AI 配队伍，开始产出可交付物</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>把重复性的活固化下来，产出一个能拿出手的成果（内容、网站、或一份像样的方案）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 到「智能体」用岗位模板建 2–3 个员工 Agent，按需绑技能；② 把每天/每周重复的动作写成固定任务（如"每周产出 3 篇英文内容"）；③ 如果要做软件或网站，走「软件工程向导」（第 10 章）而不是普通任务；④ 用「客户页面」生成一个公网问答链接试试对外效果；⑤ 开始每周看「经营驾驶舱」和「计费明细」。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td><strong>有一个公网可访问的链接</strong>（站点 / 客户问答页 / 交付文档），或有一批成型的内容资产。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>内容产出量、客户响应时间、知识库增长量（第 13 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $30–80（估算参考）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>让同一个 Agent 既做开发又做对外发布；知识库一直没补充，AI 回答开始"空转"。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+    <li>
+      <h4>第 61–90 天：让组织自己长大，把节奏固定下来</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>从"你推着干"过渡到"它按节奏自己干"，你只做判断和拍板。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 看「组织进化」的阶段判定与 AI 建议，该增员就确认采纳；② 检查「监控指标」四项，尤其是人类参与率，看自己是不是被太多琐事缠住；③ 用第 13 章附录 C 的月度复盘模板做一次复盘，写下"下月只做的一件事"；④ 把表现好的任务提示词整理成模板，反复用；⑤ 在「目标管理」建一次目标与 KR，让 AI 围着目标转。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td>你有一个稳定的周节奏（第 4 节），且能说出"这个月哪个岗位最划算"。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>阿米巴单位 Token 价值、净收入、ROI（第 13 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $50–150（估算参考）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>盲目追求"全自动"，把关键决策也交出去；预算科目不分项，月底说不清钱花哪了。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+  </ol>
+
+  <h3>3.2 路线 B · 小团队（老板 + 运营 + 产品）</h3>
+
+  <p>你已经有一个小团队，想用 AI 接管一部分流程。你的重点不是"能不能跑"，而是<strong>协作与治理</strong>：谁能做什么、花谁的钱、出事怎么查。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>第 1–30 天：先分权，再上量</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>把团队成员和 AI 编进同一张组织图，权限边界先划清。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 建公司并邀请成员（公司管理 →「成员邀请」），按角色分配；② 逐条过一遍 14 项权限（第 14 章），高风险 5 项从严；③ 建第一个项目，导入团队已有的资料（知识库 / 会议导入 / 项目导入）；④ 为项目建管理者 Agent + 2–3 个员工 Agent；⑤ 约定"红黄绿三通道"分别谁来处理。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td>每个成员都知道自己有哪些权限；人工节点的处理人、SLA 都设定了。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>人类参与率、人工节点积压数（第 13、14 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $10–50（估算参考，取决于项目数）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>给"方便起见"把人全设成管理员；通知设置成全部打扰，大家很快就不看了。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+    <li>
+      <h4>第 31–60 天：把关键流程搬进来</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>至少一条真实业务流程（如"内容排期发布"或"客户咨询跟进"）由 AI 承担主要执行。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 用「流程」把多步骤串起来；② 用「连接器」接入邮箱 / CRM 等外部系统，写操作设人工审核；③ 用「目标管理」把团队目标拆成 KR 与任务；④ 关键岗位用「权限租赁」临时放权，到期回收；⑤ 让运营同学固定每周读「经营日报」与「分析报告」。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td>有一条流程能连续跑通两周，中途只需人工处理少量节点。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>预算消耗率、任务完成率、客户响应时间 P95（第 13 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $50–150（估算参考）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>把连接器权限开得过大；对外动作忘了走人工审核。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+    <li>
+      <h4>第 61–90 天：多项目并轨，治理上台阶</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>同时运营多条业务线而不失控，治理动作常态化。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 用公司级知识库沉淀跨项目共用资料（总部政策、通用规范）；② 定期跑「执行内审」与「红队演练」，看审计报告；③ 用「阿米巴核算」做岗位级复盘，淘汰低效岗位；④ 用「组织进化」的定量调控八维按阶段调档；⑤ 建立"月度复盘会"（第 13 章附录 C）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td>你能在同一周内说清各项目的净收入与风险；有书面的治理会议纪要。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>净收入、预算消耗率、活跃预警数（第 13 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $150–500（估算参考）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>多项目共用一个预算池却不做分账；治理动作"每月想起来才做"。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+  </ol>
+
+  <h3>3.3 路线 C · 已有多业务公司</h3>
+
+  <p>你手上有成熟的业务、现成的资料和团队。你的重点不是"从零开始"，而是<strong>把已有资产导入、让 AI 接住存量工作、并在可控范围内放量</strong>。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>第 1–30 天：盘点资产，全量导入</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>把公司级知识与每条业务线的上下文喂进系统。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 建公司，先在知识库建一个<strong>公司级</strong>知识库，导入制度、产品资料、行业资料；② 每条现有业务建一个项目，用「项目导入」把背景、当前阶段、关键联系人、未决事项整理成上下文；③ 历史会议记录用「会议导入」批量梳理成决策与行动项；④ 装好边缘客户端，让它扫描本地文档目录自动上传；⑤ 为每个项目配管理者 Agent。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td>每条业务线的项目上下文齐全；知识库里主要资料都已"就绪"。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>知识库增长量、文档就绪率（第 07、13 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $50–150（估算参考）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>以为"导入 = 搬站"，期待一键还原旧系统；资料一股脑倒进去，不分层不清理，检索质量反而下降。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+    <li>
+      <h4>第 31–60 天：用 AI 接住存量工作</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>每条业务线各有一类工作改由 AI 主要承担，人只做审核。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 用「流程」把存量 SOP 搬进来；② 用连接器接入邮箱 / 数据库 / CRM；③ 对外动作（发信、发帖）一律设人工审核节点；④ 用「引导建项」为每条业务线确认执行策略；⑤ 关键岗位开「渐进式信任」，按表现逐步放权。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td>至少一条业务线的某项日常产出，连续两周由 AI 完成、人只审核。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>任务完成率、返工率、单位 Token 价值（第 13 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $200–500（估算参考）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>一上来就全自动放开对外发布；老员工抵触却不给过渡期与培训。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+    <li>
+      <h4>第 61–90 天：多线并行与规模化</h4>
+      <div class="zy-table-wrap">
+      <table class="zy-table">
+        <tbody>
+          <tr><td class="zy-nowrap"><strong>目标</strong></td><td>多项目并行运营，用数据决定资源往哪条线倾斜。</td></tr>
+          <tr><td class="zy-nowrap"><strong>关键动作</strong></td><td>① 用「组织进化」按阶段批量扩编，从部门建制走向自治；② 用「阿米巴核算」+「经营驾驶舱」做横向比较，把资源投向 ROI 高的线；③ 用「目标管理」把公司战略拆到各项目；④ 定期内审 + 红队演练，把治理变成习惯；⑤ 每条线各设一名"项目负责人"（project_owner）问责。</td></tr>
+          <tr><td class="zy-nowrap"><strong>完成标志</strong></td><td>你能在一张驾驶舱视图里比较各业务线，并据此做一次真实的资源调整。</td></tr>
+          <tr><td class="zy-nowrap"><strong>该盯的指标</strong></td><td>净收入、ROI、预算消耗率、活跃预警（第 13 章）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>月成本量级</strong></td><td>约 $500–2000+（估算参考）。</td></tr>
+          <tr><td class="zy-nowrap"><strong>最容易犯的错</strong></td><td>把所有业务塞进一个项目；用 AI 的产出做重大决策却不留人工复核。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">三条路线共通的三个动作</span>
+    <p>不管你是哪条路线，第 1 个月都要做三件事：<strong>写清楚目标</strong>（引导建项 / 任务描述）、<strong>喂够资料</strong>（知识库 / 导入）、<strong>留一个你能看懂成果的闭环</strong>（跑到验收）。这三件事做到位，后面只是加量。</p>
+  </div>
+
+  <h2>四、节奏建议：每天、每周、每月该做什么</h2>
+
+  <p>经营最怕"凭感觉、看心情"。这一节给你一套固定的节奏：<strong>每天 10 分钟、每周 30 分钟、每月 90 分钟</strong>。把它当成上班的例行公事，你就不会被 AI 的产出量冲昏头，也不会因为某个节点卡住两周才发现。</p>
+
+  <h3>每天（10 分钟）</h3>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>处理待办节点：清空「人工节点」的待处理项，处理不了的直接升级或催办</span></li>
+    <li><input type="checkbox"><span>扫一眼预算：看「AI 预算消耗」与预算消耗率是否还在 80% 以下</span></li>
+    <li><input type="checkbox"><span>看经营日报：读一遍最新「经营日报」，记住里面的风险提示</span></li>
+    <li><input type="checkbox"><span>（可选）看通知中心有没有紧急 / 重要项未读</span></li>
+  </ul>
+
+  <p>这三件事加起来不超过 10 分钟，但它们挡住了两个最致命的风险：<strong>红线动作没人批</strong>和<strong>钱烧超了没发现</strong>。哪怕你今天很忙，只做前两项也行。</p>
+
+  <h3>每周（30 分钟）</h3>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>看驾驶舱：读「经营驾驶舱」六个数字，记下本周最异常的一个</span></li>
+    <li><input type="checkbox"><span>处理积压审批：把一周里堆积的人工节点过一遍，别让 SLA 全超时</span></li>
+    <li><input type="checkbox"><span>看计费明细：按天看花费分布，找出花得最猛的那天、回想当时发生了什么</span></li>
+    <li><input type="checkbox"><span>看阿米巴：找出"花得多、产出少"的岗位</span></li>
+    <li><input type="checkbox"><span>确认公司账本余额仍高于预警阈值</span></li>
+    <li><input type="checkbox"><span>决定下周只做一件事，写下来</span></li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">"只做一件事"是刻意的设计</span>
+    <p>待办清单越长，人越容易挑软柿子捏。逼自己每周只定一件事，是为了让资源（你的注意力 + 项目预算）聚焦。写不下来"一件"的时候，往往说明你还没想清哪件事最要紧——那本身就是个信号。</p>
+  </div>
+
+  <h3>每月（90 分钟）</h3>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>月度复盘：用第 13 章附录 C 的模板填一份复盘表，写下"本月最异常的一个数字"</span></li>
+    <li><input type="checkbox"><span>看组织进化：读阶段判定与 AI 建议，决定要不要增员、撤编或切换阶段</span></li>
+    <li><input type="checkbox"><span>看结项报告（若有）：对照目标达成率、返工率、ROI</span></li>
+    <li><input type="checkbox"><span>看治理结论：读一次内审报告与红队演练结论</span></li>
+    <li><input type="checkbox"><span>调预算：根据上月实际花费，调整下月的项目预算与告警阈值</span></li>
+    <li><input type="checkbox"><span>清理知识库：把过期资料归档，把高频资料补全，淘汰答不准的来源</span></li>
+    <li><input type="checkbox"><span>定下"下月只做的一件事"及其验证指标</span></li>
+  </ul>
+
+  <p>这一小时四件主事的因果关系是：<strong>复盘</strong>让你看清过去 → <strong>看组织</strong>让你决定队伍怎么变 → <strong>调预算</strong>决定弹药给多少 → <strong>清知识</strong>保证 AI 的判断有依据。四件事都做完，下个月你就不用凭感觉开工了。</p>
+
+  <h2>五、最佳实践 30 条</h2>
+
+  <p>这 30 条是前面 19 章反复验证过的经验，分成四组。每条一句话，后面跟一句"为什么"。你可以把它当"不知道怎么做时才遵守的默认规则"。</p>
+
+  <h3>5.1 把话说清楚（8 条）</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>实践</th><th>为什么</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>任务描述里的"什么算做完"比"做什么"更重要。</td><td>验收 Agent 要拿一个标准来判，标准含糊就会反复返工。</td></tr>
+      <tr><td>2</td><td>建项目时把目标写清楚，别写"提升业绩"这种话。</td><td>目标模糊，AI 拆出来的任务也模糊，整条链路从源头就歪了。</td></tr>
+      <tr><td>3</td><td>提问时给出背景占位符，如"我的项目是【跨境电商独立站】"。</td><td>没有上下文，AI 只能给通用答案，等于白问。</td></tr>
+      <tr><td>4</td><td>一次只让 AI 做一件边界清晰的事。</td><td>任务越大越复杂，验收越难、返工越多。</td></tr>
+      <tr><td>5</td><td>复杂软件需求走「软件工程向导」，不要用普通任务硬做。</td><td>向导会先出 PRD/TAD 再落到任务，避免"想到哪做到哪"。</td></tr>
+      <tr><td>6</td><td>把好用的提示词整理成模板反复用。</td><td>有效表达是可复用资产，别每次重新摸索。</td></tr>
+      <tr><td>7</td><td>产出不满意时，先改输入，再考虑换角色 / 换引擎。</td><td>多数问题出在输入不够清晰，而不是模型不够强。</td></tr>
+      <tr><td>8</td><td>让 AI 复述一遍它理解的任务，再让它开工。</td><td>一句话就能暴露理解偏差，省掉一轮返工。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>5.2 花钱有数（7 条）</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>实践</th><th>为什么</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>9</td><td>预算科目分开记，月底才知道钱去哪了。</td><td>混在一起记，你只能看到总数，没法归因、没法优化。</td></tr>
+      <tr><td>10</td><td>先设项目预算再开工，别等烧起来才管。</td><td>预算是熔断的前提，没有上限就没有自动刹车。</td></tr>
+      <tr><td>11</td><td>把预警阈值留在 80% 左右，别设到 95%。</td><td>预警的意义是给你留出补救时间，卡太死等于没有缓冲。</td></tr>
+      <tr><td>12</td><td>把「计费明细」当参考、不当发票。</td><td>其中含按长度估算的兜底计费，不是精确账单。</td></tr>
+      <tr><td>13</td><td>视频、大模型这类贵的档位，先小样试再放量。</td><td>贵档位一次失误的成本可能是日常的几十倍。</td></tr>
+      <tr><td>14</td><td>每周看一次花费按天分布。</td><td>异常往往集中在某一天，不看分布就找不出来。</td></tr>
+      <tr><td>15</td><td>公司账本余额和项目预算要同时看。</td><td>一个管"还有没有钱"，一个管"这条线允许花多少"，缺一不可。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>5.3 组织有度（8 条）</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>实践</th><th>为什么</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>16</td><td>第一周永远选半自动。</td><td>先看懂 AI 的行为逻辑，再决定要不要放开，这是最稳的起步方式。</td></tr>
+      <tr><td>17</td><td>不要让一个 Agent 同时干开发与对外发布。</td><td>两件事风险等级不同，混在一个角色里权限就失控了。</td></tr>
+      <tr><td>18</td><td>先建管理者 Agent，再让它去带员工。</td><td>没有协调层，任务分配会乱、会互相抢资源。</td></tr>
+      <tr><td>19</td><td>用岗位模板建 Agent，别从零手写。</td><td>模板是打磨过的，能省掉大量试错。</td></tr>
+      <tr><td>20</td><td>技能按需给，不要"先开着以后也许用得上"。</td><td>权限越大，出错时的波及面越大。</td></tr>
+      <tr><td>21</td><td>组织进化给的建议，逐条看证据再决定。</td><td>它只是建议，判断权始终在你手里。</td></tr>
+      <tr><td>22</td><td>扩编一次只加必要的岗位，别一次加一堆。</td><td>组织膨胀比人手不足更难收拾。</td></tr>
+      <tr><td>23</td><td>谁负责哪个方向、哪个项目、哪个任务，写下来。</td><td>责任不清时，AI 和人都会互相等对方。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>5.4 安全有底（7 条）</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>实践</th><th>为什么</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>24</td><td>对外动作（发邮件、发帖、发布）一律走人工审核。</td><td>发出去就收不回来，一次失误可能毁掉客户信任。</td></tr>
+      <tr><td>25</td><td>红黄绿三通道先约好谁处理。</td><td>通道定义了风险等级，但没人认领就等于没人管。</td></tr>
+      <tr><td>26</td><td>HMAC Secret 当密码保管，谁都不给。</td><td>它是平台与项目服务器之间的防伪凭证。</td></tr>
+      <tr><td>27</td><td>KillSwitch 只在真出事时按，按前先想清楚。</td><td>它不可逆，全停之后要重新梳理才能恢复。</td></tr>
+      <tr><td>28</td><td>别在情绪上头时删除知识库或解散公司。</td><td>这些动作的损失是长期的，情绪是临时的。</td></tr>
+      <tr><td>29</td><td>定期看内审报告与风险登记册。</td><td>问题早发现一天，处理成本就低一个量级。</td></tr>
+      <tr><td>30</td><td>关键决策留人工复核，别全交给 AI 下结论。</td><td>AI 放大你的判断力，但不能替代承担后果。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>六、常见认知误区纠正（15 条）</h2>
+
+  <p>这 15 条是新手最常带着的错误预期。每条按"<strong>你以为是 → 实际是 → 该怎么做</strong>"三段讲。把它们读一遍，能省掉你至少一个月的心力。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>你以为是</th><th>实际是</th><th>该怎么做</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>它是给我配了个助理。</td><td>它是给你配了一支<strong>需要配置的队伍</strong>。</td><td>花时间建公司、建项目、配 Agent，别指望开箱即用。</td></tr>
+      <tr><td>2</td><td>全自动就是完全不用管。</td><td>全自动只是<strong>只在关键节点通知你</strong>，不是没有节点。</td><td>保持每日 10 分钟处理节点，全自动也需要你拍板。</td></tr>
+      <tr><td>3</td><td>AI 会自己学会我的业务。</td><td>它学得快不快，取决于<strong>你喂了多少资料</strong>。</td><td>认真做知识库，导入历史资料，及时确认待确认知识。</td></tr>
+      <tr><td>4</td><td>花钱了就该出成果。</td><td>交付质量<strong>取决于需求清晰度</strong>，钱只决定算力。</td><td>把任务描述写清楚，尤其是"什么算做完"。</td></tr>
+      <tr><td>5</td><td>任务越多，跑得越快。</td><td>它们是<strong>注意力与预算的竞争</strong>关系，越多越慢。</td><td>一次聚焦少量关键任务，用时间片权重区分轻重。</td></tr>
+      <tr><td>6</td><td>验收是干活的 AI 自己说了算。</td><td>是<strong>独立的验收 Agent</strong> 按三权分立原则判的。</td><td>去验收记录看"执行者"与"验收 Agent"两个不同的身份。</td></tr>
+      <tr><td>7</td><td>"返工"是无能的表现。</td><td>返工是<strong>正常的质量控制</strong>，0 返工反而可能意味着没人真在验收。</td><td>关注返工率的变化趋势，而不是要求它必须为零。</td></tr>
+      <tr><td>8</td><td>预算花完就彻底停了，没救了。</td><td>是<strong>熔断 + 补充后可恢复</strong>，还有降级运行兜底。</td><td>看到预警就去补预算，别等到彻底停摆才处理。</td></tr>
+      <tr><td>9</td><td>兜底暂停重启一下就好了。</td><td>它是<strong>持久状态</strong>，重启不会自己恢复。</td><td>人工处理后，去自动运营控制台点「恢复」或「启动」。</td></tr>
+      <tr><td>10</td><td>知识库塞得越多越好。</td><td>未经整理的海量资料会<strong>拉低检索质量</strong>。</td><td>分类、去重、淘汰过期资料，宁精勿滥。</td></tr>
+      <tr><td>11</td><td>我可以让它一键把整个旧网站搬过来。</td><td>项目导出的只是<strong>上下文与要点</strong>，不是整站复制。</td><td>用它整理背景和目标，具体内容靠知识与工程向导重建。</td></tr>
+      <tr><td>12</td><td>开了全自动，我可以去度假一个月。</td><td>它会在关键节点等你，<strong>你不在，进度就停在节点上</strong>。</td><td>要么设专职代处理人，要么度假前切回半自动 / 人工审核。</td></tr>
+      <tr><td>13</td><td>Agent 越多越强。</td><td>组织会<strong>膨胀、内耗、抢资源</strong>，人多不等于产出高。</td><td>按需增员，用阿米巴核算淘汰低效岗位。</td></tr>
+      <tr><td>14</td><td>它就是一个更聪明的聊天机器人。</td><td>它是<strong>会拆解、会排班、会验收、会记账的运营体系</strong>。</td><td>别只把它当问答用，把流程和任务真正接进去。</td></tr>
+      <tr><td>15</td><td>AI 做得不好，是模型不够强。</td><td>多数情况是<strong>需求、资料或配置</strong>没到位。</td><td>先查任务描述、知识库、角色配置，再考虑换模型。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>七、全书索引</h2>
+
+  <p>这一节是"倒排索引"：你想做某件事，直接找到该翻哪一章。表后面还有一份"按角色读"的推荐路径。</p>
+
+  <h3>7.1 我想做 X → 翻第几章</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>我想做 / 想知道</th><th>翻这一章</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>搞清这套系统到底是什么、能干什么不能干什么</td><td>第 01 章</td></tr>
+      <tr><td>注册账号、创建我的第一家公司</td><td>第 02 章</td></tr>
+      <tr><td>决定行业类型、公司名称怎么填、以后能不能改</td><td>第 02 章</td></tr>
+      <tr><td>把同事加进公司、设组织架构</td><td>第 02、14 章</td></tr>
+      <tr><td>创建一个新项目、每一步该怎么填</td><td>第 03 章</td></tr>
+      <tr><td>知道项目类型 / 名称 / 描述对 AI 行为有什么影响</td><td>第 03 章</td></tr>
+      <tr><td>搞清项目服务器怎么开通、IP 端口怎么填</td><td>第 03 章</td></tr>
+      <tr><td>理解全自动 / 半自动 / 人工审核到底差在哪</td><td>第 04 章</td></tr>
+      <tr><td>搞懂 L0–L3 自主级别怎么用</td><td>第 04、14 章</td></tr>
+      <tr><td>设预算、理解预警 / 熔断 / 降级 / 兜底</td><td>第 04、13 章</td></tr>
+      <tr><td>找到平台侧某个按钮在哪</td><td>第 05 章</td></tr>
+      <tr><td>找到项目内某个页面 / 按钮在哪</td><td>第 06 章</td></tr>
+      <tr><td>认识自动运营控制台的 16 个入口</td><td>第 06、09 章</td></tr>
+      <tr><td>建知识库、把资料喂给 AI</td><td>第 07 章</td></tr>
+      <tr><td>搞懂公司级 / 项目级知识库怎么选</td><td>第 07 章</td></tr>
+      <tr><td>用边缘客户端自动扫描本地文档</td><td>第 07 章</td></tr>
+      <tr><td>把会议记录变成任务</td><td>第 07 章</td></tr>
+      <tr><td>把已经存在的项目整体导入</td><td>第 07 章</td></tr>
+      <tr><td>创建、管理 AI 智能体（Agent）</td><td>第 08 章</td></tr>
+      <tr><td>用岗位模板 / 技能库快速组队</td><td>第 08 章</td></tr>
+      <tr><td>让组织自动管理、自动扩编</td><td>第 08 章</td></tr>
+      <tr><td>理解组织四阶段与定量调控</td><td>第 08、13 章</td></tr>
+      <tr><td>搞懂任务、时间片、轮次是怎么转的</td><td>第 09 章</td></tr>
+      <tr><td>知道 review 轮什么时候触发、干了什么</td><td>第 09 章</td></tr>
+      <tr><td>看三权分立验收记录、理解通过 / 返工 / 驳回</td><td>第 09 章</td></tr>
+      <tr><td>处理需要我点头的人工节点</td><td>第 09、14 章</td></tr>
+      <tr><td>做一个复杂的软件功能 / 网站</td><td>第 10 章</td></tr>
+      <tr><td>修改已有的软件工程</td><td>第 10 章</td></tr>
+      <tr><td>知道点了"新建任务"之后系统到底做了什么</td><td>第 11 章</td></tr>
+      <tr><td>任务一直"待执行"，想知道为什么</td><td>第 11、19 章</td></tr>
+      <tr><td>找不到好的提问方式、想要模板</td><td>第 12 章</td></tr>
+      <tr><td>知道每天 / 每周 / 每月该盯哪些数</td><td>第 13 章</td></tr>
+      <tr><td>读懂经营驾驶舱、经营日报、结项报告</td><td>第 13 章</td></tr>
+      <tr><td>用阿米巴核算找出低效岗位</td><td>第 13 章</td></tr>
+      <tr><td>理解 14 项权限、怎么分配</td><td>第 14 章</td></tr>
+      <tr><td>搞清红黄绿三通道与 SLA</td><td>第 14 章</td></tr>
+      <tr><td>用渐进式信任 / 权限租赁放权</td><td>第 14 章</td></tr>
+      <tr><td>做内审、红队演练、看审计报告</td><td>第 14 章</td></tr>
+      <tr><td>看一个完整的电商业务怎么从 0 跑起来</td><td>第 15 章</td></tr>
+      <tr><td>看一个软件产品怎么从想法做到上线</td><td>第 16 章</td></tr>
+      <tr><td>看内容 / 咨询 / 制造 / 本地服务行业怎么做</td><td>第 17 章</td></tr>
+      <tr><td>遇到具体问题想快速找答案</td><td>第 18 章</td></tr>
+      <tr><td>系统报错 / 项目卡住 / 想查安全红线</td><td>第 19 章</td></tr>
+      <tr><td>查术语、定节奏、看能力现状、找章节</td><td>第 20 章（本章）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>7.2 按角色读的推荐路径</h3>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4>新人（第一次接触）</h4>
+      <p>01 → 02 → 03 → 04 → 06 → 09 → 13 → 18。先建立世界观和操作手感，再谈优化。想快，先照首页"十分钟快速上手"做一遍。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>CEO / 老板</h4>
+      <p>01 → 04 → 13 → 14 → 20，再看 15/16/17 挑一个和你最像的案例。你的重点是钱、队伍和治理，不是点每个按钮。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>管理员 / 运营</h4>
+      <p>05 → 06 → 07 → 08 → 09 → 12 → 14 → 19。你需要熟悉每一个入口，是团队里最会用工具的人。</p>
+    </div>
+    <div class="zy-card purple">
+      <h4>只想知道"能不能用"的评估者</h4>
+      <p>01 → 04 → 10 → 13 → 20（尤其第二节能力现状）。判断边界、成本、产出形态，不必钻进操作细节。</p>
+    </div>
+  </div>
+
+  <h2>八、写在最后</h2>
+
+  <p>写到这里，全书就要收尾了。我不想用煽情的话结束，只说几句务实的话。</p>
+
+  <p>这套系统真正改变的，不是"你雇不雇得起一个团队"，而是<strong>你判断一件事值不值得做、做完没做完、划不划算的成本，被大幅压低了</strong>。以前你要花三个月试一个方向，现在可能三周就看清；以前一个运营动作要排期、要人盯，现在可以交给 AI 循环推进。这是它的价值所在。</p>
+
+  <p>但请一定记住：<strong>方向判断永远是人的事</strong>。做什么产品、服务哪类客户、什么原则不能让——这些问题，AI 只能给你更多素材，不能替你承担后果。工具会放大你的判断力：判断对，它放大正确；判断错，它同样放大错误。所以不要因为"它很能干"就把方向盘也交出去。</p>
+
+  <p>还有一个朴素的建议：<strong>从小处开始，把一个闭环真正跑通，再谈规模</strong>。多数人失败不是因为系统不好用，而是因为一上来就想让 AI 接管一整个公司，结果被复杂度淹没。先让它干净利落地做成一件事——哪怕是写完一篇像样的英文商品页——你会对这个工具建立真实的信任，也知道该怎么用它。</p>
+
+  <p>愿你把它当同事，而不是当魔法。祝你顺利。</p>
+
+  <h2>九、本章小结</h2>
+
+  <ul>
+    <li><strong>术语的表是活的。</strong>界面上遇到不认识的词，回来查第一节或附录 A；解释比目录长，但每条都能独立看懂。</li>
+    <li><strong>能力有边界，标注要看。</strong>绿色"已上线"可放心用，黄色"部分可用"注意条件，蓝色"规划中"别投入。尤其记住第 2.2 节那六件"目前不成立"的事。</li>
+    <li><strong>节奏胜过激情。</strong>每天 10 分钟、每周 30 分钟、每月 90 分钟，把这三档做成习惯，你的项目就不会失控。</li>
+    <li><strong>路线图只讲动作与标志，不承诺效果。</strong>选一条和你身份相符的路线，照着 30 / 60 / 90 天走，成本数字只作量级参考。</li>
+    <li><strong>30 条最佳实践和 15 个误区，是别人的学费。</strong>不用全背，卡住时回来对一眼。</li>
+  </ul>
+
+  <p>全书到此结束。想回到目录、挑另一条路径重读，或者把这本书分享给同事，请前往 <a href="index.html">全书目录（index.html）</a>。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">最后一句话</span>
+    <p>这本书不是说明书，是"怎么用好它"的经验集。界面会变，方法不会。凡是本书与你的实际界面不符的地方，<strong>以实际界面为准</strong>。</p>
+  </div>
+
+  <h2>附录 A · 术语速查（一页纸）</h2>
+
+  <p>把最常用的 40 个词压成一页，适合打印贴在显示器旁。详细的解释请回第一节对应分组查。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>术语</th><th>一句话</th><th>术语</th><th>一句话</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>公司</strong></td><td>组织容器（人、钱、共用知识）</td><td><strong>项目</strong></td><td>一条业务线，独立服务器与账本</td></tr>
+      <tr><td><strong>任务</strong></td><td>最小干活单元</td><td><strong>成员</strong></td><td>被邀请进公司的真人账号</td></tr>
+      <tr><td><strong>角色</strong></td><td>成员标签，决定权限起点</td><td><strong>权限</strong></td><td>细到动作级的开关（共 14 项）</td></tr>
+      <tr><td><strong>所有者</strong></td><td>最终控制人，负责转让/解散</td><td><strong>邀请码</strong></td><td>加人进公司的凭证</td></tr>
+      <tr><td><strong>Agent</strong></td><td>项目里干活的 AI 单元</td><td><strong>管理者 Agent</strong></td><td>只协调不下场的 AI</td></tr>
+      <tr><td><strong>员工 Agent</strong></td><td>真正执行任务的 AI</td><td><strong>岗位模板</strong></td><td>现成岗位，一键套用</td></tr>
+      <tr><td><strong>技能</strong></td><td>Agent 会做的一件事</td><td><strong>技能白名单</strong></td><td>Agent 被允许用的技能清单（当前为建议性，未强制拦截）</td></tr>
+      <tr><td><strong>RunConfig</strong></td><td>决定角色"怎么跑"的配置</td><td><strong>提示词</strong></td><td>你给 AI 的指令</td></tr>
+      <tr><td><strong>返工率</strong></td><td>被验收判"返工"的比例</td><td><strong>版本</strong></td><td>候选 / 激活 / 已停用</td></tr>
+      <tr><td><strong>经验沉淀</strong></td><td>把教训存成可复用经验</td><td><strong>SOP</strong></td><td>标准作业流程</td></tr>
+      <tr><td><strong>组织四阶段</strong></td><td>起步 / 成长 / 规模化 / 成熟</td><td><strong>一键扩编</strong></td><td>确认建议后自动批量上岗</td></tr>
+      <tr><td><strong>时间片</strong></td><td>一轮切成若干格，轮着用</td><td><strong>时间片权重</strong></td><td>任务每轮能分到多少时间</td></tr>
+      <tr><td><strong>轮次</strong></td><td>AI 的一"班"</td><td><strong>轮次模式</strong></td><td>task / review / free</td></tr>
+      <tr><td><strong>接力摘要</strong></td><td>跨轮的"交班记录"</td><td><strong>review 重排</strong></td><td>定期抬头看全局、重排任务</td></tr>
+      <tr><td><strong>空闲等待</strong></td><td>没活时不烧钱的状态</td><td><strong>并发数</strong></td><td>同时跑多少任务</td></tr>
+      <tr><td><strong>loop 引擎</strong></td><td>调外部工具跑长活（默认）</td><td><strong>agent 引擎</strong></td><td>内部直接调 AI 干短活</td></tr>
+      <tr><td><strong>时限</strong></td><td>单任务执行的时间上限</td><td><strong>日志标签</strong></td><td>日志每行的身份牌</td></tr>
+      <tr><td><strong>三权分立</strong></td><td>干活的、验收的、批准的不同一</td><td><strong>验收结论</strong></td><td>通过 / 返工 / 驳回</td></tr>
+      <tr><td><strong>人工处理节点</strong></td><td>要你点一下才继续的关口</td><td><strong>自主级别 L0–L3</strong></td><td>级别越高 AI 越自由</td></tr>
+      <tr><td><strong>三通道</strong></td><td>红=强制 / 黄=敏感 / 绿=例行</td><td><strong>SLA</strong></td><td>节点的处理时限</td></tr>
+      <tr><td><strong>KillSwitch</strong></td><td>紧急全停的红色按钮（不可逆）</td><td><strong>合规拦截</strong></td><td>碰红线直接熔断并通知</td></tr>
+      <tr><td><strong>知识库</strong></td><td>AI 的参考资料室</td><td><strong>分层知识库</strong></td><td>公司级 + 项目级 + 共享</td></tr>
+      <tr><td><strong>RAG</strong></td><td>先查资料再回答</td><td><strong>相似度</strong></td><td>检索结果与问题的贴合度</td></tr>
+      <tr><td><strong>Few-Shot</strong></td><td>给 AI 看优秀案例当范例</td><td><strong>待确认知识</strong></td><td>需人工确认才入库的条目</td></tr>
+      <tr><td><strong>文档状态</strong></td><td>待处理→…→就绪／失败／需人工确认</td><td><strong>边缘客户端</strong></td><td>本机托盘工具，扫本地文档</td></tr>
+      <tr><td><strong>平台账本</strong></td><td>真实资金流水</td><td><strong>项目账本</strong></td><td>业务线的虚拟经营核算</td></tr>
+      <tr><td><strong>项目预算</strong></td><td>这条线允许花多少</td><td><strong>AI 运行预算</strong></td><td>留给模型调用的那部分</td></tr>
+      <tr><td><strong>预算科目</strong></td><td>token / 第三方 / 算力 / 人工</td><td><strong>熔断</strong></td><td>触上限自动停，防烧钱</td></tr>
+      <tr><td><strong>降级运行</strong></td><td>钱紧时省着跑</td><td><strong>兜底保护</strong></td><td>异常自动停，持久状态需手动恢复</td></tr>
+      <tr><td><strong>token 计费</strong></td><td>输入 1 / 输出 2 / 缓存读 0.02 元/M</td><td><strong>兜底计费</strong></td><td>按长度估算，非精确账单</td></tr>
+      <tr><td><strong>经营驾驶舱</strong></td><td>老板看的一屏汇总</td><td><strong>经营日报</strong></td><td>系统按日/按需生成的报告</td></tr>
+      <tr><td><strong>阿米巴核算</strong></td><td>把岗位当独立小账本</td><td><strong>单位 Token 价值</strong></td><td>每百万 token 换回多少价值</td></tr>
+      <tr><td><strong>结项报告</strong></td><td>项目期末总结</td><td><strong>ROI</strong></td><td>投入产出比</td></tr>
+      <tr><td><strong>MCP / 连接器</strong></td><td>AI 连外部系统的插头</td><td><strong>流程</strong></td><td>把多步骤串成流水线</td></tr>
+      <tr><td><strong>事件总线</strong></td><td>模块间"发生了什么"的广播</td><td><strong>资源治理</strong></td><td>防任务互抢资源的协调</td></tr>
+      <tr><td><strong>冲突仲裁</strong></td><td>目标打架时中立裁决</td><td><strong>审计</strong></td><td>关键动作留痕可回溯</td></tr>
+      <tr><td><strong>风险登记册</strong></td><td>登记并跟踪风险的地方</td><td><strong>变更日志</strong></td><td>"改了什么"的流水</td></tr>
+      <tr><td><strong>红队演练</strong></td><td>主动扮坏人找漏洞</td><td><strong>内审</strong></td><td>系统给自己做的体检</td></tr>
+      <tr><td><strong>HMAC</strong></td><td>平台与项目服务器间的防伪密钥</td><td><strong>媒体生成</strong></td><td>AI 生成视频 / 图 / 歌</td></tr>
+      <tr><td><strong>客户页面</strong></td><td>只读限权的对外问答链接</td><td><strong>SSE 流式输出</strong></td><td>回答逐字推送，不用干等</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>附录 B · 能力现状全表（三端 60+ 项）</h2>
+
+  <p>这是全书最全的能力现状清单。徽章含义见第二节：<span class="zy-badge green">已上线</span> / <span class="zy-badge amber">部分可用</span> / <span class="zy-badge sky">规划中</span>。位置写的是平台上的入口路径。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>#</th><th>能力</th><th>端</th><th>现状</th><th>位置 / 备注</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>注册与登录</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>登录页 / 注册页</td></tr>
+      <tr><td>2</td><td>创建公司</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「创建公司」</td></tr>
+      <tr><td>3</td><td>公司列表与状态</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「公司列表」</td></tr>
+      <tr><td>4</td><td>组织架构（部门）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「组织架构」，需先选公司</td></tr>
+      <tr><td>5</td><td>成员管理</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「成员管理」</td></tr>
+      <tr><td>6</td><td>成员邀请</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「成员邀请」</td></tr>
+      <tr><td>7</td><td>公司设置 / 转让 / 解散</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>公司管理 →「公司设置」</td></tr>
+      <tr><td>8</td><td>新建项目向导</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目管理 →「新建项目」，三步</td></tr>
+      <tr><td>9</td><td>项目列表与筛选</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目管理</td></tr>
+      <tr><td>10</td><td>项目详情与启停</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目详情头部按钮</td></tr>
+      <tr><td>11</td><td>服务器实例管理</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目详情 →「服务器实例」</td></tr>
+      <tr><td>12</td><td>HMAC Secret 查看 / 重置</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目详情 →「服务器实例」</td></tr>
+      <tr><td>13</td><td>预算设定与调整</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目详情 →「预算明细」→「调整预算」</td></tr>
+      <tr><td>14</td><td>运行配置（调度 / 执行器 / 定价）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目详情 →「运行配置」</td></tr>
+      <tr><td>15</td><td>数据面板</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>左侧菜单「数据面板」</td></tr>
+      <tr><td>16</td><td>知识库管理</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>左侧菜单「知识库」</td></tr>
+      <tr><td>17</td><td>RAG 检索</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>知识库 →「RAG 检索」</td></tr>
+      <tr><td>18</td><td>AI 对话</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>左侧菜单「AI 对话」</td></tr>
+      <tr><td>19</td><td>AI 问答（项目内）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「AI 问答」</td></tr>
+      <tr><td>20</td><td>公司账本</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>左侧菜单「公司账本」</td></tr>
+      <tr><td>21</td><td>项目账本</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「项目账本」</td></tr>
+      <tr><td>22</td><td>媒体生成（视频 / 图像 / 歌曲）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>左侧菜单「媒体生成」</td></tr>
+      <tr><td>23</td><td>媒体价目设置</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>媒体生成 →「价目设置」</td></tr>
+      <tr><td>24</td><td>通知中心</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>左侧菜单「通知中心」</td></tr>
+      <tr><td>25</td><td>设置 · 个人设置</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>设置 →「个人设置」</td></tr>
+      <tr><td>26</td><td>设置 · 功能管理（13 项开关）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>设置 →「功能管理」</td></tr>
+      <tr><td>27</td><td>AI 智能建议（推荐开哪些功能）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>设置 →「功能管理」→「分析项目并建议」</td></tr>
+      <tr><td>28</td><td>设置 · 授权管理</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>设置 →「授权管理」</td></tr>
+      <tr><td>29</td><td>设置 · Agent 优化（常规 / 深度）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>设置 →「Agent 优化」</td></tr>
+      <tr><td>30</td><td>超管 · 全局看板</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>超管后台</td></tr>
+      <tr><td>31</td><td>超管 · 用户管理</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>超管后台</td></tr>
+      <tr><td>32</td><td>超管 · 项目穿透（只读）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>超管后台</td></tr>
+      <tr><td>33</td><td>超管 · 实例监控</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>超管后台</td></tr>
+      <tr><td>34</td><td>超管 · Token 统计</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>超管后台</td></tr>
+      <tr><td>35</td><td>超管 · Prompt 审计（可导出 CSV、脱敏）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>超管后台</td></tr>
+      <tr><td>36</td><td>超管 · 治理审计</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>超管后台</td></tr>
+      <tr><td>37</td><td>客户页面（对外分享问答）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「客户页面」</td></tr>
+      <tr><td>38</td><td>公开问答页（/s/{token}）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>分享链接直接打开</td></tr>
+      <tr><td>39</td><td>移动端审批页</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>人工节点 →「移动审批」</td></tr>
+      <tr><td>40</td><td>会议内容导入梳理</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「会议导入」</td></tr>
+      <tr><td>41</td><td>现有项目整体导入</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「项目导入」</td></tr>
+      <tr><td>42</td><td>引导建项（想法 → 策略）</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「引导建项」</td></tr>
+      <tr><td>43</td><td>待确认知识清单</td><td>平台</td><td><span class="zy-badge green">已上线</span></td><td>项目内 →「待确认知识」</td></tr>
+      <tr><td>44</td><td>智能体中心（组织 / 任务 / 配置 / 运行）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>组织与运营 →「智能体」</td></tr>
+      <tr><td>45</td><td>岗位模板库</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>智能体中心 →「组织」</td></tr>
+      <tr><td>46</td><td>技能库 / 提升为组织级</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>智能体中心 →「组织」</td></tr>
+      <tr><td>47</td><td>Agent 运行配置 / 导入 XML</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>智能体中心 →「配置」</td></tr>
+      <tr><td>48</td><td>组织进化 · 阶段状态与判定证据</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>组织与运营 →「组织进化」</td></tr>
+      <tr><td>49</td><td>组织进化 · AI 建议（增员 / 扩容 / 装配 / 升级）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>组织进化 →「AI 建议」</td></tr>
+      <tr><td>50</td><td>组织进化 · 能力开启（按阶段推荐）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>组织进化</td></tr>
+      <tr><td>51</td><td>组织进化 · 定量调控（八维）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>组织进化</td></tr>
+      <tr><td>52</td><td>组织进化 · 阶段切换（含回退）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>组织进化 →「阶段切换」</td></tr>
+      <tr><td>53</td><td>自动运营控制台（16 入口）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>组织与运营 →「自动运营」</td></tr>
+      <tr><td>54</td><td>任务管理（新建 / 编辑 / 筛选）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「任务管理」</td></tr>
+      <tr><td>55</td><td>运行轮次与日志面板</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「运行轮次 / 日志面板」</td></tr>
+      <tr><td>56</td><td>计费明细</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「计费明细」</td></tr>
+      <tr><td>57</td><td>人工处理节点（含 SLA）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「人工节点」</td></tr>
+      <tr><td>58</td><td>角色管理（版本 / 经验 / SOP）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「角色管理」</td></tr>
+      <tr><td>59</td><td>目标管理（KR · 权衡权重）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>组织与运营 →「目标管理」</td></tr>
+      <tr><td>60</td><td>审计治理（含 KillSwitch）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>治理与资源 →「审计治理」</td></tr>
+      <tr><td>61</td><td>经营日报（四种类型 / 三态）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「经营日报」</td></tr>
+      <tr><td>62</td><td>监控指标（四项质量信号）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「监控指标」</td></tr>
+      <tr><td>63</td><td>结项报告</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「结项报告」</td></tr>
+      <tr><td>64</td><td>验收记录（三权分立留痕）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「验收记录」</td></tr>
+      <tr><td>65</td><td>测试运行</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「测试运行」</td></tr>
+      <tr><td>66</td><td>阿米巴核算（岗位级 / 任务级）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「阿米巴核算」</td></tr>
+      <tr><td>67</td><td>经营驾驶舱</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「经营驾驶舱」</td></tr>
+      <tr><td>68</td><td>权限租赁（续期 / 吊销）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>自动运营 →「权限租赁」</td></tr>
+      <tr><td>69</td><td>连接器（MCP）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>接入与执行 →「连接器」</td></tr>
+      <tr><td>70</td><td>流程编排</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>接入与执行 →「流程」</td></tr>
+      <tr><td>71</td><td>深度研究</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>研究与获客 →「深度研究」</td></tr>
+      <tr><td>72</td><td>战略规划 / 资源治理 / 渐进式信任 / 冲突仲裁 / 事件总线</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>治理与资源分组</td></tr>
+      <tr><td>73</td><td>报告 / 备份</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>运维与报告分组</td></tr>
+      <tr><td>74</td><td>软件工程向导（七步）</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>新建任务 →「新建软件工程」</td></tr>
+      <tr><td>75</td><td>软件修改弹窗</td><td>项目</td><td><span class="zy-badge green">已上线</span></td><td>新建任务 →「软件修改」</td></tr>
+      <tr><td>76</td><td>边缘客户端安装与扫描上传</td><td>边缘</td><td><span class="zy-badge amber">部分可用</span></td><td>本机托盘 +「边缘接入」</td></tr>
+      <tr><td>77</td><td>边缘客户端界面中文化</td><td>边缘</td><td><span class="zy-badge amber">部分可用</span></td><td>当前为英文界面</td></tr>
+      <tr><td>78</td><td>边缘客户端「Open Logs」</td><td>边缘</td><td><span class="zy-badge green">已上线</span></td><td>点开直接打开日志目录</td></tr>
+      <tr><td>79</td><td>边缘客户端「Reconnect」</td><td>边缘</td><td><span class="zy-badge sky">已移除</span></td><td>菜单项已移除，改为自动重连（指数退避）</td></tr>
+      <tr><td>80</td><td>验收标准（done_when）独立输入框</td><td>项目</td><td><span class="zy-badge sky">规划中</span></td><td>写进任务描述代替</td></tr>
+      <tr><td>81</td><td>Slack / Discord 通知通道</td><td>平台</td><td><span class="zy-badge sky">规划中</span></td><td>当前为飞书 / Telegram / 邮件</td></tr>
+      <tr><td>82</td><td>"一键导入整个网站"</td><td>—</td><td><span class="zy-badge sky">规划中</span></td><td>不存在，勿承诺</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>附录 C · 30/60/90 天路线图（打印版）</h2>
+
+  <p>把三条路线的关键动作压成一页可勾选清单。选一条你所属的路线，每 30 天勾一轮。成本数字均为<strong>估算参考</strong>。</p>
+
+  <div class="zy-card tinted">
+    <h3>路线 A · 一人公司</h3>
+    <p><strong>第 1–30 天</strong>（月成本约 $10–30）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>注册、创建公司</span></li>
+      <li><input type="checkbox"><span>新建项目，运行模式选<strong>半自动</strong></span></li>
+      <li><input type="checkbox"><span>用「引导建项」把目标与现状写清、确认策略</span></li>
+      <li><input type="checkbox"><span>传 3–5 份资料进知识库，去 AI 问答提 3 个问题</span></li>
+      <li><input type="checkbox"><span>下 1 个简单任务，观察它跑到验收</span></li>
+    </ul>
+    <p><strong>第 31–60 天</strong>（月成本约 $30–80）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>用岗位模板建 2–3 个员工 Agent</span></li>
+      <li><input type="checkbox"><span>把重复动作写成固定任务</span></li>
+      <li><input type="checkbox"><span>软件 / 网站走「软件工程向导」</span></li>
+      <li><input type="checkbox"><span>用「客户页面」生成一个公网问答链接</span></li>
+      <li><input type="checkbox"><span>每周看驾驶舱与计费明细</span></li>
+    </ul>
+    <p><strong>第 61–90 天</strong>（月成本约 $50–150）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>看组织进化建议，按需确认扩编</span></li>
+      <li><input type="checkbox"><span>检查监控指标（尤其人类参与率）</span></li>
+      <li><input type="checkbox"><span>用附录 C 模板做一次月度复盘</span></li>
+      <li><input type="checkbox"><span>把好提示词固化成模板</span></li>
+      <li><input type="checkbox"><span>建一次目标与 KR</span></li>
+    </ul>
+  </div>
+
+  <div class="zy-card tinted">
+    <h3>路线 B · 小团队</h3>
+    <p><strong>第 1–30 天</strong>（月成本约 $10–50）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>建公司、邀请成员、按角色分配</span></li>
+      <li><input type="checkbox"><span>逐条过 14 项权限，高风险 5 项从严</span></li>
+      <li><input type="checkbox"><span>建项目、导入团队已有资料</span></li>
+      <li><input type="checkbox"><span>建管理者 + 2–3 个员工 Agent</span></li>
+      <li><input type="checkbox"><span>约定红黄绿三通道谁处理</span></li>
+    </ul>
+    <p><strong>第 31–60 天</strong>（月成本约 $50–150）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>用「流程」串起一条真实业务流程</span></li>
+      <li><input type="checkbox"><span>用「连接器」接入外部系统，写操作设审核</span></li>
+      <li><input type="checkbox"><span>用「目标管理」拆 KR 与任务</span></li>
+      <li><input type="checkbox"><span>关键岗位用「权限租赁」临时放权</span></li>
+      <li><input type="checkbox"><span>运营每周读经营日报与分析报告</span></li>
+    </ul>
+    <p><strong>第 61–90 天</strong>（月成本约 $150–500）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>建公司级知识库沉淀跨项目资料</span></li>
+      <li><input type="checkbox"><span>跑内审与红队演练</span></li>
+      <li><input type="checkbox"><span>用阿米巴核算淘汰低效岗位</span></li>
+      <li><input type="checkbox"><span>用定量调控八维按阶段调档</span></li>
+      <li><input type="checkbox"><span>建立月度复盘会</span></li>
+    </ul>
+  </div>
+
+  <div class="zy-card tinted">
+    <h3>路线 C · 已有多业务公司</h3>
+    <p><strong>第 1–30 天</strong>（月成本约 $50–150）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>建公司级知识库，导入制度 / 产品 / 行业资料</span></li>
+      <li><input type="checkbox"><span>每条业务建一个项目，用「项目导入」整理上下文</span></li>
+      <li><input type="checkbox"><span>历史会议用「会议导入」批量梳理</span></li>
+      <li><input type="checkbox"><span>装边缘客户端，扫描本机文档目录</span></li>
+      <li><input type="checkbox"><span>为每个项目配管理者 Agent</span></li>
+    </ul>
+    <p><strong>第 31–60 天</strong>（月成本约 $200–500）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>把存量 SOP 搬进「流程」</span></li>
+      <li><input type="checkbox"><span>连接器接入邮箱 / 数据库 / CRM</span></li>
+      <li><input type="checkbox"><span>对外动作一律设人工审核节点</span></li>
+      <li><input type="checkbox"><span>用「引导建项」确认每条业务线策略</span></li>
+      <li><input type="checkbox"><span>关键岗位开「渐进式信任」</span></li>
+    </ul>
+    <p><strong>第 61–90 天</strong>（月成本约 $500–2000+）</p>
+    <ul class="zy-check">
+      <li><input type="checkbox"><span>用组织进化按阶段批量扩编</span></li>
+      <li><input type="checkbox"><span>用阿米巴 + 驾驶舱做横向比较，资源投向 ROI 高的线</span></li>
+      <li><input type="checkbox"><span>用目标管理把公司战略拆到各项目</span></li>
+      <li><input type="checkbox"><span>内审 + 红队演练常态化</span></li>
+      <li><input type="checkbox"><span>每条线设一名项目负责人问责</span></li>
+    </ul>
+  </div>
+
+  <h2>附录 D · 全书章节索引（20 章）</h2>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr><th>章</th><th>一句话主题</th><th>适合谁读</th><th>什么时候该读它</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>01 认识引擎</td><td>它是什么、三端、能做什么不能做什么</td><td>所有人</td><td>第一次接触，建立世界观</td></tr>
+      <tr><td>02 注册与创建公司</td><td>注册、建公司、组织架构、成员与邀请、转让解散</td><td>所有人</td><td>准备开公司、想加人</td></tr>
+      <tr><td>03 创建项目与信息影响</td><td>向导逐步、每个字段的后续影响、服务器开通</td><td>所有人</td><td>建第一个（或下一个）项目</td></tr>
+      <tr><td>04 运行模式与预算</td><td>三种模式、L0–L3、预算科目、预警熔断降级</td><td>CEO / 运营</td><td>决定放权程度与花钱上限</td></tr>
+      <tr><td>05 界面导览（上）平台侧</td><td>平台 10 个一级页面 + 超管逐页按钮说明</td><td>运营 / 管理员</td><td>找不到平台侧某按钮</td></tr>
+      <tr><td>06 界面导览（下）项目内</td><td>6 大分组、40+ 页面逐页说明</td><td>运营 / 管理员</td><td>找不到项目内某页面</td></tr>
+      <tr><td>07 知识库与资料导入</td><td>分层知识库、边缘客户端、会议导入、项目导入</td><td>所有人</td><td>想让 AI 说对话、导入老资料</td></tr>
+      <tr><td>08 智能体</td><td>建 Agent、岗位模板、技能、版本、组织进化</td><td>CEO / 运营</td><td>组队、让组织自动成长</td></tr>
+      <tr><td>09 自动运营</td><td>任务、时间片、轮次、review、验收、人工节点</td><td>所有人（核心）</td><td>派任务、看进度、处理节点</td></tr>
+      <tr><td>10 软件功能开发与修改</td><td>软件工程向导、软件修改、新建任务正确姿势</td><td>产品 / 技术负责人</td><td>要做或改一个复杂功能</td></tr>
+      <tr><td>11 任务执行链路</td><td>端到端时序：谁执行、何时调智能体、钱怎么花</td><td>想搞懂原理的人</td><td>想知道"点下去之后发生了什么"</td></tr>
+      <tr><td>12 提问的艺术</td><td>100+ 可复制提问模板</td><td>所有人</td><td>不知道该怎么向 AI 描述需求</td></tr>
+      <tr><td>13 经营指标</td><td>分阶段指标、驾驶舱/日报/阿米巴/结项报告</td><td>CEO / 运营</td><td>看数、复盘、判断健康度</td></tr>
+      <tr><td>14 团队与治理</td><td>成员、14 项权限、三通道、审计、信任、权限租赁</td><td>CEO / 管理员</td><td>分权、治理、加人、放权</td></tr>
+      <tr><td>15 案例：跨境电商</td><td>一个人怎么跑通第一笔订单</td><td>电商 / OPC</td><td>想照抄一条完整路径</td></tr>
+      <tr><td>16 案例：软件与网站</td><td>想法 → PRD/TAD → 可访问产品</td><td>软件 / 交付型业务</td><td>接私活、做产品的标准打法</td></tr>
+      <tr><td>17 案例：多行业合辑</td><td>内容媒体 / 咨询 / 制造 / 本地服务</td><td>传统行业负责人</td><td>想知道"我的行业怎么落地"</td></tr>
+      <tr><td>18 FAQ 100 问</td><td>按 10 类整理的 100 个高频问题</td><td>所有人</td><td>遇到具体问题先来搜</td></tr>
+      <tr><td>19 故障排查与红线</td><td>自助排查表 + 安全红线 + 发布前检查</td><td>所有人</td><td>项目卡住、报错、要发布</td></tr>
+      <tr><td>20 术语表与路线图</td><td>术语总表、节奏建议、最佳实践、全书索引</td><td>所有人</td><td>看不懂名词、不知道从哪开始</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>附录 E · 版本说明与免责</h2>
+
+  <p>本书基于 <strong>2026 年 9 月</strong>的代码现状撰写，界面文案逐条与前端代码核对。产品在持续迭代，因此有几条你需要始终记着：</p>
+
+  <ul>
+    <li><strong>界面可能变化。</strong>按钮位置、菜单名称、字段顺序都可能被调整；本书描述的是撰写时的形态。</li>
+    <li><strong>以实际界面为准。</strong>如果本书与你屏幕上的界面不一致，请信任你的屏幕。发现按钮找不到时，先按第二节的"三步定位法"排查（功能开关 → 版本条件 → 以实际界面为准）。</li>
+    <li><strong>标注"规划中"的能力尚未开发。</strong>凡带 <span class="zy-badge sky">规划中</span> 徽章的能力，请不要据此做商业决策或向客户承诺。</li>
+    <li><strong>示例数字均为示例。</strong>书中的成本、时间线、账本样例只用于建立量级感，不是账单，也不构成任何效果承诺。</li>
+    <li><strong>计费数字不是发票。</strong>「计费明细」含按文本长度估算的兜底口径，仅供日常参考，不能作为财务凭据。</li>
+    <li><strong>本手册不替代你的判断。</strong>方向选择、风险承担、对外承诺，始终是人的责任。</li>
+  </ul>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">一句总结</span>
+    <p>书会过时，界面不会骗你；方法比按钮更长久。<strong>凡有疑问，先看实际界面，再回本书对照。</strong></p>
+  </div>
+
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第19章 故障自查、安全与红线 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 19 章 · 随时查阅</div>
+    <h1>第19章 故障自查、安全与红线</h1>
+    <p class="zy-lead">项目不对了，先别慌。这一章不讲原理，只讲步骤：按症状查、照决策树走、一次改一个变量。附安全红线和发布前检查清单，可直接打印。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 35 分钟</span>
+      <span class="zy-badge green">排查手册</span>
+      <span class="zy-badge amber">重点：照着做就能定位</span>
+    </div>
+  </header>
+
+  <h2>你将学会</h2>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>用「三处体检报告」在 60 秒内判断项目到底卡在哪一层</span></li>
+    <li><input type="checkbox"><span>把八类最常见故障（项目不动、任务待执行、预算熔断、兜底暂停、实例离线等）照着步骤定位到底</span></li>
+    <li><input type="checkbox"><span>分清一条错误提示是「你操作错了」「功能没开」还是「系统真出故障了」</span></li>
+    <li><input type="checkbox"><span>改坏之后知道怎么回滚、怎么走恢复评估，而不是推倒重来</span></li>
+    <li><input type="checkbox"><span>背下安全红线，并且能当场回答「发布 / 上线 / 发邮件 / 花钱之前要检查什么」</span></li>
+    <li><input type="checkbox"><span>知道哪些问题自己能解决、哪些必须立刻找人工支持，以及求助时该递什么信息</span></li>
+  </ul>
+
+  <p>第 18 章是「问答体」——你带着一个问题去，拿一个答案走。这一章不一样，它是<strong>排查手册体</strong>：你带着一个症状来，跟着决策树一层层往下走，直到定位到那一个原因，然后按处置步骤动手。所以这里的每一节都写成「现象 → 决策树 / 步骤 → 处置 → 还不行怎么办」四段式，目标是能单独打印、贴在电脑边上用。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">排查三条铁律（先记住，再往下读）</span>
+    <p><strong>① 先看状态，再动手。</strong>90% 的「项目坏了」其实是「项目正常地停在了某个预期位置」。没看清状态就点「启动 / 恢复 / 重启」，往往把小问题搅成大问题。</p>
+    <p><strong>② 一次只改一个变量。</strong>同时改三样东西，好了你不知道是哪样救的，坏了你也不知道是哪样害的。改一样、看一样、记一样。</p>
+    <p><strong>③ 花钱的问题优先于功能的问题。</strong>看到「熔断」「余额不足」「已经花掉一大笔」这类信号，先止血（暂停 / 补预算 / 紧急停止），再去查功能为什么不对。钱花出去收不回来，功能可以慢慢修。</p>
+  </div>
+
+  <h3>症状速查：我看到的症状，跳到第几节</h3>
+
+  <p>先扫这一张表。左边找你看到的现象，右边直奔对应小节。表里给了 20 条最常遇到的症状。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>你看到的症状</th><th>最可能卡在哪一层</th><th>去这一节</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>项目整个「不动了」，没有新轮次</td><td>循环层（未启动 / 空闲等待 / 兜底 / 熔断）</td><td>2.1</td></tr>
+        <tr><td>控制台状态是「已停止」</td><td>循环被停，需要重新启动</td><td>2.1</td></tr>
+        <tr><td>界面提示「项目已完成全部任务并空闲等待」</td><td>正常待命，不是故障</td><td>2.1</td></tr>
+        <tr><td>任务列表里任务全是「待执行」</td><td>调度层（排队 / 前置节点 / 循环没开）</td><td>2.2</td></tr>
+        <tr><td>任务卡在「规划中」，一直不进执行</td><td>软件工程向导没走完</td><td>2.2</td></tr>
+        <tr><td>控制台亮「熔断：是」</td><td>预算层（AI 预算或总预算被击穿）</td><td>2.3</td></tr>
+        <tr><td>控制台亮「降级：是」</td><td>已到预警线，系统在省着用</td><td>2.3</td></tr>
+        <tr><td>AI 预算消耗条旁边亮「预警」tag</td><td>已到预警线（默认 80%），该准备补预算</td><td>2.3</td></tr>
+        <tr><td>账本页提示「项目预算已耗尽……」「接近预警阈值。」</td><td>项目账本预算告警</td><td>2.3</td></tr>
+        <tr><td>账本页提示「余额 …… 已低于预警阈值 ……」</td><td>公司平台账本余额告急</td><td>2.3</td></tr>
+        <tr><td>红色横幅「项目已因兜底保护暂停」</td><td>连续失败触发的保险丝</td><td>2.4</td></tr>
+        <tr><td>重启服务后项目还是停着</td><td>兜底暂停是持久状态</td><td>2.4</td></tr>
+        <tr><td>实例状态显示成英文或「已停止 / 宕机」</td><td>服务器实例层</td><td>2.5</td></tr>
+        <tr><td>提示「该项目的服务器实例尚未配置，请录入服务器 IP」</td><td>实例还没录入</td><td>2.5</td></tr>
+        <tr><td>托盘图标显示 <code>Status: Disconnected</code></td><td>边缘客户端链路</td><td>2.6</td></tr>
+        <tr><td>托盘显示 <code>Status: Reconnecting...</code></td><td>正在自动重连（正常过程）</td><td>2.6</td></tr>
+        <tr><td>找不到「重连」菜单项 / 想打开日志</td><td><code>Reconnect</code> 已移除（改自动重连）；日志靠 <code>Open Logs</code></td><td>2.6</td></tr>
+        <tr><td>知识文档一直「解析中 / 向量化中」或变「失败」</td><td>知识库处理管线</td><td>2.7</td></tr>
+        <tr><td>RAG 检索答非所问</td><td>资料没就绪或分层放错</td><td>2.7</td></tr>
+        <tr><td>AI 写的东西不对、没做完、跑偏了</td><td>不是故障，是产出质量问题</td><td>2.8</td></tr>
+        <tr><td>页面提示「加载……失败，请确认……功能已启用」</td><td>功能开关没开，不是损坏</td><td>3.2</td></tr>
+        <tr><td>改了密钥 / 配置后出事，想退回去</td><td>需要回滚与恢复</td><td>四</td></tr>
+        <tr><td>AI 正在做危险的事（对外发布 / 付款 / 删数据）</td><td>安全红线，立即止血</td><td>五</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>一、先学会看三处「体检报告」</h2>
+
+  <p>不管什么问题，先别急着点按钮。打开三处地方各看一眼，你就能把「项目在哪一层卡住」缩小到一个很小的范围。这三处分别回答三个问题：<strong>循环转不转</strong>（控制台）、<strong>任务排得对不对</strong>（任务列表）、<strong>到底跑到哪一步、报了什么</strong>（日志面板）。</p>
+
+  <h3>自动运营控制台：先看这一屏</h3>
+
+  <div class="zy-path">项目 <span class="sep">›</span> 自动运营</div>
+
+  <p>这是项目 AI 的「驾驶舱」。打开后先看三样东西，顺序不要乱：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>右上角的大状态标签</h4>
+      <p>它只可能是四种值之一，每种的含义和处理方向完全不同：</p>
+      <div class="zy-table-wrap">
+        <table class="zy-table">
+          <thead><tr><th>界面显示</th><th>含义</th><th>你该做的第一件事</th></tr></thead>
+          <tbody>
+            <tr><td><span class="zy-badge green">运行中</span></td><td>循环在转，正在按时间片推进任务</td><td>去看日志面板，确认是不是在等人工节点</td></tr>
+            <tr><td><span class="zy-badge amber">已暂停</span></td><td>循环停在原地，等你处理</td><td>看预算运行态和兜底横幅，找暂停原因</td></tr>
+            <tr><td><span class="zy-badge red">已停止</span></td><td>循环没在被驱动</td><td>确认是否忘了点「启动」，或项目被停过</td></tr>
+            <tr><td><span class="zy-badge">未知</span></td><td>还没取到状态，或取状态失败</td><td>点「刷新」再看；仍未知就看页面顶部报错</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>这一版的改进：<strong>兜底暂停时，顶部大标签不再「骗人」地显示绿色「运行中」</strong>了，它会跟随真实状态变成暂停类，红色横幅上的文案也直接指向「恢复」（不再让人去点那个已被禁用的「启动」）。看到红色横幅就知道该去处理触发原因、再点恢复，详见 2.4。</p>
+    </li>
+    <li>
+      <h4>「预算运行态」的三个 tag</h4>
+      <p>这是最快看清「钱有没有出事」的地方，三个 tag 分别是：</p>
+      <ul>
+        <li><strong>熔断：是 / 否</strong> —— 是，说明预算被击穿，循环被强制暂停。这是花钱问题，优先级最高。</li>
+        <li><strong>降级：是 / 否</strong> —— 是，说明到了预警线，系统主动降强度（切低成本模型、压缩非核心任务）省着跑，还在跑。</li>
+        <li><strong>已终止：是 / 否</strong> —— 是，说明项目已置终止态（目标达成、负面终止或手动终止），不再推进。</li>
+      </ul>
+    </li>
+    <li>
+      <h4>「AI 预算消耗」进度条</h4>
+      <p>文字形如「本轮预算: ¥X / 已用 ¥Y」。当用度到<strong>预警线时会亮一个「预警」tag</strong>——这条线和「计费明细」页用的是<strong>同一条后端预警线（默认 80%）</strong>，不再有"80% 降级、90% 亮标签"两套口径。看到它，就该准备补预算了，别等熔断。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一分钟体检口诀</span>
+    <p>状态标签看「转不转」→ 预算三个 tag 看「钱出没出事」→ 兜底横幅看「是不是被保险丝拦下」。三眼看完，八成的问题已经知道去哪一节了。</p>
+  </div>
+
+  <h3>任务列表：看状态分布，不看单个任务</h3>
+
+  <div class="zy-path">自动运营控制台 <span class="sep">›</span> 任务管理</div>
+
+  <p>不要只盯一个任务。先看<strong>整张表的状态分布</strong>——分布会告诉你问题在「排队」还是「执行」。任务状态一共六种：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>状态</th><th>界面中文</th><th>含义</th></tr></thead>
+      <tbody>
+        <tr><td><code>pending</code></td><td>待执行</td><td>已排进队列，还没轮到它的时间片</td></tr>
+        <tr><td><code>running</code></td><td>运行中</td><td>正在被某一轮处理</td></tr>
+        <tr><td><code>paused</code></td><td>已暂停</td><td>被挂起（可能等人工节点、可能手动暂停）</td></tr>
+        <tr><td><code>done</code></td><td>已完成</td><td>通过验收，收工</td></tr>
+        <tr><td><code>failed</code></td><td>失败</td><td>重试到上限仍未通过，等人工处理</td></tr>
+        <tr><td><code>planning</code></td><td>规划中</td><td>软件工程向导还没走完，任务还没成型</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">怎么用「分布」判断</span>
+    <p><strong>全部待执行</strong> → 循环大概率没在转，去看控制台状态（2.1 / 2.2）。<br>
+    <strong>一个运行中、其余待执行</strong> → 正常，时间片轮转中，耐心等。<br>
+    <strong>有已暂停</strong> → 去看它是不是在等人工节点（2.2）。<br>
+    <strong>有失败</strong> → 去看失败任务的日志和验收结论（2.4 讲怎么找根因）。<br>
+    <strong>有规划中</strong> → 去软件工程向导把它走完（详见第 10 章）。</p>
+  </div>
+
+  <h3>日志面板：最后一层，看清「跑到哪、报了什么」</h3>
+
+  <div class="zy-path">自动运营控制台 <span class="sep">›</span> 日志面板</div>
+
+  <p>日志面板分上下两半。上半是<strong>日志绑定列表</strong>，列有「任务 / 轮次 / 状态 / 日志文件 / 更新时间」；下半是你点某一行后展开的<strong>日志详情</strong>。</p>
+
+  <p>上半那张表的「状态」列只有两种值，别看错：</p>
+  <ul>
+    <li><strong>运行中</strong> —— 这一轮的日志正在实时写入，可以开着看。</li>
+    <li><strong>已结束</strong> —— 这一轮跑完了，日志是历史，不再增长。</li>
+  </ul>
+
+  <p>点进某一行，下方会显示「任务 X · 轮次 Y 日志」，右侧有一个<strong>「自动刷新」开关</strong>。想让日志跟着执行进度滚动，就把它打开；想安静地看历史，就关掉。这一版的改进：<strong>关掉自动刷新（或它自己暂停）时，面板会提示「内容可能已过期」</strong>，提醒你手动刷新一下再看，别拿着旧日志下结论。</p>
+
+  <p>日志面板加载失败时，这一版做了区分：<strong>404 属于「正常空态」</strong>（这一轮还没生成日志，不是故障）；<strong>其它错误才单独当作错误展示</strong>，并带上 HTTP 状态码、提示你去「检查实例是否在线」。所以看到 404 不用慌，看到带状态码的报错才需要往 2.5 实例那一层查。</p>
+
+  <p>每条日志前面有一个标签，对应 AI 一条记录的类型，含义如下：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>标签</th><th>人话解释</th></tr></thead>
+      <tbody>
+        <tr><td><code>assistant</code></td><td>AI 说的话（回答、说明、结论）</td></tr>
+        <tr><td><code>user</code></td><td>喂给 AI 的内容（任务提示词、人工回复）</td></tr>
+        <tr><td><code>system</code></td><td>系统插入的提示（上下文压缩、调度说明等）</td></tr>
+        <tr><td><code>summary</code></td><td>上下文太长时的压缩摘要——看到它说明对话被\"折叠\"过一次</td></tr>
+        <tr><td><code>thinking</code></td><td>AI 的思考过程（不一定每条都有）</td></tr>
+        <tr><td><code>tool_use</code></td><td>AI 调用了一个工具（读文件、跑命令、发请求……）</td></tr>
+        <tr><td><code>tool_result</code></td><td>那个工具返回的结果</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">日志的两个常见误解</span>
+    <p>①「没有日志」不等于「没跑」——只有轮次真正执行并产生会话文件后，才会出现绑定；任务刚排上队时列表可能就是空的，空态写的是「暂无日志绑定（任务开始执行后自动生成）」。</p>
+    <p>② <strong>日志里出现大段 <code>thinking</code> 或反复 <code>tool_use</code> 不代表出错</strong>，那是 AI 在干活。真正的不对劲看两个信号：同一步骤反复循环，或者 <code>tool_result</code> 里带着报错文本。</p>
+  </div>
+
+  <h3>状态组合 → 最可能原因（对照表）</h3>
+
+  <p>把三处体检报告的结论拼起来，绝大多数情况可以直接跳到原因。下表按「控制台状态 + 任务分布 + 日志特征」给出判断。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>控制台状态</th><th>任务分布</th><th>日志特征</th><th>最可能的原因</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>运行中</td><td>有运行中</td><td>持续有新日志</td><td>一切正常，正在干活</td></tr>
+        <tr><td>运行中</td><td>全待执行</td><td>无新日志</td><td>正在排时间片，或在等前置人工节点</td></tr>
+        <tr><td>运行中</td><td>全已完成</td><td>无新轮次</td><td>进入空闲等待（正常待命，不烧钱）</td></tr>
+        <tr><td>运行中（+兜底横幅）</td><td>含失败</td><td>反复报错</td><td>兜底保护暂停</td></tr>
+        <tr><td>已暂停</td><td>含运行中/待执行</td><td>日志停在某处</td><td>可能熔断、可能等人工、可能被手动暂停</td></tr>
+        <tr><td>已暂停</td><td>全待执行</td><td>无日志</td><td>循环被暂停但没重新启动</td></tr>
+        <tr><td>已停止</td><td>全待执行</td><td>无日志</td><td>自动运营未启动，或项目被停过</td></tr>
+        <tr><td>运行中 + 熔断：是</td><td>含已暂停</td><td>日志停在某轮</td><td>预算击穿（花钱问题，优先处理）</td></tr>
+        <tr><td>运行中 + 降级：是</td><td>非核心任务被挂起</td><td>正常日志</td><td>到预警线，主动降强度省钱</td></tr>
+        <tr><td>已终止：是</td><td>不再变化</td><td>无新日志</td><td>项目已置终止态</td></tr>
+        <tr><td>未知</td><td>取不到</td><td>—</td><td>状态请求失败；点刷新，或看页面顶部报错</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>二、八类常见故障的排查流程</h2>
+
+  <p>接下来八节，覆盖你自己能处理的绝大多数情况。每节的写法统一：先说<strong>现象</strong>，再给<strong>决策树 / 步骤</strong>，然后给<strong>处置</strong>，最后给「<strong>还不行怎么办</strong>」。请严格按顺序走，不要跳步——跳步就会变成「一次改三个变量」。</p>
+
+  <h3>项目「不动了」</h3>
+
+  <p><strong>现象：</strong>盯着看半天，没有新轮次、没有新日志、任务状态一成不变。这是被问得最多的一句话，而它其实对应七八种完全不同的原因。按下面这棵树从顶往下走，走到「是」就停，那就是答案。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>项目本身的状态是什么？</h4>
+      <p>去项目详情页看头部状态。如果是<strong>「已暂停」或「已停止」</strong>，问题在项目层，不是 AI 层——先用头部按钮把它恢复/启动，再看有没有反应。如果是<strong>「开通中」</strong>，再等等；如果是<strong>「开通失败」</strong>，走 2.5 实例排查。</p>
+    </li>
+    <li>
+      <h4>自动运营到底启没启动？</h4>
+      <p>看控制台右上角。若是「已停止」或「未知」，说明循环压根没被驱动——先点<span class="zy-btn ok">启动</span>。注意：<strong>项目「运行中」不等于自动运营「已启动」</strong>，这是两个开关，新手最容易混。</p>
+    </li>
+    <li>
+      <h4>运行模式是不是「人工审核」？</h4>
+      <p>看「运行模式」卡片。如果是<strong>人工审核</strong>，那么 AI 产出方案后必须你点头才会执行——它不是在偷懒，是在等你。到人工处理节点页处理掉待办，或把模式调成半自动 / 全自动。详见第 4 章。</p>
+    </li>
+    <li>
+      <h4>任务是不是全完成、进入了空闲等待？</h4>
+      <p>到任务管理页看：如果<strong>所有任务都是「已完成」</strong>，那就不是故障，而是正常待命。你会在通知或日志里看到这句话——请记住它的原文：</p>
+      <div class="zy-note info">
+        <span class="zy-note-title">界面消息原文</span>
+        <p>「项目已完成全部任务并空闲等待 N 轮（不再消耗 LLM）。如需继续运营，请注入新信息并触发 review 重排任务」</p>
+      </div>
+      <p><strong>处置：</strong>这恰恰是「不花钱」的好状态。想让它继续干活，就给项目<strong>注入新信息</strong>（新任务、新资料、新目标），然后<strong>触发一次 review</strong> 让它重排任务集。什么都不做也不会扣钱。</p>
+    </li>
+    <li>
+      <h4>有没有被兜底保护按下暂停？</h4>
+      <p>看控制台上有没有红色横幅「项目已因兜底保护暂停」。有，就转 2.4。</p>
+    </li>
+    <li>
+      <h4>是不是预算熔断了？</h4>
+      <p>看「预算运行态」的「熔断」tag。是「是」，就转 2.3。</p>
+    </li>
+    <li>
+      <h4>是不是在等人工节点 / 等 review？</h4>
+      <p>到人工处理节点页看有没有「待处理」的节点——有，就是在等你（或同事）点确认。
+
+      另外，系统默认每 20 轮左右触发一次 review（复盘重排），<strong>review 期间没有任务轮日志是正常的</strong>。看「运行轮次」页，如果最新一轮的「状态」是 review 相关或还没结束，耐心等它跑完。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">还不行怎么办</span>
+    <p>走完上面七步仍停在原地：① 把控制台状态、任务分布、最新一轮的日志最后 20 行截图记下来（见第七节的求助清单）；② 试着点一次<span class="zy-btn">刷新</span>确认不是界面缓存；③ 仍无反应再考虑重启服务，但<strong>重启前先把状态记下来</strong>，否则现场就丢了。</p>
+  </div>
+
+  <h3>任务一直「待执行」</h3>
+
+  <p><strong>现象：</strong>单个任务或一批任务卡在「待执行」，从不变「运行中」。</p>
+
+  <p><strong>按顺序排查这六条原因：</strong></p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>#</th><th>原因</th><th>怎么确认</th><th>处置</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>项目没启动</td><td>项目详情头部是「已停止 / 已暂停」</td><td>先启动项目</td></tr>
+        <tr><td>2</td><td>自动运营没开</td><td>控制台状态非「运行中」</td><td>控制台点<span class="zy-btn ok">启动</span></td></tr>
+        <tr><td>3</td><td>人工审核模式</td><td>运行模式卡片写着「人工审核」</td><td>处理人工节点，或调整运行模式</td></tr>
+        <tr><td>4</td><td>时间片排队</td><td>有别的任务「运行中」，本任务权重低</td><td>正常，等它轮到；急就提高时间片权重</td></tr>
+        <tr><td>5</td><td>前置人工节点未处理</td><td>人工节点页有「待处理」</td><td>处理掉那个节点，任务会自动续上</td></tr>
+        <tr><td>6</td><td>策略未确认，启动被拦</td><td>点启动时提示「策略未确认，请先完成引导建项并确认执行策略」</td><td>去引导建项页，点「确认策略」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>第 4 条要展开说一下：系统默认有 <strong>10 个「时间片」</strong>，任务按各自的「时间片权重」排队轮流获得处理时间。所以「待执行」很多时候只是<strong>还没轮到</strong>——特别是当列表里已经有任务在「运行中」时，这是完全正常的排队，不是卡死。判断方法：等一个轮次的时间，看它有没有往前挪。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">关于「策略未确认」这条拦路虎</span>
+    <p>引导建项会产生一套「执行策略」，如果没确认，启动自动运营会被直接拦住，后端返回的原话是「策略未确认，请先完成引导建项并确认执行策略」。界面上对应的提示是「未确认策略时，启动自动运营会被拦（/autoops/start 要求已确认策略）」。<strong>这不是 bug，是设计上的防呆</strong>——策略没定，AI 不该开跑。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">还不行怎么办</span>
+    <p>六条都排除、任务还是不动：去「运行轮次」页看最新一轮是不是一直没结束。如果某一轮长期「运行中」，可能是引擎卡在某个长任务上（比如跑一个很大的软件工程），去日志面板看它最后在做什么。</p>
+  </div>
+
+  <h3>预算相关：预警、熔断、余额不足</h3>
+
+  <p><strong>现象：</strong>三种提示都可能出现，含义和处置各不相同，先分清是哪一种。</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card amber">
+      <h4>「预警」tag</h4>
+      <p>预算条旁边亮「预警」tag，出现在用度到达<strong>预警线</strong>时。这一版起，这条线与「计费明细」页<strong>由同一后端参数驱动（默认 80%）</strong>，不再有"80% 是内部线、90% 才亮标签"的两套说法。</p>
+      <p><strong>止损窗口</strong>：还能跑，但别拖。</p>
+    </div>
+    <div class="zy-card">
+      <h4>「熔断：是」</h4>
+      <p>预算被击穿，循环已被强制暂停。可能是 <strong>AI 运行预算</strong>超了，也可能是 <strong>总预算</strong>超了。</p>
+      <p><strong>状态</strong>：已经停了，等你补钱。</p>
+    </div>
+    <div class="zy-card">
+      <h4>「余额不足」告警</h4>
+      <p>这是<strong>公司平台账本</strong>层面的告警，跟项目预算不是一回事——是公司账户快没钱了。</p>
+      <p><strong>影响</strong>：平台余额耗尽会引发实例熔断。</p>
+    </div>
+  </div>
+
+  <p>把这一节涉及的全部原文提示列出来，方便你对照。这些都是真实界面文案：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>提示原文</th><th>出现位置</th><th>含义</th></tr></thead>
+      <tbody>
+        <tr><td>项目预算已耗尽，请及时补充预算避免项目暂停。</td><td>项目账本页</td><td>项目预算线已被击穿</td></tr>
+        <tr><td>项目预算已用 x%，处于告急状态。</td><td>项目账本页</td><td>已到告急阈值</td></tr>
+        <tr><td>接近预警阈值。</td><td>项目账本页</td><td>刚够到预警线，还有余量</td></tr>
+        <tr><td>余额 …… 已低于预警阈值 ……，请及时充值避免实例熔断。</td><td>公司账本页</td><td>公司平台余额告急</td></tr>
+        <tr><td>熔断：是</td><td>控制台「预算运行态」</td><td>已熔断</td></tr>
+        <tr><td>已熔断 / 预警</td><td>计费明细页</td><td>计费汇总的预算状态</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>处置步骤（项目预算熔断）：</strong></p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>先别急着点恢复，先确认是哪条线烧穿了</h4>
+      <p>控制台「预算运行态」里能看到「总预算 ¥… / 已用 ¥…」和「AI ¥… / 已用 ¥…」。哪条用度 ≥ 上限，就是它。</p>
+    </li>
+    <li>
+      <h4>去正确的页面加预算</h4>
+      <p>项目预算看<strong>项目账本</strong>页（副标题是「项目虚拟核算：收入、支出与预算消耗」），用「项目预算」设置调；AI 运行预算在<strong>自动运营控制台 → 调整运行模式与预算科目</strong>里调。</p>
+    </li>
+    <li>
+      <h4>加完还要手动点一次「恢复」或「启动」</h4>
+      <p>这是最容易被忽略的一步：<strong>补预算不会自动续跑</strong>。补充预算后，回到控制台点<span class="zy-btn">恢复</span>或<span class="zy-btn ok">启动</span>，循环才会重新转起来。</p>
+    </li>
+    <li>
+      <h4>顺手查一下钱为什么会烧穿</h4>
+      <p>到计费明细 / 经营驾驶舱看消耗速率，看是不是有任务在反复失败重试、或某个非核心任务吃掉了大部分预算。补钱是止血，调任务才是治病。</p>
+    </li>
+  </ol>
+
+  <p><strong>处置步骤（公司余额告急）：</strong>去公司账本页充值，点<span class="zy-btn">充值</span>；余额恢复后，之前因余额问题受影响的实例会恢复正常上报。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">计费数字不是发票</span>
+    <p>计费明细里的「累计花费」包含一部分<strong>按文本长度估算的兜底计费</strong>（上游没回 usage 时产生）。界面 tooltip 原文写得很清楚：「其中包含按文本长度估算的兜底计费（上游未回 usage 时产生），非精确账单，请勿直接作为账单核销」。另有「未计量 N 轮」的 tag 表示这些轮次实际跑了但没拿到计量数据。所以——<strong>用它看趋势、控成本可以，拿它对账、报销不可以</strong>。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">还不行怎么办</span>
+    <p>补了预算、点了恢复，仍显示「熔断：是」：① 点<span class="zy-btn">刷新</span>；② 确认你补的是<strong>被击穿的那条线</strong>（AI 预算和总预算是两条独立线，补错线没用）；③ 若总预算本身设置得很小，把总预算一起调大。</p>
+  </div>
+
+  <h3>兜底保护暂停</h3>
+
+  <p><strong>现象：</strong>控制台顶部出现红色横幅，原文是：</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">界面提示原文</span>
+    <p>标题「项目已因兜底保护暂停」，正文「兜底暂停为持久状态（跨重启保留），需人工在运行配置 / 任务面板处理后，点击「恢复」或「启动」继续。」</p>
+  </div>
+
+  <p>兜底保护是系统防烧钱的最后一道保险丝：一个任务<strong>连续失败到上限</strong>（默认走「降级重试 → 升级转人工 → 告警退出」三级），系统就会主动停下循环，避免在同一个坑里无限烧钱。所以这条横幅出现，说明<strong>确实有东西坏了，不是误报</strong>。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">最重要的一条提醒</span>
+    <p><strong>不要一上来就点「恢复」。</strong>兜底暂停的根因通常是一个一直失败的任务——你不修它，恢复后它还会再失败一次，钱又白花一轮。正确顺序是：先找根因 → 修掉 → 再恢复。</p>
+  </div>
+
+  <p><strong>怎么找到根因：</strong></p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>看横幅里的原因和时间</h4>
+      <p>横幅会显示「原因：……」和「暂停时间：……」，先读这一行，它往往直接点名是哪个任务、哪类错误。</p>
+    </li>
+    <li>
+      <h4>到任务列表找「失败」的任务</h4>
+      <p>失败的任务就是嫌疑对象。看它的名称、引擎类型、创建时间。</p>
+    </li>
+    <li>
+      <h4>看那几轮的日志与验收结论</h4>
+      <p>到日志面板找到失败任务对应的轮次，看最后几步在做什么、报了什么错；再到验收记录页看它被判「返工」还是「驳回」，结论往往写明了哪条标准没过。</p>
+    </li>
+    <li>
+      <h4>判断是「任务本身有问题」还是「外部依赖不可用」</h4>
+      <p>如果是提示词太模糊、目标写错了，就去改任务描述；如果是外部服务连不上、密钥失效，就去修依赖。</p>
+    </li>
+    <li>
+      <h4>修完了，再点「恢复」或「启动」</h4>
+      <p>记住横幅里那句「跨重启保留」——<strong>重启服务不会自动解除兜底暂停</strong>，必须人工处理后再手动恢复。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">还不行怎么办</span>
+    <p>恢复后很快又兜底暂停：说明根因没修干净。回到第 3 步，把失败轮次的日志完整看一遍，必要时把任务先删掉或改成更小的范围，重新起一个更明确的任务。</p>
+  </div>
+
+  <h3>服务器实例问题</h3>
+
+  <p><strong>现象：</strong>项目详情页的「服务器实例」页签数据不对，或提示实例未配置、实例离线。</p>
+
+  <div class="zy-path">项目详情 <span class="sep">›</span> 服务器实例</div>
+
+  <p>先认识两类状态：<strong>实例状态</strong>和<strong>心跳状态</strong>。它们回答不同的问题——实例状态是「这台机器在不在」，心跳是「这台机器健不健康」。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>类别</th><th>取值</th><th>含义</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="5"><strong>实例状态</strong></td><td>运行中</td><td>实例正常</td></tr>
+        <tr><td>已停止</td><td>实例被停机</td></tr>
+        <tr><td>创建中</td><td>正在开通，耐心等</td></tr>
+        <tr><td>已销毁</td><td>实例被删除——数据有风险，立即求助</td></tr>
+        <tr><td>待创建</td><td>还没真正创建</td></tr>
+        <tr><td rowspan="4"><strong>心跳状态</strong></td><td>正常</td><td>实例按时上报，健康</td></tr>
+        <tr><td>降级</td><td>上报异常或资源吃紧</td></tr>
+        <tr><td>宕机</td><td>长时间没有上报</td></tr>
+        <tr><td>未知</td><td>还没拿到心跳数据</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>你会用到的按钮（原文）：</strong></p>
+  <div class="zy-card blue">
+    <p>
+      <span class="zy-btn">编辑实例</span>
+      <span class="zy-btn ghost">查看部署脚本</span>
+      <span class="zy-btn">录入服务器</span>
+      <span class="zy-btn ok">确认部署完成</span>
+      <span class="zy-btn">录入服务器 IP</span>
+    </p>
+    <p>另外，「HMAC Secret」一栏有「显示 / 复制 / 重新生成」三个按钮，属于凭据管理，红线纪律见第五节。</p>
+  </div>
+
+  <p><strong>常见情形与处置：</strong></p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>现象</th><th>处置</th></tr></thead>
+      <tbody>
+        <tr><td>提示「该项目的服务器实例尚未配置，请录入服务器 IP」</td><td>点<span class="zy-btn">录入服务器</span>填写，再点<span class="zy-btn ok">确认部署完成</span></td></tr>
+        <tr><td>提示「尚未配置服务器实例」</td><td>点<span class="zy-btn">录入服务器 IP</span>，或点<span class="zy-btn ghost">查看部署脚本</span>自行部署</td></tr>
+        <tr><td>实例状态「已停止」</td><td>确认是不是被人为停机；重启实例后回到平台确认心跳恢复</td></tr>
+        <tr><td>心跳「降级 / 宕机」</td><td>先确认项目服务器进程是否在跑；能连上就查资源占用；连不上走 2.6 的网络排查思路</td></tr>
+        <tr><td>实例「创建中」超过预期</td><td>耐心等；若长时间不变，找人工支持（见第七节）</td></tr>
+        <tr><td>实例「已销毁」</td><td><strong>立即停止一切写操作，找人工支持</strong>（数据可能有丢失风险）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">「实例离线了，我的数据还在吗？」</span>
+    <p>在。每个项目的任务、知识库、账本、日志这些数据，都<strong>存在项目服务器（也就是这台实例）上</strong>，而不是存在你自己电脑或平台网页里。所以：<strong>实例离线 / 停机，数据通常还在</strong>，等实例恢复就能重新看到；<strong>只有实例被「销毁」，才真正有数据丢失风险</strong>。看到「已销毁」三个字，别自己折腾，直接求助。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">一个小提示：实例状态可能显示英文</span>
+    <p>某些位置（如项目详情页的实例状态 tag）会直接显示后端的英文值（如 <code>running</code>、<code>stopped</code>），而不是中文。这是展示口径差异，不影响功能——对照上面的表读即可。超管后台的实例监控页筛选项是中文的。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">还不行怎么办</span>
+    <p>实例状态正常、心跳也正常，但项目就是没反应：那问题多半不在实例层，回到 2.1 的决策树从头走。</p>
+  </div>
+
+  <h3>边缘客户端连不上</h3>
+
+  <p><strong>现象：</strong>电脑右下角托盘的边缘客户端图标状态不对，本地资料传不上去。</p>
+
+  <p>先认清一件事：<strong>边缘客户端界面全是英文的</strong>，托盘菜单很精简——状态行之外，只有 <strong>Open Logs（打开日志）</strong> 和 <strong>Quit（退出）</strong> 两项，状态文字也全是英文。这是当前版本的真实情况，不要去找中文菜单。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">Reconnect 菜单已经拿掉了，这不是 bug</span>
+    <p>如果你记得以前菜单里有个 <strong>Reconnect（重连）</strong>，它现在已<strong>移除</strong>了——连接层自带指数退避<strong>自动重连</strong>，掉线会自己恢复，不需要手动点，之前那个菜单项是空实现、点了没反应，索性去掉以免误导。<strong>Open Logs 现在是真的能用</strong>：点它会打开日志目录，排查连不上的原因时很有用。<strong>Quit</strong> 可正常退出。</p>
+  </div>
+
+  <p><strong>托盘状态文字对照：</strong></p>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>显示</th><th>含义</th><th>该做什么</th></tr></thead>
+      <tbody>
+        <tr><td><code>Status: Connected</code></td><td>已连上，正常</td><td>不用管</td></tr>
+        <tr><td><code>Status: Disconnected</code></td><td>断开了</td><td>按下面三步排查</td></tr>
+        <tr><td><code>Status: Connecting...</code></td><td>正在连接</td><td>等几秒</td></tr>
+        <tr><td><code>Status: Reconnecting...</code></td><td>正在自动重连</td><td><strong>正常过程，别手动干预</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>排查顺序：网络 → 项目服务器地址 → 密钥。</strong>按这个顺序，不要跳步：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>先看网络</h4>
+      <p>这台电脑能不能正常上网？项目服务器所在的网络通不通？断网时客户端会按 <code>1s → 2s → … → 60s</code> 的指数退避自动重连，所以短暂 <code>Reconnecting...</code> 是正常的。<strong>本机断网期间没传完的文件，联网后会自动续传</strong>，不用重传。</p>
+    </li>
+    <li>
+      <h4>再看项目服务器地址</h4>
+      <p>确认客户端配置里的服务器地址没有变。如果实例被迁移过、或 IP 变了，旧地址就连不上——到项目详情页的「服务器实例」核对当前 IP 和端口，再更新客户端配置。</p>
+    </li>
+    <li>
+      <h4>最后看密钥 / 凭据</h4>
+      <p>如果服务器地址没错、网络也通，那多半是凭据问题（token 失效、密钥被重新生成）。<strong>注意：一旦平台上对某个实例重新生成了 HMAC Secret，用旧密钥的客户端就会认证失败</strong>（详见第五节密钥纪律）。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">还不行怎么办（替代方案）</span>
+    <p><strong>① 点托盘里的 Open Logs 打开日志目录</strong>，看最新的日志输出，往往能看出连不上的真实原因；<strong>② 重启一次客户端进程</strong>（或它的 Quit 后重新启动）——重启后它会自动重新建立连接、继续上传未完成的文件；<strong>③ 检查配置文件里的服务器地址与 token 是否正确</strong>。做完这三样仍是 Disconnected，就带着日志去求助。注意：<strong>不用去找「重连」按钮，它已经没有了</strong>——断线的恢复交给自动重连。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">本地文件安全</span>
+    <p>边缘客户端只允许处理你指定的监听目录（白名单）内的文件，服务器下发的指令无法越权读取你电脑上的任意目录。反过来，本地配置里的 token 是明文存储的，请确保该配置文件不要外传、不要提交到任何代码仓库。</p>
+  </div>
+
+  <h3>文档 / 知识库异常</h3>
+
+  <p><strong>现象：</strong>上传的文档卡在某个状态不动，或者变成「失败」；检索时答非所问。</p>
+
+  <p>知识文档有完整的处理链（后端共 10 个状态），先对照看懂它现在在哪一步：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>状态</th><th>含义</th><th>要不要管</th></tr></thead>
+      <tbody>
+        <tr><td>待处理</td><td>刚进来，排队中</td><td>等</td></tr>
+        <tr><td>解析中</td><td>正在抽取文字</td><td>等</td></tr>
+        <tr><td>已解析</td><td>文字抽出来了</td><td>等，进入下一步</td></tr>
+        <tr><td>分块中</td><td>正在切成小段</td><td>等</td></tr>
+        <tr><td>向量化中</td><td>正在算向量（让 AI 能"语义检索"）</td><td>等</td></tr>
+        <tr><td>就绪</td><td>完成，可被检索</td><td>不用管，这是终态</td></tr>
+        <tr><td>需人工确认</td><td>解析走了降级路径（乱码偏多、结构特殊），系统不直接放行</td><td><strong>要你过一眼</strong>，确认内容可用后入库</td></tr>
+        <tr><td>失败</td><td>处理链中断</td><td><strong>需要处理</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>处置步骤：</strong></p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>「解析中 / 向量化中」卡很久：先等等</h4>
+      <p>大文档、扫描件、公式很多的 PDF 处理会慢，别几分钟就判死刑。<strong>只有确认变成「失败」才需要动作</strong>。</p>
+    </li>
+    <li>
+      <h4>变成「失败」：换格式重传</h4>
+      <p>最常见的原因是格式太复杂。把文档转成更「干净」的格式再传：PDF 转成 txt / md，扫描件先做一次 OCR，表格尽量用 xlsx。知识库上传的白名单是 <code>.pdf / .txt / .md / .markdown / .docx / .xlsx</code>（<strong>pptx 不支持</strong>，要传先另存成 PDF；伪装或损坏的文件会被当场拒收）。</p>
+    </li>
+    <li>
+      <h4>检查大小</h4>
+      <p>单文件有大小限制（上传入口会写明）。超限的文件先拆分，或压缩后再传。</p>
+    </li>
+    <li>
+      <h4>确认该不该走「待确认知识」</h4>
+      <p>部分资料不会直接入库，而是先进「待确认知识清单」等你人工确认，原文提示是「以下知识条目需人工确认后才会写入正式知识库并参与全局检索」。如果你觉得「传了却检索不到」，先来这里确认它是不是在等你在清单里点「确认入库」。</p>
+    </li>
+    <li>
+      <h4>RAG 答非所问：先确认文档「就绪」</h4>
+      <p>检索不到内容，八成是文档还在处理链中间。到知识库页确认目标文档状态是<strong>「就绪」</strong>；再确认知识库的层级对不对（公司级 / 项目级 / 共享——放错层会让它在另一个项目里检索不到）。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">还不行怎么办</span>
+    <p>同一格式反复失败：先用最简单的方式验证——把内容复制成一份纯 txt 上传。如果纯 txt 能顺利到「就绪」，那就是原文档格式的问题，专心做格式转换；如果连纯 txt 也失败，就是链路故障，走第七节求助。</p>
+  </div>
+
+  <h3>AI 做得不对（这不是故障）</h3>
+
+  <p><strong>现象：</strong>项目在正常跑，但你不满意它的产出。这是<strong>最常被误当成故障</strong>的一类情况——请先把它和真故障分开。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">核心分界线</span>
+    <p>真故障是「系统不转了」；AI 做得不对是「系统转着，但结果不对」。后者不靠重启解决，靠<strong>改描述、改配置、改任务范围</strong>解决。</p>
+  </div>
+
+  <p>把「做得不对」再细分成四种，每种对应完全不同的动作：</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card">
+      <h4>「写错了」——方向对，细节错</h4>
+      <p>比如文案里有事实错误、数字算错了。这属于<strong>没达到验收标准</strong>。</p>
+      <p><strong>动作：</strong>去验收记录看它被判「返工」还是「通过」；如果是返工，看是哪条标准没过，把要求补进任务描述，让它重做一轮。必要时把验收结论「驳回」，回到任务定义层重写。</p>
+    </div>
+    <div class="zy-card">
+      <h4>「没做完」——干到一半停了</h4>
+      <p>任务范围定得太大，或时限设得太短，AI 在收尾时提前结束了。</p>
+      <p><strong>动作：</strong>给任务<strong>注入补充信息</strong>（把剩下的部分说清楚），或把任务拆成更小的子任务分几次做。</p>
+    </div>
+    <div class="zy-card">
+      <h4>「跑偏了」——做的不是你想要的</h4>
+      <p>任务描述写得含糊，AI 按自己的理解发挥了。</p>
+      <p><strong>动作：</strong><strong>先改描述</strong>——把「做成什么样算完成」写清楚（系统界面暂时没有单独的「验收标准」输入框，就写在任务描述里）。改完描述再让 review 重排。</p>
+    </div>
+    <div class="zy-card">
+      <h4>「不做了」——反复失败后停了</h4>
+      <p>连续失败触发兜底，或者任务被判「驳回」后不再执行。</p>
+      <p><strong>动作：</strong>这是真需要干预的情况，走 2.4 找根因；如果是驳回，回到任务前提层，判断这个任务还该不该做——该做就改目标重开，不该做就删掉。</p>
+    </div>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">处理的黄金顺序：先改描述，再改配置，最后才考虑换 Agent</span>
+    <p>大多数人第一反应是「换个更聪明的 Agent」或者「换个引擎」，但绝大多数产出问题其实出在<strong>输入不清</strong>上。所以按这个顺序：<br>
+    <strong>① 改任务描述</strong>（把目标、边界、"什么算做完"写具体）→ <strong>② 改配置</strong>（引擎类型、时间片权重、运行模式、验收强度）→ <strong>③ 最后才换角色 / 换 Agent 版本</strong>。每改一样，等它跑一轮，看结果，再决定下一步。别一次全改。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">不要用「催进度」代替「改输入」</span>
+    <p>任务做得不对时反复点「恢复 / 继续」是没用的——输入没变，结果不会变。真正有效的是改描述、补信息、调配置。</p>
+  </div>
+
+  <h2>三、错误提示怎么读</h2>
+
+  <p>产品里的提示五花八门，但本质只有三类。学会归类，你就能在 10 秒内判断「这是不是我能解决的」。</p>
+
+  <h3>三类错误的区分</h3>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>第一类：你的操作问题</h4>
+      <p><strong>特征</strong>：提示里直接说你缺了什么、填错了什么。</p>
+      <p><strong>例子</strong>：「请先选择公司」「任务提示词草稿为空，请先与 AI 对话生成」「策略未确认……」</p>
+      <p><strong>怎么办</strong>：照着提示补那一步就行。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>第二类：功能没开</h4>
+      <p><strong>特征</strong>：提示里出现「功能未启用 / 功能已启用」字样，或「加载……失败，请确认……功能已启用」。</p>
+      <p><strong>例子</strong>：仲裁、渐进式信任、资源治理、营销等高级功能。</p>
+      <p><strong>怎么办</strong>：去设置里开开关，见下一节。</p>
+    </div>
+    <div class="zy-card">
+      <h4>第三类：系统故障</h4>
+      <p><strong>特征</strong>：提示里是超时、网络、服务器内部错误，或反复出现且与你的操作无关。</p>
+      <p><strong>例子</strong>：「请求超时，请稍后重试」「网络异常，请检查连接」「服务器内部错误」，以及 502 / 503 / 504 这类网关错误。</p>
+      <p><strong>怎么办</strong>：<strong>先分清是读操作还是写操作</strong>——写操作（提交、保存、发布等）超时或网络异常时，界面会提示「可能已在服务端生效，请先刷新确认再重试」，<strong>先刷新看清结果，别盲目重试导致重复提交</strong>；读操作失败重试一次，仍失败记录现场求助。502 / 503 / 504 这一版会优先显示后端给出的 message，缺省给中文解释和下一步动作，照提示处理即可。</p>
+    </div>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">对话页的报错长这样</span>
+    <p>AI 对话页出错时，这一版不再把底层错误拼进 AI 的回复消息里，而是<strong>单独弹一条错误条</strong>，你可以展开「<strong>技术详情</strong>」看到原始报错。<strong>先看错误条上的中文说明</strong>，需要排查时再展开技术详情把原文提供给支持人员。</p>
+  </div>
+
+  <h3>重要：有一类「失败」其实是功能开关没开</h3>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这不是故障</span>
+    <p>有些高级功能页面，在功能开关没打开时，会提示「加载……失败，请确认……功能已启用」。<strong>系统没坏，是那个功能的开关没开。</strong>去 <span class="zy-path">设置 <span class="sep">›</span> 功能管理</span> 找到它、打开开关，再刷新页面即可。</p>
+  </div>
+
+  <p>在下表左列找到你看到的提示关键词，右列就是要去开的开关：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>你看到的提示（关键词）</th><th>去开哪个开关</th><th>界面功能名</th></tr></thead>
+      <tbody>
+        <tr><td>「加载信任数据失败，请确认渐进式信任功能已启用」</td><td><code>trust_model</code></td><td>渐进式信任</td></tr>
+        <tr><td>「加载仲裁案件失败，请确认冲突仲裁功能已启用（功能开关 arbitrator）」</td><td><code>arbitrator</code></td><td>冲突仲裁</td></tr>
+        <tr><td>「资源治理功能未启用」</td><td><code>resource_governor</code></td><td>资源治理</td></tr>
+        <tr><td>「营销引擎功能未启用，请在功能开关中开启 marketing_engine」</td><td><code>marketing_engine</code></td><td>营销引擎</td></tr>
+        <tr><td>「社交媒体功能未启用，请在功能开关中开启 social_media」</td><td><code>social_media</code></td><td>社交媒体运营</td></tr>
+        <tr><td>部署相关操作被拦 / 点了没动静</td><td><code>deploy</code></td><td>自动构建部署</td></tr>
+        <tr><td>报告的自动生成没发生</td><td><code>report</code> 或 <code>auto_report</code></td><td>自动报告 / 智能报告</td></tr>
+        <tr><td>备份没按时跑</td><td><code>backup</code></td><td>自动备份</td></tr>
+        <tr><td>战略相关页面内容为空 / 被拦</td><td><code>strategy</code></td><td>战略规划</td></tr>
+        <tr><td>营销自动化页面数据为空</td><td><code>marketing</code></td><td>营销自动化</td></tr>
+        <tr><td>项目模板列表为空</td><td><code>project_template</code></td><td>项目模板</td></tr>
+        <tr><td>「AI 生成功能未启用」</td><td>对应流程模块的开关</td><td>流程 / 生成能力</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">功能管理页怎么用</span>
+    <p>进 <span class="zy-path">设置 <span class="sep">›</span> 功能管理</span>，先在下拉里<strong>选择项目</strong>（不选项目时页面会提示「请先选择一个项目以管理其功能开关」）。页面分「基础功能」和「高级功能」两块，逐项是开关。<strong>基础功能默认开启，高危的高级功能明确开启才生效。</strong>拿不准该开哪些，可以点「分析项目并建议」，让 AI 根据项目当前状态给建议。</p>
+    <p>另外，安全底线三项（资源治理、预算熔断、渐进式信任）是强制开启的，开关不可关，只能调参数——这是设计如此，不是界面坏了。</p>
+  </div>
+
+  <h3>发现异常时，该记录什么</h3>
+
+  <p>这一条平时不起眼，关键时刻能省你一小时。发现不对的那一刻，趁现场还在，先记下四样：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>时间</strong>：几点几分发现的（越精确越好）</span></li>
+    <li><input type="checkbox"><span><strong>页面</strong>：哪个页面、哪个项目、哪个页签</span></li>
+    <li><input type="checkbox"><span><strong>提示原文</strong>：把报错/提示<strong>一字不改</strong>抄下来或截图</span></li>
+    <li><input type="checkbox"><span><strong>任务 ID</strong>：涉及哪个任务、哪一轮（有 ID 最好，没有就记任务名称）</span></li>
+  </ul>
+
+  <p>这四样凑齐，无论你自己排查还是找人求助，效率都会高一个量级。附录 D 给了一张可打印的记录模板。</p>
+
+  <h2>四、改坏了怎么办：回滚与恢复</h2>
+
+  <p>「改坏了」分两种：一种是改错了配置 / 删错了东西，想退回去；另一种是项目中断了（等人、等批准、停机），想接着跑。两条路径不一样。</p>
+
+  <h3>自动备份：你的后悔药</h3>
+
+  <div class="zy-path">项目 <span class="sep">›</span> 运维与报告 <span class="sep">›</span> 备份</div>
+
+  <p>「自动备份」页分两个页签：<strong>「备份历史」</strong>和<strong>「备份配置」</strong>。</p>
+
+  <ul>
+    <li><strong>备份历史</strong>：列出历次备份（类型、大小、状态、校验和、起止时间）。每行有三个操作按钮：<span class="zy-btn ghost">校验</span>、<span class="zy-btn warn">还原</span>、<span class="zy-btn danger">删除</span>。手工触发一次备份，点<span class="zy-btn">立即备份</span>。</li>
+    <li><strong>备份配置</strong>：设置备份类型、Cron 表达式（如「0 3 * * *」表示每天凌晨 3 点）、保留天数、是否启用。</li>
+  </ul>
+
+  <p><strong>怎么用：</strong>出问题前，先确认这个开关是开的（对应功能开关 <code>backup</code>，见第三节）；出问题时，到备份历史里选一个<strong>出问题之前</strong>的备份点，点「还原」。还原前建议先点「校验」确认这个备份是完整的。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">还原前想清楚两件事</span>
+    <p>① <strong>还原会把数据退回到备份那一刻</strong>——备份之后产生的正常工作成果也会一起丢失。所以先评估「退回去的损失」和「不回退的损失」哪个更大。<br>
+    ② <strong>还原前先暂停项目</strong>，否则还原过程中 AI 还在写数据，容易造成不一致。</p>
+  </div>
+
+  <h3>恢复评估：中断之后怎么接着跑</h3>
+
+  <p>项目因为等人、等批准、停机而中断过，想继续时，系统不会盲目续接，而是先做一次<strong>恢复评估</strong>。</p>
+
+  <ul>
+    <li><strong>豁免期内（默认 2 天）：直接续接。</strong>中断时间很短，环境没变，系统直接从原中断点接着跑。</li>
+    <li><strong>超过豁免期：做环境漂移评估。</strong>系统会检查这段时间里环境有没有变（依赖、凭据、数据结构、知识库等），然后给出一个结论。</li>
+  </ul>
+
+  <p>评估结论有三种，含义如下：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>结论</th><th>含义</th><th>你该做什么</th></tr></thead>
+      <tbody>
+        <tr><td><code>resume</code></td><td>环境没本质变化，直接续接</td><td>确认即可，让它继续</td></tr>
+        <tr><td><code>resume_with_adjust</code></td><td>需要<br>调整后<续接</td><td>看它建议调整什么（任务范围 / 优先级等），认可后继续</td></tr>
+        <tr><td><code>replan</code></td><td>变化太大，建议重新规划任务</td><td>认真看结论，可能确实该重排一次</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>去哪看：<span class="zy-path">自动运营控制台 <span class="sep">›</span> 审计治理 <span class="sep">›</span> 恢复评估</span>。表格列是「中断原因 / 中断天数 / 评估决策 / 恢复信息 / 评估时间」，「评估决策」那一列就是上面三种结论之一。</p>
+
+  <h3>变更日志：改了什么、什么时候</h3>
+
+  <p>同一页的<strong>「变更日志」</strong>页签，记录了项目里的关键变更——任务删除、预算调整、运行配置修改、目标调整、紧急停止等都会留痕。用途很直接：出问题时回查「是不是刚才有人改了什么」。这是排查「改了才坏」类问题最有效的入口。<strong>需要说明的是</strong>，这一版的变更日志还<strong>不带「操作人」列</strong>（「谁改的」目前要结合其它记录推断，补齐列属待排期）。</p>
+
+  <h3>回滚 / 恢复的正确顺序</h3>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>先停</h4>
+      <p>暂停项目 / 暂停自动运营，先把「变化」停住。不先停就动手，现场会一直变，你永远追不上。</p>
+    </li>
+    <li>
+      <h4>看日志定位</h4>
+      <p>翻变更日志看最近改了什么；翻运行轮次 / 日志面板看最后跑到哪、报了什么。先定位，再决定退到哪个点。</p>
+    </li>
+    <li>
+      <h4>再回滚 / 恢复</h4>
+      <p>确认要回退，就用备份「还原」；中断情况则走「恢复评估」拿到结论。</p>
+    </li>
+    <li>
+      <h4>最后才恢复运行</h4>
+      <p>数据到位、环境确认后，再点「启动 / 恢复」让循环转起来。顺序反了（先启后修），基本等于没修。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">紧急停止是最后手段，不是首选</span>
+    <p>审计治理页有一个红色的<span class="zy-btn danger">紧急停止（KillSwitch）</span>按钮，点击前会弹确认框，原文是「<strong>紧急停止所有自动运营任务？此操作不可逆</strong>」。它用于「AI 正在做危险的事、必须立刻全停」的场合。因为不可逆，<strong>能用「暂停」解决的绝不用它</strong>。详见第五节。</p>
+  </div>
+
+  <h2>五、安全红线</h2>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">这一节必须最严肃地读</span>
+    <p>下面每一条都是「永远不要让 AI 代做的事」。不是「建议不要」，是「不能」。系统本身有多层防护去拦这些动作，但<strong>防护是兜底，纪律在你手上</strong>：不要在提示词里授权 AI 去做这些事，不要为了省事把自主级别调到 L0，不要跳过人工确认。</p>
+  </div>
+
+  <h3>永远不要让 AI 代做的事</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>#</th><th>绝不能交给 AI 代做</th><th>为什么</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>对外发布与署名</strong></td><td>发布出去就收不回来，署名代表公司立场</td></tr>
+        <tr><td>2</td><td><strong>给外部发邮件 / 发消息</strong></td><td>发错收件人、说错话，是公关事故</td></tr>
+        <tr><td>3</td><td><strong>付款、转账、下单消费</strong></td><td>钱出去就回不来；单笔金额可能失控</td></tr>
+        <tr><td>4</td><td><strong>删除数据 / 删除文件</strong></td><td>不可逆；可能连带删掉别人的成果</td></tr>
+        <tr><td>5</td><td><strong>修改权限与密钥</strong></td><td>改错会导致全线中断或越权</td></tr>
+        <tr><td>6</td><td><strong>做法律 / 合规 / 财务承诺</strong></td><td>可能构成对外承诺，产生真实责任</td></tr>
+        <tr><td>7</td><td><strong>代表公司做任何承诺</strong></td><td>超出 AI 的能力与授权范围</td></tr>
+        <tr><td>8</td><td><strong>现实世界的线下动作</strong>（签约、物理操作、打款）</td><td>无论自主级别多高，一律必须人工</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>三层防护怎么配合</h3>
+
+  <p>系统不是靠一句「小心点」来防风险的，而是三层配合。你要做的是<strong>知道每层在哪、别去拆它</strong>。</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>三通道决策</b>按动作性质分流</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node warn"><b>合规拦截</b>命中红线自动转人工</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>紧急停止</b>最后的红色按钮</div>
+  </div>
+
+  <div class="zy-grid c3">
+    <div class="zy-card green">
+      <h4>绿通道（green）· 例行</h4>
+      <p>日常的、低风险的动作。按自主级别处理：L0 直接执行归档，L1 通知但不等待。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>黄通道（yellow）· 敏感</h4>
+      <p>对外发布、删除、付费、外发这类敏感写操作。默认<strong>转为人工节点</strong>，除非你在项目配置 / 提示词里显式授权（把自主级别设到 L0/L1）。还可以配「权限租赁」——临时授权某个动作，带过期时间和成本上限，到期自动收回。</p>
+    </div>
+    <div class="zy-card">
+      <h4>红通道（red）· 强制</h4>
+      <p>命中禁止清单的动作，<strong>强制 L3 人工审核，AI 不得代行</strong>。这是硬拦截，没有商量余地。</p>
+    </div>
+  </div>
+
+  <p>三通道之外还有一层<strong>紧急停止（KillSwitch）</strong>：当 AI 真的在做危险的事，你需要在几秒内全停。它位于审计治理页，确认框原文「紧急停止所有自动运营任务？此操作不可逆」。<strong>它是最后手段</strong>——不可逆意味着点了之后要重新走启动流程。能用「暂停」解决就别用它。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>这样做</h4>
+      <ul>
+        <li>把对外动作交给人工节点，自己点确认</li>
+        <li>用权限租赁临时放权，设好过期时间与成本上限</li>
+        <li>危险动作出现时先<b>暂停</b>，能停住就不升级</li>
+        <li>确需全停时用紧急停止，并记下原因</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>别这样做</h4>
+      <ul>
+        <li>为了省事把自主级别长期设成 L0</li>
+        <li>给 AI 开放「发邮件 / 发布 / 支付」类动作的自动执行</li>
+        <li>遇到问题第一反应就点紧急停止</li>
+        <li>关掉安全底线三项（资源治理 / 预算熔断 / 渐进式信任）</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>密钥与凭据纪律</h3>
+
+  <p>项目详情页的「服务器实例」里有 <strong>HMAC Secret</strong>，旁边是「显示 / 复制 / 重新生成」三个按钮。它相当于平台与你的项目服务器之间通信的「对暗号」，一旦不一致，双方就互相不认。</p>
+
+  <ul>
+    <li><strong>API Key 等凭据是加密存储的</strong>（AES-256-GCM），库里存的是密文，接口响应不含明文。</li>
+    <li><strong>绝不把密钥写进对话、写进代码、提交到 git</strong>。想给 AI 用某个外部服务，走连接器配置，不要直接把 key 贴在提示词里。</li>
+    <li><strong>明文查看会留审计记录</strong>——界面提示写得很清楚：「已掩码显示，点击「显示」查看明文（明文查看会记录审计日志）」。这是刻意设计，让你谨慎。</li>
+  </ul>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">「重新生成」之前，先确认没有正在跑的项目依赖它</span>
+    <p>HMAC Secret 一旦<strong>重新生成</strong>，<strong>旧密钥立即失效</strong>——所有还在用旧密钥通信的一方（项目服务器、边缘客户端）都会连不上，表现就是心跳掉线、边缘客户端 <code>Disconnected</code>、转发请求被拒。<br>
+    所以点「重新生成」前，务必确认：<strong>当前没有正在执行的任务、没有正在上传的边缘客户端</strong>。生成新密钥后，要第一时间把它同步到所有需要用到它的一方。密钥泄露的应急，也同理：改完要同步，别只顾一头。</p>
+  </div>
+
+  <h3>数据与隐私</h3>
+
+  <ul>
+    <li><strong>客户 / 员工个人信息的处理边界</strong>：能不用真实个人信息就不用。要处理时，最小化范围、限定用途，不要让 AI 把敏感信息写进对外内容。</li>
+    <li><strong>公开问答页（客户页面）绝不要放内部资料。</strong>客户页面用于对外的公开 AI 问答，创建时有一个<strong>「知识库白名单」</strong>字段，placeholder 是「不选则对项目全部知识库开放」——<strong>这是最容易出事的地方</strong>：你什么都不选，等于把项目所有知识库对公众开放。要开放什么，就<strong>明确勾选</strong>那一两个对外安全的库，其余的一个都不要放。</li>
+    <li><strong>访问链接等同密码</strong>：创建成功时弹窗原文「请立即复制访问链接，token 仅本次展示，关闭后不可再查看」。它是免登录的公开入口，别随手转发。要作废，用「重置链接」——旧链接立即失效。</li>
+    <li><strong>Prompt 审计会记录对话内容</strong>：超管后台的 Prompt 审计可以查看项目里的提示词与对话，并支持导出。所以<strong>不要在对话里输入不该被记录的内容</strong>（密钥、身份证号、银行卡号等）。</li>
+    <li><strong>给客户页面设限流</strong>：可以设「每分钟限流」和「每日上限」，避免被刷爆产生意外花费。</li>
+  </ul>
+
+  <h3>成本红线</h3>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">预算不是建议，是硬约束</span>
+    <p>项目预算是一个<strong>硬上限</strong>：到预警线（默认 80%）会通知并可能降级，超限直接熔断、暂停循环。<strong>不要把「0 表示不限制」当成「随便花」</strong>——0 只是不设上限，钱还是按实际消耗真实扣的。填写预算时，把它当成「这个项目最多允许我花多少」，而不是「随便写个数字」。</p>
+  </div>
+
+  <p>另外记住：计费含估算成分，<strong>不是精确账单</strong>（详见 2.3）。所以控制成本要看趋势、看速率，不要纠结到分。</p>
+
+  <h2>六、发布前检查清单</h2>
+
+  <p>下面四张清单都可以直接打印或截图。养成「做完一遍再发出去」的习惯，能挡掉绝大多数低级事故。每一项都可以勾选。</p>
+
+  <h3>对外内容发布前</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>事实核查</strong>：数字、名称、日期、链接都核对过，没有 AI 编造的「幻觉」内容</span></li>
+    <li><input type="checkbox"><span><strong>品牌口吻</strong>：语气、称呼、术语与公司一贯风格一致</span></li>
+    <li><input type="checkbox"><span><strong>联系方式与链接</strong>：邮箱、电话、网址点开可用，没有占位符残留</span></li>
+    <li><input type="checkbox"><span><strong>合规</strong>：内容里没有不能承诺的表述（价格、交期、效果、法律结论）</span></li>
+    <li><input type="checkbox"><span><strong>有无泄露内部信息</strong>：没有内部数据、成本、客户名单、密钥</span></li>
+    <li><input type="checkbox"><span><strong>谁批准</strong>：发布这个动作经过人工确认，不是 AI 自动发的</span></li>
+  </ul>
+
+  <h3>上线软件功能前</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>需求对不对</strong>：要做的功能与当初确认的 PRD / 需求一致</span></li>
+    <li><input type="checkbox"><span><strong>有没有验收记录</strong>：走了独立验收，结论是「通过」而非「返工」</span></li>
+    <li><input type="checkbox"><span><strong>备份是否开启</strong>：<code>backup</code> 开关是开的，且最近有一次成功备份</span></li>
+    <li><input type="checkbox"><span><strong>有没有影响线上的改动</strong>：这次改动会不会碰坏正在跑的东西</span></li>
+    <li><input type="checkbox"><span><strong>回滚方案</strong>：万一出事，退回到哪个备份点、怎么退，心里有数</span></li>
+  </ul>
+
+  <h3>发送邮件前</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>收件人是否正确</strong>：逐个核对，特别留意自动补全带进来的错地址</span></li>
+    <li><input type="checkbox"><span><strong>是不是群发误发</strong>：该单发的别群发，该密送的别群抄</span></li>
+    <li><input type="checkbox"><span><strong>内容是否含内部信息</strong>：内部报价、成本、员工信息不外泄</span></li>
+    <li><input type="checkbox"><span><strong>退订与合规</strong>：营销类邮件带退订方式，符合目标市场的合规要求</span></li>
+    <li><input type="checkbox"><span><strong>由谁发出</strong>：确认这不是 AI 自主外发，而是经过人工确认的</span></li>
+  </ul>
+
+  <h3>花钱前</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>单价是否清楚</strong>：知道这一笔按什么单价、按什么用量算</span></li>
+    <li><input type="checkbox"><span><strong>有没有预算</strong>：项目设了预算，且还没到熔断</span></li>
+    <li><input type="checkbox"><span><strong>是否可事后核对</strong>：知道去哪看这笔花费（计费明细 / 项目账本 / 公司账本）</span></li>
+    <li><input type="checkbox"><span><strong>是否设了上限</strong>：敏感动作配了成本上限 / 权限租赁，防止单笔烧穿</span></li>
+  </ul>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">计费口径的两条原文提醒</span>
+    <p>计费明细页两条 tooltip 原文，值得记住：<br>
+    ① 「其中包含按文本长度估算的兜底计费（上游未回 usage 时产生），非精确账单，请勿直接作为账单核销」<br>
+    ② 「这些轮次已实际执行，但没有可用的计量数据（无法读取 usage），仅 0 元留痕，不计入花费」<br>
+    所以核对花费时，先分清「实际花费」「估算部分」「未计量部分」三块，别混着算。</p>
+  </div>
+
+  <h2>七、什么时候该找人工支持</h2>
+
+  <p>大部分问题你能自己解决，但下面这几类，<strong>别自己硬扛</strong>——它们要么涉及不可逆的数据风险，要么需要后台权限。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>你自己能解决的</h4>
+      <ul>
+        <li>任务排队、空闲等待、等人工节点</li>
+        <li>功能开关没开导致的「加载失败」</li>
+        <li>预算预警 / 熔断——自助补预算 + 恢复</li>
+        <li>兜底暂停——找到根因后恢复</li>
+        <li>文档格式问题——换格式重传</li>
+        <li>边缘客户端短暂断连——等自动重连</li>
+        <li>运行模式、时间片、引擎类型等配置调整</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>必须找人工支持的</h4>
+      <ul>
+        <li><strong>数据丢失</strong>：误删、备份还原失败、数据对不上</li>
+        <li><strong>安全事件</strong>：密钥泄露、账号异常、权限被改、AI 越权动作</li>
+        <li><strong>计费异常</strong>：金额明显不对、出现大量无法解释的花费</li>
+        <li><strong>实例故障</strong>：实例「已销毁」、长时间无法恢复的宕机</li>
+        <li><strong>无法恢复的中断</strong>：恢复评估反复失败、备份还原后仍不正常</li>
+        <li><strong>多人协作失灵</strong>：成员进不来、权限错乱且自助无法修复</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>求助时要准备什么</h3>
+
+  <p>把下面这份清单填好再求助，能大幅缩短解决时间。空着大半去问「我的项目坏了」，对方只能反问，一轮来回就浪费半天。</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>项目与公司</strong>：公司名 / 项目名 / 项目 ID</span></li>
+    <li><input type="checkbox"><span><strong>时间</strong>：问题第一次出现的时间（精确到分钟）</span></li>
+    <li><input type="checkbox"><span><strong>页面</strong>：在哪个页面、哪个页签、点了哪个按钮</span></li>
+    <li><input type="checkbox"><span><strong>现象原文</strong>：提示文案一字不改，或截图</span></li>
+    <li><input type="checkbox"><span><strong>状态快照</strong>：控制台状态 + 预算三个 tag + 任务分布</span></li>
+    <li><input type="checkbox"><span><strong>任务 / 轮次</strong>：涉及的任务名、任务 ID、轮次号</span></li>
+    <li><input type="checkbox"><span><strong>你已经做过什么</strong>：按本章哪一节的步骤试过、结果如何</span></li>
+    <li><input type="checkbox"><span><strong>最近改过什么</strong>：看变更日志，列出最近的配置 / 任务 / 预算改动</span></li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">求助前的小动作</span>
+    <p>点一次<span class="zy-btn">刷新</span>、换一个浏览器标签页重开——相当一部分「故障」只是页面缓存没刷新。确认不是这个之后再求助。</p>
+  </div>
+
+  <h2>八、本章小结与下一步</h2>
+
+  <p>这一章没有新知识，只有「怎么做」。把你真正用得上的记下来：</p>
+
+  <ul>
+    <li><strong>三条铁律</strong>：先看状态再动手；一次只改一个变量；花钱的问题优先于功能的问题。</li>
+    <li><strong>三处体检报告</strong>：控制台（转不转 + 钱出没出事）→ 任务列表（分布）→ 日志面板（跑到哪、报什么）。三眼看懂，八成问题已定位。</li>
+    <li><strong>八类故障四段式</strong>：项目不动、任务待执行、预算、兜底暂停、实例、边缘客户端、知识文档、AI 做得不对。前七类照步骤走，第八类先改描述再改配置。</li>
+    <li><strong>错误提示三类</strong>：操作问题 / 功能没开 / 系统故障。看到「请确认……功能已启用」，去设置开开关，别当故障修。</li>
+    <li><strong>回滚顺序</strong>：先停 → 再看日志定位 → 再回滚 / 恢复 → 最后才恢复运行。</li>
+    <li><strong>安全红线</strong>：对外发布、发邮件、付款、删数据、改权限密钥、做承诺——永远不要交给 AI；能用「暂停」就别用「紧急停止」；客户页面的知识库白名单一定明确勾选。</li>
+    <li><strong>发布前四张清单</strong>：对外内容 / 上线功能 / 发邮件 / 花钱，逐项打勾再出手。</li>
+  </ul>
+
+  <p><strong>下一步：</strong>如果你在排查时被某个术语卡住（不知道「熔断」「三通道」「权限租赁」到底指什么），去 <strong>第 20 章 · 术语表与路线图</strong>，附录有全书术语总表和 30/60/90 天落地节奏，帮你把这套系统真正用起来。如果你还没读过 <strong>第 18 章 · 100 问 FAQ</strong>，那是另一种查法——你带着一个问题去，拿一个答案走，和这一章的「照着步骤排查」正好互补。</p>
+
+  <h2>附录 A · 症状 → 处置速查卡（打印版）</h2>
+
+  <p>这一页可以单独打印贴墙。和第 18 章附录 B 的分工是：那里偏「第一步做什么」，这里偏「<strong>处置步骤</strong>」和「<strong>不要做什么</strong>」。左边症状照抄界面原文，右边一步步做。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>症状（界面原文 / 你的观察）</th><th>最可能原因</th><th>三步处置</th><th>不要做什么</th><th>详见</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>项目半天没有新轮次</td><td>循环未启动 / 空闲等待 / 兜底 / 熔断</td><td>①看控制台状态 ②看预算三 tag ③看有没有兜底横幅</td><td>别直接点「启动」硬冲</td><td>2.1</td></tr>
+        <tr><td>状态「已停止」</td><td>循环没被驱动</td><td>①确认项目状态 ②控制台点「启动」③看日志是否开始</td><td>别以为项目「运行中」= 自动运营已开</td><td>2.1</td></tr>
+        <tr><td>「项目已完成全部任务并空闲等待 N 轮」</td><td>正常待命，不烧钱</td><td>①注入新信息 ②触发 review 重排任务</td><td>别反复点恢复催它干活</td><td>2.1</td></tr>
+        <tr><td>任务全是「待执行」</td><td>排队 / 循环没开 / 前置节点</td><td>①确认循环状态 ②看有没有人工节点 ③等一个轮次看前不前进</td><td>别急着删任务重建</td><td>2.2</td></tr>
+        <tr><td>任务一直「规划中」</td><td>软件工程向导没走完</td><td>①打开软件工程向导 ②走完剩余步骤 ③创建任务</td><td>别以为它坏了</td><td>2.2</td></tr>
+        <tr><td>提示「策略未确认，请先完成引导建项并确认执行策略」</td><td>执行策略没确认</td><td>①去引导建项页 ②点「确认策略」③再启动自动运营</td><td>别绕过它强行启动</td><td>2.2</td></tr>
+        <tr><td>亮红「预警」tag</td><td>预算用度已达后端配置的预警线（默认 80%）</td><td>①看是 AI 预算还是总预算 ②准备补预算 ③查消耗速率</td><td>别等熔断才动手</td><td>2.3</td></tr>
+        <tr><td>「熔断：是」</td><td>预算被击穿</td><td>①确认是哪条线 ②去对应页面补预算 ③回控制台点「恢复 / 启动」</td><td>别补错线；别以为补了会自动跑</td><td>2.3</td></tr>
+        <tr><td>「项目预算已耗尽，请及时补充预算避免项目暂停。」</td><td>项目预算线击穿</td><td>①项目账本调预算 ②恢复运行 ③查根因</td><td>别当发票对账用</td><td>2.3</td></tr>
+        <tr><td>「接近预警阈值。」</td><td>刚到预警线</td><td>①看消耗趋势 ②评估要不要补 ③观察是否降级</td><td>不必惊慌，但别无视</td><td>2.3</td></tr>
+        <tr><td>「余额 …… 已低于预警阈值 ……」</td><td>公司平台余额告急</td><td>①去公司账本 ②充值 ③确认实例恢复</td><td>别和项目预算混为一谈</td><td>2.3</td></tr>
+        <tr><td>「项目已因兜底保护暂停」</td><td>连续失败触发保险丝</td><td>①读横幅原因 ②找失败任务和日志 ③修完再恢复</td><td>别一上来就点「恢复」</td><td>2.4</td></tr>
+        <tr><td>重启服务后项目还是停着</td><td>兜底暂停是持久状态</td><td>①确认根因已修 ②回控制台点「恢复 / 启动」</td><td>别指望重启自动解除</td><td>2.4</td></tr>
+        <tr><td>「该项目的服务器实例尚未配置，请录入服务器 IP」</td><td>实例未录入</td><td>①点「录入服务器」②填写 ③点「确认部署完成」</td><td>别忽略，任务无法执行</td><td>2.5</td></tr>
+        <tr><td>实例状态「已停止」</td><td>实例被停机</td><td>①确认是否人为 ②重启实例 ③回平台确认心跳</td><td>别在停机状态下继续排任务</td><td>2.5</td></tr>
+        <tr><td>心跳「宕机 / 降级」</td><td>实例未按时上报</td><td>①查项目服务器进程 ②查网络 ③查资源占用</td><td>别只看一个心跳就下结论</td><td>2.5</td></tr>
+        <tr><td>实例状态「已销毁」</td><td>实例被删除，数据有风险</td><td>①立即停止写操作 ②整理现场 ③马上找人工支持</td><td>别自己折腾、别继续跑任务</td><td>2.5 / 七</td></tr>
+        <tr><td><code>Status: Disconnected</code></td><td>边缘客户端断连</td><td>①查网络 ②核对服务器地址 ③查密钥</td><td>别找「重连」菜单项——它已移除，客户端会自动重连</td><td>2.6</td></tr>
+        <tr><td><code>Status: Reconnecting...</code></td><td>正在自动重连（指数退避）</td><td>①等几秒 ②确认网络恢复</td><td>别手动干预</td><td>2.6</td></tr>
+        <tr><td>找不到日志 / 想打开日志</td><td>托盘菜单只有 Status / Open Logs / Quit</td><td>①点「Open Logs」直接打开日志目录 ②或手动到日志目录查看</td><td>别以为电脑坏了</td><td>2.6</td></tr>
+        <tr><td>文档一直「解析中 / 向量化中」</td><td>处理链还在走</td><td>①等 ②只有变「失败」才动作</td><td>别几分钟就重传</td><td>2.7</td></tr>
+        <tr><td>文档状态「失败」</td><td>格式太复杂 / 超限</td><td>①转成 pdf/txt/md ②压缩或拆分 ③重传</td><td>别原样反复重传</td><td>2.7</td></tr>
+        <tr><td>资料传了但检索不到</td><td>还在「待确认知识」</td><td>①去待确认知识清单 ②点「确认入库」③再到 RAG 检索</td><td>别以为传了就会自动生效</td><td>2.7</td></tr>
+        <tr><td>AI 写的内容不对</td><td>输入不清 / 没达标准</td><td>①看验收结论 ②把要求补进描述 ③让它重做</td><td>别用「催进度」代替改输入</td><td>2.8</td></tr>
+        <tr><td>AI 做的不是我想要的</td><td>任务描述含糊</td><td>①改描述（写清"什么算做完"）②review 重排 ③再看结果</td><td>别直接换 Agent</td><td>2.8</td></tr>
+        <tr><td>「加载……失败，请确认……功能已启用」</td><td>功能开关没开</td><td>①去设置 → 功能管理 ②选项目 ③打开对应开关</td><td>别当系统故障修</td><td>3.2</td></tr>
+        <tr><td>改了配置后出问题</td><td>改动引入的问题</td><td>①先停 ②看变更日志 ③用备份「还原」</td><td>别在停之前动手</td><td>四</td></tr>
+        <tr><td>中断很久后想接着跑</td><td>需要恢复评估</td><td>①去审计治理 → 恢复评估 ②读结论 ③按结论继续</td><td>别无视 replan 建议硬续接</td><td>四</td></tr>
+        <tr><td>AI 正在做危险的事</td><td>安全事件</td><td>①先暂停 ②确需全停才用紧急停止 ③查变更日志</td><td>别犹豫，但也别无脑用不可逆按钮</td><td>五</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这张卡的正确用法</span>
+    <p>它给的是「处置路线」，不是「一键方案」。走完三步仍不动，翻到对应小节看完整决策树，或按第七节准备信息求助。<strong>任何时候都不要一次改多个变量。</strong></p>
+  </div>
+
+  <h2>附录 B · 全部界面错误 / 警示文案对照表</h2>
+
+  <p>把手册和界面里能确认的兜底文案汇总在这里。左边是<strong>原文</strong>（可用来搜索、对照），往后是位置、含义、怎么办。遇到看不懂的提示，先来这里查。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>文案原文</th><th>出现位置</th><th>含义</th><th>怎么办</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>项目预算已耗尽，请及时补充预算避免项目暂停。</td><td>项目账本页</td><td>项目预算线被击穿</td><td>调高项目预算 → 恢复运行</td></tr>
+        <tr><td>项目预算已用 x%，处于告急状态。</td><td>项目账本页</td><td>已到告急阈值</td><td>尽快补预算</td></tr>
+        <tr><td>项目预算已用 x%，接近预警阈值。</td><td>项目账本页</td><td>刚到预警线</td><td>观察趋势，准备补</td></tr>
+        <tr><td>余额 …… 已低于预警阈值 ……，请及时充值避免实例熔断。</td><td>公司账本页</td><td>公司余额告急</td><td>去公司账本充值</td></tr>
+        <tr><td>项目已因兜底保护暂停</td><td>自动运营控制台红色横幅</td><td>连续失败触发保险丝</td><td>先找根因，修完再恢复</td></tr>
+        <tr><td>兜底暂停为持久状态（跨重启保留），需人工在运行配置 / 任务面板处理后，点击「恢复」或「启动」继续。</td><td>同上（横幅正文）</td><td>重启不会自动解除</td><td>处理后手动恢复</td></tr>
+        <tr><td>紧急停止所有自动运营任务？此操作不可逆</td><td>审计治理页 KillSwitch 确认框</td><td>红色全停按钮</td><td>能用暂停就别用；点了要重新启动</td></tr>
+        <tr><td>项目已完成全部任务并空闲等待 N 轮（不再消耗 LLM）。如需继续运营，请注入新信息并触发 review 重排任务</td><td>通知 / 日志</td><td>正常待命，不烧钱</td><td>注入新信息 + 触发 review</td></tr>
+        <tr><td>策略未确认，请先完成引导建项并确认执行策略</td><td>点「启动」时的后端提示</td><td>启动被策略门槛拦住</td><td>去引导建项确认策略</td></tr>
+        <tr><td>未确认策略时，启动自动运营会被拦（/autoops/start 要求已确认策略）</td><td>引导建项页告警</td><td>同上</td><td>确认策略后重试</td></tr>
+        <tr><td>自动运营未启用，请先修改配置</td><td>后端提示</td><td>项目未开自动运营</td><td>在配置中启用自动运营</td></tr>
+        <tr><td>任务提示词草稿为空，请先与 AI 对话生成</td><td>软件修改弹窗</td><td>没生成草稿就提交</td><td>先与 AI 对话生成草稿</td></tr>
+        <tr><td>Agent 引擎可能无法完成软件交付，仅适合简单项目，建议使用循环执行</td><td>新建 / 编辑任务弹窗（选 agent 引擎时）</td><td>引擎选择提醒</td><td>复杂 / 编码任务改用循环执行</td></tr>
+        <tr><td>任务状态查询连续失败，已停止轮询</td><td>媒体生成中心</td><td>轮询连续失败，进入错误态</td><td>点重试；仍失败查网络 / 后端</td></tr>
+        <tr><td>其中包含按文本长度估算的兜底计费（上游未回 usage 时产生），非精确账单，请勿直接作为账单核销</td><td>计费明细 tooltip</td><td>估算计费说明</td><td>看趋势可以，别当发票</td></tr>
+        <tr><td>这些轮次已实际执行，但没有可用的计量数据（无法读取 usage），仅 0 元留痕，不计入花费</td><td>计费明细 tooltip</td><td>未计量轮次说明</td><td>不必计入花费统计</td></tr>
+        <tr><td>金额由服务端按「档位单价 × 用量」折算并计入项目账本；未定价档位显示 [待定价]（不折算、不谎报金额）。</td><td>媒体生成中心</td><td>媒体计费口径</td><td>未定价档位不会折算金额</td></tr>
+        <tr><td>加载信任数据失败，请确认渐进式信任功能已启用</td><td>渐进式信任页</td><td>功能开关 <code>trust_model</code> 没开</td><td>去功能管理开开关</td></tr>
+        <tr><td>加载仲裁案件失败，请确认冲突仲裁功能已启用（功能开关 arbitrator）</td><td>冲突仲裁页</td><td>功能开关 <code>arbitrator</code> 没开</td><td>去功能管理开开关</td></tr>
+        <tr><td>资源治理功能未启用</td><td>资源治理相关接口</td><td>功能开关 <code>resource_governor</code> 没开</td><td>去功能管理开开关</td></tr>
+        <tr><td>营销引擎功能未启用，请在功能开关中开启 marketing_engine</td><td>营销相关接口</td><td>功能开关没开</td><td>去功能管理开开关</td></tr>
+        <tr><td>社交媒体功能未启用，请在功能开关中开启 social_media</td><td>营销相关接口</td><td>功能开关没开</td><td>去功能管理开开关</td></tr>
+        <tr><td>请先选择一个项目以管理其功能开关</td><td>设置 → 功能管理</td><td>没选项目</td><td>先在下拉里选项目</td></tr>
+        <tr><td>请先选择公司</td><td>新建项目向导</td><td>没选公司</td><td>先选择公司</td></tr>
+        <tr><td>请立即复制访问链接，token 仅本次展示，关闭后不可再查看</td><td>客户页面创建成功弹窗</td><td>公开链接仅展示一次</td><td>立即复制妥善保存</td></tr>
+        <tr><td>该项目的服务器实例尚未配置，请录入服务器 IP</td><td>项目详情 → 服务器实例</td><td>实例未录入</td><td>录入服务器 → 确认部署完成</td></tr>
+        <tr><td>尚未配置服务器实例</td><td>项目详情 → 服务器实例</td><td>实例未配置</td><td>录入服务器 IP</td></tr>
+        <tr><td>已掩码显示，点击「显示」查看明文（明文查看会记录审计日志）</td><td>HMAC Secret 栏</td><td>密钥默认掩码</td><td>谨慎查看，明文会留痕</td></tr>
+        <tr><td>请求超时，请稍后重试</td><td>全局请求拦截（读操作）</td><td>网络 / 后端超时</td><td>重试；持续则求助</td></tr>
+        <tr><td>可能已在服务端生效，请先刷新确认再重试</td><td>全局请求拦截（<strong>写操作</strong>超时 / 网络异常）</td><td>写请求发出后没收到响应，服务端可能已执行</td><td>先刷新页面确认状态，别盲目重试以免重复提交</td></tr>
+        <tr><td>502 / 503 / 504 网关类错误（中文解释 + 下一步动作）</td><td>全局请求拦截</td><td>网关 / 上游不可用，优先透传后端 message</td><td>按提示的中文解释与下一步动作处理</td></tr>
+        <tr><td>网络异常，请检查连接</td><td>全局请求拦截</td><td>连不上后端</td><td>检查网络后重试</td></tr>
+        <tr><td>登录已过期，请重新登录</td><td>全局请求拦截</td><td>Token 失效</td><td>重新登录（会自动回跳原页面）</td></tr>
+        <tr><td>错误条 + 可折叠「技术详情」</td><td>AI 对话页</td><td>对话出错，底层错误不再拼进 AI 消息体</td><td>看错误条中文说明；排查时展开技术详情</td></tr>
+        <tr><td>暂无日志绑定（任务开始执行后自动生成）</td><td>日志面板空态</td><td>这一轮还没生成日志</td><td>等轮次开始执行</td></tr>
+        <tr><td>以下知识条目需人工确认后才会写入正式知识库并参与全局检索</td><td>待确认知识清单页</td><td>条目在等待人工确认</td><td>点「确认入库」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">一条使用建议</span>
+    <p>本表只收录了<strong>能确认的</strong>界面文案。如果你遇到的提示不在表里，先按第三节的「三类错误」归类，再决定是自助还是求助。不要凭猜测动手改系统。</p>
+  </div>
+
+  <h2>附录 C · 安全红线一页纸</h2>
+
+  <p>这一页适合打印出来贴在工位。它只讲两件事：<strong>什么绝不能让 AI 代做</strong>，<strong>什么必须人工审批</strong>。</p>
+
+  <div class="zy-card amber">
+    <h4>绝不能让 AI 代做（无论自主级别多高）</h4>
+    <ul>
+      <li>对外发布内容、对外署名</li>
+      <li>给外部发邮件 / 发消息</li>
+      <li>付款、转账、下单、任何花钱的对外动作</li>
+      <li>删除数据 / 删除文件</li>
+      <li>修改权限、修改密钥</li>
+      <li>做法律 / 合规 / 财务承诺</li>
+      <li>代表公司做任何承诺</li>
+      <li>现实世界线下动作：签约、物理操作、财务打款</li>
+    </ul>
+  </div>
+
+  <div class="zy-card green">
+    <h4>必须人工审批的动作（默认转人工节点）</h4>
+    <ul>
+      <li>所有敏感写操作：发布 / 删除 / 付费 / 外发 / 部署 / 采购 / 退款</li>
+      <li>命中红通道禁止清单的动作（强制 L3，AI 不得代行）</li>
+      <li>超出权限上限的动作（单动作成本超限 / 不在白名单）</li>
+      <li>高风险合规节点（默认需双签复核）</li>
+      <li>线下流转类动作（无论级别一律强制人工）</li>
+    </ul>
+  </div>
+
+  <div class="zy-card blue">
+    <h4>三层防护 + 一个红按钮</h4>
+    <ul>
+      <li><strong>三通道决策</strong>：绿=例行（按级别处理）/ 黄=敏感（默认转人工，可临时授权）/ 红=强制（必须人工，AI 不得代行）。</li>
+      <li><strong>合规拦截</strong>：命中红线自动熔断转人工，并通知你。</li>
+      <li><strong>权限租赁</strong>：临时放权，带过期时间 + 成本上限，到期自动回收。</li>
+      <li><strong>紧急停止（KillSwitch）</strong>：审计治理页，确认原文「紧急停止所有自动运营任务？此操作不可逆」——不可逆，慎用，能用暂停就别用它。</li>
+    </ul>
+  </div>
+
+  <div class="zy-card">
+    <h4>凭据与数据纪律</h4>
+    <ul>
+      <li>API Key 加密存储；密钥绝不写进对话 / 代码 / git。</li>
+      <li>HMAC Secret <strong>重新生成前先确认没有正在跑的任务和正在上传的客户端</strong>——旧密钥会立即失效；改完要同步到全部使用方。</li>
+      <li>客户页面的「知识库白名单」是<strong>白名单（fail-closed）</strong>：<strong>留空 = 不开放任何知识库</strong>，不是「全部开放」。一定要明确勾选要对外公开的库；界面上也有显眼的未勾选警告和「可能泄露成本价」提醒。</li>
+      <li>公开访问链接等同密码，就地保存、别乱转；作废用「重置链接」。</li>
+      <li>Prompt 审计会记录对话内容——别在对话里输入密钥、身份证、银行卡号等。</li>
+    </ul>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">一句话记住</span>
+    <p>凡是「<strong>出去收不回</strong>」（发出去、花出去、删掉、承诺出去）的动作，都必须是<strong>人来拍板</strong>。AI 可以做方案、写草稿、给建议，但最后那一下，由你按。</p>
+  </div>
+
+  <h2>附录 D · 故障排查记录模板</h2>
+
+  <p>养成记录习惯，下一次遇到同类问题能省一大半时间。下面这张表可以复制去填，也可以打印几张备用。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>时间</th><th>页面 / 项目</th><th>现象原文（一字不改）</th><th>我做了什么</th><th>结果</th><th>结论</th></tr>
+      </thead>
+      <tbody>
+        <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+        <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+        <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+        <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+        <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+        <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+        <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+        <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>每列怎么填：</p>
+  <ul>
+    <li><strong>时间</strong>：精确到分钟，方便事后和日志对齐。</li>
+    <li><strong>页面 / 项目</strong>：哪个项目、哪个页面、哪个页签。</li>
+    <li><strong>现象原文</strong>：提示文案照抄，不要转述成「它报错了」。</li>
+    <li><strong>我做了什么</strong>：按本章哪一节的步骤做了哪些操作。<strong>一次只记一个变量</strong>。</li>
+    <li><strong>结果</strong>：有效 / 无效 / 出现新问题。</li>
+    <li><strong>结论</strong>：最终是哪个原因、以后怎么避免。这一列最值钱。</li>
+  </ul>
+
+  <h2>附录 E · 恢复与回滚决策树</h2>
+
+  <p>「改坏了」时照这张表选动作。左边是当前情况，往右依次是推荐动作、风险、备选方案。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>当前情况</th><th>推荐动作</th><th>风险</th><th>备选</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>刚改错配置，还没跑</td><td>改回去，或点「重置为默认」</td><td>无</td><td>对比变更日志确认改了什么</td></tr>
+        <tr><td>改错了且已经跑了</td><td>先暂停 → 看变更日志 → 用备份「还原」到改之前</td><td>丢失改动后的产出</td><td>不动数据，只把配置改回并让 review 重排</td></tr>
+        <tr><td>误删了任务</td><td>用备份还原，或重建任务</td><td>还原会波及备份点之后的其它改动</td><td>重建一个更明确的任务</td></tr>
+        <tr><td>预算被击穿熔断</td><td>补预算 → 回控制台点「恢复 / 启动」</td><td>根因没修会再次熔断</td><td>先降非核心任务强度再恢复</td></tr>
+        <tr><td>连续失败触发兜底暂停</td><td>找根因 → 修根因 → 再恢复</td><td>直接恢复会再失败、再烧钱</td><td>把失败任务缩小范围重开</td></tr>
+        <tr><td>中断 &lt; 2 天</td><td>直接续接（豁免期内）</td><td>低</td><td>照常检查一次日志</td></tr>
+        <tr><td>中断 &gt; 2 天</td><td>走恢复评估，按结论执行</td><td>忽略 replan 硬续接可能白干</td><td>手动选更保守的任务集</td></tr>
+        <tr><td>恢复评估给 <code>resume_with_adjust</code></td><td>看建议调整项，认可后继续</td><td>不调整可能重复旧问题</td><td>改为 replan 重排</td></tr>
+        <tr><td>恢复评估给 <code>replan</code></td><td>按建议重新规划任务集</td><td>需要重新投入时间</td><td>缩小项目范围，聚焦关键路径</td></tr>
+        <tr><td>数据明显丢失</td><td>停 → 找人工支持</td><td>自行操作可能覆盖可恢复数据</td><td>——</td></tr>
+        <tr><td>安全事件（密钥泄露 / AI 越权）</td><td>先暂停 → 视情况紧急停止 → 立即求助</td><td>拖延会扩大影响</td><td>——</td></tr>
+        <tr><td>实例「已销毁」</td><td>停止一切操作 → 立即求助</td><td>继续操作可能造成二次损失</td><td>——</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">决策树的通用原则</span>
+    <p><strong>能缓解就别回滚，能回滚就别重来，能自己处理就别硬扛，涉及数据和安全就别自己动手。</strong>顺序不要跳，动作不要并。</p>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

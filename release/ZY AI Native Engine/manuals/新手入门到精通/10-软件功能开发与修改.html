@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第10章 软件功能的开发与修改 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 10 章 · 第三步：指挥 AI 干活</div>
+    <h1>软件功能的开发与修改</h1>
+    <p class="zy-lead">想给项目做一个新功能、或者改一个已有功能？这一章告诉你正确的入口在哪，以及为什么"直接新建一个开发任务"十有八九要返工。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 22 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：软件工程向导与软件修改弹窗</span>
+    </div>
+  </header>
+
+  <p>很多人第一次想让 AI 给自己做一个功能时，第一反应都是：去<strong>任务管理</strong>里新建一个任务，任务名写「开发一个登录功能」，描述写「做一个用户能注册登录的页面」，然后点保存，等 AI 干活。</p>
+
+  <p>这是个很自然的想法，但它是<em>最容易失败</em>的做法。原因不复杂：AI 拿到这句话，会自己"猜"你要什么——猜注册要几个字段、猜密码要不要加密、猜登录后跳到哪个页面、猜要不要找回密码。它猜出来的东西，八成跟你脑子里想的不一样。等你看到结果再一句句纠正，来回折腾的时间和钱，比一开始老老实实花二十分钟把需求说清楚要多得多。</p>
+
+  <p>这一章要做的，就是把这件"直觉上会做错"的事纠正过来，给你两条<strong>正道</strong>：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>分清「新建软件工程」「软件修改」「通用任务」三种任务类型，知道各自适合什么场景</span></li>
+    <li><input type="checkbox"><span>会用<strong>软件工程向导</strong>（新建）七步走完一个功能从想法到任务的完整流程</span></li>
+    <li><input type="checkbox"><span>会用<strong>软件修改</strong>弹窗，把"改一个已有功能"讲清楚再创建任务</span></li>
+    <li><input type="checkbox"><span>知道什么时候才该用普通的「新建任务」，以及引擎（循环执行 / Agent 智能体）怎么选</span></li>
+    <li><input type="checkbox"><span>掌握一套非技术背景也能用的"需求表达法"，把模糊想法写成 AI 能执行的需求</span></li>
+  </ul>
+
+  <h2>零、先分清三件事：你到底想做哪一种？</h2>
+
+  <p>在打开任何页面之前，先在心里定位你的目标。三类目标，对应三条完全不同的路，走错了就要返工。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>你的想法</th><th>该走哪条路</th><th>入口在哪</th><th>为什么</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>想做一个全新的软件功能</strong><br>（从零开始，比如"加一个优惠券系统"）</td>
+          <td>新建软件工程</td>
+          <td>任务管理 → 新建任务 → 任务类型选「新建软件工程」→ 自动进入软件工程向导</td>
+          <td>会先跟你对齐需求、产出 PRD 和 TAD 设计文档、再拆成模块，最后才落成任务。AI 不再是"自由发挥"，而是照着设计文档干活。</td>
+        </tr>
+        <tr>
+          <td><strong>想改一个已经做好的软件功能</strong><br>（比如"把首页按钮改个颜色"）</td>
+          <td>软件修改</td>
+          <td>任务管理 → 新建任务 → 任务类型选「软件修改」→ 选好源软件工程 → 自动弹出软件修改对话框</td>
+          <td>先跟 AI 把"改哪里、改成什么样"聊清楚，AI 把改法整理成一份任务提示词草稿，你确认了才创建任务。</td>
+        </tr>
+        <tr>
+          <td><strong>只是要一份文档、一份分析、一批素材</strong><br>（比如"调研一下竞品""写一篇推广文案"）</td>
+          <td>通用任务</td>
+          <td>任务管理 → 新建任务 → 任务类型保持「通用任务」</td>
+          <td>没有代码交付物，不需要设计阶段，直接描述清楚要什么就行。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">最容易失败的做法</span>
+    <p>在任务管理里新建一个<strong>通用任务</strong>，任务名写「开发登录功能」，描述写「做一个用户能注册登录的页面」，直接保存。这个任务会跳过需求对齐、跳过设计，直接丢给 AI 自由发挥，最终大概率是"做出来了，但不是你要的"，返工率高、还烧钱。</p>
+    <p>正确的做法是把它做成<strong>「新建软件工程」</strong>：先花十几二十分钟和 AI 把需求聊透、把设计文档确认好，再让 AI 干活。</p>
+  </div>
+
+  <p>下面我们就按这三条路，一条一条讲清楚。</p>
+
+  <h2>一、先搞懂三种任务类型</h2>
+
+  <p>所有软件相关的活儿，最终都会变成<strong>任务</strong>（task）进入自动运营的排班。但在任务管理页新建任务时，"任务类型"这一个选项，决定了这个任务<strong>走什么链路、要不要先做设计</strong>。</p>
+
+  <div class="zy-path">项目管理 <span class="sep">›</span> 选择项目 <span class="sep">›</span> 自动运营 <span class="sep">›</span> 任务管理</div>
+
+  <p>进入「任务管理」页，右上角是 <span class="zy-btn">新建任务</span> 按钮。点开后会看到一个「新建任务」弹窗，里面有这些字段：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>字段</th><th>界面上的样子</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>任务名称</td><td>输入框，占位提示「如：市场定向调研」</td><td>必填。给这个任务起个名字，以后在列表里认得出。</td></tr>
+        <tr><td>描述</td><td>多行输入，占位提示「任务详细描述」，最多 500 字</td><td>必填。这一步<strong>写得越具体，AI 越不容易跑偏</strong>。</td></tr>
+        <tr><td>任务类型</td><td>三个单选：<span class="zy-field">通用任务</span> <span class="zy-field">新建软件工程</span> <span class="zy-field">软件修改</span></td><td>关键字段，下面详细讲。</td></tr>
+        <tr><td>软件名称</td><td>输入框，占位提示「留空则自动命名（按任务标题或序号）」</td><td><strong>只有任务类型选「新建软件工程」时才出现。</strong>留空就由系统自动起名；填了它，这个软件的文档会写进独立子目录，和项目里别的软件互不覆盖（见第二节）。</td></tr>
+        <tr><td>优先级</td><td>下拉：P0 - 紧急 / P1 - 高 / P2 - 常规 / P3 - 低</td><td>默认 P1。决定 AI 先干哪个。</td></tr>
+        <tr><td>时间片权重</td><td>数字，1–10</td><td>默认 1。数字越大，每轮分给它的时间越多。详见第 09 章。<strong>创建后不可修改。</strong></td></tr>
+        <tr><td>引擎类型</td><td>两个单选：<span class="zy-field">循环执行</span> <span class="zy-field">Agent 智能体（Agent 引擎）</span></td><td>默认「循环执行」。软件类工作请保持默认，原因见第四节。</td></tr>
+        <tr><td>AI 模型</td><td>下拉，占位提示「路由自动」，可留空</td><td>留空即由系统按任务复杂度自动挑模型，绝大多数情况留空就好。</td></tr>
+        <tr><td>关联软件工程</td><td>下拉，占位提示「选择要修改的软件工程」</td><td><strong>只有任务类型选「软件修改」时才会出现</strong>，用来指定要改哪个已有软件工程。</td></tr>
+        <tr><td>时限（秒）</td><td>数字，默认 7200</td><td>单次执行最长允许跑多久，默认 2 小时。</td></tr>
+        <tr><td>角色 ID</td><td>输入框，占位提示「指派 Agent 角色 ID（可选）」</td><td>可选。指定由哪个智能体角色来干这个活。</td></tr>
+        <tr><td>提示词模板</td><td>多行输入，占位提示「任务执行提示词模板」</td><td>可选。想手写一段更精确的指令时用。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>通用任务（general）——最简单的一类</h3>
+
+  <p>选「通用任务」，点保存，任务就直接创建好了，状态是<strong>待执行（pending）</strong>，等着自动运营调度它。它没有设计阶段，你描述什么，AI 就尽力做什么。</p>
+
+  <p><strong>适合：</strong>调研、分析、写文案、整理资料、生成素材、跑一次性脚本这类<strong>非软件交付物</strong>的工作。</p>
+
+  <h3>新建软件工程（eng）——做新功能的正道</h3>
+
+  <p>选「新建软件工程」，点保存后<strong>不会</strong>直接创建任务，而是会发生两件事：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>系统先建一个"规划中"的任务</h4>
+      <p>任务会被创建出来，但状态是<strong>规划中（planning）</strong>。这个状态很关键：<em>规划中的任务不会被执行</em>，调度器会跳过它。所以它不会在你还没设计好的时候就自己跑去写代码。</p>
+    </li>
+    <li>
+      <h4>自动弹出「新建软件工程」向导</h4>
+      <p>一个七步的向导对话框打开了，标题是「新建软件工程」。你在这里完成需求对齐、设计确认、模块拆分，最后点「创建任务」，任务才会从"规划中"变成"待执行"。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">中途可以退出，进度会保留</span>
+    <p>如果你在向导里做到一半有事走开了，直接关掉或刷新页面都没问题：<strong>向导进度会保留</strong>。任务会一直待在「规划中」状态，在任务列表里它的操作列会出现一个 <span class="zy-btn warn">继续规划</span> 按钮，下次点它就能<strong>回到你上次停下的那一步</strong>接着做，不用从第 1 步重新聊。关闭时系统会问你一句：</p>
+    <p>「关闭将保留进度，任务仍为「规划中」，可在任务列表点「继续规划」接着做。确定要退出吗？」</p>
+  </div>
+
+  <h3>软件修改（mod）——改已有功能的正道</h3>
+
+  <p>选「软件修改」，你会先看到一个必填的下拉框「关联软件工程」——它列出的是本项目里已有的软件工程任务。你必须先<strong>选中要改的那个工程</strong>，否则点保存时系统会提示「请选择要修改的软件工程」。</p>
+
+  <p>保存之后，同样先建一个"规划中"的任务，然后自动弹出「软件修改」对话框。你在对话框里跟 AI 聊清楚改法，确认后任务才转成"待执行"。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">为什么必须选"源软件工程"</span>
+    <p>因为 AI 修改代码前需要先"看懂"现有代码长什么样。你把源工程告诉它，它才能读取这个工程已有的需求文档、设计文档和代码目录结构，从而知道"改哪里"、"别碰坏什么"。这也是为什么软件修改任务必须先有一个软件工程存在。</p>
+  </div>
+
+  <h3>一张表帮你选对类型</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>我想做的事</th><th>任务类型</th><th>选完会发生什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>从零做一个新功能 / 新工具</td><td>新建软件工程</td><td>建"规划中"任务 + 打开七步向导</td></tr>
+        <tr><td>改一个已经做好的功能</td><td>软件修改</td><td>建"规划中"任务 + 打开修改对话框（需先选源工程）</td></tr>
+        <tr><td>修一个具体的 bug（页面报错点不进去）</td><td>软件修改</td><td>同上，用修改对话框把 bug 描述清楚</td></tr>
+        <tr><td>给现有页面换个文案 / 换个按钮颜色</td><td>软件修改</td><td>同上，改动小但也要走这个入口</td></tr>
+        <tr><td>给现有系统加一个模块（如"加个优惠券"）</td><td>新建软件工程</td><td>新功能，从设计开始；若只是给已有工程加一个模块，也可在修改对话框里说明</td></tr>
+        <tr><td>做数据导入 / 导出功能</td><td>新建软件工程</td><td>涉及字段映射与校验，先设计更稳</td></tr>
+        <tr><td>做权限 / 登录注册相关改动</td><td>新建软件工程 或 软件修改</td><td>安全敏感，强烈建议先走设计确认</td></tr>
+        <tr><td>做一个对外可访问的网页 / 落地页</td><td>新建软件工程</td><td>有代码交付物，走设计</td></tr>
+        <tr><td>调研竞品、写分析报告</td><td>通用任务</td><td>直接创建，待执行</td></tr>
+        <tr><td>写一篇推广文案 / 邮件</td><td>通用任务</td><td>直接创建，待执行</td></tr>
+        <tr><td>整理一批资料进知识库</td><td>通用任务</td><td>直接创建，或直接用知识库页面上传（第 07 章）</td></tr>
+        <tr><td>生成一批素材（图片 / 视频）</td><td>通用任务</td><td>或直接用媒体生成中心</td></tr>
+        <tr><td>跑一个一次性脚本 / 小工具</td><td>通用任务</td><td>直接创建</td></tr>
+        <tr><td>不知道算不算"软件功能"</td><td>看交付物</td><td>交付物是代码 / 网页 / 能运行的东西 → 软件类；交付物是文字 / 图表 → 通用任务</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>任务状态一览：你在列表里会看到什么</h3>
+
+  <p>不管选哪种类型，任务最终都会出现在任务列表里，带着一个状态标签。看懂这几个状态，你就知道任务走到哪一步了：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>界面上的中文</th><th>含义</th><th>你该做什么</th></tr></thead>
+      <tbody>
+        <tr><td><span class="zy-badge amber">规划中</span></td><td>软件工程 / 软件修改任务正在走向导设计阶段，还没开始执行。</td><td>点「继续规划」或「继续修改」把流程走完。</td></tr>
+        <tr><td><span class="zy-badge">待执行</span></td><td>已经在队列里排队，等待自动运营调度。</td><td>确认自动运营在运行即可，不用管。</td></tr>
+        <tr><td><span class="zy-badge green">运行中</span></td><td>AI 正在干这个活。</td><td>可以看轮次和日志，不要频繁暂停。</td></tr>
+        <tr><td><span class="zy-badge amber">已暂停</span></td><td>任务被暂停了，不会继续推进。</td><td>确认后点「恢复」继续。</td></tr>
+        <tr><td><span class="zy-badge blue">已完成</span></td><td>任务跑完并通过了验收判定。</td><td>看结果对不对，对就提下一个需求。</td></tr>
+        <tr><td><span class="zy-badge red">失败</span></td><td>任务尝试后没成功，可能已经重试过。</td><td>看日志找原因，把需求写清楚后重新提一次。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一个关键区别</span>
+    <p>"规划中"是个<strong>不会被自动执行</strong>的状态。这是系统故意的设计：软件工程/软件修改任务在你把设计确认完之前，绝不会自己跑去写代码。这也是为什么这两类任务比普通任务多了一层保障。</p>
+  </div>
+
+  <h2>二、正道 A：新建软件工程（软件工程向导）</h2>
+
+  <p>这是"怎么创建项目中的复杂软件功能"这个问题的<strong>官方答案</strong>。整个向导一共七步，你不需要懂代码，只需要在每一步做"确认"和"提意见"。</p>
+
+  <p>进入方式：任务管理 → <span class="zy-btn">新建任务</span> → 任务类型选 <span class="zy-field">新建软件工程</span> → 填好名称和描述 → 点 <span class="zy-btn">保存</span>。向导会自动打开。</p>
+
+  <p>向导顶部是一条步骤条，七步分别是：</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>1</b>需求对齐</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>2</b>生成 PRD/TAD</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>3</b>PRD 确认</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>4</b>TAD 确认</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>5</b>评审对话</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>6</b>生成模块</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node ok"><b>7</b>完成</div>
+  </div>
+
+  <p>底部按钮会随步骤变化，一共用到这几个：<span class="zy-btn ghost">上一步</span> <span class="zy-btn">下一步</span> <span class="zy-btn">保存并下一步</span> <span class="zy-btn">应用评审</span> <span class="zy-btn ok">创建任务</span>。</p>
+
+  <h3>第 1 步 · 需求对齐</h3>
+
+  <p>这一步是一个对话框。下方输入框的占位提示是<strong>「描述你的软件工程需求（目标、功能、技术栈等）...」</strong>，右边是 <span class="zy-btn">发送</span> 按钮。你用大白话把想做的事说给 AI，AI 会反过来问你问题，一来一回把需求聊清楚。</p>
+
+  <p><strong>你要说的四件核心信息：</strong></p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4>做什么</h4>
+      <p>这个功能是干嘛的。比如"让客户能用优惠码下单时打折"。</p>
+    </div>
+    <div class="zy-card blue">
+      <h4>给谁用</h4>
+      <p>谁会用到它。比如"已经注册的买家""我们的运营人员"。</p>
+    </div>
+    <div class="zy-card blue">
+      <h4>核心场景</h4>
+      <p>从进入到完成，用户大概会走哪几步。哪怕只写三步也行。</p>
+    </div>
+    <div class="zy-card blue">
+      <h4>不做什么</h4>
+      <p>明确划出边界。比如"这次不做优惠券的分享转发"。</p>
+    </div>
+  </div>
+
+  <p><strong>AI 通常会追问什么：</strong>目标用户是谁、有没有特殊情况要处理、要做在网页端还是手机端、有没有必须用的技术或不能碰的既有系统、"什么情况算做完"。</p>
+
+  <p><strong>怎么算"对齐完成"：</strong>有一个简单的判断标准——如果 AI 用一段话复述它理解的需求，你看了觉得"对，就是这个意思"，那就可以点 <span class="zy-btn">下一步</span> 了。如果你看完心里还打鼓，就继续聊，别急着往下走。</p>
+
+  <div class="zy-copy"><span class="zy-copy-tag">需求对齐 · 通用话术</span>我的项目是【跨境电商独立站】，想做一个【优惠券功能】。
+做什么：客户在结算页输入优惠码，符合条件的订单自动打折。
+给谁用：已经注册的买家；运营同事也能在后台创建优惠券。
+核心场景：（1）运营创建一张券，设好折扣和有效期；（2）买家下单时输入券码；（3）系统判断是否可用，可用就打折并记录。
+不做什么：这次不做优惠券的分享和转赠，也不做复杂的叠加规则。
+我们大概有 5 个人员在用，预算不宽裕，希望功能尽量简单可靠。</div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这一步大多数人的坑</span>
+    <p>只回一句"你看着办"或者"随便做个简单的"。AI 会按最常见的做法猜，而"最常见的做法"往往不是你要的。哪怕你只说清楚"不做什么"，也能帮 AI 少走很多弯路。</p>
+  </div>
+
+  <p>聊完之后点 <span class="zy-btn">下一步</span>，系统会把你这段对话自动总结成一份精简摘要（这一步在后台完成，即使总结失败也不会打断流程）。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">一句话都没聊，是点不动「下一步」的</span>
+    <p>如果你还没跟 AI 说过任何需求就点「下一步」，系统会拦下来并提示：<strong>「请先与 AI 描述你的需求，至少完成一轮对话后再生成 PRD/TAD」</strong>。这是为了防止用空上下文重新生成、把你之前已经确认过的文档覆盖掉。先老老实实说一句"我要做什么"，再往下走。</p>
+  </div>
+
+  <h3>第 2 步 · 生成 PRD/TAD</h3>
+
+  <p>点完「下一步」，界面会转一圈，显示<strong>「AI 正在撰写 PRD 和 TAD，请稍候...」</strong>。这一步 AI 在做两件事：</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card green">
+      <h4>PRD = 产品需求文档</h4>
+      <p>用大白话讲，PRD 回答的是<strong>"做什么"</strong>：产品背景、目标用户、有哪些功能、每个功能怎么用、什么算做完。它是给"人"看的。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>TAD = 技术架构设计</h4>
+      <p>用大白话讲，TAD 回答的是<strong>"怎么做"</strong>：整体结构、分成哪几个模块、模块之间怎么交互、数据怎么存、怎么部署。它是给"干活的人"看的。</p>
+    </div>
+  </div>
+
+  <p><strong>为什么一定要先有这两份文档？</strong>因为它们是 AI 后面所有工作的"施工图纸"。没有图纸，AI 就凭自己的理解自由发挥，做出来的东西对不对全看运气；有了图纸，AI 是在执行一份你确认过的方案，跑偏的概率大大降低。这也正是「软件工程向导」和普通任务最根本的区别。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">这两份文档存在哪（按软件名隔离）</span>
+    <p>它们会以文件形式保存到你这个项目的工作区里，文件名分别是 <code>PRD.md</code> 和 <code>TAD.md</code>。<strong>每个软件有自己的子目录</strong>，路径形如 <code>{项目工作区}/{软件名称}/PRD.md</code>；模块文档放在 <code>{软件名称}/TAD/</code> 下，开发计划是 <code>{软件名称}/dev-plan.md</code>。软件名称来自「新建任务」弹窗里那个<strong>「软件名称」输入框</strong>（留空则系统按任务标题或序号自动命名）。这样同一个项目里做两个互不相干的软件，<strong>文档不会互相覆盖</strong>。软件修改任务读写的，也是它对应源软件的那个目录。</p>
+    <p>升级前的老项目不受影响：旧路径（项目工作区根目录下的 PRD.md 等）仍然可读，系统在软件子目录里找不到时会<strong>回退读旧位置</strong>，老文件也不会被删。</p>
+  </div>
+
+  <h3>第 3 步 · PRD 确认</h3>
+
+  <p>生成完成后，界面会切换到一个文档预览页。左上角显示文档名 <strong>PRD.md</strong>，右上角有一个按钮可以 <span class="zy-btn ghost">编辑</span> / <span class="zy-btn ghost">预览</span> 来回切换——预览是排版好的样子，编辑是纯文本，你可以直接改。</p>
+
+  <p><strong>非技术背景的你，重点检查这四条：</strong></p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>目标用户对不对</strong>：文档里说的"谁会用这个功能"，跟你心里的答案一致吗</span></li>
+    <li><input type="checkbox"><span><strong>功能边界对不对</strong>：列出来的功能，有没有多做你不想要的，或者漏了你必须有的</span></li>
+    <li><input type="checkbox"><span><strong>验收口径对不对</strong>：文档里写的"什么算做完"，是不是你认可的完成标准</span></li>
+    <li><input type="checkbox"><span><strong>"不做什么"有没有写进去</strong>：明确排除的东西，将来 AI 才不会自作主张加上</span></li>
+  </ul>
+
+  <p>确认没问题，点 <span class="zy-btn">保存并下一步</span>。你刚才在编辑框里做的任何修改，会一起保存下来。</p>
+
+  <h3>第 4 步 · TAD 确认</h3>
+
+  <p>接着是 TAD.md 的预览页，界面和第 3 步一样（文档名变成 <strong>TAD.md</strong>，同样有 编辑 / 预览 切换）。这一步很多人觉得"技术文档我看不懂，直接下一步算了"，其实只看几个点就够了：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>你要看的</th><th>怎么判断</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>技术选型合不合理</td><td>有没有用一个你完全没听过的、听起来很重的技术？不确定就把疑问写下来，下一步问 AI。</td></tr>
+        <tr><td>有没有引入你不懂的依赖</td><td>文档里如果提到"需要接入某某第三方服务"，问问自己愿不愿意为它额外付钱、额外注册账号。</td></tr>
+        <tr><td>部署方式说清楚了吗</td><td>是跑在这个项目自己的服务器上，还是要额外买什么东西？</td></tr>
+        <tr><td>数据表设计覆盖了你的业务吗</td><td>文档列出的数据结构里，有没有你业务里必须记的东西（比如订单号、优惠码、有效期）。缺了就补。</td></tr>
+        <tr><td>模块划分看得懂吗</td><td>后面第 6 步会按这里的模块拆分，所以模块名最好是你也能看懂的词。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>同样，改完点 <span class="zy-btn">保存并下一步</span>。</p>
+
+  <h3>第 5 步 · 评审对话</h3>
+
+  <p>这一步又是一个对话框，输入框占位提示是<strong>「输入评审意见，与 AI 多轮讨论 PRD/TAD...」</strong>。它是一个"提意见"的环节——把你在前两步没搞懂、不放心、想调整的地方，直接说出来。</p>
+
+  <p>聊完之后，点底部的 <span class="zy-btn">应用评审</span> 按钮。这个按钮的作用是：<strong>把你这一轮对话里提的所有意见，交给 AI 去重写 PRD 和 TAD</strong>，把合理的建议吸收进去、把缺陷修正掉。所以"应用评审"不是"确认"，而是"按我说的改一遍文档"。</p>
+
+  <div class="zy-copy"><span class="zy-copy-tag">评审对话 · 提意见模板</span>看了 PRD 和 TAD，我有几点意见：
+1. 【必须改】目标用户漏了"运营同事"，他们需要能在后台创建优惠券，请补上。
+2. 【必须改】"什么算做完"写得太笼统，我希望明确成：输入有效券码后订单金额确实减少，且订单记录里能看到用了哪张券。
+3. 【想确认】TAD 里提到的短信通知，是不是要额外买短信服务？如果成本高，这次先不做。
+4. 【建议】字段命名请用中文注释说明，方便我这种非技术的人看懂。</div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">应用评审会重写文档（但会留上一版）</span>
+    <p>点了「应用评审」，AI 会输出<strong>更新后的完整 PRD 和 TAD</strong>，覆盖原来的版本。覆盖之前，系统会<strong>先把上一版存成 <code>PRD.prev.md</code> / <code>TAD.prev.md</code></strong>——万一改坏了，还有上一版可回看。不过如果你对现有文档很满意、只是随口聊两句，宁可先不点：后面第 6 步生成模块用的就是覆盖后的版本。想再核对一遍，可以退回上一步看文档。</p>
+  </div>
+
+  <h3>第 6 步 · 生成模块</h3>
+
+  <p>点「应用评审」后进入这一步，界面显示<strong>「正在生成模块文档与开发计划...」</strong>。这里解释一个关键概念：</p>
+
+  <p><strong>什么叫"模块"？</strong>就是把一个软件功能，拆成一块块相对独立的部分。比如"优惠券功能"可能被拆成：优惠券管理、券码校验、折扣计算、订单记录、后台配置页。每一块就是一个模块。</p>
+
+  <p>系统会从你确认过的 TAD 里提取出模块清单，然后<strong>为每个模块单独生成一份详细设计文档</strong>，最后再生成一份开发计划。这些文档会保存在项目工作区里（模块文档放在<strong>你这个软件子目录的 <code>TAD/</code></strong> 下，开发计划是 <code>dev-plan.md</code>）。</p>
+
+  <p><strong>模块和任务是什么关系？</strong>模块是"设计层面的划分"，任务才是"执行层面的单位"。最终创建出来的任务，会带上这句指令：参考 PRD、TAD 和开发计划，按模块逐个实现、逐个测试。也就是说，模块清单就是 AI 后面排班干活的顺序表。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">生成失败不会一直转圈</span>
+    <p>第 2 步（生成 PRD/TAD）和第 6 步（生成模块）都要调模型，可能因模型波动失败。失败时界面会显示<strong>失败态</strong>并给出 <span class="zy-btn ghost">重试</span> 按钮，不会卡在"正在生成…"的转圈页让你干等。点「重试」即可原地再来一次；也可以关掉向导稍后从任务列表点「继续规划」重进。另外，「上一步」按钮会把你带回<strong>正确的上一屏</strong>（比如从生成模块回到 PRD/TAD 确认），不会错位。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">模块太多怎么办</span>
+    <p>如果 TAD 写得比较宏大，模块可能很多，生成这一步会比较慢（每个模块都要调一次模型）。如果你觉得模块拆得过细，正确做法是退回第 3/4 步，把 TAD 里的模块划分改粗一点，再重新生成，而不是硬等着。</p>
+  </div>
+
+  <h3>第 7 步 · 完成 / 创建任务</h3>
+
+  <p>最后一步，界面顶部会出现一条绿色的成功提示：<strong>「PRD / TAD / 模块文档已生成完毕」</strong>。下面是一个只读的文本框，标题是<strong>「最终任务提示词（将用于创建任务）：」</strong>，里面就是要交给 AI 执行的完整指令（包含各文档的存放位置和"自主进行、无人值守、拆成 10~200 个小型任务串行实现"这类要求）。</p>
+
+  <p><strong>走到第 7 步本身，任务还没有提交。</strong>这一步只是把"将要交给 AI 的完整提示词"预览给你看，任务仍然停在「规划中」。只有你点了 <span class="zy-btn ok">创建任务</span>，它才真正落地。所以这一步可以安心多看几遍，不满意就点「上一步」回去改。</p>
+
+  <p>确认无误，点底部的 <span class="zy-btn ok">创建任务</span>。屏幕上会提示<strong>「软件工程任务已创建」</strong>，向导关闭，任务列表刷新。</p>
+
+  <p>这时候发生的事情是：任务的提示词被填好了，状态从"规划中"变成<strong>待执行（pending）</strong>，正式进入自动运营的排班，接下来就交给 AI 一轮一轮去做了。具体怎么排班、怎么验收，见第 09 章。</p>
+
+  <p>任务提交之后，这份规划就"锁"住了：在任务列表里，已提交的软件工程任务会多出一个 <span class="zy-btn ghost">查看规划</span> 按钮，点它可以<strong>只读回看</strong>生成的文档和最终提示词，不能再改、也不能重复提交。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">创建任务需要"自动运营"在跑</span>
+    <p>任务创建出来只是"排上了队"。真正开始干活，需要项目的自动运营处于运行状态。如果你的项目是"人工审核"模式，自动运营循环不会自己启动，需要你手动触发任务。这些在第 04 章（运行模式）和第 09 章（自动运营）里讲。</p>
+  </div>
+
+  <h3>完整时间线与心理预期</h3>
+
+  <p>第一次走完整个向导，你心里要有个数，免得中途以为"卡死了"：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>步骤</th><th>大概花多久</th><th>为什么慢 / 会不会卡</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 需求对齐</td><td>你说了算，建议 10–20 分钟</td><td>不慢，取决于你聊得多细。这是<strong>最值得花时间</strong>的一步。</td></tr>
+        <tr><td>2 生成 PRD/TAD</td><td>几分钟</td><td>AI 要写两份长文档，是全程<strong>较慢</strong>的一步。转圈属正常，别重复点。</td></tr>
+        <tr><td>3 PRD 确认</td><td>5–10 分钟</td><td>快慢取决于你读文档的仔细程度。</td></tr>
+        <tr><td>4 TAD 确认</td><td>3–10 分钟</td><td>同上，按上表五个点扫一遍即可。</td></tr>
+        <tr><td>5 评审对话</td><td>5–15 分钟</td><td>提的意见越多，"应用评审"要重写的内容越多，越慢。</td></tr>
+        <tr><td>6 生成模块</td><td>可能最慢</td><td>每个模块各调一次模型，模块多就慢。<strong>最容易在这里等得不耐烦。</strong></td></tr>
+        <tr><td>7 完成</td><td>几秒</td><td>点「创建任务」瞬间完成。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>卡住怎么办：</strong>如果某一步的转圈状态超过了好几分钟还没动静，先回想一下自己点了几次按钮——重复点击可能触发多次生成。如果是生成失败，界面会显示<strong>失败态和一个「重试」按钮</strong>，点它原地重试即可；也可以点 <span class="zy-btn ghost">上一步</span> 退回去再试，或者关掉向导，在任务列表里点 <span class="zy-btn warn">继续规划</span> 重新进入（会回到你上次的步骤）。别忘了：<em>关掉向导不会丢掉已经生成到服务器上的文档，向导进度也会保留</em>。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：七步走完，到底产出了哪些东西？</summary>
+    <div class="zy-acc-body">
+      <p>走完向导，系统会在你这个项目的工作区里留下这些文件，它们也是 AI 之后干活的依据：</p>
+      <div class="zy-table-wrap">
+        <table class="zy-table">
+          <thead><tr><th>文件</th><th>是什么</th><th>哪一步产出</th></tr></thead>
+          <tbody>
+            <tr><td>对话摘要</td><td>第 1 步需求对齐的对话精简总结</td><td>点「下一步」时自动生成</td></tr>
+            <tr><td>PRD.md</td><td>产品需求文档（做什么）</td><td>第 2 步生成，第 3 步你确认</td></tr>
+            <tr><td>TAD.md</td><td>技术架构设计（怎么做）</td><td>第 2 步生成，第 4 步你确认，第 5 步可被评审重写</td></tr>
+            <tr><td>PRD.prev.md / TAD.prev.md</td><td>应用评审前的上一版文档备份</td><td>第 5 步点「应用评审」覆盖前自动留存</td></tr>
+            <tr><td>各模块文档</td><td>每个模块的详细设计，放在软件子目录的 TAD/ 下，按序号命名</td><td>第 6 步生成</td></tr>
+            <tr><td>开发计划</td><td>模块的实现顺序与里程碑</td><td>第 6 步生成</td></tr>
+            <tr><td>最终任务提示词</td><td>交给 AI 执行的完整指令，会写进任务的提示词字段</td><td>第 7 步生成并提交</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>这些文件存在项目自己的工作区里，并且<strong>按软件名称分目录隔离</strong>——每个软件工程任务读写的是自己这个软件名对应的子目录（<span class="zy-field">{项目工作区}/{软件名称}/</span>），下面才放 <span class="zy-field">PRD.md</span> / <span class="zy-field">TAD.md</span> / <span class="zy-field">TAD/*.md</span> / <span class="zy-field">dev-plan.md</span>；软件修改任务则读写它「关联软件工程」所指向的那个源软件目录。所以同一个项目下的多个软件工程任务<strong>不会互相覆盖 PRD/TAD</strong>。升级前落盘的旧路径（放在项目级、没有软件子目录）在首次读取时会自动回退到旧位置，老项目不受影响。</p>
+    </div>
+  </details>
+
+  <h2>三、正道 B：修改已有软件功能（软件修改弹窗）</h2>
+
+  <p>做好的功能要改，走的是「软件修改」。进入方式：任务管理 → <span class="zy-btn">新建任务</span> → 任务类型选 <span class="zy-field">软件修改</span> → 在「关联软件工程」里选好要改的那个工程 → 填好名称和描述 → 点 <span class="zy-btn">保存</span>。</p>
+
+  <p>弹出来的对话框标题是<strong>「软件修改」</strong>。里面的元素不多，但每一个都很关键：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>界面元素（原文）</th><th>作用</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>源软件工程 / 工程 ID</td><td>顶部两行只读信息，显示你要改的是哪个工程，防止改错对象。</td></tr>
+        <tr><td>聊天区 + 输入框<span class="zy-field">描述你想如何修改这个软件工程...</span></td><td>在这里跟 AI 说你要怎么改。右边是 <span class="zy-btn">发送</span> 按钮。</td></tr>
+        <tr><td>任务提示词草稿 + <span class="zy-btn ghost">再生成一次</span></td><td>AI 会把"改法"整理成一段任务提示词，自动填进下面的草稿框。</td></tr>
+        <tr><td>草稿输入框<span class="zy-field">AI 回复将自动填入此处，可手动编辑后再确认创建</span></td><td>这是最终交给 AI 执行的指令，<strong>你可以手动改</strong>。</td></tr>
+        <tr><td><span class="zy-btn ghost">取消</span> / <span class="zy-btn">确认创建任务</span></td><td>底部两个按钮。确认后提示「软件修改任务已创建」。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>这个弹窗的精髓：两段式设计</h3>
+
+  <p>它不是让你"直接填一句要求就干活"，而是把动作拆成了两段：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>第一段：先跟 AI 把需求聊清楚</h4>
+      <p>你在聊天区用大白话描述想怎么改。AI 会结合这个工程已有的需求文档、设计文档和代码目录结构来理解你的意思，并且可以反问你。聊的过程中，它会在草稿框里帮你把"改法"整理成一段专业、完整的任务提示词。</p>
+    </li>
+    <li>
+      <h4>第二段：草稿定型了，再创建任务</h4>
+      <p>你看草稿框里的提示词，觉得到位了就点 <span class="zy-btn">确认创建任务</span>。如果还差点意思，可以直接在草稿框里手改，或者点 <span class="zy-btn ghost">再生成一次</span> 让 AI 重写一版。</p>
+    </li>
+  </ol>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">千万不要草稿为空就点"确认创建任务"</span>
+    <p>如果草稿框还是空的（你一次都没跟 AI 聊过，或者聊了但 AI 还没生成内容），点确认会弹出一条警告：<strong>「任务提示词草稿为空，请先与 AI 对话生成」</strong>，任务不会被创建。</p>
+    <p>这不是系统在为难你，而是在保护你：没有提示词的任务等于没写清楚需求，创建出来也是白跑。请先老老实实跟 AI 聊，让草稿生成出来。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">关掉弹窗会有确认提示</span>
+    <p>如果你在聊天过程中不小心点了右上角关闭，系统会问你：<strong>「关闭将保留进度，任务仍为「规划中」，可在任务列表点「继续修改」接着做。确定要退出吗？」</strong>，两个选项是 <span class="zy-btn ghost">继续编辑</span> 和 <span class="zy-btn ghost">退出</span>。选「继续编辑」就回到对话框；选「退出」也不会白聊——任务会保留为「规划中」，稍后可在任务列表点 <span class="zy-btn warn">继续修改</span> 接着做。</p>
+    <p>小提醒：点 <span class="zy-btn ghost">再生成一次</span> 时，如果草稿框里已经有内容，系统会先二次确认：<strong>「将用 AI 的新结果覆盖当前草稿，可稍后用「还原上一版」找回。是否继续？」</strong>，两个选项是 <span class="zy-btn ghost">取消</span> 和 <span class="zy-btn ghost">继续生成</span>。系统会拿着<strong>当前草稿</strong>去请 AI 重写（草稿为空时则是从零生成），生成结果会覆盖草稿框里的内容；覆盖前的那一版会被记下来，草稿框上方出现 <span class="zy-btn ghost">还原上一版</span> 按钮，点一下即可找回。稳妥起见，动手重生成前也可以先把满意的段落复制到别处存一下。</p>
+  </div>
+
+  <h3>修改需求描述模板</h3>
+
+  <p>在聊天区里，按这个结构说，AI 一次就能抓住重点：</p>
+
+  <div class="zy-copy"><span class="zy-copy-tag">软件修改 · 需求描述模板</span>改什么：把首页 Hero 区的 CTA 按钮文案从「了解更多」改成「免费试用」。
+为什么改：现在的文案转化率低，想让人一眼知道点了能试用。
+改完应该是什么样：按钮上显示「免费试用」，点击后跳转到注册页 /register。
+不能影响什么：不要动按钮的位置和大小，不要影响手机端的显示效果，其它页面不受影响。
+怎么验证：在电脑和手机上都打开首页，确认按钮文案变了、点了能跳到注册页，且页面其它部分没变化。</div>
+
+  <h3>三个对照案例：模糊 vs 可执行</h3>
+
+  <div class="zy-do-dont">
+    <div class="no">
+      <h4>❌ 别这样说</h4>
+      <p>"优化一下首页。"</p>
+      <p>AI 不知道"优化"是指改文案、改配色、改排版还是改速度，只能自己猜，结果往往不是你想要的。</p>
+    </div>
+    <div class="yes">
+      <h4>✅ 要这样说</h4>
+      <p>"把首页 Hero 区的 CTA 按钮从『了解更多』改成『免费试用』，点击后跳转注册页，且不影响移动端布局。"</p>
+      <p>改了哪里、改成什么、跳到哪里、不能碰什么，四件事全说清了。</p>
+    </div>
+  </div>
+
+  <div class="zy-do-dont">
+    <div class="no">
+      <h4>❌ 别这样说</h4>
+      <p>"结算页有点问题，你看看吧。"</p>
+      <p>没有现象描述，AI 得先猜是什么问题，甚至可能"修"一个并不存在的毛病。</p>
+    </div>
+    <div class="yes">
+      <h4>✅ 要这样说</h4>
+      <p>"结算页输入优惠券码后点『应用』没有反应，控制台报错。期望：输入有效券码后订单金额立刻减少并显示折扣。请只修这个问题，不要改动其它逻辑。"</p>
+      <p>现象、期望结果、影响范围都给了，AI 能直接定位。</p>
+    </div>
+  </div>
+
+  <div class="zy-do-dont">
+    <div class="no">
+      <h4>❌ 别这样说</h4>
+      <p>"加个会员功能，顺便把积分也做了，最好再来个等级体系。"</p>
+      <p>一次塞三个大功能，AI 每样都做得半吊子，验收时你也不知道算不算完成。</p>
+    </div>
+    <div class="yes">
+      <h4>✅ 要这样说</h4>
+      <p>"这次只做会员的基础部分：注册用户可以在个人中心看到一个『会员』页，显示当前等级（先固定为普通会员）。积分和等级规则下一轮再做。"</p>
+      <p>范围收住、边界划清，这一轮能真正做完、验收通过。</p>
+    </div>
+  </div>
+
+  <h2>四、什么情况才该用普通「新建任务」</h2>
+
+  <p>普通「新建任务」（任务类型保持「通用任务」）不是"低级选项"，它只是<strong>不做设计阶段</strong>的直接执行。用对地方，它又快又好。</p>
+
+  <p><strong>适合用通用任务的场景：</strong></p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card"><h4>调研与分析</h4><p>竞品调研、市场分析、数据统计口径梳理。</p></div>
+    <div class="zy-card"><h4>文案与内容</h4><p>推广文案、邮件正文、社交媒体帖子。</p></div>
+    <div class="zy-card"><h4>资料整理</h4><p>把一批零散材料梳理成结构化文档。</p></div>
+    <div class="zy-card"><h4>素材生成</h4><p>生成图片、视频、歌曲等创意素材。</p></div>
+    <div class="zy-card"><h4>一次性脚本</h4><p>跑一次就完事的小工具、批量处理。</p></div>
+    <div class="zy-card"><h4>非软件交付物</h4><p>任何交付物不是代码/网页/可运行程序的工作。</p></div>
+  </div>
+
+  <h3>引擎怎么选：循环执行 vs Agent 智能体</h3>
+
+  <p>"引擎类型"决定了 AI 用哪种方式干活，界面上有两个选项：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>引擎</th><th>界面叫法</th><th>适合什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>loop</td><td><span class="zy-field">循环执行</span>（默认）</td><td>复杂、需要写代码、耗时长的工作。会派一个"外部工人"在项目服务器上持续跑，能真正读写文件、跑命令。<strong>软件类工作一律选它。</strong></td></tr>
+        <tr><td>agent</td><td><span class="zy-field">Agent 智能体</span></td><td>信息整合、调用接口、快速问答这类轻量任务。在系统内部直接调模型完成，不落地成代码文件。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>如果你把任务类型选成了「新建软件工程」或「软件修改」，同时又选了 Agent 智能体，界面上会跳出这样一条告警（原文）：</p>
+
+  <blockquote>Agent 引擎可能无法完成软件交付，仅适合简单项目，建议使用循环执行</blockquote>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这条告警只在软件类任务上出现</span>
+    <p>注意：这条提示<strong>只有"任务类型不是通用任务"且"选了 Agent 引擎"时才会出现</strong>。也就是说，系统认为"软件交付就该用循环执行"。看到它，请把引擎改回 <span class="zy-field">循环执行</span>。</p>
+  </div>
+
+  <p><strong>一句话口诀：</strong>交付物是<strong>代码 / 网页 / 能运行的东西</strong>，就走软件工程或软件修改，并选循环执行；交付物是<strong>文字 / 图表 / 素材</strong>，就用普通任务，引擎按需要选。</p>
+
+  <h2>五、软件工程与项目的其他部分怎么联动</h2>
+
+  <p>软件工程不是一个孤立的对话框，它和项目里好几个地方是打通的。知道这些联动，你能少踩很多坑。</p>
+
+  <h3>与任务列表：规划中的任务可以"继续"</h3>
+
+  <p>软件工程和软件修改任务在创建时会处于<strong>规划中</strong>状态，在任务列表的"类型"列会显示 <span class="zy-badge blue">软件工程</span> 或 <span class="zy-badge amber">软件修改</span> 标签。处于规划中的任务，操作列会多出 <span class="zy-btn warn">继续规划</span>（软件工程）或 <span class="zy-btn warn">继续修改</span>（软件修改）按钮，点它就能回到向导/弹窗接着做。</p>
+
+  <h3>与知识库：让 AI 参考你的产品资料</h3>
+
+  <p>如果 AI 在设计或开发时能读到你项目里的产品资料、行业知识，做出来的东西会更贴近你的业务。做法是先把资料放进项目知识库（见第 07 章），AI 在开发过程中就会参考。软件修改对话框里的 AI，也会读取源工程的需求文档、设计文档和代码目录结构，这就是它"看懂现状"的方式。</p>
+
+  <h3>与测试：软件类任务完成后有测试记录留痕</h3>
+
+  <p>软件类任务执行时会产生测试运行记录。在自动运营的快捷入口里有一个 <strong>测试运行</strong>，打开是「测试运行记录」页面，列表里有这些列：测试 ID、任务、通过（<span class="zy-badge green">通过</span> / <span class="zy-badge red">未通过</span>）、引擎、改动说明、测试目标、耗时、时间、详情。点开详情能看到「输出尾部」和「错误信息」，用来判断这次改动到底测出什么问题。</p>
+
+  <h3>与部署：改动上线要靠"自动构建部署"</h3>
+
+  <p>代码写完要真正跑起来（部署），需要项目开启对应功能。路径是：设置 → 功能管理 → 选中项目，打开 <strong>「自动构建部署」</strong> 开关（它的内部代号是 deploy）。没开这个开关，AI 的改动可能停留在"代码写好了"但没上线。功能管理页的完整说明见第 05 章。</p>
+
+  <h3>与验收：独立验收 Agent 会对照任务描述判定</h3>
+
+  <p>任务做完后，会有<strong>独立的验收 Agent</strong> 去对照任务的描述判断"到底做没做对"，结论可能是通过、返工或驳回（三权分立验收，见第 09 章）。这就是为什么"怎么验证"一定要写进需求——你写清楚了验收标准，验收 Agent 才有依据；你写"你懂的"，它就只能按它自己的理解判。</p>
+
+  <h3>与备份：改动前先确认自动备份已开</h3>
+
+  <p>改代码有改坏的风险。项目里有一个「自动备份」页面（在运维与报告分组下），对应的功能开关是 <strong>「自动备份」</strong>（内部代号 backup）。在让 AI 大改之前，建议先确认它是开着的，这样出了问题才有东西可以回滚。</p>
+
+  <h2>六、需求写得好，返工少一半</h2>
+
+  <p>这一节是给非技术背景的你准备的。你不需要懂代码，但你需要会把想法"翻译"成 AI 能执行的需求。记住一个四要素模板：</p>
+
+  <div class="zy-grid c4">
+    <div class="zy-card purple"><h4>做什么</h4><p>一句话说清这个功能/改动是干嘛的。</p></div>
+    <div class="zy-card purple"><h4>给谁用</h4><p>谁会用到它，他们的身份是什么。</p></div>
+    <div class="zy-card purple"><h4>什么样算做完</h4><p>验收标准。做到什么程度你才满意。</p></div>
+    <div class="zy-card purple"><h4>不能碰什么</h4><p>边界。哪些地方不许动、哪些这次不做。</p></div>
+  </div>
+
+  <h3>五个常见坏习惯</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>坏习惯</th><th>为什么不行</th><th>换种说法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>说"优化一下"</td><td>"优化"没有方向，AI 会猜，猜错就得返工。</td><td>说清优化什么、优化到什么程度。</td></tr>
+        <tr><td>说"美化一下"</td><td>审美是主观的，AI 无法知道你喜欢哪种风格。</td><td>给出参考对象或具体元素（颜色、字号、间距）。</td></tr>
+        <tr><td>说"差不多就行"</td><td>"差不多"意味着验收没有标准，返工判定也无从谈起。</td><td>写出最低可接受的标准。</td></tr>
+        <tr><td>说"你懂的"</td><td>AI 不懂你的上下文，它只会按最常见的做法来。</td><td>把你知道的背景补出来。</td></tr>
+        <tr><td>一次说五个需求</td><td>做不精、验收难、出问题难定位。</td><td>一次一个，做完验收再提下一个。</td></tr>
+        <tr><td>只描述界面不描述规则</td><td>比如只说"有个输入框"，没说输入什么、不对时怎么办。</td><td>把背后的业务规则也写出来。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>从模糊想法到可执行需求：一个改写示范</h3>
+
+  <p>假设你的原始想法是：<em>"我想让客户能领优惠券，这样他们就更愿意下单。"</em> 这句话对 AI 来说太模糊了。我们一步步把它拆开：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>拆出"做什么"</h4>
+      <p>原始：客户能领优惠券。<br>改写：做一个优惠券功能——运营可以创建优惠券并设置满减规则与有效期；买家可以在活动页领取优惠券。</p>
+    </li>
+    <li>
+      <h4>拆出"给谁用"</h4>
+      <p>两类人：<strong>运营同事</strong>（创建和管理券）、<strong>已注册买家</strong>（领取和使用券）。把这两类人写清楚，AI 才知道要做两个入口。</p>
+    </li>
+    <li>
+      <h4>拆出"什么样算做完"</h4>
+      <p>写成可检查的标准：运营能创建一张"满 100 减 20"的券；买家领取后能在"我的优惠券"里看到；下单时能选用，且订单金额确实减了 20；同一张券只能用一次。</p>
+    </li>
+    <li>
+      <h4>拆出"不能碰什么"</h4>
+      <p>这次不做分享转赠、不做多券叠加、不改动现有的订单结算流程。</p>
+    </li>
+    <li>
+      <h4>最后拼成一段可以直接用的话</h4>
+      <p>把上面四块按顺序连起来，就是一份 AI 能直接执行的需求。</p>
+    </li>
+  </ol>
+
+  <div class="zy-copy"><span class="zy-copy-tag">改写后的完整需求（可直接粘贴）</span>【做什么】做一个优惠券功能：运营可以创建优惠券并设置满减规则和有效期；买家可以在活动页领取，并在下单时使用。
+【给谁用】运营同事（后台创建、管理券）；已注册买家（领取、使用）。
+【什么样算做完】1）运营能创建"满 100 减 20、有效期 7 天"的券；2）买家领取后能在"我的优惠券"看到；3）下单时可选用，订单金额确实减 20；4）同一张券只能使用一次，过期后不能再用。
+【不能碰什么】这次不做分享转赠、不做多券叠加、不改动现有订单结算流程。</div>
+
+  <h2>七、版本迭代怎么管</h2>
+
+  <p>软件功能很少一次做到位，都是一轮一轮改出来的。用这套引擎，迭代要注意四件事：</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card green">
+      <h4>小步快跑，一次一个功能</h4>
+      <p>不要一次提十个需求。一轮改一个，改完验收通过，再进下一个。这既省预算，也让问题好定位。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>每轮改完先验收再往下</h4>
+      <p>任务跑完后看看结果对不对（测试运行记录、验收记录），确认没问题再提下一轮需求。别在没验收的东西上继续叠需求。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>记录每一次改动</h4>
+      <p>系统在审计与治理页有「变更日志」标签页，会记录关键改动。想追"这个功能什么时候改的、改了啥"，来这里查。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>出问题先回滚</h4>
+      <p>改坏了别急着让 AI "再改回去"，优先用备份恢复到改动前的状态，再重新提一次更清楚的需求。</p>
+    </div>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">迭代心法</span>
+    <p>把软件工程当成"一颗种子"，第一轮只种下最小可用的版本，之后每一轮都是小小的改进。你只需要在每一轮里做两件事：<strong>把需求说清楚、把结果验一遍</strong>。其余的拆模块、写代码、测试，都交给 AI。</p>
+  </div>
+
+  <h2>八、本章小结与下一步</h2>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>想做新功能 → 任务类型选<strong>「新建软件工程」</strong>，走七步向导；改已有功能 → 选<strong>「软件修改」</strong>，先选源工程再跟 AI 聊；只要文档/分析/素材 → 用<strong>通用任务</strong>。</span></li>
+    <li><input type="checkbox"><span>不要直接新建一个"开发某某功能"的通用任务，那等于让 AI 自由发挥，返工率高。</span></li>
+    <li><input type="checkbox"><span>软件工程向导七步：需求对齐 → 生成 PRD/TAD → PRD 确认 → TAD 确认 → 评审对话 → 生成模块 → 完成。PRD 是"做什么"，TAD 是"怎么做"。</span></li>
+    <li><input type="checkbox"><span>软件修改弹窗是"两段式"：先跟 AI 把改法聊清楚、生成提示词草稿，再点「确认创建任务」。草稿为空不能创建。</span></li>
+    <li><input type="checkbox"><span>软件类工作一律选<strong>循环执行</strong>引擎；写需求记得带上"做什么 / 给谁用 / 什么样算做完 / 不能碰什么"四要素。</span></li>
+  </ul>
+
+  <p>到这里，你已经知道"怎么把一件事交给 AI 去做"。但任务点下去之后，系统内部到底发生了什么——谁在执行、什么时候自动调用智能体、钱是怎么花的、失败了怎么办？下一章我们把这条链路完整走一遍。</p>
+
+  <div class="zy-quick">
+    <a href="09-自动运营.html">上一章：自动运营：任务、轮次与验收</a>
+    <a href="11-任务执行链路.html">下一章：发起任务后，系统做了什么</a>
+    <a href="07-知识与资料导入.html">相关：知识库与资料导入</a>
+    <a href="05-界面导览-平台.html">相关：界面导览（平台侧）</a>
+  </div>
+
+  <h2>附录 A · 需求对齐话术模板</h2>
+
+  <p>下面每条都可以直接复制到「需求对齐」对话框或「软件修改」聊天区里，把方括号里的内容换成你自己的。它们的共同点是：说清了范围、给了可验证的标准、划了边界。</p>
+
+  <div class="zy-copy"><span class="zy-copy-tag">场景 1 · 全新做一个小工具</span>我的项目是【跨境电商独立站】。我想做一个小工具：【一个在页面上把人民币价格换算成美元显示的小工具】。
+给谁用：【浏览商品的海外买家】。
+核心场景：（1）商品价格旁显示一个美元估算价；（2）汇率按固定值算即可，先不做实时汇率；（3）鼠标悬停显示汇率说明。
+不做什么：不涉及支付，不做多币种切换，不做后台管理。
+预算不宽裕，请尽量简单，一个页面搞定。</div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">场景 2 · 给现有系统加一个模块</span>我的项目里已经有一个【订单管理系统】。现在想给它加一个【退款管理】模块。
+做什么：客服可以在后台对某个订单发起退款，填写退款原因和金额，退款后订单状态变为"已退款"。
+给谁用：客服人员；财务需要能导出退款记录。
+核心场景：（1）客服在订单详情点"发起退款"；（2）填金额和原因、提交；（3）订单状态更新，记录一条退款流水。
+不做什么：这次不做自动对接支付渠道的真实打款，只做内部记录。
+请把它设计成和现有系统一致的风格，不要改动已有的下单流程。</div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">场景 3 · 改造一个已有页面</span>我的项目里已经有一个【产品列表页】，现在想改造它。
+改什么：列表顶部加一个搜索框和"分类筛选"下拉；每张产品卡片上显示价格。
+为什么改：用户反馈商品太多不好找。
+改完应该是什么样：搜索框能按名称模糊搜；筛选下拉能按分类过滤；搜索和筛选可以同时生效。
+不能影响什么：不要改动卡片的整体布局和分页逻辑，移动端也要正常。
+怎么验证：输入关键词能筛出对应商品，选分类能过滤，清空后恢复全部。</div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">场景 4 · 修一个具体 bug</span>我的项目是【跨境电商独立站】，有一个 bug 要修。
+现象：在【结算页】输入优惠券码后点"应用"，页面没有任何反应，也不报错。
+期望：输入有效券码后，订单金额立刻减少并显示"已优惠 ¥X"；输入无效券码时给出"优惠码无效"的提示。
+复现步骤：加入一件商品 → 进入结算页 → 输入券码 → 点应用。
+不能影响什么：只修这一个问题，不要改动其它结算逻辑。
+怎么验证：分别用一个有效和一个无效的券码测一遍，确认两种情况的反应都正确。</div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">场景 5 · 做数据导入导出功能</span>我的项目是【订单管理系统】。我想加一个【订单数据导出】功能。
+做什么：后台能把订单列表按当前筛选条件导出成 Excel 文件。
+给谁用：财务和运营同事。
+核心场景：（1）在订单列表选好时间范围和状态；（2）点"导出"，下载一个 Excel 文件。
+要包含哪些列：订单号、下单时间、客户名、商品、金额、状态。
+不做什么：这次只做导出，不做导入。
+怎么验证：导出的文件能用 Excel 打开，行数和页面上的订单数一致，列名正确。</div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">场景 6 · 做权限相关改动</span>我的项目是【企业管理后台】。我想调整【权限】相关的功能。
+做什么：增加一个"财务"角色，这个角色只能看到账本和订单，看不到客户资料和营销页面。
+给谁用：公司的财务同事。
+核心场景：（1）管理员在成员管理里把某个成员的角色设为"财务"；（2）该成员登录后，菜单里只有他有权限的页面。
+不能影响什么：不要改动现有其它角色的权限；管理员角色不受影响。
+怎么验证：分别用管理员和财务账号登录，确认财务账号看不到不该看的菜单和页面。注意这是一个安全相关的改动，请务必把校验做在服务端，不能只藏菜单。</div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">场景 7 · 接入一个第三方服务</span>我的项目是【订单管理系统】。我想接入【短信通知】功能。
+做什么：订单状态变成"已发货"时，自动给买家发一条短信。
+给谁用：下了单的买家。
+核心场景：（1）客服在后台把订单标记为已发货；（2）系统给该订单的收货手机号发一条短信。
+必须先回答我的问题：用哪家短信服务、大概多少钱一条？如果要额外注册账号或充值，请先告诉我，我确认了再做。
+不做什么：这次只做"发货通知"这一种短信，不做营销短信、不做短信回复。
+怎么验证：把一条测试订单标记为已发货，确认能收到短信，且只发一次。</div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">场景 8 · 做一个后台管理页面</span>我的项目是【跨境电商独立站】。我想加一个后台页面，用来管理【首页轮播图】。
+做什么：运营可以在后台增删改首页的轮播图（图片 + 跳转链接 + 排序）。
+给谁用：运营同事。
+核心场景：（1）进入后台"轮播图管理"页；（2）上传图片、填跳转链接、拖拽调整顺序；（3）保存后首页按新顺序展示。
+要包含哪些字段：图片、跳转链接、排序、是否启用。
+不能影响什么：不要改动首页其它板块；图片太大的时候要有提示。
+怎么验证：上传两张图、调整顺序、保存，回到首页确认顺序变了；禁用某张后首页不再显示它。</div>
+
+  <h2>附录 B · 软件工程向导七步检查清单</h2>
+
+  <p>每一步都给你"完成标志 / 你要检查什么 / 常见坑"，可以逐条勾选。</p>
+
+  <details class="zy-acc">
+    <summary>第 1 步 · 需求对齐</summary>
+    <div class="zy-acc-body">
+      <ul class="zy-check">
+        <li><input type="checkbox"><span><strong>完成标志：</strong>你能用一句话复述 AI 理解的需求，并且觉得"对"。</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>做什么 / 给谁用 / 核心场景 / 不做什么，四件事都说了吗？</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>有没有模糊词（优化、美化、差不多）还留在对话里？</span></li>
+        <li><input type="checkbox"><span><strong>常见坑：</strong>只回一句"你看着办"，导致 AI 全靠猜。</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>第 2 步 · 生成 PRD/TAD</summary>
+    <div class="zy-acc-body">
+      <ul class="zy-check">
+        <li><input type="checkbox"><span><strong>完成标志：</strong>界面从"AI 正在撰写 PRD 和 TAD"跳到了 PRD 预览页。</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>有没有出现错误提示？如果长时间没动静，不要重复点按钮。</span></li>
+        <li><input type="checkbox"><span><strong>常见坑：</strong>以为这一步是"已经做完"，其实它只是生成了两份文档，还没执行。</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>第 3 步 · PRD 确认</summary>
+    <div class="zy-acc-body">
+      <ul class="zy-check">
+        <li><input type="checkbox"><span><strong>完成标志：</strong>看完 PRD，目标用户、功能边界、"什么算做完"你都认可。</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>"不做什么"有没有明确写出来？</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>有没有多做你不需要的功能？多余的功能也意味着多余的花费。</span></li>
+        <li><input type="checkbox"><span><strong>常见坑：</strong>懒得读，直接点下一步，结果把错误的需求执行了下去。</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>第 4 步 · TAD 确认</summary>
+    <div class="zy-acc-body">
+      <ul class="zy-check">
+        <li><input type="checkbox"><span><strong>完成标志：</strong>技术选型没引入你不懂的依赖，数据设计覆盖了你的业务字段。</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>模块名你看得懂吗（后面按它拆任务）？</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>有没有提到要额外付费/额外注册的第三方服务？</span></li>
+        <li><input type="checkbox"><span><strong>常见坑：</strong>觉得"技术的东西我看不懂"就跳过，但后面所有工作都基于它。</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>第 5 步 · 评审对话</summary>
+    <div class="zy-acc-body">
+      <ul class="zy-check">
+        <li><input type="checkbox"><span><strong>完成标志：</strong>你提的意见 AI 都回应了，点「应用评审」后文档被更新。</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>意见要说清"哪一句要改成什么"，别只说"不太好"。</span></li>
+        <li><input type="checkbox"><span><strong>常见坑：</strong>没意见也点了「应用评审」，等于让 AI 把文档重写一遍，可能白改。</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>第 6 步 · 生成模块</summary>
+    <div class="zy-acc-body">
+      <ul class="zy-check">
+        <li><input type="checkbox"><span><strong>完成标志：</strong>界面走到第 7 步，说明模块文档和开发计划都生成完了。</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>模块是不是拆得过细（会拖慢进度、增加花费）？</span></li>
+        <li><input type="checkbox"><span><strong>常见坑：</strong>这一步最慢，误以为死机了，反复退出重进。</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="zy-acc">
+    <summary>第 7 步 · 完成 / 创建任务</summary>
+    <div class="zy-acc-body">
+      <ul class="zy-check">
+        <li><input type="checkbox"><span><strong>完成标志：</strong>点「创建任务」后提示"软件工程任务已创建"，任务列表里状态变为待执行。</span></li>
+        <li><input type="checkbox"><span><strong>检查：</strong>项目的自动运营是否在运行？不然任务只是排队、不会自己动。</span></li>
+        <li><input type="checkbox"><span><strong>常见坑：</strong>以为点了「创建任务」= 活已经干完，其实这只是"刚刚排班"。</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <h2>附录 C · 任务类型与引擎选择决策表</h2>
+
+  <p>一张表把"我想做 X"该选什么全部给全。时间片权重和优先级是建议值，可按实际情况调整。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>我想做 X</th><th>任务类型</th><th>引擎</th><th>时间片权重</th><th>优先级</th><th>前置条件</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>从零做一个新的软件功能</td><td>新建软件工程</td><td>循环执行</td><td>3–5</td><td>P1</td><td>需求想清楚；预算充足</td></tr>
+        <tr><td>给现有系统加一个模块</td><td>新建软件工程</td><td>循环执行</td><td>3–5</td><td>P1</td><td>已有工程在跑，避免同时改同一块</td></tr>
+        <tr><td>给现有系统加一个小功能</td><td>软件修改</td><td>循环执行</td><td>2–3</td><td>P2</td><td>必须先有源软件工程</td></tr>
+        <tr><td>改造一个已有页面</td><td>软件修改</td><td>循环执行</td><td>2–3</td><td>P2</td><td>必须先有源软件工程</td></tr>
+        <tr><td>修一个具体 bug</td><td>软件修改</td><td>循环执行</td><td>1–2</td><td>P0–P1</td><td>能描述现象与复现步骤</td></tr>
+        <tr><td>改文案 / 按钮颜色等小改动</td><td>软件修改</td><td>循环执行</td><td>1</td><td>P3</td><td>必须先有源软件工程</td></tr>
+        <tr><td>做数据导入 / 导出</td><td>新建软件工程</td><td>循环执行</td><td>2–4</td><td>P2</td><td>明确要哪些字段、什么格式</td></tr>
+        <tr><td>做登录 / 注册 / 权限</td><td>新建软件工程 或 软件修改</td><td>循环执行</td><td>3–5</td><td>P0–P1</td><td>安全敏感，务必先做设计确认</td></tr>
+        <tr><td>做一个对外网页 / 落地页</td><td>新建软件工程</td><td>循环执行</td><td>2–4</td><td>P2</td><td>有明确的文案与素材</td></tr>
+        <tr><td>接入第三方接口（支付/物流/短信）</td><td>新建软件工程</td><td>循环执行</td><td>3–5</td><td>P1</td><td>确认是否要额外付费、密钥谁提供</td></tr>
+        <tr><td>优化现有功能性能</td><td>软件修改</td><td>循环执行</td><td>2–4</td><td>P2</td><td>能指出慢在哪、期望多快</td></tr>
+        <tr><td>竞品调研</td><td>通用任务</td><td>Agent 智能体</td><td>1–2</td><td>P2</td><td>无</td></tr>
+        <tr><td>市场 / 数据分析</td><td>通用任务</td><td>Agent 智能体</td><td>1–3</td><td>P2</td><td>数据源已接入（如需要）</td></tr>
+        <tr><td>写推广文案 / 邮件</td><td>通用任务</td><td>Agent 智能体</td><td>1</td><td>P2</td><td>无</td></tr>
+        <tr><td>整理一批资料入库</td><td>通用任务</td><td>Agent 智能体</td><td>1</td><td>P3</td><td>资料已备齐</td></tr>
+        <tr><td>生成图片 / 视频素材</td><td>通用任务（或用媒体生成中心）</td><td>Agent 智能体</td><td>1</td><td>P2</td><td>预算里有图片/视频额度</td></tr>
+        <tr><td>跑一次性脚本 / 批量处理</td><td>通用任务</td><td>循环执行</td><td>1–2</td><td>P3</td><td>想清楚输入与输出</td></tr>
+        <tr><td>给文档做翻译 / 摘要</td><td>通用任务</td><td>Agent 智能体</td><td>1</td><td>P3</td><td>无</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">关于时间片权重</span>
+    <p>时间片权重越大，每轮分给这个任务的时间越多。软件类任务通常活重、耗时长，建议给 3–5；只有小改动才用 1–2。调度机制详见第 09 章。</p>
+  </div>
+
+  <h2>附录 D · 一个完整案例的文档样例结构</h2>
+
+  <p>以"给跨境电商独立站加一个优惠券功能"为例，让你知道 AI 产出的 PRD 和 TAD 大概长什么样、你该看哪里。</p>
+
+  <h3>PRD.md 该包含哪些小节</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>小节</th><th>写了什么（人话）</th><th>你该看哪里</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>产品背景与目标</td><td>为什么要做优惠券，想解决什么问题（比如提升下单转化）。</td><td>目标是不是你想要的。</td></tr>
+        <tr><td>目标用户与使用场景</td><td>谁用（运营、买家），从进入到完成走哪几步。</td><td>人对了没、场景全不全。</td></tr>
+        <tr><td>核心功能需求</td><td>分模块列出要做哪些功能（创建券、领取、校验、使用、记录）。</td><td>有没有多做/漏做。</td></tr>
+        <tr><td>非功能需求</td><td>性能、安全、可用性上的要求（比如"券码不能被人猜出来"）。</td><td>有没有你特别在意的点。</td></tr>
+        <tr><td>数据与接口边界</td><td>要记哪些数据（券码、折扣、有效期、使用记录）。</td><td>业务上必须记的字段有没有。</td></tr>
+        <tr><td>验收标准与里程碑</td><td>什么算做完（输入有效券码金额确实减少）；分几步交付。</td><td><strong>重点看</strong>，这就是验收依据。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>TAD.md 该包含哪些小节</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>小节</th><th>写了什么（人话）</th><th>你该看哪里</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>整体架构与技术选型</td><td>用什么技术做、大概怎么搭。</td><td>有没有引入你不懂的、要额外花钱的东西。</td></tr>
+        <tr><td>模块划分</td><td>把功能拆成哪几块（如优惠券管理、券码校验、折扣计算）。</td><td>模块名你看得懂吗；拆得合不合理。</td></tr>
+        <tr><td>模块间接口与数据流</td><td>这些模块之间怎么传数据。</td><td>粗略看，重点是流程是否顺畅。</td></tr>
+        <tr><td>数据库 / 存储设计</td><td>要用哪些数据表、字段是什么。</td><td>你业务里的关键字段（订单号、券码、有效期）有没有。</td></tr>
+        <tr><td>关键流程</td><td>领券流程、用券流程分别怎么走。</td><td>跟你想的业务规则一致吗。</td></tr>
+        <tr><td>部署与安全</td><td>跑在哪、怎么保证安全。</td><td>有没有额外部署要求。</td></tr>
+        <tr><td>风险与演进路线</td><td>这一版先做什么、以后可以加什么。</td><td>确认"不做的部分"确实被排到了以后。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">看文档的诀窍</span>
+    <p>你不需要逐字读完。PRD 重点看"目标用户、核心功能、验收标准"三节；TAD 重点看"技术选型、模块划分、数据库设计"三节。其余内容扫一眼，有疑问就在第 5 步「评审对话」里问出来。</p>
+  </div>
+
+  <p>看到这里，你已经掌握了"把软件功能交给 AI"的两条正道。接下来第 11 章会带你走一遍任务执行的全过程，看看这个任务从创建到跑完，中间到底发生了什么。</p>
+
+  <h2>附录 E · 软件功能开发常见问题速查</h2>
+
+  <details class="zy-acc faq">
+    <summary>我点开向导做到一半关掉了，前面的努力白费了吗？</summary>
+    <div class="zy-acc-body">
+      <p>不会。已经<strong>生成到服务器上的文档</strong>（PRD、TAD、模块文档、开发计划）会保留下来，而且<strong>向导进度也会保留</strong>——关窗或刷新后，在任务列表里点 <span class="zy-btn warn">继续规划</span>（软件修改任务则是 <span class="zy-btn warn">继续修改</span>）重新进入，会直接回到你上次停留的那一步接着做，不用从"需求对齐"重新开聊。</p>
+      <p>所以：不管你的需求聊没聊完，只要任务还没被删，重新进入向导都能从原步骤继续。关掉向导前系统也会提示你：任务会保留为「规划中」，可稍后继续。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>能不能跳过后面的确认步骤，快速创建任务？</summary>
+    <div class="zy-acc-body">
+      <p>向导是按顺序走的，没有"跳过"按钮。从设计上讲，也不建议跳——PRD 和 TAD 确认正是这个向导存在的意义，跳过了就跟直接新建通用任务没区别了。如果你觉得某一步内容已经没问题，快速扫一眼点「保存并下一步」即可，不必花很长时间。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>PRD 或 TAD 生成失败了怎么办？</summary>
+    <div class="zy-acc-body">
+      <p>不会一直转圈。第 2 步（生成 PRD/TAD）和第 6 步（生成模块）失败后会显示<strong>失败态和一个「重试」按钮</strong>，点它原地重试即可，不用退出去重来；点 <span class="zy-btn ghost">上一步</span> 也会回到正确的上一屏。</p>
+      <p>如果反复失败，检查一下项目的 AI 预算是不是快用完了（第 04 章）；也可以关掉向导，在任务列表里点 <span class="zy-btn warn">继续规划</span> 重新进入（会回到你上次的步骤）。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>"再生成一次"会不会把我手改的草稿冲掉？</summary>
+    <div class="zy-acc-body">
+      <p>会有确认保护。草稿框里已经有内容时，点「再生成一次」会先弹确认「将用 AI 的新结果覆盖当前草稿，可稍后用「还原上一版」找回。是否继续？」，你选「继续生成」才会覆盖。AI 会把当前草稿一起发给它作为参考（草稿为空时则从零生成），所以是在你现有版本的基础上重写。万一新版本还不如旧版，草稿框上方的 <span class="zy-btn ghost">还原上一版</span> 能一键找回覆盖前的那一版。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>软件修改任务为什么一定要选"源软件工程"？</summary>
+    <div class="zy-acc-body">
+      <p>因为 AI 修改之前需要先"看懂"现有代码。选好源工程后，它才能读取这个工程已有的需求文档、设计文档和代码目录结构，从而知道改哪里、不碰哪里。没选源工程就直接保存，界面会提示「请选择要修改的软件工程」，任务是建不出来的。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>同一个项目里做两个全新的软件工程，会互相干扰吗？</summary>
+    <div class="zy-acc-body">
+      <p>不会互相覆盖。同一个项目下的每个软件工程任务，<strong>设计文档</strong>按软件名称分目录隔离（放在 <span class="zy-field">{项目工作区}/{软件名称}/</span> 下），各写各的 PRD/TAD，互不干扰。软件修改任务则读写它的「关联软件工程」对应的那个文档目录。<strong>但要如实知道边界</strong>：隔离的是文档，<strong>代码工作目录仍是项目级共享</strong>——同一个项目里的两个全新软件，代码文件仍可能互相看见、互相影响。真要彻底隔离（两个客户、两套产品），<strong>建议拆成两个项目</strong>，这样预算与验收记录也能各算各的。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>任务创建了，为什么一直不动？</summary>
+    <div class="zy-acc-body">
+      <p>先看两件事：一，任务状态是不是还停留在"规划中"（说明向导没走完）；二，项目的自动运营是不是在运行。如果项目是"人工审核"模式，自动运营循环不会自己转，任务需要你手动触发才会执行。详见第 04 章和第 09 章。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>AI 做出来的东西不是我想要的，怎么办？</summary>
+    <div class="zy-acc-body">
+      <p>先别急着让 AI"再改回去"。第一步是判断问题出在哪：如果是<strong>需求没写清</strong>，就重新走一次软件修改，把"改什么、改成什么样、怎么验证"写具体；如果是<strong>改动太大改坏了</strong>，优先用项目的自动备份恢复到改动前的状态，再重新提一个范围更小的需求。一次只提一个小改动，是避免这种问题最有效的办法。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>我能自己直接改生成出来的 PRD/TAD 文档吗？</summary>
+    <div class="zy-acc-body">
+      <p>能。PRD 确认和 TAD 确认两步里，右上角有「编辑」按钮，点开就是纯文本编辑框，你可以直接改内容，改完点「保存并下一步」即可。你的修改会覆盖 AI 的版本，后面所有工作都以你改过的版本为准。</p>
+    </div>
+  </details>
+
+  <details class="zy-acc faq">
+    <summary>非技术的我，看不懂 TAD，会不会选错？</summary>
+    <div class="zy-acc-body">
+      <p>不用怕。你只需要看第 4 步列出的那五个点（技术选型、依赖、部署、数据设计、模块划分），有疑问就在第 5 步「评审对话」里直接问 AI。把疑问说成大白话也没关系，AI 会用你能听懂的方式解释。关键是<strong>别装懂、别跳过</strong>。</p>
+    </div>
+  </details>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

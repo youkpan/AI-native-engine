@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第07章 知识库与资料导入 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 07 章 · 第二步：看懂界面</div>
+    <h1>第07章 知识库与资料导入</h1>
+    <p class="zy-lead">新项目怎么起步、已有项目的资料怎么搬进来？这一章把五种导入方式全部讲透，照着做就能让 AI 真正"认识你的生意"。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 24 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：5 种导入方式</span>
+      <span class="zy-badge purple">含 4 个附录</span>
+    </div>
+  </header>
+
+  <h3>你将学会</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>说清「公司级知识库」和「项目级知识库」的区别，知道什么资料该放哪一层</span></li>
+    <li><input type="checkbox"><span>看文档的 7 个处理状态，一眼判断"卡在哪一步、要不要重试"</span></li>
+    <li><input type="checkbox"><span>用五条通道把资料喂进系统：知识库上传 / 边缘客户端 / 会议导入 / 项目导入 / 引导建项</span></li>
+    <li><input type="checkbox"><span>把"已经进行中的项目"整体搬进系统，并跑通"从会议到任务"的闭环</span></li>
+    <li><input type="checkbox"><span>用 RAG 检索自检知识库到底有没有被真正"吃进去"</span></li>
+  </ul>
+
+  <h2>一、先记住一句话：AI 答得准不准，八成取决于你喂了什么</h2>
+
+  <p>很多人对 AI 的失望，来自一个误解——以为它"什么都知道"。它其实不知道你的业务。它不知道你的产品叫什么、卖给谁、价格多少、竞品是谁、你公司盖章要走几道流程。这些只有你能告诉它。</p>
+
+  <div class="zy-card blue">
+    <h4>核心结论：先喂资料，再谈自动化</h4>
+    <p>系统里有一套叫 <strong>RAG</strong> 的机制，简单说就是"<strong>先翻你的资料，再开口回答</strong>"。它翻的就是<strong>知识库</strong>。你往知识库里放什么，AI 的脑子里就有什么；你什么都不放，它就只会说漂亮但正确的废话。</p>
+    <p>所以正确顺序永远是：<strong>先把资料喂够 → 再让 AI 干活</strong>。反过来做（先跑起来再补资料），AI 会先产出一堆偏题的内容，你还得逐条返工，反而更贵。</p>
+  </div>
+
+  <p>系统给了你五条"喂资料"的通道。它们不是互相替代，而是各有各的场景。先看这张总览表，后面九节逐个讲透。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>导入方式</th>
+          <th>最适合什么</th>
+          <th>入口在哪</th>
+          <th>详见</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>① 知识库直接上传</strong></td>
+          <td>手上已经整理好的文档，想让它进入 AI 的"长期记忆"</td>
+          <td>左侧一级菜单 <span class="zy-path">知识库</span></td>
+          <td>本章第三节</td>
+        </tr>
+        <tr>
+          <td><strong>② 边缘客户端</strong></td>
+          <td>资料散在你电脑各个文件夹里，不想一个个手动挑</td>
+          <td>装在自己电脑上的小工具（托盘图标）</td>
+          <td>本章第四节</td>
+        </tr>
+        <tr>
+          <td><strong>③ 会议记录导入</strong></td>
+          <td>周会 / 复盘 / 客户沟通的纪要，想变成知识，还想变成任务</td>
+          <td>项目内 <span class="zy-path">研究与获客 <span class="sep">›</span> 会议导入</span></td>
+          <td>本章第五节</td>
+        </tr>
+        <tr>
+          <td><strong>④ 已有项目整体导入</strong></td>
+          <td>项目已经在跑了，有历史资料、有聊天记录，想整体接手</td>
+          <td>项目内 <span class="zy-path">建项与定义 <span class="sep">›</span> AI 问答 <span class="sep">›</span> 项目导入</span></td>
+          <td>本章第六节</td>
+        </tr>
+        <tr>
+          <td><strong>⑤ 引导建项（对话补充）</strong></td>
+          <td>新项目从零起步，用聊天的形式把背景、目标、约束讲清楚</td>
+          <td>项目内 <span class="zy-path">建项与定义 <span class="sep">›</span> AI 问答 <span class="sep">›</span> 引导建项</span></td>
+          <td>本章第七节</td>
+        </tr>
+        <tr>
+          <td><strong>⑥ AI 对话附件</strong></td>
+          <td>临时问一个文件里的问题，不想长期入库</td>
+          <td>左侧一级菜单 <span class="zy-path">AI 对话</span> 输入框的曲别针</td>
+          <td>本章第三节末尾 +<br>附录 B</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">前五种的区别，一句话记住</span>
+    <p><strong>①是"往书架上放书"，②是"让人上门帮你搬书"，③是"把开会的录音转成笔记再变任务"，④是"接手一家已经在营业的店"，⑤是"开一家新店前先把想法聊清楚"。</strong>第六种是"临时借用一本参考书，看完就还"，不进书架。</p>
+  </div>
+
+  <h2>二、先搞懂知识库：公司级 vs 项目级</h2>
+
+  <p>知识库是本系统里 AI 的"长期记忆"。它不是一个乱堆文件的文件夹，而是<strong>分层的</strong>——分两层，公司级和项目级。搞清这一层关系，后面所有操作都会顺。</p>
+
+  <h3>知识库页在哪，长什么样</h3>
+
+  <div class="zy-path">左侧一级菜单 <span class="sep">›</span> 知识库（/kb）</div>
+
+  <p>页面顶部有两个页签：<strong>知识库</strong> 和 <strong>RAG 检索</strong>。默认停在「知识库」。这个页签里，标题写着一句话——<strong>分层知识库（公司级 → 项目级）</strong>，右上角是 <span class="zy-btn">新建知识库</span> 按钮。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">第一步永远是选公司</span>
+    <p>如果你还没在右上角的公司切换器里选公司，页面会显示 <span class="zy-field">请先在顶部选择公司</span>，<span class="zy-btn">新建知识库</span> 按钮也是灰的、点不动。这不是 bug，是系统在提醒你：知识库必须归属到一家公司名下。先选公司，再回来。</p>
+  </div>
+
+  <h3>新建知识库：五个字段逐条讲</h3>
+
+  <p>点 <span class="zy-btn">新建知识库</span>，弹出标题为「新建知识库」的窗口。里面只有五个字段，但每一个都会影响 AI 后面能查到什么。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>字段</th>
+          <th>必填</th>
+          <th>界面提示（原文）</th>
+          <th>填错了/不填会怎样</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>名称</strong></td>
+          <td>是</td>
+          <td><span class="zy-field">如：产品知识库 / 公司制度库</span>（最长 255 字）</td>
+          <td>不填点「创建」会报「请输入知识库名称」。名称只影响你在列表里认不认得出来，不影响检索。建完可再改。</td>
+        </tr>
+        <tr>
+          <td><strong>描述</strong></td>
+          <td>否</td>
+          <td><span class="zy-field">知识库用途说明（可选）</span></td>
+          <td>纯备注。但<strong>建议写</strong>——半年后你会忘记这个库是干什么的。</td>
+        </tr>
+        <tr>
+          <td><strong>类型</strong></td>
+          <td>是（默认公司级）</td>
+          <td>单选：<strong>公司级 / 项目级 / 共享</strong></td>
+          <td><strong>这个最关键</strong>，决定它能被哪些项目检索到。见下面第三节的说明。</td>
+        </tr>
+        <tr>
+          <td><strong>所属项目</strong></td>
+          <td>类型选「项目级」时建议填写</td>
+          <td><span class="zy-field">选择项目</span>（下拉列出本公司项目）</td>
+          <td>只有类型选「项目级」时这个字段才出现。不选的话库建出来了，但不会被任何项目的检索优先命中。</td>
+        </tr>
+        <tr>
+          <td><strong>共享下级</strong></td>
+          <td>否（默认关闭）</td>
+          <td>开关 + 提示文字：<strong>开启后下级项目可检索到本知识库</strong></td>
+          <td>开着 = 这个库可以被各项目"借"去当兜底资料；关着 = 只有公司层面能用，项目里查不到。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>填完点 <span class="zy-btn">取消</span> 或 <span class="zy-btn">创建</span>。创建成功后右下角会飘出一句「知识库已创建」，列表立刻刷新。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">文档归谁？以它所在的知识库为准</span>
+    <p>往库里上传文档时，<strong>文档的归属</strong>（属于哪家公司、哪个项目）<strong>一律以它被传进的那个知识库 <code>kb_id</code> 为准</strong>，而不是看请求里带的参数。所以：传进公司级库的文档就是公司级，传进某项目库的就是那个项目的。<strong>如果请求自报的公司 / 项目跟这个库对不上，会被直接拒绝</strong>（403「知识库不属于该公司，拒绝上传」/「知识库不属于该项目，拒绝上传」；库 ID 查不到则 404「知识库不存在」）。这条校验是防止把文档挂到不属于自己的库下面、造成归属错乱和计数污染。对正常操作没有影响，你只管先在页面上选对库即可。</p>
+  </div>
+
+  <h3>三个类型到底怎么选</h3>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>公司级 company</h4>
+      <p>给<strong>全公司共用</strong>的资料。品牌手册、法务模板、财务制度、公司简介、统一的报价口径——凡是不管哪个项目都该遵守的，放这里。</p>
+      <p>列表里显示蓝色「公司级」标签。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>项目级 project</h4>
+      <p>给<strong>某一条业务线专用</strong>的资料。产品说明、客户名单、竞品拆解、这条线的历史数据——只对这一个项目有用的，放这里。</p>
+      <p>列表里显示绿色「项目级」标签。要配合「所属项目」一起填。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>共享 shared</h4>
+      <p>特殊类型。它<strong>不是</strong>第三种归属，更接近一个标记——把它当成"公司级的、愿意给项目借用"的库。</p>
+      <p>列表里显示橙色「共享」标签。</p>
+    </div>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">检索优先级：项目级优先，公司级兜底</span>
+    <p>当 AI 在某个项目里检索资料时，系统按 <strong>项目级 70% + 公司级共享 30%</strong> 的比例取结果：先尽量用这个项目自己的资料，不够才用公司的公共资料补上。这叫<strong>分层检索</strong>——先看"你这条线的专属档案"，再看"公司通用手册"。</p>
+    <p>反过来说：<strong>公司级的私密库（没开「共享下级」）不会被任何项目检索到</strong>。这是刻意设计的安全边界，不是漏配。所以你如果希望"公司在项目里也能查到"，建库时就把「共享下级」打开。</p>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">一个反直觉但很重要的点</span>
+    <p>知识库没有"项目页面入口"。你<strong>不是在项目里建知识库</strong>——所有知识库（包括项目级的）都在左侧一级菜单的 <strong>知识库</strong> 页里统一创建和管理，通过"类型 + 所属项目"来决定归属。找不到"项目里的知识库菜单"是正常的。</p>
+  </div>
+
+  <h3>RAG 是什么：用一句人话讲清</h3>
+
+  <p>RAG 是"检索增强生成"的缩写，听起来吓人，其实就是一件事：<strong>让 AI 在回答前先去你的资料里翻一遍，把相关的段落找出来，再基于这些段落回答。</strong></p>
+
+  <p>打个比方：普通的 AI 像一个博学但没见过你公司的顾问，问什么都能侃，但可能侃错；RAG 像同一个顾问，但每次开口前你先把公司档案袋递给他，他看完再答。答案自然贴你的实际。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>有资料库（RAG 生效）</h4>
+      <p>问："我们的主力产品定价策略是什么？"</p>
+      <p>AI 答：翻到《定价说明》里那段，按你写的三档价格和折扣规则回答。</p>
+    </div>
+    <div class="no">
+      <h4>没资料库（只能靠猜）</h4>
+      <p>问："我们的主力产品定价策略是什么？"</p>
+      <p>AI 答：给出一套"通常的 SaaS 定价建议"，看着专业，但和你的实际情况没关系。</p>
+    </div>
+  </div>
+
+  <h3>RAG 检索页签：你的"自检台"</h3>
+
+  <p>切到 <strong>RAG 检索</strong> 页签，你会看到一个搜索框、一个数量下拉（Top 5 / Top 10 / Top 20）和一个 <span class="zy-btn">检索</span> 按钮。</p>
+
+  <ul>
+    <li>搜索框提示文字：<span class="zy-field">输入检索关键词，如：产品定位、目标客户、营销策略</span></li>
+    <li>搜出来的每条结果显示 <strong>相似度 N%</strong>（这就是 AI 眼里的"有多像"），并标出来源标签：<strong>上传 / 网页 / 手工</strong></li>
+    <li>什么都没搜到，页面显示空态 <span class="zy-field">未检索到相关内容</span></li>
+    <li>搜索框是空的就去点检索，会提示「请输入检索关键词」</li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">这个页签的真正用途</span>
+    <p>它不是给访客用的搜索框，而是<strong>给你自查用的</strong>。你上传完资料，就顺手在这里搜一下："如果我搜『产品定位』，能不能搜到我刚传的那份文档？相似度是不是够高？"</p>
+    <p>搜得到、相似度也高，说明资料真的吃进去了；搜不到，说明资料没解析成功、或者内容里根本没有这些关键词。<strong>这是判断知识库有没有喂好的最快方法</strong>（第九章还会再讲怎么系统化地自检）。</p>
+  </div>
+
+  <h2>三、文档的一生：十个状态</h2>
+
+  <p>资料进系统不是"传完就完事"，它要经过一整条流水线。你打开某个知识库的 <span class="zy-btn">文档管理</span> 抽屉，会看到每份文档后面挂着一个状态标签。看懂这几个状态，你就知道它卡在哪一步。</p>
+
+  <p>先给结论：后端的文档状态一共有 <strong>10 个</strong>，<strong>界面现在全部给了中文标签</strong>，不再有裸英文。万一遇到字典里没有的新值，也会显示成「未知状态（原值）」而不是英文原样——不会再把 <code>processing</code> 这种词直接甩给你。下面表格按流水线顺序排。</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node"><b>待处理</b>uploaded 刚传上来，还没动</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>处理中</b>processing 已被处理入口认领</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>解析中</b>parsing 正在读文件正文</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>已解析</b>parsed 正文读出来了</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>分块中</b>chunking 切成小段</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>向量化中</b>embedding 转成可检索的"数字指纹"</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node ok"><b>就绪</b>ready 可以被 AI 检索到了</div>
+  </div>
+
+  <p>不顺利时有两条岔路：一是 <strong>失败</strong>——上面任何一步出问题，都会掉到 <code>error</code>（<strong>失败（可重试）</strong>）并在文档记录里留下错误说明；自动重试耗尽了则变成 <code>failed</code>（<strong>失败（重试耗尽）</strong>）。二是 <strong>需人工确认</strong>——解析虽没彻底失败，但走了<strong>降级路径</strong>（docx/xlsx 只能勉强抽出结构、或正文乱码占比偏高），系统<strong>不会再把这种结果直接标成「就绪」</strong>，而是标 <code>needs_review</code>（<strong>需人工确认</strong>），并把原因写进错误说明里，等你复核。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>状态</th>
+          <th>界面中文</th>
+          <th>它在干什么</th>
+          <th>卡在这里说明什么 / 怎么办</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>uploaded</code></td>
+          <td><span class="zy-badge">待处理</span></td>
+          <td>文件已经存进来了，排队等处理</td>
+          <td><strong>正常状态，但不会自己往下走。</strong>到文档管理抽屉里点那一行的 <span class="zy-btn">处理</span> 按钮，才开始解析入库。这是新手最容易漏的一步。</td>
+        </tr>
+        <tr>
+          <td><code>parsing</code></td>
+          <td><span class="zy-badge amber">解析中</span></td>
+          <td>正在把文件正文抽成纯文本</td>
+          <td>大文件（几十 MB 的 PDF）会停久一点，属正常。如果十几分钟还不动，多半是文件本身有问题（扫描件、加密文档），可重传或用 txt 版本。</td>
+        </tr>
+        <tr>
+          <td><code>parsed</code></td>
+          <td><span class="zy-badge">已解析</span></td>
+          <td>正文提取完成</td>
+          <td>过渡状态。若长期停在这里，通常是下一步就失败了；刷新一下看是否已变「失败」。</td>
+        </tr>
+        <tr>
+          <td><code>chunking</code></td>
+          <td><span class="zy-badge amber">分块中</span></td>
+          <td>把长文切成一段一段（默认每段约 1024 个字符，相邻段重叠约 100 字符）</td>
+          <td>很快。长期不动多半是文档巨大或已经在出错。</td>
+        </tr>
+        <tr>
+          <td><code>embedding</code></td>
+          <td><span class="zy-badge amber">向量化中</span></td>
+          <td>把每一段转成"数字指纹"，AI 才能按语义相似度搜到它</td>
+          <td>这一步要调向量模型、按批处理，<strong>耗时最长</strong>。大文档停几分钟很正常。若最终失败，常见原因是向量模型未配置或调用失败。</td>
+        </tr>
+        <tr>
+          <td><code>ready</code></td>
+          <td><span class="zy-badge green">就绪</span></td>
+          <td>全部完成，已可被 RAG 检索命中</td>
+          <td><strong>这才是目标状态。</strong>只有"就绪"的文档，AI 才查得到。</td>
+        </tr>
+        <tr>
+          <td><code>processing</code></td>
+          <td><span class="zy-badge amber">处理中</span></td>
+          <td>已被某个处理入口"认领"，正在处理中</td>
+          <td>正常流转中的短暂状态。它表示"有人正在处理这份文档，别重复点"。长期停在这里，刷新一下，若仍不动就等超时回收或重新点「处理」。</td>
+        </tr>
+        <tr>
+          <td><code>error</code></td>
+          <td><span class="zy-badge red">失败（可重试）</span></td>
+          <td>处理中断</td>
+          <td>最常见三种原因：①正文抽出来是空的（扫描版 PDF、纯图片文档、docx/xlsx 这类压缩包格式）；②文件本身损坏或格式伪装（比如把一个改名的文件当 PDF 传）；③向量模型没配好。<strong>这种「失败」还能重试</strong>——修好文件或配好模型后，点那一行的 <span class="zy-btn">处理</span> 重来。处置办法见 <strong>附录 C</strong>。</td>
+        </tr>
+        <tr>
+          <td><code>needs_review</code></td>
+          <td><span class="zy-badge red">需人工确认</span></td>
+          <td>解析走了降级路径，产物质量存疑，暂停入库等你复核</td>
+          <td><strong>这是本版本新增的状态。</strong>docx/xlsx 只能勉强抽出结构、或正文乱码占比偏高（≥5%）时，系统不再假装"解析成功"，而是把它标成「需人工确认」，并把具体原因写进错误说明里。<strong>处理办法：</strong>点开错误说明看原因，确认内容可用就直接点「处理」放行入库；若内容确实乱七八糟，就转成 txt/md 重传。它和「失败」的区别是：内容没丢，只是需要你拍板。</td>
+        </tr>
+        <tr>
+          <td><code>failed</code></td>
+          <td><span class="zy-badge red">失败（重试耗尽）</span></td>
+          <td>重试次数已耗尽的终态，不再自动重试</td>
+          <td>与「失败（可重试）」含义相近，区别是这个状态已经放弃自动重试。<strong>处置方式一样</strong>：看错误原因，修好文件后重传（见附录 C）。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一条实用规则</span>
+    <p>文档列表右上角有 <span class="zy-btn">刷新</span>。处理大文件时，传完点「处理」，然后过几分钟回来点「刷新」看状态；<strong>不要反复点「处理」</strong>——已经就绪的文档再点会被跳过，不会重复入库，但你也在白等。</p>
+  </div>
+
+  <h2>四、导入方式一：直接在知识库上传</h2>
+
+  <p>这是最直接、最可控的方式：你自己挑文档，自己传，自己触发处理。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>进入知识库，找到目标库</h4>
+      <p>左侧一级菜单 <strong>知识库</strong>，在列表里找到你要放资料的那个库。列表列有：名称 / 类型 / 共享 / 文档数 / 分块数 / 状态 / 创建时间 / 操作。</p>
+      <div class="zy-path">知识库 <span class="sep">›</span> 找到你的库 <span class="sep">›</span> 操作列「文档管理」</div>
+    </li>
+    <li>
+      <h4>打开文档管理抽屉</h4>
+      <p>点该行的 <span class="zy-btn">文档管理</span>，右侧滑出抽屉，标题是「文档管理 · 你的库名」。工具栏上是 <span class="zy-btn">上传文档</span> 和 <span class="zy-btn">刷新</span>。</p>
+      <p>列表每一行的操作列有两个按钮：状态还不是「就绪」时出现 <span class="zy-btn">处理</span>；右侧的 <span class="zy-btn danger">删除</span> 可以<strong>按单份文档删除</strong>——点它会二次确认「确认删除文档「X」？将同时删除其已入库的分块，且不可恢复。」（按钮「删除 / 取消」）。这是本版本新增的粒度：以前想清掉一份传错的文档，只能把整个知识库删了重建，现在单独删一条就行，删掉后它的分块也一并从检索里移除。</p>
+    </li>
+    <li>
+      <h4>选文件上传</h4>
+      <p>点 <span class="zy-btn">上传文档</span>，在弹出的文件框里选一个文件。上传成功后提示：<strong>上传成功，请点击「处理」开始解析入库</strong>。</p>
+      <div class="zy-note warn">
+        <span class="zy-note-title">一次一个</span>
+        <p>这个入口是<strong>单文件</strong>的，选完就传。要传多份，重复这一步。刚上传的文档状态是「待处理」。</p>
+      </div>
+    </li>
+    <li>
+      <h4>点「处理」，等它变成「就绪」</h4>
+      <p>在文档列表里找到刚传的那一行（状态还不等于「就绪」时，操作列会显示 <span class="zy-btn">处理</span> 按钮），点它。处理成功后提示 <strong>文档处理完成</strong>，状态会一路走到「就绪」。</p>
+    </li>
+    <li>
+      <h4>去 RAG 检索页签自检</h4>
+      <p>切到 <strong>RAG 检索</strong>，用文档里的一个关键词搜一下，确认能搜到、相似度合理。这一条闭环才算走完。</p>
+    </li>
+  </ol>
+
+  <h3>支持哪些格式（请务必看这一节）</h3>
+
+  <p>知识库上传窗口接受的格式，界面上限定了这六种：<strong>pdf、txt、md（含 .markdown）、docx、xlsx</strong>。但"能传上去"和"解析得好"是两件事，差别很大。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这六种现在是硬闸门，不是"界面拦一下"而已</span>
+    <p>以前上传格式只靠前端的文件选择框的 <code>accept</code> 过滤，绕过界面（比如用脚本调接口）就能塞进别的格式。现在后端也加了<strong>上传格式闸门</strong>，两道校验：</p>
+    <ul>
+      <li><strong>扩展名白名单</strong>：只认 <code>pdf / txt / md / markdown / docx / xlsx</code>。<strong>没有扩展名的文件、以及其它任何后缀，一律拒收</strong>（返回 400，提示「文件缺少扩展名，仅支持 …」或「不支持的文件类型 .xxx，仅支持 …」）。</li>
+      <li><strong>OOXML 魔数校验</strong>：<code>docx / xlsx</code> 本质是 ZIP 包，上传时系统会读文件头，<strong>不是以 <code>PK</code>（ZIP 魔数）开头的，一律拒收</strong>（提示「文件内容与 .docx 扩展名不符（缺少 OOXML/ZIP 魔数），疑似伪装或损坏文件」）。这能挡住把别的文件改个后缀假扮成 Word/Excel 的情况。</li>
+    </ul>
+    <p>唯一保持原契约的是 <strong>PDF</strong>：它的魔数校验留在<strong>解析阶段</strong>而非上传口——所以一个伪装成 PDF 的文件<strong>还能传上去</strong>，但处理时会以<strong>「失败（可重试）」状态 + 一条可读的失败原因</strong>落库，而不是静默通过。</p>
+  </div>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>格式</th>
+          <th>能不能传</th>
+          <th>解析效果</th>
+          <th>建议</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>txt / md</strong></td>
+          <td><span class="zy-badge green">支持</span></td>
+          <td><strong>最好</strong>。直接按文本读取，自动处理编码（UTF-8 优先，疑似 GBK 的老文件会按 GB18030 解码），几乎不会失败</td>
+          <td><span class="zy-badge green">首选</span>。有旧文档时，先转成 txt/md 再传，最省事也最准</td>
+        </tr>
+        <tr>
+          <td><strong>pdf</strong></td>
+          <td><span class="zy-badge green">支持</span></td>
+          <td>只抽取 PDF 里"文字层"的内容。<strong>扫描件 / 图片型 PDF 抽不出文字</strong>，会直接判为失败</td>
+          <td>如果是扫描件，先用 OCR 工具转成 txt 再传</td>
+        </tr>
+        <tr>
+          <td><strong>docx</strong></td>
+          <td><span class="zy-badge green">支持</span></td>
+          <td><strong>解析质量差</strong>。Word 文档本质是一个压缩包，当前只做"可打印字符抽取"，<strong>真正的正文基本抽不出来，抽到的多是二进制噪声</strong>。好消息是：<strong>这种降级解析的结果不会再被标成「就绪」</strong>，而是标成「需人工确认」并给出原因，等你复核——不会被误当成可检索的资料</td>
+          <td>重要的 docx 请先另存为 txt 或粘贴成 md 再传</td>
+        </tr>
+        <tr>
+          <td><strong>xlsx</strong></td>
+          <td><span class="zy-badge green">支持</span></td>
+          <td>同上（表格文件同样是压缩包）。表格结构会彻底丢失，只剩零散噪声字符；同样会被标成「需人工确认」而非「就绪」</td>
+          <td>台账类数据，建议只把"结论性文字"整理成 txt 段落再传，原始表格留着不要指望它被读懂</td>
+        </tr>
+        <tr>
+          <td><strong>csv / pptx / doc / 图片 / 压缩包</strong></td>
+          <td><span class="zy-badge red">不在上传窗口白名单</span></td>
+          <td>—</td>
+          <td>先用工具转成 txt / md 再传。要放 PPT 内容，就复制文字出来</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">pptx 到底支不支持？分清两条链路</span>
+    <p>知识库<strong>上传区明确写着支持的格式</strong>「pdf / txt / md / markdown / docx / xlsx；其中 docx、xlsx 为降级解析（正文可能抽取不全，建议另存为 txt/md），<strong>演示稿（.pptx）不支持</strong>，请先另存为 PDF 或文本再上传」。也就是说：<strong>知识库这条管线只认到 docx / xlsx，pptx 进不来</strong>。</p>
+    <p>但你可能会在别处看到 pptx 被列为支持——那是<strong>会议记录导入</strong>（见本章第六节），它走的是另一条解析链路，能处理 pptx，梳理完再落到你指定的知识库。两条链路支持的格式不一样，别拿会议导入的清单去套知识库上传。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">大小限制：单文件 ≤ 50MB</span>
+    <p>上传有 50MB 的单文件上限。超了会被拒绝，且<strong>不会残留任何记录</strong>。真实场景里超过 50MB 的文档基本都不适合整份入库——建议拆分或只提炼要点。</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">同一份文件传两次会怎样？</span>
+    <p>在<strong>同一个知识库</strong>里重复上传完全相同的文件，系统会识别出内容一致（按文件内容校验），<strong>直接复用已有的那份，不产生新记录、也不重复占空间</strong>。所以传重了不用慌，不会污染知识库、不会重复计费。</p>
+    <p>系统还会<strong>按已有文档的当前状态给你一句提示</strong>，照着做就行：已就绪的提示「该文件内容已存在且解析就绪，本次未重复入库」；<strong>上次是「失败」或「需人工确认」的，提示「该文件已存在且上次处理失败/需人工确认，请在文档列表点「处理」重试」</strong>；正在处理的则提示「该文件已存在，正在处理中」。</p>
+    <p>但如果你把同一份内容传到<strong>两个不同的知识库</strong>，它们会各自入库一次——这是刻意的，因为两个库的归属和可见范围不同。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">顺手说一句：AI 对话里的附件</span>
+    <p>左侧一级菜单的 <strong>AI 对话</strong> 页，输入框旁边有个曲别针按钮，可以传附件。<strong>它是"临时参考"性质</strong>——只服务于那一轮对话，不会进任何知识库，也不会被后续检索命中。适合"我就想问问这个文件里的某段话"。想把资料长期沉淀，还是走知识库。支持的格式和大小见 <strong>附录 B</strong>。</p>
+  </div>
+
+  <h2>五、导入方式二：边缘客户端（本地文档自动扫描上传）</h2>
+
+  <p>如果资料散在你电脑的各个文件夹里，一个个手动挑太慢。这时用<strong>边缘客户端</strong>——一个装在你电脑上的小工具，它盯着你指定的文件夹，发现新文档就自动解析、自动上传。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">为什么需要它</span>
+    <p>平台是云端的、项目服务器是云端的，但<strong>你的资料在你本地的电脑里</strong>。云端程序没法直接读你 D 盘的文件夹。边缘客户端就是那座桥：它在你本机运行，负责"把本地的东西送到云端"，同时也能接收项目服务器下发的指令在本机执行（比如批量提取某目录的文档文本）。</p>
+  </div>
+
+  <h3>它长什么样：一个托盘图标，界面是英文的</h3>
+
+  <p>边缘客户端没有窗口界面，它常驻在系统托盘（Windows 右下角、macOS 右上角）。托盘图标右键菜单<strong>全部是英文</strong>，逐项如下。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>菜单项（原文）</th>
+          <th>中文意思</th>
+          <th>现状</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ZY Edge Client</strong>（标题）</td>
+          <td>工具名，鼠标悬停还会显示 <code>ZY Enterprise AI Engine - Edge Client</code></td>
+          <td>图标是一个极简的蓝色圆点，属<strong>占位图标</strong>，不是正式品牌图</td>
+        </tr>
+        <tr>
+          <td><strong>Status: Connected</strong></td>
+          <td>已连接</td>
+          <td><span class="zy-badge green">可用</span></td>
+        </tr>
+        <tr>
+          <td><strong>Status: Connecting...</strong></td>
+          <td>连接中</td>
+          <td><span class="zy-badge green">可用</span></td>
+        </tr>
+        <tr>
+          <td><strong>Status: Reconnecting...</strong></td>
+          <td>重连中（断线后自动重试）</td>
+          <td><span class="zy-badge green">可用</span></td>
+        </tr>
+        <tr>
+          <td><strong>Status: Disconnected</strong></td>
+          <td>未连接</td>
+          <td><span class="zy-badge green">可用</span></td>
+        </tr>
+        <tr>
+          <td><span class="zy-btn ghost">Open Logs</span></td>
+          <td>打开日志目录</td>
+          <td><span class="zy-badge green">可用</span>——点了会用系统默认程序打开日志所在目录，排障时直接进去看文件</td>
+        </tr>
+        <tr>
+          <td><span class="zy-btn ghost">Quit</span></td>
+          <td>退出</td>
+          <td><span class="zy-badge green">可用</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">先把预期放正</span>
+    <p>托盘菜单现在<strong>只剩「Open Logs / Quit」两项</strong>：<strong>Open Logs</strong> 已经能真正打开日志目录；原来的「<strong>Reconnect</strong>」菜单项<strong>已被移除</strong>——因为连接层本身就按指数退避自动重连了，不需要你手动点。所以如果你在旧教程里看到「Reconnect」按钮，那是过期信息。图标仍是占位图，菜单是英文，这些属正常，不用担心装错。</p>
+  </div>
+
+  <h3>它盯着哪些文件夹、认哪些格式</h3>
+
+  <p>客户端的行为由一份配置决定（本机配置文件）。关键几项：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>配置项</th>
+          <th>默认值</th>
+          <th>意思</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>watch_dirs</code>（监听目录）</td>
+          <td>空 / 需自行指定</td>
+          <td>你告诉它盯着哪几个文件夹。只在清单里的目录才会被扫描</td>
+        </tr>
+        <tr>
+          <td><code>file_types</code>（认的格式）</td>
+          <td><code>.pdf .docx .xlsx .txt .md .csv</code></td>
+          <td>不在这六种里的文件，客户端会直接忽略</td>
+        </tr>
+        <tr>
+          <td><code>max_file_size_mb</code></td>
+          <td>50</td>
+          <td>超过 50MB 的文件跳过（超大文件只上传解析出的文本要点）</td>
+        </tr>
+        <tr>
+          <td><code>debounce_interval</code></td>
+          <td>2 秒</td>
+          <td>文件放进去后等 2 秒再处理，避免"文件还没写完就传"</td>
+        </tr>
+        <tr>
+          <td><code>upload</code>（并发 / 超时 / 重试）</td>
+          <td>3 / 60 秒 / 3 次</td>
+          <td>同时传 3 个文件；网络类错误自动重试，被服务器明确拒绝（4xx）时不再重试</td>
+        </tr>
+        <tr>
+          <td><code>server.base_url</code> / <code>token</code></td>
+          <td>需配置</td>
+          <td>项目服务器的加密连接地址与访问令牌。<strong>令牌没配对，一切都不会动</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>连接方式是<strong>加密长连接（WSS）</strong>，直连你项目的项目服务器（不经平台转发）。连接后每 30 秒心跳一次；断线会按 <strong>1 秒 → 2 秒 → … → 60 秒</strong> 的退避节奏自动重连。</p>
+
+  <h3>上传后你在哪里看</h3>
+
+  <p>客户端传上去的文件，在项目内的 <strong>边缘接入</strong> 页能看到。</p>
+
+  <div class="zy-path">项目内 <span class="sep">›</span> 接入与执行 <span class="sep">›</span> 边缘接入（/project/&lt;id&gt;/edge）</div>
+
+  <p>页面上方一排状态卡：<strong>连接状态</strong>（已连接 / 未连接）、<strong>在线客户端</strong>、<strong>客户端版本</strong>、<strong>累计上传文件</strong>、<strong>WebSocket 端点 / 最近心跳</strong>（没有心跳时显示 <strong>暂无心跳</strong>）。下方是「上传文件」表，列有：文件名 / 原始路径 / 大小 / 状态 / 上传时间，顶部还能按状态筛选。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>状态</th>
+          <th>界面中文</th>
+          <th>含义</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>uploaded</code></td><td><span class="zy-badge">已上传</span></td><td>文件已到服务器，等待进入知识库处理流程</td></tr>
+        <tr><td><code>processing</code></td><td><span class="zy-badge amber">处理中</span></td><td>正在解析入库</td></tr>
+        <tr><td><code>indexed</code></td><td><span class="zy-badge green">已索引</span></td><td>已入库，可被检索到</td></tr>
+        <tr><td><code>failed</code></td><td><span class="zy-badge red">失败</span></td><td>上传或解析失败，需要在客户端侧重传</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>列表没数据时显示 <span class="zy-field">暂无上传文件</span>。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">「客户端版本」和「最近心跳」可能一直是空的</span>
+    <p>这两个位置取自服务端的实时统计，<strong>当前版本里很可能一直显示 <code>-</code> 和 <code>暂无心跳</code></strong>，但左侧的「连接状态」和「在线客户端」是准的。以"连接状态是否已连接 + 上传文件表里有没有你的文件"为准，不用纠结版本号为空。</p>
+  </div>
+
+  <h3>一直 Status: Disconnected 怎么办</h3>
+
+  <p>托盘上如果长期显示未连接，按这个顺序查：</p>
+
+  <ol>
+    <li><strong>先确认程序在跑</strong>——托盘图标还在不在？Quit 之后是不会自动回来的。</li>
+    <li><strong>检查配置里的服务器地址和令牌</strong>——<code>base_url</code> 写对了吗（要带 <code>wss://</code>）；<code>token</code> 是不是有效的（激活后拿到的）。这两项任一不对，服务端会直接拒绝握手。</li>
+    <li><strong>检查网络与证书</strong>——本机能不能访问那台服务器；如果是自签证书，配置里有个"跳过证书校验"的开关，但它<strong>只允许在开发环境打开</strong>，正式环境必须用合法证书。</li>
+    <li><strong>换个网络试试</strong>——公司网络带拦截代理时，长连接经常被掐断。</li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">卡住超过十分钟？</span>
+    <p>边缘客户端相关故障的完整排查表在 <a href="19-故障排查与红线.html">第 19 章 故障自查、安全与红线</a>。这里先记住一条底线：<strong>服务端对连接采用"校验不过就拒绝"的失败关闭（fail-closed）策略</strong>——没有配置访问令牌、令牌已吊销或已过期，一律拒绝连接，绝不会"因为你没配就放行"。这是安全设计，不是故障。</p>
+  </div>
+
+  <h2>六、导入方式三：会议记录导入</h2>
+
+  <p>会议纪要是一种被严重低估的资料。它天然带着三类高价值信息：<strong>发生了什么、决定了什么、谁要做什么</strong>。这一节讲的就是怎么把会议记录喂进去——并且，把"行动项"直接变成 AI 要去执行的任务。</p>
+
+  <div class="zy-path">项目内 <span class="sep">›</span> 研究与获客 <span class="sep">›</span> 会议导入（/project/&lt;id&gt;/meetings）</div>
+
+  <p>页面标题是 <strong>会议内容导入梳理</strong>。结构分两块：上面是导入区，下面是「会议记录」列表。</p>
+
+  <h3>导入区：先选目标知识库（可选）</h3>
+
+  <p>最上面一行是 <strong>目标知识库（可选）：</strong> 加一个下拉框，提示文字是 <span class="zy-field">选择知识库，梳理后自动入库 RAG</span>。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">这一栏决定会议内容会不会"长期留下来"</span>
+    <p>选了一个知识库：AI 梳理完之后，会自动把梳理结果作为一份文档写进那个知识库，<strong>之后可以被 RAG 检索到</strong>，成为 AI 的长期记忆。<br>
+    不选：会议记录照样会梳理、会出现在列表里、行动项照样能转任务，<strong>但不会进知识库</strong>，后续检索不到。</p>
+    <p>所以：这场会议如果"以后还会被翻出来参考"，就选一个库；如果只是临时把纪要变成任务，可以不选。</p>
+  </div>
+
+  <h3>两种投喂方式</h3>
+
+  <div class="zy-grid c2">
+    <div class="zy-card">
+      <h4>页签一：上传文件</h4>
+      <p>点 <span class="zy-btn">选择会议文件</span> 挑一个文件。旁边有一行小字说明：<strong>支持 txt / md / docx / pdf / xlsx / pptx，暂不支持音视频</strong>。</p>
+      <p>成功后会提示 <strong>会议文件已上传，AI 正在后台梳理</strong>。</p>
+    </div>
+    <div class="zy-card">
+      <h4>页签二：粘贴文本</h4>
+      <p>直接把会议记录粘进去。两个输入框：</p>
+      <ul>
+        <li>标题：<span class="zy-field">会议标题（可选，如：产品周会 8/13）</span></li>
+        <li>正文：<span class="zy-field">粘贴会议记录文本，AI 将自动梳理摘要、决策与行动项</span></li>
+      </ul>
+      <p>正文为空时 <span class="zy-btn">开始梳理</span> 是禁用的。点了之后提示 <strong>已提交，AI 正在后台梳理</strong>。</p>
+    </div>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">音视频确实不支持，别硬传</span>
+    <p>传了音频或视频文件，会被明确拒绝并提示"<strong>暂不支持音视频文件，请先转写为文本后导入</strong>"。要用录音，请先用转写工具（或会议软件自带的"导出文字记录"）转成文字，再走"粘贴文本"这条路。</p>
+    <p>另外，文件名后缀不在白名单里的（比如 .csv、.json、.doc），也会被拒绝并提示只支持哪几种。白名单和上传窗口的提示一致。</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">梳理会花钱</span>
+    <p>"梳理"这一步是一次实打实的 AI 调用（要读完整篇记录、输出结构化结果），会计入这个项目的 token 消耗。长会议记录花费会更明显——这是正常的，一次梳理的成本远低于人工整理一小时的会议纪要。</p>
+  </div>
+
+  <h3>会议列表：五种状态</h3>
+
+  <p>下方 <strong>会议记录</strong> 列表有 <span class="zy-btn">刷新</span> 按钮，列是：会议标题 / 来源 / 状态 / 导入时间 / 操作。来源只有两种：<strong>文件</strong> 或 <strong>文本</strong>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>状态</th>
+          <th>界面中文</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>pending</code></td><td><span class="zy-badge">待处理</span></td><td>刚提交，还没开始（通常只停留几秒）</td></tr>
+        <tr><td><code>parsing</code></td><td><span class="zy-badge amber">解析中</span></td><td>正在把文件正文读出来（粘贴文本的方式一般跳过这步）</td></tr>
+        <tr><td><code>analyzing</code></td><td><span class="zy-badge amber">分析中</span></td><td>AI 正在梳理摘要 / 决策 / 行动项，这一步最久</td></tr>
+        <tr><td><code>done</code></td><td><span class="zy-badge green">已完成</span></td><td>梳理结果已就绪，可以点详情看，也可以转任务</td></tr>
+        <tr><td><code>error</code></td><td><span class="zy-badge red">失败</span></td><td>流程中断，详情抽屉里会显示失败原因原文</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>列表操作列有三个按钮：<span class="zy-btn ghost">详情</span>；<strong>重新梳理</strong>（只在状态是「失败」或「已完成」时出现）；<span class="zy-btn danger">删除</span>（会弹确认框「确认删除会议「X」？」，删除后提示「已删除」）。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">「重新梳理」的用途</span>
+    <p>失败时重跑一次；或者已完成的会议你又补了内容想重来。注意：正在分析中的记录不允许重置，会提示「会议正在梳理中，请稍后再试」——这是防止重复梳理把行动项搞出两份的保护。</p>
+  </div>
+
+  <h3>详情抽屉：参会人 / 会议摘要 / 决策 / 行动项</h3>
+
+  <p>点 <span class="zy-btn ghost">详情</span>，右侧滑出抽屉，标题就是这场会议的标题。里面分四段：</p>
+
+  <ul>
+    <li><strong>参会人</strong>——AI 从记录里认出的人名，做成标签。没有则显示 <code>-</code>。</li>
+    <li><strong>会议摘要</strong>——一段话概括核心议题与结论。</li>
+    <li><strong>决策</strong>——这次会议定下来的事，逐条列出。</li>
+    <li><strong>行动项</strong>——谁要做什么、截止到什么时候。每条还能显示 <strong>责任人</strong> 和 <strong>截止</strong> 时间。</li>
+  </ul>
+
+  <p>如果会议还在梳理中，抽屉里显示 <span class="zy-field">正在梳理中，请稍后刷新查看</span>；如果失败了，显示 <span class="zy-field">处理失败</span>，并在顶部用红色提示条给出具体原因。</p>
+
+  <h3>重点：从会议到任务这条闭环</h3>
+
+  <p>这是本节最值钱的部分。<strong>行动项不只是文字，它可以一键变成 AI 要去执行的任务。</strong></p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>开会</b>讨论、拍板</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>导入</b>传文件或粘文本</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>AI 梳理</b>摘要 + 决策 + 行动项</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node hot"><b>点「转自动运营任务」</b></div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node ok"><b>自动运营接到任务</b>排进任务队列</div>
+  </div>
+
+  <p>行动项有三种状态，界面中文如下：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>状态</th>
+          <th>界面中文</th>
+          <th>这一行能看到什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>open</code></td>
+          <td><span class="zy-badge amber">待处理</span></td>
+          <td>右侧出现 <span class="zy-btn">转自动运营任务</span> 按钮</td>
+        </tr>
+        <tr>
+          <td><code>done</code></td>
+          <td><span class="zy-badge green">已完成</span></td>
+          <td>只读，没有转换按钮</td>
+        </tr>
+        <tr>
+          <td><code>converted</code></td>
+          <td><span class="zy-badge blue">已转任务</span></td>
+          <td>显示 <strong>已转任务 &lt;任务号&gt;</strong>，一眼知道它去哪了</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>点 <span class="zy-btn">转自动运营任务</span> 会先弹一个小气泡确认：<strong>将该行动项转为自动运营任务？</strong>，按钮是「转换」和「取消」。确认后提示 <strong>已转为任务 &lt;任务号&gt;</strong>，这条行动项的状态立刻变成「已转任务」。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">转过去之后发生了什么</span>
+    <p>系统会新建一条自动运营任务：<strong>任务名和描述都取行动项的内容</strong>，验收标准写成"完成行动项：&lt;内容&gt;"，优先级定为常规（P2），执行引擎默认用 <strong>Agent 引擎</strong>（进程内调 AI，适合信息整理、对外联络这类任务）。</p>
+    <p>然后它就进了这个项目的任务队列，跟你在"新建任务"里手工建的任务一样，由自动运营按轮次推进。你在 <strong>自动运营 → 任务管理</strong> 里能看到它（第 09 章）。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">两条限制要知道</span>
+    <p>① <strong>已经转过一次的行动项不能再转</strong>，会提示状态不对、无法转换——这是防止同一件事被派两份任务。<br>
+    ② 只能转<strong>本项目的</strong>行动项，跨项目转不了。</p>
+  </div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">会议场景 · 粘贴文本时怎么写得让 AI 更好梳理</span>会议标题：产品周会 8/13
+
+参会人：我、运营小李、外聘设计老王
+
+本次议题：独立站首页改版
+
+讨论要点：
+- 老王反馈当前首页跳出率高，主要卡在首屏没有价值主张
+- 小李说广告投放的数据显示，客户最关心的是"多久能收到货"
+- 我决定首页首屏改成"3 天到货 + 60 天无理由"
+
+本次决策：
+1. 首页首屏重做，突出时效与退换承诺，本周五前出稿
+2. 暂停当前关键词投放，等新版上线后再投
+
+行动项：
+- 老王：出 2 版首屏视觉方案（截止 8/16）
+- 小李：整理近 30 天客户咨询里"物流时效"相关的原话，给老王做参考（截止 8/15）
+- 我：确认新版首页的退换货政策文案是否与合同条款一致（截止 8/15）</div>
+
+  <p>这样写的好处：<strong>参会人、决策、行动项、责任人、截止时间都显式给出</strong>。AI 不用猜，梳理出来的结果就能直接用于转任务。</p>
+
+  <h2>七、导入方式四：已有项目整体导入（本章重点）</h2>
+
+  <p>这一节回答用户最关心的那个问题：<strong>"我已经有在跑的项目了，资料一大堆，怎么整体搬进来？"</strong></p>
+
+  <p>系统的答案是「现有项目导入」：你把项目的名称、描述、既有资料、过去的聊天记录要点交代给它，AI 把它整理成一份<strong>项目上下文</strong>，作为后续建项与自动运营的起点。</p>
+
+  <div class="zy-path">项目内 <span class="sep">›</span> 建项与定义 <span class="sep">›</span> AI 问答 <span class="sep">›</span> 右上角 <span class="zy-btn ok">项目导入</span></div>
+
+  <p>页面标题是 <strong>现有项目导入</strong>，左上角有 <span class="zy-btn ghost">返回项目</span>。页面分左右两栏。</p>
+
+  <h3>左栏：项目信息与资料</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>字段 / 按钮</th>
+          <th>界面提示（原文）</th>
+          <th>怎么填</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>项目名称</strong></td>
+          <td><span class="zy-field">已进行中项目的名称</span></td>
+          <td>填你线下/原有那套体系里这个项目叫什么。它会成为 AI 理解项目的入口信息。</td>
+        </tr>
+        <tr>
+          <td><strong>项目描述</strong></td>
+          <td><span class="zy-field">一句话说明项目定位</span></td>
+          <td>一句话：做什么、卖给谁。例如"面向北美中小卖家的跨境独立站，主营家居收纳"。</td>
+        </tr>
+        <tr>
+          <td><strong>既有资料</strong></td>
+          <td>拖拽上传区，提示：<strong>支持 txt/md/docx/pdf/xlsx/csv 等，单文件 ≤ 50MB；需先创建会话</strong></td>
+          <td>把手上已有的文档拖进来。<strong>最多 10 个文件</strong>一次。</td>
+        </tr>
+        <tr>
+          <td><span class="zy-btn">上传到会话</span></td>
+          <td>未建会话 / 未选文件时按钮置灰</td>
+          <td>先把文件选好、先建会话，这个按钮才会亮。</td>
+        </tr>
+        <tr>
+          <td><strong>聊天记录</strong></td>
+          <td><span class="zy-field">粘贴关键沟通/聊天记录的要点摘要</span></td>
+          <td><strong>这一栏性价比最高</strong>。不需要粘贴原始聊天记录，只要把要点摘要写进去（谁、什么时候、谈成了什么、还卡在哪）。</td>
+        </tr>
+        <tr>
+          <td><span class="zy-btn">创建导入会话</span></td>
+          <td>—</td>
+          <td>整页的"启动键"。<strong>先点它</strong>，才有后面的上传与整理。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>两个提示语要知道：</p>
+  <ul>
+    <li>还没建会话就想上传文件时，会提示 <strong>请先创建导入会话</strong>，页面下方也会显示 <span class="zy-field">请先创建导入会话，再上传文档</span>。</li>
+    <li>还没选公司时点创建，会提示 <strong>缺少公司上下文，请先在右上角选择公司</strong>。</li>
+  </ul>
+
+  <h3>右栏：AI 整理的项目上下文</h3>
+
+  <p>右栏有两张卡。</p>
+
+  <p>第一张卡叫 <strong>AI 整理的项目上下文</strong>，右上角是 <span class="zy-btn">整理并完成建项</span> 按钮。还没建会话时，卡里写着 <span class="zy-field">左侧填写信息并「创建导入会话」后，可在此触发 AI 整理</span>；建了会话但还没整理时，显示 <span class="zy-field">点击「整理并完成建项」生成上下文摘要</span>。</p>
+
+  <p>点下去之后，AI 会把前面所有信息（名称、描述、你传的文档、聊天记录要点）读一遍，产出一份结构化的项目上下文，显示四项：</p>
+
+  <div class="zy-grid c4">
+    <div class="zy-card tinted"><h4>项目背景</h4><p>这个项目是干什么的、怎么来的</p></div>
+    <div class="zy-card tinted"><h4>当前阶段</h4><p>它现在走到哪一步了</p></div>
+    <div class="zy-card tinted"><h4>关键联系人</h4><p>涉及哪些人（标签形式展示）</p></div>
+    <div class="zy-card tinted"><h4>未决事项</h4><p>还悬着没定的问题清单</p></div>
+  </div>
+
+  <p>整理成功后提示 <strong>导入整理完成，已标记待续建</strong>——"待续建"的意思是：这份上下文已经存好了，等着你去确认执行策略、把任务正式建起来。</p>
+
+  <p>第二张卡叫 <strong>会话状态</strong>，只在会话建好之后出现，显示三项：<strong>会话 ID / 阶段 / 状态</strong>。阶段的中文映射是：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>阶段代码</th><th>界面中文</th><th>你在这一步该做什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>research</code></td><td>调研</td><td>（新项目引导流程的起点）</td></tr>
+        <tr><td><code>input</code></td><td>信息录入</td><td>补充项目背景与资料</td></tr>
+        <tr><td><code>summarize</code></td><td>摘要整理</td><td>让 AI 归纳成摘要</td></tr>
+        <tr><td><code>strategy</code></td><td>策略生成</td><td>生成并确认执行策略</td></tr>
+        <tr><td><code>import</code></td><td>导入</td><td><strong>「现有项目导入」走的就是这个阶段</strong></td></tr>
+        <tr><td><code>done</code></td><td>已完成</td><td>建项完成，可进入自动运营</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>整理完成后，这张卡里会出现 <span class="zy-btn">下一步：确认执行策略</span> 按钮，点它直接跳到引导建项页（下一节）。</p>
+
+  <h3>关于"上传的资料去哪了"，必须说清楚</h3>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">导入页上传的资料，不会自动进知识库</span>
+    <p>这是最容易产生误解的一点。你在「现有项目导入」页传的文档，作用是<strong>让 AI 读懂这个项目</strong>——系统会从中抽取文字要点，追加到导入会话里，供"整理项目上下文"使用。它<strong>不会</strong>直接变成知识库文档，也因此不会被后续的 RAG 检索命中。</p>
+    <p>这不是缺陷，而是流程分工：这一步是"建项之前的摸底"，等建项完成、项目有了自己的知识库 ID，再正式把资料放进知识库。<strong>正确做法：导入页负责"说清楚是什么项目"，知识库页负责"把资料存下来长期用"。</strong></p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">所以：导入页的文档怎么写最划算</span>
+    <p>既然是"给 AI 读的摸底材料"，那就<strong>优先放散装文字，而不是厚重的 PDF</strong>。原因有两个：一是导入页对 docx / pdf 这类文件同样只做"可打印文字抽取"，质量一般；二是 PDF 再厚，AI 也只能从中读到模糊的一份印象。</p>
+    <p>更划算的填法是：<strong>既有资料栏放几份关键的 txt / md（或把文档里的核心段落复制成 txt）</strong>，同时把最关键的信息<strong>手打摘要到"聊天记录"栏</strong>。手打的那几百字，价值往往高于十份 PDF。</p>
+  </div>
+
+  <h3>完整操作顺序：照着走一遍</h3>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>先在平台建一个"项目占位"</h4>
+      <p>导入是"在某个项目里"进行的，所以你得先有一个项目。走新建项目向导（第 03 章），把名称、类型、行业、运行模式、预算填好，提交创建。这一步不需要填得很完美，后面能改。</p>
+      <div class="zy-path">项目管理 <span class="sep">›</span> 新建项目向导</div>
+    </li>
+    <li>
+      <h4>进入这个项目，打开导入页</h4>
+      <p>从项目列表进入项目，左侧切到 <strong>建项与定义 → AI 问答</strong>，点右上角的 <span class="zy-btn ok">项目导入</span>。</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 建项与定义 <span class="sep">›</span> AI 问答 <span class="sep">›</span> 项目导入</div>
+    </li>
+    <li>
+      <h4>填名称、描述，先把"聊天记录"写扎实</h4>
+      <p>填项目名称、项目描述；然后在「聊天记录」里把项目的前世今生写成要点摘要（谁在跟、当前进展、卡在哪、下一步想干什么）。<strong>这是整页里最值钱的一段字。</strong></p>
+    </li>
+    <li>
+      <h4>点「创建导入会话」</h4>
+      <p>成功提示 <strong>导入会话已创建</strong>，右栏出现「会话状态」卡，阶段显示「导入」。</p>
+    </li>
+    <li>
+      <h4>上传既有资料</h4>
+      <p>拖拽文件到上传区（最多 10 个，单个 ≤ 50MB），然后点 <span class="zy-btn">上传到会话</span>。成功提示 <strong>已上传 N 个文档，待整理后纳入项目上下文</strong>。</p>
+    </li>
+    <li>
+      <h4>点「整理并完成建项」</h4>
+      <p>等 AI 读完所有材料，右栏出现「项目背景 / 当前阶段 / 关键联系人 / 未决事项」四段结果。提示 <strong>导入整理完成，已标记待续建</strong>。</p>
+    </li>
+    <li>
+      <h4>点「下一步：确认执行策略」</h4>
+      <p>跳到引导建项页，把执行策略生成、修改、确认（下一节详解）。<strong>这一步不能跳</strong>，没确认策略，自动运营是启动不了的。</p>
+    </li>
+    <li>
+      <h4>回项目详情，启动自动运营</h4>
+      <p>策略确认后，到 <strong>自动运营控制台</strong> 点 <span class="zy-btn">启动</span>，AI 开始按任务队列跑起来。</p>
+      <div class="zy-path">项目内 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 自动运营</div>
+    </li>
+    <li>
+      <h4>补知识库（长期记忆）</h4>
+      <p>再回到左侧 <strong>知识库</strong>，为这个项目建一个"项目级"库，把产品资料、客户资料、竞品分析正式传进去并处理到「就绪」。这一步做完，AI 才算真正"认识你的生意"。</p>
+      <div class="zy-path">左侧一级菜单 <span class="sep">›</span> 知识库 <span class="sep">›</span> 新建知识库（类型选「项目级」）</div>
+    </li>
+  </ol>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">顺序错了会怎样</span>
+    <p>最常见的新手错误是：<strong>建完项目就直接点「启动」</strong>，结果被拦——因为还没确认执行策略。所以请记住这个顺序：<strong>建项目 → 导入/引导 → 确认策略 → 补知识库 → 再启动</strong>。启动永远是最后一步。</p>
+  </div>
+
+  <h3>「你手上有什么」→「该怎么导入」对照表</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>你手上的东西</th>
+          <th>推荐通道</th>
+          <th>具体怎么做</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>合同 / 报价单（PDF 或扫描件）</strong></td>
+          <td>知识库上传</td>
+          <td>如果是扫描件，先 OCR 成 txt 再传；电子版 PDF 可直接传。价格体系这类要长期被引用的，务必进项目级知识库</td>
+        </tr>
+        <tr>
+          <td><strong>产品手册 / 说明书</strong></td>
+          <td>知识库上传</td>
+          <td>优先 txt / md。docx 可传，但建议只把核心技术段落另存成 txt</td>
+        </tr>
+        <tr>
+          <td><strong>Excel 台账（订单、库存、客户表）</strong></td>
+          <td>知识库上传（谨慎）</td>
+          <td>表格类内容进知识库后只剩下零散文字，AI 读不出结构。更推荐把"结论"整理成一段说明文字再传</td>
+        </tr>
+        <tr>
+          <td><strong>微信 / 钉钉聊天记录</strong></td>
+          <td>项目导入 或 会议导入</td>
+          <td>别贴原始记录。整理成"要点摘要"（谁、何时、谈到什么、结论是什么）再贴进去——导入页的「聊天记录」栏，或会议导入的「粘贴文本」</td>
+        </tr>
+        <tr>
+          <td><strong>旧网站上的内容</strong></td>
+          <td>知识库上传</td>
+          <td>把网页正文复制出来存成 txt / md 再传。<strong>没有"一键抓取整个网站"的功能</strong>，不要期待</td>
+        </tr>
+        <tr>
+          <td><strong>竞品资料</strong></td>
+          <td>知识库上传</td>
+          <td>放<strong>项目级</strong>知识库；建一个叫"竞品分析"的库专门放，检索时更干净</td>
+        </tr>
+        <tr>
+          <td><strong>内部 SOP / 制度文件</strong></td>
+          <td>知识库上传</td>
+          <td>如果全公司通用（比如报销制度），放<strong>公司级</strong>库并打开「共享下级」</td>
+        </tr>
+        <tr>
+          <td><strong>代码仓库</strong></td>
+          <td>不适用</td>
+          <td>代码通过"软件工程"模块管理，不进知识库。想加复杂功能，见第 10 章</td>
+        </tr>
+        <tr>
+          <td><strong>会议录音 / 录像</strong></td>
+          <td>会议导入（需先转文字）</td>
+          <td><strong>系统不支持音视频</strong>。先用转写工具或会议软件导出文字，再走"粘贴文本"</td>
+        </tr>
+        <tr>
+          <td><strong>散落在电脑各处的旧文档</strong></td>
+          <td>边缘客户端</td>
+          <td>装客户端，把那些文件夹加进监听目录，让它自己扫、自己传（第四节）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>八、导入方式五：引导建项（从想法到执行策略）</h2>
+
+  <p>前一条路是"接手续建"，这一条是"从零起步"。新项目创建之后，用引导建项把项目背景聊清楚，让 AI 生成一份<strong>执行策略</strong>——那才是 AI 后面所有动作的蓝图。</p>
+
+  <div class="zy-path">项目内 <span class="sep">›</span> 建项与定义 <span class="sep">›</span> AI 问答 <span class="sep">›</span> 右上角 <span class="zy-btn">引导建项</span></div>
+
+  <p>页面标题是 <strong>引导建项</strong>，里面纵向排四张卡片。</p>
+
+  <h3>卡片一：引导会话</h3>
+
+  <p>最上面一行是一个输入框加两个按钮：</p>
+  <ul>
+    <li>输入框提示：<span class="zy-field">会话 ID（留空则自动创建）</span>——你不用先去别的地方创建会话，<strong>留空直接点「生成策略」，系统会替你建一个</strong>。</li>
+    <li><span class="zy-btn ghost">读取会话</span>——只有你填了会话 ID 才会出现，用来把之前的会话续接回来。</li>
+    <li><span class="zy-btn">生成策略</span>——主按钮。</li>
+  </ul>
+
+  <p>下面会显示两个标签：<strong>阶段：&lt;中文阶段名&gt;</strong>，以及 <strong>策略已确认</strong> 或 <strong>策略未确认</strong>。这两个标签是你的"仪表盘"——尤其是后一个，它直接决定自动运营能不能启动。</p>
+
+  <h3>卡片二：项目信息与对话补充</h3>
+
+  <p>上半部分是从项目档案自动读进来的种子信息：<strong>项目名称 / 项目类型 / 所属行业 / 项目描述 / 目标</strong>。右上角有 <span class="zy-btn ghost">重新从项目档案载入</span>，你在项目详情页改过之后可以点它刷新。读不到时显示 <span class="zy-field">未从项目档案读到种子信息，可直接在下方对话补充</span>。</p>
+
+  <p>下半部分是「对话补充」。这里是<strong>你和 AI 聊项目的地方</strong>：</p>
+  <ul>
+    <li>对话区空白时提示：<span class="zy-field">补充项目背景 / 目标 / 约束等信息，再生成摘要与策略</span></li>
+    <li>输入框提示：<span class="zy-field">例如：目标市场是北美，预算 200 元，90 天内跑通首单</span></li>
+    <li>按钮：<span class="zy-btn">发送</span>，回答期间出现 <span class="zy-btn ghost">停止</span></li>
+  </ul>
+
+  <p>对话里如果出现了「较早对话摘要」这样一条居中的灰色气泡，那是系统把太长之前的对话自动压缩成摘要，不是 AI 的一轮回答，也不影响后续流程。</p>
+
+  <h3>卡片三：项目摘要</h3>
+
+  <p>点右上角 <span class="zy-btn ghost">生成摘要</span>，AI 会把你的种子信息 + 对话内容归纳成一份结构化摘要，字段包括：<strong>项目名称 / 项目描述 / 核心问题 / 核心目标 / 目标用户 / 约束条件 / 里程碑 / 建议智能体</strong>。</p>
+
+  <p>没有摘要时显示 <span class="zy-field">尚无项目摘要，补充对话后点击「生成摘要」</span>。如果 AI 产出的摘要不完整，会在顶部给出黄色提示条「摘要有降级：…」，流程不受影响。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">别空着就点「生成摘要」</span>
+    <p>既没聊天记录、项目档案里也没有信息时点生成，会被拦下并提示 <strong>请先补充项目信息或与 AI 对话后再生成摘要</strong>。这是防止 AI 在没料的情况下编出一份看起来很像样、其实全是猜的摘要——那种摘要会污染后面的策略生成。</p>
+  </div>
+
+  <h3>卡片四：项目执行策略</h3>
+
+  <p>这是整页的重头戏。右上角三个按钮：<span class="zy-btn ghost">重新生成</span> / <span class="zy-btn">确认策略</span> / <span class="zy-btn ok">完成建项</span>。</p>
+
+  <p>生成出来的策略<strong>可以直接改</strong>——它们就是普通的输入框：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>策略字段</th>
+          <th>形式</th>
+          <th>你在改什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>里程碑</strong></td>
+          <td>多行文本（每行一条）</td>
+          <td>这个项目要在哪几个节点上"交付成果"。AI 后面拆任务会围着它转</td>
+        </tr>
+        <tr>
+          <td><strong>关键路径</strong></td>
+          <td>多行文本（每行一条）</td>
+          <td>哪几件事是"不做完后面都动不了"的</td>
+        </tr>
+        <tr>
+          <td><strong>目标拆解</strong></td>
+          <td>多行文本（每行一条）</td>
+          <td>把大目标拆成几块可执行的方向</td>
+        </tr>
+        <tr>
+          <td><strong>所需岗位</strong></td>
+          <td>表格：岗位 / 职责 / 人数 + <span class="zy-btn ghost">添加岗位</span></td>
+          <td>这个项目要配哪些"AI 岗位"、各几个人。这里定的岗位会体现在后续的组织与智能体里</td>
+        </tr>
+        <tr>
+          <td><strong>预算建议</strong></td>
+          <td>总预算（元）、AI 运行预算（元）</td>
+          <td>AI 给的建议值，你可以改。这是"建议"，最终以项目预算设置为准</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>没生成策略时这里显示 <span class="zy-field">尚未生成策略，请先创建会话并点击「生成策略」</span>。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">「重新生成」和「确认策略」的区别</span>
+    <p><strong>重新生成</strong>：让 AI 再给一版草案。它不落库，你不满意就一直重来。<br>
+    <strong>确认策略</strong>：把你在页面上改完的这版正式存下来，并标记「策略已确认」。<strong>只有确认过的策略才是正式执行蓝图</strong>，AI 后面按它拆任务。<br>
+    点「确认策略」前如果还没生成过策略，会提示「请先生成策略」。</p>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">最重要的是这一条：不确认策略，自动运营起不来</span>
+    <p>页面上有一行黄色告警原文，请记住它：<strong>未确认策略时，启动自动运营会被拦（/autoops/start 要求已确认策略）</strong>。</p>
+    <p>真的去点启动，系统会拒绝并提示：<strong>策略未确认，请先完成引导建项并确认执行策略</strong>。这不是 bug，是刻意设的门槛——防止 AI 在"没有蓝图"的情况下自己乱跑、白烧钱。</p>
+    <p><strong>大多数"我点了启动没反应"的问题，都出在这里。</strong></p>
+  </div>
+
+  <h3>完成建项：把策略变成任务</h3>
+
+  <p>确认策略之后点 <span class="zy-btn ok">完成建项</span>。成功提示 <strong>建项完成，已生成 N 条初始任务</strong>，并在下方显示四项结果：</p>
+
+  <div class="zy-grid c4">
+    <div class="zy-kpi"><div class="zy-kpi-label">初始任务数</div><div class="zy-kpi-value">N</div><div class="zy-kpi-hint">AI 按策略拆出来的第一批任务</div></div>
+    <div class="zy-kpi"><div class="zy-kpi-label">阶段</div><div class="zy-kpi-value">—</div><div class="zy-kpi-hint">建项后会话进入的阶段</div></div>
+    <div class="zy-kpi"><div class="zy-kpi-label">幂等复用</div><div class="zy-kpi-value">是 / 否</div><div class="zy-kpi-hint">「是」表示这次没有重复建，复用了上次的结果</div></div>
+    <div class="zy-kpi"><div class="zy-kpi-label">项目 ID</div><div class="zy-kpi-value">—</div><div class="zy-kpi-hint">任务挂到了哪个项目上</div></div>
+  </div>
+
+  <p>如果建项没成，这里会显示红色提示 <strong>建项未完成：&lt;原因&gt;</strong>。最常见的原因是项目档案里缺少最基本的信息（没有项目定义），系统会明确告诉你"没有项目定义，建项被跳过"，而不是假装成功——这一点可以放心。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">「幂等复用：是」是好事</span>
+    <p>表示你重复点了「完成建项」，系统识别出"这个项目已经建过了"，<strong>直接复用上次结果，没有重复创建任务</strong>。所以你多点几次不会造出一堆重复任务。</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">关于"调研"这个阶段</span>
+    <p>阶段的第一个名字叫「调研」（research），流程上它是新项目引导的起点。需要说明的是：<strong>当前版本的引导建项页不会自动联网做调研</strong>，策略是 AI 基于你补充的信息与摘要生成的。想让它联网查资料，在 <strong>AI 问答</strong> 页勾选「联网搜索」再问（该选项默认关闭）。</p>
+  </div>
+
+  <div class="zy-copy"><span class="zy-copy-tag">引导建项 · 对话补充时的万能四句</span>我的项目是【跨境电商独立站，主营家居收纳，面向北美】。
+
+现状：已经有 Shopify 店铺，月销约 800 单，主要靠广告投放，自然流量几乎没有。
+目标：90 天内把自然流量占比从 5% 提到 30%，同时把广告成本压到销售额的 15% 以内。
+约束：我一个人做，每周只能投入 10 小时，每月预算不超过 3000 元；不请外部代运营。
+已知资源：现有商品页 30 个、老客户邮箱列表 2000 条、供应商 3 家（都有现货）。
+
+请据此生成执行策略，里程碑请按"周"来排。</div>
+
+  <h2>九、待确认知识清单（知识入库的最后一道闸）</h2>
+
+  <p>前面讲的都是"人喂给 AI"。这一节讲反过来的方向：<strong>AI 想沉淀知识时，得先过你这一关。</strong></p>
+
+  <div class="zy-path">直接访问 /project/&lt;项目ID&gt;/kb/review</div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这一页当前没有侧边栏入口</span>
+    <p>「待确认知识清单」目前<strong>不在侧边栏菜单里</strong>，需要手工访问上面的网址才能打开（把 &lt;项目ID&gt; 换成你的项目数字 ID，也就是项目详情页网址里那个数字）。这是当前版本的实际情况，不是你没找到。后续版本若补齐入口，以实际界面为准。</p>
+  </div>
+
+  <p>页面标题是 <strong>待确认知识清单</strong>，右上角有 <span class="zy-btn ghost">返回知识库</span> 和 <span class="zy-btn ghost">刷新</span>。页面顶部常驻一条蓝色提示，原文是：</p>
+
+  <div class="zy-note info">
+    <strong>以下知识条目需人工确认后才会写入正式知识库并参与全局检索</strong>
+  </div>
+
+  <p>下方是表格，列为：<strong>节点 ID / 标题 / 详情 / 状态 / 操作</strong>。没有待确认条目时显示 <span class="zy-field">暂无待确认知识</span>。后台只把「待确认」状态的节点送进这张表，所以你实际看到的每一行都是可以确认的。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>状态</th>
+          <th>界面中文</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>pending</code></td><td><span class="zy-badge amber">待确认</span></td><td>等你拍板。只有这一种状态点 <span class="zy-btn ok">确认入库</span> 才有意义</td></tr>
+        <tr><td><code>in_progress</code></td><td><span class="zy-badge blue">处理中</span></td><td>正在走入库流程</td></tr>
+        <tr><td><code>completed</code></td><td><span class="zy-badge green">已入库</span></td><td>已正式沉淀</td></tr>
+        <tr><td><code>rejected</code></td><td><span class="zy-badge red">已驳回</span></td><td>被拒绝，不会入库</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>（上表是节点状态的完整枚举；在这一页你实际只会看到「待确认」。）</p>
+
+  <p>点 <span class="zy-btn ok">确认入库</span>，成功后提示 <strong>知识已确认入库</strong>，该条立刻从清单里消失。</p>
+
+  <h3>这些条目是从哪来的？</h3>
+
+  <p>它们来自你在 <strong>AI 问答</strong> 页的操作。当 AI 给出一段特别好的回答，你想把它"沉淀成范例、以后遇到类似问题直接参考"时，就会用到「提升为案例」这个动作。系统不放心让 AI 自己决定什么该沉淀——所以：</p>
+
+  <ul>
+    <li>如果项目开启了<strong>知识入库人工确认</strong>，这个动作不会直接生效，而是生成一条"待确认知识"节点，标题是<strong>「待确认知识：案例提升」</strong>，自主级别 L2（一键确认），出现在这一页等你点头。</li>
+    <li>你点 <span class="zy-btn ok">确认入库</span> 之后，这条内容才真正进入正式沉淀。</li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">为什么要人工确认</span>
+    <p>因为知识库是"AI 长期要参考的东西"。如果 AI 自己觉得"这条不错"就直接写进去，一旦那条内容是错的、过时的、或者含敏感信息，它就会<strong>反复污染后面每一次回答</strong>——错误被引用，还会被当作范例继续放大。加一道人工闸门，成本很低，收益很大。</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">不是所有项目都有这一页的内容</span>
+    <p>只有当项目开启了"知识入库人工确认"，才会有条目落到这里。没开启时，这类提升动作会直接生效、不进这个清单。所以清单长期为空是正常的。<strong>但只要你看到有「待确认」的条目，就说明有知识在门口等你放行</strong>，别放着不管。</p>
+  </div>
+
+  <h2>十、怎么判断知识库"喂好了"</h2>
+
+  <p>上传完成不等于喂好了。下面四步是验收动作，建议每次大批量导入后都做一遍。</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4>① 用 RAG 检索自检（最关键）</h4>
+      <p>去 <strong>知识库 → RAG 检索</strong>，搜 <strong>5 个你能判断对错的问题关键词</strong>，比如"产品定位""目标客户""退款政策""核心卖点""竞品差异"。</p>
+      <p>判断标准：能搜到 + 相似度不低 + 搜出来的段落确实是讲这件事的。五条里对三条以上，说明喂得不错；搜不到或者搜出来驴唇不对马嘴，说明资料有问题（见附录 C）。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>② 看文档状态是不是都「就绪」</h4>
+      <p>挨个知识库打开「文档管理」抽屉，扫一眼状态列。<strong>只要还有「待处理」，就说明它是死文件，AI 永远查不到</strong>——点「处理」把它推下去。</p>
+      <p>还有「失败」的，去附录 C 查原因。别留着一堆失败文档假装没看见。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>③ 问一次 AI，看它有没有用你的资料</h4>
+      <p>去 <strong>AI 问答</strong> 页（勾上「知识库检索」），问一个只有你资料里才有答案的问题，比如"我们公司的 X 是什么？"。</p>
+      <p>如果它答得贴你的实际情况，说明 RAG 生效；如果它给的是一套通用说法，说明资料没被检索到。</p>
+    </div>
+    <div class="zy-card purple">
+      <h4>④ 定期清理过期资料</h4>
+      <p>知识库不是"越大越好"。<strong>过期的价格表、作废的制度、淘汰的产品说明留在库里，会持续干扰 AI 的判断</strong>。</p>
+      <p>建议每季度过一遍：把作废文档删掉（文档管理里可删），或把整个过期的库删掉（知识库列表操作列有「删除」，会连文档与分块一起清掉，不可恢复，删前想清楚）。</p>
+    </div>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">删知识库是不可恢复的</span>
+    <p>点「删除」会弹确认框：<strong>确认删除知识库「X」？将同时删除其下所有文档与分块，且不可恢复。</strong>确认后，这个库连同里面所有文档和分块一起被清掉，没法找回。删之前先确认"里面的东西别处还有备份"。</p>
+  </div>
+
+  <h2>十一、本章小结与下一步</h2>
+
+  <ul>
+    <li><strong>一句话原则</strong>：AI 答得准不准，八成取决于你喂了什么。先喂资料，再谈自动化。</li>
+    <li><strong>知识库是分层的</strong>：项目级优先（70%）、公司级共享兜底（30%）。公司级私密库不会漏进项目检索——想让它被项目用到，建库时打开「共享下级」。</li>
+    <li><strong>文档有十个状态</strong>：待处理 → 处理中 → 解析中 → 已解析 → 分块中 → 向量化中 → 就绪，另外还有失败（可重试 / 重试耗尽）和「需人工确认」两条岔路。只有「就绪」才算真进去；「待处理」要你手动点「处理」；「需人工确认」说明解析走了降级路径、要你复核。</li>
+    <li><strong>五条导入通道各有分工</strong>：知识库上传（正式入库）、边缘客户端（自动扫本地）、会议导入（纪要变知识 + 变任务）、项目导入（接手已有项目）、引导建项（新项目从想法到策略）。</li>
+    <li><strong>两个最容易踩的坑</strong>：① 导入页上传的资料只用于"摸底"，不会自动进知识库；② 不确认执行策略，自动运营启动一定被拦。</li>
+    <li><strong>验收四步</strong>：RAG 检索自检、文档状态全「就绪」、问一次 AI 看有没有引用资料、定期清理过期内容。</li>
+    <li><strong>下一步</strong>：资料喂好了，接下来去 <a href="08-智能体.html">第 08 章 智能体：创建、管理与自动扩编</a>，把干活的"人"配齐。</li>
+  </ul>
+
+  <div class="zy-quick">
+    <a href="06-界面导览-项目.html">上一章：项目内页面导览</a>
+    <a href="08-智能体.html">下一步：智能体</a>
+    <a href="19-故障排查与红线.html">导入失败？查故障排查章</a>
+    <a href="20-术语表与路线图.html">RAG / Few-Shot 是什么？查术语表</a>
+  </div>
+
+  <h2>附录 A · 资料导入方式对照全表</h2>
+
+  <p>把这张表打印出来贴在手边。遇到"这份资料该怎么弄进去"，先查它。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>方式</th>
+          <th>入口路径</th>
+          <th>支持格式（界面白名单）</th>
+          <th>大小 / 数量限制</th>
+          <th>要人工确认吗</th>
+          <th>适合的资料</th>
+          <th>常见失败原因</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>① 知识库上传</strong></td>
+          <td>知识库 <span class="sep">›</span> 文档管理 <span class="sep">›</span> 上传文档</td>
+          <td>pdf / txt / md / markdown / docx / xlsx</td>
+          <td>单文件 ≤ 50MB；一次一个</td>
+          <td>要：传完还要点「处理」</td>
+          <td>已整理好的正式资料，要长期被 AI 引用</td>
+          <td>扫描件 PDF 抽不出文字；docx/xlsx 解析质量差；忘了点「处理」</td>
+        </tr>
+        <tr>
+          <td><strong>② 边缘客户端</strong></td>
+          <td>本机托盘程序（上传结果看 项目内 <span class="sep">›</span> 边缘接入）</td>
+          <td>pdf / docx / xlsx / txt / md / csv</td>
+          <td>单文件 ≤ 50MB；目录可配多个</td>
+          <td>要：入库仍走知识库处理</td>
+          <td>散落在本机各目录的旧文档，量大不想手动挑</td>
+          <td>服务器地址/令牌没配；目录不在监听清单；格式不在白名单；一直 Disconnected</td>
+        </tr>
+        <tr>
+          <td><strong>③ 会议导入（文件）</strong></td>
+          <td>项目内 <span class="sep">›</span> 研究与获客 <span class="sep">›</span> 会议导入 <span class="sep">›</span> 上传文件</td>
+          <td>txt / md / markdown / docx / pdf / xlsx / pptx</td>
+          <td>单文件，无显式界面上限</td>
+          <td>否（后台自动梳理）</td>
+          <td>会议纪要文件、决议文档、周报</td>
+          <td>音视频被明确拒绝；格式不在白名单；文件内容为空</td>
+        </tr>
+        <tr>
+          <td><strong>③ 会议导入（文本）</strong></td>
+          <td>会议导入 <span class="sep">›</span> 粘贴文本 <span class="sep">›</span> 开始梳理</td>
+          <td>纯文本粘贴</td>
+          <td>正文不能为空</td>
+          <td>否；但行动项转任务时会弹确认</td>
+          <td>手边有文字版纪要、转写稿</td>
+          <td>内容太短/太乱，AI 梳理不出行动项</td>
+        </tr>
+        <tr>
+          <td><strong>④ 项目导入</strong></td>
+          <td>项目内 <span class="sep">›</span> AI 问答 <span class="sep">›</span> 项目导入</td>
+          <td>txt / md / doc / docx / pdf / xlsx / xls / csv / json</td>
+          <td>单文件 ≤ 50MB；<strong>最多 10 个文件</strong></td>
+          <td>要：需先「创建导入会话」再上传，最后「整理并完成建项」</td>
+          <td>接手已有项目时的摸底材料、聊天记录要点</td>
+          <td>没建会话就点上传；没选公司；上传后忘了点「整理并完成建项」</td>
+        </tr>
+        <tr>
+          <td><strong>④ 项目导入（聊天记录）</strong></td>
+          <td>同上，直接粘贴到「聊天记录」栏</td>
+          <td>纯文本粘贴</td>
+          <td>建议控制在几百字要点</td>
+          <td>要：同「整理并完成建项」</td>
+          <td>微信/钉钉沟通要点、客户往来结论</td>
+          <td>贴了原始长记录而非要点，AI 抓不住重点</td>
+        </tr>
+        <tr>
+          <td><strong>⑤ 引导建项（对话补充）</strong></td>
+          <td>项目内 <span class="sep">›</span> AI 问答 <span class="sep">›</span> 引导建项 <span class="sep">›</span> 对话补充</td>
+          <td>纯文本对话</td>
+          <td>—</td>
+          <td>要：策略必须点「确认策略」</td>
+          <td>新项目的背景、目标、约束、资源</td>
+          <td>空着就点「生成摘要」被拦；生成策略后忘了确认</td>
+        </tr>
+        <tr>
+          <td><strong>⑥ AI 对话附件</strong></td>
+          <td>左侧一级菜单 <span class="sep">›</span> AI 对话 <span class="sep">›</span> 输入框曲别针</td>
+          <td>doc / docx / pdf / txt / md / xlsx / xls / ppt / pptx / html / csv / json</td>
+          <td>单文件 ≤ 50MB</td>
+          <td>否</td>
+          <td><strong>临时参考</strong>：只想就这个文件问一下，不长期沉淀</td>
+          <td>误以为它进了知识库（其实没有）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">怎么选：三个问题定通道</span>
+    <p><strong>问一：这份资料以后还要被反复引用吗？</strong>要 → 走①知识库。不要，只是这次想问 → 走⑥对话附件。<br>
+    <strong>问二：资料在我电脑里，还是我手上已经有文字了？</strong>在电脑里、量很大 → 走②边缘客户端。手上已有文字 → 直接粘贴进③或④。<br>
+    <strong>问三：项目是新的还是已经在跑的？</strong>已经在跑 → 走④项目导入。全新的 → 走⑤引导建项。</p>
+  </div>
+
+  <h2>附录 B · 文件格式支持与限制总表</h2>
+
+  <p>四个入口的白名单各不相同，别记混。下表逐入口列出（以当前代码为准）。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>格式</th>
+          <th>知识库上传</th>
+          <th>AI 对话附件</th>
+          <th>项目导入</th>
+          <th>会议导入</th>
+          <th>边缘客户端扫描</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>txt</strong></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td></tr>
+        <tr><td><strong>md / markdown</strong></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span>（.md）</td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td></tr>
+        <tr><td><strong>pdf</strong></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td></tr>
+        <tr><td><strong>docx</strong></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td></tr>
+        <tr><td><strong>doc（旧版 Word）</strong></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td></tr>
+        <tr><td><strong>xlsx</strong></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td></tr>
+        <tr><td><strong>xls（旧版 Excel）</strong></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td></tr>
+        <tr><td><strong>csv</strong></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td></tr>
+        <tr><td><strong>pptx / ppt</strong></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span>（.pptx）</td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td></tr>
+        <tr><td><strong>json</strong></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td></tr>
+        <tr><td><strong>html / htm</strong></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge green">✔</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td></tr>
+        <tr><td><strong>音视频（mp3/mp4 等）</strong></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td><td class="zy-nowrap"><span class="zy-badge red">✘ 明确拒绝</span></td><td class="zy-nowrap"><span class="zy-badge red">✘</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">这张表怎么读</span>
+    <p>表里这几列，说的是<strong>界面上「允许你选中」的格式</strong>（上传控件的可选类型），以当前前端代码为准。其中 <strong>「知识库上传」这一列现在同时被后端强制校验</strong>：扩闸门只认列出的这几种扩展名（无扩展名或其它后缀直接 400），docx / xlsx 还要过 OOXML 魔数校验——所以这一列对知识库入口而言已经是硬边界。其它几列（对话附件、项目导入、会议导入、边缘扫描）仍以各自前端控件的可选项为准。</p>
+    <p>不管走哪个入口，都别把"✔"理解成"一定解析得好"（docx / xlsx 就是反例：能传，但解析质量差）。真正稳妥的判断标准只有一个：<strong>这种格式的内容能不能被干净地抽成文字</strong>。凡是要长期入库的，<strong>能转 txt / md 就转</strong>。</p>
+  </div>
+
+  <p><strong>限制逐条：</strong></p>
+  <ul>
+    <li><strong>知识库上传</strong>：单文件 ≤ 50MB；一次一个文件；上传后必须点「处理」。</li>
+    <li><strong>AI 对话附件</strong>：单文件 ≤ 50MB；不进知识库。</li>
+    <li><strong>项目导入</strong>：单文件 ≤ 50MB；单次最多 10 个文件；必须先创建导入会话。</li>
+    <li><strong>会议导入</strong>：界面无显式大小上限（但超大文件解析会很慢）；音视频会被明确拒绝。</li>
+    <li><strong>边缘客户端</strong>：单文件 ≤ 50MB；扫描目录需在配置里显式指定；6 种格式由配置项决定。</li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">什么格式最保险：一句话——txt / md 最稳</span>
+    <p>把这句话记牢：<strong>纯文本（txt / md）是所有入口里唯一"不会出意外"的格式</strong>。它不需要任何解析器，直接读取，编码问题也有兜底。</p>
+    <p>docx / pdf 依赖解析链路，效果参差不齐：PDF 抽不到文字的扫描件一定失败；<strong>docx / xlsx 在知识库这条链路上走的是降级通道，正文基本抽不出来、抽到的多是二进制噪声</strong>。好在这类文档<strong>不会再被误标成「就绪」</strong>——系统会把它标成「需人工确认」并给出原因，等你复核，避免"看起来成功了、检索出来却是乱码"。所以遇到重要资料，<strong>"先转成 txt 再传"永远是最省钱、最省心的做法</strong>——写文档时多花两分钟，后面能少踩十个坑。</p>
+  </div>
+
+  <h2>附录 C · 文档处理异常自查表</h2>
+
+  <p>症状 → 可能原因 → 处置步骤。按顺序试，多数问题三步内解决。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>症状</th>
+          <th>可能原因</th>
+          <th>处置步骤</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>文档一直是「待处理」</strong></td>
+          <td>你还没点「处理」。这是最常见的情况，不是故障</td>
+          <td>① 打开该知识库的「文档管理」抽屉；② 找到那一行，点操作列的 <span class="zy-btn">处理</span>；③ 点「刷新」看状态是否开始变化</td>
+        </tr>
+        <tr>
+          <td><strong>一直卡在「解析中」超过十几分钟</strong></td>
+          <td>文件太大、格式复杂，或者文件本身已损坏</td>
+          <td>① 再等 5 分钟，点「刷新」；② 仍不动，把原文另存为 txt（只保留正文）重新上传；③ 如果是扫描版 PDF，先 OCR 转文字</td>
+        </tr>
+        <tr>
+          <td><strong>卡在「向量化中」很久</strong></td>
+          <td>向量模型调用慢或批量大。这一步本来就最耗时</td>
+          <td>① 先等（大文档几分钟到十几分钟正常）；② 若超过半小时，刷新看是否已转「失败」；③ 失败且提示与"未配置"有关，说明向量模型没配好，需管理员处理；④ 拆分文档后分批传</td>
+        </tr>
+        <tr>
+          <td><strong>状态是「失败」，提示内容为空</strong></td>
+          <td>正文抽出来是空的——扫描件、纯图片 PDF、加密文档最常见的结局</td>
+          <td>① 用 OCR 工具把文件转成文字；② 存成 txt 重新上传；③ 临时应急：把关键段落复制到「AI 对话」里直接问</td>
+        </tr>
+        <tr>
+          <td><strong>状态是「需人工确认」</strong></td>
+          <td>解析走了降级路径——docx / xlsx 抽不出结构，或正文乱码占比偏高（≥5%）。这是新版本刻意新增的"存疑"状态，不是彻底失败</td>
+          <td>① 点开这一行的错误说明，看系统写明的具体原因；② 内容还能用 → 直接点 <span class="zy-btn">处理</span> 放行入库；③ 内容确实乱七八糟 → 把它另存为 txt / md 重传（推荐）；④ 别不管它，它不会自动进检索</td>
+        </tr>
+        <tr>
+          <td><strong>状态是「失败」，文件后缀明明是 PDF</strong></td>
+          <td>文件不是真正的 PDF（被改过后缀），或 PDF 结构损坏。PDF 的魔数校验在解析期做，所以伪装文件能传上来、但会在这一步失败落库</td>
+          <td>① 用 PDF 阅读器打开试试，打不开就是坏文件；② 用原始文件重新导出一次 PDF；③ 仍不行就转 txt</td>
+        </tr>
+        <tr>
+          <td><strong>上传直接失败，提示超限</strong></td>
+          <td>文件超过 50MB</td>
+          <td>① 拆分文件；② 或者只提炼其中的要点段落，另存成 txt 再传（推荐）；③ 别为了提高上限去改配置，大文件入库对检索没有好处</td>
+        </tr>
+        <tr>
+          <td><strong>上传被当场拒绝</strong>（提示「不支持的文件类型 .xxx」「文件缺少扩展名」或「缺少 OOXML/ZIP 魔数」）</td>
+          <td>撞上了上传格式闸门：后缀不在白名单、文件没有扩展名，或者 docx / xlsx 并不是真正的 Office 文件（被改过后缀）</td>
+          <td>① 确认后缀：只支持 pdf / txt / md / markdown / docx / xlsx；② 无后缀的文件补上正确后缀；③ 若是 Word/Excel，拿原始文件重新导出一次再传，别用手改后缀的文件</td>
+        </tr>
+        <tr>
+          <td><strong>状态是「就绪」，但 RAG 搜不到</strong></td>
+          <td>你搜的关键词在文档里确实不存在；或者搜的是另一个知识库的内容；或者文档属于公司级私密库、而你在项目上下文里搜</td>
+          <td>① 换用文档里真实出现过的词再搜；② 在「知识库」页签确认这份文档在哪个库；③ 确认该库的「共享下级」是否开启；④ 用 AI 问答页（勾「知识库检索」）换个问法试</td>
+        </tr>
+        <tr>
+          <td><strong>相似度都很低（比如都在 30% 以下）</strong></td>
+          <td>文档内容与你的问法用词差异大，或文档本身内容太杂（比如塞了一份满是表格的 Excel）</td>
+          <td>① 改进文档：把核心结论写成白话段落；② 把大而杂的库拆成"产品/AI 客户/竞品"几个专题库；③ 换更贴近文档原文的措辞搜索</td>
+        </tr>
+        <tr>
+          <td><strong>搜出来的是过期内容</strong></td>
+          <td>旧版本文档还留在库里，和新版一起被检索到</td>
+          <td>① 定位到旧文档，在「文档管理」里删掉；② 养成"更新资料时同步删旧版"的习惯；③ 每季度清理一次（第十章第④步）</td>
+        </tr>
+        <tr>
+          <td><strong>边缘接入页「暂无上传文件」</strong></td>
+          <td>客户端没连上，或 scan 未启用，或目录里没有白名单格式的文件</td>
+          <td>① 看托盘状态是不是 Connectioned；② 检查配置里的监听目录与格式白名单；③ 往监听目录里放一个 .txt 测试；④ 还不行看第 19 章</td>
+        </tr>
+        <tr>
+          <td><strong>会议记录一直是「失败」</strong></td>
+          <td>文件解析失败、内容为空，或 AI 梳理这一步调用出错</td>
+          <td>① 打开详情抽屉，看顶部红色提示里的具体原因；② 内容为空 → 换纯文本粘贴；③ 点「重新梳理」重试；④ 仍失败就把内容精简后重交</td>
+        </tr>
+        <tr>
+          <td><strong>行动项没有「转自动运营任务」按钮</strong></td>
+          <td>它的状态不是「待处理」——可能已经转过（显示"已转任务 X"），或已被标记完成</td>
+          <td>① 看右侧标签：<span class="zy-badge blue">已转任务</span> 说明已经转过了，去「任务管理」里找它；② <span class="zy-badge green">已完成</span> 说明不需要再转</td>
+        </tr>
+        <tr>
+          <td><strong>点「启动自动运营」被拦</strong></td>
+          <td>执行策略还没确认。这是设计门槛，不是故障</td>
+          <td>① 去项目内 <strong>AI 问答 → 引导建项</strong>；② 生成策略 → 修改 → 点 <span class="zy-btn">确认策略</span>；③ 看到标签变成「策略已确认」后，再回自动运营点启动</td>
+        </tr>
+        <tr>
+          <td><strong>完成建项提示"没有项目定义，建项被跳过"</strong></td>
+          <td>项目档案里缺少最基本的项目信息</td>
+          <td>① 回项目详情页，把项目描述、目标补齐；② 回引导建项，点「重新从项目档案载入」；③ 若仍读不到，直接在「对话补充」里把项目是什么讲清楚，再生成摘要与策略</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">一个通用原则</span>
+    <p>凡是"看起来卡住了"的局面，先做两件事：<strong>点「刷新」看最新状态；找到具体的提示原文。</strong>系统在这类页面上的提示都很具体（比如"内容为空"、"未配置"、"暂不支持音视频"），提示原文本身就是答案。切忌反复重传——多数时候问题不在传输环节。</p>
+  </div>
+
+  <h2>附录 D · 知识库内容清单模板（可勾选）</h2>
+
+  <p>新建知识库时对着这张清单勾，避免"上线后才发现少喂了什么"。按公司级 / 项目级分开列。</p>
+
+  <h3>公司级知识库（全公司通用，建议打开「共享下级」）</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>公司简介</strong>：一段话讲清我们是谁、做什么、服务谁（建议 300 字以内，最能提升回答质量）</span></li>
+    <li><input type="checkbox"><span><strong>品牌规范</strong>：名称写法、口号、视觉与语气要求、禁用表达</span></li>
+    <li><input type="checkbox"><span><strong>产品/服务总览</strong>：各条产品线一句话定位与目标客户</span></li>
+    <li><input type="checkbox"><span><strong>定价与折扣原则</strong>：价格档位、折扣审批权限、报价口径</span></li>
+    <li><input type="checkbox"><span><strong>法务与合规</strong>：合同模板要点、隐私政策要点、行业禁语</span></li>
+    <li><input type="checkbox"><span><strong>财务制度</strong>：报销规则、付款流程、发票要求</span></li>
+    <li><input type="checkbox"><span><strong>对外沟通口径</strong>：邮件签名规范、客户投诉处理原则、退款政策</span></li>
+    <li><input type="checkbox"><span><strong>组织与审批</strong>：谁有权批什么、常见流程的路径</span></li>
+    <li><input type="checkbox"><span><strong>通用素材</strong>：公司介绍文案的多个版本、常用 FAQ</span></li>
+  </ul>
+
+  <h3>项目级知识库（本项目专用，建议一个专题一个库）</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>产品资料</strong>：规格、卖点、使用场景、常见问题</span></li>
+    <li><input type="checkbox"><span><strong>客户资料</strong>：典型客户画像、常见异议与应对话术（<strong>注意别放未脱敏的个人敏感信息</strong>）</span></li>
+    <li><input type="checkbox"><span><strong>竞品分析</strong>：主要竞品、差异点、我们相对优势</span></li>
+    <li><input type="checkbox"><span><strong>市场与渠道</strong>：目标市场特征、各渠道表现、投放经验</span></li>
+    <li><input type="checkbox"><span><strong>内容素材库</strong>：已发布的优质文案、高转化的标题、常用配图说明</span></li>
+    <li><input type="checkbox"><span><strong>运营 SOP</strong>：本项目的日常动作清单（怎么发货、怎么回客服、怎么复盘）</span></li>
+    <li><input type="checkbox"><span><strong>历史结论</strong>：过去做过哪些尝试、结果如何、踩过哪些坑（这条极有价值）</span></li>
+    <li><input type="checkbox"><span><strong>项目专属术语</strong>：内部黑话、缩写对照表</span></li>
+  </ul>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">一条经验：宁可少而精</span>
+    <p>知识库质量的瓶颈从来不是"量不够"，而是"太杂"。一份 300 字写得清楚的公司简介，对回答质量的提升，往往大于十份没人整理过的旧 PPT。<strong>宁可先放 5 份精炼材料，好过一口气塞 50 份半成品文档。</strong></p>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

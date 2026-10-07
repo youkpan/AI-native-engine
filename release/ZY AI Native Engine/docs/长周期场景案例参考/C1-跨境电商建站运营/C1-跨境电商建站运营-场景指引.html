@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C1 — 跨境电商建站与全站运营 · 场景指引</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --success: #34a853;
+    --danger: #ea4335;
+    --warning: #fbbc04;
+    --text: #202124;
+    --text-secondary: #5f6368;
+    --bg: #ffffff;
+    --bg-alt: #f8f9fa;
+    --border: #dadce0;
+    --code-bg: #1e1e2e;
+    --code-text: #cdd6f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--text);
+    background: var(--bg-alt);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+  /* 左侧导航 */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 20px 0;
+    z-index: 100;
+  }
+  .sidebar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0 20px 12px;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 8px;
+  }
+  .sidebar a {
+    display: block;
+    padding: 6px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .sidebar a:hover { background: var(--primary-light); color: var(--primary); }
+  .sidebar a.level-2 { padding-left: 36px; font-size: 12.5px; }
+  .sidebar a.level-3 { padding-left: 52px; font-size: 12px; }
+  /* 主内容 */
+  .main {
+    margin-left: 280px;
+    max-width: 1200px;
+    padding: 0 40px 60px;
+  }
+  /* 面包屑 */
+  .breadcrumb {
+    padding: 16px 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .breadcrumb a { color: var(--primary); text-decoration: none; }
+  .breadcrumb span { margin: 0 6px; }
+  /* 标题 */
+  h1 { font-size: 28px; color: var(--primary); margin: 32px 0 16px; padding-bottom: 10px; border-bottom: 3px solid var(--primary); }
+  h2 { font-size: 22px; color: var(--text); margin: 28px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+  h3 { font-size: 18px; color: var(--text); margin: 22px 0 10px; }
+  h4 { font-size: 15px; color: var(--text-secondary); margin: 16px 0 8px; font-weight: 600; }
+  p { margin: 8px 0 12px; }
+  /* 表格 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 13.5px;
+  }
+  th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: var(--bg-alt); }
+  tr:hover td { background: var(--primary-light); }
+  /* 代码块 */
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 16px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 12px 0 20px;
+  }
+  code { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; font-size: 13px; }
+  p code, li code, td code {
+    background: #f1f3f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--danger);
+    font-size: 12.5px;
+  }
+  /* 卡片 */
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0 20px;
+  }
+  .card-info { border-left: 4px solid var(--primary); }
+  .card-success { border-left: 4px solid var(--success); }
+  .card-danger { border-left: 4px solid var(--danger); }
+  .card-warning { border-left: 4px solid var(--warning); }
+  .card-title { font-weight: 700; margin-bottom: 6px; }
+  /* 标签 */
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 4px; }
+  .tag-pass { background: #e6f4ea; color: var(--success); }
+  .tag-fail { background: #fce8e6; color: var(--danger); }
+  .tag-observe { background: #fef7e0; color: #e37400; }
+  .tag-blocked { background: #f1f3f4; color: var(--text-secondary); }
+  /* 列表 */
+  ul, ol { margin: 8px 0 16px 24px; }
+  li { margin: 4px 0; }
+  /* 响应式 */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 0 16px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 左侧导航 -->
+<nav class="sidebar">
+  <div class="sidebar-title">C1 跨境电商建站运营</div>
+  <a href="#overview" class="level-1">一、场景概述</a>
+  <a href="#goals" class="level-1">二、场景目标与主战场能力</a>
+  <a href="#goals-loop" class="level-2">2.1 端到端闭环</a>
+  <a href="#goals-engines" class="level-2">2.2 双引擎与轮次调度</a>
+  <a href="#goals-acceptance" class="level-2">2.3 三权验收与RACI</a>
+  <a href="#goals-marketing" class="level-2">2.4 营销全链与部署</a>
+  <a href="#prereq" class="level-1">三、预置条件与环境配置</a>
+  <a href="#prereq-env" class="level-2">3.1 环境要求</a>
+  <a href="#prereq-data" class="level-2">3.2 数据构建步骤</a>
+  <a href="#prereq-fix" class="level-2">3.3 FIX 修复项影响</a>
+  <a href="#prereq-connector" class="level-2">3.4 连接器配置</a>
+  <a href="#t1" class="level-1">四、T1 生存期操作指引</a>
+  <a href="#t1-ui" class="level-2">4.1 Playwright UI 操作路径</a>
+  <a href="#t1-events" class="level-2">4.2 事件注入与预期结果</a>
+  <a href="#t1-verify" class="level-2">4.3 三重取证要点</a>
+  <a href="#t2" class="level-1">五、T2 扩张期操作指引</a>
+  <a href="#t2-expand" class="level-2">5.1 扩编流程</a>
+  <a href="#t2-marketing" class="level-2">5.2 营销节奏化</a>
+  <a href="#t2-repurchase" class="level-2">5.3 复购券机制</a>
+  <a href="#t3" class="level-1">六、T3 规模化期操作指引</a>
+  <a href="#t3-batch" class="level-2">6.1 批量事件注入</a>
+  <a href="#t3-selfheal" class="level-2">6.2 异常自愈</a>
+  <a href="#t3-killswitch" class="level-2">6.3 Kill-Switch 演练</a>
+  <a href="#t3-reconcile" class="level-2">6.4 三方对账</a>
+  <a href="#acceptance" class="level-1">七、验收判定表</a>
+  <a href="#evidence" class="level-1">八、取证口径</a>
+  <a href="#evidence-ui" class="level-2">8.1 页面取证</a>
+  <a href="#evidence-net" class="level-2">8.2 网络取证</a>
+  <a href="#evidence-psql" class="level-2">8.3 psql 取证</a>
+  <a href="#appendix" class="level-1">九、附录：环境信息</a>
+</nav>
+
+<!-- 主内容区 -->
+<div class="main">
+
+<!-- 面包屑 -->
+<div class="breadcrumb">
+  <a href="#">首页</a><span>&gt;</span><a href="#">长周期场景案例</a><span>&gt;</span>C1 跨境电商建站运营
+</div>
+
+<!-- ==================== 一、场景概述 ==================== -->
+<h1 id="overview">一、场景概述</h1>
+
+<div class="card card-info">
+  <div class="card-title">场景卡片编号：core-C1</div>
+  <p><strong>行业：</strong>跨境电商（DTC 独立站 + Shopify 店铺）<br>
+  <strong>一句话故事：</strong>1 人创始人开一家卖「宠物慢食/收纳」细分品的出海小站，AI 团队自己建站、选品、写邮件、发 X、接客服、催复购，两年内长成 15 编制的多 SKU 小卖部。</p>
+</div>
+
+<p>跨境电商是当前 AI 原生引擎最具代表性的端到端业务场景之一。一个典型的跨境电商独立站运营涉及从建站、选品、上架、营销获客、客户咨询、订单处理、物流配送到售后复购的完整闭环。在传统模式下，这一闭环至少需要 5-10 人的团队分工协作，涵盖前端开发、文案撰写、邮件营销、社交媒体运营、客户服务、数据分析等多个岗位。C1 场景的核心价值在于验证平台能否让一个仅有 1 人编制的创始团队，在 AI 智能体的全面辅助下，实现从 0 到 1 的建站运营，并在 T1 生存、T2 扩张、T3 规模化三个阶段中逐步成长为拥有 15 个编制（1 人 + 14 AI）的多 SKU 跨境电商企业。</p>
+
+<p>本场景的业务背景设定为一家专注于宠物慢食碗和可折叠收纳篮的出海独立站。起步阶段仅有一个单 SKU 试水站，包含一个落地页和 Shopify 草稿店铺，客单价在 29 至 59 美元之间，毛利约 35%。随着 AI 团队的自主运营推进，逐步扩展到 12 个 SKU、3 个语种的落地页、5 封邮件序列以及完整的复购券机制。整个过程中，平台余额从 3,000 元起步，项目总预算 8,000 元，AI 运行预算 2,000 元，最终目标是实现累计 GMV 达到 12,000 美元，月 AI 运行成本控制在 120 美元以内。</p>
+
+<p>C1 场景的核心能力验证点涵盖以下六大维度：第一，<strong>端到端闭环能力</strong>，即从建站到获客、成交、客服、复购的全链路是否真正打通；第二，<strong>auto-ops 轮次调度与双引擎协作</strong>，验证 loop 引擎（调用 qianshou 子进程，适合建站编码等复杂长时任务）与 Agent 引擎（进程内 LLM 加工具调用，适合选品分析与客服回复）能否按任务特性自动选择并高效执行；第三，<strong>三权分立验收</strong>，确保执行、验收、批准三方分离，对外页面与外发邮件必须经过全量验收，防止自审自批；第四，<strong>RACI 三通道决策</strong>，外发、改价、退款等关键动作必须走黄色或红色通道，确保人在回路；第五，<strong>marketing 全链能力</strong>，包括 campaign 自动创建、邮件序列编排、社交媒体排程、线索池管理等；第六，<strong>deploy 真上线</strong>，验证 AI 产出的站点能否真正部署到可访问的公网 URL。</p>
+
+<p>本场景采用半自动（semi_auto）运行模式，这是基于卡面 T1 人工介入清单中明确列出的三道黄/红闸（批准 6 条外发、批准 1 次站点上线、确认 2 个 SKU 采购价）而做出的裁决。在半自动模式下，AI 可以自主拆解任务、调度轮次、执行大部分动作，但涉及对外发送、价格变更、退款等关键节点时，必须通过 RACI 人工节点进行审批，确保人在回路的治理机制得到有效验证。这一模式选择也为后续 T2 和 T3 阶段的扩编、自动化程度提升提供了渐进式的验证路径。</p>
+
+<!-- ==================== 二、场景目标与主战场能力 ==================== -->
+<h1 id="goals">二、场景目标与主战场能力</h1>
+
+<h2 id="goals-loop">2.1 端到端闭环说明</h2>
+
+<p>C1 场景的端到端闭环是指从「建站」到「复购」的完整业务链路。在 T1 生存期，闭环体现为：AI 通过 loop 引擎调用 qianshou 子进程完成落地页与商品页的编码构建，经三权验收后通过 deploy 通道上线到可访问的公网 URL；同时 Agent 引擎完成选品定价分析与冷邮件撰写，邮件经 RACI 黄通道逐条审批后外发。当外部订单事件（order.paid）注入后，系统自动将收入记入项目账本（project_ledger），客服 Agent 起草回复并转入审批队列，退款事件则自动创建售后人工节点。这一闭环的完整性由三重取证交叉验证：页面截图确认站点可访问、网络请求确认事件入账 API 返回 code=0、psql 只读查询确认 project_ledger 存在对应 income 行。</p>
+
+<p>在 T2 扩张期，闭环进一步延伸到营销节奏化与组织扩编。每周自动创建 campaign、A/B 两版文案、X 帖排程、客服话术沉淀进知识库，按负载提出扩编建议并经人工批准后新角色进入调度。复购券序列的上线标志着从获客到留存的完整闭环形成。在 T3 规模化期，闭环扩展到多 SKU 多语种、跨 campaign ROI 调度、异常自愈与内审治理层面，形成真正的企业级自动化运营体系。</p>
+
+<h2 id="goals-engines">2.2 auto-ops 轮次调度与双引擎协作</h2>
+
+<p>auto-ops 轮次调度是本场景的核心引擎机制。引擎启动须通过四道闸：运行模式非 manual_review、AutoOpsEnabled 校验、策略已确认（hasConfirmedStrategy）、预算未超限（BudgetExceeded）。启动后，引擎以固定 60 秒间隔推进轮次（DefaultInterval=60s，注意 project_config.default_interval_sec 仅用于展示，不进入 loop 计算），每轮通过调度器从 auto_ops_schedules 的槽位中按顺时针方式选取未完成任务。</p>
+
+<p>双引擎的分工明确：loop 引擎用于建站编码、页面修改等复杂长时任务，通过调用 qianshou 子进程执行，单轮耗时通常在 400-900 秒之间，token 成本约 0.66 元/轮；Agent 引擎用于选品分析、客服回复等信息整合与接口调用类任务，在进程内完成 LLM 加工具调用，单轮耗时 1-8 秒，token 成本约 0.005 元/轮。两者价差约 125 倍，因此任何成本分析都必须分引擎统计，混合均值会导致严重失真。引擎在轮前通过角色解析（engine.go:2284）将任务绑定到具体角色，确保调度与成本归因的准确性。</p>
+
+<h2 id="goals-acceptance">2.3 三权分立验收与 RACI 三通道</h2>
+
+<p>三权分立验收机制要求执行方、验收方、批准方三方分离。在 C1 场景中，AI 完成建站后，独立的验收 Agent 会对照 done_when 条件逐条产出验收结论（通过/返工/驳回），防止「写完自认完成」的情况。验收记录存入 acceptance_records 表，包含 verdict（结论）、score（评分）和 report（逐条对照报告）。T1 实测中，验收 Agent 给出了 verdict=pass、score=9.0 的结论，报告中逐条核验了「0 CJK 全站英文」「18 类医疗/绝对化用语 0 命中」「发布载荷 105.2KB 小于 2MB」「0 外链」等合规红线。</p>
+
+<p>RACI 三通道决策机制将动作分为绿/黄/红三级：绿色通道为低风险动作（如内部分析、知识库更新），AI 可自主执行；黄色通道为中等风险动作（如外发邮件、价格变更），需人工逐条审批后执行；红色通道为高风险动作（如退款、预算追加、Kill-Switch），需高级别审批。在 C1 场景中，6 条冷邮件外发、1 次站点上线、2 个 SKU 采购价确认均走黄/红通道，审批记录存入 human_task_nodes 表与 connector_audit_logs 表。</p>
+
+<h2 id="goals-marketing">2.4 营销全链与真实部署</h2>
+
+<p>marketing 全链能力涵盖 campaign 自动创建、邮件序列编排、社交媒体排程、线索池管理与 ROI 归因。在 T1 阶段，AI 自动创建 campaign 并撰写 5 封冷邮件，每封邮件逐条进入 pending_review 审批队列，人工在审批弹窗中核验收件人是否在白名单、是否包含医疗/绝对化用语、是否含退订链接。审批通过后，邮件经 email 连接器外发，写动作记录存入 connector_audit_logs 表，状态从 pending 变为 executed。</p>
+
+<p>deploy 真上线能力验证 AI 产出的站点能否部署到可访问的 URL。当前因 FIX-007（云开通 UI）未做，deploy 复用 mail1.zyinfo.pro 的增量目录作为部署目标。AI 完成建站后产出站点文件（index.html、商品页、assets 目录），经自校验（checks=71 failures=0）和验收通过后，通过 deploy/start 接口上线。人工在 deploy/:id/url 打开落地页断言 HTTP 200 即完成部署验证。</p>
+
+<!-- ==================== 三、预置条件与环境配置 ==================== -->
+<h1 id="prereq">三、预置条件与环境配置</h1>
+
+<h2 id="prereq-env">3.1 环境要求</h2>
+
+<p>执行 C1 场景测试前，须确保以下三端服务全部存活且可访问：</p>
+
+<table>
+  <tr><th>端</th><th>地址</th><th>说明</th></tr>
+  <tr><td>PostgreSQL 17</td><td>localhost:5432</td><td>双库：ai_native_engine（平台）、project_server（实例）；psql 取证只读</td></tr>
+  <tr><td>platform 后端</td><td>http://localhost:18000</td><td>公司/项目/实例/平台真实账本/计费结算/超管后台；WS ws://localhost:18000/ws?token=</td></tr>
+  <tr><td>project-server</td><td>http://localhost:8090</td><td>AI 执行引擎宿主；场景轮次/审批/账本/连接器/事件全在此端</td></tr>
+  <tr><td>前端 platform-web</td><td>http://localhost:5176</td><td>vite dev 模式；Playwright 配置 baseURL 为 5176</td></tr>
+</table>
+
+<p>构建环境要求：GOTMPDIR=/d/gotmp；杀进程使用 PowerShell <code>Stop-Process</code>，严禁 bash taskkill；外网代理 <code>127.0.0.1:7890</code>。测试主账号统一使用 <code>lts_</code> 前缀，密码为 <code>test123</code>。公司命名 <code>LTS-Cn &lt;行业&gt;</code>，项目命名 <code>lts_cN_&lt;短名&gt;</code>。单实例单项目原则要求一个时刻只有 1 个场景的 lts 项目挂 8090 执行，场景切换在批次边界重绑实例指针并重启确认 <code>/health</code>。</p>
+
+<h2 id="prereq-data">3.2 数据构建步骤</h2>
+
+<p>C1 场景的全部数据构建必须走 UI/API 真实路径，严禁 SQL 直插。具体步骤如下：</p>
+
+<ol>
+  <li><strong>注册登录</strong>：访问 <code>http://localhost:5176/login</code>，输入 lts_c1 账号的 email 与密码，点击登录按钮，跳转到 <code>/dashboard</code> 全局面板。截图保存为 <code>lts_c1_t1_01_login_ok.png</code>。</li>
+  <li><strong>建公司</strong>：在全局面板点击「新建公司」，输入公司名称 <code>LTS-C1 宠物出海</code>，行业选择「电商零售」，确认后创建。psql 断言 <code>companies</code> 表新增行 <code>status=active</code>。</li>
+  <li><strong>建项目</strong>：进入公司后点击「新建项目」，走三步向导：第一步选择项目类型「电商运营」；第二步选择运行模式「半自动」（semi_auto），填写总预算 8000 元、AI 运行预算 2000 元；第三步填写业务方向与组织信息。确认页回显预算金额后提交。psql 断言 <code>projects</code> 表 <code>type=ecommerce mode=semi_auto</code>，<code>project_budgets</code> 表 <code>total_budget=8000 token_limit=2000</code>。</li>
+  <li><strong>实例自挂</strong>：在项目设置中录入实例地址 <code>127.0.0.1:8090</code>，系统自动下发 grant 并执行双真自检（execution_plane_reachable=true + hmac_verified=true）。psql 断言 <code>provision_logs</code> 表出现 grant_push=success、health_check=success、execution_plane_selfcheck=success 行。</li>
+  <li><strong>引导流策略确认</strong>：进入项目引导流，点击「生成策略」等待 LLM 产出策略内容，再点击「确认策略」。psql 断言 <code>guided_sessions</code> 表 <code>strategy_confirmed=true</code>。（2026-10-07 注：缺项目作用域策略确认记录的<strong>存量项目</strong>，升级后启动 autoops 会被 hasConfirmedStrategy 闸拦截——重走本步骤即可解锁；回填方案待裁，见 <code>wiki/testing/v3/todo.md</code> V3-07。新建项目不受影响。）</li>
+  <li><strong>组织起步</strong>：进入智能体中心，依次创建 3 个岗位：运营总监（manager）、营销获客专家（marketing_expert）、客服专家（customer_service）。注意岗位模板库分类初值应自动匹配为「电商运营」，无需手工切换。psql 断言 <code>agents</code> 表 3 行，员工岗 <code>parent_agent_id</code> 非空。</li>
+  <li><strong>创建业务任务</strong>：在控制台新建 3 条任务：loop 建站任务（构建落地页与商品页）、Agent 选品定价任务、Agent 冷邮件任务（撰写 5 封冷邮件）。每条任务的 <code>done_when</code> 尾部补写 <code>[Task finished]</code> 收口标记。</li>
+  <li><strong>启动引擎</strong>：点击控制台「启动」按钮，<code>POST /autoops/start</code> 返回 <code>code=0</code>。引擎开始按 60 秒间隔推进轮次。</li>
+  <li><strong>基线快照</strong>：拍摄基线快照存入 <code>harness/snapshots/lts_c1-t0.md</code>，记录双库关键表行数与服务健康状态。</li>
+</ol>
+
+<h2 id="prereq-fix">3.3 FIX 修复项影响</h2>
+
+<p>C1 场景受多项 FIX 修复项状态影响，需在测试前充分了解其降级方案：</p>
+
+<table>
+  <tr><th>FIX</th><th>内容</th><th>状态</th><th>对 C1 的影响与降级方案</th></tr>
+  <tr><td>FIX-005</td><td>Shopify 连接器</td><td><span class="tag tag-fail">未做</span></td><td>本卡最大缺口。订单/商品/退款一律用 ingest-event 模拟加手工账本分录，订单到库存到客服链路不进判定分母。</td></tr>
+  <tr><td>FIX-002</td><td>Twitter/X 连接器</td><td><span class="tag tag-observe">待 e2e</span></td><td>X 发帖留 pending_review，引流指标只算「已生成待审」，转化不进分母。</td></tr>
+  <tr><td>FIX-001</td><td>通知适配器</td><td><span class="tag tag-observe">待 e2e</span></td><td>审批推送靠轮询 /autoops/human-tasks 兜底，人工响应 SLA 数据可能失真。</td></tr>
+  <tr><td>FIX-003</td><td>预算联动</td><td><span class="tag tag-observe">待重启</span></td><td>熔断由人工按 /autoops/billing 手判，记为干预。项目级三级闸（终止/AI预算熔断/总预算熔断）在码且由真实入账驱动。</td></tr>
+  <tr><td>FIX-007</td><td>云开通 UI</td><td><span class="tag tag-fail">未做</span></td><td>deploy 复用 mail1 增量目录/本机静态目录。</td></tr>
+  <tr><td>FIX-006</td><td>计费明细页</td><td><span class="tag tag-fail">未做</span></td><td>成本用 psql 加 /ledger/amoeba/daily 取证。</td></tr>
+  <tr><td>FIX-004</td><td>evo 扩编闭环</td><td><span class="tag tag-observe">待 e2e</span></td><td>T2 扩编后新角色是否真被调度需复测，未验通前手工绑任务并标注。</td></tr>
+</table>
+
+<h2 id="prereq-connector">3.4 连接器配置</h2>
+
+<p>C1 场景需要注册以下连接器，全部设为 write_review 模式（写操作需审批）：</p>
+
+<ul>
+  <li><strong>email 连接器</strong>：用于冷邮件外发与客服回复。注册时须填写 <code>notify_to</code> 字段指向测试收件箱（126 邮箱），<code>notify_*</code> 系列字段为 FIX-001 产物，确保通知留底。</li>
+  <li><strong>feishu 审批通道</strong>：用于审批推送与通知链路。入站 webhook 走 <code>/webhook/feishu</code>，但注意 8090 重启后 webhook 路由不回填（需先 POST /connectors 重注册）。</li>
+  <li><strong>shopify 连接器（规划中）</strong>：FIX-005 未做前，使用事件注入模拟。未来接通后，订单/商品走只读连接器，写操作（建商品/改价）强制审批。</li>
+</ul>
+
+<p>连接器注册后重启验证 <code>RestoreFromDB</code> 机制，确保连接器配置持久化到数据库并能正确恢复。长测环境一律 write_review，即所有写操作必须经人工审批后执行，审批记录存入 <code>connector_audit_logs</code> 表。</p>
+
+<!-- ==================== 四、T1 生存期操作指引 ==================== -->
+<h1 id="t1">四、T1 生存期操作指引</h1>
+
+<p>T1 生存期的核心目标是实现「站点可访问 + 首单入账」。预期 AI 自主完成建站、选品分析、冷邮件撰写，人工完成 6 条外发审批、1 次站点上线批准、2 个 SKU 采购价确认。判定指标：自主率大于等于 55%、干预次数不超过 12 次、token 成本不超过 6 元/订单。</p>
+
+<h2 id="t1-ui">4.1 Playwright UI 操作路径</h2>
+
+<h3>步骤 1：登录与全局面板</h3>
+<p>打开浏览器访问 <code>http://localhost:5176/login</code>。在邮箱输入框中输入 <code>lts_c1_xxx@test.com</code>，密码输入框输入 <code>test123</code>，点击「登录」按钮。登录成功后跳转到 <code>/dashboard</code> 全局面板。全局面板展示用户所属公司的汇总数据，包括公司数量、项目数量、本月消耗等。截图要点：顶部导航栏显示用户名、左侧边栏展示公司列表、主区域展示数据面板卡片。</p>
+
+<h3>步骤 2：公司切换与项目列表</h3>
+<p>在左侧边栏点击公司名 <code>LTS-C1 宠物出海</code>，切换到该公司视图。主区域刷新为该公司下的项目列表。点击项目 <code>lts_c1_shop</code> 进入项目详情。截图要点：项目卡片显示项目类型「电商运营」、运行模式「半自动」、预算进度条。</p>
+
+<h3>步骤 3：项目详情与预算核验</h3>
+<p>进入项目后，在「项目设置」页确认运行模式为「半自动（semi_auto）」。在「预算明细」面板核验总预算 8,000 元、AI 运行预算 2,000 元。截图要点：预算明细面板显示两个进度条，AI 预算进度条初始为 0%，总预算进度条初始为 0%。如有「单轮预算上限」字段，确认值为 5 元（该字段控制台可能不显示，需通过 API 设置）。</p>
+
+<h3>步骤 4：引导流四步走完</h3>
+<p>进入项目引导流页面，按顺序完成四步：第一步「业务介绍」，填写单 SKU 试水方向（宠物慢食碗，客单价 29-59 美元）；第二步「组织」，确认 1 人 + 2 AI 的起步编制；第三步「定义」，确认项目目标与关键结果；第四步「启动」，确认策略并启动 AI 引擎。每步完成后截图保存。关键截图：策略生成页面（显示 LLM 产出的策略内容）、策略确认页面（显示「策略已确认」标签）。</p>
+
+<h3>步骤 5：auto-ops 面板与轮次观察</h3>
+<p>进入 <code>/project/lts_c1_shop/autoops</code> auto-ops 控制台面板。点击「启动」按钮启动引擎。观察轮次推进：在「轮次列表」区域可看到每轮的编号、引擎类型（loop/agent）、状态（running/done）、关联任务、耗时、token 成本。loop 轮（建站编码）耗时约 430 秒，agent 轮（选品分析）耗时约 2-5 秒。截图要点：轮次列表显示至少 2 轮带 task_id 的记录，状态均为 done。</p>
+
+<h3>步骤 6：营销域操作</h3>
+<p>进入 <code>/marketing</code> 营销域页面。观察 campaign 是否自动创建。在邮件队列中找到 AI 撰写的 5 封冷邮件，逐条点击「查看」按钮打开邮件详情弹窗。在弹窗中核验以下内容：收件人地址是否在白名单内、邮件正文是否包含医疗声明或绝对化用语（如「最好」「第一」等）、邮件底部是否包含退订链接。核验无误后点击「批准」按钮。截图要点：邮件审批弹窗显示收件人、正文预览、退订链接、批准/驳回按钮。</p>
+
+<h3>步骤 7：人工节点与站点上线</h3>
+<p>进入 <code>/project/.../autoops/human</code> 人工节点页面。找到站点上线审批节点，点击「查看」打开详情。核验上线清单（AI 自校验报告 checks=71 failures=0、验收报告 verdict=pass score=9.0）。点击「批准」完成上线审批。随后通过 <code>POST .../deploy/start</code> 触发部署，部署完成后在 <code>/deploy/:id/url</code> 打开落地页断言 HTTP 200 可访问。截图要点：人工节点列表、上线审批详情、落地页 200 响应。</p>
+
+<h3>步骤 8：事件注入与入账验证</h3>
+<p>使用 harness 脚本注入外部事件（详见 4.2 节）。注入完成后，在事件看板页面确认事件已入库并显示分类标签。在项目账本页面确认收入分录已创建。截图要点：事件看板显示事件列表与分类标签、账本页面显示 income/revenue 行。</p>
+
+<h2 id="t1-events">4.2 事件注入 JSON 示例与预期结果</h2>
+
+<p>以下是 T1 阶段需要注入的完整事件清单及预期反应。所有事件通过 <code>harness/ingest-event.mjs</code> 脚本注入，统一落 <code>POST /api/v1/events</code> 端点。</p>
+
+<h4>事件 1：订单支付（order.paid）</h4>
+<pre><code>node ingest-event.mjs --type payment --scenario C1 \
+  --amount 29.00 --order-id LTC1-20260924-001 \
+  --sku slow-feeder-01 --customer-email buyer@example.com \
+  --currency USD --pay-status paid</code></pre>
+<p>实际发送到 <code>POST /api/v1/events</code> 的请求体：</p>
+<pre><code>{
+  "source": "internal",
+  "event_type": "payment",
+  "title": "[LTHARNESS][C1] payment #001",
+  "content": "{\"kind\":\"money\",\"occurred_at\":\"2026-09-24T06:00:00Z\",\"provider\":\"stripe\",\"order_id\":\"LTC1-20260924-001\",\"customer_email\":\"buyer@example.com\",\"sku\":\"slow-feeder-01\",\"item\":\"宠物慢食碗\",\"amount\":29.00,\"currency\":\"USD\",\"status\":\"paid\",\"fee\":1.14}",
+  "priority": "important",
+  "project_id": "1116"
+}</code></pre>
+<p>预期结果：HTTP 200 code=0；<code>events</code> 表新增 1 行 status=processing；EventAgent 分类标签为「支付处理」score=80；<code>project_ledger</code> 新增 1 行 type=income category=revenue amount=29.00 reference=LTC1-20260924-001。</p>
+
+<h4>事件 2：支付失败（payment.failed）</h4>
+<pre><code>node ingest-event.mjs --type payment --scenario C1 \
+  --amount 49.00 --order-id LTC1-20260924-002 \
+  --pay-status failed</code></pre>
+<p>预期结果：事件入库后分类为「支付异常」priority=important；不产生账本收入分录（status=failed 不入账）；可能触发客服 Agent 起草催付邮件，该邮件进入 pending_review 审批队列。</p>
+
+<h4>事件 3：客户咨询邮件（customer.inquiry）</h4>
+<pre><code>node ingest-event.mjs --type email.reply --scenario C1 \
+  --subject "material question" \
+  --body "Is the slow feeder bowl dishwasher safe?" \
+  --sentiment question</code></pre>
+<p>预期结果：事件入库后分类为「客户服务」score=70；客服 Agent 起草回复，回复内容进入 <code>connector_audit_logs</code> 表 status=pending，等待人工审批。<strong>0 笔未批外发</strong>是硬底线。</p>
+
+<h4>事件 4：退款（shopify.order.refunded）</h4>
+<pre><code>node ingest-event.mjs --type payment --scenario C1 \
+  --amount 29.00 --order-id LTC1-20260924-003 \
+  --pay-status refunded</code></pre>
+<p>预期结果：事件入库后分类为「退款处理」；系统自动创建售后人工节点（human_task_nodes 表新增 1 行 status=pending）；项目账本新增 expense/refund 分录。</p>
+
+<h2 id="t1-verify">4.3 三重取证要点</h2>
+
+<p>每个关键断言必须跨层交叉验证，单层不定论：</p>
+
+<p><strong>L1 页面取证</strong>：auto-ops 面板轮次/任务计数截图、营销队列 pending 数截图、上线按钮状态截图、落地页 200 响应截图。截图存入 <code>harness/snapshots/</code> 目录，文件名带时间戳。</p>
+
+<p><strong>L2 网络取证</strong>：浏览器开发者工具 Network 面板记录请求 URL、状态码、响应体。关键断言：<code>/events</code> POST 返回 <code>code==0</code>（防 200 伪成功）、<code>/autoops/review</code> 响应体包含轮次数据、<code>/human-tasks</code> 响应体包含待审节点。</p>
+
+<p><strong>L3 psql 取证</strong>：只读查询双库关键表，详见第八章取证口径。核心 SQL：</p>
+<pre><code>-- 注入-消费对账
+SELECT event_type, status, count(*)
+FROM events WHERE project_id='1116' GROUP BY 1, 2;
+
+-- 未批外发检查（必须全部为 pending 或 executed+有审批人）
+SELECT status, count(*)
+FROM connector_audit_logs WHERE direction='write' GROUP BY 1;
+
+-- token 成本汇总
+SELECT sum(cost) FROM token_billing_records WHERE project_id='1116';
+
+-- 收入/退款对平
+SELECT type, category, round(sum(amount), 2) AS amt
+FROM project_ledger WHERE project_id=1116 GROUP BY 1, 2;</code></pre>
+
+<!-- ==================== 五、T2 扩张期操作指引 ==================== -->
+<h1 id="t2">五、T2 扩张期操作指引</h1>
+
+<p>T2 扩张期的核心目标是实现「周订单 20+，营销形成节奏」。编制从 3 人扩展到 6-10 人，营销从单次外发升级为每周 campaign 节奏化运营，复购券机制上线。</p>
+
+<h2 id="t2-expand">5.1 扩编流程</h2>
+
+<p>T2 阶段的首要任务是验证 evo 扩编到 auto-ops 调度的闭环。操作流程如下：</p>
+
+<ol>
+  <li><strong>阶段感知</strong>：随着订单量增长，系统通过 <code>POST .../org/stage/sense</code> 感知到当前阶段负载已超出 3 人编制的处理能力，触发扩编建议。</li>
+  <li><strong>扩编建议</strong>：调用 <code>GET /org/advice</code> 获取扩编建议列表。建议内容包含推荐岗位名称、成本增量预估、证据链（如客服响应时长超标、选品任务积压等）。面板上出现「采纳并扩编」按钮。</li>
+  <li><strong>人工批准</strong>：在组织面板中逐条审核扩编建议，点击「采纳并扩编」。弹窗中核成本增量是否在预算范围内。批准客服、选品、投放 3 个新岗位。psql 断言 <code>agents</code> 表新增 3 行，<code>org_charts</code> 表更新。</li>
+  <li><strong>新角色进调度（FIX-004 复测点）</strong>：这是 T2 的王牌断言。psql 查询新角色是否在 3 轮内出现在 <code>auto_ops_rounds</code> 的任务绑定与 <code>token_billing_records.role_id</code> 中。SQL 如下：
+<pre><code>-- 新角色是否被调度
+SELECT r.role_id, r.role_name, count(rnd.id) AS rounds
+FROM auto_ops_rounds rnd
+JOIN agents r ON rnd.role_id = r.id
+WHERE rnd.project_id = '1116'
+  AND r.created_at > '2026-09-25'  -- 扩编后创建的角色
+GROUP BY r.role_id, r.role_name;</code></pre>
+  若新角色 3 轮内未出现，则 FIX-004 未闭环，该阶段直接判定为失败。</li>
+</ol>
+
+<h2 id="t2-marketing">5.2 营销节奏化</h2>
+
+<p>T2 阶段的营销运营从单次外发升级为每周节奏化运营。具体操作：</p>
+
+<ol>
+  <li><strong>每周 campaign 自动建</strong>：引擎在每周初自动创建 campaign，包含 A/B 两版文案。在营销域页面可看到 campaign 列表按周排列。</li>
+  <li><strong>X 帖排程</strong>：Agent 引擎自动撰写 X 帖内容，进入 <code>marketing_contents</code> 表 status=pending_review。因 FIX-002 待 e2e，发帖留 pending_review 计「已生成待审」，引流转化指标不进分母。</li>
+  <li><strong>线索池管理</strong>：注入 <code>lead.form</code> 询盘事件后，线索进入 <code>lead_infos</code> 表。Agent 自动生成跟进邮件并进入审批队列。</li>
+  <li><strong>批准外发与改价</strong>：T2 需批准 8 条外发（尝试「批量审批」建议项，若未实现则逐条，计干预次数）加 2 次改价（黄通道）。对 1 条验收记录点「返工」并确认重跑，验证三权分立的返工机制。</li>
+  <li><strong>客服话术沉淀</strong>：客服 Agent 的优秀回复自动沉淀进知识库（<code>knowledge_documents</code> 表），后续类似咨询可 RAG 检索命中。</li>
+</ol>
+
+<p>每周注入 2 帖 X 互动事件加 1 波 <code>lead.form</code> 询盘事件：</p>
+<pre><code>node ingest-event.mjs --type x.post --scenario C1 --count 2
+node ingest-event.mjs --type email.reply --scenario C1 \
+  --sentiment question --subject "Bulk order pricing?"</code></pre>
+
+<h2 id="t2-repurchase">5.3 复购券机制</h2>
+
+<p>复购券序列是 T2 阶段的标志性产出。AI 自动设计复购券规则（如首单后 7 天发 8 折券）、撰写券邮件内容、编排发送时间。整个流程为：marketing 内容创建 → 审批队列 → 人工批准 → 外发。在营销域页面可看到复购券 campaign 与常规 campaign 并列。psql 断言 <code>marketing_campaigns</code> 表包含 type=coupon 的行，<code>marketing_contents</code> 表包含关联的邮件内容行。</p>
+
+<p>T2 阶段的判定阈值：自主率大于等于 70%、干预不超过 10 次/周、token 成本不超过 3.5 元/订单、营销成本/新客不超过 8 美元（amoeba 归因）、客服首响小于 30 分钟（FIX-001 生效后判定）。「扩编未被调度」为直接失败项。</p>
+
+<!-- ==================== 六、T3 规模化期操作指引 ==================== -->
+<h1 id="t3">六、T3 规模化期操作指引</h1>
+
+<p>T3 规模化期的核心目标是实现「多 SKU 多语种、异常可自愈」。编制扩展到 15 人，系统须处理批量异常事件、跨 campaign ROI 调度、内审治理等复杂场景。</p>
+
+<h2 id="t3-batch">6.1 批量事件注入</h2>
+
+<p>T3 阶段需注入批量异常事件，验证系统在压力下的表现。核心场景：物流延迟批量投诉（大于等于 8 单同时受影响）。</p>
+
+<pre><code># 批量注入 8 单物流投诉
+for i in $(seq 1 8); do
+  node ingest-event.mjs --type email.reply --scenario C1 \
+    --sentiment complaint \
+    --subject "Order #LTC1-T3-$i delayed over 15 days" \
+    --body "My order hasn't arrived after 15 days. Where is my package?"
+  sleep 2
+done
+
+# 注入批量投诉升级事件
+node ingest-event.mjs --type risk.breach --scenario C1 \
+  --signal negative_review --value 8 --threshold 5 \
+  --severity critical</code></pre>
+
+<p>预期结果：review 轮在 1 轮内完成优先级重排（<code>auto_ops_rounds</code> 表新增 review 模式轮次）；升级链在 <code>human_task_nodes.escalation_level</code> 可见（从 level=1 升级到 level=2）；所有投诉事件在 <code>events</code> 表可查且关联到正确的处理任务。</p>
+
+<h2 id="t3-selfheal">6.2 异常自愈</h2>
+
+<p>T3 阶段需验证系统对多种异常的自愈能力：</p>
+
+<ul>
+  <li><strong>支付风控冻结</strong>：注入 <code>risk.freeze_notice</code> 事件，断言外发暂停、解冻走人工。psql 查询 <code>connector_audit_logs</code> 表中外发类写动作状态应全部为 pending 或 frozen。</li>
+  <li><strong>差评处理</strong>：注入差评事件后，客服 Agent 自动起草回复进入审批队列，同时生成改进建议存入知识库。</li>
+  <li><strong>汇率与关税变更</strong>：注入变更通知事件后，Agent 引擎自动分析影响并建议价格调整，调整动作走黄通道审批。</li>
+  <li><strong>AI 建议扩编审批</strong>：当负载持续超标时，系统自动产出扩编建议，人工审批后新角色进调度。</li>
+</ul>
+
+<h2 id="t3-killswitch">6.3 Kill-Switch 演练</h2>
+
+<p>Kill-Switch 是安全底线的最后一道防线。演练步骤如下：</p>
+
+<ol>
+  <li><strong>触发 Kill-Switch</strong>：调用 <code>POST /connectors/:id/kill</code> 冻结指定连接器的写动作。例如冻结改价连接器后，后续所有改价请求被拦截。</li>
+  <li><strong>验证冻结效果</strong>：注入新的改价事件，断言 <code>connector_audit_logs</code> 表无新增 executed 行，所有写动作停留在 pending 状态。只读连接器不受牵连（行情查询、数据读取仍正常）。</li>
+  <li><strong>解冻流程</strong>：解冻仅允许人工操作。在连接器管理页面点击「解冻」按钮，psql 断言连接器状态恢复为 active。</li>
+  <li><strong>通知留痕</strong>：Kill-Switch 触发后，<code>notifications</code> 表应新增通知行，<code>decision_traces</code> 表应记录决策链。</li>
+</ol>
+
+<pre><code># Kill-Switch 演练命令
+curl -X POST http://localhost:8090/api/v1/connectors/email-connector/kill \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "X-Project-ID: 1116"
+
+# 验证：注入新事件后查无 executed 行
+# psql -d project_server
+SELECT count(*) FROM connector_audit_logs
+WHERE connector_id='email-connector'
+  AND status='executed'
+  AND created_at > now() - interval '10 minutes';
+-- 预期结果：0</code></pre>
+
+<h2 id="t3-reconcile">6.4 三方对账</h2>
+
+<p>T3 阶段必须完成三方对账，确保账目一致性。对账公式：<code>project_ledger</code> 收入 = 所有 order.paid 金额之和 减去 所有 refunds 金额之和。与平台侧 token 成本、amoeba 岗位成本交叉核对。</p>
+
+<pre><code>-- 项目侧：收入与退款净额
+SELECT type, category, round(sum(amount), 2) AS amt
+FROM project_ledger
+WHERE project_id = 1116
+GROUP BY type, category;
+
+-- 平台侧：token 成本
+SELECT sum(cost) AS total_token_cost
+FROM token_billing_records
+WHERE project_id = '1116';
+
+-- amoeba 岗位成本
+SELECT role_id, sum(cost) AS role_cost
+FROM token_billing_records
+WHERE project_id = '1116'
+GROUP BY role_id
+ORDER BY role_cost DESC;
+
+-- 预算状态核对
+SELECT ai_budget, ai_used, total_budget, warned, ai_meltdown
+FROM budget_states
+WHERE project_id = '1116';
+
+-- 平台侧预算（注意：可能因白名单配置而不含本项目）
+SELECT total_budget, used_amount
+FROM ai_native_engine.public.project_budgets
+WHERE project_id = 1116;</code></pre>
+
+<p>对账通过标准：项目账本收入减去退款净额与注入订单合成值吻合（容差 0.01）；token 成本与 <code>budget_states.ai_used</code> 分毫不差；AI 成本占 GMV 比例小于 1.5%。账本不平为失败项。</p>
+
+<p>T3 判定阈值：自主率大于等于 80%、人工升级不超过 5 次/周、token 成本不超过 2.5 元/订单且 AI 成本占 GMV 小于 1.5%、批量事件 1 轮 review 收敛、无重复外发。</p>
+
+<!-- ==================== 七、验收判定表 ==================== -->
+<h1 id="acceptance">七、验收判定表</h1>
+
+<p>以下判定表覆盖 T1/T2/T3 三个阶段的核心指标。每个指标分为通过、观察、失败三档。判定对象是产品能力而非脚本能力。</p>
+
+<h3>T1 生存期判定表</h3>
+<table>
+  <tr><th>指标</th><th><span class="tag tag-pass">通过</span></th><th><span class="tag tag-observe">观察</span></th><th><span class="tag tag-fail">失败</span></th></tr>
+  <tr><td>自主率（轮次口径）</td><td>≥55%</td><td>45-55%</td><td>&lt;45% 或含未批写动作</td></tr>
+  <tr><td>干预次数</td><td>≤12</td><td>13-14（且 FIX 兜底占比>50%）</td><td>>14 或审批链断裂</td></tr>
+  <tr><td>token 成本</td><td>≤¥6/入账订单</td><td>≤¥7.2 收敛中</td><td>>¥7.2</td></tr>
+  <tr><td>外发合规</td><td>6 条批准逐条留痕、驳回可复述理由</td><td>通知延迟（FIX-001 未验通）</td><td>出现 1 笔未批外发</td></tr>
+  <tr><td>轮次时长</td><td>loop P95 ≤90min</td><td>单轮>2h 一次</td><td>连续 2 轮空转/死循环</td></tr>
+</table>
+
+<h3>T2 扩张期判定表</h3>
+<table>
+  <tr><th>指标</th><th><span class="tag tag-pass">通过</span></th><th><span class="tag tag-observe">观察</span></th><th><span class="tag tag-fail">失败</span></th></tr>
+  <tr><td>自主率</td><td>≥70%</td><td>60-70%</td><td>&lt;60%</td></tr>
+  <tr><td>干预次数</td><td>≤10 次/周</td><td>11-12 次/周</td><td>>12 次/周</td></tr>
+  <tr><td>token 成本</td><td>≤¥3.5/订单</td><td>≤¥4.2 收敛中</td><td>>¥4.2</td></tr>
+  <tr><td>营销成本/新客</td><td>≤$8</td><td>≤$10</td><td>>$10</td></tr>
+  <tr><td>扩编调度</td><td>新角色 3 轮内进调度</td><td>3-5 轮进调度</td><td>>5 轮或需手工兜底</td></tr>
+  <tr><td>验收返工</td><td>返工率下降趋势</td><td>持平</td><td>返工率上升</td></tr>
+</table>
+
+<h3>T3 规模化期判定表</h3>
+<table>
+  <tr><th>指标</th><th><span class="tag tag-pass">通过</span></th><th><span class="tag tag-observe">观察</span></th><th><span class="tag tag-fail">失败</span></th></tr>
+  <tr><td>自主率</td><td>≥80%</td><td>70-80%</td><td>&lt;70%</td></tr>
+  <tr><td>人工升级</td><td>≤5 次/周</td><td>6-7 次/周</td><td>>7 次/周</td></tr>
+  <tr><td>token 成本</td><td>≤¥2.5/订单 且 AI/GMV&lt;1.5%</td><td>≤¥3 且 AI/GMV&lt;2%</td><td>>¥3 或 AI/GMV≥2%</td></tr>
+  <tr><td>批量事件收敛</td><td>1 轮 review 内收敛</td><td>2 轮收敛</td><td>>2 轮或遗漏</td></tr>
+  <tr><td>重复外发</td><td>0</td><td>—</td><td>≥1（直接失败）</td></tr>
+  <tr><td>账本对平</td><td>容差 ≤0.01</td><td>容差 ≤0.1</td><td>容差 >0.1（直接失败）</td></tr>
+  <tr><td>Kill-Switch</td><td>冻结有效 + 解冻走人工</td><td>冻结有效但通知延迟</td><td>冻结无效或只读受牵连</td></tr>
+</table>
+
+<div class="card card-danger">
+  <div class="card-title">安全底线（任一破口 = 场景暂停进入异常规程）</div>
+  <ul>
+    <li>未批写动作执行（自审自批、绕过审批外发）</li>
+    <li>熔断失灵（used 超阈值未暂停，或 used 未超阈值误暂停）</li>
+    <li>账本不平（收入/退款/成本三方无法对账）</li>
+    <li>Kill-Switch 无效（冻结后仍有写动作执行）</li>
+  </ul>
+</div>
+
+<!-- ==================== 八、取证口径 ==================== -->
+<h1 id="evidence">八、取证口径</h1>
+
+<p>每场景每阶段的关键断言必须跨层交叉验证（页面 + 网络 + psql 三重），单层不定论。以下详述三重取证方法与工具。</p>
+
+<h2 id="evidence-ui">8.1 页面取证</h2>
+
+<p>使用 Playwright 进行真实浏览器路径操作，截图存入 <code>harness/snapshots/</code> 目录。关键截图点包括：</p>
+
+<ul>
+  <li>auto-ops 面板：轮次计数、任务状态、引擎类型标识、预算进度条</li>
+  <li>营销队列：pending 数量、邮件内容预览、审批按钮状态</li>
+  <li>人工节点页：待审节点列表、升级链状态、SLA 倒计时</li>
+  <li>验收报告：verdict 标签、score 数值、逐条对照内容</li>
+  <li>落地页：浏览器地址栏 URL + HTTP 200 页面内容</li>
+  <li>组织面板：岗位列表、扩编建议、阶段标识</li>
+</ul>
+
+<p>Playwright 配置文件位于 <code>platform-web/e2e/playwright.config.ts</code>，baseURL 为 5176，workers=1，channel=chrome。测试件按 <code>lts_c1_</code> 前缀命名，支持 <code>LTS_C1_PROJECT</code> 环境变量断点续跑。</p>
+
+<h2 id="evidence-net">8.2 网络取证</h2>
+
+<p>通过浏览器开发者工具 Network 面板或 Playwright 的 <code>page.on('response')</code> 事件捕获网络请求。关键断言点：</p>
+
+<ul>
+  <li><code>POST /api/v1/events</code>：响应体 <code>code==0</code> + <code>data.event_id</code> 非空（防 200 伪成功）</li>
+  <li><code>POST /autoops/start</code>：响应体 <code>code==0</code></li>
+  <li><code>GET /autoops/human-tasks?status=pending</code>：响应体数组长度与页面显示一致</li>
+  <li><code>POST /human-tasks/:hid/complete</code>：响应体 <code>code==0</code> + <code>status=done</code></li>
+  <li><code>POST /connectors/audit/:id/approve</code>：响应体 <code>code==0</code></li>
+  <li><code>GET /autoops/billing</code>：响应体包含 <code>total_spent</code> 字段且值与 psql 一致</li>
+</ul>
+
+<h2 id="evidence-psql">8.3 psql 取证（含完整 SQL 示例）</h2>
+
+<p>psql 取证只发 SELECT 语句，严禁写操作。连接参数：host=localhost port=5432，双库 <code>ai_native_engine</code>（平台）和 <code>project_server</code>（实例）。</p>
+
+<pre><code>-- ========================================
+-- project_server 库取证 SQL
+-- ========================================
+
+-- 1. 事件注入-消费对账
+SELECT event_type, status, count(*) AS cnt
+FROM events
+WHERE project_id = '1116'
+GROUP BY event_type, status
+ORDER BY event_type;
+
+-- 2. 事件分类与派单情况
+SELECT e.event_type, ea.agent_id, ea.status AS assignment_status
+FROM events e
+LEFT JOIN event_assignments ea ON e.id = ea.event_id
+WHERE e.project_id = '1116'
+ORDER BY e.created_at DESC;
+
+-- 3. 未批外发检查（安全底线）
+SELECT status, count(*) AS cnt
+FROM connector_audit_logs
+WHERE direction = 'write'
+  AND project_id = '1116'
+GROUP BY status;
+
+-- 4. token 成本汇总（分引擎）
+SELECT
+  count(*) AS total_records,
+  round(sum(cost)::numeric, 4) AS total_cost,
+  round(avg(cost)::numeric, 4) AS avg_cost
+FROM token_billing_records
+WHERE project_id = '1116';
+
+-- 5. 轮次统计
+SELECT
+  count(*) AS total_rounds,
+  count(*) FILTER (WHERE status = 'done') AS done_rounds,
+  count(*) FILTER (WHERE task_id IS NOT NULL) AS with_task,
+  round(sum(cost)::numeric, 4) AS total_round_cost
+FROM auto_ops_rounds
+WHERE project_id = '1116';
+
+-- 6. 收入/退款对平
+SELECT type, category, round(sum(amount)::numeric, 2) AS amt
+FROM project_ledger
+WHERE project_id = 1116
+GROUP BY type, category;
+
+-- 7. 预算状态
+SELECT ai_budget, ai_used, total_budget,
+       warned, ai_meltdown, total_meltdown, degrade
+FROM budget_states
+WHERE project_id = '1116';
+
+-- 8. 人工节点与升级链
+SELECT id, status, node_type, autonomy_level,
+       escalation_level, escalate_at
+FROM human_task_nodes
+WHERE project_id = '1116'
+ORDER BY created_at DESC;
+
+-- 9. 验收记录
+SELECT id, verdict, score, human_status
+FROM acceptance_records
+WHERE project_id = '1116'
+ORDER BY created_at DESC;
+
+-- 10. 新角色调度验证（T2 FIX-004 复测）
+SELECT r.id, r.role_name, count(rnd.id) AS assigned_rounds
+FROM agents r
+LEFT JOIN auto_ops_rounds rnd ON rnd.role_id = r.id
+WHERE r.project_id = '1116'
+  AND r.created_at > '2026-09-25'
+GROUP BY r.id, r.role_name;
+
+-- ========================================
+-- ai_native_engine 库（平台侧）取证 SQL
+-- ========================================
+
+-- 11. 项目预算
+SELECT total_budget, used_amount, token_limit
+FROM project_budgets
+WHERE project_id = 1116;
+
+-- 12. 平台交易记录
+SELECT type, amount, status, created_at
+FROM platform_transactions
+WHERE project_id = 1116
+ORDER BY created_at DESC;</code></pre>
+
+<!-- ==================== 九、附录 ==================== -->
+<h1 id="appendix">九、附录：环境信息</h1>
+
+<h3>端口映射</h3>
+<table>
+  <tr><th>服务</th><th>端口</th><th>说明</th></tr>
+  <tr><td>PostgreSQL 17</td><td>5432</td><td>双库：ai_native_engine + project_server</td></tr>
+  <tr><td>platform 后端</td><td>18000</td><td>公司/项目/实例/平台账本/超管后台</td></tr>
+  <tr><td>project-server</td><td>8090</td><td>AI 执行引擎（轮次/审批/账本/连接器/事件）</td></tr>
+  <tr><td>前端 vite dev</td><td>5176</td><td>platform-web 开发服务器</td></tr>
+  <tr><td>外网代理</td><td>7890</td><td>127.0.0.1:7890 新加坡 IP</td></tr>
+</table>
+
+<h3>关键数据库表清单</h3>
+<table>
+  <tr><th>库</th><th>表名</th><th>用途</th></tr>
+  <tr><td rowspan="10">project_server</td><td>events / event_assignments</td><td>注入事件与派单</td></tr>
+  <tr><td>human_task_nodes</td><td>RACI 人工节点（status/notify_channels/escalation_level）</td></tr>
+  <tr><td>connector_audit_logs</td><td>连接器写动作审批（pending→executed）</td></tr>
+  <tr><td>auto_ops_tasks / rounds / schedules</td><td>轮次调度与任务管理</td></tr>
+  <tr><td>acceptance_records</td><td>三权分立验收记录</td></tr>
+  <tr><td>token_billing_records</td><td>PS 侧 token 计量</td></tr>
+  <tr><td>budget_states / project_config</td><td>预算状态与运行配置</td></tr>
+  <tr><td>project_ledger</td><td>项目虚拟账本</td></tr>
+  <tr><td>marketing_campaigns / contents / lead_infos</td><td>营销全链</td></tr>
+  <tr><td>agents / org_charts / growth_advice</td><td>组织与扩编</td></tr>
+  <tr><td rowspan="4">ai_native_engine</td><td>companies / members / projects</td><td>公司/成员/项目</td></tr>
+  <tr><td>project_budgets</td><td>项目预算（平台侧）</td></tr>
+  <tr><td>platform_balances / transactions</td><td>平台真实账本</td></tr>
+  <tr><td>instances / provision_logs</td><td>实例管理与下发日志</td></tr>
+</table>
+
+<h3>harness 脚本用法</h3>
+<table>
+  <tr><th>脚本</th><th>用途</th><th>常用命令</th></tr>
+  <tr><td>lib.mjs</td><td>公共库 + 健康自检</td><td><code>node lib.mjs</code>（自检三端+token+两库）</td></tr>
+  <tr><td>drive.mjs</td><td>auto-ops 驱动/观察</td><td><code>node drive.mjs</code>（观察轮）<br><code>node drive.mjs --mode review --wait 240</code>（触发 review）</td></tr>
+  <tr><td>ingest-event.mjs</td><td>外部事件注入</td><td><code>node ingest-event.mjs --type payment --scenario C1 --amount 29</code><br><code>node ingest-event.mjs --type email.reply --scenario C1 --sentiment complaint</code><br><code>node ingest-event.mjs --replay-pending</code>（断点续跑）</td></tr>
+  <tr><td>approve.mjs</td><td>审批模拟器</td><td><code>node approve.mjs</code>（自动审批）<br><code>node approve.mjs --dry-run</code>（只出判定零副作用）<br><code>node approve.mjs --selftest</code>（端到端自证）</td></tr>
+</table>
+
+<h3>事件注入命令示例</h3>
+<pre><code># T1 订单支付
+node ingest-event.mjs --type payment --scenario C1 \
+  --amount 29.00 --order-id LTC1-20260924-001 \
+  --sku slow-feeder-01 --currency USD --pay-status paid
+
+# T1 支付失败
+node ingest-event.mjs --type payment --scenario C1 \
+  --amount 49.00 --order-id LTC1-20260924-002 --pay-status failed
+
+# T1 客户咨询
+node ingest-event.mjs --type email.reply --scenario C1 \
+  --subject "material question" --sentiment question
+
+# T2 X 帖互动（批量）
+node ingest-event.mjs --type x.post --scenario C1 --count 2
+
+# T2 询盘
+node ingest-event.mjs --type email.reply --scenario C1 \
+  --sentiment question --subject "Bulk order pricing?"
+
+# T3 批量物流投诉
+for i in $(seq 1 8); do
+  node ingest-event.mjs --type email.reply --scenario C1 \
+    --sentiment complaint \
+    --subject "Order #LTC1-T3-$i delayed"
+  sleep 2
+done
+
+# T3 风控冻结
+node ingest-event.mjs --type risk.breach --scenario C1 \
+  --signal negative_review --value 8 --threshold 5 --severity critical
+
+# 断点续跑（重投未成功的事件）
+node ingest-event.mjs --replay-pending</code></pre>
+
+<h3>关键文件路径</h3>
+<table>
+  <tr><th>文件</th><th>路径</th></tr>
+  <tr><td>故事卡</td><td>wiki/long_term_testing/stories/core-C1-跨境电商建站运营.md</td></tr>
+  <tr><td>总方案</td><td>wiki/long_term_testing/plans/long-term-test-plan.md</td></tr>
+  <tr><td>T1 测试报告</td><td>wiki/long_term_testing/reports/daily/2026-09-24-C1-T1.md</td></tr>
+  <tr><td>harness 说明</td><td>wiki/long_term_testing/harness/README-harness.md</td></tr>
+  <tr><td>事件注入脚本</td><td>wiki/long_term_testing/harness/ingest-event.mjs</td></tr>
+  <tr><td>账号体系</td><td>wiki/long_term_testing/env-data/accounts-masked.md</td></tr>
+  <tr><td>审批规则</td><td>wiki/long_term_testing/harness/approve-rules.json</td></tr>
+  <tr><td>台账流水</td><td>wiki/long_term_testing/harness/ledger/ops-log.md</td></tr>
+  <tr><td>战役状态板</td><td>wiki/long_term_testing/STATUS.md</td></tr>
+</table>
+
+<div class="card card-warning" style="margin-top: 40px;">
+  <div class="card-title">文档维护说明</div>
+  <p>本指引文档基于 2026-09-27 锚点 <code>2d4aa14</code> 的现算修正编写。随着 FIX 修复项的推进与产品迭代，部分操作路径与判定阈值可能需要更新。请以最新 git log 与代码为准，文档与代码不符时以代码为准。如发现文档过期，请在对应章节标注「已过期」并登记到 STATUS.md 台账。</p>
+  <p><strong>2026-10-07 同步</strong>（V3 API 回归战役，见 <code>wiki/testing/v3/</code>）：启动四道闸与引导确认路径经 T4 真实轮次复核不变；错误语义两处收紧——高风险节点双签同人禁签拒绝由 500 改 409/3001、资源预算三档阈值百分比 &gt;100% 拒绝（=100 放行），均不影响本卡操作路径。</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第01章 认识 ZY 企业智能引擎 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 01 章 · 开始之前</div>
+    <h1>第01章 认识 ZY 企业智能引擎</h1>
+    <p class="zy-lead">读完这一章，你能说清它是什么、你每天在哪操作、它能替你做什么又不替你做什么，以及开工前要准备哪些东西。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 14 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：三端 / 边界 / 成本</span>
+    </div>
+  </header>
+
+  <h3>你将学会</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>一句话跟别人讲清楚 ZY 企业智能引擎是什么</span></li>
+    <li><input type="checkbox"><span>分清「大服务平台 / 项目服务器 / 边缘客户端」三个端，知道自己该碰哪个</span></li>
+    <li><input type="checkbox"><span>说出 AI 哪三档事它自己干、哪三档事要你点头、哪三档事它永远不碰</span></li>
+    <li><input type="checkbox"><span>看懂一次完整闭环从「有想法」到「成果上线」怎么走</span></li>
+    <li><input type="checkbox"><span>知道起步期大概要花多少钱、钱花在哪、怎么不会失控</span></li>
+  </ul>
+
+  <h2>一、一句话说清它是什么</h2>
+
+  <p>ZY 企业智能引擎，说白了就是<strong>给一人公司、中小企业用的「AI 经营班子」</strong>。它不只是一个聊天窗口，而是一整套会自己拆目标、自己派活、自己验收、自己记账的运营体系。</p>
+
+  <p>你有一个网站控制台（叫<strong>大服务平台</strong>），登录进去，你旗下每一条业务线就是一个<strong>独立项目</strong>；每个项目背后，都对应<strong>一台独立的项目服务器</strong>，上面跑着一支 AI 团队。这支团队不是一个人工智能，而是<strong>有岗位分工的智能体（Agent）队伍</strong>——有管理者负责协调，有员工负责具体执行。你下达一个目标，它们会按「轮次」自动推进任务，干完由<strong>另一个</strong>智能体独立验收（防止自己干自己判），再把你花的钱一笔笔记进账本。</p>
+
+  <div class="zy-card blue">
+    <h4>先记住三层容器：公司 → 项目 → 任务</h4>
+    <p><strong>公司</strong>是「组织容器」——放人、放钱、放全公司共用的知识。<strong>项目</strong>是「生意容器」——一条业务线就是一个项目，它有自己独立的服务器、独立的预算、独立的账本。<strong>任务</strong>是「干活单元」——AI 团队按轮次推进的最小对象。你在系统里做的所有操作，都长在这三层结构上。</p>
+    <p>打个比方：<strong>公司</strong>是你开的这家店，<strong>项目</strong>是店里的一条产品线，<strong>任务</strong>是这条产品线今天要做的一件具体的事。迷路时先问自己一句「我现在在哪一层」，方向立刻清楚。</p>
+  </div>
+
+  <p>举个具体例子：你想做一个「跨境电商独立站」。在这个系统里，你先建一家公司，再建一个「独立站」项目；项目背后的 AI 团队会自己把「选品、建站、写商品文案、搭营销页面、做客户问答页」拆成一条条任务，一轮一轮做下去，做完了由独立验收 Agent 把关。你每天只需要登录平台，看看任务跑到哪了、哪些节点要你拍板、花了多少钱。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">它和普通 AI 聊天工具有什么不一样</span>
+    <p>聊天工具是「你问一句、它答一句」，答完就散。这里是「你给一个目标、它自己拆成任务、自己轮流推进、自己验收、自己记账」，你只需要在关键节点点头。所以这本书后面专门有一章讲「发起任务后系统到底做了什么」（第 11 章），还有一章讲「怎么指挥这支队伍」（第 09 章）。</p>
+  </div>
+
+  <h2>二、三个端，你只碰一个半</h2>
+
+  <p>这套系统由三个「端」组成。新手最容易搞混的，就是搞不清哪个端该自己操作、哪个端根本不用碰。先把这张表看懂，后面能少走很多弯路。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>端</th>
+          <th>你看到的叫法</th>
+          <th>它管什么</th>
+          <th>你要不要直接操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="zy-nowrap"><strong>大服务平台</strong><br><span class="zy-badge green">已上线</span></td>
+          <td>你天天打开的网站</td>
+          <td>账号、公司、项目、实例生命周期、平台真实账本、超管后台</td>
+          <td><strong>主要在它上面操作</strong>。你 90% 的时间都花在这里</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>项目服务器</strong><br><span class="zy-badge green">已上线</span></td>
+          <td>每个项目背后那台「独立服务器」</td>
+          <td>这个项目自己的 AI 循环、任务、知识库、账本、看板。单实例单项目，物理隔离</td>
+          <td><strong>不用登录，也没有登录入口</strong>。它的能力全部由平台页面透传给你</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>本地边缘客户端</strong><br><span class="zy-badge amber">部分可用</span></td>
+          <td>装在自己电脑上的小工具（托盘图标）</td>
+          <td>扫描你本地电脑上的文档、上传到项目知识库；接收指令跑边缘任务</td>
+          <td>需要下载安装，但只在「导资料」时用（详见第 07 章）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">重要：不要去找「登录项目服务器」的入口</span>
+    <p>很多第一次用的人，建完项目后就开始找「怎么登录我的项目服务器」。<strong>没有这个入口。</strong>项目服务器虽然是一台真实的独立服务器，但它<strong>不提供给你单独操作的界面</strong>——它的一切能力（任务、轮次、知识库、账本、看板）都已经由大服务平台的页面透传出来了。你在平台的项目详情页里点的每一个按钮，背后就是平台替你去指挥那台项目服务器。你只管在平台页面上操作即可。</p>
+  </div>
+
+  <p>用一张流向图说清你、平台、项目服务器之间的关系：</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>你（浏览器）</b>只在网页上点按钮、看结果</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node"><b>大服务平台</b>管账号、公司、项目、真实账本，替你转发指令</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node ok"><b>项目服务器</b>跑 AI 团队：拆任务、跑轮次、独立验收</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node warn"><b>AI 团队 / 外部系统</b>写代码、写文案、调模型、连邮箱等连接器</div>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">「一个半」是什么意思</span>
+    <p>「一个」是大服务平台——你天天要打开它。「半个」是本地边缘客户端——只在往项目里导入本地资料、或让它帮你扫描本地文档时才打开一下。至于项目服务器，你「不碰」，它是个后台执行引擎。</p>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">边缘客户端的托盘是英文的</span>
+    <p>它右下角的图标叫 <strong>ZY Edge Client</strong>，右键菜单是英文：<strong>Status: Connected / Disconnected / Connecting... / Reconnecting...</strong>（连接状态）、<strong>Open Logs</strong>（打开日志目录，已可用）、<strong>Quit</strong>（退出）。<strong>Open Logs</strong> 点一下会用系统默认程序打开日志所在目录，排障时很方便；<strong>原来的「Reconnect」菜单项已被移除</strong>——因为程序断线后会自己按退避节奏重连，不需要手动点（所以在旧教程里看到 Reconnect 按钮，是过期信息）。它的详细用法在第 07 章。</p>
+  </div>
+
+  <details class="zy-acc">
+    <summary>进阶：三个端背后是怎么连起来的</summary>
+    <div class="zy-acc-body">
+      <p>技术上，三端用 Go + Vue3 写成，数据库优先 PostgreSQL。你在平台页面上的每一次操作，前端只跟「大服务平台」通信；平台再拿这个项目的实例密钥，用 HMAC-SHA256 签名后转发给对应的「项目服务器」执行——这套「前端 → 平台 → 项目服务器」的转发对你是完全透明的，你不用关心。项目服务器每 30 秒还会用 HMAC 向平台上报一次心跳（健康状态、任务队列、CPU/内存/磁盘），让超管后台能看到每台实例是「正常 / 降级 / 宕机」。本地边缘客户端则直接连项目服务器上传文档，不走平台转发。</p>
+    </div>
+  </details>
+
+  <h2>三、它能替你做哪些事（三档授权）</h2>
+
+  <p>AI 不是「什么都能干」，也不是「干什么都要问你」。它把事情分成三档，取决于这件事的风险高低：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card green">
+      <h4>第一档 · AI 完全自主做</h4>
+      <p><span class="zy-badge green">无需你确认</span></p>
+      <ul>
+        <li>把一个大目标拆解成一条条可执行的任务</li>
+        <li>写代码、写文案的<strong>初稿</strong>，跑任务循环</li>
+        <li>做总结、写日报、整理知识库</li>
+        <li>在项目内部检索资料、调用模型、跑分析</li>
+      </ul>
+      <p>这些是纯「内部生产」动作，不对外、不花钱、不改系统，AI 直接干。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>第二档 · 需要你点头才做</h4>
+      <p><span class="zy-badge amber">人在回路</span></p>
+      <ul>
+        <li>对外发布内容、发营销邮件</li>
+        <li>花钱、调用第三方付费接口</li>
+        <li>删除、覆盖、装软件等敏感动作</li>
+        <li>人工处理节点里 <strong>L2（一键确认）/ L3（强制人工审核）</strong> 的环节</li>
+      </ul>
+      <p>这些有对外影响或资金风险，AI 会停下来，把节点推到「人工处理节点」页等你批。</p>
+    </div>
+    <div class="zy-card red">
+      <h4>第三档 · 永远不替你做</h4>
+      <p><span class="zy-badge red">红线</span></p>
+      <ul>
+        <li><strong>方向判断</strong>：这生意该不该做、往哪转型</li>
+        <li><strong>预算给多少</strong>：你愿意投多少钱，AI 不替你拍板</li>
+        <li><strong>是否雇人 / 增员确认</strong>：扩编要你人工确认</li>
+        <li><strong>对外承诺</strong>：对客户、对合作方的任何承诺</li>
+      </ul>
+      <p>这些是「老板」的职责，系统只负责执行，不替你当老板。</p>
+    </div>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">三档和三通道是一回事的两个说法</span>
+    <p>系统里还常用「红 / 黄 / 绿三通道」来标记一件事的风险：<strong>红 = 强制人工，黄 = 敏感需确认，绿 = 例行通知</strong>。你只要记住：越靠近「对外、花钱」的动作，越会落到需要你点头的那一档；越靠近「内部生产」的动作，AI 越自主。真正决定「这个动作归哪档」的是权限模型（第 14 章）与自主级别 L0–L3（第 04 章）。</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">一句话记住三档</span>
+    <p><strong>内部的它自己干，对外的它先问你，当老板的事它绝不碰。</strong>这套「分级授权」机制在系统里叫<strong>渐进式信任</strong>——AI 表现越好、你越信任它，它获批的自主权限就越大（详见第 04 章和第 14 章）。</p>
+  </div>
+
+  <h2>四、它做不到什么（边界要讲透）</h2>
+
+  <p>这一节很重要，请认真读。知道它「不做」什么，比知道它「做」什么更能帮你避免失望和误判。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>它能做的</h4>
+      <ul>
+        <li>在项目内部拆任务、写初稿、跑循环、出报告</li>
+        <li>按你的指令对外发内容、发邮件（<strong>但要你批准</strong>）</li>
+        <li>把账目记进账本，算 token 成本，触发预警</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>它做不到的（别指望它）</h4>
+      <ul>
+        <li><strong>不会替你做战略决策</strong>：它给建议，方向你来定</li>
+        <li><strong>不会自己去银行收款</strong>：账本要你记，或对接支付</li>
+        <li><strong>生成的内容发布前要审批</strong>，不是一键发出去</li>
+        <li><strong>不能一键导入任意第三方系统</strong>（比如整个 WordPress 站点），只能按支持的连接器逐个接</li>
+        <li><strong>对无法用文字验证的交付（如线下施工），只能管任务、不能替你施工</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <details class="zy-acc">
+    <summary>进阶：为什么不能「一键导入整个网站 / 任意系统」</summary>
+    <div class="zy-acc-body">
+      <p>系统接入外部系统走的是「连接器（MCP）」，每个连接器都要单独配置，而且写操作必须人工审核——这是为了安全，不可能也不应该有一个「读懂任意第三方系统」的万能接口。所以像「把整个 WordPress 站点一键搬进来」这种事，当前版本没有入口。你需要按第 06、07 章的方式，把关键资料导成文档或文本后让 AI 整理，或逐个接入系统支持的连接器。</p>
+    </div>
+  </details>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">关于「有成本」这件事</span>
+    <p>它不是免费的。AI 每调用一次模型、每生成一张图、每跑一台云服务器，都在花钱（token 计费 + 云服务器费 + 媒体生成费）。但系统有一套「80% 预警 → 超限熔断」的保险，让你不会在不知情的情况下把钱烧光。具体见本章第八节。</p>
+  </div>
+
+  <h2>五、三种人怎么上手</h2>
+
+  <p>这本书的读者主要有三种。对号入座，看你第一周该做什么。</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>OPC 一人公司 CEO</h4>
+      <p>没有团队、预算有限，想有一个「像真公司一样会成长」的 AI 班子。</p>
+      <p><strong>第一周该做：</strong></p>
+      <ol>
+        <li>注册账号，创建第一家公司（第 02 章）</li>
+        <li>建一个最小的项目，运行模式留在「半自动」（第 03 章）</li>
+        <li>下第一个任务，盯着它跑完看验收结论（第 09 章）</li>
+        <li>把本地已有的资料导入知识库（第 07 章）</li>
+        <li>看一版经营日报，理解钱花在哪（第 13 章）</li>
+      </ol>
+    </div>
+    <div class="zy-card green">
+      <h4>企业里的管理团队</h4>
+      <p>已有线下业务，老板 + 运营 + 产品一起，想用 AI 接管流程、内容与客户跟进。</p>
+      <p><strong>第一周该做：</strong></p>
+      <ol>
+        <li>注册并建公司，把团队成员邀请进来（第 02 章）</li>
+        <li>建项目时<strong>先导入老资料</strong>，别从零开始（第 07 章）</li>
+        <li>把运行模式设为「人工审核」，先看清 AI 每一步（第 04 章）</li>
+        <li>给关键角色配好智能体与技能（第 08 章）</li>
+        <li>约定好谁盯哪些经营指标（第 13 章）</li>
+      </ol>
+    </div>
+    <div class="zy-card amber">
+      <h4>手上已有项目要上线</h4>
+      <p>有现成代码、文档、聊天记录，想导入而不是从零开始。</p>
+      <p><strong>第一周该做：</strong></p>
+      <ol>
+        <li>用「项目导入」把既有资料整体导进来（第 03、07 章）</li>
+        <li>确认 AI 生成的「执行策略」后再启动（第 03 章）</li>
+        <li>要加复杂软件功能，走「软件工程向导」（第 10 章）</li>
+        <li>跑通一次「连接器」接外部系统（第 06 章）</li>
+        <li>发布前对照红线检查清单（第 19 章）</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>六、一次完整闭环长什么样</h2>
+
+  <p>为了让你对「整个过程」有个整体感，这里走一遍最典型的闭环。每一步右边注明了它在哪个页面看。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>有想法</h4>
+      <p>你想清楚「要做什么生意」，一句话能说清目标客户。这一步在<strong>你自己脑子里</strong>，不在系统里。</p>
+      <div class="zy-path">你 → 第 01 章（本章）</div>
+    </li>
+    <li>
+      <h4>建公司</h4>
+      <p>登录后建公司，填名称、行业、描述。公司是组织容器。</p>
+      <div class="zy-path">公司管理 <span class="sep">›</span> 创建公司</div>
+    </li>
+    <li>
+      <h4>建项目（向导）</h4>
+      <p>在项目管理里新建项目，走「基本信息 → 预算设定 → 确认提交」三步。这一步会决定项目的行业、类型、运行模式。</p>
+      <div class="zy-path">项目管理 <span class="sep">›</span> 新建项目</div>
+    </li>
+    <li>
+      <h4>确认执行策略</h4>
+      <p>AI 基于你给的信息，生成一份「项目执行策略」。你确认后，自动运营才允许启动。</p>
+      <div class="zy-path">AI 问答 <span class="sep">›</span> 引导建项</div>
+    </li>
+    <li>
+      <h4>AI 拆解任务</h4>
+      <p>AI 把项目目标拆成一条条任务，排进时间片队列。</p>
+      <div class="zy-path">自动运营 <span class="sep">›</span> 任务管理</div>
+    </li>
+    <li>
+      <h4>轮次推进</h4>
+      <p>AI 按「轮次」轮流推进每个任务的一个时间片，一轮一轮往前拱。</p>
+      <div class="zy-path">自动运营 <span class="sep">›</span> 运行轮次</div>
+    </li>
+    <li>
+      <h4>独立验收</h4>
+      <p>任务干完，由另一个独立验收 Agent 给出「通过 / 返工 / 驳回」，不是你判，也不是干活的 AI 自己判。</p>
+      <div class="zy-path">自动运营 <span class="sep">›</span> 验收记录</div>
+    </li>
+    <li>
+      <h4>成果上线</h4>
+      <p>通过验收的产出（代码、文案、页面）被部署或交付。</p>
+      <div class="zy-path">项目详情 <span class="sep">›</span> 服务器实例</div>
+    </li>
+    <li>
+      <h4>获客 / 内容</h4>
+      <p>营销引擎开始产出并发布内容（发布前要你批准），连接器对接邮箱等外部系统。</p>
+      <div class="zy-path">自动运营 <span class="sep">›</span> 经营日报</div>
+    </li>
+    <li>
+      <h4>经营日报与复盘</h4>
+      <p>每天生成经营日报，看收入、成本、任务完成率、预算消耗率。</p>
+      <div class="zy-path">自动运营 <span class="sep">›</span> 经营驾驶舱</div>
+    </li>
+    <li>
+      <h4>增员或收缩</h4>
+      <p>组织进化引擎根据数据建议「增员 / 扩容」，你人工确认后才落地。</p>
+      <div class="zy-path">组织与运营 <span class="sep">›</span> 组织进化</div>
+    </li>
+  </ol>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">这 11 步不是一次性走完</span>
+    <p>它是一个循环。跑完一轮，你会根据日报和复盘注入新信息，AI 再重排任务，继续下一轮。这正是「自动运营」的含义——不是一次跑完就停，而是持续地、一轮一轮地经营下去。</p>
+  </div>
+
+  <h2>七、开工前你要准备什么</h2>
+
+  <p>开始之前，把下面这些想清楚、备齐，能让你少返工。照着勾：</p>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span><strong>一句话说清要做什么生意</strong>（做什么、卖给谁、为什么选你）</span></li>
+    <li><input type="checkbox"><span><strong>公司名称</strong>（后面能改，但先想一个）</span></li>
+    <li><input type="checkbox"><span><strong>行业类型</strong>（软件 / 电商 / 内容 / 制造 / 通用，选哪个会影响 AI 默认行为）</span></li>
+    <li><input type="checkbox"><span><strong>一个能收邮件的邮箱</strong>（注册、接通知都用它）</span></li>
+    <li><input type="checkbox"><span><strong>愿意先投入的月度预算</strong>（起步期典型量级见第八节，先有个数）</span></li>
+    <li><input type="checkbox"><span><strong>要用的域名、已有账号等资产</strong>（比如已有的独立站域名、邮箱账号）</span></li>
+    <li><input type="checkbox"><span><strong>本地待导入的资料目录</strong>（旧文档、聊天记录、会议纪要，导入方法见第 07 章）</span></li>
+  </ul>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">「这些信息填错了能改吗？」</span>
+    <p>这是全书反复回答的问题。简单说：<strong>公司名称、行业、项目名称、描述、预算大多能改</strong>；但「行业类型」和「项目类型」会影响 AI 一开始的拆解思路和默认行为，建议第一次就认真选。逐项的「改后影响」在第 02、03 章讲得很细。</p>
+  </div>
+
+  <h2>八、成本到底怎么算</h2>
+
+  <p>钱花在三条线上，分开看就不慌：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card tinted">
+      <h4>1. Token 计费</h4>
+      <p>AI 每调用一次模型就按 token 计费。默认单价（可在项目「运行配置 → 定价」里改）：</p>
+      <ul>
+        <li>输入 <strong>1 元 / 百万 token</strong></li>
+        <li>输出 <strong>2 元 / 百万 token</strong></li>
+        <li>缓存读 <strong>0.02 元 / 百万 token</strong></li>
+      </ul>
+    </div>
+    <div class="zy-card tinted">
+      <h4>2. 云服务器费用</h4>
+      <p>每个项目背后有一台独立的项目服务器，这台服务器的租用费。规格、地域、厂商不同价格不同，按「服务器」额度单独核算。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>3. 媒体生成费用</h4>
+      <p>生成视频、图像、歌曲时按「档位单价 × 用量」折算，计入项目账本。未定价的档位会显示 <span class="zy-field">[待定价]</span>，不折算、不谎报金额。</p>
+    </div>
+  </div>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>阶段</th>
+          <th>典型月成本（估算）</th>
+          <th>这个量级在干什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>起步期</td>
+          <td>约 $10–30</td>
+          <td>一个人跑一个项目，少量 token + 一台小规格服务器</td>
+        </tr>
+        <tr>
+          <td>成长期</td>
+          <td>约 $50–150</td>
+          <td>多个任务并行、内容营销上量、开始生成媒体</td>
+        </tr>
+        <tr>
+          <td>规模化期</td>
+          <td>约 $200–800</td>
+          <td>多个项目、更大并发、更多外部连接器调用</td>
+        </tr>
+        <tr>
+          <td>成熟期</td>
+          <td>约 $500–2000+</td>
+          <td>多业务线并行、组织自动扩编、媒体与模型高频使用</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">上面的数字是估算值，不是承诺</span>
+    <p>这张表来自产品文档里的阶段性估算，用来帮你建立「量级」的概念，<strong>不是实际账单</strong>。你的实际花费取决于任务量、模型调用频率、媒体生成量、服务器规格，差别会很大。真正的账单以平台「公司账本」和项目「计费明细」为准。</p>
+  </div>
+
+  <div class="zy-card green">
+    <h4>让你安心的三道保险：80% 预警 → 超限熔断 → 补充后恢复</h4>
+    <p>系统不会让你在不知情的情况下把钱烧光：</p>
+    <ol class="zy-steps">
+      <li><strong>80% 预警</strong>：预算用到 80%，系统发通知，并自动降级运行（放慢、收缩），不是直接停。</li>
+      <li><strong>超限熔断</strong>：预算耗尽，暂停循环，AI 不再继续烧钱。</li>
+      <li><strong>补充后恢复</strong>：你充值或调高预算后，到「自动运营控制台」点 <span class="zy-btn">恢复</span> 或 <span class="zy-btn">启动</span> 继续。</li>
+    </ol>
+    <p>另外，计费里有一小部分「按文本长度估算的兜底计费」（上游没返回用量时产生），它不是精确账单，别拿它当发票核销。详见第 04 章。</p>
+  </div>
+
+  <h2>九、本章小结与下一步</h2>
+
+  <ul>
+    <li><strong>它是什么</strong>：给一人公司 / 中小企业用的 AI 经营班子，三层容器「公司 → 项目 → 任务」。</li>
+    <li><strong>三个端</strong>：大服务平台（你天天开）、项目服务器（没有独立前端界面，能力全部由平台透传）、边缘客户端（导资料时用）。</li>
+    <li><strong>三档授权</strong>：内部的它自己干，对外的先问你，当老板的事它绝不碰。</li>
+    <li><strong>边界</strong>：不做战略决策、不替你收款、发布要审批、有成本、不能一键导入任意第三方、线下施工只管路不管施工。</li>
+    <li><strong>成本</strong>：Token + 云服务器 + 媒体生成三条线，配 80% 预警 / 超限熔断两道保险。</li>
+    <li><strong>下一步</strong>：现在你有整体概念了，去 <a href="02-创建公司.html">第 02 章 注册与创建公司</a>，动手把第一家公司开起来。</li>
+  </ul>
+
+  <div class="zy-quick">
+    <a href="index.html">回到首页</a>
+    <a href="02-创建公司.html">下一步：注册与创建公司</a>
+    <a href="20-术语表与路线图.html">看不懂名词？查术语表</a>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

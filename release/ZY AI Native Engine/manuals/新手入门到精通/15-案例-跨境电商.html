@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第15章 案例：跨境电商独立站 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 15 章 · 实战案例</div>
+    <h1>第15章 案例：跨境电商独立站</h1>
+    <p class="zy-lead">一个人、在国内、做面向欧美市场的家居小件独立站，预算有限、没有团队。从第 0 天到第 90 天，每一步「在哪个页面点什么」，照着走一遍。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 55 分钟</span>
+      <span class="zy-badge green">可照着操作</span>
+      <span class="zy-badge amber">重点：每一步点哪里</span>
+      <span class="zy-badge purple">附 5 个附录</span>
+    </div>
+  </header>
+
+  <p>前面 14 章，你学的都是「零件」：怎么建公司、怎么建项目、怎么设预算、怎么建智能体、怎么派任务、怎么开发软件功能。这一章把它们拼成一辆能开的车。我们会跟着一个具体的人，走完一段具体的路：<strong>从注册账号，到独立站上线，到第一个月复盘，到第一次扩编。</strong></p>
+
+  <p>这一章的目标不是「讲清楚某个功能」，而是<strong>让你知道在什么时间、去哪个页面、按哪个按钮</strong>。所以它写得很啰嗦——每个动作都写了路径和按钮原文。你可以把它当成一份作战手册，第一次做的时候摊在旁边，做一步划一步。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">先说清一件事：这一章不承诺结果</span>
+    <p>本章出现的<strong>所有金额、天数、数量、转化率，都是示例设定</strong>，用来把「操作顺序」和「判断逻辑」讲清楚。它们<strong>不是效果承诺，也不是业绩预测</strong>。真实的钱请以「计费明细」「公司账本」「项目账本」里显示的数字为准。能不能卖出去、卖多少，取决于你的产品、价格、市场和你自己的判断，AI 不替你做这个保证。</p>
+  </div>
+
+  <h3>你将学会</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>一个人做跨境电商独立站，从第 0 天到第 90 天的<strong>完整操作路线</strong>（每步都带页面路径和按钮）</span></li>
+    <li><input type="checkbox"><span>项目描述、项目目标、预算、运行模式这些字段，<strong>在一个真实案例里具体怎么写</strong></span></li>
+    <li><input type="checkbox"><span>怎么用<strong>软件工程向导</strong>把「我要一个独立站」变成能跑的任务</span></li>
+    <li><input type="checkbox"><span>产品文案、SEO 内容、邮件营销这些日常活儿，怎么写成一张张<strong>可以直接照抄的任务卡</strong></span></li>
+    <li><input type="checkbox"><span>第一个月该看哪些数字、三个典型问题怎么处置、什么时候该扩编（以及什么时候<strong>不该</strong>）</span></li>
+  </ul>
+
+  <h2>零、先认识这个案例的主角</h2>
+
+  <p>我们把主角设定得尽量真实——真实到你会觉得「这不就是我吗」。</p>
+
+  <div class="zy-card">
+    <h4>案例主角设定卡（全部为示例）</h4>
+    <div class="zy-table-wrap">
+    <table class="zy-table">
+      <tbody>
+        <tr><td><strong>业务</strong></td><td>面向美国、欧洲市场的<strong>家居收纳小件</strong>独立站（厨房收纳、桌面收纳、旅行收纳三类）。不自建工厂，从国内供应商选品、贴自己的品牌，小包直发。</td></tr>
+        <tr><td><strong>团队</strong></td><td>只有你一个人。没有美工、没有运营、没有客服、没有程序员。加上系统里的一支 AI 班子。</td></tr>
+        <tr><td><strong>预算</strong></td><td>项目总预算 ¥3,000（示例）。你希望第一个月把「看得见的钱」压在 ¥400 以内。</td></tr>
+        <tr><td><strong>目标</strong></td><td>90 天内：独立站公网可访问 → 12 个 SKU 上架 → 有第一批自然流量与咨询。不求马上盈利。</td></tr>
+        <tr><td><strong>周期</strong></td><td>第 0 天建公司，第 1 天建项目，第 1 周出独立站，第 1 个月复盘，第 2 个月扩编，第 3 个月进入稳定节奏。</td></tr>
+        <tr><td><strong>前置条件</strong></td><td>手上有：40 张产品白底图、一份供应商报价表（Excel）、几页竞品笔记（Word）、一个想好的品牌名「NestKeeper」。没有现成网站，没有现成代码。</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">为什么选「一个人 + 跨境电商」做第一个案例</span>
+    <p>因为它<strong>把三端能力都用上了</strong>：公司/项目/预算在平台侧，AI 循环、知识库、任务、账本在项目服务器侧，本地资料扫描上传走边缘客户端。而且它天然需要「对外动作要审批」——发邮件、发布内容、上架商品，全都碰得到人在回路机制。你把这个案例走通了，换个行业（案例 17 章）只是换套素材。</p>
+  </div>
+
+  <h2>一、第 0 天：把公司开起来</h2>
+
+  <p>第一天不碰项目，只做一件事：<strong>建一个公司</strong>。别跳过这一步——项目必须挂在公司下面，公司的行业、描述、组织架构会一路影响到后面 AI 怎么理解你的生意。</p>
+
+  <h3>1.1 注册账号</h3>
+
+  <div class="zy-path">打开网站 › 登录页 <span class="sep">›</span> 还没有账号？立即注册</div>
+
+  <p>在登录页点 <span class="zy-btn">还没有账号？立即注册</span>，填四项：<strong>用户名 / 邮箱 / 密码 / 确认密码</strong>。注册完用邮箱 + 密码登录。详细规则（用户名能不能重复、密码多长）见 <a href="02-创建公司.html">第 02 章</a>。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一个实际建议</span>
+    <p>用一个<strong>你长期不会丢的邮箱</strong>注册。这个邮箱以后是通知、审批、找回账号的入口，别用一次性邮箱。另外，把密码存进你自己的密码管理器——系统里不会明文显示它。</p>
+  </div>
+
+  <h3>1.2 创建公司：三个字段怎么填</h3>
+
+  <div class="zy-path">左侧菜单「公司管理」 <span class="sep">›</span> 右上角 <span class="zy-btn">创建公司</span></div>
+
+  <p>弹出标题为「创建公司」的窗口，三个字段：<strong>公司名称</strong>（必填）、<strong>行业类型</strong>（下拉）、<strong>描述</strong>（可选）。填完点 <span class="zy-btn">创建</span>，成功提示「公司创建成功」。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>字段</th><th>本案例怎么填（示例）</th><th>为什么这么填</th><th>以后能改吗</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>公司名称</strong></td>
+        <td>NestKeeper 家居出海</td>
+        <td>这是<strong>你自己看的名字</strong>，不用和对外品牌完全一致。建议「品牌名 + 一句业务定语」，这样你以后开第二个、第三家公司时列表里一眼分得清。</td>
+        <td>能改，公司设置里改</td>
+      </tr>
+      <tr>
+        <td><strong>行业类型</strong></td>
+        <td>跨境电商（以你界面上的选项为准，选最接近的）</td>
+        <td>行业是<strong>分类口径</strong>，主要影响列表标签和模板筛选，不会让 AI 自动去开店。选一个亲近的即可，拿不准就选范围最大的那个。</td>
+        <td>能改</td>
+      </tr>
+      <tr>
+        <td><strong>描述</strong></td>
+        <td>面向欧美市场的家居收纳小件 DTC 独立站，一人公司，从国内供应商选品贴牌，小包直发。</td>
+        <td>描述是给你自己和团队成员看的备注，<strong>建议写</strong>。半年后你会感谢现在写下的这句话。</td>
+        <td>能改</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1.3 建组织架构：一人公司也要建部门</h3>
+
+  <div class="zy-path">公司管理 <span class="sep">›</span> 组织架构（页签）</div>
+
+  <p>很多新手会想：「就我一个人，建什么部门？」——建。原因有两个。</p>
+
+  <p>第一，<strong>组织架构是给 AI 班子用的</strong>。项目服务器里的智能体组织（管理者 Agent → 员工 Agent）会参照你公司/项目的部门结构来分配职责。你现在建的是「框」，AI 后面往里填「人」。</p>
+
+  <p>第二，<strong>它省掉了你以后重排的工夫</strong>。一人公司的部门怎么建？按<strong>职能</strong>建，不要按人头建：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue"><h4>内容与品牌</h4><p>产品文案、品牌调性、社媒内容、邮件文案都归这里。</p></div>
+    <div class="zy-card green"><h4>站点与工程</h4><p>独立站开发、页面改动、SEO 技术项、后续的小工具。</p></div>
+    <div class="zy-card amber"><h4>获客与客户</h4><p>SEO、内容分发、邮件营销、客户咨询应答。</p></div>
+  </div>
+
+  <p>三个部门就够。现在这三个部门里一个真人也没有——这是正常的，我们后面会用 AI 员工把它们填上。</p>
+
+  <h3>1.4 邀请谁：这一阶段其实没人可邀</h3>
+
+  <p>说句实话：<strong>第 0 天你没有需要邀请的人</strong>。「成员邀请」页签是给有团队的情况准备的（合伙人、兼职运营、外包客服）。一人公司在这个阶段要认清一件事——</p>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">你的团队 = 你一个人 + N 个 AI Agent</span>
+    <p>这不是「退而求其次」。你真正缺的不是人手，是<strong>注意力</strong>。AI 班子帮你把「执行」这部分接走，你只保留「定方向、批预算、拍板」三件事。等你哪天确实需要真人（比如要找海外仓、要谈供应商），再去「成员邀请」页签发邀请。</p>
+  </div>
+
+  <h3>1.5 权限：给自己开哪些，为什么有两个建议保留人工</h3>
+
+  <p>系统里有 14 项权限（<strong>读 / 写 / 运行任务 / 花钱 / 外发邮件 / 装插件 / 装软件 / 加 MCP / 优化提示词 / 运行命令行 / 调权重 / 暂停项目 / 暂停任务 / 用户管理</strong>），完整解释见 <a href="14-团队与治理.html">第 14 章</a>。作为创始人，你对自己的账号当然是全开。真正要你花心思的，是<strong>给 AI 班子开哪些</strong>。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>建议放手给 AI 的</h4>
+      <p><strong>读、写、运行任务</strong>——这是干活的底线能力，不给就没法工作。<br>
+      <strong>优化提示词、调权重</strong>——让角色能自己迭代、自己分配精力，这是「越用越准」的来源。</p>
+    </div>
+    <div class="no">
+      <h4>建议保留人工的</h4>
+      <p><strong>花钱（spend_money）</strong>——涉及投广告、买数据、付第三方接口费。金额一大就该有人签字。<br>
+      <strong>外发邮件（send_email）</strong>——发出去就收不回来，触达的是真实客户，必须有一道人工关。</p>
+    </div>
+  </div>
+
+  <p>这两项不建议直接放开，还有个<strong>机制上的理由</strong>：半自动运行模式下，系统的设计本来就是「关键决策节点（目标变更、<strong>大额支出</strong>、<strong>对外动作</strong>）由人工确认后继续」。你把这两项手工开成全自动，等于绕过了产品给你的安全阀。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">第 0 天收尾检查</span>
+    <p>□ 账号能登录 □ 公司建好了 □ 三个职能部门建好了 □ 顶栏公司切换器能选到 NestKeeper。这四项齐了，第 0 天就结束，不要急着建项目——项目要花钱的地方多，想清楚了再建。</p>
+  </div>
+
+  <h2>二、第 1 天：把项目立起来</h2>
+
+  <p>第 1 天做三件事：<strong>建项目 → 录服务器 → 启动</strong>。这是整个案例里信息密度最高的一天，因为你要一口气把「生意定义」写进系统。</p>
+
+  <h3>2.1 打开新建项目向导</h3>
+
+  <div class="zy-path">顶栏公司切换器选「NestKeeper 家居出海」 <span class="sep">›</span> 项目管理 <span class="sep">›</span> <span class="zy-btn">新建项目</span></div>
+
+  <p>如果顶栏没选公司，项目管理页顶部会有黄色提示 <span class="zy-btn warn">请先选择或创建一个公司</span>，右上角「新建项目」也是灰的。选对公司再来。</p>
+
+  <p>向导标题「新建项目向导」，三步：<strong>基本信息 / 预算设定 / 确认提交</strong>。下面把第一步的每个字段，按这个案例逐字填给你看。</p>
+
+  <h3>2.2 基本信息：逐字示例</h3>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>字段</th><th>本案例填什么（可直接照抄）</th><th>为什么这么写</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>项目名称</strong><br><span class="zy-badge amber">必填</span></td>
+        <td>NestKeeper 家居收纳独立站</td>
+        <td>提示原文是 <span class="zy-field">如：营销内容自动化</span>，最长 128 字。<strong>名称是标识不是指令</strong>，它不会改变 AI 的执行逻辑，但会写进部署脚本和项目服务器的 AGENTS.md，所以取一个「一看就知道在干什么生意」的名字。别叫「我的第一个项目」。</td>
+      </tr>
+      <tr>
+        <td><strong>项目类型</strong></td>
+        <td>电商运营</td>
+        <td>选项是<strong>软件开发 / 电商运营 / 内容创作 / 智能制造 / 通用业务</strong>。要如实说：当前版本<strong>项目类型不参与自动运营的执行逻辑</strong>，选「电商运营」不会让 AI 自动去开店。它的实际用途是列表标签、模板筛选、引导建项时的种子信息。所以选一个最接近的就好。这个案例里选「电商运营」。</td>
+      </tr>
+      <tr>
+        <td><strong>行业</strong></td>
+        <td>跨境电商/家居用品</td>
+        <td>提示原文 <span class="zy-field">如：互联网/制造/教育</span>，最长 64 字。它是<strong>自由输入框</strong>，不是下拉。注意它和项目类型是两回事：类型是「你干哪类活」，行业是「你服务哪个领域」。同样不影响执行逻辑，填个大概即可。</td>
+      </tr>
+      <tr>
+        <td><strong>运行模式</strong></td>
+        <td><strong>半自动</strong></td>
+        <td>单选：<strong>全自动 / 半自动 / 手动</strong>，默认就停在「半自动」。<strong>第一周强烈建议半自动</strong>——理由见 2.3。</td>
+      </tr>
+      <tr>
+        <td><strong>项目描述</strong><br><span class="zy-badge red">强影响</span></td>
+        <td>面向美国和欧洲市场的家居收纳小件 DTC 独立站，品类为厨房收纳、桌面收纳、旅行收纳三类。不建工厂，从国内供应商选品贴自有品牌，小包直发欧美。目前手上有 40 张产品白底图、一份供应商报价表和几页竞品笔记。目标是先把站点搭起来并上架 12 个 SKU。</td>
+        <td><strong>这是真正会喂给 AI 的字段。</strong>写清三件事：<strong>做什么生意、卖给谁、现在手上有什么</strong>。走引导建项时，它会作为项目档案种子，AI 据此生成执行策略和第一批任务。</td>
+      </tr>
+      <tr>
+        <td><strong>项目目标</strong><br><span class="zy-badge red">强影响</span></td>
+        <td>90 天内：独立站公网可访问，12 个 SKU 全部上架且可点开详情页，积累第一批自然搜索流量与询盘。不求马上盈利，但求跑通「选品 → 建站 → 内容 → 获客」这条链路。</td>
+        <td>目标回答「什么算成功、多久内」。<strong>写一个可衡量的结果 + 一个时间</strong>。注意这里写的是「跑通链路」而不是「月销多少」——一个人在起步期给自己定销量指标，只会让 AI 拆出一堆做不到的任务。</td>
+      </tr>
+      <tr>
+        <td><strong>服务器 IP / 端口</strong></td>
+        <td>留空 / 默认 8090</td>
+        <td>提示原文 <span class="zy-field">项目服务器 IP（可选，稍后可改）</span>。第一次建项目<strong>建议留空</strong>，建完再去服务器实例页签录。端口默认 8090。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">描述 vs 目标，一句话分清</span>
+    <p>描述回答「<strong>这是个什么生意</strong>」，目标回答「<strong>做到什么程度算赢</strong>」。两个都写清楚，AI 拆任务时才有抓手；只写一个，它只能靠猜。</p>
+  </div>
+
+  <h3>2.3 为什么第一周选「半自动」</h3>
+
+  <p>「半自动」不是「AI 少干活」，而是「<strong>关键决策要你点头</strong>」。官方在「调整运行模式与预算科目」窗口里给的解释原文是：</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">界面原文 · 半自动</span>
+    半自动：AI 自动执行，但在关键决策节点（目标变更、大额支出、对外动作等）由人工确认后继续。
+  </div>
+
+  <p>对跨境电商来说，这句话里有两个词特别关键：<strong>大额支出</strong>（选品、投广告、买工具）和<strong>对外动作</strong>（发邮件、发布内容、上架商品）。你第一周还不知道 AI 的判断准不准，让它把这些直接做出去，风险太大。</p>
+
+  <p>还有个机制细节要记住：<strong>只有全自动和半自动会启用自动运营循环</strong>；选「手动」时，任务要靠你自己一个个触发，AI 不会自己排班。所以「半自动」是起步期唯一合理的选择。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">两个名字，同一件事</span>
+    <p>创建向导里第三个选项叫「<strong>手动</strong>」，等你进了项目、到「自动运营控制台 → 调整运行模式」时它叫「<strong>人工审核</strong>」——<strong>是同一个东西</strong>（内部值都是 manual）。别以为项目里冒出了新选项。</p>
+  </div>
+
+  <h3>2.4 预算设定：一套具体的示例数字</h3>
+
+  <p>点 <span class="zy-btn">下一步</span> 进第二步。顶部一行说明原文：<span class="zy-field">预算单位为人民币（元），0 表示不限制</span>。默认值是 总预算 1000 / Token 月度额度 500 / 图片 100 / 视频 0 / 服务器 500。本案例改成这样：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>字段</th><th>默认</th><th>本案例填（示例）</th><th>依据 / 说明</th></tr></thead>
+    <tbody>
+      <tr><td><strong>总预算</strong></td><td>1000</td><td><strong>3000</strong></td><td>这是项目总上限。起步期一个月「看得见的钱」大约在 ¥90–380 量级（¥10–30 折算），三个月准备 ¥3000 是留了余量的保守值。达到阈值会预警，超限会熔断。</td></tr>
+      <tr><td><strong>Token 月度额度</strong></td><td>500</td><td><strong>300</strong></td><td>模型调用费按「输入 1 元/M、输出 2 元/M、缓存读 0.02 元/M」计价。<strong>这是月度额度</strong>，月月重置。¥300 对一个起步期项目够用；先小后大，不够再调。</td></tr>
+      <tr><td><strong>图片生成额度</strong></td><td>100</td><td><strong>100</strong></td><td>12 个 SKU 的主图/场景图会用到。图片比视频便宜得多，¥100 够起步。</td></tr>
+      <tr><td><strong>视频生成额度</strong></td><td>0</td><td><strong>50</strong></td><td><strong>这里有个坑</strong>：0 的意思是「不限制」，不是「禁止」。如果你这个月压根不做视频，别填 0——填一个很小的正数（比如 50），让它「最多只能花这么多」，才是真的刹车。</td></tr>
+      <tr><td><strong>服务器费用额度</strong></td><td>500</td><td><strong>300</strong></td><td>一台最小规格的项目实例常驻，月成本量级几十元。¥300 覆盖三个月有余。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">预算的三个数字怎么联动</span>
+    <p><strong>80% 预警</strong>（通知你并降级运行）→ <strong>超限熔断</strong>（暂停循环，不再烧钱）→ <strong>补充预算后恢复</strong>（在自动运营控制台点「恢复」或「启动」）。起步期的正确心态是：<strong>先把额度调小，让它早点提醒你</strong>，而不是调大让自己安心。第一次被预警不是坏事，那说明机制在工作。</p>
+  </div>
+
+  <h3>2.5 确认提交，然后从「草稿」到「运行中」</h3>
+
+  <p>第三步是纯展示的核对页，把「基本信息 / 预算设定」两块并排给你看。确认无误点 <span class="zy-btn ok">提交创建</span>，弹出「项目创建成功」。</p>
+
+  <p>注意：<strong>刚建好的项目状态是「草稿」，还不能跑。</strong>要让项目真的跑起来，必须做三件事：</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>录入 / 开通服务器</h4>
+      <p>进项目详情页 →「服务器实例」页签。三种来源任选其一（见下）。</p>
+    </li>
+    <li>
+      <h4>确认部署完成</h4>
+      <p>服务器上部署脚本跑完、服务起来之后，回到页签点 <span class="zy-btn ok">确认部署完成</span>。</p>
+    </li>
+    <li>
+      <h4>启动</h4>
+      <p>点页面头部 <span class="zy-btn ok">启动</span>，项目进入「运行中」，这时才能去自动运营里派任务。</p>
+    </li>
+  </ol>
+
+  <h3>2.6 服务器：三种来源选哪种</h3>
+
+  <p>每个项目对应<strong>一台独立的项目服务器</strong>——这叫「单实例单项目物理隔离」。好处是项目之间数据隔离、互不影响；代价是每个项目都要一台机器（有成本）。你不用 SSH 上去操作，界面已经把它的能力透传了。</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>来源一：云厂商自动开通</h4>
+      <p>平台对接了云厂商，你选规格和地域，平台自动下单开机、部署、健康检查，全程能看进度。<strong>本案例选这个，规格用最小的那一档。</strong></p>
+    </div>
+    <div class="zy-card green">
+      <h4>来源二：手动录入已有服务器</h4>
+      <p>点 <span class="zy-btn">录入服务器</span>，填 IP、SSH 端口、项目服务器端口（默认 8090）、规格、地域。适合你手上已经有一台机器的情况。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>来源三：部署脚本</h4>
+      <p>点 <span class="zy-btn">查看部署脚本</span> 拿一段一键脚本，到你自己的机器上跑，脚本负责装环境、生成配置、起服务。适合懂点运维的人。</p>
+    </div>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">「先用最小规格」不是抠门，是纪律</span>
+    <p>起步期你根本不知道这个项目会不会跑下去，也不知道真实的负载是多少。先开最小规格，跑起来看监控指标里的资源使用率，不够再升配。<strong>反过来（先开大机器再缩）通常缩不下去</strong>，因为你的项目数据在上面。</p>
+  </div>
+
+  <p>录入后建议点一下项目列表卡片上的 <span class="zy-btn">连接测试</span>，验证平台和服务器「暗号对上了」。成功文案原文是：<strong>「连接成功：{ip}:{port}，HMAC 验证通过（{ms}ms）」</strong>。出现这行绿字，第 1 天就算收工了。</p>
+
+  <h2>三、第 2 天：先喂资料，再让 AI 干活</h2>
+
+  <p>第 2 天不做任何「产出型」的事，只做一件事：<strong>喂资料</strong>。这是全流程里最容易被跳过、也最影响后面所有结果的一步。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">资料不喂够，AI 写出来的东西就像路人</span>
+    <p>你让 AI 写产品文案，它凭什么知道你卖的是「适合租房族的折叠收纳盒」还是「适合家庭主妇的大容量收纳箱」？没有资料，它只能写出<strong>通用电商套话</strong>——那种放在任何一家店都成立、也因此对谁都不成立的文字。你后面省下的每一个「不满意、重写」的来回，都是现在喂进去的资料换来的。</p>
+  </div>
+
+  <h3>3.1 建两个知识库：公司级和项目级各放什么</h3>
+
+  <div class="zy-path">左侧菜单「知识库」 <span class="sep">›</span> <span class="zy-btn">新建知识库</span></div>
+
+  <p>知识库分两层（页面标题原文就是「分层知识库（公司级 → 项目级）」）。新建时的字段有五个：<strong>名称 / 描述 / 类型（公司级 / 项目级 / 共享）/ 所属项目 / 共享下级</strong>。本案例建两个：</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card blue">
+      <h4>公司级：品牌与口径库</h4>
+      <p>类型选「公司级」。放<strong>不管哪个项目都该遵守的</strong>东西：</p>
+      <ul>
+        <li>品牌调性说明（一句话：理性、克制、不夸大）</li>
+        <li>公司简介与对外统一口径</li>
+        <li>客服话术底线（不承诺退款、不承诺时效）</li>
+        <li>英文文案的用词偏好与禁用词</li>
+      </ul>
+      <p>「共享下级」开关打开，这样项目级检索也能借到它。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>项目级：NestKeeper 资料库</h4>
+      <p>类型选「项目级」，「所属项目」选 NestKeeper 家居收纳独立站。放<strong>只对这一条业务线有用的</strong>东西：</p>
+      <ul>
+        <li>12 个 SKU 的产品资料（材质、尺寸、承重、卖点）</li>
+        <li>供应商报价表（Excel）</li>
+        <li>竞品拆解笔记（对方定价、页面结构、卖点）</li>
+        <li>目标客群画像（25–35 岁租房城市年轻人）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一个专题一个库，别建一个「大杂烩」</span>
+    <p>你以后会需要「给客户页面的问答只开放某一个库」这种操作（第七节）。如果所有资料都塞进一个库，你就没法做筛选，客户页面要么全开放要么全关闭。现在多花两分钟分库，后面省很多事。</p>
+  </div>
+
+  <h3>3.2 把手上现有的东西导进去</h3>
+
+  <p>按资料形态选导入方式，<a href="07-知识与资料导入.html">第 07 章</a> 有完整对照表。本案例四类资料分别这么进：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>你手上有什么</th><th>用哪种方式</th><th>具体点哪里</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>12 个 SKU 的产品资料（你手打的 Markdown / Word）</td>
+        <td>知识库上传</td>
+        <td>知识库 → 项目级库那一行 → <span class="zy-btn">文档管理</span> → <span class="zy-btn">上传文档</span></td>
+      </tr>
+      <tr>
+        <td>供应商报价表（Excel）</td>
+        <td>知识库上传</td>
+        <td>同上。上传支持 <code>.pdf / .txt / .md / .markdown / .docx / .xlsx</code></td>
+      </tr>
+      <tr>
+        <td>竞品笔记（Word）、品牌调性（手写文档）</td>
+        <td>知识库上传</td>
+        <td>品牌调性放公司级库，竞品笔记放项目级库</td>
+      </tr>
+      <tr>
+        <td>散落在本地电脑各个文件夹里的旧文档、截图说明</td>
+        <td>边缘客户端</td>
+        <td>装本地那个托盘小程序，让它扫描指定文件夹自动清洗上传（界面是英文的，见第 07 章）</td>
+      </tr>
+      <tr>
+        <td>你和供应商沟通的聊天记录要点、开过的会</td>
+        <td>会议导入 / 项目导入</td>
+        <td>项目内「研究与获客」分组 → 会议导入；或「现有项目导入」把一段业务整体搬进来</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>上传完注意看文档的<strong>状态</strong>：待处理 → 解析中 → 已解析 → 分块中 → 向量化中 → 就绪。只有到了「就绪」，它才真正参与检索。没到就绪的文档旁边会有 <span class="zy-btn">处理</span> 按钮，点一下催它。</p>
+
+  <p>还有两种状态要认识：<strong>「失败」</strong>是压根没解析出来，点「处理」重试即可；<strong>「需人工确认」</strong>是解析走了降级路径（比如文档里乱码较多、结构特殊）——内容拿到了但不够干净，系统<strong>不会</strong>直接标成「就绪」，而是等你人工看过后才让它入库，具体原因会写在文档旁边。另外上传有格式白名单：<code>.pdf / .txt / .md / .markdown / .docx / .xlsx</code>，<strong>pptx 不能直接传</strong>（上传区已明示），要传就先把 PPT 另存成 PDF。不在名单里的格式、或伪装/损坏的文件会被当场拒收，不会悄悄进库。</p>
+
+  <h3>3.3 自检：用 RAG 检索搜三个问题</h3>
+
+  <div class="zy-path">知识库 <span class="sep">›</span> RAG 检索（页签）</div>
+
+  <p>检索框的提示原文是 <span class="zy-field">输入检索关键词，如：产品定位、目标客户、营销策略</span>。用<strong>你后面真的要问 AI 的那些问题的关键词</strong>来搜三个：</p>
+
+  <ol>
+    <li><strong>产品定位</strong>——应该能搜到你的品牌调性说明。</li>
+    <li><strong>收纳盒尺寸 / 承重</strong>——应该能搜到对应的 SKU 资料，结果里会显示「相似度 N%」。</li>
+    <li><strong>竞品定价</strong>——应该能搜到竞品笔记。</li>
+  </ol>
+
+  <p>如果搜出来是空态「未检索到相关内容」，或者命中的是明显无关的内容，<strong>先别往下走</strong>。回头检查：文档是否「就绪」？内容是不是图片扫描件（纯图片 PDF 解析不出文字）？知识库的「类型 / 所属项目」是不是配对？</p>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">这个自检动作，以后每周做一次</span>
+    <p>知识库是活的——你会不断往里加东西，也可能不小心删掉关键文档。花两分钟搜三个关键词，是所有「AI 回答变笨了」问题里性价比最高的排查手段。</p>
+  </div>
+
+  <h2>四、第 3–4 天：把 AI 班子搭起来</h2>
+
+  <p>资料喂完了，接下来建人。这里有个<strong>新手最常见的错误</strong>：一上来就建五个专职 Agent（文案、设计、SEO、客服、开发）。在本案例里，我们<strong>只建一个</strong>。</p>
+
+  <h3>4.1 建一个「全能操盘手」起步</h3>
+
+  <div class="zy-path">进入项目 <span class="sep">›</span> 左侧菜单「组织与运营」 <span class="sep">›</span> 智能体 <span class="sep">›</span> <span class="zy-btn">新建 Agent</span></div>
+
+  <p>「智能体中心」有四个页签：<strong>组织 / 任务 / 配置 / 运行</strong>。在「组织」页签点 <span class="zy-btn">新建 Agent</span>。填岗位信息时可以先用「岗位模板库」里的现成岗位起步，也可以自己写。</p>
+
+  <p>关键在<strong>系统提示词</strong>。给一个可以直接复制进去的范例（把方括号换成你的）：</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">岗位提示词 · 独立站全能操盘手</span>
+    你是【NestKeeper 家居收纳独立站】的运营操盘手，负责人是我（创始人）。当前阶段：起步期，一个人 + 你，预算有限。
+
+    你的职责范围：产品文案、页面内容、SEO 内容、营销素材、客户问答整理。你不负责最终对外发布——所有对外动作先产出草稿。
+
+    你的边界：单笔预算超过【200 元】的动作必须先上报；不自行承诺退款、赔偿、发货时效；不自行决定选品或改价。
+
+    你的输出格式：先给一句话结论，再列具体动作与依据，最后标出「需要人工确认的下一步」。
+
+    禁止事项：不要臆测缺失的信息，缺什么就明说缺什么；不要写夸大功效的文案（如「史上最好」）；不要用你不确定的产品参数。
+
+  </div>
+
+  <h3>4.2 装配技能</h3>
+
+  <p>建完 Agent，在成员列表里点「技能」，从技能库勾选与这个业务相关的技能。本案例起步阶段勾这几类就够：<strong>内容写作、SEO、营销文案、数据整理</strong>。技能库里有个动作叫 <span class="zy-btn">提升为组织级</span>——等你把某个技能调顺了，再提升，让以后的其它项目也能用。</p>
+
+  <h3>4.3 为什么起步期一个全能 Agent 比五个专职 Agent 好</h3>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>协调开销</h4>
+      <p>五个 Agent 就要有分工、有交接、有管理者协调。你现在的业务量根本喂不饱五个岗位，它们会互相等活干。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>成本</h4>
+      <p>每个 Agent 都有自己的提示词和上下文。岗位越多，同样的活儿要烧的 token 越多（多出来的部分都花在「沟通」上）。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>上下文</h4>
+      <p>一个操盘手看得到全局（产品、价格、客群、内容），写出来的东西是一致的。五个专职 Agent 各看一角，写出来的东西容易互相打架。</p>
+    </div>
+  </div>
+
+  <p>什么时候该加人？<strong>当你确实在某一类活上排不过来的时候</strong>。这件事我们放到第九节（第 2 个月）再谈——那时候系统会主动给你建议。</p>
+
+  <h2>五、第 1 周：第一个交付物——把独立站做出来</h2>
+
+  <p>前面四天都是准备，第 5 天开始动真格。第一个大动作是<strong>建站</strong>，而这在系统里的正道是「<strong>软件工程向导</strong>」，不是随便发一条任务。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">为什么必须走向导</span>
+    <p>独立站是一个「软件」。它有页面结构、有交互、有部署。你直接发一条「帮我做一个网站」，AI 会从零猜你要什么，猜错就是三天白干。<strong>软件工程向导的作用，是在动手前逼你把「要做什么」讲清楚，并且产出一份你可以逐字核对的需求文档。</strong></p>
+  </div>
+
+  <h3>5.1 发起：新建任务 → 任务类型选「新建软件工程」</h3>
+
+  <div class="zy-path">自动运营控制台 <span class="sep">›</span> 任务管理 <span class="sep">›</span> <span class="zy-btn">新建任务</span></div>
+
+  <p>在「新建任务」弹窗里填：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>字段</th><th>本案例填（示例）</th></tr></thead>
+    <tbody>
+      <tr><td><strong>任务名称</strong></td><td>NestKeeper 独立站建站</td></tr>
+      <tr><td><strong>描述</strong></td><td>搭建面向欧美市场的家居收纳小件 DTC 独立站，英文站点，含首页、产品列表、产品详情、关于我们、联系我们、隐私政策、退换货政策 7 个页面，支持 12 个 SKU 展示与加购。</td></tr>
+      <tr><td><strong>任务类型</strong></td><td><strong>新建软件工程</strong>（选项原文：通用任务 / 新建软件工程 / 软件修改）</td></tr>
+      <tr><td><strong>软件名称</strong></td><td>NestKeeper 独立站（这一版新增的字段）。<strong>可留空</strong>，留空则系统自动命名。</td></tr>
+      <tr><td><strong>优先级</strong></td><td>P0 - 紧急</td></tr>
+      <tr><td><strong>时间片权重</strong></td><td>4（1–10，越大分到的精力越多）</td></tr>
+      <tr><td><strong>引擎类型</strong></td><td><strong>循环执行（loop）</strong>。选 Agent 引擎时界面会警告「Agent 引擎可能无法完成软件交付，仅适合简单项目，建议使用循环执行」，建站这种活必须走 loop。</td></tr>
+      <tr><td><strong>AI 模型</strong></td><td>留空 = 路由自动</td></tr>
+      <tr><td><strong>时限（秒）</strong></td><td>默认 7200</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>点 <span class="zy-btn">保存</span>，任务创建成功，并且<strong>自动打开「新建软件工程」向导</strong>（因为类型选了 eng，任务状态先是「规划中」）。向导七步：<strong>需求对齐 / 生成 PRD/TAD / PRD 确认 / TAD 确认 / 评审对话 / 生成模块 / 完成</strong>。</p>
+
+  <p>这里说一下<strong>「软件名称」这个字段为什么值得填</strong>：向导产出的文档不是散在项目根目录，而是收在<strong>以软件名命名的独立文件夹</strong>里（<code>{项目工作区}/{软件名称}/</code> 下的 <code>PRD.md</code> / <code>TAD.md</code> / <code>TAD/*.md</code> / <code>dev-plan.md</code>）。填一个看得懂的名字，等于给这套文档贴了标签；同一个项目里将来再建第二个软件工程，两套文档也不会打架。留空也行，只是文件夹名由系统取。</p>
+
+  <h3>5.2 第 1 步 · 需求对齐：一段完整对话范例</h3>
+
+  <p>这一步是你和 AI 的对话，输入框提示原文是 <span class="zy-field">描述你的软件工程需求（目标、功能、技术栈等）...</span>。下面是一段完整的往返（约 10 轮），你可以照着这个节奏来——<strong>关键是：说清范围，而不是说清技术</strong>。</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">需求对齐 · 对话范例（跨境电商独立站）</span>
+    我：我要做一个面向美国市场的家居收纳小件独立站，卖厨房收纳、桌面收纳、旅行收纳三类产品，先上 12 个 SKU。
+
+    AI：收到。我先确认三件事——① 目标客户是「租房年轻人」还是「有房家庭」？② 有没有已经定好的品牌名？③ 这个站只做展示，还是要能下单付款？
+
+    我：主要面向 25–35 岁租房的城市年轻人。品牌名叫 NestKeeper。要有加购和结账入口，支付走 Stripe。
+
+    AI：明白，结账按 Stripe Checkout 处理。还要确认——④ 物流发货方式？⑤ 有没有现成的退货政策文本？⑥ 产品图片和文案你有素材吗，还是需要 AI 生成？
+
+    我：物流用国内直发小包，美国 7–12 天到。退货政策没有，你按常见的 30 天退货写一版，我改。图片我有 40 张白底图，文案只有供应商给的参数表。
+
+    AI：好。⑦ 站点语言只要英文，还是英文 + 西班牙文？⑧ 主机和部署你有偏好吗，还是用平台默认？
+
+    我：先只做英文。部署用平台默认。
+
+    AI：最后一个范围确认——⑨ 要不要包含博客栏目？⑩ 我建议把「做完」的标准写死为：首页、产品列表、产品详情、关于我们、联系我们、隐私政策、退换货政策 7 个页面公网可访问，并且 12 个 SKU 都能点开详情页。你同意吗？
+
+    我：同意，博客先不做，留给下一轮。另外产品列表页要能有分类筛选。
+
+    AI：收到，加上分类筛选。我按这个范围生成 PRD 和 TAD，你看完把关。
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">这段对话里最值钱的是第 ⑩ 条</span>
+    <p>AI 主动把「什么算做完」写成了一个<strong>可以核对的标准</strong>（7 个页面 + 12 个可点开的详情页）。你以后每次需求对齐，都要往这个方向收口。因为界面暂时没有单独填「验收标准」的输入框，<strong>这个标准就写进任务描述里</strong>——这是让独立验收 Agent 判得准的唯一办法。</p>
+  </div>
+
+  <p>讲完点 <span class="zy-btn">下一步</span>，进入「生成 PRD/TAD」这一步。</p>
+
+  <h3>5.3 第 2–5 步：文档生成与评审</h3>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>生成 PRD/TAD</h4>
+      <p>这一步是等待，界面显示「AI 正在撰写 PRD 和 TAD，请稍候...」。不要关窗口。</p>
+    </li>
+    <li>
+      <h4>PRD 确认</h4>
+      <p>文档名 <code>PRD.md</code>，右上角可切换 <span class="zy-btn ghost">预览</span> / <span class="zy-btn ghost">编辑</span>。这里<strong>必须真的读一遍</strong>——尤其核对：7 个页面写全了吗？12 个 SKU 的结构对吗？Stripe 结账写进去了吗？改完点 <span class="zy-btn">保存并下一步</span>。</p>
+    </li>
+    <li>
+      <h4>TAD 确认</h4>
+      <p>文档名 <code>TAD.md</code>，技术方案。你读不懂代码没关系，重点看<strong>「用了哪些技术、部署在哪、数据存哪」</strong>这三句话能不能看懂。看不懂就问 AI，别硬点下一步。</p>
+    </li>
+    <li>
+      <h4>评审对话</h4>
+      <p>输入框提示 <span class="zy-field">输入评审意见，与 AI 多轮讨论 PRD/TAD...</span>。这是给你「挑刺」的机会。挑完点 <span class="zy-btn">应用评审</span>。</p>
+    </li>
+  </ol>
+
+  <p>然后是「生成模块」（显示「正在生成模块文档与开发计划...」），最后到<strong>第 7 步 · 完成</strong>：界面显示「PRD / TAD / 模块文档已生成完毕」，并给出「最终任务提示词」。点 <span class="zy-btn ok">创建任务</span>，任务才真正进入执行队列。</p>
+
+  <h3>5.4 站内结构：该包含哪些页面</h3>
+
+  <p>跨境电商独立站，起步期需要的页面清单如下。这张表你可以直接抄进 PRD。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>页面</th><th>必须有吗</th><th>它要解决的问题</th><th>本案例要点</th></tr></thead>
+    <tbody>
+      <tr><td>首页</td><td>必须</td><td>三秒内让人知道「你卖什么、为什么在你这里买」</td><td>一句主标语 + 三个信任点（免运费 / 30 天退货 / 材质）</td></tr>
+      <tr><td>产品列表</td><td>必须</td><td>让客户能按类别浏览</td><td>三类分类筛选；12 个 SKU 卡片</td></tr>
+      <tr><td>产品详情</td><td>必须</td><td>回答尺寸、材质、承重、怎么用</td><td>每个 SKU 一页；参数表 + 场景图 + 加购</td></tr>
+      <tr><td>关于我们</td><td>必须</td><td>建立信任，尤其对欧美客户</td><td>写品牌故事，不要写「我们是一家 AI 公司」</td></tr>
+      <tr><td>联系我们</td><td>必须</td><td>让客户找得到人</td><td>邮箱为主（起步期不要留电话）</td></tr>
+      <tr><td>隐私政策</td><td>必须</td><td>欧美市场合规底线</td><td>说明收集哪些数据、cookie 用途</td></tr>
+      <tr><td>退换货政策</td><td>必须</td><td>直接决定转化率</td><td>30 天退货要写清条件和运费归属</td></tr>
+      <tr><td>博客 / 内容栏目</td><td>可后置</td><td>承接 SEO 长尾流量</td><td>本案例第一轮不做，第二轮再加</td></tr>
+      <tr><td>物流与时效说明</td><td>建议</td><td>减少「多久能到」的咨询</td><td>可以放在退换货页里</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>5.5 任务上线后看什么</h3>
+
+  <p>任务创建完，回到「任务管理」列表，你会看到它。这个页面有几列值得你每天扫一眼：<strong>任务名称 / 状态 / 优先级 / 时间片 / 引擎 / 类型 / 模型 / 创建时间</strong>。其中「模型」列空着时显示「路由自动」——意思是系统替你选模型。</p>
+
+  <p>然后去「运行轮次」页看它跑到哪了。页面标题是「运行轮次与日志」，列有<strong>轮次 / 状态 / 模式 / 引擎 / 耗时（秒）/ 花费（元）/ 开始时间</strong>。状态是这六个之一：待执行 / 运行中 / 已通过 / 需重做 / 已驳回 / 失败。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">「已通过」不是 AI 自己说的</span>
+    <p>任务干完会触发<strong>独立验收 Agent</strong>（这就是「三权分立验收」：干活的、验收的、批准的不是同一个 AI）。它会给出<strong>通过 / 返工 / 驳回</strong>三种结论，并且这些结论会记在「验收记录」页里。你要养成的习惯是——<strong>看验收记录，而不是看任务状态</strong>。任务显示「已完成」但验收记录写着「返工」，说明还有问题。</p>
+  </div>
+
+  <h3>5.6 第一个交付物达成：公网可访问链接</h3>
+
+  <p>当建站任务通过验收、部署也完成后，你会拿到一个<strong>公网能打开的链接</strong>。这一刻是这整个项目的心理里程碑——因为它把「我在用 AI 做事情」变成了「我有一个真实存在的东西」。</p>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">拿到链接后，做三件小事</span>
+    <p>① 用<strong>手机</strong>打开一遍（很多人只在电脑上看，结果移动端是坏的）；② 找一个不懂你业务的朋友看一眼，问他「你知道我卖什么吗」；③ 把链接存到你的项目笔记里，这是你后面所有内容、邮件、客户页面的「落点」。</p>
+  </div>
+
+  <p>注意：这一周你的站点是<strong>能访问</strong>，不是<strong>能卖</strong>。支付链路、物流说明、政策文案都还要第二周补。这是正常的节奏，不要因为「还不能收钱」就焦虑。</p>
+
+  <h2>六、第 2 周：产品与内容</h2>
+
+  <p>第 2 周开始有「日常活儿」了。这一节是本章最实用的部分——我们把每一类活儿写成一<strong>张任务卡</strong>，每张卡都写清：任务名称 / 描述 / 任务类型 / 引擎 / 时间片权重 / 优先级。你可以直接照抄进「新建任务」弹窗。</p>
+
+  <div class="zy-card blue">
+    <h4>任务卡 A · 产品文案（12 个 SKU）</h4>
+    <p><strong>任务名称：</strong>NestKeeper 产品详情页文案（12 SKU）</p>
+    <p><strong>描述：</strong>基于项目知识库里的产品资料与竞品笔记，为 12 个 SKU 各写一版英文产品详情页文案。每个 SKU 需要：一句主标题（不超过 60 字符）、3 条卖点（每条不超过 12 词）、一段 80–120 词的产品描述、一个参数表（尺寸/材质/承重/清洁方式）。语气理性克制，不夸大。完成标准：12 个 SKU 全部产出，且每个 SKU 的参数与知识库原文一致，无编造参数。</p>
+    <p><strong>任务类型：</strong>通用任务　<strong>引擎：</strong>Agent 智能体　<strong>时间片权重：</strong>3　<strong>优先级：</strong>P1 - 高</p>
+  </div>
+
+  <div class="zy-card green">
+    <h4>任务卡 B · 产品主图与场景图</h4>
+    <p>这个不是普通任务，走<strong>媒体生成</strong>（左侧菜单「媒体生成」）。要提醒你一句：<strong>它是要花钱的，而且钱记在项目账本上</strong>。媒体生成中心的提示原文是「金额由服务端按「档位单价 × 用量」折算并计入项目账本；未定价档位显示 [待定价]（不折算、不谎报金额）」。</p>
+    <p>图像标签页字段：<strong>提示词 / 引擎（gpt / seedream）/ 尺寸</strong>。两个可以照抄的提示词见 <a href="#app-c">附录 C</a>。</p>
+    <p><strong>建议做法：</strong>先只生成 2 张试水，看上不上得了台面，再批量生成剩下 10 张。<strong>不要一上来点 12 次。</strong></p>
+  </div>
+
+  <div class="zy-card amber">
+    <h4>任务卡 C · SEO 内容与内容日历</h4>
+    <p><strong>任务名称：</strong>NestKeeper 内容选题与 SEO 大纲</p>
+    <p><strong>描述：</strong>基于目标客群（25–35 岁租房城市年轻人）与三类产品，产出 20 个英文博客选题，并为其中 5 个写出详细文章大纲（含 H1/H2 结构、目标关键词、搜索意图、字数建议）。选题要围绕「租房收纳难题」这类真实搜索意图，不要写品牌自夸内容。完成标准：20 个选题 + 5 份大纲全部产出，每个选题标注目标关键词。</p>
+    <p><strong>任务类型：</strong>通用任务　<strong>引擎：</strong>Agent 智能体　<strong>时间片权重：</strong>2　<strong>优先级：</strong>P1 - 高</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">引擎怎么选，记住一句话就够</span>
+    <p><strong>要写代码、要建东西、要跑很久 → 循环执行（loop）；要整合信息、要快速产出文本 → Agent 智能体（agent）。</strong>拿不准时：任务类型选「新建软件工程」或「软件修改」时一律 loop；纯文本类一律 agent。系统其实还会按描述里的关键词自己猜（编码/开发/构建→loop，查询/汇总/快速→agent，兜底 loop），但你自己选更稳。</p>
+  </div>
+
+  <p>第二周结束时，你应该已经：12 个 SKU 的文案齐了、主图齐了、20 个内容选题齐了。这时候你会发现一件有意思的事——<strong>活儿不是「干完」的，是「排队轮流推进」的</strong>。你同时挂着五六个任务，每轮 AI 只推进其中几个时间片。这就是「排班」，不是「一件件做」。</p>
+
+  <h2>七、第 3 周：获客与客户接触</h2>
+
+  <p>有站了、有内容了，第三周开始做「让人知道」。这一周有两个重点：<strong>邮件营销的审批链条</strong>，和<strong>客户页面</strong>。</p>
+
+  <h3>7.1 SEO 与内容分发</h3>
+
+  <p>你手上的 20 个选题，先挑 5 个写成初稿。写稿任务卡：</p>
+
+  <div class="zy-card blue">
+    <h4>任务卡 D · 博客文章初稿</h4>
+    <p><strong>任务名称：</strong>NestKeeper 博客文章初稿（第 1 批 5 篇）</p>
+    <p><strong>描述：</strong>按已确认的 5 份大纲，各写一篇 900–1200 词的英文博客初稿。每篇开头 2 句直击读者痛点，正文用小标题分段，结尾给一个自然的下一步（引导到对应产品页，不要硬推销）。完成标准：5 篇初稿产出，每篇含 H1/H2 结构、目标关键词自然出现、无夸大表述。</p>
+    <p><strong>任务类型：</strong>通用任务　<strong>引擎：</strong>循环执行（loop）　<strong>时间片权重：</strong>3　<strong>优先级：</strong>P2 - 常规</p>
+  </div>
+
+  <p>长文用 loop、短文用 agent，这条经验值得记住：<strong>要写得长、要反复打磨的，走 loop</strong>。</p>
+
+  <h3>7.2 邮件营销：草稿 → 人工审批 → 发送</h3>
+
+  <p>这是本章最重要的一段纪律说明。</p>
+
+  <div class="zy-card amber">
+    <h4>任务卡 E · 邮件序列草稿</h4>
+    <p><strong>任务名称：</strong>新客欢迎邮件序列草稿（5 封）</p>
+    <p><strong>描述：</strong>为新订阅用户设计 5 封英文欢迎邮件序列（第 0 / 2 / 5 / 9 / 14 天），主题分别是：品牌欢迎与承诺、收纳痛点与选品逻辑、单品深度介绍、真实使用场景、限时优惠引导。每封含主题行、预览文字、正文、一个 CTA 按钮文案。语气理性、克制、不夸大。完成标准：5 封邮件全部产出草稿，且每封不含任何未经确认的产品参数或承诺。</p>
+    <p><strong>任务类型：</strong>通用任务　<strong>引擎：</strong>Agent 智能体　<strong>时间片权重：</strong>2　<strong>优先级：</strong>P1 - 高</p>
+  </div>
+
+  <p>草稿出来之后，<strong>它不会自己发出去</strong>。这正是半自动模式在起作用——「对外动作」要你点头。你在「人工节点」页会看到待处理项：</p>
+
+  <div class="zy-path">自动运营控制台 <span class="sep">›</span> 人工节点</div>
+
+  <p>人工处理节点页的筛选有<strong>待处理 / 处理中 / 已完成 / 已驳回 / 已升级</strong>，卡片上会显示<strong>通道 / 自主级别 L{n} / SLA（秒）/ 处理人 / 描述</strong>。邮件这类敏感动作一般走<strong>黄通道</strong>（敏感需确认），自主级别默认 <strong>L2</strong>（一键确认：AI 暂停等你，你点一下才继续）。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">审批这一步，一个环节都不能省</span>
+    <p>邮件发出去就收不回来，触达的是真实客户，代表的是你的品牌。你可以把审批做得很快——<strong>但你不能跳过它</strong>。想快，就提前把「品牌调性」「禁用词」「统一口径」写进公司级知识库，让 AI 第一版就贴近你的要求；而不是事后用「取消发送」来补救。另外记住：<strong>手机端也能审批</strong>（移动端审批页有「批准 / 拒绝」），所以你没有「没在电脑前所以只能让 AI 自己发」这个借口。</p>
+  </div>
+
+  <h3>7.3 建一个客户页面：给独立站做「产品手册智能问答」</h3>
+
+  <div class="zy-path">进入项目 <span class="sep">›</span> 左侧菜单「研究与获客」 <span class="sep">›</span> 客户页面 <span class="sep">›</span> <span class="zy-btn">新建分享</span></div>
+
+  <p>「客户页面」是你可以<strong>公开分享出去的一条问答链接</strong>。客户不需要账号，打开就能问，AI 只按你允许的知识库回答。给独立站做一个「产品手册智能问答」，填法逐项如下：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>字段</th><th>本案例怎么填</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>名称</strong><span class="zy-badge amber">必填</span></td>
+        <td>NestKeeper 产品手册智能问答</td>
+        <td>提示原文 <span class="zy-field">如：产品手册智能问答</span>。不填点保存会提示「请输入分享名称」。名称只是给你自己看的。</td>
+      </tr>
+      <tr>
+        <td><strong>简介</strong></td>
+        <td>关于产品尺寸、材质、使用与保养的常见问题。</td>
+        <td>对外展示的简介，客户能在页面上看到。这句话决定了客户会问什么，值得好好写。</td>
+      </tr>
+      <tr>
+        <td><strong>知识库白名单</strong></td>
+        <td><strong>只勾「NestKeeper 资料库」里那个产品资料库，不要勾公司级库</strong></td>
+        <td>勾选框提示原文是 <span class="zy-field">留空表示不开放任何知识库，请显式勾选要公开的知识库</span>，下方还写着一行 <strong>「留空 = 不开放任何知识库（访客只能得到无资料的通用回答）」</strong>。<strong>这是本页最关键的一个字段。</strong>一个都不勾，列表里会显示空态「未开放（未勾选知识库）」，保存时还会再弹一次二次确认。</td>
+      </tr>
+      <tr>
+        <td><strong>启用</strong></td>
+        <td>开</td>
+        <td>关掉等于这条链接不可用。</td>
+      </tr>
+      <tr>
+        <td><strong>每分钟限流</strong></td>
+        <td>5（默认 10）</td>
+        <td>单位是「次/分钟（每访客）」。公开页面对陌生人开放，起步期调小一点。</td>
+      </tr>
+      <tr>
+        <td><strong>每日上限</strong></td>
+        <td>100（默认 100）</td>
+        <td>单位是「次/天（总计）」。这是你这个页面一天最多花多少钱的间接控制阀。</td>
+      </tr>
+      <tr>
+        <td><strong>过期时间</strong></td>
+        <td>先留空（永久有效），跑一周再决定要不要设</td>
+        <td>提示原文 <span class="zy-field">留空表示永久有效</span>。设置过期时间等于给这条链接上了一个自动保险。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>点 <span class="zy-btn">保存</span> 创建后，会弹出一个窗口，里面是<strong>唯一一次能看到完整链接的机会</strong>。警告原文是：</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">界面原文 · 创建成功提示</span>
+    请立即复制访问链接，token 仅本次展示，关闭后不可再查看
+  </div>
+
+  <p>立刻点 <span class="zy-btn">复制链接</span> 存好。列表里以后只显示 <code>/s/xxxx****</code> 这种带掩码的提示——看不到完整 token。真弄丢了也不用慌，操作列里有 <span class="zy-btn">重置链接</span>：确认后会生成一条新链接，<strong>旧链接立即失效</strong>，已经发出去的旧地址要重新发一遍。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">为什么不要把所有知识库都放进去</span>
+    <p>先把最容易搞反的一点说清：<strong>「知识库白名单」留空 = 不开放任何库</strong>，不是"全部开放"——旧版本的界面文案把它写反了，这一版已经改对（列表空态显示「未开放（未勾选知识库）」，没勾选就保存会弹窗二次确认）。</p>
+    <p>真正的坑在另一头：把<strong>不该公开的库和产品资料挤进同一个库</strong>，然后为了公开产品资料顺手勾了这个库。你的项目级库里除了产品资料，还有<strong>供应商报价表</strong>——那是你的成本价。客户问一句「你们这个收纳盒成本多少」，AI 可能就把报价表里的数字说出来了。勾选处的警示原文就是「切勿把含成本价 / 供应商报价 / 内部制度的库加入白名单」。<strong>只勾该给客户看的那一个库，库也要分家</strong>，这不是小心谨慎，这是基本操作。</p>
+  </div>
+
+  <p>客户页面的公开访问地址形如 <code>/s/{token}</code>，页面标题是「AI 智能问答」，输入框提示「请输入您的问题…」，单条限制 2000 字。你自己先去测三个问题，看回答是不是只引用了产品资料。有一点提前跟客户说清楚：<strong>访客的聊天记录只留在他自己那台电脑的浏览器里</strong>，刷新或换个浏览器就没了，服务端不留存这段对话；要复盘客户问了什么，看的是列表里的「访问日志」。</p>
+
+  <h3>7.4 客户咨询怎么接（流程 / 连接器 / 人工节点）</h3>
+
+  <p>客户从客户页面提问、从邮件回复、从「联系我们」表单进来，这三条路最后都汇到你的处理队列：</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>客户来源</b>客户页面 / 邮件 / 表单</div>
+    <div class="zy-flow-arrow">›</div>
+    <div class="zy-flow-node"><b>AI 首答</b>基于知识库给草稿或直接回答</div>
+    <div class="zy-flow-arrow">›</div>
+    <div class="zy-flow-node warn"><b>超范围</b>退款 / 赔偿 / 政策外特例</div>
+    <div class="zy-flow-arrow">›</div>
+    <div class="zy-flow-node ok"><b>人工节点</b>你在「人工节点」页处理</div>
+  </div>
+
+  <p>「超范围问题必须升级」这条规则，要写进你 Agent 的岗位提示词里（第四节给了范例）。想让 AI 能真正连上你的邮箱或表单，需要配「<strong>连接器</strong>」（智能体连接外部系统的插头，英文叫 MCP）——这一步涉及凭据和外部系统，建议等到第三周之后、流程跑顺了再配。起步期先用客户页面顶上就够了。</p>
+
+  <h2>八、第 4 周：复盘与第一次调整</h2>
+
+  <p>第 4 周不做新东西，只做一件事：<strong>看数字，然后改一个地方</strong>。</p>
+
+  <h3>8.1 该看哪几屏</h3>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>经营日报</h4>
+      <p>页面标题「经营日报」，按钮 <span class="zy-btn">生成日报</span> <span class="zy-btn">刷新</span>。类型有 daily 经营日报 / analysis 分析报告 / audit 内审报告 / redteam 红队演练；状态有 draft 草稿 / confirmed 已确认 / applied 已应用。<strong>重点看「草稿」状态的</strong>——那是在等你确认的。</p>
+    </li>
+    <li>
+      <h4>经营驾驶舱</h4>
+      <p>标题「经营驾驶舱」，按钮 <span class="zy-btn">刷新</span> <span class="zy-btn">运行预警评估</span>。六张指标卡：<strong>总收入 / 总成本 / 净收入 / 任务完成率 / 预算消耗率 / 活跃预警</strong>。预警级别 warn 警告 / critical 严重。</p>
+    </li>
+    <li>
+      <h4>监控指标</h4>
+      <p>四张质量卡：<strong>AI 产出质量评分（均值 0-10）/ 客户响应时间 P95（秒）/ 人类参与率（%）/ 知识库增长量（近 30 天新增条目）</strong>。</p>
+    </li>
+    <li>
+      <h4>计费明细</h4>
+      <p>四张汇总卡：<strong>累计花费 / 预算已用 / 输入 Token / 输出 Token</strong>。这里有一个必须知道的 tooltip 原文：「其中包含按文本长度估算的兜底计费（上游未回 usage 时产生），非精确账单，请勿直接作为账单核销」。</p>
+    </li>
+  </ol>
+
+  <h3>8.2 假设三个典型问题，怎么处置</h3>
+
+  <div class="zy-card amber">
+    <h4>问题一：某个任务花费异常高</h4>
+    <p><strong>现象：</strong>计费明细里，一个叫「独立站建站」的任务吃掉了一半预算，而它还在「运行中」。</p>
+    <p><strong>怎么查：</strong>计费明细 → 看输入/输出 Token 比例。如果输出 Token 特别大，说明它在大段大段地写字；再去「阿米巴核算」看岗位级核算，确认是哪一类活儿在烧。</p>
+    <p><strong>怎么处置：</strong>① 把它的<strong>时间片权重</strong>从 4 降到 2，让它每轮少占时间；② 如果它是 loop 任务，考虑是不是任务范围太大，拆成两个小任务；③ 在任务描述里收紧范围（「本轮只做首页和产品列表」）。<strong>不要直接暂停</strong>——建站任务通常是关键路径，暂停它会更慢。</p>
+  </div>
+
+  <div class="zy-card amber">
+    <h4>问题二：返工率偏高</h4>
+    <p><strong>现象：</strong>验收记录里一堆「返工」结论，AI 干完了又被退回来重做。</p>
+    <p><strong>怎么查：</strong>去「验收记录」页看结论分布（pass 通过 / redo 返工 / reject 驳回），再点开详情看「执行者」和「验收 Agent」分别说了什么。同时看「角色管理 → 绩效」里的<strong>返工率</strong>。</p>
+    <p><strong>怎么处置：</strong>九成的返工是<strong>需求没写清</strong>，不是 AI 不行。回去看任务描述——你是不是只写了「优化产品文案」？把它改成可核对的：「12 个 SKU，每个含主标题 60 字符内、3 条卖点、80–120 词描述、参数表与知识库原文一致」。<strong>把「什么算做完」写进任务描述</strong>，返工率会立刻下来。</p>
+  </div>
+
+  <div class="zy-card amber">
+    <h4>问题三：内容产出多，但没有转化</h4>
+    <p><strong>现象：</strong>20 篇选题、5 篇长文、5 封邮件都产出了，站点访问也在涨，但没有任何询盘。</p>
+    <p><strong>怎么查：</strong>这类问题<strong>基本不是模型问题，是链路问题</strong>。去看客户页面的访问日志（客户页面 → 那一行的「日志」）：客户问了什么？有没有「拦截 / 过期」的记录？如果客户问了但没人接，那就是<strong>跟进动作缺失</strong>。</p>
+    <p><strong>怎么处置：</strong>加一条「线索跟进」任务，并把客户页面的咨询、邮件的回复都接到人工节点上。这一条非常典型——<strong>你花了大力气做「让人知道」，却没做「接住人」</strong>。</p>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">一人公司最稀缺的资源是注意力</span>
+    <p>上面三个问题，每个都有十种改法，但你的时间只够改一种。<strong>决定「下一步只做一件事」比列出十件事重要得多。</strong>本案例第 4 周选的是第三件——把「接住人」这条链路补齐。理由：前两件是效率和成本问题，第三件是「有没有生意」的问题。</p>
+  </div>
+
+  <h3>8.3 触发一次全局重排</h3>
+
+  <p>看完数字、改完方向，建议手动触发一次 review（重排）。系统默认每 20 轮会自动做一次：AI 审视全局（进度、预算、收益），重新排任务集和时间片。你现在主动触发一次，相当于<strong>让 AI 按新的优先级重排一遍</strong>，执行效率通常会有明显变化。</p>
+
+  <h2>九、第 2 个月：第一次扩编</h2>
+
+  <p>第 2 个月开始，你的项目已经跑了一段时间，系统会开始给你「该长大了」的信号。</p>
+
+  <h3>9.1 走一遍组织进化页</h3>
+
+  <div class="zy-path">进入项目 <span class="sep">›</span> 左侧菜单「组织与运营」 <span class="sep">›</span> 组织进化</div>
+
+  <p>页面标题「组织进化」，从上到下五块：<strong>阶段状态 / 组织架构 / AI 建议 / 能力开启 / 定量调控（八维）</strong>。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>看阶段状态与判定证据</h4>
+      <p>「阶段状态」块有 <span class="zy-btn ghost">重新评估</span> 按钮，后面跟着阶段徽章（起步期 / 成长期 / 规模化期 / 成熟期）和成熟度。展开「判定证据」能看到一张表：<strong>指标 / 当前值 / 阈值 / 命中 / 可用</strong>。这就是「凭数据说话」——它告诉你为什么判断你现在还在起步期。</p>
+    </li>
+    <li>
+      <h4>看 AI 建议</h4>
+      <p>「AI 建议（N 条待处理）」是本页最重要的区域。建议类型有 <strong>role_add 增员 / scale_out 扩容 / skill_attach 技能装配 / stage_upgrade 阶段升级</strong>；状态有 <strong>pending 待确认 / accepted 已确认 / applied 已应用 / declined 已拒绝 / deferred 暂缓 / expired 已过期</strong>。每条建议都能展开「为什么（证据）」，看到它的对标基准和指标依据。</p>
+    </li>
+    <li>
+      <h4>确认采纳</h4>
+      <p>点 <span class="zy-btn">确认</span> 时，系统会弹确认框，原文是：<strong>「确认采纳建议「X」？系统将自动完成扩编/装配并上岗。」</strong> 点「暂缓」会要求你输入<strong>冷却天数</strong>（冷却期内不再重复提示）；点「拒绝」要输入原因（用于留痕复盘）。</p>
+    </li>
+    <li>
+      <h4>上岗</h4>
+      <p>确认后 AI 会自动建角色、装技能、上岗测试，然后进入调度。你不需要手动去智能体中心一个个建。</p>
+    </li>
+  </ol>
+
+  <h3>9.2 该加营销 Agent 还是客服 Agent</h3>
+
+  <p>本案例在第 2 个月收到的建议大概率是<strong>增员</strong>，但加哪个岗位，要看你的证据，不是看感觉。判断标准：</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>看什么</th><th>如果……</th><th>该加的是</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>任务队列长度 / 等待时间</td>
+        <td>内容类任务一直排队、等很久</td>
+        <td><strong>营销 Agent</strong>（内容产能不够）</td>
+      </tr>
+      <tr>
+        <td>客户页面访问日志</td>
+        <td>咨询量上来了，但回复慢、有人工节点积压</td>
+        <td><strong>客服 Agent</strong>（接待能力不够）</td>
+      </tr>
+      <tr>
+        <td>AI 产出质量评分</td>
+        <td>内容质量分低、返工多</td>
+        <td>先别加人，<strong>先把提示词和知识库改好</strong></td>
+      </tr>
+      <tr>
+        <td>预算消耗率</td>
+        <td>已经接近 80% 预警线</td>
+        <td>先别加人，<strong>先看钱花在哪了</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>本案例的设定是：内容任务排队、咨询量小但没有及时接——所以<strong>两个都需要，但只加一个，加客服</strong>。理由和第八节一样：<strong>接住一个真实客户比多发一篇文章值钱。</strong>营销可以慢一点，客户丢了就没了。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">扩编要花多少钱（示例估算）</span>
+    <p>建议卡片上会直接显示<strong>「估算月成本」</strong>和<strong>「扩编后总成本变化」</strong>——这是系统给你的透明标注，不要跳过。按组织四阶段的量级参考：起步期约 ¥90–380/月，进入成长期（小组分工）大致在 ¥350–1000/月。<strong>注意这是量级估算，不是账单</strong>；真实花费看计费明细。</p>
+  </div>
+
+  <h3>9.3 阶段切换：从起步期到成长期</h3>
+
+  <p>如果你确认已经具备条件，可以主动点页面右上角的 <span class="zy-btn ghost">阶段切换</span>。弹窗里有一段 alert 原文值得读一遍：</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">界面原文 · 阶段切换</span>
+    阶段切换会批量创建缺失岗位、更新组织节点与阶段状态；提交前系统会做角色唯一 / 技能合法 / 预算覆盖校验。
+  </div>
+
+  <p>弹窗字段是<strong>「目标阶段」和「岗位集（可选，留空使用阶段推荐默认岗位）」</strong>，按钮有 <span class="zy-btn ghost">回退上次切换</span>、<span class="zy-btn ghost">取消</span>、<span class="zy-btn">确认切换</span>。注意它<strong>是建议不是命令</strong>——你可以切换，也可以回退。升级永远看数据，不看心情。</p>
+
+  <h2>十、第 3 个月：进入稳定运营的节奏</h2>
+
+  <p>到第 3 个月，项目应该进入一种「你不盯着它也在跑」的状态。这时候你的工作从「搭东西」变成「看节奏」。</p>
+
+  <h3>10.1 每周固定动作清单（可勾选）</h3>
+
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>周一：看「人工节点」有没有待处理的（邮件审批、客户升级、关键决策）</span></li>
+    <li><input type="checkbox"><span>周一：看「经营日报」，重点看草稿状态的报告，确认或调整</span></li>
+    <li><input type="checkbox"><span>周三：看「运行轮次」，有没有卡在「需重做 / 已驳回」的任务</span></li>
+    <li><input type="checkbox"><span>周三：用 RAG 检索搜 3 个关键词，检查知识库还准不准</span></li>
+    <li><input type="checkbox"><span>周五：看「计费明细」和「经营驾驶舱」，预算消耗率有没有异常</span></li>
+    <li><input type="checkbox"><span>周五：看「验收记录」，返工率是不是在下降</span></li>
+    <li><input type="checkbox"><span>周五：看客户页面「日志」，有没有被「拦截」或「过期」的咨询</span></li>
+    <li><input type="checkbox"><span>月末：做一次月度复盘，写下个月「只做的一件事」</span></li>
+  </ul>
+
+  <h3>10.2 什么时候该考虑开第二个项目</h3>
+
+  <p>第 3 个月你一定会有这个念头：「我能不能再开一个项目，做另一个品类 / 另一个市场？」</p>
+
+  <p>判断标准只有一条：<strong>第一个项目是否已经「不需要你每天救火」</strong>。具体看三个信号：</p>
+
+  <ul>
+    <li>最近的经营日报里，<strong>人工节点数量在下降</strong>（说明 AI 的判断越来越准，你要插手的地方越来越少）。</li>
+    <li>预算消耗率<strong>稳定</strong>，不再频繁触发预警。</li>
+    <li>返工率<strong>持续下降</strong>且任务完成率稳定。</li>
+  </ul>
+
+  <p>三个都满足，可以考虑开第二个。只要有一个明显不满足，<strong>「还不到时候」往往就是正确答案</strong>。因为第二个项目意味着第二台服务器、第二套知识库、第二份注意力预算——而注意力是唯一不能靠花钱补充的资源。</p>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">一人公司最大的陷阱是「多点开花」</span>
+    <p>你有 AI 班子，能力上限确实比传统一人公司高。但你的<strong>决策带宽</strong>没变。一个项目跑顺了再开第二个，是「复制成功」；一个项目还没顺就开第二个，是「把一个坑变成两个坑」。</p>
+  </div>
+
+  <h2>十一、这个案例里，我踩过的坑（10 条）</h2>
+
+  <p>下面 10 条，是走这条路最常见的坑。每条都写清「现象 → 原因 → 后来怎么改」，你可以直接拿去对照自己。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>#</th><th>踩的坑</th><th>现象</th><th>原因</th><th>后来怎么改</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>任务写成「优化网站」</strong></td>
+        <td>AI 连着三天改前端样式，配色换了七八轮，用户根本看不到的东西反复调</td>
+        <td>「优化」是个没有边界、也没有「做完」标准的词。AI 只能自己定义什么叫优化——它选了它最容易做的那个（改样式）</td>
+        <td>把动词换成可核对的名词：「把产品详情页的加载时间降到 X 以内」「12 个 SKU 全部可点开」。改完之后，同一个任务 1 天就验收通过</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>知识库里塞了供应商报价</strong></td>
+        <td>客户页面被客户问出成本相关内容，差点把底价暴露出去</td>
+        <td>把报价表和产品资料放进了同一个库，又把这个库勾进了白名单（白名单留空其实是"不开放"，真正的坑是<strong>库没分家</strong>）</td>
+        <td>① 把报价表单独建一个库，不进白名单；② 客户页面只勾「产品资料」那一个库；③ 以后凡是成本相关的资料，一律单独建库</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>一上来建了五个 Agent</strong></td>
+        <td>岗位之间互相等活、任务在「待执行」堆着，钱花了活没多干</td>
+        <td>业务量喂不饱五个岗位，多出来的成本全花在「协调」和「重复读上下文」上</td>
+        <td>砍回一个全能岗，跑一个月再按真实瓶颈加人。加人的依据是数据，不是「感觉需要一个」</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>视频额度填了 0</strong></td>
+        <td>以为 0 是「关闭」，结果根本没上限，做了一次视频测试花掉一小笔</td>
+        <td>预算说明原文是「0 表示不限制」，0 是放开不是锁死</td>
+        <td>不想花就填一个很小的正数（如 50），让额度成为真正的上限。同时对不做的品类，靠审批而不是靠额度兜底</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>跳过需求对齐直接建站</strong></td>
+        <td>AI 做出了三个版本的首页，但一个页面结构都不对，全部推倒</td>
+        <td>省掉了「软件工程向导」的需求对齐，等于让 AI 猜你要什么</td>
+        <td>凡是「软件类」的活，一律走软件工程向导，把 7 个页面和「做完的标准」在 PRD 阶段就写死</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><strong>邮件草稿没审就排队发送</strong></td>
+        <td>草稿里有一句夸大的时效承诺，差点发给全部订阅客户</td>
+        <td>把「对外动作人工确认」当成麻烦，想去掉这道关</td>
+        <td>不跳审批，改成「把标准写进知识库」——公司在知识库里写清禁用词和口径，AI 第一版就贴近要求，审批从十分钟变成十秒</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><strong>知识库文档一直是「解析中」</strong></td>
+        <td>AI 回答里完全没用到产品资料，写得像通用电商文案</td>
+        <td>纯图片扫描的 PDF 解析不出文字，文档没到「就绪」就不参与检索，但你只看「上传成功」就走了</td>
+        <td>上传后固定做一次 RAG 自检，搜三个关键词；文档状态不是「就绪」就点「处理」催一下</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><strong>第一周就选了全自动</strong></td>
+        <td>AI 自己决定了一次小额支出和一次内容发布，你事后才知道</td>
+        <td>想「一步到位」，把第一周该用来观察的窗口直接跳过了</td>
+        <td>第一周老实选半自动，看着 AI 怎么判断；等你能预测它下一步要干什么了，再考虑放开</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><strong>预算只设了总预算，没管 Token 月度额度</strong></td>
+        <td>月底 Token 额度悄悄用完，任务被熔断停了一天</td>
+        <td>总预算管的是整个项目，Token 月度额度管的是「这个月的模型调用」——两个是不同跑道</td>
+        <td>每月初看一次 Token 月度额度的余量，在计费明细里看输入/输出 Token 比例，异常就调任务的时间片权重</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td><strong>内容产出一堆，没人接住客户</strong></td>
+        <td>文章、邮件、客户页面都做了，访问量在涨，但零询盘</td>
+        <td>只做了「让人知道」，没做「接住人」——缺跟进任务和人工节点</td>
+        <td>加一条「线索跟进」任务，把客户页面咨询和邮件回复都接到人工节点；每周五固定看客户页面日志</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">把这 10 条总结成一句话</span>
+    <p>这个案例里几乎所有的坑，根因都是同一句话——<strong>「你没有告诉 AI 什么算做完，也没有告诉它什么不能做。」</strong>前者靠任务描述，后者靠知识库和提示词。这两件事做好了，这个系统会非常好用；做不好，你会觉得它笨。</p>
+  </div>
+
+  <h2>十二、本章小结与下一步</h2>
+
+  <ul>
+    <li><strong>顺序比功能重要。</strong>公司 → 项目 → 知识库 → Agent → 建站 → 内容 → 获客 → 复盘。跳过任何一步，后面都要回来补。</li>
+    <li><strong>第一周留在半自动。</strong>不是保守，是给自己一个「看懂 AI 怎么判断」的窗口期。</li>
+    <li><strong>描述和目标写清楚，AI 才有抓手。</strong>这两个字段是全流程里唯一会真正改变 AI 行为的项目信息。</li>
+    <li><strong>软件类的活走软件工程向导</strong>，把「什么算做完」在 PRD 阶段写死，返工率立刻下降。</li>
+    <li><strong>对外动作必须有人工审批。</strong>邮件、发布、上架，一个环节都不省；想快就靠知识库，不靠跳过审批。</li>
+    <li><strong>扩编看数据不看感觉。</strong>组织进化页的建议、判定证据、估算成本，三样都看清楚再点「确认」。</li>
+    <li><strong>一个人公司最稀缺的是注意力。</strong>每个月只做一件事，比列十件事有用。</li>
+  </ul>
+
+  <p>你会注意到，这个案例里最难的从来不是「怎么建站」——建站这件事，AI 干得比大多数人好。难的是<strong>你有没有想清楚要什么、有没有把标准写出来、有没有在关键的地方点头</strong>。这三件事，AI 替不了你。</p>
+
+  <p>这个案例是「从零开始做一个新业务」。下一章我们换一个场景：<strong>你手上已经有一个软件产品，或者要接私活给客户做企业站、小程序</strong>，那条路和这条路的打法完全不同——去读 <a href="16-案例-软件开发与网站设计.html">第 16 章 · 案例：软件产品与网站设计</a>。</p>
+
+  <div class="zy-quick">
+    <a href="10-软件功能开发与修改.html">回顾：软件工程向导怎么用</a>
+    <a href="09-自动运营.html">回顾：任务与验收</a>
+    <a href="16-案例-软件开发与网站设计.html">下一步：第 16 章 软件产品与网站设计</a>
+  </div>
+
+  <h2>附录 A · 全流程操作时间线（Day 0 → Day 90）</h2>
+
+  <p>这是本章最有复用价值的一张表。左边是「今天做什么」，右边是「在哪个页面、点哪个按钮」。第一天到第一周建议严格按顺序走；第二周之后可以按自己的节奏调整。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>时间</th><th>今天做什么</th><th>在哪个页面</th><th>关键按钮 / 动作</th></tr></thead>
+    <tbody>
+      <tr><td>Day 0</td><td>注册账号</td><td>登录页</td><td><span class="zy-btn">还没有账号？立即注册</span>，填四项后登录</td></tr>
+      <tr><td>Day 0</td><td>创建公司</td><td>公司管理</td><td><span class="zy-btn">创建公司</span> → 填名称/行业/描述 → <span class="zy-btn">创建</span></td></tr>
+      <tr><td>Day 0</td><td>建三个职能部门</td><td>公司管理 › 组织架构</td><td>按职能建「内容与品牌 / 站点与工程 / 获客与客户」</td></tr>
+      <tr><td>Day 0</td><td>确认顶栏公司切换器</td><td>任意页顶栏</td><td>切换到 NestKeeper 家居出海</td></tr>
+      <tr><td>Day 1</td><td>建项目（基本信息）</td><td>项目管理 › <span class="zy-btn">新建项目</span></td><td>填名称/类型/行业/模式/描述/目标，模式选<strong>半自动</strong></td></tr>
+      <tr><td>Day 1</td><td>设定预算</td><td>新建项目向导 › 预算设定</td><td>总预算 3000 / Token 300 / 图片 100 / 视频 50 / 服务器 300</td></tr>
+      <tr><td>Day 1</td><td>提交创建</td><td>向导 › 确认提交</td><td><span class="zy-btn ok">提交创建</span>，看到「项目创建成功」</td></tr>
+      <tr><td>Day 1</td><td>开通服务器</td><td>项目详情 › 服务器实例</td><td>选云厂商自动开通，规格取<strong>最小档</strong></td></tr>
+      <tr><td>Day 1</td><td>确认部署并启动</td><td>项目详情 › 服务器实例 / 页头</td><td><span class="zy-btn ok">确认部署完成</span> → <span class="zy-btn ok">启动</span></td></tr>
+      <tr><td>Day 2</td><td>建公司级知识库</td><td>知识库 › <span class="zy-btn">新建知识库</span></td><td>类型「公司级」；开「共享下级」</td></tr>
+      <tr><td>Day 2</td><td>建项目级知识库</td><td>知识库 › <span class="zy-btn">新建知识库</span></td><td>类型「项目级」+ 选所属项目</td></tr>
+      <tr><td>Day 2</td><td>上传资料</td><td>知识库 › <span class="zy-btn">文档管理</span></td><td><span class="zy-btn">上传文档</span>，逐个确认文档到「就绪」</td></tr>
+      <tr><td>Day 2</td><td>RAG 自检</td><td>知识库 › RAG 检索</td><td>搜「产品定位 / 收纳盒尺寸 / 竞品定价」</td></tr>
+      <tr><td>Day 3</td><td>建全能 Agent</td><td>项目内 › 智能体 › 组织</td><td><span class="zy-btn">新建 Agent</span>，贴岗位提示词</td></tr>
+      <tr><td>Day 3</td><td>装配技能</td><td>智能体 › 组织 › 成员列表</td><td>点「技能」勾内容写作 / SEO / 营销文案 / 数据整理</td></tr>
+      <tr><td>Day 4</td><td>建站任务：需求对齐</td><td>任务管理 › <span class="zy-btn">新建任务</span> → 向导</td><td>类型「新建软件工程」，引擎 loop，权重 4</td></tr>
+      <tr><td>Day 4</td><td>生成 PRD/TAD</td><td>软件工程向导 › 第 2 步</td><td>等待，不要关窗口</td></tr>
+      <tr><td>Day 5</td><td>审 PRD</td><td>向导 › PRD 确认</td><td>核对 7 个页面 + 12 SKU → <span class="zy-btn">保存并下一步</span></td></tr>
+      <tr><td>Day 5</td><td>审 TAD</td><td>向导 › TAD 确认</td><td>看「用什么技术、部署在哪、数据存哪」→ <span class="zy-btn">保存并下一步</span></td></tr>
+      <tr><td>Day 5</td><td>评审对话</td><td>向导 › 评审对话</td><td>提出修改意见 → <span class="zy-btn">应用评审</span></td></tr>
+      <tr><td>Day 6</td><td>生成模块并创建任务</td><td>向导 › 生成模块 / 完成</td><td><span class="zy-btn ok">创建任务</span></td></tr>
+      <tr><td>Day 6–7</td><td>盯轮次</td><td>自动运营控制台 › 运行轮次</td><td>看状态是否从「运行中」走到「已通过」</td></tr>
+      <tr><td>Day 7</td><td>验收与上线核对</td><td>自动运营控制台 › 验收记录</td><td>看结论是 pass / redo / reject；拿到公网链接后用手机打开</td></tr>
+      <tr><td>Day 8</td><td>产品文案任务</td><td>任务管理 › <span class="zy-btn">新建任务</span></td><td>通用任务 + agent + 权重 3 + P1</td></tr>
+      <tr><td>Day 9</td><td>产品主图</td><td>左侧菜单「媒体生成」› 图像</td><td>先试 2 张，满意再批量</td></tr>
+      <tr><td>Day 10</td><td>内容选题与 SEO 大纲</td><td>任务管理 › <span class="zy-btn">新建任务</span></td><td>通用任务 + agent + 权重 2 + P1</td></tr>
+      <tr><td>Day 11</td><td>社媒内容日历</td><td>任务管理 › <span class="zy-btn">新建任务</span></td><td>通用任务 + agent + 权重 2 + P2</td></tr>
+      <tr><td>Day 12</td><td>开营销相关能力开关</td><td>设置 › 功能管理</td><td>按需开启 marketing / marketing_engine 等</td></tr>
+      <tr><td>Day 13</td><td>邮件序列草稿</td><td>任务管理 › <span class="zy-btn">新建任务</span></td><td>通用任务 + agent + 权重 2 + P1</td></tr>
+      <tr><td>Day 14</td><td>审批并发送邮件</td><td>自动运营控制台 › 人工节点</td><td><span class="zy-btn ok">确认完成</span> / 批准</td></tr>
+      <tr><td>Day 15</td><td>建客户页面</td><td>项目内 › 研究与获客 › 客户页面</td><td><span class="zy-btn">新建分享</span> → 只勾产品资料库</td></tr>
+      <tr><td>Day 16</td><td>配限流与过期</td><td>客户页面 › 编辑</td><td>每分钟 5 / 每日 100 / 过期留空</td></tr>
+      <tr><td>Day 17</td><td>公开页自测</td><td>浏览器打开 <code>/s/{token}</code></td><td>问 3 个问题，确认只引用产品资料</td></tr>
+      <tr><td>Day 18</td><td>补齐政策与物流文案</td><td>任务管理 › <span class="zy-btn">新建任务</span></td><td>通用任务 + agent + 权重 1 + P2</td></tr>
+      <tr><td>Day 19</td><td>建目标与 KR</td><td>组织与运营 › 目标管理</td><td><span class="zy-btn">新建目标</span>，填 KR 与权衡权重</td></tr>
+      <tr><td>Day 20</td><td>看经营日报</td><td>自动运营控制台 › 经营日报</td><td><span class="zy-btn">生成日报</span>，重点看草稿</td></tr>
+      <tr><td>Day 21</td><td>看驾驶舱与监控指标</td><td>经营驾驶舱 / 监控指标</td><td><span class="zy-btn">运行预警评估</span></td></tr>
+      <tr><td>Day 22</td><td>看计费明细</td><td>自动运营控制台 › 计费明细</td><td>核对输入/输出 Token，看是否有异常任务</td></tr>
+      <tr><td>Day 23–25</td><td>处置三个典型问题</td><td>计费明细 / 验收记录 / 客户页面日志</td><td>降时间片权重 / 改任务描述 / 加跟进任务</td></tr>
+      <tr><td>Day 26</td><td>触发全局重排</td><td>自动运营控制台</td><td>手动触发 review，让 AI 按新优先级重排</td></tr>
+      <tr><td>Day 28</td><td>决定下月只做一件事</td><td>经营日报 / 笔记</td><td>写下一句「下月只做 X」，只写一件</td></tr>
+      <tr><td>Day 30</td><td>月度复盘</td><td>经营驾驶舱 + 阿米巴核算</td><td>按月度复盘模板填一遍</td></tr>
+      <tr><td>Day 31–45</td><td>第 2 个月：等建议、看证据</td><td>组织进化</td><td><span class="zy-btn ghost">重新评估</span>，读判定证据表</td></tr>
+      <tr><td>Day 45</td><td>采纳扩编建议</td><td>组织进化 › AI 建议</td><td><span class="zy-btn">确认</span> → 弹「确认采纳建议…」</td></tr>
+      <tr><td>Day 46–60</td><td>新岗位上岗与磨合</td><td>智能体 › 组织 / 运行</td><td>看新岗的返工率与产出</td></tr>
+      <tr><td>Day 61–90</td><td>进入稳定节奏</td><td>按第十节的周清单</td><td>周一 / 周三 / 周五 / 月末四组固定动作</td></tr>
+      <tr><td>Day 90</td><td>三个月账本复盘</td><td>公司账本 + 项目账本 + 计费明细</td><td>看累计投入与累计收入，决定要不要开第二个项目</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>附录 B · 这个项目的任务清单（20 条）</h2>
+
+  <p>这张表可以直接照抄进「新建任务」弹窗。说明：「时间片权重」是 1–10，越大每轮分到的精力越多；「依赖前置」表示这条任务最好等前面那条完成后再发。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>#</th><th>任务名称</th><th>描述（摘要）</th><th>类型</th><th>引擎</th><th>权重</th><th>优先级</th><th>依赖前置</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>NestKeeper 独立站建站</td><td>7 个页面 + 12 SKU 详情 + 分类筛选 + Stripe 结账</td><td>新建软件工程</td><td>loop</td><td>4</td><td>P0</td><td>—</td></tr>
+      <tr><td>2</td><td>产品详情页文案（12 SKU）</td><td>每 SKU：主标题 + 3 卖点 + 描述 + 参数表</td><td>通用任务</td><td>agent</td><td>3</td><td>P1</td><td>1</td></tr>
+      <tr><td>3</td><td>首页主标语与信任点</td><td>一句主标语 + 3 个信任点文案</td><td>通用任务</td><td>agent</td><td>2</td><td>P1</td><td>1</td></tr>
+      <tr><td>4</td><td>关于我们 / 品牌故事</td><td>400 词以内，讲清为什么做收纳、怎么选品</td><td>通用任务</td><td>agent</td><td>1</td><td>P2</td><td>1</td></tr>
+      <tr><td>5</td><td>隐私政策与退换货政策</td><td>隐私政策 + 30 天退货条款（含运费归属）</td><td>通用任务</td><td>agent</td><td>1</td><td>P2</td><td>1</td></tr>
+      <tr><td>6</td><td>产品主图与场景图</td><td>12 张，先试 2 张再批量</td><td>通用任务</td><td>agent</td><td>2</td><td>P1</td><td>1</td></tr>
+      <tr><td>7</td><td>竞品与定价调研</td><td>3 家竞品的定价、页面结构、卖点拆解</td><td>通用任务</td><td>agent</td><td>2</td><td>P1</td><td>—</td></tr>
+      <tr><td>8</td><td>内容选题与 SEO 大纲</td><td>20 个选题 + 5 份详细大纲</td><td>通用任务</td><td>agent</td><td>2</td><td>P1</td><td>—</td></tr>
+      <tr><td>9</td><td>博客文章初稿（第 1 批）</td><td>5 篇，每篇 900–1200 词</td><td>通用任务</td><td>loop</td><td>3</td><td>P2</td><td>8</td></tr>
+      <tr><td>10</td><td>社媒内容日历（30 天）</td><td>30 条选题 + 每条一句话文案</td><td>通用任务</td><td>agent</td><td>2</td><td>P2</td><td>8</td></tr>
+      <tr><td>11</td><td>新客欢迎邮件序列草稿</td><td>5 封英文邮件，含主题行与 CTA</td><td>通用任务</td><td>agent</td><td>2</td><td>P1</td><td>8</td></tr>
+      <tr><td>12</td><td>邮件序列审批与发送</td><td>人工确认后按序列发送</td><td>通用任务</td><td>agent</td><td>1</td><td>P0</td><td>11</td></tr>
+      <tr><td>13</td><td>客户页面知识库整理</td><td>把产品问答相关文档整理成独立库</td><td>通用任务</td><td>agent</td><td>2</td><td>P1</td><td>2, 3</td></tr>
+      <tr><td>14</td><td>客户页面问答自测</td><td>用 20 个真实客户问题测一遍，标出答错的</td><td>通用任务</td><td>agent</td><td>1</td><td>P1</td><td>13</td></tr>
+      <tr><td>15</td><td>站内 SEO 元信息优化</td><td>各页 title / description / 结构化数据</td><td>通用任务</td><td>loop</td><td>2</td><td>P2</td><td>1</td></tr>
+      <tr><td>16</td><td>移动端与可访问性自查</td><td>移动端布局 + 图片 alt + 对比度</td><td>通用任务</td><td>agent</td><td>1</td><td>P2</td><td>1</td></tr>
+      <tr><td>17</td><td>支付与结账链路自查</td><td>加购 → 结账 → 成功页全链路走一遍</td><td>通用任务</td><td>agent</td><td>1</td><td>P0</td><td>1</td></tr>
+      <tr><td>18</td><td>物流与时效页文案</td><td>美国 7–12 天、欧洲时效与运费规则</td><td>通用任务</td><td>agent</td><td>1</td><td>P2</td><td>1</td></tr>
+      <tr><td>19</td><td>经营日报解读与风险汇总</td><td>把当日指标变动翻译成「该做什么」</td><td>通用任务</td><td>agent</td><td>2</td><td>P1</td><td>—</td></tr>
+      <tr><td>20</td><td>全局重排（手动 review）</td><td>审视进度/预算/收益，重排任务集与时间片</td><td>通用任务</td><td>agent</td><td>1</td><td>P1</td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">权重怎么分配</span>
+    <p>一共默认 10 个时间片，任务按权重占用。上面 20 条如果全在队列里，权重加总会远超 10——这是正常的，<strong>系统会排队轮转，不是同时全开</strong>。真正的用法是：把「关键路径」上的任务权重调大（建站 = 4），把「可以慢一点」的调小（政策文案 = 1）。</p>
+  </div>
+
+  <h2 id="app-c">附录 C · 可复制的提示词与话术</h2>
+
+  <p>下面每一段都可以直接复制。带方括号的地方换成你自己的信息。这些是<strong>本书为这个案例撰写的示范文本</strong>，用来帮你理解「该写什么」，不是引擎内置的固定内容。</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-01 岗位提示词 · 独立站全能操盘手</span>
+    你是【NestKeeper 家居收纳独立站】的运营操盘手，负责人是我（创始人）。当前阶段：起步期，一个人 + 你，预算有限。
+
+    职责范围：产品文案、页面内容、SEO 内容、营销素材、客户问答整理。
+
+    边界：单笔预算超过【200 元】的动作必须先上报；不自行承诺退款、赔偿、发货时效；不自行决定选品或改价；所有对外发送的内容（邮件、社媒）一律先产出草稿并标注「待审核」。
+
+    输出格式：先给一句话结论，再列具体动作与依据，最后标出「需要人工确认的下一步」。
+
+    禁止事项：不臆测缺失信息，缺什么就明说缺什么；不写夸大功效的文案；不使用不确定的产品参数。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-02 需求对齐开场话术（建站类）</span>
+    我要做一个面向【美国】市场的【家居收纳小件】独立站，卖【厨房收纳、桌面收纳、旅行收纳】三类产品，先上【12】个 SKU。目标客户是【25–35 岁租房的城市年轻人】。品牌名【NestKeeper】。
+
+    我需要：加购和结账入口（支付走【Stripe】）、分类筛选、移动端可用。
+    物流是【国内直发小包，美国 7–12 天】。
+    我有【40 张白底图】和【供应商参数表】，没有现成文案。
+    站点只做【英文】。
+    「做完」的标准我定为：【首页、产品列表、产品详情、关于我们、联系我们、隐私政策、退换货政策 7 个页面公网可访问，且 12 个 SKU 都能点开详情页】。
+    先不做博客。请你把不清楚的地方一次性问完，别猜。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-03 产品文案任务描述（单品）</span>
+    基于项目知识库里的产品资料，为【折叠式桌面收纳盒】写一版英文产品详情页文案。
+    内容要求：一句主标题（不超过 60 字符）；3 条卖点（每条不超过 12 词）；一段 80–120 词的产品描述；一个参数表（尺寸 / 材质 / 承重 / 清洁方式）。
+    语气：理性、克制，不夸大，不使用「史上最好」这类词。
+    约束：所有参数必须与知识库原文一致，不得编造；不确定的参数标注出来让我确认。
+    做完的标准：以上四项齐全，且参数与知识库可逐条对上。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-04 产品文案任务描述（批量 12 SKU）</span>
+    为 12 个 SKU 各写一版英文产品详情页文案，结构统一（主标题 / 3 卖点 / 80–120 词描述 / 参数表）。
+    先产出【3 个 SKU】给我看格式和语气，我确认后再做剩下 9 个。
+    每个 SKU 的参数必须来自知识库原文；缺少参数的 SKU 单独列一张「待补参数清单」给我。
+    做完的标准：12 个 SKU 全部产出，参数零编造。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-05 产品图生成提示词（主图）</span>
+    一张【折叠式桌面收纳盒】的电商白底产品图：米白色 PP 材质，可折叠，展开尺寸约 30×20×12cm，正面 45 度视角，柔和均匀的棚拍打光，浅灰白背景，无文字无 logo，画面干净，正方形构图，适合独立站产品主图。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-06 产品图生成提示词（场景图）</span>
+    一张【折叠式桌面收纳盒】的使用场景图：放在【北欧风格小书桌】上，盒内放着笔、便签、充电线，窗外是白天自然光，画面温暖克制，不出现人物脸部，浅景深，横构图，适合独立站详情页第二屏。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-07 SEO 选题与大纲任务</span>
+    基于目标客群「【25–35 岁租房的城市年轻人】」与三类产品，产出 20 个英文博客选题，并为其中 5 个写出详细大纲。
+    选题要求：围绕【租房收纳难题】这类真实搜索意图，例如「小空间如何收纳」「搬家时怎么保护物品」。不要写品牌自夸内容。
+    每个选题标注：目标关键词、搜索意图（信息型 / 比较型 / 交易型）、预计字数。
+    5 份大纲需含 H1 / H2 结构与每节要点。
+    做完的标准：20 个选题 + 5 份大纲全部产出，每个选题都有目标关键词。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-08 长文初稿任务</span>
+    按已确认的 5 份大纲各写一篇 900–1200 词的英文博客初稿。
+    要求：开头 2 句直击读者痛点；正文用小标题分段；结尾给一个自然的下一步（引导到对应产品页，不要硬推销）。
+    约束：不使用未经确认的产品参数；不承诺效果。
+    做完的标准：5 篇初稿产出，每篇含 H1 / H2 结构，目标关键词自然出现。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-09 社媒内容日历任务</span>
+    为接下来 30 天产出英文社媒内容日历。每天一条，含：日期、平台（Instagram / Pinterest / TikTok 择一）、内容类型（图文 / 短视频脚本 / 清单）、一句话文案、配图建议。
+    内容主题要覆盖：收纳技巧、租房场景、产品细节、用户常见问题。
+    不要出现「限时抢购」这类促销话术超过 3 条。
+    做完的标准：30 条齐全，每条都有可执行的文案与配图建议。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-10 邮件序列草稿任务</span>
+    为新订阅用户设计 5 封英文欢迎邮件（第 0 / 2 / 5 / 9 / 14 天发送）。
+    主题分别为：品牌欢迎与承诺；租房收纳痛点与选品逻辑；单品深度介绍（【折叠桌面收纳盒】）；真实使用场景；温和的复购引导。
+    每封含：主题行、预览文字、正文（150–250 词）、一个 CTA 按钮文案。
+    约束：语气理性克制；不夸大；不承诺时效与退款条件；所有内容标「待审核」。
+    做完的标准：5 封全部产出草稿，无未确认参数、无未确认承诺。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-11 邮件审批话术（人工节点）</span>
+    请把这 5 封邮件与公司级知识库里的「品牌调性」和「禁用词」逐条对照，列出所有不符合的地方，并给出改法。
+    另外单独核对：有没有承诺发货时效、有没有承诺退款条件、有没有使用未经确认的产品参数。
+    只列问题，不要重写全文。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-12 客户问答知识库整理任务</span>
+    把项目知识库中与「产品尺寸 / 材质 / 使用与保养 / 退换货」相关的文档，整理成一个独立的「客户问答资料库」。
+    整理要求：只保留可以对外公开的内容；凡是涉及成本、供应商、内部报价的内容，<strong>一律不要</strong>放入。
+    输出一份清单，列出：放入了哪些文档、排除了哪些文档、排除原因。
+    做完的标准：清单产出，且排除清单里明确包含所有成本类文档。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-13 月度复盘提问</span>
+    这是【NestKeeper】项目的第【1】个月。请基于本月的经营日报、计费明细、验收记录、客户页面日志，回答四个问题：
+    1）本月花的钱里，哪一项最不值？依据是什么？
+    2）本月返工最多的任务是什么？根因是需求没写清，还是能力不足？
+    3）客户页面被问了哪些问题？有没有答不出来的？
+    4）如果下个月只能改一件事，你建议改哪一件？给出理由和验证指标。
+    只给结论和依据，不要复述数字。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-14 返工率排查提问</span>
+    本月验收记录里「返工」结论占比偏高。请把返工的任务按「原因」归类（需求描述不清 / 参数缺失 / 输出格式不符 / 能力不足），并指出哪一类占比最高。
+    对占比最高的一类，给出 3 条可以写进任务描述的改进模板。
+    不要泛泛地建议「提高质量」。
+
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">C-15 扩编决策提问</span>
+    【NestKeeper】项目当前处在【起步期】。请基于任务队列长度、客户页面咨询量、AI 产出质量评分、预算消耗率四项数据，判断现在更该加【营销 Agent】还是【客服 Agent】。
+    给出：推荐哪一个、依据的三条数据、预计每月成本变化、如果判断错误会有什么代价。
+    不要给「都加」这种答案。
+
+  </div>
+
+  <h2>附录 D · 成本明细示例表（起步期一个月）</h2>
+
+  <p>下表是「一个人 + 1 个项目，起步期」的<strong>示例测算</strong>，用来帮你建立量级感。它<strong>不是账单，也不是承诺</strong>；真实的钱请分别看：公司账本（真实资金）、计费明细（项目 AI 花费）、项目账本（项目收支）。三者口径不同，不要相加。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>成本项</th><th>假设</th><th>月估算（示例）</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>AI token（模型调用）</td><td>每天若干轮任务，含知识库检索与独立验收</td><td>¥60–200</td><td>单价：输入 1 元/M、输出 2 元/M、缓存读 0.02 元/M</td></tr>
+      <tr><td>云服务器（项目实例）</td><td>1 台最小规格常驻</td><td>¥30–80</td><td>规格不同差异大；起步期用最小档</td></tr>
+      <tr><td>媒体生成（图片 / 视频）</td><td>12 张产品图，视频偶尔</td><td>¥0–100</td><td>视频显著更贵；未定价档位显示「待定价」不折算</td></tr>
+      <tr><td>第三方接口 / 连接器</td><td>起步期多数用不上</td><td>¥0–50</td><td>配了外部系统才产生</td></tr>
+      <tr><td>人工介入</td><td>你自己处理人工节点</td><td>时间成本</td><td>不是系统扣费，但别忘了它的机会成本</td></tr>
+      <tr><td><strong>合计</strong></td><td>起步期一人一项目</td><td><strong>约 ¥90–430</strong></td><td>对照组织四阶段「起步期 ~$10–30」的估算，量级一致</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">三个数字别搞混</span>
+    <p><strong>公司账本</strong>：你真金白银的账户（充值、AI 算力费、云服务器费）。<strong>计费明细</strong>：这个项目 AI 花了多少（含按文本长度估算的兜底计费，非精确账单）。<strong>项目账本</strong>：这条业务线的经营核算（收入、支出、预算消耗）。预算熔断看的是计费明细那条线。</p>
+  </div>
+
+  <h2>附录 E · 三个月后的账本长什么样（示例）</h2>
+
+  <p>下面的数字<strong>全部是示例</strong>，用来演示「一个起步期项目三个月的投入产出大概长什么样」，以及每一项该怎么读。真实情况因人而异，可能好得多，也可能差得多。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead><tr><th>项目</th><th>第 1 个月</th><th>第 2 个月</th><th>第 3 个月</th><th>三个月累计</th></tr></thead>
+    <tbody>
+      <tr><td>AI token 花费</td><td>¥180</td><td>¥240</td><td>¥210</td><td>¥630</td></tr>
+      <tr><td>云服务器</td><td>¥40</td><td>¥40</td><td>¥40</td><td>¥120</td></tr>
+      <tr><td>媒体生成</td><td>¥60</td><td>¥90</td><td>¥40</td><td>¥190</td></tr>
+      <tr><td><strong>成本合计</strong></td><td><strong>¥280</strong></td><td><strong>¥370</strong></td><td><strong>¥290</strong></td><td><strong>¥940</strong></td></tr>
+      <tr><td>项目收入</td><td>¥0</td><td>¥180</td><td>¥520</td><td>¥700</td></tr>
+      <tr><td><strong>单月净收入</strong></td><td><strong>-¥280</strong></td><td><strong>-¥190</strong></td><td><strong>+¥230</strong></td><td><strong>-¥240</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>这张表怎么读：</p>
+
+  <ul>
+    <li><strong>前两个月是纯投入，这是正常的。</strong>建站、内容、知识库这些是「资产」，不是当月开销。看到单月净收入是负数，先别慌，看它是不是在收窄。</li>
+    <li><strong>第 3 个月单月净收入转正是关键信号</strong>——它说明「内容 → 流量 → 咨询 → 成交」这条链路第一次跑通了。这个信号比「累计是否回本」重要得多。</li>
+    <li><strong>三个月累计仍然为负（示例里是 -¥240）</strong>。这才是起步期的真实样子：先投入，再收。任何告诉你「第一个月就赚钱」的说法，你都要警惕。</li>
+    <li><strong>看收入别只看总额，要看来源。</strong>去「阿米巴核算」看岗位级核算，能知道你赚的钱主要是哪类活儿带来的——是 SEO 内容引来的，还是邮件序列引来的。这决定了你下个月该给谁加权重。</li>
+    <li><strong>媒体生成的花费波动最大</strong>（示例里 60 / 90 / 40）。一旦做了视频，这项会明显跳升，记得单独盯它。</li>
+  </ul>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">最后再说一次</span>
+    <p>上表是<strong>为了说明「怎么读账本」而编的示例</strong>。它既不是这个系统的能力上限，也不是你照做就能得到的结果。真实的数字，永远以你自己界面上的「公司账本 / 项目账本 / 计费明细」为准。</p>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

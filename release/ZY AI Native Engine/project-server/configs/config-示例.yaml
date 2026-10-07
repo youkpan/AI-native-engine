@@ -1,0 +1,230 @@
+# 项目服务器本地开发配置
+# 生产环境请使用环境变量覆盖敏感字段（PS_PLATFORM_PROJECT_KEY、PS_PLATFORM_HMAC_SECRET 等）
+
+server:
+  port: 8090
+  read_timeout: 30s
+  # 1200s：LLM 流式输出（plan/chat 对齐对话等）长连接传输，write_timeout 过短会在
+  # 输出中途强制切断连接，需按最长单次流式调用放宽。
+  write_timeout: 1200s
+  shutdown_timeout: 10s
+
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: "CHANGE_ME"                 # 数据库密码
+  name: project_server
+  ssl_mode: disable
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: 1h
+
+platform:
+  # 大平台回调地址（心跳上报）
+  callback_url: "http://localhost:18000/api/v1/heartbeat"
+  # 项目ID（由大平台分配）——多项目宿主模式下必须置空（FIX-012 §3.2 validate 三分支）
+  # 战役 P0 重启窗 2026-09-24：本地测试环境启用宿主多项目模式（fb4cdf9）
+  project_id: ""
+  # 多项目宿主模式开关（env: PS_PLATFORM_MULTI_PROJECT）
+  multi_project: true
+  # 宿主托管项目数上限（env: PS_PLATFORM_MAX_HOSTED_PROJECTS；默认 8）
+  # W4 修复波 3 本地测试档调整 8 → 12：战役 grant active 已顶到 8/8，
+  # 第 9 个自挂项目会在 grant push 处失败（C6-D1 §6.1），修复批复跑冷启动
+  # 旅程需要再自挂新项目（lts_c6b_*）⇒ 抬高到 12。仅本地测试档，不改默认值/示例档；
+  # **需重启 project-server 才生效**（config 只在启动时读）。
+  max_hosted_projects: 12
+  # 项目密钥（由大平台生成，部署时注入）
+  project_key: "change-me-injected-at-deploy"
+  # HMAC 签名密钥
+  hmac_secret: "xxxxxxxxxxxxxxxxchangehere"
+  # 心跳上报间隔
+  heartbeat_interval: 30s
+  # 平台真实账本 token 计费上报（ISSUE-W4-10 波 2 作用域收口）
+  # 地址留空 = 上报器不启动 ⇒ 平台 project_budgets.used_amount 恒 0、AI 算力费不进真实账本。
+  # 本地测试宿主启用上报，但**必须**配下方白名单：本机 grants 里含历史生产项目 34
+  # （未上报存量数百条），一旦无作用域开报即把 34 的历史消耗写进平台真实账本并扣 owner 余额。
+  billing_report_url: "http://localhost:18000/api/v1/billing/report"
+  billing_report_interval: 5m
+  # 上报项目作用域（env: PS_PLATFORM_BILLING_REPORT_PROJECTS，逗号分隔）
+  # 空 = 全部 active grants 逐项目上报（生产默认）；非空 = 清单外项目一条不发。
+  # 战役口径「仅 lts 增量」：新项目要入账需显式加进来（宁可不报，也不越范围写真实账本）。
+  billing_report_projects:
+    - "1045"
+    - "1108"
+  # 请求时间窗口（防重放攻击）：15m 放大，容忍并发同秒请求与两端时钟偏差
+  replay_window: 15m
+  # 边缘客户端内部访问令牌（edge-client config server.token 对应值；未配置时 /edge/upload 拒绝）
+  edge_token: "edge-zy-instance-34-dev-token"
+
+project:
+  name: "示例项目"
+  company: "示例公司"
+  description: "项目描述"
+  server_path: "/opt/project-server"
+
+cors:
+  allow_origins:
+    - "http://localhost:3000"
+    - "http://localhost:5173"
+    - "http://localhost:18000"
+
+log:
+  level: debug
+  file: "./logs/project-server.log"
+  max_size: 100
+  max_backups: 7
+  max_age: 30
+  compress: true
+
+# LLM 模型路由网关 (Story 3-1)
+llm:
+  router:
+    circuit_breaker_threshold: 5        # 连续失败次数阈值，触发熔断
+    circuit_breaker_recovery: 60s       # 熔断恢复时间
+    max_tokens_per_call: 16384          # 单次调用最大 token 数
+    health_check_interval: 5m           # 健康检查间隔
+
+  # DeepSeek 配置（主模型，支持思考模式）
+  deepseek:
+    api_key: "CHANGE_ME"                # 生产通过环境变量 PS_LLM_DEEPSEEK_API_KEY 注入
+    base_url: "https://api.deepseek.com"
+    model: "deepseek-v4-flash"
+    weight: 10                          # 路由权重
+    input_cost: 0.002                   # 元/千token（输入）
+    output_cost: 0.008                  # 元/千token（输出）
+    max_tokens: 64192
+    request_timeout: 1200s
+
+  # GLM 智谱配置（轻量对话模型）
+  glm:
+    api_key: "CHANGE_ME"                # 生产通过环境变量 PS_LLM_GLM_API_KEY 注入
+    base_url: "https://open.bigmodel.cn/api/paas/v4"
+    model: "glm-4-flash"
+    weight: 5                           # 路由权重
+    input_cost: 0.001                   # 元/千token（输入）
+    output_cost: 0.001                  # 元/千token（输出）
+    max_tokens: 8096
+    request_timeout: 1200s
+
+# 知识库 embedding（Story 3-2）
+knowledge:
+  embedding:
+    provider: "dashscope"               # deepseek / glm / dashscope
+    api_key: "CHANGE_ME"                # 阿里云 DashScope，生产用 PS_KNOWLEDGE_EMBEDDING_API_KEY
+    base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    model: "qwen3.7-text-embedding"
+    dim: 1024
+    request_timeout: 60s
+
+# 媒体生成（视频/图像/音乐）
+media:
+  ark:
+    # 火山方舟（Seedream 图像 / Seedance 视频）——默认图像引擎。
+    # API Key 获取：火山方舟控制台 https://console.volcengine.com/ark/region:ark+cn-beijing/apikey（需先开通模型服务）
+    api_key: ""                         # 火山方舟 Ark API Key，也可用环境变量 PS_MEDIA_ARK_API_KEY 注入
+    base_url: "https://ark.cn-beijing.volces.com/api/v3"
+    model: "doubao-seedream-5-0-260128" # Seedream 模型 ID（以账号已开通为准；未开通 5.0 用 doubao-seedream-4-5-251128）
+  openai:
+    api_key: "CHANGE_ME"                # 魔搭 modelscope GPT-Image
+    base_url: "https://api-inference.modelscope.cn/v1"
+    model: "gpt-image-2"                # 图像模型 ID。注意：modelscope 图像生成仅支持异步接口且无 gpt-image-2，当前该端点不可用；gpt 引擎需配真实 OpenAI key 方可用，图像生成请用 seedream 引擎
+  mureka:
+    api_key: ""                                                   # 待配（音乐生成）
+    base_url: "https://api.mureka.cn"
+  # 媒体单价（元/单位）——出厂参考价，用户可在「媒体中心 → 价目设置」覆盖（覆盖值入库）。
+  # 未命中的档位不折算（记 0 元并标记「待定价」，不谎报）。
+  pricing:
+    image:                              # 元/张，按输出尺寸最大边归一
+      1K: 0.20
+      2K: 0.22
+      4K: 0.30
+    video:                              # 元/条，<分辨率>_<时长档>（le5=≤5s，gt5=>5s）；分辨率与接口白名单一致（480p/720p）
+      480p_le5: 2.20
+      480p_gt5: 4.50
+      720p_le5: 5.30
+      720p_gt5: 10.50
+    music:                              # 元/首
+      per_track: 0.35
+
+# P0-06: Playwright 浏览器自动化工具
+browser:
+  enabled: false                        # 是否启用浏览器工具（生产环境按需开启）
+  timeout_sec: 30                       # 默认超时秒数
+  max_concurrent: 3                     # 最大并发页面数
+  domain_whitelist: []                  # 允许访问的域名白名单（空=不限，生产环境强烈建议配置）
+
+# Web 搜索（metaso 中文搜索 + Serper Google 搜索）
+web_search:
+  provider: metaso                      # 默认 provider: metaso / serper / serpapi / bing / custom
+  max_results: 5
+  metaso:
+    api_key: "CHANGE_ME"                # 生产用环境变量 PS_WEB_SEARCH_METASO_API_KEY 注入
+    base_url: "https://metaso.cn/api/v1"
+    scope: webpage
+    size: 10
+  serper:
+    api_key: ""                         # 待配，生产用 PS_WEB_SEARCH_SERPER_API_KEY
+    base_url: "https://google.serper.dev"
+    gl: us
+    hl: en
+    num: 10
+
+# 事件驱动 Agent 系统
+event:
+  batch_size: 20                        # 事件批量处理数量
+  flush_interval: 30s                   # 批量拉取间隔
+
+# Agent 定时调度器
+scheduler:
+  enabled: true                         # 是否启用 Cron 调度器
+
+# 项目账本 / AI 取数看板
+ledger:
+  # AI 生成 SQL 的单条语句执行超时（自然语言取数）。<=0 回落缺省 8s；
+  # 环境变量 PS_AI_SQL_TIMEOUT_MS（毫秒）优先级更高。
+  ai_sql_timeout: 8s
+
+# 通信平台连接器配置（webhook 接收 + 消息发送）
+# 保留：运行时连接器以 POST /connectors 注册为准（配置落库并 AES-GCM 加密），
+# 本段当前未被加载（internal/config 无对应字段），仅作字段速查。
+connectors:
+  # 飞书
+  feishu:
+    app_id: ""
+    app_secret: ""
+    verify_token: ""
+    encrypt_key: ""
+  # Telegram
+  telegram:
+    bot_token: ""
+  # Slack
+  slack:
+    bot_token: ""
+    signing_secret: ""
+  # 钉钉
+  dingtalk:
+    webhook_url: ""
+    secret: ""
+    keyword: ""
+  # Discord
+  discord:
+    bot_token: ""
+    application_id: ""
+
+# 通知外发（FIX-001）：auto-ops / flow 告警与人工节点通知的通道分发参数。
+# 站内 notifications 表留底不受本段控制（永远写）；enabled=false 即「只留底不外发」。
+# 外发目标不在这里配，而在连接器注册的 config 里：email 配 notify_to、
+# telegram 配 notify_chat_id、feishu 配 notify_receive_id(+notify_receive_id_type)。
+# 所有项可用环境变量覆盖：PS_NOTIFY_ENABLED / PS_NOTIFY_QUEUE_SIZE /
+# PS_NOTIFY_MIN_INTERVAL / PS_NOTIFY_DAILY_LIMIT_PER_CHANNEL / PS_NOTIFY_MAX_RETRY /
+# PS_NOTIFY_DEDUP_WINDOW（时长项支持 "90s" 或毫秒整数）。
+notify:
+  enabled: true
+  queue_size: 256                       # 异步队列，满则丢外发（不丢站内）
+  min_interval: 2s                      # 单 worker 相邻两次外发的最小间隔
+  daily_limit_per_channel: 50           # 单通道单日外发上限（防告警风暴打爆 SMTP）
+  max_retry: 3                          # 即时失败重试次数；pending_review 不算失败
+  dedup_window: 5m                      # 相同标题+正文在窗口内只发一次
+
+

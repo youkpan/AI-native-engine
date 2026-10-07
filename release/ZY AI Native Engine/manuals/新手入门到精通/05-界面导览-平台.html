@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第05章 界面导览（上）：平台侧页面 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 05 章 · 第二步：看懂界面</div>
+    <h1>第05章 界面导览（上）：平台侧页面</h1>
+    <p class="zy-lead">登录以后，你面对的是十来个一级页面和一堆按钮。这一章不讲原理，只做一件事：带你一个页面一个页面地认门——打开哪一页、屏幕上写着什么、点下去会发生什么。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 22 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：10 个一级页面 / 顶栏 / 超管后台</span>
+    </div>
+  </header>
+
+  <h3>你将学会</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>说清平台界面由哪三块拼成：顶栏、侧边栏、内容区</span></li>
+    <li><input type="checkbox"><span>认全 10 个一级页面，知道每一个是干什么的、你多久来一次</span></li>
+    <li><input type="checkbox"><span>看懂顶栏那个「公司切换器」为什么重要，它一变会牵动哪些页面</span></li>
+    <li><input type="checkbox"><span>照着真实按钮文案找到动作入口：建公司、建项目、充值、看账、生成媒体、改设置</span></li>
+    <li><input type="checkbox"><span>知道超管后台单独长什么样、为什么你的账号里看不到它</span></li>
+  </ul>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">这一章和下一章怎么分工</span>
+    <p>这本手册把「界面导览」拆成了上下两章。你在平台首页登录后看到的这些页面（数据面板、公司管理、项目管理、账本、设置……）全部属于<strong>平台侧</strong>，是本章的范围；而你点进某个具体项目以后，左侧多出来的那一截菜单（智能体、自动运营、连接器……）属于<strong>项目内页面</strong>，是<a href="06-界面导览-项目.html">第 06 章</a>的范围。两章合起来，才是完整的产品地图。</p>
+  </div>
+
+  <h2>一、平台侧页面全景：一张地图</h2>
+
+  <p>先忘掉细节。任何一个平台侧页面，屏幕都被切成三块：上面一条<strong>顶栏</strong>，左边一条<strong>侧边栏</strong>，中间一大片<strong>内容区</strong>。你所有的操作都发生在这三块里。</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>顶栏</b>折叠按钮、公司切换器、通知铃铛、主题切换、用户菜单</div>
+    <div class="zy-flow-arrow">＋</div>
+    <div class="zy-flow-node"><b>侧边栏</b>一级菜单（9 项常显 + 超管后台），进项目后多出 6 个分组</div>
+    <div class="zy-flow-arrow">＋</div>
+    <div class="zy-flow-node ok"><b>内容区</b>当前页面本体：标题、按钮、表格、弹窗</div>
+  </div>
+
+  <p>三块里只有中间那块会随页面切换而变。顶栏和侧边栏从你登录那一刻起就在，是你「不迷路」的两个锚点——不知道自己在哪时，先看侧边栏哪一项被高亮。</p>
+
+  <h3>10 个一级页面，一眼认全</h3>
+
+  <p>侧边栏从上到下的常显项固定在 9 个，加上只有超管能看到的第 10 个，一共 10 个一级页面。先混个脸熟，下面几节再逐个展开。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>侧边栏文案</th>
+          <th>路径</th>
+          <th>它是干什么的</th>
+          <th>你多久来一次</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="zy-nowrap"><strong>数据面板</strong></td>
+          <td class="zy-nowrap">/dashboard</td>
+          <td>登录后的落地页，看项目数、预算消耗、任务状态、最近活动。</td>
+          <td>每次登录先扫一眼</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>公司管理</strong></td>
+          <td class="zy-nowrap">/company</td>
+          <td>建公司、看组织架构、管成员、发邀请、改公司设置。</td>
+          <td>建公司时集中来，之后偶尔</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>项目管理</strong></td>
+          <td class="zy-nowrap">/project</td>
+          <td>建项目、看项目卡片、做连接测试，是进各个项目的总入口。</td>
+          <td>几乎每次都要路过</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>知识库</strong></td>
+          <td class="zy-nowrap">/kb</td>
+          <td>分层知识库（公司级 → 项目级）、上传文档、RAG 检索。</td>
+          <td>导资料时集中来</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>AI 对话</strong></td>
+          <td class="zy-nowrap">/chat</td>
+          <td>平台级的多轮对话，可以上传文件、看思维过程和工具调用。</td>
+          <td>按需</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>公司账本</strong></td>
+          <td class="zy-nowrap">/ledger</td>
+          <td>真金白银的账户流水：充值、消费、预警阈值。</td>
+          <td>充值 / 对账时来</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>媒体生成</strong></td>
+          <td class="zy-nowrap">/media</td>
+          <td>生成视频 / 图像 / 歌曲，看任务记录与价目设置。</td>
+          <td>做素材时来</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>通知中心</strong></td>
+          <td class="zy-nowrap">/notifications</td>
+          <td>系统推给你的所有消息：预算预警、审批请求、任务完成……</td>
+          <td>每天扫一遍</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>设置</strong></td>
+          <td class="zy-nowrap">/settings</td>
+          <td>个人设置、Agent 优化、功能管理、授权管理。</td>
+          <td>配置期集中来</td>
+        </tr>
+        <tr>
+          <td class="zy-nowrap"><strong>超管后台</strong><br><span class="zy-badge purple">仅超管</span></td>
+          <td class="zy-nowrap">/admin/dashboard</td>
+          <td>全局看板、用户管理、项目穿透、实例监控、Token 统计、Prompt 审计、治理审计。</td>
+          <td>只有平台运营方用</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">「超管后台」这一项，你的账号里大概率没有</span>
+    <p>侧边栏最下面的「超管后台」只对<strong>超级管理员</strong>显示。如果你是普通企业用户，看不到它是正常的，不是你的账号出了问题。这一章的第十节会讲它长什么样，你可以当背景知识看，也可以直接跳过。</p>
+  </div>
+
+  <h3>为什么侧边栏会「时多时少」</h3>
+
+  <p>很多新手第一次遇到这种情况会慌：刚登录时侧边栏只有十来项，点进一个项目之后，突然从「项目管理」下面冒出来 6 个分组。这不是 bug，而是设计：</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>没进项目时（平台视角）</h4>
+      <p>侧边栏只显示 9 个一级页面 + 超管后台。这时的你站在「公司」这一层，管的是组织、项目清单、账本、设置。</p>
+    </div>
+    <div class="no">
+      <h4>进了某个项目时（项目视角）</h4>
+      <p>在「项目管理」和「知识库」之间会插入 6 个分组菜单（建项与定义、组织与运营、接入与执行、研究与获客、治理与资源、运维与报告），整条侧边栏一下子长出一大截。</p>
+    </div>
+  </div>
+
+  <p>判断「我现在在哪一层」有一个特别简单的办法：<strong>看侧边栏有没有那 6 个分组</strong>。有，说明你已经在某个项目里了，你接下来的操作只影响这一个项目；没有，说明你还在平台层。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：这 6 个分组菜单，什么时候才会出现</summary>
+    <div class="zy-acc-body">
+      <p>它们出现的条件是当前网址里带着项目号——也就是形如 <code>/project/123/...</code> 这样的路径。你从「项目管理」点进一个具体项目时，网址就会带上这个项目号，侧边栏随之展开。返回平台层（比如点「数据面板」）后，网址里的项目号消失，那 6 个分组也就收起来了。</p>
+      <p>另外有一个细节：当你离开项目、回到平台层时，系统会顺手把「当前选中项目」清空，避免你在账本页看到的还是上一个项目的数据。所以从项目里退出来之后，账本等页面会自动切回公司视角，这是对的，不是丢数据。</p>
+    </div>
+  </details>
+
+  <h2>二、全局框架：顶栏、侧边栏与面包屑</h2>
+
+  <p>这一节讲三块里「永远在」的部分。它们不随页面变，但每个都跟你的日常操作强相关，尤其是公司切换器。</p>
+
+  <h3>顶栏，从左到右</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>控件</th>
+          <th>界面文案</th>
+          <th>点下去会怎样</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>折叠按钮</td>
+          <td>图标（无文字），悬停提示折叠 / 展开</td>
+          <td>把左侧菜单收成只有图标的一条窄栏，给内容区腾地方。状态会记住，刷新后还是收着的。</td>
+        </tr>
+        <tr>
+          <td><strong>公司切换器</strong></td>
+          <td>占位符 <span class="zy-field">选择公司</span>，下拉第一项 <span class="zy-btn ghost">全部公司</span></td>
+          <td>切换当前公司。见下一节，这是本章最重要的一个控件。</td>
+        </tr>
+        <tr>
+          <td>通知铃铛</td>
+          <td>铃铛图标，有未读时带角标</td>
+          <td>弹出一个小面板，标题「通知」，里面有 <span class="zy-btn ghost">全部已读</span>（有未读时才出现）和 <span class="zy-btn ghost">查看全部</span>；没消息时显示 <span class="zy-field">暂无通知</span>。</td>
+        </tr>
+        <tr>
+          <td>主题切换</td>
+          <td>悬停提示 <span class="zy-field">切换暗色</span> / <span class="zy-field">切换亮色</span></td>
+          <td>在亮色和暗色主题间来回切。选择会记住，下次打开还是这个主题。</td>
+        </tr>
+        <tr>
+          <td><strong>用户菜单</strong></td>
+          <td>头像 / 用户名</td>
+          <td>下拉四项：<strong>通知中心</strong>、<strong>个人中心</strong>、<strong>设置</strong>、<strong>退出登录</strong>（这一项与上面隔了一条分隔线，防止误点）。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>通知面板里的时间显示很贴心：刚发生的显示「刚刚」，最近一小时内显示「N 分钟前」，当天显示「N 小时前」，更早显示「N 天前」，再早一点就直接显示「月/日」。所以你看一眼就知道哪条是新的。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">铃铛上的未读数会自己刷新</span>
+    <p>未读条数不用你手动刷新，页面会每隔 30 秒自动去查一次。所以你在别的标签页里处理完一条通知，回到这个页面时角标很快就跟上了。</p>
+  </div>
+
+  <h3>公司切换器：全平台最该先搞懂的一个控件</h3>
+
+  <p>这个下拉框决定了「你现在以哪家公司的身份在操作」。它有三个状态，含义完全不同：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card tinted">
+      <h4>全部公司</h4>
+      <p>下拉里的第一项，对应数值 0。选了它，数据面板显示的会是你能看到的<strong>所有公司汇总</strong>。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>某一家具体公司</h4>
+      <p>选了它，知识库、项目管理、功能管理等页面都会以这家公司为范围，新建资源也会挂到它名下。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>还没选（未选择）</h4>
+      <p>首次登录 / 刚清过选择时是空的状态。这时很多页面会提示你「先选公司」，按钮也是灰的。</p>
+    </div>
+  </div>
+
+  <p>它之所以关键，是因为下面这几个页面的「可用性」直接取决于它有没有被选中：</p>
+
+  <ul>
+    <li><strong>知识库</strong>：没选公司时，列表直接显示 <span class="zy-field">请先在顶部选择公司</span>，<span class="zy-btn">新建知识库</span> 也是灰的。</li>
+    <li><strong>项目管理</strong>：没选公司时，顶部挂着一条橙色提示 <span class="zy-field">请先选择或创建一个公司</span>，<span class="zy-btn">新建项目</span> 点不动。</li>
+    <li><strong>公司管理</strong>：后面四个页签（组织架构 / 成员管理 / 成员邀请 / 公司设置）全部变灰，只有「公司列表」可看。</li>
+    <li><strong>设置 → 功能管理</strong>：没选公司时提示 <span class="zy-field">请先在顶部选择公司</span>。</li>
+  </ul>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">换了公司，之前选的「当前项目」会被清掉</span>
+    <p>你在 A 公司里点进了一个项目，此时「当前选中项目」记着这个项目。如果你在顶栏把公司切换到 B 公司，系统会立刻清空这个记录——因为那个项目根本不属于 B 公司，留着它只会让账本之类的页面显示错乱。所以切完公司以后，如果相关页面变回「公司视角」，是正常行为。记住一句话：<strong>换公司等于换上下文，先把公司选对，再进项目。</strong></p>
+  </div>
+
+  <h3>面包屑：你的「来路」指示牌</h3>
+
+  <p>内容区顶部有一行小小的导航，形如「首页 / 公司管理 / ……」，用斜杠分隔。第一项永远固定是<strong>首页</strong>，往后是当前页面所在的路由层级。每一段都可以点，点过去就回到那一层。</p>
+
+  <p>有一个小规矩要知道：进入 <strong>AI 对话</strong> 页时，这行面包屑是<strong>不显示</strong>的。因为对话页是满屏三栏布局，顶部再塞一行导航会挤。这不是坏了。</p>
+
+  <h3>授权横幅：如果你看到红条或黄条</h3>
+
+  <p>在顶栏上方，有时会多出一条横幅，只在授权相关的情况下出现：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>颜色</th>
+          <th>界面原文</th>
+          <th>含义</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="zy-badge red">红</span></td>
+          <td>未激活授权，系统将在 … 后自动关闭</td>
+          <td>还在试用、没激活。倒计时不足 1 分钟时会显示「即将关闭」，请尽快去「设置 → 授权管理」激活。</td>
+        </tr>
+        <tr>
+          <td><span class="zy-badge amber">黄</span></td>
+          <td>网络异常，已按上次激活延期运行至 …</td>
+          <td>离线宽限：系统暂时连不上授权服务器，按上次激活的状态继续跑一段时间，期间功能不受影响。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">看到红条别不当回事</span>
+    <p>红条不是装饰。倒计时走完，系统会自动关闭。处理方法在「设置 → 授权管理」：把授权码填进 <span class="zy-field">请输入授权码</span>，点 <span class="zy-btn">激活</span>。授权码从哪来，问给你开通服务的人。</p>
+  </div>
+
+  <h3>浏览器的标签页标题也是导航</h3>
+
+  <p>每切换一个页面，浏览器标签页上的文字会跟着变成「页面名 - ZY 企业智能引擎」。开着好几个标签页时，扫一眼标签就知道哪个是哪个页面。列表页的标题取自各页面自己的名称，比如「数据面板」「公司管理」「项目账本」，超管页面则会在名字后面缀上「（超管）」三个字。</p>
+
+  <h2>三、数据面板：登录后的第一眼</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 数据面板</div>
+
+  <p>登录成功以后，默认落到这一页。它的定位是「一眼看清全局」，所以内容非常克制，只有四张指标卡 + 两块活动区域。</p>
+
+  <h3>你会看到什么</h3>
+
+  <p>页面顶部是一句欢迎语 <strong>欢迎回来，你的用户名</strong>，下面一行小字说明 <span class="zy-field">这里是你的全局数据面板，后续可自定义展示模块。</span> 注意「后续可自定义」这个说法——说明这个面板未来会开放模块自定义，当前版本是固定布局。</p>
+
+  <p>接着是四张指标卡（四列排开）：</p>
+
+  <div class="zy-grid c4">
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">项目概览</div>
+      <div class="zy-kpi-value">N 个</div>
+      <div class="zy-kpi-hint">你能看到的项目总数</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">预算消耗</div>
+      <div class="zy-kpi-value">N%</div>
+      <div class="zy-kpi-hint">已用预算占总预算的比例</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">任务状态</div>
+      <div class="zy-kpi-value">进行中</div>
+      <div class="zy-kpi-hint">运行中 / 开通中的项目数（口径见附录 D）</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">Agent 执行</div>
+      <div class="zy-kpi-value">N 次</div>
+      <div class="zy-kpi-hint">开通与运维记录的累计条数（口径见附录 D）</div>
+    </div>
+  </div>
+
+  <p>再往下分左右两块：左边是图表卡「项目活动趋势」，右边是列表卡「最近活动」。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>区域</th>
+          <th>加载中显示</th>
+          <th>没有数据时显示</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>项目活动趋势（图表）</td>
+          <td class="zy-nowrap">加载图表数据...</td>
+          <td class="zy-nowrap">暂无活动数据</td>
+        </tr>
+        <tr>
+          <td>最近活动（列表）</td>
+          <td>—</td>
+          <td class="zy-nowrap">暂无项目活动</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">为什么我看到的是三个点或者一片空白</span>
+    <p>新账号没有任何项目时，这两块注定是空的——它们显示的是 <span class="zy-field">暂无活动数据</span> 和 <span class="zy-field">暂无项目活动</span>，这是正常的。等你建了公司、建了项目、项目开始跑任务，图表和列表就会自己长出来。</p>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">如果顶部弹出一句「加载看板数据失败」</span>
+    <p>这是数据没拉回来的兜底文案。多数情况下是网络抖动或后端一时忙，刷新一下页面通常就好。如果连续几次都失败，去看看「通知中心」有没有系统通知，或换个时间再试。</p>
+  </div>
+
+  <h2>四、公司管理：你的组织容器</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 公司管理</div>
+
+  <p>这一页用五个页签把「公司」这件事分成了五块：公司列表、组织架构、成员管理、成员邀请、公司设置。建公司的操作在<a href="02-创建公司.html">第 02 章</a>讲得很细，这里只讲界面怎么认。</p>
+
+  <h3>五个页签</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>页签</th>
+          <th>它在管什么</th>
+          <th>什么时候能用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>公司列表</strong></td>
+          <td>你名下（或有权限看到的）所有公司的清单。</td>
+          <td>永远可用</td>
+        </tr>
+        <tr>
+          <td><strong>组织架构</strong></td>
+          <td>公司内部的部门与层级结构。</td>
+          <td>需先选中公司</td>
+        </tr>
+        <tr>
+          <td><strong>成员管理</strong></td>
+          <td>查看成员、调整角色与权限。</td>
+          <td>需先选中公司</td>
+        </tr>
+        <tr>
+          <td><strong>成员邀请</strong></td>
+          <td>生成邀请、把同事拉进来。</td>
+          <td>需先选中公司</td>
+        </tr>
+        <tr>
+          <td><strong>公司设置</strong></td>
+          <td>公司的基础信息设置。</td>
+          <td>需先选中一家具体公司</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">页签是灰的，点不动？</span>
+    <p>后四个页签（组织架构 / 成员管理 / 成员邀请 / 公司设置）在<strong>没有选中任何一家公司</strong>时是禁用的，视觉上是灰的、点不动。先去「公司列表」点某一行的 <span class="zy-btn ghost">进入</span>，或点这一行的 <span class="zy-btn ghost">设置</span>，选中之后它们就亮了。「公司设置」比另外三个更严格一点——必须选中<strong>一家具体的公司</strong>才解锁。</p>
+  </div>
+
+  <h3>公司列表页长什么样</h3>
+
+  <p>标题区左边写着 <strong>我的公司</strong>，右边一个蓝色按钮 <span class="zy-btn">创建公司</span>。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>列名</th>
+          <th>里面放什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>公司名称</td><td>你建公司时填的名字</td></tr>
+        <tr><td>行业</td><td>公司所属行业</td></tr>
+        <tr><td>描述</td><td>一句话简介，太长会省略，悬停可看全</td></tr>
+        <tr><td>状态</td><td>只有两种：<span class="zy-badge green">正常</span> 或 <span class="zy-badge red">已停用</span></td></tr>
+        <tr><td>操作</td><td>两个文字按钮：<span class="zy-btn ghost">进入</span> 和 <span class="zy-btn ghost">设置</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>如果一家公司都还没建，表格位置会显示 <span class="zy-field">暂无公司，点击右上角创建</span>。这句话本身就是操作指引——它不是让你「去找」创建入口，创建入口就在右上角。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：「进入」和「设置」有什么区别</summary>
+    <div class="zy-acc-body">
+      <p><strong>进入</strong>相当于把这家公司「选中」，接下来的页面都以它为范围，并把你带到这家公司的详情上下文里；<strong>设置</strong>则直接把你送到「公司设置」那个页签，方便改基础信息。</p>
+      <p>如果你只是想把顶栏的公司切换器切到某一家，用顶栏那个下拉最快，不必在这一页绕。两者效果一致，改的都是「当前公司」这个上下文。</p>
+    </div>
+  </details>
+
+  <h2>五、项目管理：进入每个项目的总入口</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 项目管理</div>
+
+  <p>这是你使用最频繁的一个页面。它是「公司 → 项目」的最后一跳，也是本章和<a href="06-界面导览-项目.html">第 06 章</a>之间的那道门。</p>
+
+  <h3>页面结构</h3>
+
+  <p>标题区左边是 <strong>项目管理</strong>，紧跟一枚小标签显示当前公司名（这样你一眼就知道自己正在哪家公司下建项目）；右边是 <span class="zy-btn">新建项目</span> 按钮，它旁边紧跟一个提示。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>选了公司</h4>
+      <p><span class="zy-btn">新建项目</span> 亮着，点下去弹出「新建项目向导」，走三步：基本信息 → 预算设定 → 确认提交。每个字段怎么填、填错有什么后果，见<a href="03-创建项目.html">第 03 章</a>。</p>
+    </div>
+    <div class="no">
+      <h4>没选公司</h4>
+      <p>页面顶部挂着橙色告警 <span class="zy-field">请先选择或创建一个公司</span>，<span class="zy-btn">新建项目</span> 是灰的。项目必须挂在公司下面，所以先去顶栏选一家公司。</p>
+    </div>
+  </div>
+
+  <h3>项目卡片上有什么</h3>
+
+  <p>每个项目展示为一张卡片，卡片上能看到：</p>
+
+  <ul>
+    <li><strong>项目名称</strong>——点击进入这个项目。</li>
+    <li><strong>项目描述</strong>——就是建项目时填的那句。没填的话这里显示 <span class="zy-field">暂无描述</span>。</li>
+    <li><strong>项目类型 / 行业 / 创建时间</strong>——用来快速区分不同项目。</li>
+    <li><span class="zy-btn ghost">连接测试</span>——这是个很实用的小按钮，见下。</li>
+  </ul>
+
+  <p>如果一个项目都还没有，卡片区显示 <span class="zy-field">暂无项目，点击「新建项目」开始</span>。</p>
+
+  <h3>「连接测试」按钮：点下去会告诉你三件事</h3>
+
+  <p>这个按钮用来验证「平台能不能连上这个项目背后的服务器」。它有三种结果，文案各不相同，看懂这三种你就知道问题出在哪一层：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>结果</th>
+          <th>界面提示</th>
+          <th>说明什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="zy-badge green">全通</span></td>
+          <td>连接成功：IP:端口，HMAC 验证通过（Nms）</td>
+          <td>网络能通，签名验证也过了，这台服务器完全正常。括号里是往返耗时，越小越好。</td>
+        </tr>
+        <tr>
+          <td><span class="zy-badge amber">半通</span></td>
+          <td>连通但 HMAC 验证失败：错误信息</td>
+          <td>网络能连到那台机器，但双方密钥对不上。通常是实例密钥不匹配，需要重新核对密钥，不是网络故障。</td>
+        </tr>
+        <tr>
+          <td><span class="zy-badge red">不通</span></td>
+          <td>连接失败：错误信息</td>
+          <td>连都连不上。可能是服务器没开、地址填错、端口不通。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">HMAC 是什么，为什么要测它</span>
+    <p><strong>HMAC</strong> 是一种「带密钥的签名」机制。平台给项目服务器下指令时，会附上一段用密钥算出来的签名；服务器收到后用自己的密钥验一遍，对得上才执行。这样即使有人截获了指令也伪造不了。「连接测试」把网络连通性和签名验证拆开报，就是为了让你一眼分清「是网不通」还是「是密钥不对」。</p>
+  </div>
+
+  <h2>六、知识库：分层存放你的资料</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 知识库</div>
+
+  <p>知识库用来喂给 AI 资料。它的核心概念是<strong>分层</strong>：公司级的知识放到公司层，所有项目都能用；项目级的知识只归某一个项目；共享知识还能下发给下级。页面标题下面那句 <span class="zy-field">分层知识库（公司级 → 项目级）</span> 点明了这个顺序。</p>
+
+  <h3>两个页签</h3>
+
+  <p>「知识库」页签管资料本身，「RAG 检索」页签用来试查。</p>
+
+  <p>知识库页签右上角有 <span class="zy-btn">新建知识库</span>，同样受公司切换器约束：没选公司时，整个列表显示 <span class="zy-field">请先在顶部选择公司</span>，按钮不可点。列表的列是：<strong>名称 / 类型 / 共享 / 文档数 / 分块数 / 状态 / 创建时间 / 操作</strong>，操作里有两个文字按钮 <span class="zy-btn ghost">文档管理</span> 和 <span class="zy-btn ghost">删除</span>。</p>
+
+  <p>点 <span class="zy-btn">新建知识库</span> 弹出对话框 <strong>新建知识库</strong>，字段如下：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>字段</th>
+          <th>提示文字</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>名称</td>
+          <td><span class="zy-field">如：产品知识库 / 公司制度库</span></td>
+          <td>给知识库起个名字，最长 255 字。</td>
+        </tr>
+        <tr>
+          <td>描述</td>
+          <td><span class="zy-field">知识库用途说明（可选）</span></td>
+          <td>选填，写清这个库放什么，以后好找。</td>
+        </tr>
+        <tr>
+          <td>类型</td>
+          <td>三个选项：公司级 / 项目级 / 共享</td>
+          <td>决定谁能用这个库。</td>
+        </tr>
+        <tr>
+          <td>所属项目</td>
+          <td>下拉，占位符 <span class="zy-field">选择项目</span></td>
+          <td>只有选了「项目级」时才需要（也才会显示）。</td>
+        </tr>
+        <tr>
+          <td>共享下级</td>
+          <td>开关，旁边写着「开启后下级项目可检索到本知识库」</td>
+          <td>打开后，下面的项目也能查到这份资料。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>底部是 <span class="zy-btn ghost">取消</span> 和 <span class="zy-btn">创建</span>。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">类型选错了很麻烦</span>
+    <p>「公司级」是所有项目共享，「项目级」只给一个项目用，选错了会出现「别的项目查不到这份资料」或「不该看到的项目也看到了」。第一遍建库时就把类型想清楚。</p>
+  </div>
+
+  <h3>RAG 检索页签</h3>
+
+  <p>这个页签的作用是「拿一句话去知识库里试查一下」，看看你的资料有没有被 AI 检索到、相似度多高。</p>
+
+  <ul>
+    <li>输入框占位符 <span class="zy-field">输入检索关键词，如：产品定位、目标客户、营销策略</span>。</li>
+    <li>旁边一个条数下拉，可选 Top 5 / 10 / 20。</li>
+    <li>按钮 <span class="zy-btn">检索</span>。</li>
+    <li>查不到内容时显示 <span class="zy-field">未检索到相关内容</span>。</li>
+    <li>每条结果上显示 <strong>相似度 N%</strong>，数字越大表示越相关。</li>
+  </ul>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">RAG 到底是什么，为什么值得先来这里试一下</span>
+    <p><strong>RAG</strong> 就是「让 AI 先翻你的资料、再回答」。它在回答前会拿你的问题去知识库里找最相关的几段文字，把它们一起交给模型。所以如果你发现 AI「答得不对」，第一步不是怪模型，而是来这个页面试一下：<strong>你的问题能不能在这里查出相似度高的结果</strong>。查不到，说明是资料没进库或标题不对；查得到但答得还差，才轮到调提问方式。</p>
+  </div>
+
+  <h3>文档管理抽屉</h3>
+
+  <p>在知识库列表里点某一行的 <span class="zy-btn ghost">文档管理</span>，右侧滑出一个抽屉，标题是 <strong>文档管理 · 知识库名字</strong>。抽屉里有 <span class="zy-btn">上传文档</span> 和 <span class="zy-btn ghost">刷新</span> 两个按钮，右上角可关闭。</p>
+
+  <p>上传支持的文件类型是 <strong>.pdf / .txt / .md / .markdown / .docx / .xlsx</strong>。文档列表的列是：<strong>文件名 / 类型 / 状态 / 分块数 / 大小 / 上传时间 / 操作</strong>，操作里是 <span class="zy-btn ghost">处理</span>。一篇文档都没传时显示 <span class="zy-field">暂无文档，点击「上传文档」添加</span>。</p>
+
+  <p>文档的状态是分阶段的，含义如下（这组状态在「知识库页签的库状态」和「文档状态」上是两套，别混）：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>文档状态（中文）</th>
+          <th>含义</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>待处理</td><td>文件传上来了，还没开始解析</td></tr>
+        <tr><td>解析中</td><td>正在把文件里的文字抽出来</td></tr>
+        <tr><td>已解析</td><td>文字抽完了</td></tr>
+        <tr><td>分块中</td><td>正在切成一小段一小段</td></tr>
+        <tr><td>向量化中</td><td>正在把每一段转成能「按意思搜索」的向量</td></tr>
+        <tr><td>就绪</td><td>全部完成，可以参与检索了</td></tr>
+        <tr><td>失败</td><td>中途出错，需要重新处理或换文件</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>知识库本身的状态则只有三个：<strong>正常 / 索引中 / 错误</strong>。资料导入的完整流程（包括边缘客户端怎么扫你电脑里的文件），在<a href="07-知识与资料导入.html">第 07 章</a>。</p>
+
+  <h2>七、AI 对话：平台级的多轮问答</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> AI 对话</div>
+
+  <p>这一页是满屏的三栏布局：左边是对话列表，中间是消息区，底部是输入区。顶部没有面包屑（前面讲过，是刻意的）。</p>
+
+  <h3>三种「空白状态」要分清</h3>
+
+  <p>新手在这一页最常见的困惑是「怎么空空如也」。其实有三个不同的空，对应三句不同的提示：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card tinted">
+      <h4>左栏没有对话</h4>
+      <p>显示 <span class="zy-field">暂无对话</span>。点 <span class="zy-btn">新建对话</span> 就有了。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>还没打开任何对话</h4>
+      <p>中间显示 <span class="zy-field">选择或创建一个对话开始</span>，下面配一个 <span class="zy-btn">新建对话</span> 按钮。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>对话开了但还没说话</h4>
+      <p>消息区显示 <span class="zy-field">开始一个新的对话</span>，外加一行提示：输入消息或上传文件开始与 AI 助手交流。</p>
+    </div>
+  </div>
+
+  <h3>左栏：对话列表</h3>
+
+  <ul>
+    <li>顶部 <span class="zy-btn">新建对话</span>，新建的对话默认叫 <strong>新对话</strong>。</li>
+    <li>搜索框占位符 <span class="zy-field">搜索对话...</span>，用来在对话多的时候过滤。</li>
+    <li>每条对话右侧有下拉菜单，两项：<span class="zy-btn ghost">重命名</span> 和 <span class="zy-btn ghost">删除</span>。</li>
+  </ul>
+
+  <p>点重命名会弹出输入框，标题 <strong>重命名对话</strong>，提示语 <span class="zy-field">请输入新的对话名称</span>，改完提示「已重命名」。点删除会先弹确认框：<strong>确定删除这个对话吗？删除后不可恢复。</strong></p>
+
+  <h3>中间：消息区</h3>
+
+  <p>对话顶部显示当前对话的名称，右边挂一枚灰色小标签，显示这个对话的归属范围。<strong>注意：这个标签显示的是原始英文值</strong>（比如 project），不是中文。这是界面上的一个小瑕疵，看到英文别惊讶。</p>
+
+  <p>消息分两种：</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>你发的（右侧）</h4>
+      <p>纯文本。悬停或点按钮有 <span class="zy-btn ghost">复制</span> 和 <span class="zy-btn ghost">删除</span>。</p>
+    </div>
+    <div class="no">
+      <h4>AI 回的（左侧）</h4>
+      <p>内容更丰富：可能有一段可展开的「思维过程」，可能有一串工具调用卡片，然后是正文。正文下方（且状态已结束、有模型名时）会显示一行小字：模型名、耗时（毫秒 / 秒 / 分钟会自适应）、输出 token 数。操作同样是复制和删除。</p>
+    </div>
+  </div>
+
+  <p>工具调用卡片折叠在消息里，展开后能看到两段：<strong>参数</strong> 和 <strong>结果</strong>。卡片头部显示工具名和耗时。「思维过程」是模型在给答案前的推理草稿，默认收起，想看它「怎么想的」时可以展开。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">AI 正在输出时，删除按钮是点不动的</span>
+    <p>这是刻意设计——消息还在流式生成时不允许删除，避免删到一半状态错乱。等它输出完，删除按钮就恢复可用了。</p>
+  </div>
+
+  <p>删除单条消息的确认文案是 <strong>确定删除这条消息吗？删除后不可恢复。</strong></p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">回答失败了？错误会单独成条，不会混进 AI 的话里</span>
+    <p>如果某次回复没成功（网络中断、上游服务异常等），界面上会出现一个<strong>单独的错误块</strong>：标题「<strong>本次回复未成功完成</strong>」，下面一句人话「回复未能完成（可能因网络中断或上游服务异常），请重试；若反复出现，请检查网络或查看实例状态。」。<strong>它不会再伪装成 AI 说的一段话</strong>，所以你不会把报错当成 AI 的回答。</p>
+    <p>错误块下方还有一个可折叠的「<strong>技术详情</strong>」，展开能看到底层返回的原始报错。这主要是给排障用的——日常你按上面那句话重试、或去实例状态看看就行，不必读懂那段英文。</p>
+  </div>
+
+  <h3>底部：输入区</h3>
+
+  <p>输入框占位符 <span class="zy-field">输入消息... (Enter 发送, Shift+Enter 换行)</span>。这条提示很实用：<strong>回车发送，想换行就按住 Shift 再回车</strong>。</p>
+
+  <p>输入框旁边有附件入口，支持的文件类型很长一串：<strong>.doc / .docx / .pdf / .txt / .md / .xlsx / .xls / .ppt / .pptx / .html / .csv / .json</strong>。上传后附件上会显示状态：<strong>已解析 / 解析中... / 解析失败</strong>。上传成功会提示「已上传: 文件名」。</p>
+
+  <p>AI 正在流式输出时，发送区会变成一个红色的 <strong>停止</strong> 按钮，点它可以打断这次生成。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">这里的对话是「平台级」的</span>
+    <p>平台级的 AI 对话和项目里那套「AI 问答」（在项目内，见<a href="06-界面导览-项目.html">第 06 章</a>）不是同一件事。平台级对话走平台自己的通道，除非你把对话显式挂到某个项目上，否则它不会去调那个项目的服务器、也不消耗那个项目的预算与知识库。日常「问点什么」用它，「围绕项目干活」用项目内的 AI 问答。</p>
+  </div>
+
+  <h2>八、公司账本：真金白银的流水</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 公司账本</div>
+
+  <p>菜单里叫「公司账本」，副标题一句把人话讲透了：<span class="zy-field">平台账户真实资金流水：充值、AI 算力费、云服务器费等</span>。这一页管的是<strong>你真正充进去的钱</strong>。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">「公司账本」和「项目账本」是两个账，别搞混</span>
+    <p>产品里有两条完全不同的账：<strong>公司账本</strong>（这一页，<code>/ledger</code>）记的是平台账户的真实资金：你充了多少、花了多少、余额还有多少；<strong>项目账本</strong>（<code>/project/项目号/ledger</code>）记的是某一条业务线的虚拟核算：收入、支出、预算消耗。两者用的是<strong>同一个页面组件</strong>，靠网址里有没有项目号来决定显示哪一种。所以你会发现「从项目里点项目账本」和「从侧边栏点公司账本」长得像但内容不同——这是设计如此。项目账本那半边的细节（含「账本明细 / 智能看板」两个页签）在<a href="06-界面导览-项目.html">第 06 章</a>。</p>
+  </div>
+
+  <h3>顶部三个按钮</h3>
+
+  <p>公司账本模式下，标题右边有三个按钮：</p>
+
+  <ul>
+    <li><span class="zy-btn">充值</span>——给账户加钱。</li>
+    <li><span class="zy-btn">记录消费</span>——手工记一笔消费。</li>
+    <li><span class="zy-btn">预警阈值</span>——设置余额低于多少时提醒你。</li>
+  </ul>
+
+  <h3>四张卡：账户现状</h3>
+
+  <div class="zy-grid c4">
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">当前余额</div>
+      <div class="zy-kpi-value">¥ N</div>
+      <div class="zy-kpi-hint">可用额度</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">累计充值</div>
+      <div class="zy-kpi-value">¥ N</div>
+      <div class="zy-kpi-hint">一共充进来多少</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">累计消费</div>
+      <div class="zy-kpi-value">¥ N</div>
+      <div class="zy-kpi-hint">一共花掉多少</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">预警阈值</div>
+      <div class="zy-kpi-value">¥ N</div>
+      <div class="zy-kpi-hint">低于此值触发通知</div>
+    </div>
+  </div>
+
+  <p>如果余额跌破了你设的预警线，页面顶部会出现一条橙色提醒：<strong>余额 … 已低于预警阈值 …，请及时充值避免实例熔断。</strong>「实例熔断」的意思是：余额真的见底时，平台会把你项目对应的服务器停掉，防止欠费。所以这条提醒要认真对待。</p>
+
+  <h3>交易明细表</h3>
+
+  <p>表格标题「交易明细」，右上角有两个筛选器：<strong>全部类型</strong>（可选 充值 / 消费 / 退款）和 <strong>全部分类</strong>（可选 云服务器费 / Token 费 / 图片生成费 / 视频生成费 / 其它）。</p>
+
+  <p>表格的列是：<strong>时间 / 类型 / 分类 / 描述 / 关联单号 / 金额 / 余额</strong>。金额是带正负号的——进账为正、出账为负，余额那一列是这笔之后账户的余额。一条记录都没有时显示 <span class="zy-field">暂无交易记录</span>。记录多的时候底部有分页条。</p>
+
+  <h3>三个弹窗</h3>
+
+  <p>点顶部那三个按钮，分别弹出三个对话框：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>弹窗标题</th>
+          <th>字段</th>
+          <th>说明与限制</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>账户充值</strong></td>
+          <td>金额、描述、支付单号</td>
+          <td>金额最小 0.01、最大 1000000；描述占位符「如：在线支付充值」；支付单号选填，占位符「可选」。底部是 <span class="zy-btn ghost">取消</span> 和 <span class="zy-btn">确认充值</span>。<strong>超过上限会直接被拦下</strong>，提示「单笔充值金额不能超过 1000000 元」。</td>
+        </tr>
+        <tr>
+          <td><strong>记录消费</strong></td>
+          <td>分类、金额、项目 ID、公司 ID、描述</td>
+          <td>手工记一笔账。描述占位符「如：LLM 调用消费」。底部是 <span class="zy-btn ghost">取消</span> 和 <span class="zy-btn">确认</span>。</td>
+        </tr>
+        <tr>
+          <td><strong>余额预警阈值</strong></td>
+          <td>阈值（元）</td>
+          <td>低于这个数就通知你。底部是 <span class="zy-btn ghost">取消</span> 和 <span class="zy-btn">保存</span>。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>三个操作成功后分别提示：<strong>充值成功</strong> / <strong>消费已记录</strong> / <strong>预警阈值已更新</strong>。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">公司账本里的「Token 费 / AI 算力费」现在会真的记账了</span>
+    <p>公司账本里有一个消费分类叫「Token 费」，指 AI 调用模型花的钱。这一批改动之后，<strong>项目里 AI 消耗的 token 会由项目侧按批上报给平台，计入公司账本的真实流水</strong>：平台按每批的 <code>report_id</code> 幂等去重，同一批<strong>不会重复扣费</strong>；上报成功才记账，失败会退避重试、不丢单；上报水位也落了库，进程重启不会重扫历史账。</p>
+    <p>页面上有一行常显说明写得很清楚：<strong>「AI 算力费由项目侧 token 计费批量上报（未开启该上报时不含此项，可在项目账本查看 AI 运行消耗）」</strong>。也就是说，只有<strong>部署时配好了上报地址</strong>的实例，公司账本才会有这项；没配上报地址的实例，公司账本里不含 AI 算力费——这是「未启用」而非「算漏了」。所以做对账前，先看这一行说明：<strong>确认上报已开启，再拿公司账本的 Token 费和项目内计费明细对照</strong>；没有开启时，AI 消耗请以项目账本的「计费明细 / 运行轮次」为准。</p>
+  </div>
+
+  <h2>九、媒体生成中心：做素材的地方</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 媒体生成</div>
+
+  <p>页面标题 <strong>媒体生成中心</strong>，标题左边有一个 <span class="zy-btn ghost">返回</span> 按钮，点了回到项目管理。整页用五个页签切分：<strong>视频 / 图像 / 歌曲 / 任务记录 / 价目设置</strong>。</p>
+
+  <h3>视频页签</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>字段</th>
+          <th>可选项 / 提示</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>提示词</td><td>多行输入，占位符 <span class="zy-field">描述想要生成的视频画面与风格</span></td></tr>
+        <tr><td>时长(秒)</td><td>4 到 12 之间</td></tr>
+        <tr><td>分辨率</td><td>480p 或 720p</td></tr>
+        <tr><td>比例</td><td>16:9 / 9:16 / 1:1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>按钮是 <span class="zy-btn">生成视频</span>；提交后进入轮询等待，按钮变成红色的 <span class="zy-btn danger">停止</span>，点它可以中止等待。</p>
+
+  <h3>图像页签</h3>
+
+  <ul>
+    <li>提示词：占位符 <span class="zy-field">描述想要生成的图像</span>。</li>
+    <li>引擎：可选 <strong>gpt</strong> 或 <strong>seedream</strong>。</li>
+    <li>尺寸：输入框占位符 <span class="zy-field">如 1024x1024</span>。</li>
+    <li>按钮 <span class="zy-btn">生成图像</span>。</li>
+  </ul>
+
+  <h3>歌曲页签</h3>
+
+  <ul>
+    <li>歌词：多行输入，占位符 <span class="zy-field">输入歌词内容（必填）</span>——<strong>这是必填项</strong>。</li>
+    <li>风格提示：占位符 <span class="zy-field">描述歌曲风格、情绪等（可选）</span>。</li>
+    <li>按钮 <span class="zy-btn">生成歌曲</span>，等待时可点 <span class="zy-btn danger">停止</span>。</li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">视频和歌曲有「防假死」保护</span>
+    <p>视频和歌曲是异步生成的，界面要不停去问「好了没」。如果连续多次都问不到结果，页面不会一直傻等，而是停下来并提示 <strong>任务状态查询连续失败，已停止轮询</strong>，旁边给一个 <span class="zy-btn ghost">重试查询</span> 的链接按钮。看到它别慌，点重试查询通常就能接上。</p>
+  </div>
+
+  <h3>任务记录页签</h3>
+
+  <p>顶部有一个类型筛选（全部类型 / 视频 / 图像 / 歌曲）和一个 <span class="zy-btn ghost">刷新</span> 按钮。页面上一句提示把计费口径说得很清楚：</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">关于金额的口径（界面原文）</span>
+    <p>金额由服务端按「档位单价 × 用量」折算并计入项目账本；未定价档位显示 <span class="zy-badge amber">待定价</span>（不折算、不谎报金额）。</p>
+  </div>
+
+  <p>表格的列是：<strong>时间 / 类型 / 状态 / 档位 / 单价(元) / 用量 / 金额(元) / 提示词</strong>。没有记录时显示 <span class="zy-field">暂无媒体任务记录</span>。任务状态共九种，含义如下：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>状态</th>
+          <th>含义</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>已提交</td><td>请求发出去了</td></tr>
+        <tr><td>排队中</td><td>在服务端排队等资源</td></tr>
+        <tr><td>准备中</td><td>正在准备模型 / 资源</td></tr>
+        <tr><td>生成中</td><td>正在生成</td></tr>
+        <tr><td>已完成</td><td>成功产出</td></tr>
+        <tr><td>失败</td><td>生成失败</td></tr>
+        <tr><td>已超时</td><td>等太久，判定超时</td></tr>
+        <tr><td>已取消</td><td>被你手动中止</td></tr>
+        <tr><td>已过期</td><td>任务过期失效</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>价目设置页签</h3>
+
+  <p>这一页让你给各档位定单价。顶部一条提示：</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">价目设置的口径（界面原文）</span>
+    <p>单价填 0 表示「未设置，跟随默认价」，只有填写的档位会保存为覆盖价（负价不可提交）。</p>
+  </div>
+
+  <p>档位分三组：<strong>图像</strong>（元/张：1K / 2K / 4K）、<strong>视频</strong>（元/条：480p ≤5s / 480p ＞5s / 720p ≤5s / 720p ＞5s）、<strong>音乐</strong>（元/首：单曲）。每个输入框下面会写清楚当前是「未设置，跟随默认 ¥x」还是「默认 ¥x」。底部是 <span class="zy-btn">保存价目</span> 和 <span class="zy-btn ghost">重新加载</span>。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">不是所有人都能改价目</span>
+    <p>如果你是只读身份，页面会显示 <span class="zy-field">当前身份为只读：价目编辑仅限公司管理员 / 项目负责人。</span>，<span class="zy-btn">保存价目</span> 也不出现。想改价，需要拿到公司管理员或项目负责人的身份。</p>
+  </div>
+
+  <h2>十、通知中心：所有消息都落在这里</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 通知中心</div>
+
+  <p>标题 <strong>通知中心</strong>，右上角一个 <span class="zy-btn">全部已读 (N)</span> 按钮——括号里的 N 是当前未读数，只有存在未读时这个按钮才显示。</p>
+
+  <h3>三个筛选器</h3>
+
+  <p>页面提供三个下拉筛选，可以叠加使用：<strong>通知类型</strong>、<strong>优先级</strong>、<strong>已读状态</strong>（未读 / 已读）。</p>
+
+  <h3>一条通知上有什么</h3>
+
+  <ul>
+    <li>一枚<strong>优先级标签</strong>（紧急 / 重要 / 普通 / 信息）。</li>
+    <li>一行<strong>类型标签</strong>（预算预警 / 审批请求 / 任务完成 / 营销更新 / 里程碑 / 系统通知 / 营销通知）。</li>
+    <li><strong>标题</strong>与<strong>正文</strong>。</li>
+    <li><strong>时间</strong>。</li>
+    <li>两个操作按钮：<span class="zy-btn ghost">标为已读</span> 和 <span class="zy-btn ghost">删除</span>。</li>
+  </ul>
+
+  <p>一条通知都没有时显示 <span class="zy-field">暂无通知</span>。点删除会弹确认框，标题「提示」，内容是 <strong>确认删除该通知？</strong>。点「全部已读」成功后提示 <strong>已全部标记已读</strong>。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">通知和顶栏铃铛是同一批数据</span>
+    <p>顶栏铃铛里那个小面板，显示的就是这一页通知的最近几条（加一个「查看全部」按钮跳过来）。所以你可以只在铃铛里快速扫一眼，需要批量处理时再来这一页。预算预警、审批请求这类需要你动作的消息，会在铃铛上直接加未读角标，基本不会漏。</p>
+  </div>
+
+  <h2>十一、设置：四个页签</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 设置</div>
+
+  <p>设置页是标签页布局，四个页签的顺序固定：<strong>个人设置 / Agent 优化 / 功能管理 / 授权管理</strong>。这四个里，「功能管理」和「Agent 优化」是高价值页，值得多花点时间。</p>
+
+  <h3>个人设置</h3>
+
+  <p>最简单的一页，两项：<strong>用户名</strong>（只读展示）和<strong>主题模式</strong>（一个开关，开启侧标「暗色」、关闭侧标「亮色」）。这个开关和顶栏那个主题切换按钮效果一样，改哪个都行。</p>
+
+  <h3>授权管理</h3>
+
+  <p>显示授权状态，并让你激活。展示项如下：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>项目</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>机器码</td><td>这台服务器的唯一标识，激活时要用它。没取到时显示「—」。</td></tr>
+        <tr><td>激活状态</td><td>四种之一：已激活 / 试用中（未激活）/ 离线宽限 / 已过期。</td></tr>
+        <tr><td>有效期</td><td>已激活或离线宽限时显示到期日期；试用中显示「未激活」；其余显示「—」。</td></tr>
+        <tr><td>上次激活时间</td><td>最近一次成功激活的时间。</td></tr>
+        <tr><td>预计关闭时间</td><td>只在试用或离线宽限状态下出现。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>激活方式是：把授权码填进 <span class="zy-field">请输入授权码</span> 输入框，点 <span class="zy-btn">激活</span>。输入框是空的就点，会提示 <strong>请输入授权码</strong>；激活成功会提示 <strong>激活成功</strong>。</p>
+
+  <h3>功能管理：项目级的功能开关</h3>
+
+  <p>这一页控制「某个项目开哪些功能」。顶部先选项目：一个下拉，占位符 <span class="zy-field">请先选择项目</span>，旁边一个 <span class="zy-btn ghost">重置为默认</span> 按钮（没选项目时不可点）。进入页面时会自动帮你选中第一个项目。</p>
+
+  <p>页面顺序是：<strong>基础功能</strong>卡 → <strong>高级功能</strong>卡 → <strong>AI 智能建议</strong>卡。前两张卡里是一排排开关，每项开 / 关后提示「XX 已开启」或「XX 已关闭」。重置会提示「功能开关已重置为默认值」。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>分组</th>
+          <th>包含的功能</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>基础功能</strong></td>
+          <td>自动构建部署、通知中心、自动备份、自动报告、智能报告、项目模板</td>
+        </tr>
+        <tr>
+          <td><strong>高级功能</strong></td>
+          <td>营销自动化、战略规划、渐进式信任、冲突仲裁、资源治理、营销引擎、社交媒体运营</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>第三张卡「AI 智能建议」有点意思：说明写着 <span class="zy-field">AI 根据项目当前状态和经营需求，分析应开启哪些高级功能。</span>，点 <span class="zy-btn">分析项目并建议</span> 按钮，AI 会给出一组建议，每条带一个优先级标签（高 / 中 / 低），后面跟一个 <span class="zy-btn">开启</span> 按钮，或者一枚灰色的 <span class="zy-badge">暂不需要</span> 标签。没有可建议的会显示 <span class="zy-field">暂无建议，所有功能已根据项目状态合理配置。</span></p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">「安全底线」项真的锁住了，关不掉</span>
+    <p>手册别处会提「资源治理、预算熔断、渐进式信任属于安全底线」。在当前版本里，这事<strong>已经落到界面和后端两层</strong>：凡是带「<strong>安全底线</strong>」小标签的开关（当前是「渐进式信任」和「资源治理」两项），开关是<strong>置灰、点不动</strong>的，鼠标悬停会提示「该功能为安全底线，不允许关闭」；就算绕过界面直接调接口，后端也会拒绝，并返回「「XX」为安全底线功能，不允许关闭」。换句话说，这几项你<strong>想关也关不掉</strong>——只能保持开启。</p>
+    <p>其余开关则可以自由开 / 关。另外项目内的「组织进化 → 定量调控」里还有一套强制维度（预算、自主权限），那是另一处的安全底线，同样不可关。相关背景见<a href="04-运行模式与预算.html">第 04 章</a>和<a href="08-智能体.html">第 08 章</a>。</p>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">这个开关现在真的「管事」，不只是个显示标记</span>
+    <p>早前版本里，有些开关拨了好像没反应。现在以下 <strong>6 个开关已经真正生效</strong>：<strong>自动构建部署（deploy）、自动报告（report）、智能报告（auto_report）、营销自动化（marketing）、战略规划（strategy）、渐进式信任（trust_model）</strong>。一旦你把某个关掉，再访问对应功能（点按钮、开页面、调接口），系统会直接拒绝并给出中文提示，格式是「<strong>XX功能未启用，请在功能开关中开启 KEY</strong>」。举几个实际会撞到的例子：</p>
+    <ul>
+      <li>关了 <code>deploy</code>，去点「自动构建部署」，会提示「自动构建部署功能未启用，请在功能开关中开启 deploy」。</li>
+      <li>关了 <code>strategy</code>，进「战略」页会提示「战略规划功能未启用，请在功能开关中开启 strategy」。</li>
+      <li>关了 <code>report</code>，看报告配置 / 历史会提示「报告配置功能未启用…」；关了 <code>auto_report</code>，让系统自动生成并推送日报，会提示「智能报告功能未启用…」。</li>
+    </ul>
+    <p>另外，「冲突仲裁、营销引擎、社交媒体、项目模板」这几个开关本来就在生效；只有「<strong>通知中心（notification）</strong>」这一个目前<strong>还没有</strong>接上开关门控——这是已知的未完成项，关掉它暂时不影响通知投递。</p>
+  </div>
+
+  <p>几个状态提示要知道：没选公司时显示 <span class="zy-field">请先在顶部选择公司</span>；选了公司但公司下还没有项目时，显示 <span class="zy-field">请先选择一个项目以管理其功能开关</span>；选好了项目，卡片上方会显示一行「<strong>当前配置：项目名</strong>」，提醒你别改错了项目。如果项目列表或开关本身加载失败，页面会分别弹出一条红色提示「<strong>项目列表加载失败</strong>」或「<strong>功能开关加载失败</strong>」，带上具体原因，并给一个 <span class="zy-btn">重试</span> 链接——不会再静默地显示一个空列表。真的一个开关都没有（不是加载失败）时，显示「该项目暂无功能开关，可点击「重置为默认」初始化」。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：功能开关的 13 个 key 与切换规则</summary>
+    <div class="zy-acc-body">
+      <p>每个功能在接口层有一个英文 key，界面显示的中文名、分组、是否「安全底线」，<strong>都以项目服务器下发的字典为唯一来源</strong>（前端只做兜底）。对照如下（想查接口文档或排查问题时用得上）：</p>
+      <ul>
+        <li>deploy —— 自动构建部署 <span class="zy-badge blue">已生效</span></li>
+        <li>notification —— 通知中心（<strong>尚未门控</strong>）</li>
+        <li>backup —— 自动备份</li>
+        <li>report —— 自动报告 <span class="zy-badge blue">已生效</span></li>
+        <li>marketing —— 营销自动化 <span class="zy-badge blue">已生效</span></li>
+        <li>strategy —— 战略规划 <span class="zy-badge blue">已生效</span></li>
+        <li>trust_model —— 渐进式信任 <span class="zy-badge blue">已生效</span>（安全底线，不可关）</li>
+        <li>arbitrator —— 冲突仲裁</li>
+        <li>resource_governor —— 资源治理（安全底线，不可关）</li>
+        <li>marketing_engine —— 营销引擎（后端名为「营销自动化引擎」）</li>
+        <li>social_media —— 社交媒体运营（后端名为「社交媒体管理」）</li>
+        <li>auto_report —— 智能报告 <span class="zy-badge blue">已生效</span>（与上面的「自动报告 report」是两个 key，别混）</li>
+        <li>project_template —— 项目模板</li>
+      </ul>
+      <p>两个容易踩的点：其一，<strong>「自动报告（report）」和「智能报告（auto_report）」是两项不同的功能</strong>——前者管报告配置与历史阅读，后者管报告的自动生成与推送，界面上已经分开显示，看到两个「报告」别以为重复了。其二，分组与显示名当前<strong>统一由后端字典决定</strong>：界面按后端下发的分组动态渲染；后端若新增了界面不认识的 key，会归到「<strong>其它</strong>」分组里，而不是裸奔一个英文 key。所以遇到「功能明明开了、页面说没启用」时，先来这里核对 key 有没有开关到位。</p>
+      <p>还有个小细节：点 <span class="zy-btn ghost">重置为默认</span> 会先弹确认框「将把该项目所有功能开关恢复为默认值，是否继续？」，确认后才执行，成功提示「功能开关已重置为默认值」——这是个破坏性操作，别手滑。</p>
+    </div>
+  </details>
+
+  <h3>Agent 优化：让系统自己优化智能体</h3>
+
+  <p>这一页管两件事：<strong>常规优化</strong>（到一定运行次数后自动优化某个 Agent / 技能）和<strong>深度全局优化</strong>（定时或手动，把整个项目的执行数据统计一遍再优化）。</p>
+
+  <p><strong>常规优化 (Regular)</strong> 卡：说明写着「对新创建的 Agent/Skill 达到里程碑次数后自动触发优化分析。」字段有「运行次数里程碑」（默认是 3 / 10 / 40 / 200 这几个数，可以加可以删）、「自定义优化提示词」（占位符「留空使用默认模板」）、「自动应用建议」（旁边注明只自动应用非破坏性的建议，比如提示词调整）。</p>
+
+  <p><strong>深度全局优化 (Deep Global)</strong> 卡字段更多：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>字段</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>定时执行 (Cron)</td><td>占位符 <span class="zy-field">如: 0 2 * * 0 (每周日凌晨2:00)</span>，提示「留空则仅支持手动触发」</td></tr>
+        <tr><td>优化深度</td><td>三选一：浅度 / 标准 / 深度，默认「标准」。分别对应近 30 天快速分析、近 90 天全面分析、近 180 天深度分析</td></tr>
+        <tr><td>单次最大费用 (¥)</td><td>默认 10，范围 0–1000，这是给单次优化设的成本上限</td></tr>
+        <tr><td>最少数据量</td><td>默认 50，范围 0–100000，提示「每次优化至少需要的运行次数，防止数据不足」</td></tr>
+        <tr><td>自定义优化提示词</td><td>占位符「聚焦特定优化方向，留空使用默认模板」</td></tr>
+        <tr><td>自动应用建议</td><td>同常规优化</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>卡片底部有一个 <span class="zy-btn">立即执行一次深度优化</span> 按钮，执行中会变成「优化中...」。另外还有「通知」卡（一个开关，开着就「优化完成后推送 WebSocket 消息通知」，这是系统内部的实时通道，你不用管它是什么，知道会收到消息就行）、「排除列表」卡（选哪些 Agent / 技能不参与优化），最后是 <span class="zy-btn">保存设置</span>。</p>
+
+  <p>页面最下面是「优化报告历史」表，列是 <strong>时间 / 层级 / 目标 / 摘要 / 费用(¥) / 操作</strong>，层级显示「深度全局」或「常规优化」，操作里有「查看」和「应用」。</p>
+
+  <h2>十二、超管后台：平台运营方专用的那一套</h2>
+
+  <div class="zy-path">侧边栏 <span class="sep">›</span> 超管后台（仅超级管理员可见）</div>
+
+  <p>超管后台是一套独立的界面：进到 <code>/admin</code> 之后，侧边栏换成<strong>深色样式</strong>，顶部品牌写着 <strong>ZY 超管后台</strong>（折叠时只显示「超管」），顶栏标题是「超级管理员控制台」。菜单共 7 个页面，外加最后一个 <span class="zy-btn ghost">返回用户端</span>（点了回到普通用户的数据面板）。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">普通账号访问 /admin 会被弹回去</span>
+    <p>超管后台的每一个页面都要求「登录 + 是超级管理员」两个条件。如果你不是超管，直接敲网址访问会被自动重定向回数据面板，不会报错也不会泄漏内容。所以看不到它是设计，不是故障。</p>
+  </div>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>菜单</th>
+          <th>页面标题</th>
+          <th>它能看什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>全局看板</strong></td>
+          <td>全局数据看板</td>
+          <td>全平台的汇总数字：总用户数、活跃项目、实例健康度、累计 Token、累计充值、累计消费、预算消耗速率。右上角可刷新。</td>
+        </tr>
+        <tr>
+          <td><strong>用户管理</strong></td>
+          <td>用户管理</td>
+          <td>用户列表：ID / 邮箱 / 姓名 / 状态 / 超管 / 公司数 / 项目数 / 余额 / 累计消费 / 注册时间 / 操作。操作有三类：<span class="zy-btn ghost">详情</span>、<span class="zy-btn ghost">封禁</span> 或 <span class="zy-btn ghost">解封</span>、<span class="zy-btn ghost">重置密码</span>。可按「邮箱/姓名」搜索、按状态筛。</td>
+        </tr>
+        <tr>
+          <td><strong>项目穿透</strong></td>
+          <td>项目穿透查看</td>
+          <td>查看任意用户的项目。点详情弹出 <strong>项目详情（只读穿透）</strong>，顶部一条告警写着 <span class="zy-field">超管只读查看，不可修改用户项目数据</span>；里面显示 ID / 名称 / 状态 / 模式 / 总预算 / 已消耗 / Token 月度 / 近 30 天 Prompt 数，下面还有实例列表。</td>
+        </tr>
+        <tr>
+          <td><strong>实例监控</strong></td>
+          <td>实例监控</td>
+          <td>各项目服务器的运行状况。列：ID / 所属项目 / IP / 云厂商 / 规格 / 区域 / 实例状态 / 心跳状态 / 资源使用率（CPU·内存·磁盘）/ 最后心跳。<strong>「实例状态」列现在显示中文</strong>（运行中 / 已停止 / 创建中 / 已销毁 / 待创建 / 异常），和上方筛选项口径一致，不再是英文原文。可按状态筛。</td>
+        </tr>
+        <tr>
+          <td><strong>Token 统计</strong></td>
+          <td>Token 消耗统计</td>
+          <td>累计 Token 数、Token 类消费总额，并可切换统计维度（按模型 / 按用户 / 按项目）看 Top N 消耗排行。</td>
+        </tr>
+        <tr>
+          <td><strong>Prompt 审计</strong></td>
+          <td>Prompt 审计日志</td>
+          <td>全平台 Prompt 的检索与导出。可按关键词（占位符「全文搜索」）、用户 ID、项目 ID、模型、时间范围筛。列：ID / 用户 / 项目 / 模型 / 角色 / 内容 / Tokens / Agent / 任务 ID / 时间。按钮 <span class="zy-btn">查询</span> 和 <span class="zy-btn ghost">导出全部（当前筛选）</span>。</td>
+        </tr>
+        <tr>
+          <td><strong>治理审计</strong></td>
+          <td>治理审计汇总</td>
+          <td>报告总数、严重级别分布、报告类型分布、最近严重发现。右上角可刷新。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">Prompt 审计的「导出」：导当前筛选的全部，而且和屏幕一样脱敏</span>
+    <p>这个页面之前有两个坑，现在都补上了，运营方可以放心用：</p>
+    <ul>
+      <li><strong>范围</strong>：按钮现在叫 <span class="zy-btn ghost">导出全部（当前筛选）</span>，导出的是<strong>当前筛选条件下的全部记录</strong>，不再只是你翻到的那一页。按钮旁有个小问号，悬停会说明「导出范围为当前筛选条件下的全部记录；内容中的手机号/邮箱与屏幕展示同样脱敏」。</li>
+      <li><strong>脱敏</strong>：屏幕和导出<strong>用同一套口径</strong>——手机号中间四位打码（<code>138****8888</code>）、邮箱 @ 前只留一两位（<code>ab***@x.com</code>）。也就是导出的 CSV 里也是脱敏后的内容，不再出现「屏幕脱敏、导出原文」的漏洞。屏幕上还会对你搜的关键词做高亮。</li>
+      <li><strong>防公式注入</strong>：以 <code>=</code>、<code>+</code>、<code>-</code>、<code>@</code> 开头的文本会被加一个前导单引号，避免用 Excel / WPS 打开时被当成公式执行。</li>
+    </ul>
+    <p>即便如此，导出的内容仍可能含项目内部信息，请按敏感数据管理，别随手外发。</p>
+  </div>
+
+  <h2>十三、本章小结与下一步</h2>
+
+  <ul>
+    <li><strong>三块结构</strong>：顶栏（公司切换器、通知铃铛、主题、用户菜单）、侧边栏（一级菜单）、内容区（页面本体）。</li>
+    <li><strong>10 个一级页面</strong>：数据面板、公司管理、项目管理、知识库、AI 对话、公司账本、媒体生成、通知中心、设置，加超管后台。</li>
+    <li><strong>公司切换器</strong>是全平台最该先搞懂的控件：它决定知识库 / 项目管理 / 公司管理后四页 / 功能管理能不能用，换公司会清掉「当前项目」。</li>
+    <li><strong>两条账别搞混</strong>：公司账本 = 真实资金；项目账本 = 虚拟核算。同一个页面组件、靠网址区分。</li>
+    <li><strong>超管后台</strong>是独立的深色界面，只对超级管理员开放，普通账号访问会被弹回。</li>
+    <li><strong>下一步</strong>：平台侧的门认完了，去 <a href="06-界面导览-项目.html">第 06 章 界面导览（下）：项目内页面</a>，看进项目之后那 6 个分组、40 多个页面。</li>
+  </ul>
+
+  <div class="zy-quick">
+    <a href="index.html">回到首页</a>
+    <a href="06-界面导览-项目.html">下一步：项目内页面导览</a>
+    <a href="04-运行模式与预算.html">上一章：运行模式与预算</a>
+    <a href="07-知识与资料导入.html">我要导资料</a>
+  </div>
+
+  <h2>附录 A · 平台侧按钮与入口倒排索引</h2>
+
+  <p>用法：左边一列是「你想干的事」，右边是「去哪一页、点哪个按钮」。按下表找，不用在界面里瞎点。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>我想做这件事</th>
+          <th>去哪一页</th>
+          <th>点哪个按钮 / 用什么控件</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>看全局有多少项目、预算烧了多少</td><td>数据面板</td><td>直接看四张指标卡</td></tr>
+        <tr><td>看最近的动态</td><td>数据面板</td><td>右侧「最近活动」列表</td></tr>
+        <tr><td>建一家新公司</td><td>公司管理 → 公司列表</td><td><span class="zy-btn">创建公司</span></td></tr>
+        <tr><td>进入某家公司</td><td>公司管理 → 公司列表</td><td>该行 <span class="zy-btn ghost">进入</span></td></tr>
+        <tr><td>改公司基础信息</td><td>公司管理 → 公司设置</td><td>先选中公司，再修改</td></tr>
+        <tr><td>看部门 / 层级结构</td><td>公司管理 → 组织架构</td><td>先选中公司</td></tr>
+        <tr><td>看成员、调角色权限</td><td>公司管理 → 成员管理</td><td>先选中公司</td></tr>
+        <tr><td>邀请同事加入公司</td><td>公司管理 → 成员邀请</td><td>先选中公司</td></tr>
+        <tr><td>切换当前公司</td><td>任意页面</td><td>顶栏公司下拉，选某家公司或 <span class="zy-btn ghost">全部公司</span></td></tr>
+        <tr><td>建一个新项目</td><td>项目管理</td><td><span class="zy-btn">新建项目</span></td></tr>
+        <tr><td>进入某个项目干活</td><td>项目管理</td><td>点项目卡片</td></tr>
+        <tr><td>验证某项目服务器通不通</td><td>项目管理</td><td>卡片上的 <span class="zy-btn ghost">连接测试</span></td></tr>
+        <tr><td>建一个知识库</td><td>知识库 → 知识库</td><td><span class="zy-btn">新建知识库</span></td></tr>
+        <tr><td>往知识库传文档</td><td>知识库 → 知识库</td><td>该行 <span class="zy-btn ghost">文档管理</span> → <span class="zy-btn">上传文档</span></td></tr>
+        <tr><td>测试资料能不能被检索到</td><td>知识库 → RAG 检索</td><td>输入关键词 → <span class="zy-btn">检索</span></td></tr>
+        <tr><td>删掉一个知识库</td><td>知识库 → 知识库</td><td>该行 <span class="zy-btn ghost">删除</span></td></tr>
+        <tr><td>开一个新对话问 AI</td><td>AI 对话</td><td><span class="zy-btn">新建对话</span></td></tr>
+        <tr><td>给对话改名 / 删对话</td><td>AI 对话</td><td>对话右侧下拉 → <span class="zy-btn ghost">重命名</span> / <span class="zy-btn ghost">删除</span></td></tr>
+        <tr><td>追问时带一个文件</td><td>AI 对话</td><td>输入区附件按钮，支持 doc/pdf/xlsx/ppt 等</td></tr>
+        <tr><td>打断 AI 正在输出的回答</td><td>AI 对话</td><td>输入区的红色 <span class="zy-btn danger">停止</span></td></tr>
+        <tr><td>给账户充值</td><td>公司账本</td><td><span class="zy-btn">充值</span></td></tr>
+        <tr><td>手工记一笔消费</td><td>公司账本</td><td><span class="zy-btn">记录消费</span></td></tr>
+        <tr><td>改余额预警线</td><td>公司账本</td><td><span class="zy-btn">预警阈值</span></td></tr>
+        <tr><td>按类型 / 分类筛流水</td><td>公司账本</td><td>交易明细右上两个下拉</td></tr>
+        <tr><td>生成一条视频</td><td>媒体生成 → 视频</td><td><span class="zy-btn">生成视频</span></td></tr>
+        <tr><td>生成一张图</td><td>媒体生成 → 图像</td><td><span class="zy-btn">生成图像</span></td></tr>
+        <tr><td>生成一首歌</td><td>媒体生成 → 歌曲</td><td>填歌词 → <span class="zy-btn">生成歌曲</span></td></tr>
+        <tr><td>看媒体任务花了多少钱</td><td>媒体生成 → 任务记录</td><td>看「金额(元)」列</td></tr>
+        <tr><td>改各档位单价</td><td>媒体生成 → 价目设置</td><td>改数字 → <span class="zy-btn">保存价目</span></td></tr>
+        <tr><td>把消息全部标为已读</td><td>通知中心</td><td><span class="zy-btn">全部已读 (N)</span></td></tr>
+        <tr><td>只处理未读消息</td><td>通知中心</td><td>「已读状态」下拉选「未读」</td></tr>
+        <tr><td>删掉一条通知</td><td>通知中心</td><td>该条 <span class="zy-btn ghost">删除</span></td></tr>
+        <tr><td>切换亮色 / 暗色主题</td><td>任意页面</td><td>顶栏主题按钮，或设置 → 个人设置</td></tr>
+        <tr><td>激活授权</td><td>设置 → 授权管理</td><td>填授权码 → <span class="zy-btn">激活</span></td></tr>
+        <tr><td>开关某个项目的功能</td><td>设置 → 功能管理</td><td>选项目 → 拨对应开关</td></tr>
+        <tr><td>让 AI 建议开哪些高级功能</td><td>设置 → 功能管理</td><td><span class="zy-btn">分析项目并建议</span></td></tr>
+        <tr><td>把功能开关恢复默认</td><td>设置 → 功能管理</td><td><span class="zy-btn ghost">重置为默认</span></td></tr>
+        <tr><td>让智能体到一定次数后自动优化</td><td>设置 → Agent 优化</td><td>改「运行次数里程碑」→ <span class="zy-btn">保存设置</span></td></tr>
+        <tr><td>立刻做一次深度优化</td><td>设置 → Agent 优化</td><td><span class="zy-btn">立即执行一次深度优化</span></td></tr>
+        <tr><td>改深度优化的成本上限 / 数据门槛</td><td>设置 → Agent 优化</td><td>改「单次最大费用」「最少数据量」</td></tr>
+        <tr><td>看全平台汇总数据（超管）</td><td>超管后台 → 全局看板</td><td>进入即看，右上角可刷新</td></tr>
+        <tr><td>查 / 封禁某个用户（超管）</td><td>超管后台 → 用户管理</td><td>该行 <span class="zy-btn ghost">详情</span> / <span class="zy-btn ghost">封禁</span> / <span class="zy-btn ghost">重置密码</span></td></tr>
+        <tr><td>看某个用户的项目（超管）</td><td>超管后台 → 项目穿透</td><td>查看详情（只读）</td></tr>
+        <tr><td>看服务器实例健康度（超管）</td><td>超管后台 → 实例监控</td><td>看「心跳状态」「资源使用率」列</td></tr>
+        <tr><td>查某个 Prompt（超管）</td><td>超管后台 → Prompt 审计</td><td>填筛选 → <span class="zy-btn">查询</span></td></tr>
+        <tr><td>导出 Prompt 记录（超管）</td><td>超管后台 → Prompt 审计</td><td><span class="zy-btn ghost">导出全部（当前筛选）</span>（与屏幕同口径脱敏）</td></tr>
+        <tr><td>从超管后台回到普通界面（超管）</td><td>超管后台</td><td>侧边栏最下 <span class="zy-btn ghost">返回用户端</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 B · 平台侧状态与标签全表</h2>
+
+  <p>本表把平台侧会出现的状态、标签、枚举值集中在一起。界面显示中文，接口层多为英文，排查问题时对着看。</p>
+
+  <h3>公司、用户与成员</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>类别</th>
+          <th>英文值</th>
+          <th>界面中文</th>
+          <th>出现位置</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="3">用户状态</td><td>active</td><td>正常</td><td>超管 → 用户管理</td></tr>
+        <tr><td>banned</td><td>已封禁</td><td>超管 → 用户管理</td></tr>
+        <tr><td>inactive</td><td>未激活</td><td>超管 → 用户管理</td></tr>
+        <tr><td rowspan="4">成员角色</td><td>super_admin</td><td>超级管理员</td><td>成员管理</td></tr>
+        <tr><td>admin</td><td>管理员</td><td>成员管理</td></tr>
+        <tr><td>member</td><td>普通成员</td><td>成员管理</td></tr>
+        <tr><td>ai_agent</td><td>AI Agent</td><td>成员管理</td></tr>
+        <tr><td rowspan="2">公司状态</td><td>active</td><td>正常</td><td>公司列表「状态」列</td></tr>
+        <tr><td>其它</td><td>已停用</td><td>公司列表「状态」列</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>项目与实例</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>类别</th>
+          <th>英文值</th>
+          <th>界面中文</th>
+          <th>出现位置</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="7">项目状态</td><td>draft</td><td>草稿</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>provisioning</td><td>开通中</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>running</td><td>运行中</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>paused</td><td>已暂停</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>stopped</td><td>已停止</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>done</td><td>已完成</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>failed</td><td>开通失败</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td rowspan="4">运行模式</td><td>full_auto</td><td>全自动</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>semi_auto</td><td>半自动</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>manual</td><td>手动（新建向导写入；自动运营控制台里显示为「人工审核」）</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td>manual_review</td><td>人工审核（自动运营控制台写入；与手动同义，内部值不同，尚未合并）</td><td>项目卡片 / 超管项目穿透</td></tr>
+        <tr><td rowspan="6">实例状态</td><td>running</td><td>运行中</td><td>超管 → 实例监控（筛选项与表格「实例状态」列均为中文）</td></tr>
+        <tr><td>stopped</td><td>已停止</td><td>超管 → 实例监控</td></tr>
+        <tr><td>creating</td><td>创建中</td><td>超管 → 实例监控</td></tr>
+        <tr><td>terminated</td><td>已销毁</td><td>超管 → 实例监控</td></tr>
+        <tr><td>pending</td><td>待创建</td><td>超管 → 实例监控</td></tr>
+        <tr><td>error</td><td>异常</td><td>超管 → 实例监控</td></tr>
+        <tr><td rowspan="4">心跳状态</td><td>healthy</td><td>正常</td><td>超管 → 实例监控</td></tr>
+        <tr><td>degraded</td><td>降级</td><td>超管 → 实例监控</td></tr>
+        <tr><td>down</td><td>宕机</td><td>超管 → 实例监控</td></tr>
+        <tr><td>unknown</td><td>未知</td><td>超管 → 实例监控</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>知识库与文档</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>类别</th>
+          <th>英文值</th>
+          <th>界面中文</th>
+          <th>出现位置</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="3">知识库类型</td><td>company</td><td>公司级</td><td>知识库 / 新建知识库</td></tr>
+        <tr><td>project</td><td>项目级</td><td>知识库 / 新建知识库</td></tr>
+        <tr><td>shared</td><td>共享</td><td>知识库 / 新建知识库</td></tr>
+        <tr><td rowspan="3">知识库状态</td><td>active</td><td>正常</td><td>知识库列表</td></tr>
+        <tr><td>indexing</td><td>索引中</td><td>知识库列表</td></tr>
+        <tr><td>error</td><td>错误</td><td>知识库列表</td></tr>
+        <tr><td rowspan="7">文档状态</td><td>uploaded</td><td>待处理</td><td>文档管理抽屉</td></tr>
+        <tr><td>parsing</td><td>解析中</td><td>文档管理抽屉</td></tr>
+        <tr><td>parsed</td><td>已解析</td><td>文档管理抽屉</td></tr>
+        <tr><td>chunking</td><td>分块中</td><td>文档管理抽屉</td></tr>
+        <tr><td>embedding</td><td>向量化中</td><td>文档管理抽屉</td></tr>
+        <tr><td>ready</td><td>就绪</td><td>文档管理抽屉</td></tr>
+        <tr><td>error</td><td>失败</td><td>文档管理抽屉</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>账本与媒体</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>类别</th>
+          <th>英文值</th>
+          <th>界面中文</th>
+          <th>出现位置</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="3">平台流水类型</td><td>recharge</td><td>充值</td><td>公司账本</td></tr>
+        <tr><td>consume</td><td>消费</td><td>公司账本</td></tr>
+        <tr><td>refund</td><td>退款</td><td>公司账本</td></tr>
+        <tr><td rowspan="5">平台流水分类</td><td>server</td><td>云服务器费</td><td>公司账本</td></tr>
+        <tr><td>token</td><td>Token 费</td><td>公司账本</td></tr>
+        <tr><td>image</td><td>图片生成费</td><td>公司账本</td></tr>
+        <tr><td>video</td><td>视频生成费</td><td>公司账本</td></tr>
+        <tr><td>other</td><td>其它</td><td>公司账本</td></tr>
+        <tr><td rowspan="9">媒体任务状态</td><td>submitted</td><td>已提交</td><td>媒体生成 → 任务记录</td></tr>
+        <tr><td>queued</td><td>排队中</td><td>媒体生成 → 任务记录</td></tr>
+        <tr><td>preparing</td><td>准备中</td><td>媒体生成 → 任务记录</td></tr>
+        <tr><td>running</td><td>生成中</td><td>媒体生成 → 任务记录</td></tr>
+        <tr><td>succeeded</td><td>已完成</td><td>媒体生成 → 任务记录</td></tr>
+        <tr><td>failed</td><td>失败</td><td>媒体生成 → 任务记录</td></tr>
+        <tr><td>timeouted</td><td>已超时</td><td>媒体生成 → 任务记录</td></tr>
+        <tr><td>cancelled</td><td>已取消</td><td>媒体生成 → 任务记录</td></tr>
+        <tr><td>expired</td><td>已过期</td><td>媒体生成 → 任务记录</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>通知与授权</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>类别</th>
+          <th>英文值</th>
+          <th>界面中文</th>
+          <th>出现位置</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="4">通知优先级</td><td>urgent</td><td>紧急</td><td>通知中心</td></tr>
+        <tr><td>important</td><td>重要</td><td>通知中心</td></tr>
+        <tr><td>normal</td><td>普通</td><td>通知中心</td></tr>
+        <tr><td>info</td><td>信息</td><td>通知中心</td></tr>
+        <tr><td rowspan="7">通知类型</td><td>budget_alert</td><td>预算预警</td><td>通知中心</td></tr>
+        <tr><td>approval_required</td><td>审批请求</td><td>通知中心</td></tr>
+        <tr><td>task_complete</td><td>任务完成</td><td>通知中心</td></tr>
+        <tr><td>campaign_update</td><td>营销更新</td><td>通知中心</td></tr>
+        <tr><td>milestone</td><td>里程碑</td><td>通知中心</td></tr>
+        <tr><td>system</td><td>系统通知</td><td>通知中心</td></tr>
+        <tr><td>marketing</td><td>营销通知</td><td>通知中心</td></tr>
+        <tr><td rowspan="4">激活状态</td><td>authorized</td><td>已激活</td><td>设置 → 授权管理</td></tr>
+        <tr><td>trial</td><td>试用中（未激活）</td><td>设置 → 授权管理</td></tr>
+        <tr><td>grace</td><td>离线宽限</td><td>设置 → 授权管理</td></tr>
+        <tr><td>expired</td><td>已过期</td><td>设置 → 授权管理</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 C · 全局交互速查：加载、空态、报错、分页</h2>
+
+  <p>平台侧各页面的「非正常状态」文案是统一的套路。认熟这几句，你就能一眼判断「是没数据、还是出错了、还是我没选对上下文」。</p>
+
+  <h3>三类「空」要分清</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>你看到的</th>
+          <th>真实含义</th>
+          <th>该怎么办</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>暂无 XXX（如「暂无项目流水」「暂无交易记录」「暂无通知」）</td><td>一切正常，就是这条数据还没有</td><td>不用管，等有数据就会自己出现</td></tr>
+        <tr><td>请先在顶部选择公司</td><td>你把公司切换器留在了空闲状态</td><td>去顶栏选一家公司</td></tr>
+        <tr><td>请先选择或创建一个公司</td><td>同上，出现在项目管理页</td><td>去顶栏选公司，或先去公司管理建一家</td></tr>
+        <tr><td>请先选择一个项目以管理其功能开关</td><td>公司选好了，但这家公司还没有项目</td><td>先去项目管理建一个项目</td></tr>
+        <tr><td>暂无公司，点击右上角创建</td><td>一家公司都还没有</td><td>点右上角 <span class="zy-btn">创建公司</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>加载与出错文案</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>界面文案</th>
+          <th>含义与处理</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>加载图表数据...</td><td>数据面板的图表正在拉数据，等一下就好</td></tr>
+        <tr><td>加载看板数据失败</td><td>数据面板整体拉取失败，多数是网络抖动，刷新页面重试</td></tr>
+        <tr><td>请求超时，请稍后重试</td><td>读操作超过 15 秒没响应。稍等再试，或检查网络</td></tr>
+        <tr><td>请求超时，该操作可能已在服务端生效，请先刷新确认结果，再决定是否重试</td><td><strong>写操作</strong>（提交、保存、新建、删除等）超时。这类请求可能其实已经成功了，只是回执没回来，所以别急着重复点——先刷新看结果，避免重复充值 / 重复建任务</td></tr>
+        <tr><td>网络异常，请检查连接</td><td>读操作请求根本没发出去或被中断。检查网络 / 代理</td></tr>
+        <tr><td>网络异常，该操作可能已在服务端生效，请先刷新确认结果，再决定是否重试</td><td><strong>写操作</strong>断网，同上：先刷新确认，再决定要不要重来</td></tr>
+        <tr><td>上游服务暂时不可达（502），请稍后重试；如持续出现请查看实例状态</td><td>项目服务器连不上（网关返回 502）。先确认实例在不在线，稍后重试。若后端透传了具体原因（如「实例未就绪」），会优先显示那句</td></tr>
+        <tr><td>上游服务暂时不可用（503），可能正在重启或过载，请稍后重试</td><td>项目服务器正在重启或过载（503）。等一两分钟再试</td></tr>
+        <tr><td>上游服务响应超时（504），请稍后重试；如持续出现请查看实例状态</td><td>项目服务器响应超时（504）。稍后重试，持续出现就去看实例状态</td></tr>
+        <tr><td>无权限访问</td><td>后端返回了 403。你的角色没有这个操作的权限</td></tr>
+        <tr><td>××功能未启用，请在功能开关中开启 KEY</td><td>该项目对应功能的开关是关的。去设置 → 功能管理把它打开（见本章第十一节）</td></tr>
+        <tr><td>正在重新登录 / 跳回登录页</td><td>登录态失效（未认证 / Token 无效 / Token 过期）会自动跳登录页，登录后回到原页面</td></tr>
+        <tr><td>项目列表加载失败 / 功能开关加载失败</td><td>功能管理页的项目列表或开关拉取失败，后面跟具体原因，并带一个「重试」链接——点它重试，不用整页刷新</td></tr>
+        <tr><td>操作失败: ××× / 重置失败: ××× / 获取建议失败: ×××</td><td>功能管理页每个动作失败都会带前缀，后面跟具体原因</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">哪些错误会把你踢回登录页，哪些不会</span>
+    <p>只有「登录态本身失效」这一类（未认证、Token 无效、Token 过期）才会自动跳登录页，并且会记住你原本要去哪，登录后送你回去。而像「登录失败」「该用户名已存在」「账号被封禁」这类，是在当前页面原地显示错误，不会把你踢走。所以如果你改了密码后在别处登录、这边被踢回登录页，是正常的。</p>
+  </div>
+
+  <h3>分页</h3>
+
+  <p>记录多的列表（公司账本交易明细、Prompt 审计等）底部有分页条，形如「共 N 条 上一页 页码 下一页」。公司账本用的是最简的一种：只显示总条数 + 上页 / 页码 / 下页。</p>
+
+  <h2>附录 D · 界面上的数字从哪来</h2>
+
+  <p>这一节回答一个容易被忽略但很容易造成误判的问题：你屏幕上那些数字，各自代表什么、边界在哪。看懂它，你就不会误把「汇总值」当「实时值」。</p>
+
+  <h3>数据面板四张卡</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>卡片</th>
+          <th>数字含义</th>
+          <th>注意</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>项目概览</td><td>你能看到的项目<strong>个数</strong></td><td>切到「全部公司」时是跨公司汇总，切到某家公司时只看这一家</td></tr>
+        <tr><td>预算消耗</td><td>已用预算 ÷ 总预算，换算成百分比</td><td>跨多个项目时看的是整体比例，不代表某一个项目</td></tr>
+        <tr><td>任务状态</td><td>处于<strong>运行中 / 开通中</strong>状态的<strong>项目</strong>数（卡片标题写作「任务状态」）</td><td>口径与字面不一致：它数的是「项目」，不是「任务条数」，也不含已完成 / 失败的项目</td></tr>
+        <tr><td>Agent 执行</td><td>开通与运维记录的累计<strong>条数</strong></td><td>是记录条数，不是「几个智能体」，也不等同于智能体调用次数</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>公司账本的四个数</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr>
+          <th>字段</th>
+          <th>它是什么</th>
+          <th>边界</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>当前余额</td><td>账户可用额度（可用额度）</td><td>真实资金，余额见底会触发实例熔断</td></tr>
+        <tr><td>累计充值</td><td>历史累计充进来的钱</td><td>只增不减</td></tr>
+        <tr><td>累计消费</td><td>历史累计花掉的钱</td><td>只增不减</td></tr>
+        <tr><td>预警阈值</td><td>低于它就说一声</td><td>你可以在 <span class="zy-btn">预警阈值</span> 里改</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">「累计消费」和项目内的花费不是一回事</span>
+    <p>公司账本记的是<strong>真实资金</strong>；项目内的「计费明细」记的是这个项目<strong>虚拟核算</strong>的花销。两者口径不同，不要交叉相减。AI token 消耗现在会由项目侧批量上报进公司账本（见第八节的提醒），但<strong>前提是部署时配好了上报地址</strong>——没配的实例，公司账本不含 AI 算力费，这一点账本页也有常显说明。做经营分析仍以项目账本的「计费明细」为准，做资金核对以公司账本为准。</p>
+  </div>
+
+  <h3>媒体生成的钱</h3>
+
+  <p>任务记录里的「金额(元)」由服务端按「档位单价 × 用量」折算，计入<strong>项目账本</strong>。如果你没给某个档位设置单价，那条记录会显示 <span class="zy-badge amber">待定价</span>，金额不折算——这不是系统算错了，而是「宁可空着也不编一个数」。想让它有数，去「价目设置」填上单价。</p>
+
+  <h3>超管后台的统计</h3>
+
+  <p>Token 统计页的两种维度讲清楚：<strong>累计 Token 数</strong>是消耗掉的 token 总量，<strong>Token 类消费总额</strong>是这些 token 折算成的钱。它还能切换「按模型 / 按用户 / 按项目」看 Top N 排行——用来回答「谁在烧」「哪个模型贵」这类问题。全局看板里的「预算消耗速率」是一个趋势指标，表示当前花钱的速度，比单看「花了多少」更能提前发现问题。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一个小小的对账习惯</span>
+    <p>养成每周扫一眼「通知中心（预算预警类）」+「公司账本（余额与累计消费）」的习惯。这两个地方是最早能发现「钱不对劲」的位置，比等盯项目内的计费明细更提前。</p>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

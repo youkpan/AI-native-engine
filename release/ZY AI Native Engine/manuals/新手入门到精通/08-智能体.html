@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第08章 智能体：创建、管理与自动扩编 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 08 章 · 第三步：指挥 AI 干活</div>
+    <h1>智能体：创建、管理与自动扩编</h1>
+    <p class="zy-lead">把 AI 拆成一支有岗位、有技能、有负责人的队伍，并让系统替你盯着"现在该不该加人"。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 20 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：加不加人你拍板</span>
+    </div>
+  </header>
+
+  <p>你在前面几章已经把公司建好、项目开起来、预算设好、资料导进来。现在到了一个关键问题：<strong>这些活到底是谁在干？</strong></p>
+
+  <p>答案不是"一个大模型在干所有事"，那样既管不好、也追不了责。ZY 引擎的做法，是把干活的 AI 拆成一个个<strong>智能体（Agent）</strong>——每个智能体有自己的岗位、自己的技能、自己的负责人，就像一家公司里的员工一样，只不过他们是数字的。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">本章要回答你三个问题</span>
+    第一，我<strong>怎么创建</strong>一个智能体，需要填什么、填错了能不能改？第二，创建出来<strong>怎么管理</strong>——技能怎么给、配置怎么调、表现怎么看？第三，也是最关心的：<strong>能不能自动管理</strong>，系统会不会自己招人、自己分工？
+  </div>
+
+  <p>先给你一个明确的结论，后面再用整章去论证它：<strong>系统能自动感知业务变化、自动给出"该加人了"的建议，甚至能一键把新员工招进来、配好技能、做完上岗测试；但"要不要加人"这个决定，始终由你拍板。</strong>它不会背着你偷偷扩编、偷偷花钱。这不是能力不足，这是刻意设计——组织变动和成本变化，必须让人知道、让人同意。</p>
+
+  <h3>你将学会</h3>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>分清"管理者智能体"和"员工智能体"，知道谁该下活、谁不该下场</span></li>
+    <li><input type="checkbox"><span>在「智能体中心」把四个标签页（组织 / 任务 / 配置 / 运行）各管什么看明白</span></li>
+    <li><input type="checkbox"><span>从岗位模板库挑一个岗，完整创建一个 Agent 并绑定技能</span></li>
+    <li><input type="checkbox"><span>在「组织进化」页读懂 AI 建议，并且敢点「确认」或「暂缓」</span></li>
+    <li><input type="checkbox"><span>知道四阶段（起步 / 成长 / 规模化 / 成熟）分别是多大规模、大概多少钱</span></li>
+  </ul>
+
+  <h3>先纠正一个常见误解</h3>
+  <p>很多新用户以为："我买了 AI，它就是一个超级大脑，我在对话框里说一句，它就把所有活干完了。" 在演示场景下这听上去很美，但一旦你的项目真的跑起来，就会立刻遇到三个问题：</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card">
+      <h4>问题一：追不了责</h4>
+      <p>一个大脑什么都做，出了错你不知道是"需求理解错了"还是"执行做砸了"，也没法针对性地换人、换技能。</p>
+    </div>
+    <div class="zy-card">
+      <h4>问题二：管不了成本</h4>
+      <p>一个大脑什么活都接，你没法说"营销这块预算给多一点、客服这块省一点"，因为根本没有"块"。</p>
+    </div>
+    <div class="zy-card">
+      <h4>问题三：长不大</h4>
+      <p>业务从 1 个项目扩到 10 个项目，一个大脑处理不过来，你也没法给它"加人"，只能干等它变慢。</p>
+    </div>
+  </div>
+
+  <p>所以 ZY 引擎选择把 AI 组织化。每个智能体都遵守「三要素」：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>三要素</th><th>是什么</th><th>在界面哪里配</th><th>人话解释</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>专家</strong>（岗位）</td>
+          <td>这个 Agent 是什么岗位、负责什么、红线在哪</td>
+          <td>智能体中心 → 组织 →「新建 Agent」的岗位角色 / 职责边界 / 人工红线</td>
+          <td>相当于员工入职时的"岗位说明书"</td>
+        </tr>
+        <tr>
+          <td><strong>技能</strong>（Skill）</td>
+          <td>这个岗位会哪些具体本事（前端编码、投放、写文案……）</td>
+          <td>智能体中心 → 组织 → 成员列表的「技能」按钮；技能库在上方统一维护</td>
+          <td>相当于员工的"技能证书"，可版本化、可复用</td>
+        </tr>
+        <tr>
+          <td><strong>连接器</strong>（Connector）</td>
+          <td>这个岗位能操作哪些外部系统（飞书、邮件、Git 仓库……）</td>
+          <td>岗位模板里登记；运行时按最小权限授权</td>
+          <td>相当于员工的"门禁卡"，给哪张卡就能进哪扇门</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">一句话记住</span>
+    岗位决定"该干什么"，技能决定"会怎么干"，连接器决定"能碰什么"。三者齐了，一个 Agent 才算配齐。
+  </div>
+
+  <h2>一、Agent 是什么，跟"任务"什么关系</h2>
+
+  <p>先把两个最容易混的概念分清楚：<strong>Agent（智能体）是"人"，任务（Task）是"活"。</strong></p>
+
+  <p>任务是你或者管理者 Agent 派下去的一件具体工作，比如"写一篇产品发布文案""调研三个竞品的定价"。任务有标题、有类型、有优先级、有状态（待处理 / 执行中 / 已完成……）。而 Agent 是承接这些活的"员工"——它可能今天接一个文案任务，明天接一个调研任务。</p>
+
+  <p>那么，任务是怎么落到某个 Agent 头上的？这里就出现了两类 Agent。</p>
+
+  <h3>管理者 Agent 与员工 Agent</h3>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>类型</th><th>界面显示</th><th>职责</th><th>会不会下场执行</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>管理者</td>
+          <td><span class="zy-badge blue">管理者</span></td>
+          <td>识别任务、把任务分给合适的员工、跟踪进度、做质量验收</td>
+          <td><strong>不会</strong>。它只协调分配，不亲自写代码、不亲自发邮件</td>
+        </tr>
+        <tr>
+          <td>员工</td>
+          <td><span class="zy-badge green">员工</span></td>
+          <td>各领域的专家，真正把活干出来</td>
+          <td><strong>会</strong>。它是具体任务的执行者</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>"管理者不下场"这条规则不是随便定的。它的意义在于：<strong>分工和验收必须是两拨人。</strong>如果同一个 Agent 既分活给自己、又给自己的活打分，那"质量把关"就是一句空话。所以引擎在底层会拦：只有<code>管理者</code>类型的 Agent 才能调用"分配任务"能力，员工去调会被直接拒绝，界面上的报错是「agent xxx is not a manager」。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">常见坑：以为必须先建管理者</span>
+    不是。你可以先建一个员工 Agent，直接给它派活。管理者 Agent 的价值在团队超过 3~4 个人、任务开始变多之后才明显。起步阶段一人公司，先建一个全能员工反而更省事。
+  </div>
+
+  <h3>管理者怎么给员工派活</h3>
+  <p>当一个管理者 Agent 接到任务，它按这个顺序挑人（这套逻辑在代码里是真实执行的，不是文案）：</p>
+
+  <ol class="zy-steps">
+    <li><strong>识别任务</strong>：看任务的类型（构建 / 市场 / 财务 / 内容 / 客服等），映射到候选岗位。</li>
+    <li><strong>匹配员工</strong>：在同一个项目里，找岗位匹配、且状态是"正常"的员工 Agent。</li>
+    <li><strong>择优分配</strong>：看候选员工<strong>最近 30 次任务的平均质量分</strong>，挑分高的。</li>
+    <li><strong>产出分配路径</strong>：记下"某某经理 → 某某员工"，供后续绩效追踪和复盘。</li>
+  </ol>
+
+  <p>最后这一步的"分配路径"很关键，它是后面「沉淀飞轮」的数据来源——哪个员工被派了什么活、干得怎么样，都会被记下来，越用越准。</p>
+
+  <h3>跟第 09 章"任务"的边界在哪</h3>
+  <p>本章讲的是"人"（Agent 怎么建、怎么配、怎么扩编）；第 09 章讲的是"活"（任务怎么派、轮次怎么转、验收怎么做）。两者的交界点是：<strong>任务可以选择"交给哪个岗位"，Agent 则决定"这个岗位由谁来干"。</strong>如果你现在看不懂任务那一侧，没关系，先记住本章的"人"怎么配齐，第 09 章会接上。</p>
+
+  <h3>两种执行方式：loop 引擎与 agent 引擎</h3>
+  <p>智能体干活时，底层有两种"工作方式"，你可以理解为两种工人：</p>
+
+  <div class="zy-grid c2">
+    <div class="zy-card tinted">
+      <h4>loop 引擎（默认）</h4>
+      <p>派一个"外部工人"（qianshou 循环工具）去跑。适合<strong>复杂、编码类、耗时长</strong>的任务，比如开发一个功能、跑一整个软件工程。它是默认真选。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>agent 引擎</h4>
+      <p>系统内部直接调用 AI 完成。适合<strong>信息整合、接口调用、快速</strong>的任务，比如汇总一份资料、查一个数据。</p>
+    </div>
+  </div>
+
+  <p>选哪个由三层配置决定，优先级从高到低是：<strong>任务级 &gt; 角色级 &gt; 项目默认</strong>。也就是说，单条任务可以指定引擎；没指定就看这个角色的配置；再没配就用项目的默认值。你不需要一开始就操心这件事，默认值对绝大多数场景是对的。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：系统怎么判断一个任务该用哪个引擎？</summary>
+    <div class="zy-acc-body">
+      <p>在你没明确指定时，系统会按任务描述里的关键词做启发式预测：出现"编码、开发、构建"等词倾向 loop；出现"查询、汇总、快速"等词倾向 agent；实在判断不出来，兜底走 loop。这套预测只是"没得选时的默认",有明确配置时永远以配置为准。</p>
+    </div>
+  </details>
+
+  <h2>二、智能体中心：四个标签页各管什么</h2>
+
+  <p>所有的"人"都在一个地方管：<strong>智能体中心</strong>。</p>
+
+  <div class="zy-path">项目内左侧菜单 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 智能体</div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">前提：必须先进某个项目</span>
+    如果你直接打开智能体中心的网址、URL 里没有项目编号，页面顶部会提示「请先进入具体项目（URL 含 projectId）后再访问智能体中心」。这不是报错，是提醒你——智能体是项目级的，先选项目。
+  </div>
+
+  <p>页面顶部是标题「智能体中心」，下面四个标签页：<span class="zy-btn ghost">组织</span> <span class="zy-btn ghost">任务</span> <span class="zy-btn ghost">配置</span> <span class="zy-btn ghost">运行</span>。很多人第一次进来只看了"组织"就退出了，其实另外三个页签才是日常管理的重心。</p>
+
+  <h3>标签页一：组织——看队伍、建人、配技能</h3>
+  <p>这是默认打开的页签，从上到下有三块。</p>
+
+  <p><strong>第一块：Agent 组织（管理者 → 员工）</strong>。标题右侧有 <span class="zy-btn">刷新</span> 和 <span class="zy-btn">新建 Agent</span> 两个按钮。下面是<strong>组织架构树</strong>，把管理者挂在上面、员工挂在下面，一眼看清谁领导谁。</p>
+
+  <p><strong>第二块：成员列表</strong>。用表格列出所有 Agent：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>列名</th><th>内容</th><th>怎么读</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>名称</td><td>你给 Agent 起的名字，如"项目经理小 Z"</td><td>自己起，随意</td></tr>
+        <tr><td>岗位</td><td>岗位标识，如 manager、fullstack_dev</td><td>决定它接哪类活</td></tr>
+        <tr><td>类型</td><td><span class="zy-badge blue">管理者</span> / <span class="zy-badge green">员工</span></td><td>决定它能不能分配任务</td></tr>
+        <tr><td>状态</td><td>正常 / 停用 / 暂停</td><td>停用的 Agent 不会被派活</td></tr>
+        <tr><td>操作</td><td><span class="zy-btn ghost">详情</span> <span class="zy-btn ghost">技能</span> <span class="zy-btn warn">暂停</span> 或 <span class="zy-btn ok">启用</span></td><td>详情看画像与绩效；技能改装配；暂停/启用控制是否在线</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>第三块：岗位模板库 + 技能库</strong>，左右并排。岗位模板库告诉你"这个项目类型下有哪些标准岗位可选"，技能库是"这些岗位能用哪些技能"。这两块是给前两块供料的，下面两节专门讲。</p>
+
+  <h3>标签页二：任务——给智能体派活的另一个入口</h3>
+  <p>标题是「Agent 任务编排」，三个按钮：<span class="zy-btn">刷新</span>、<span class="zy-btn">目标拆解</span>、<span class="zy-btn">新建任务</span>。</p>
+
+  <p>「目标拆解」是你给一个宏观目标（比如"为本季度新品做一轮获客"），AI 自动拆成 3~8 个子任务排队。「新建任务」是手动建一条具体任务。任务列表的列有：标题、类型、优先级、状态、岗位、创建时间、操作。</p>
+
+  <p>每行任务根据状态显示不同按钮：</p>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>按钮</th><th>什么时候出现</th><th>点了会怎样</th></tr></thead>
+      <tbody>
+        <tr><td><span class="zy-btn ghost">日志</span></td><td>任何时候</td><td>抽屉打开，看这条任务的执行日志</td></tr>
+        <tr><td><span class="zy-btn ghost">注入</span></td><td>任何时候</td><td>把新信息补进正在跑的任务里（比如临时补一句"重点是海外客户"）</td></tr>
+        <tr><td><span class="zy-btn danger">暂停</span></td><td>任务"执行中"</td><td>任务转到"已暂停"。注意：当前这一轮会跑完才停，不会硬杀进程丢上下文</td></tr>
+        <tr><td><span class="zy-btn ok">恢复</span></td><td>任务"已暂停"</td><td>重新排队继续</td></tr>
+        <tr><td><span class="zy-btn ok">通过</span> / <span class="zy-btn danger">拒绝</span></td><td>任务"待审批"</td><td>人工确认放行或驳回。驳回会让任务转失败并记下原因</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>任务状态一共六种，界面中文如下：<span class="zy-badge blue">待处理</span> <span class="zy-badge amber">执行中</span> <span class="zy-badge green">已完成</span> <span class="zy-badge red">失败</span> <span class="zy-badge sky">已暂停</span> <span class="zy-badge purple">待审批</span>。</p>
+
+  <p>「新建任务」弹窗的字段：标题（必填）、描述、类型（构建 build / 研究 research / 内容 content / 评审 review / 市场 market / 财务 finance）、优先级（1–10）、岗位角色（可选，填了会定向派给这个岗位）、知识库（逗号分隔的知识库 ID）。「目标拆解」弹窗只要两个输入：目标、项目背景（可选）。</p>
+
+  <h3>标签页三：配置——决定每个 Agent 用什么模式、什么提示词跑</h3>
+  <p>标题「Agent 运行配置」。按钮：<span class="zy-btn">刷新</span>、<span class="zy-btn">只看启用</span>（开关）、<span class="zy-btn ghost">导入 XML</span>、<span class="zy-btn">新建配置</span>。</p>
+
+  <p>配置表列：Agent 名称、角色、运行模式、Cron、工具、启用、版本、操作。运行模式有四种：</p>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>模式</th><th>什么时候用</th><th>要注意</th></tr></thead>
+      <tbody>
+        <tr><td>前台 (foreground)</td><td>你点了它就跑，跑完给你结果</td><td>适合手动触发的短任务</td></tr>
+        <tr><td>后台 (background)</td><td>丢到后台慢慢跑，不占你的界面</td><td>适合耗时任务</td></tr>
+        <tr><td>定时 (cron)</td><td>按 Cron 表达式周期性跑，如每天早 8 点发日报</td><td>要填「Cron 表达式」，如 <code>0 * * * *</code></td></tr>
+        <tr><td>事件监听 (event_listen)</td><td>某类事件发生就触发，如收到客户消息就跑客服 Agent</td><td>要选「事件触发」通配符，如 <code>message.*</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>「导入 XML」是用来批量导入 Agent 配置的，弹窗里可以填服务器上的「文件路径」，也可以直接粘贴「XML 内容」，二选一。同一个 name+role 再次导入会变成"版本 +1"，不会重复创建。</p>
+
+  <p>这块的完整字段说明，见本章 <a href="#appendix-c">附录 C · Agent 配置字段字典</a>。新手建议：这一页先只改「系统提示词」和「工具列表」，其它保持默认。</p>
+
+  <h3>标签页四：运行——看谁在跑、花了多少钱</h3>
+  <p>这里有两张表。上面是<strong>运行中 Agent 状态</strong>：Agent ID、名称、状态（已停止 / 启动中 / 空闲 / 忙碌）、当前运行、上次运行。下面是<strong>运行记录</strong>：Agent、触发模式、状态、Token、费用(¥)、耗时、创建时间、详情、停止。</p>
+
+  <p>右上角有 <span class="zy-btn">刷新</span> 和 <span class="zy-btn">启动运行</span>。点「启动运行」会让你选：Agent（必填）、任务目标（必填）、触发模式、是否"阻塞等待"。勾了阻塞等待，页面上就会一直等到跑完才返回结果；不勾，丢后台立刻返回。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">想知道钱花在哪了</span>
+    运行记录里的「费用(¥)」是这一趟实际消耗。想看汇总，去「自动运营 → 计费明细」页看累计花费与预算进度；本周期的组织级成本，则要看「组织进化」页顶部的月成本估算。
+  </div>
+
+  <h2>三、创建一个 Agent：从挑岗到绑定技能</h2>
+
+  <p>下面是一次完整的创建流程。跟着走一遍，你就掌握了。</p>
+
+  <ol class="zy-steps">
+    <li>进入智能体中心 →「组织」页签 → 点右上角 <span class="zy-btn">新建 Agent</span>。</li>
+    <li>在弹窗里填「名称」，比如"项目经理小 Z"。这是给人看的名字，怎么起都行。</li>
+    <li>选「岗位角色」。下拉里是这个项目类型下的标准岗位（如 全栈开发专家（fullstack_dev））。<strong>这个下拉可以自己输入新岗位</strong>，找不到就用岗位模板库里的 key。</li>
+    <li>选「类型」：<span class="zy-btn ghost">管理者</span> 或 <span class="zy-btn ghost">员工</span>。派活的人选管理者，干活的人选员工。</li>
+    <li>（可选）选「上级管理者」：如果这是个员工，把它挂到某个管理者下面，组织树才会好看。</li>
+    <li>填「负责人」。这是必填项，placeholder 写着「owner_id（人类用户或上级管理者 ID）」。填错了直接创建失败，报错「owner_id is required」。</li>
+    <li>（可选）填「角色描述」「职责边界」「人工红线」。这三项是给 AI 看的"岗位说明书"。</li>
+    <li>点 <span class="zy-btn">创建</span>。成功后列表里就多了一个 Agent。</li>
+    <li>回到成员列表，点这个 Agent 的 <span class="zy-btn ghost">技能</span> 按钮，为它勾选技能。</li>
+  </ol>
+
+  <h3>新建弹窗的字段清单</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>字段</th><th>必填</th><th>说明</th><th>填错能改吗</th></tr></thead>
+      <tbody>
+        <tr><td>名称</td><td>是</td><td>展示名，最长 128 字</td><td>目前界面没有改名入口，建议起一个稳妥的名字</td></tr>
+        <tr><td>岗位角色</td><td>是</td><td>决定它接哪类活，可从下拉选或自己输入</td><td>同样建议一次选对</td></tr>
+        <tr><td>类型</td><td>是</td><td>管理者 / 员工，二选一</td><td>创建时一次定</td></tr>
+        <tr><td>上级管理者</td><td>否</td><td>挂在谁下面</td><td>可选，可不填</td></tr>
+        <tr><td>负责人</td><td>是</td><td>人类用户 ID 或上级管理者 ID</td><td>可用「转移负责人」换（见负责人手册）</td></tr>
+        <tr><td>角色描述</td><td>否</td><td>这个岗位是干什么的</td><td>可后续编辑</td></tr>
+        <tr><td>职责边界</td><td>否</td><td>它能做和不能做的范围</td><td>可后续编辑</td></tr>
+        <tr><td>人工红线</td><td>否</td><td>绝对不许碰的底线</td><td>可后续编辑</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">注意：这里叫"人工红线"，岗位模板里叫"人类红线"</span>
+    「新建 Agent」弹窗里这一项叫「人工红线」，而「岗位模板详情」里叫「人类红线」。名字不一样，指的是同一件事：这个 Agent 绝对不能越过的边界。看到两个词别懵，是同一个概念。
+  </div>
+
+  <h3>绑定技能：注意"全量替换"语义</h3>
+  <p>点成员列表里的 <span class="zy-btn ghost">技能</span>，弹出「绑定技能 · 某某」的窗口，里面是「选择技能」多选框，提示语是「选择要绑定的技能（每个取最新版本）」。保存后生效。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">这是最容易踩的坑</span>
+    绑定技能是<strong>全量替换</strong>：你这次勾了几项，它就只留几项，之前绑的如果没勾上会被覆盖掉。所以每次"加技能"都要把原有的也一起勾上。另外当前接口层有个已知现象：传空数组不会清空（想全部解绑做不到），但界面正常使用不受影响。
+  </div>
+
+  <h3>Agent 详情：看画像，也看绩效</h3>
+  <p>点 <span class="zy-btn ghost">详情</span>，弹窗分三段：</p>
+  <ul>
+    <li><strong>基本信息</strong>：agent_id、岗位、类型、状态、负责人、上级、角色描述、职责边界、人工红线。</li>
+    <li><strong>已绑定技能</strong>：列出 skill_id、版本、绑定时间。</li>
+    <li><strong>绩效汇总</strong>：平均质量分、任务数、返工率（保留一位小数）、主要返工原因。</li>
+  </ul>
+
+  <p>「返工率」这一项值得你每次上线新 Agent 后回来看一眼。它统计的是"这个 Agent 交出的活被退回重做的比例"。一个新 Agent 刚上岗时返工率偏高是正常的，随着经验沉淀会下降；<strong>如果一个 Agent 跑了很久返工率还居高不下，说明它的岗位画像或技能配置有问题，该调整了。</strong></p>
+
+  <h2>四、岗位模板库：不用从零想岗位</h2>
+
+  <p>「我要建一个 AI 团队，可是该有哪些岗位？」这个问题不用你自己想。ZY 引擎按<strong>项目类型</strong>预置了成套的岗位模板，你直接挑就行。</p>
+
+  <p>位置：智能体中心 →「组织」页签 → 下方左侧的「岗位模板库」卡片。顶部有分类筛选：软件开发 / 电商运营 / 内容创作 / 智能制造 / 通用。右侧有 <span class="zy-btn">新增模板</span>。</p>
+
+  <p>表格列出每个模板的：岗位 key（如 fullstack_dev）、名称（如 全栈开发专家）、技能（这个岗位预置会哪些技能）、操作（<span class="zy-btn ghost">详情</span> <span class="zy-btn ghost">删除</span>）。</p>
+
+  <h3>五类项目分别有哪些岗位</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>项目类型</th><th>预置岗位</th><th>典型岗位数</th></tr></thead>
+      <tbody>
+        <tr><td>软件开发 software</td><td>项目经理、全栈开发专家、测试专家、运维专家</td><td>4</td></tr>
+        <tr><td>电商运营 ecommerce</td><td>运营总监、营销获客专家、客服专家、数据分析师</td><td>4</td></tr>
+        <tr><td>内容创作 content</td><td>内容总监、文案专家、设计专家、SEO 专家</td><td>4</td></tr>
+        <tr><td>智能制造 manufacture</td><td>生产总监、工艺工程师</td><td>2</td></tr>
+        <tr><td>通用 general</td><td>没有预置库，回退为"项目经理 + 通用执行者"两人最小集</td><td>2（回退）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>完整的岗位画像（角色描述 / 职责边界 / 人工红线 / 技能 / 连接器），见本章 <a href="#appendix-a">附录 A · 预置岗位模板全表</a>——这张表可以打印出来对照着建团队。</p>
+
+  <h3>新增、编辑、删除模板</h3>
+  <p>点 <span class="zy-btn">新增模板</span> 会弹出表单，字段：岗位分类（已由你当前选的分类锁定）、岗位 key（必填，提示「如 fullstack_dev（唯一标识，创建后不可改）」）、角色名称（必填）、角色描述、责任边界、人类红线、技能（多选）、连接器（可输入后回车添加）。</p>
+
+  <p>点某一行的 <span class="zy-btn ghost">详情</span>，可以编辑并保存。详情弹窗底部还有「版本管理」区：可以把当前模板「保存为版本」，列出历史版本，并支持 <span class="zy-btn warn">回滚</span>。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">为什么要给模板做版本</span>
+    岗位模板是"活的"：你把"全栈开发专家"的技能从 3 项改成 5 项、或者调了它的职责边界，这会直接影响以后新建的 Agent。做一次"保存为版本"，就是留一个快照。改坏了，一键回滚到之前的版本。模板改动不会自动影响已经创建出来的 Agent——那些 Agent 的画像在创建时就固化了。
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">版本链按"分类 + 岗位 key"隔离</span>
+    岗位模板的版本快照记录了分类。也就是说，软件开发下的 manager 和电商运营下的 manager 即使 key 相同，各自的版本号也是<strong>独立计数、互不串扰</strong>的——回滚 software 的 manager，不会动到 ecommerce 的 manager。注意：<strong>升级前保存的旧版本快照没有分类标记</strong>，历史行的归属无法可靠还原，回滚历史版本时要留意一下。以实际界面为准。
+  </div>
+
+  <h2>五、技能库与技能装配</h2>
+
+  <p>岗位模板告诉你"这个岗该会什么"，技能库则是这些"本事"本身。位置：智能体中心 →「组织」页签 → 下方右侧的「技能库」卡片。</p>
+
+  <h3>技能库的列怎么看</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>列名</th><th>含义</th></tr></thead>
+      <tbody>
+        <tr><td>名称</td><td>技能的中文名，如"后端编码"</td></tr>
+        <tr><td>skill_id</td><td>技能的唯一标识，如 coding_backend。岗位模板里引用的就是它</td></tr>
+        <tr><td>版本</td><td>同一个 skill_id 可以有多个版本，这里显示最新版</td></tr>
+        <tr><td>分类</td><td>如 coding / marketing / analysis</td></tr>
+        <tr><td>范围</td><td><span class="zy-badge green">组织级</span>（跨项目复用）或 <span class="zy-badge sky">项目级</span>（只在本项目用）</td></tr>
+        <tr><td>状态</td><td>启用 / 禁用 开关，直接拖动即可切换</td></tr>
+        <tr><td>操作</td><td><span class="zy-btn ghost">编辑</span>（存为新版本）、<span class="zy-btn ghost">提升为组织级</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>编辑技能 = 存一个新版本</h3>
+  <p>点 <span class="zy-btn ghost">编辑</span>，弹窗里有：skill_id（只读）、名称（必填）、分类、提示词、完整定义 JSON、变更说明。底部按钮是 <span class="zy-btn">保存为新版本</span>。</p>
+
+  <p>注意这个按钮的措辞——它不会覆盖旧版本，而是<strong>递增出一个新版本</strong>。旧版本还在，这样你随时能对比"这次改动到底带来了什么"。绑定技能的 Agent 会在下次绑定时取到最新版。</p>
+
+  <h3>把好技能"提升为组织级"</h3>
+  <p>项目级技能只在本项目可见。如果某个技能做得好、你想让它在公司所有项目里复用，点 <span class="zy-btn ghost">提升为组织级</span>。确认文案是：</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">界面原文</span>
+    将技能「X」提升为组织级？提升后将跨项目复用（需人工审批确认）。
+  </div>
+
+  <p>按钮是 <span class="zy-btn">申请提升</span>。注意这里是"申请"，不是"立即生效"。系统会创建一个<strong>人工确认节点</strong>（强人工级别），需要人点确认后才真正落库。成功后界面提示「提升申请已提交，待人工审批确认后生效」。</p>
+
+  <details class="zy-acc">
+    <summary>进阶：为什么"提升为组织级"要人工确认？</summary>
+    <div class="zy-acc-body">
+      <p>因为组织级技能是跨项目共享的资产。一旦提升，别的项目也会用到它——影响面超出了你当前这个项目。这类"影响别的项目"的动作，引擎一律走人工确认，避免一个项目里的临时改动悄悄污染全公司。</p>
+    </div>
+  </details>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">重要事实：技能库没有内置种子</span>
+    引擎出厂时<strong>不自带一批技能</strong>。技能库里的内容，是随着你的项目装配过程逐渐积累起来的。岗位模板里登记的技能 ID（如 coding_backend）是"岗位期望会什么"，不代表技能库里已经有了这一条。如果你发现某个 Agent 的技能下拉是空的，那不是坏了，而是技能库还没建过任何技能——点「编辑」的同类入口或通过接口新建即可。<strong>以你自己界面上看到的技能库为准。</strong>
+  </div>
+
+  <h3>技能成熟度：目前界面上看不到</h3>
+  <p>设计上，每个技能会有一个"成熟度"等级（学习中 → 练习中 → 熟练 → 专家 → 大师），随成功使用次数和成功率进阶。但要注意：<strong>这套成熟度统计需要"技能使用埋点"，而当前版本执行链路还无法可靠归因到具体技能</strong>，所以成熟度相关的展示与自动进阶属于规划中的能力，你在界面上一时看不到它。别去找"技能成熟度"这个按钮——现在没有。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <strong>这样做</strong>
+      <ul>
+        <li>先看岗位模板预置的技能 ID，照着建技能，减少命名混乱</li>
+        <li>技能改名走"存为新版本"，保留历史</li>
+        <li>通用性强、验证有效的技能，才去申请提升为组织级</li>
+      </ul>
+    </div>
+    <div class="no">
+      <strong>别这样做</strong>
+      <ul>
+        <li>不要指望技能库一打开就是满的，它是用出来的</li>
+        <li>不要为了"看起来专业"给新 Agent 一口气绑十几个技能</li>
+        <li>不要找"技能成熟度"进度条，该能力尚未提供界面</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>六、运行配置（RunConfig）：让角色自己决定怎么跑</h2>
+
+  <p>前面讲了 Agent 的"人"（组织页签）和"活"（任务页签）。还有一个层面是"这个角色的运行参数"——它用什么模型、带哪些技能、输出什么格式、权限多大。这些统称<strong>运行配置</strong>。</p>
+
+  <p>对普通用户来说，你主要会在两个地方接触它：「Agent 运行配置」（配置页签）和「角色管理页」的版本列表。</p>
+
+  <p>一个角色级配置大致包含这些字段（人话版）：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>字段</th><th>人话解释</th><th>新手要不要改</th></tr></thead>
+      <tbody>
+        <tr><td>Prompt（提示词）</td><td>这个角色的"工作指令"，告诉它怎么思考、怎么输出</td><td>要改，这是最值得你花时间的</td></tr>
+        <tr><td>Engine（引擎）</td><td>loop 还是 agent（见第一章）</td><td>先别改，用默认</td></tr>
+        <tr><td>EnabledSkills（启用技能）</td><td>这个角色装配了哪些技能</td><td>通过「绑定技能」改，别直接改这里</td></tr>
+        <tr><td>DisabledSkills（禁用技能）</td><td>明确排除的技能</td><td>先别改</td></tr>
+        <tr><td>OutputFormat（输出格式）</td><td>要求它输出 markdown / json 等</td><td>有明确需求再改</td></tr>
+        <tr><td>CLIParams（命令行参数）</td><td>给 loop 引擎的额外参数</td><td>别改，进阶内容</td></tr>
+        <tr><td>PermissionMode（权限模式）</td><td>auto-run（自动执行）或 approve（需审批）</td><td><strong>保持审批</strong>，见下方警告</td></tr>
+        <tr><td>Model（模型）</td><td>这个角色用哪个模型档位</td><td>一般交给模型路由自动决定</td></tr>
+        <tr><td>MaxBudgetUSD（预算上限）</td><td>这个角色单次/单周期的花费上限</td><td>按需设</td></tr>
+        <tr><td>KBIDs（知识库）</td><td>这个角色能检索哪些知识库</td><td>按需设</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">权限模式：auto-run 是高危开关</span>
+    权限模式里，<code>approve</code> 表示"敏感操作要人点确认"，<code>auto-run</code> 表示"自动执行、不等人"。项目级默认是审批模式。<strong>不要为了图省事把它切到 auto-run。</strong>让 AI 未经确认就自动发邮件、自动改生产数据，风险远大于你省下的那几次点击。
+  </div>
+
+  <p>配置也能整批导入。「导入 XML」弹窗支持填服务器路径或直接粘贴 XML 内容，适合同一套配置要批量铺到多个 Agent 的场景。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">新手最省心的三层策略</span>
+    第一层不动：引擎、命令行参数、权限模式，全部保持默认。第二层小改：提示词、输出格式。第三层按需：技能、知识库、预算上限。把注意力放在提示词上，回报率最高。
+  </div>
+
+  <h2>七、角色进化：让岗位自己变得更好</h2>
+
+  <p>「角色管理」是自动运营控制台下的一块，专门管"岗位这个角色本身怎么进化"。入口：</p>
+
+  <div class="zy-path">项目内 <span class="sep">›</span> 自动运营控制台 <span class="sep">›</span> 角色管理</div>
+
+  <p>页面标题「角色管理」，有三块内容。</p>
+
+  <h3>第一块：岗位能力图谱</h3>
+  <p>按分类展示"岗位 → 技能"的对应关系，标题右侧有 <span class="zy-btn ghost">刷新图谱</span>。一眼看清每类项目里有哪些岗位、每个岗位配了哪些技能。空态是「暂无能力图谱数据」。</p>
+
+  <h3>第二块：角色列表与版本</h3>
+  <p>角色列表列：角色名称、类型、活跃版本（显示成 vN）、状态（激活 / 未激活）、试跑统计（N 次 / 成功 N / 均成本 ¥N）。每行有 <span class="zy-btn ghost">版本</span> 和 <span class="zy-btn ok">优化</span> 两个按钮。</p>
+
+  <p>点 <span class="zy-btn ghost">版本</span>，下方展开该角色的版本列表：版本号、引擎、版本说明、平均成本、状态、试跑次数、操作（<span class="zy-btn ok">启用</span>）。</p>
+
+  <p>版本有三种状态，这是本节的核心概念：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>状态</th><th>界面显示</th><th>含义</th></tr></thead>
+      <tbody>
+        <tr><td>candidate</td><td><span class="zy-badge amber">候选</span></td><td>新生成的版本，还在试跑，没正式上岗</td></tr>
+        <tr><td>active</td><td><span class="zy-badge green">激活</span></td><td>当前生效的版本，Agent 就按它跑</td></tr>
+        <tr><td>retired</td><td><span class="zy-badge red">已停用</span></td><td>被淘汰的版本，留档但不生效</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>点 <span class="zy-btn ok">优化</span>，会请求"为这个角色生成一个优化版本"。系统会基于它积累的经验，产出一个 candidate 版本，跑几轮试跑后，如果新版本的成功率不低于老版本、成本没有明显上涨，就会自动提升为 active（这套灰度比较是自动的：最少试跑 5 次、成本容忍 1.2 倍、成功率容差 0.05）。你也可以手动点「启用」直接切到某个版本。</p>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">关键一句话：进化是"给建议"，不是偷改</span>
+    角色进化做的是——根据经验生成<strong>候选版本</strong>、试跑、给出对比数据。它<strong>不会</strong>在你不知情的时候把线上正在跑的版本换掉。这和第 08 章反复强调的原则一致：AI 建议、人决策。
+  </div>
+
+  <h3>第三块：经验沉淀</h3>
+  <p>这是角色进化的"粮食"。表格列：来源、经验内容、关联任务、时间。空态「暂无经验沉淀」。</p>
+
+  <p>经验有四种来源：<span class="zy-badge blue">任务</span>（task）、<span class="zy-badge blue">用户回复</span>（user_reply）、<span class="zy-badge blue">手动</span>（manual）、<span class="zy-badge blue">SOP</span>（sop）。</p>
+
+  <p>右上角两个按钮：<span class="zy-btn warn">生成 SOP 草稿</span> 和 <span class="zy-btn">新增经验</span>。「新增经验」弹窗字段：来源、关联任务（可选）、经验内容（提示「执行摘要 / 踩坑 / 有效方法」）。保存后提示「经验已沉淀」。</p>
+
+  <p>「生成 SOP 草稿」会基于这个角色的历史经验，用 AI 草拟一份标准作业流程，弹窗「SOP 草稿预览」里以 JSON 呈现，你可以查看后决定怎么用。</p>
+
+  <h3>绩效指标怎么读</h3>
+  <p>角色好不好，看四个数：</p>
+  <div class="zy-grid c4">
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">任务成功率</div>
+      <div class="zy-kpi-value">越高越好</div>
+      <div class="zy-kpi-hint">权重最大，占绩效评分 40%</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">返工率</div>
+      <div class="zy-kpi-value">越低越好</div>
+      <div class="zy-kpi-hint">退回重做的比例，占 20%</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">单位 token 附加值</div>
+      <div class="zy-kpi-value">越高越好</div>
+      <div class="zy-kpi-hint">花的每一分钱换来多少产出，占 30%</div>
+    </div>
+    <div class="zy-kpi">
+      <div class="zy-kpi-label">经验贡献</div>
+      <div class="zy-kpi-value">看趋势</div>
+      <div class="zy-kpi-hint">沉淀了多少条有用经验，占 10%</div>
+    </div>
+  </div>
+
+  <p>这四个数综合成一个绩效分，决定这个角色在"择优分配"里的优先级，也决定优化建议怎么给。你不需要去算这个分，只要知道：<strong>成功率是第一位、成本效率第二、返工率第三、经验积累第四。</strong></p>
+
+  <h3>绩效漏斗：从任务到优化</h3>
+  <div class="zy-flow">
+    <div class="zy-flow-node">任务执行</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node">记录绩效</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node">沉淀经验</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node hot">生成候选版本</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node">试跑灰度</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node ok">择优生效</div>
+  </div>
+
+  <h2>八、能不能自动管理？——组织进化引擎</h2>
+
+  <p>这是本章的核心问题，也是整个 ZY 引擎最与众不同的能力。先给结论，再讲细节。</p>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">明确回答：能自动"感知 + 建议 + 一键落地"，但不替你决定"加不加人"</span>
+    系统会持续盯着业务数据，自动判断"你现在处于哪个阶段""哪里人手不够"，并把结论变成一条条带成本估算的建议。你点「确认」，它就能把新角色建好、技能配好、上岗测试做完；你不点，它就一直等。<strong>加人这件事的最终决定权，始终在你手上。</strong>
+  </div>
+
+  <h3>入口与页面</h3>
+  <div class="zy-path">项目内左侧菜单 <span class="sep">›</span> 组织与运营 <span class="sep">›</span> 组织进化</div>
+
+  <p>页面标题「组织进化」，右上角两个按钮：<span class="zy-btn">阶段切换</span> 和 <span class="zy-btn">刷新</span>。页面从上到下是五块卡片：阶段状态、组织架构、AI 建议、能力开启、定量调控。</p>
+
+  <h3>第一块：阶段状态——我现在处于哪个阶段</h3>
+  <p>卡片显示三样东西：当前<strong>阶段徽章</strong>、<strong>成熟度</strong>（未达成 / 接近 / 已达成）、一段 <strong>reason 说明</strong>。旁边有 <span class="zy-btn ghost">重新评估</span> 按钮。</p>
+
+  <p>下面有一个可折叠的「判定证据」表：指标 / 当前值 / 阈值 / 是否命中 / 数据是否可用。这张表是"为什么系统说你到了这个阶段"的证据链，非常值得点开看一眼。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">判定的两个关键规则</span>
+    第一，系统主要看<strong>账本营收</strong>和<strong>任务完成数</strong>这两个"最小数据源"。第二，某个指标如果对应的能力还没开启（比如你还没做营销），它的数据就是缺失的，缺失指标<strong>不参与判定</strong>，不会被当成 0 分来误判你"该建营销团队"——这就避免了循环依赖。
+  </div>
+
+  <h3>第二块：组织架构树</h3>
+  <p>把当前项目里的组织节点画成树。每个节点显示：月成本、负载、成功率、产出数。部门节点会带上警告标记便于辨认。</p>
+
+  <p>这棵树和智能体中心的组织树是同一份数据，只是视角不同：智能体中心更偏"人"（谁的岗位、谁的技能），组织进化页更偏"经营"（每个岗位花了多少钱、干了多少活、成了多少）。</p>
+
+  <h3>第三块：AI 建议——本页最重要的区域</h3>
+  <p>卡片标题是「AI 建议（N 条待处理）」。每条建议包含：</p>
+  <ul>
+    <li><strong>类型</strong>：<span class="zy-badge blue">增员</span>（role_add）/ <span class="zy-badge blue">扩容</span>（scale_out）/ <span class="zy-badge amber">技能装配</span>（skill_attach）/ <span class="zy-badge green">阶段升级</span>（stage_upgrade）</li>
+    <li><strong>优先级</strong>：建议 / 可选</li>
+    <li><strong>详情折叠</strong>：「职责边界 / 技能草稿 / 成本估算」，含估算月成本、扩编后总成本变化</li>
+    <li><strong>「为什么（证据）」折叠</strong>：对标 / 指标 / 当前值 / 阈值 / 是否命中</li>
+    <li><strong>操作</strong>：<span class="zy-btn ok">确认</span> <span class="zy-btn warn">暂缓</span> <span class="zy-btn danger">拒绝</span></li>
+  </ul>
+
+  <p>三种操作的确认文案（界面原文）：</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">确认</span>
+    确认采纳建议「X」？系统将自动完成扩编/装配并上岗。
+  </div>
+  <div class="zy-copy">
+    <span class="zy-copy-tag">暂缓</span>
+    暂缓该建议，输入冷却天数（冷却期内不再重复提示）
+  </div>
+  <div class="zy-copy">
+    <span class="zy-copy-tag">拒绝</span>
+    拒绝该建议，请输入原因（用于留痕复盘）
+  </div>
+
+  <p>暂缓的默认天数是 7 天，冷却期内同一条建议不会再反复打扰你。拒绝时填的原因会留档，供后续复盘。这些建议状态在列表里显示为：待确认 / 已确认 / 已应用 / 已拒绝 / 暂缓 / 已过期。</p>
+
+  <h4>一键扩编：点了「确认」之后发生了什么</h4>
+  <p>这是最"神奇"的一步，但过程并不神秘，它是一串编排好的动作：</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node">校验</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node">建角色</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node">写组织节点</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node">装配技能</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node">入职建档</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node hot">上岗测试</div>
+    <div class="zy-flow-arrow">→</div>
+    <div class="zy-flow-node ok">留痕（可回滚）</div>
+  </div>
+
+  <ol class="zy-steps">
+    <li><strong>校验</strong>：角色名是否唯一、技能是否合法、预算是否覆盖得住。</li>
+    <li><strong>建角色</strong>：引用岗位模板新建一个 Agent，自动归属负责人。岗位模板按<strong>项目分类 + 岗位 key</strong>精确匹配，不会再出现"软件项目的 manager 套用了电商模板"这种事。如果是"新增岗位"建议，而同一分类下已经有同名角色，会<strong>直接拒绝并明确报错</strong>；如果是"扩容"建议（给既有岗位加并行实例），才会自动加序号后缀（如"全栈开发专家-2"）。你双击确认也不会建出两个同名角色——第二次会被拦下并返回明确提示。</li>
+    <li><strong>写组织节点</strong>：把它挂进组织树。</li>
+    <li><strong>装配技能</strong>：按建议里的技能草稿绑定。注意：草稿里的技能如果在技能库里不存在，会被跳过并留提示，不会整条失败。</li>
+    <li><strong>入职建档</strong>：生成岗位档案。</li>
+    <li><strong>上岗测试</strong>：给新岗位做一次<strong>真实的上岗就绪判定</strong>，对照三个条件——<strong>角色在岗、已建档且启用了非空提示词版本、期望技能已装配</strong>。结论会写回测试记录。</li>
+    <li><strong>留痕</strong>：写一条变更记录，带"回滚点"。后悔了可以一键回退——新 Agent 会被停用、组织节点被撤销。</li>
+  </ol>
+
+  <p>如果扩编中途失败（比如技能装配出错），整个流程会回滚，建议退回到"已确认"状态，你可以修完问题再点一次。它不会留下半拉子工程。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">上岗测试没通过会怎样？</span>
+    判定不通过时，系统会做两件事：<strong>生成一个人工处理节点（黄通道）</strong>，提醒你"这个岗位招不进来，请人工决定重试 / 调整配置 / 淘汰"；同时<strong>停用刚建的这个角色</strong>，阻断它进入调度——不会让一个没配好的岗位去接活。这比"连续失败满 3 次才兜底"更早介入，避免反复招募、反复烧钱。想让它直接上岗、跳过判定，可以在项目配置里打开"跳过上岗测试"开关；打开后会跳过判定，也不会生成人工节点。以实际界面为准。
+  </div>
+
+  <h3>第四块：能力开启</h3>
+  <p>卡片标题「能力开启（已开启 X / 阶段推荐 Y）」，带一条进度条。下面是能力清单，每项显示：名称、阶段标签、已开启 / 未开启。</p>
+
+  <p>ZY 引擎的能力是打过分阶段标签的：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>能力梯队</th><th>典型能力</th><th>推荐开启阶段</th></tr></thead>
+      <tbody>
+        <tr><td>核心必备</td><td>Agent 执行 / AI 对话 / 知识库 / 账本 / 自动构建部署</td><td>起步期（项目创建即启用）</td></tr>
+        <tr><td>获客与运营</td><td>营销自动化 / 邮件 / SEO / 通知 / 报告 / 备份 / 合规审查</td><td>成长期</td></tr>
+        <tr><td>规模化</td><td>A/B 测试 / 多语言 / CRM / 合同发票 / 知识图谱 / 竞品监控 / 跨项目迁移</td><td>规模化期</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>系统会针对"到了该开但还没开"的能力生成建议。注意两点：<strong>能力就绪不等于自动开启</strong>，路径永远是"检测需求 → 建议（含成本）→ 你确认 → 生效"；同时<strong>你可以随时手动开关任意能力</strong>，建议只是参考。</p>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">三条安全底线，开关不可关</span>
+    资源治理、预算熔断、渐进式信任这三项是<strong>强制开启</strong>的，参数可以调，但开关关不掉。这是防止"AI 失控烧钱"的最后一道闸。任何说"可以把预算熔断关掉省事"的说法都别信。
+  </div>
+
+  <h3>第五块：定量调控（八维）</h3>
+  <p>这是"不要一刀切的开关，而要连续调节"思想的落地。八条维度：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>维度</th><th>含义</th><th>范围</th><th>能否调</th></tr></thead>
+      <tbody>
+        <tr><td>预算</td><td>每天能花多少钱</td><td>$0.5–500/天</td><td>可调</td></tr>
+        <tr><td>自主权限</td><td>给 AI 多大自主权（0–100 分）</td><td>0–100</td><td>可调</td></tr>
+        <tr><td>优化频率</td><td>多久做一次角色优化</td><td>关闭 / 月 / 周 / 日 / 实时</td><td>可调</td></tr>
+        <tr><td>优化强度</td><td>优化的力度</td><td>浅 / 标准 / 深</td><td>可调</td></tr>
+        <tr><td>模型等级</td><td>用 flash / normal / pro 哪档模型</td><td>flash / normal / pro</td><td><span class="zy-badge sky">只读</span></td></tr>
+        <tr><td>并发数</td><td>同时能跑几个任务</td><td>0–10</td><td>可调</td></tr>
+        <tr><td>技能数</td><td>角色平均技能数量</td><td>1–1000</td><td><span class="zy-badge sky">只读</span></td></tr>
+        <tr><td>汇报频率</td><td>多久给你汇报一次</td><td>关闭 / 周 / 日 / 每任务</td><td><span class="zy-badge sky">只读</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>为什么有三个只读？因为它们的值由底层引擎实时决定（模型等级来自模型路由网关、技能数来自技能库装配、汇报频率来自报告引擎），人为硬改会造成"视图和实际不一致"。系统干脆不让你改，免得你改了一个假数字。<strong>只读维度你点它会明确报错，不会假装成功。</strong></p>
+
+  <h3>阶段切换：从"起步"走到"成长"</h3>
+  <p>点页面右上角 <span class="zy-btn">阶段切换</span>，弹出「阶段切换」窗口，顶部有一段重要的说明（界面原文）：</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">界面原文</span>
+    阶段切换会批量创建缺失岗位、更新组织节点与阶段状态；提交前系统会做角色唯一 / 技能合法 / 预算覆盖校验。
+  </div>
+
+  <p>字段有两个：「目标阶段」（下拉，每个选项后面带它的组织形态，如"成长期（小组分工）"）、「岗位集（可选，留空使用阶段推荐默认岗位）」（输入 role_key 后回车添加）。按钮是 <span class="zy-btn warn">回退上次切换</span> <span class="zy-btn ghost">取消</span> <span class="zy-btn">确认切换</span>。</p>
+
+  <p>提交后，系统会批量补建这个阶段缺的岗位，有三点细节和上面那句"校验"的措辞要对上：<strong>已经存在的岗位会自动跳过</strong>（不会重复建）；<strong>草稿里的技能如果在技能库里找不到，会跳过装配、并给你一条人工提醒</strong>（不会因此让整条切换失败）；<strong>预算不足只会预警，不会阻断这次切换</strong>。回退的确认文案是「确定回退最近一次阶段切换？组织节点与阶段状态将恢复。」</p>
+
+  <h3>四阶段模型：你现在在哪一档</h3>
+  <p>这是本章最值得记住的一张表。它是"你的业务规模 → 该配多大规模的组织 → 大概花多少钱"的对照表。成本一列是<strong>估算参考</strong>（含 token、算力、媒体等 AI 运行成本），不是账单。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th>阶段</th><th>对标规模</th><th>组织形态</th><th>典型月成本（估算）</th><th>优化频率</th><th>预算策略</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>起步期</strong> startup</td>
+          <td>0→1（约 2 人公司）</td>
+          <td>一人全能</td>
+          <td>~$10–30</td>
+          <td>按需触发</td>
+          <td>固定预算 + 硬熔断</td>
+        </tr>
+        <tr>
+          <td><strong>成长期</strong> growth</td>
+          <td>1→10（约 10 人团队）</td>
+          <td>小组分工</td>
+          <td>~$50–150</td>
+          <td>每周轻度 + 每月复盘</td>
+          <td>基础预算 + 弹性</td>
+        </tr>
+        <tr>
+          <td><strong>规模化期</strong> scale</td>
+          <td>10→100（50–200 人）</td>
+          <td>部门建制</td>
+          <td>~$200–800</td>
+          <td>每日监控 + 每周优化</td>
+          <td>动态预算 + ROI 调度</td>
+        </tr>
+        <tr>
+          <td><strong>成熟期</strong> maturity</td>
+          <td>100+（500+ 人）</td>
+          <td>事业部自治</td>
+          <td>~$500–2000+</td>
+          <td>实时自适应</td>
+          <td>多预算池 + 全局 ROI</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>四个阶段的组织形态各自是什么样：</p>
+  <ul>
+    <li><strong>起步期"一人全能"</strong>：1 个全能 Agent 兼任 CEO、开发、运营，跑通"想法 → 成品 → 上线"的最小闭环。</li>
+    <li><strong>成长期"小组分工"</strong>：CEO + 研发 + 营销 + 客服，验证产品与市场匹配、开始获客。</li>
+    <li><strong>规模化期"部门建制"</strong>：CEO + 研发 / 营销 / 销售客服 / 运营四大部门，部门内再细分岗位。</li>
+    <li><strong>成熟期"事业部自治"</strong>：CEO + 多事业部完整团队 + 中台 Agent（知识 / 技术 / 数据中台），技能按需装配。</li>
+  </ul>
+
+  <h3>升级看什么数据</h3>
+  <p>升级不看感觉，看数据。每个阶段有一组"毕业标准"（升级规则），命中率达到一定比例才算达成：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>要升级到</th><th>关键门槛（示例）</th></tr></thead>
+      <tbody>
+        <tr><td>成长期</td><td>任务完成数 ~50、营收 ~5000</td></tr>
+        <tr><td>规模化期</td><td>任务完成数 ~200、营收 ~50000、活跃 Agent 数 ~4、知识文档数 ~50</td></tr>
+        <tr><td>成熟期</td><td>任务完成数 ~1000、营收 ~500000、活跃 Agent 数 ~10</td></tr>
+        <tr><td>（终态）</td><td>成熟期没有升级阈值，它是终点</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这些数字是内置的默认阈值，实际以你界面「判定证据」表里显示的"阈值"为准。判定逻辑是：<strong>命中率达到较高比例（约六成）且最小数据源（营收、任务完成数）有命中，才算"已达成"；命中约四成算"接近"。</strong></p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">升级规则一句话</span>
+    数据够了，系统说"你可以进下一阶段了"；要不要进，你点。进去之后如果发现不合适，可以一键回退到上一个阶段和当时组织架构。
+  </div>
+
+  <h3>关于"自动管理"的四个常见疑问</h3>
+  <details class="zy-acc">
+    <summary>它会自己花钱招人吗？</summary>
+    <div class="zy-acc-body">
+      <p>不会。<strong>只有你点了「确认」，扩编才会真正发生</strong>，而且扩编前会做「预算覆盖校验」——如果预算不够覆盖新增角色的估算月成本，这一步就会拦下来。系统也会在建议里明确标出"扩编后总成本变化"，让你在点确认之前就知道要多花多少。</p>
+    </div>
+  </details>
+  <details class="zy-acc">
+    <summary>我不管它，它会一直提醒我吗？</summary>
+    <div class="zy-acc-body">
+      <p>不会。同类型的建议有冷却节流机制：你点一次「暂缓」，冷却期内（默认 7 天）它就不再重复提示。系统会尽量把建议合并打包，而不是一条一条轰炸你。这也是"注意力管理"的一部分——组织越大，越需要控制打扰频率。</p>
+    </div>
+  </details>
+  <details class="zy-acc">
+    <summary>它建议加的人，我不满意怎么办？</summary>
+    <div class="zy-acc-body">
+      <p>三种办法：一是点「确认」时修改字段（岗位名、职责边界、技能草稿、成本估算都可以覆盖后再落地）；二是点「拒绝」并写明原因，这条会留档；三是先让它落地，如果效果不好，再用变更记录一键回滚。系统不强制你接受任何建议。</p>
+    </div>
+  </details>
+  <details class="zy-acc">
+    <summary>阶段升级会不会把我的组织架构全推翻？</summary>
+    <div class="zy-acc-body">
+      <p>不会。阶段切换的动作是"补建缺失岗位"，已经存在的岗位会被跳过，不会重建、不会清空你已有的配置。切换前系统还会做一次快照备份；如果你觉得不合适，点「回退上次切换」，组织节点和阶段状态都会恢复到切换前。<strong>它是渐进的、可逆的。</strong></p>
+    </div>
+  </details>
+
+  <h2>九、人 + Agent 的混合团队怎么配</h2>
+
+  <p>ZY 引擎服务的不是"AI 全权接管"，而是"人 + AI 混合团队"。人的位置在哪，决定了你该配哪些 Agent。</p>
+
+  <h3>四种角色分工</h3>
+  <div class="zy-grid c4">
+    <div class="zy-card tinted">
+      <h4>你（负责人）</h4>
+      <p>定方向、批预算、拍板加不加人。对应"方向负责人 / 项目负责人"。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>团队成员（人）</h4>
+      <p>处理需要线下完成的事、审核关键节点、维护知识。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>管理者 Agent</h4>
+      <p>拆任务、分活、盯进度、验收。不下场执行。</p>
+    </div>
+    <div class="zy-card tinted">
+      <h4>员工 Agent</h4>
+      <p>领域专家，真正把活干出来。</p>
+    </div>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">AI Agent 不能拥有管理权限</span>
+    Agent 的权限清单里有 11 项（读、写、运行任务、花钱、发邮件、装插件、装软件、加 MCP、优化提示词、运行命令行、调权重）。但真正的"管理权限"（比如管理成员、暂停项目）只属于人类角色。<strong>不要让 Agent 去管人、管成员。</strong>数字员工可以有很多权限，唯独不能有"管人的权"。<br>补一句边界：目前这条约束主要是<strong>在界面上把住</strong>的——给 Agent 编辑权限时，管理权限那一组会禁用、点不了（详见第 14 章第二节的说明）。
+  </div>
+
+  <h3>三档配置建议</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>你的情况</th><th>建议配置</th><th>为什么</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>一个人创业，刚开始</td>
+          <td>1 个全能员工（general_executor）+ 可选 1 个管理者</td>
+          <td>起步期"一人全能"最省钱，先跑通闭环再谈分工</td>
+        </tr>
+        <tr>
+          <td>小团队，开始获客</td>
+          <td>管理者 1 个 + 员工 3–5 个（研发 / 营销 / 客服）</td>
+          <td>成长期"小组分工"，每个岗位对应一条业务线</td>
+        </tr>
+        <tr>
+          <td>多产品线，规模化了</td>
+          <td>管理者 + 按部门细分岗位，用组织进化建议来加</td>
+          <td>规模化期"部门建制"，让系统提示缺哪个岗，你只做确认</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <strong>这样做</strong>
+      <ul>
+        <li>先建"干活的人"，跑通一个任务，再加管理者</li>
+        <li>岗位从模板库里挑，别自己硬造名字</li>
+        <li>AI 建议先看"为什么（证据）"再点确认</li>
+        <li>新 Agent 上线后盯几天返工率</li>
+      </ul>
+    </div>
+    <div class="no">
+      <strong>别这样做</strong>
+      <ul>
+        <li>别一上来就建 10 个 Agent，起步期纯属浪费</li>
+        <li>别跳过成本估算就点"确认"，扩编是持续花钱</li>
+        <li>别给新 Agent 一口气绑十几个技能</li>
+        <li>别指望系统自己加人，它只会建议、不会擅自决定</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>十、本章小结与下一步</h2>
+
+  <p>把这一章压缩成六句话：</p>
+
+  <ul>
+    <li><strong>Agent 是"人"，任务 是"活"。</strong>人分两类：管理者（只协调不下场）和员工（专家，负责执行）。</li>
+    <li><strong>三要素</strong>：岗位（专家）、技能、连接器。齐了才算配齐一个 Agent。</li>
+    <li><strong>智能体中心四个页签</strong>：组织（建人配技能）、任务（派活）、配置（运行参数）、运行（看谁在跑、花了多少）。</li>
+    <li><strong>岗位模板库按项目类型预置</strong>：软件开发 / 电商运营 / 内容创作 / 智能制造各一套，通用类型回退到"项目经理 + 通用执行者"。</li>
+    <li><strong>组织进化引擎能自动感知 + 建议 + 一键落地</strong>，但"要不要加人"永远由你拍板。升级看数据不看感觉，且可回退。</li>
+    <li><strong>四阶段</strong>：起步（~$10–30）→ 成长（~$50–150）→ 规模化（~$200–800）→ 成熟（~$500–2000+）。成本是估算，不是账单。</li>
+  </ul>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">给你的一句实话</span>
+    最容易被忽略的不是"怎么建 Agent"，而是<strong>建完之后回头看绩效</strong>。一个 Agent 跑了一周，你回智能体中心看一眼它的返工率和质量分，比你再建三个新 Agent 更有价值。
+  </div>
+
+  <p><strong>下一步</strong>：人和队伍都配好了，接下来看"活是怎么派下去、一轮一轮转起来的"。请读 <a href="09-自动运营.html">第 09 章 · 自动运营：任务、轮次与验收</a>。如果对"智能体怎么把一个复杂软件功能做出来"更感兴趣，可以直接跳到 <a href="10-软件功能开发与修改.html">第 10 章 · 软件功能的开发与修改</a>。</p>
+
+  <h2 id="appendix-a">附录 A · 预置岗位模板全表</h2>
+
+  <p>这张表是引擎内置的全部岗位模板（来自代码，非编造）。建团队时可直接对照。连接器一列是"该岗位运行时按需绑定的外部系统"。</p>
+
+  <h3>软件开发（software）</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>岗位 key</th><th>名称</th><th>角色描述</th><th>职责边界</th><th>人工红线</th><th>技能</th><th>连接器</th></tr></thead>
+      <tbody>
+        <tr><td>manager</td><td>项目经理</td><td>识别任务、组织分配、验收协调；不下场执行具体编码</td><td>仅做任务拆解、分配、进度跟踪与质量验收</td><td>不得直接修改代码；不得绕过质量验收流程</td><td>task_decomposition, progress_tracking</td><td>无</td></tr>
+        <tr><td>fullstack_dev</td><td>全栈开发专家</td><td>前后端功能开发、数据库设计、API 实现</td><td>仅实现被分配的子任务；不得擅自变更架构</td><td>不得直接修改生产数据库结构；不得部署未经审核的变更</td><td>coding_frontend, coding_backend, db_design</td><td>git_repo</td></tr>
+        <tr><td>test_expert</td><td>测试专家</td><td>编写和执行单元 / 集成 / E2E 测试，回归测试</td><td>仅编写测试代码与报告缺陷；不修改业务代码</td><td>不得跳过失败测试；不得伪造测试覆盖率</td><td>test_unit, test_integration, test_e2e</td><td>无</td></tr>
+        <tr><td>devops_expert</td><td>运维专家</td><td>部署、CI/CD、监控、日志、故障排查</td><td>仅做运维操作；变更前必须经管理者审核</td><td>不得直接操作生产数据库；不得关闭监控告警</td><td>ci_cd, monitoring, incident_response</td><td>ci_cd_trigger</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>电商运营（ecommerce）</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>岗位 key</th><th>名称</th><th>角色描述</th><th>职责边界</th><th>人工红线</th><th>技能</th><th>连接器</th></tr></thead>
+      <tbody>
+        <tr><td>manager</td><td>运营总监</td><td>整体运营策略、资源调度、KPI 管理</td><td>仅做策略与分配；不直接执行营销活动</td><td>不得擅自变更定价；不得承诺超出预算的支出</td><td>strategy_planning, budget_management</td><td>无</td></tr>
+        <tr><td>marketing_expert</td><td>营销获客专家</td><td>营销活动策划、获客渠道运营、广告投放</td><td>执行被分配的营销活动；预算超限必须上报</td><td>不得投放未审核的广告素材；不得超出授权预算</td><td>campaign_planning, ad_targeting, content_copy</td><td>feishu_msg, email_sender</td></tr>
+        <tr><td>customer_service</td><td>客服专家</td><td>客户咨询响应、售后问题处理、满意度跟踪</td><td>按 SOP 处理客户问题；超权限问题升级</td><td>不得私自退款；不得承诺超出政策的赔偿</td><td>customer_communication, issue_resolution</td><td>feishu_msg</td></tr>
+        <tr><td>data_analyst</td><td>数据分析师</td><td>销售 / 运营数据分析，提供决策支持报告</td><td>仅做数据分析与报告；不修改业务数据</td><td>不得伪造数据；不得泄露客户敏感信息</td><td>data_query, reporting, data_viz</td><td>无</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>内容创作（content）</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>岗位 key</th><th>名称</th><th>角色描述</th><th>职责边界</th><th>人工红线</th><th>技能</th><th>连接器</th></tr></thead>
+      <tbody>
+        <tr><td>manager</td><td>内容总监</td><td>内容规划、选题、团队协调、质量把控</td><td>仅做规划与审核；不直接下场创作</td><td>不得发布未经审核的内容；不得违反平台合规</td><td>content_planning, editorial_review</td><td>无</td></tr>
+        <tr><td>copywriter</td><td>文案专家</td><td>文案撰写、脚本创作、品牌故事</td><td>按选题方向创作；发布前必须经审核</td><td>不得抄袭；不得发布虚假宣传内容</td><td>writing_copy, storytelling, brand_voice</td><td>email_sender</td></tr>
+        <tr><td>design_expert</td><td>设计专家</td><td>视觉设计、品牌 VI、海报 / 封面制作</td><td>按需求产出设计稿；品牌 VI 变更需审核</td><td>不得擅自变更品牌标识；不得使用未授权素材</td><td>graphic_design, brand_identity</td><td>无</td></tr>
+        <tr><td>seo_expert</td><td>SEO 专家</td><td>关键词研究、内容优化、外链建设</td><td>按 SEO 策略执行；不得使用黑帽手段</td><td>不得使用关键词堆砌；不得购买垃圾外链</td><td>keyword_research, onpage_seo, link_building</td><td>无</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>智能制造（manufacture）</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>岗位 key</th><th>名称</th><th>角色描述</th><th>职责边界</th><th>人工红线</th><th>技能</th><th>连接器</th></tr></thead>
+      <tbody>
+        <tr><td>manager</td><td>生产总监</td><td>生产计划、资源调度、质量管控</td><td>仅做计划与协调；不直接操作生产设备</td><td>不得绕过安全规程；不得隐瞒质量事故</td><td>production_planning, quality_control</td><td>feishu_msg</td></tr>
+        <tr><td>process_engineer</td><td>工艺工程师</td><td>工艺优化、SOP 制定、产能提升</td><td>工艺变更需测试验证后实施</td><td>不得擅自修改关键工艺参数</td><td>process_optimization, sop_authoring</td><td>无</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>通用（general，回退模板）</h3>
+  <p>项目类型为"通用业务"或未识别时，没有专属模板库，系统回退到下面两人最小集：</p>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>岗位 key</th><th>名称</th><th>角色描述</th><th>职责边界</th><th>人工红线</th><th>技能</th></tr></thead>
+      <tbody>
+        <tr><td>manager</td><td>项目经理</td><td>负责识别任务、组织分配、验收协调</td><td>仅做管理与协调</td><td>不得越权操作</td><td>task_decomposition</td></tr>
+        <tr><td>general_executor</td><td>通用执行者</td><td>执行被分配的具体任务</td><td>按管理者指令执行</td><td>不得自行接受未授权的任务</td><td>（无预置技能）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">通用模板最实用</span>
+    如果你还没想清楚项目属于哪一类，或者项目是"什么都做一点"，就用 general 回退模板：一个项目经理 + 一个通用执行者，跑起来再说。
+  </div>
+
+  <h2>附录 B · 技能清单：引擎里有哪些技能 ID</h2>
+
+  <p>前面说过，技能库<strong>没有出厂种子</strong>，它是用出来的。但岗位模板里已经引用了一批标准的技能 ID——这些就是"引擎期望你会用"的技能命名。你把它们建进技能库，就能和模板直接对上。</p>
+
+  <p>下面按用途归类，列出模板引用到的全部技能 ID：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>用途</th><th>技能 ID</th><th>中文含义（便于起名）</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="2">管理</td><td>task_decomposition</td><td>任务拆解</td></tr>
+        <tr><td>progress_tracking</td><td>进度跟踪</td></tr>
+        <tr><td rowspan="3">开发</td><td>coding_frontend</td><td>前端编码</td></tr>
+        <tr><td>coding_backend</td><td>后端编码</td></tr>
+        <tr><td>db_design</td><td>数据库设计</td></tr>
+        <tr><td rowspan="3">测试</td><td>test_unit</td><td>单元测试</td></tr>
+        <tr><td>test_integration</td><td>集成测试</td></tr>
+        <tr><td>test_e2e</td><td>端到端测试</td></tr>
+        <tr><td rowspan="3">运维</td><td>ci_cd</td><td>持续集成 / 交付</td></tr>
+        <tr><td>monitoring</td><td>监控</td></tr>
+        <tr><td>incident_response</td><td>故障响应</td></tr>
+        <tr><td rowspan="2">运营管理</td><td>strategy_planning</td><td>战略规划</td></tr>
+        <tr><td>budget_management</td><td>预算管理</td></tr>
+        <tr><td rowspan="3">营销</td><td>campaign_planning</td><td>营销活动策划</td></tr>
+        <tr><td>ad_targeting</td><td>广告定向投放</td></tr>
+        <tr><td>content_copy</td><td>营销文案</td></tr>
+        <tr><td rowspan="2">客服</td><td>customer_communication</td><td>客户沟通</td></tr>
+        <tr><td>issue_resolution</td><td>问题解决</td></tr>
+        <tr><td rowspan="3">数据分析</td><td>data_query</td><td>数据查询</td></tr>
+        <tr><td>reporting</td><td>报表</td></tr>
+        <tr><td>data_viz</td><td>数据可视化</td></tr>
+        <tr><td rowspan="2">内容管理</td><td>content_planning</td><td>内容规划</td></tr>
+        <tr><td>editorial_review</td><td>内容审核</td></tr>
+        <tr><td rowspan="3">创作</td><td>writing_copy</td><td>文案撰写</td></tr>
+        <tr><td>storytelling</td><td>故事化表达</td></tr>
+        <tr><td>brand_voice</td><td>品牌语调</td></tr>
+        <tr><td rowspan="2">设计</td><td>graphic_design</td><td>平面设计</td></tr>
+        <tr><td>brand_identity</td><td>品牌视觉（VI）</td></tr>
+        <tr><td rowspan="3">SEO</td><td>keyword_research</td><td>关键词研究</td></tr>
+        <tr><td>onpage_seo</td><td>站内优化</td></tr>
+        <tr><td>link_building</td><td>外链建设</td></tr>
+        <tr><td rowspan="2">生产制造</td><td>production_planning</td><td>生产计划</td></tr>
+        <tr><td>quality_control</td><td>质量控制</td></tr>
+        <tr><td rowspan="2">工艺</td><td>process_optimization</td><td>工艺优化</td></tr>
+        <tr><td>sop_authoring</td><td>SOP 编写</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">这只是"模板引用的技能"，不是"技能库里的技能"</span>
+    这张表的来源是岗位模板的定义，代表"引擎希望这个岗位掌握什么"。你实际运行时技能库里有哪些技能，以智能体中心 → 技能库的列表为准。如果某条技能不在库里，一键扩编时装配会被跳过并留提示（不会整条失败），你可以先补建再重试。
+  </div>
+
+  <h2 id="appendix-c">附录 C · Agent 配置字段字典</h2>
+
+  <p>「Agent 运行配置」（智能体中心 → 配置页签）的新建/编辑弹窗字段全集，逐条说明：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>字段</th><th>类型</th><th>必填</th><th>取值范围 / 默认</th><th>作用</th><th>能否改</th></tr></thead>
+      <tbody>
+        <tr><td>Agent 名称</td><td>文本</td><td>是</td><td>任意</td><td>标识这是给哪个 Agent 的配置</td><td>可改</td></tr>
+        <tr><td>角色</td><td>文本</td><td>否</td><td>角色标识，如 fullstack_dev</td><td>绑定岗位</td><td>可改</td></tr>
+        <tr><td>运行模式</td><td>下拉</td><td>是</td><td>前台 foreground / 后台 background / 定时 cron / 事件监听 event_listen</td><td>决定什么时候跑</td><td>可改</td></tr>
+        <tr><td>Cron 表达式</td><td>文本</td><td>否</td><td>标准 5 段 Cron，如 <code>0 * * * *</code></td><td>RunMode=cron 时生效</td><td>可改</td></tr>
+        <tr><td>事件触发</td><td>多选 / 可自定义</td><td>否</td><td>通配符，如 <code>message.*</code>、<code>approval.*</code>、<code>task_result</code>、<code>alert.*</code>、<code>report.*</code>、<code>deploy.*</code>、<code>review.*</code></td><td>RunMode=event_listen 时生效</td><td>可改</td></tr>
+        <tr><td>系统提示词</td><td>多行文本</td><td>否</td><td>任意</td><td>这个 Agent 的工作指令</td><td>可改，最值得花时间</td></tr>
+        <tr><td>工具列表</td><td>多选</td><td>否</td><td>留空 = 全部可用</td><td>限制它只能用哪些工具</td><td>可改</td></tr>
+        <tr><td>Token 上限</td><td>数字</td><td>否</td><td>默认 300000</td><td>单次运行的 token 天花板</td><td>可改</td></tr>
+        <tr><td>自动启动</td><td>开关</td><td>否</td><td>关 / 开</td><td>服务启动时是否自动拉起</td><td>可改</td></tr>
+        <tr><td>启用</td><td>开关</td><td>否</td><td>关 / 开</td><td>这条配置是否生效</td><td>可改</td></tr>
+        <tr><td>版本</td><td>只读数字</td><td>—</td><td>递增</td><td>同一配置的修改历史</td><td>系统维护</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>配置还能通过「导入 XML」批量创建，导入的弹窗字段只有两个：文件路径、XML 内容（二选一）。同一 <code>name+role</code> 重复导入会变成版本 +1，不会重复建。</p>
+
+  <h3>Agent 本身的字段（新建 Agent 弹窗）</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>字段</th><th>必填</th><th>取值</th><th>默认</th></tr></thead>
+      <tbody>
+        <tr><td>名称</td><td>是</td><td>≤128 字</td><td>—</td></tr>
+        <tr><td>岗位角色</td><td>是</td><td>模板的 role_key 或自定义</td><td>—</td></tr>
+        <tr><td>类型</td><td>是</td><td>manager / worker</td><td>worker</td></tr>
+        <tr><td>上级管理者</td><td>否</td><td>某管理者的 agent_id</td><td>空（不挂靠）</td></tr>
+        <tr><td>负责人</td><td>是</td><td>人类用户 ID 或上级管理者 ID</td><td>—</td></tr>
+        <tr><td>角色描述</td><td>否</td><td>文本</td><td>空</td></tr>
+        <tr><td>职责边界</td><td>否</td><td>文本</td><td>空</td></tr>
+        <tr><td>人工红线</td><td>否</td><td>文本</td><td>空</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 D · 组织进化建议类型与处置手册</h2>
+
+  <p>收到一条 AI 建议时，先看类型，再决定怎么处置。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>建议类型</th><th>界面显示</th><th>它在说什么</th><th>点确认后</th><th>建议处置</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>role_add</td><td><span class="zy-badge blue">增员</span></td>
+          <td>某个岗位缺人（新业务线没有对应角色）</td>
+          <td>建角色 → 配技能 → 上岗</td>
+          <td>先看理由与成本，确实缺就确认</td>
+        </tr>
+        <tr>
+          <td>scale_out</td><td><span class="zy-badge blue">扩容</span></td>
+          <td>某岗位任务排队太多，一个人干不过来</td>
+          <td>建一个并行实例（名字自动 -2、-3）</td>
+          <td>确认前想清楚：是长期忙还是临时高峰</td>
+        </tr>
+        <tr>
+          <td>skill_attach</td><td><span class="zy-badge amber">技能装配</span></td>
+          <td>某项能力到了该开启的时候</td>
+          <td>确认即生效（不建角色）</td>
+          <td>风险最低，一般可以直接确认</td>
+        </tr>
+        <tr>
+          <td>stage_upgrade</td><td><span class="zy-badge green">阶段升级</span></td>
+          <td>数据够了，可以进入下一阶段</td>
+          <td>批量补建缺失岗位 + 更新阶段</td>
+          <td>影响面最大，务必看完证据再决定</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>三种处理方式怎么选</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>操作</th><th>按钮</th><th>什么时候用</th><th>后果</th></tr></thead>
+      <tbody>
+        <tr><td>确认</td><td><span class="zy-btn ok">确认</span></td><td>认可，且现在就要落地</td><td>系统自动扩编 / 装配 / 升级，可回滚</td></tr>
+        <tr><td>暂缓</td><td><span class="zy-btn warn">暂缓</span></td><td>认可但时机不对（比如预算紧张）</td><td>冷却 N 天（默认 7），期内不再重复提示</td></tr>
+        <tr><td>拒绝</td><td><span class="zy-btn danger">拒绝</span></td><td>不认可这个判断</td><td>留档原因；若缺口仍存在，会以新建议重提</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>建议状态一览</h3>
+  <p>待确认 pending → （你操作后）已确认 accepted → 已应用 applied；或 已拒绝 declined / 暂缓 deferred / 已过期 expired。<strong>注意：点确认后接口回给你的文案恒为"已确认"，而实际落地成功后的状态是"已应用"。</strong>想确认到底落没落地，刷新一下建议列表看状态。</p>
+
+  <h3>扩编异常与处置</h3>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>现象</th><th>可能原因</th><th>怎么处理</th></tr></thead>
+      <tbody>
+        <tr><td>确认后状态仍是"已确认"</td><td>落地中途失败（技能或预算）</td><td>看提示，补齐技能 / 调整预算后重新确认</td></tr>
+        <tr><td>技能装配被跳过</td><td>技能草稿里的 skill_id 在技能库里不存在</td><td>先在技能库补建该技能，再重试</td></tr>
+        <tr><td>角色名自动变成"某某-2"</td><td>扩容建议（scale_out）遇到同名角色</td><td>正常现象，是并行实例的防撞车机制</td></tr>
+        <tr><td>报"角色名 X 已存在，禁止重复扩编"</td><td>新增岗位建议（role_add）在同一分类下已有同名角色；或双击确认的第二次</td><td>正常拦截：说明这个岗位已经建好了。确认是不是重复建议，或直接去角色列表找到它</td></tr>
+        <tr><td>角色建好了却被停用，且多出一条人工节点</td><td>上岗就绪判定未通过（缺启用版本 / 技能没装配上）</td><td>去人工节点看"扩编上岗测试失败"的原因，补齐后重试；处理完再启用该角色</td></tr>
+        <tr><td>想撤销刚扩的编</td><td>—</td><td>用变更记录的一键回滚：停用新 Agent、撤销组织节点</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>附录 E · 一个 Agent 的提示词范例</h2>
+
+  <p>「系统提示词」是你最该花时间的地方。下面给一个"营销获客专家"的可复制范例。你可以整段复制进配置 → 系统提示词，把方括号里的内容换成你自己的。</p>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">营销获客专家</span>
+    你是【项目名称】的营销获客专家，负责人是【负责人】。你的任务边界是：只在被分配的营销任务范围内工作，涉及预算超过【金额】元的投放必须先上报，不得自行决定。你的输出要求：每完成一项工作，先给一句话结论，再列具体动作与数据依据，最后标出你需要人工确认的下一步。涉及对外发送的内容（邮件、广告素材），一律先产出草稿并标注"待审核"，不得直接对外发布。遇到信息不足时，先说明缺什么，不要臆测。
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">客服专家</span>
+    你是【项目名称】的客服专家。处理客户问题时遵循：先复述客户诉求确认理解，再给出解决方案，最后说明后续跟进动作。超出你权限的问题（退款、赔偿承诺、政策外特例）必须升级给【负责人】，不得自行承诺。语气保持专业、克制、有同理心，不夸大产品能力。
+  </div>
+
+  <div class="zy-copy">
+    <span class="zy-copy-tag">全栈开发专家</span>
+    你是【项目名称】的全栈开发专家。你只实现被分配的子任务，不擅自变更整体架构。改动前先说明你会动哪些文件、为什么；改动后给出"改了什么的清单 + 怎么验证"。不得直接修改生产数据库结构，不得部署未经审核的变更。遇到需求不明确时，先提一个最小可行方案并标注假设。
+  </div>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">好提示词的四个特征</span>
+    第一，说清"你是谁、为谁干"；第二，说清"边界在哪、什么要上报"；第三，说清"输出长什么样"；第四，说清"信息不足时怎么办"。这四点齐了，Agent 的表现会稳定很多。
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">事实说明</span>
+    以上提示词范例是为本书撰写的示范文本，用于帮助理解"该写什么"，并非引擎内置的固定提示词。引擎内置的是角色的画像字段（角色描述 / 职责边界 / 人工红线），系统提示词由你或系统按项目情况填写。以你界面上实际看到的内容为准。
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

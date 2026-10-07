@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C4 — 网页休闲小游戏批量产线 | 场景指引</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.8;color:#333;background:#f5f7fa}
+  /* 左侧导航 */
+  .sidebar{position:fixed;top:0;left:0;width:260px;height:100vh;background:#1a1a2e;overflow-y:auto;padding:20px 0;z-index:100;transition:transform .3s}
+  .sidebar h3{color:#fff;font-size:14px;padding:0 20px 12px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:8px}
+  .sidebar a{display:block;color:#aab;padding:6px 20px;font-size:13px;text-decoration:none;border-left:3px solid transparent;transition:all .2s}
+  .sidebar a:hover,.sidebar a.active{color:#fff;background:rgba(26,115,232,.15);border-left-color:#1a73e8}
+  .sidebar .sub{padding-left:36px;font-size:12px;color:#778}
+  /* 主内容 */
+  .main{margin-left:260px;max-width:1200px;padding:30px 40px 60px}
+  /* 面包屑 */
+  .breadcrumb{font-size:13px;color:#666;margin-bottom:24px;padding:10px 16px;background:#fff;border-radius:6px;border:1px solid #e8eaed}
+  .breadcrumb a{color:#1a73e8;text-decoration:none}
+  .breadcrumb span{margin:0 6px;color:#999}
+  /* 标题 */
+  h1{font-size:28px;color:#1a1a2e;margin-bottom:8px;padding-bottom:12px;border-bottom:3px solid #1a73e8}
+  h2{font-size:22px;color:#1a73e8;margin:40px 0 16px;padding:8px 0 8px 12px;border-left:4px solid #1a73e8;background:linear-gradient(90deg,#e8f0fe,transparent);padding-right:12px}
+  h3{font-size:18px;color:#333;margin:24px 0 12px}
+  h4{font-size:15px;color:#555;margin:16px 0 8px}
+  p{margin-bottom:12px;text-align:justify}
+  /* 表格 */
+  table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:14px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  th{background:#1a73e8;color:#fff;padding:10px 14px;text-align:left;font-weight:600}
+  td{padding:9px 14px;border-bottom:1px solid #f0f0f0}
+  tr:nth-child(even) td{background:#f8fafd}
+  tr:hover td{background:#e8f0fe}
+  /* 代码块 */
+  pre{background:#1e1e2e;color:#cdd6f4;padding:16px 20px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6;margin:12px 0 20px}
+  code{font-family:"Fira Code","JetBrains Mono",Consolas,monospace;font-size:13px}
+  p code,li code,td code{background:#e8eaed;color:#d63384;padding:2px 6px;border-radius:4px;font-size:12.5px}
+  /* 卡片 */
+  .card{background:#fff;border-radius:10px;padding:20px 24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.06);border:1px solid #e8eaed}
+  .card-blue{border-left:4px solid #1a73e8}
+  .card-green{border-left:4px solid #34a853}
+  .card-red{border-left:4px solid #ea4335}
+  .card-yellow{border-left:4px solid #f9ab00}
+  /* 标签 */
+  .tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600;margin:2px 4px}
+  .tag-p0{background:#fce8e6;color:#ea4335}
+  .tag-p1{background:#fef7e0;color:#e37400}
+  .tag-p2{background:#e6f4ea;color:#34a853}
+  .tag-info{background:#e8f0fe;color:#1a73e8}
+  /* 列表 */
+  ul,ol{margin:8px 0 16px 24px}
+  li{margin-bottom:6px}
+  /* 高亮 */
+  .hl{background:#fff3cd;padding:2px 6px;border-radius:3px}
+  .hl-red{background:#fce8e6;padding:2px 6px;border-radius:3px;color:#c5221f}
+  .hl-green{background:#e6f4ea;padding:2px 6px;border-radius:3px;color:#137333}
+  /* 响应式 */
+  @media(max-width:900px){.sidebar{transform:translateX(-100%)}.main{margin-left:0;padding:20px}}
+  /* 目录编号 */
+  .toc-num{color:#1a73e8;font-weight:700;margin-right:6px}
+  /* 流程图 */
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+  .flow-step{background:#e8f0fe;color:#1a73e8;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600}
+  .flow-arrow{color:#999;font-size:18px}
+  /* 指标卡 */
+  .metric-row{display:flex;gap:16px;flex-wrap:wrap;margin:16px 0}
+  .metric{flex:1;min-width:140px;background:#fff;border-radius:8px;padding:14px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.06);border-top:3px solid #1a73e8}
+  .metric .val{font-size:24px;font-weight:700;color:#1a73e8}
+  .metric .label{font-size:12px;color:#666;margin-top:4px}
+  .metric.warn{border-top-color:#f9ab00}
+  .metric.warn .val{color:#e37400}
+  .metric.danger{border-top-color:#ea4335}
+  .metric.danger .val{color:#ea4335}
+</style>
+</head>
+<body>
+
+<!-- 左侧导航 -->
+<nav class="sidebar">
+  <h3>C4 场景指引目录</h3>
+  <a href="#overview"><span class="toc-num">1</span>场景概述</a>
+  <a href="#objectives"><span class="toc-num">2</span>场景目标与主战场能力</a>
+  <a href="#prerequisites"><span class="toc-num">3</span>预置条件与环境配置</a>
+  <a href="#t1"><span class="toc-num">4</span>T1 生存期操作指引</a>
+  <a href="#t1-ui" class="sub">4.1 UI 路径与冷启动</a>
+  <a href="#t1-flow" class="sub">4.2 全自动编码流程</a>
+  <a href="#t1-event" class="sub">4.3 事件注入</a>
+  <a href="#t1-human" class="sub">4.4 人工动作</a>
+  <a href="#t1-deploy" class="sub">4.5 部署验证</a>
+  <a href="#t2"><span class="toc-num">5</span>T2 扩张期操作指引</a>
+  <a href="#t3"><span class="toc-num">6</span>T3 规模化期操作指引</a>
+  <a href="#acceptance"><span class="toc-num">7</span>验收判定表</a>
+  <a href="#evidence"><span class="toc-num">8</span>取证口径</a>
+  <a href="#appendix"><span class="toc-num">9</span>附录：环境信息</a>
+</nav>
+
+<!-- 主内容 -->
+<div class="main">
+
+<!-- 面包屑 -->
+<div class="breadcrumb">
+  <a href="#">首页</a><span>&gt;</span>
+  <a href="#">长周期场景案例</a><span>&gt;</span>
+  <strong>C4 网页休闲游戏</strong>
+</div>
+
+<h1>C4 — 网页休闲小游戏批量产线 · 场景指引</h1>
+<p style="color:#666;font-size:14px;margin-bottom:24px">
+  文档编号：LTS-C4-GUIDE &nbsp;|&nbsp; 版本：v1.0 &nbsp;|&nbsp; 更新日期：2026-09-28 &nbsp;|&nbsp; 战役：长周期业务场景测试
+</p>
+
+<!-- ========== 1. 场景概述 ========== -->
+<h2 id="overview">一、场景概述</h2>
+
+<div class="card card-blue">
+<p><strong>一句话故事：</strong>1 人制作人带一批 AI 开发者，每周产出 3~5 个可玩网页小游戏，丢到站点与小游戏平台上跑流量与广告分成；<span class="hl-red">质量全靠独立验收 Agent 把门</span>，防止 AI「写完自认完成」。</p>
+</div>
+
+<p>C4 场景是六张核心故事卡中<strong>以「三权分立验收」为核心压测对象</strong>的唯一场景。所谓三权分立验收，是指在 AI 原生引擎的自动运营流程中，将「执行」「验收」「批准」三项权力彻底分离到不同的角色与 Agent 实例上，使得任何一项交付物都必须经过至少两个独立主体的评判与确认才能进入生产环境。这一设计的根本目的是解决大语言模型驱动的代码生成中一个极为普遍且隐蔽的问题——<span class="hl-red">「自审自批」</span>，即执行编码任务的 AI Agent 在完成代码编写后，自行判断任务已完成并标记为通过，而实际上代码可能存在功能缺陷、逻辑遗漏或不符合验收标准的情况。</p>
+
+<p>在网页休闲小游戏这一具体业务形态下，「自审自批」的危害尤为突出。一个 H5 小游戏从代码层面看可能完全「跑通了」——编译无报错、单元测试通过、甚至 AI 自己执行了一遍通关流程——但真实玩家打开后可能遇到首屏黑屏、第三关卡关无提示、触屏操作不灵敏、包体过大导致加载超时等问题。这些问题只有站在「玩家视角」才能发现，而执行编码的 AI Agent 天然缺乏这种视角。因此，C4 场景要求验收 Agent 必须是一个独立的角色配置，拥有独立的提示词模板、独立的 done_when 验收清单、独立的浏览器实测能力（Playwright 自动试玩 + 断言），其 executor_id 与 reviewer_id 在数据库层面被硬校验为不等，从机制上杜绝同一个 Agent 既当运动员又当裁判员的可能性。</p>
+
+<p>除了三权分立验收这一核心特色之外，C4 场景还同时压测了 qianshou loop 引擎的长时编码能力与接力机制、auto-ops 轮次调度的时间片分配、双执行引擎在同一项目中的协同（loop 引擎负责编码、Agent 引擎负责选题分析与数值核算）、项目级账本预算的单款成本上限与熔断机制、deploy 发布管线的完整链路（从构建到可访问 URL 到回滚）、以及发布后的流量运营与数据驱动排产能力。这些能力的组合使得 C4 成为一个覆盖面极广、验证维度极多的综合性场景。</p>
+
+<p>C4 场景的另一个重要特征是<strong>「人工推翻验收结论」</strong>的机制设计。即便验收 Agent 已经独立做出了「通过」的判定，系统仍然保留了人工抽检并推翻该结论的通道。当人工试玩发现验收 Agent 遗漏的问题时，可以将验收结论从「通过」改为「驳回」，任务自动退回执行队列进行返工，驳回理由会被写入角色经验库（role_experiences），成为后续验收的参考依据。这一设计确保了在 AI 自主运营的体系中，人类始终保有最终的质量否决权，同时也为验收 Agent 的持续改进提供了反馈信号。</p>
+
+<p>从业务规模的角度看，C4 场景从 T1 阶段的 1 人 + 2 AI 编制、3 款精品 demo 起步，逐步扩展到 T3 阶段的 1 人 + 12 AI 编制、20 款在跑游戏的规模化运营。这一扩展过程本身就是对 auto-ops 调度能力、组织进化（evo）机制、预算管控精度以及事故自愈能力的全面考验。特别是在 T3 阶段，当 20 款游戏同时在线运营时，任何一款游戏的 JS 报错率飙升、广告 SDK 政策违规或成本超支都可能触发系统级的连锁反应，要求平台能够在不影响其他游戏正常运营的前提下进行精准的隔离处置。</p>
+
+<!-- ========== 2. 场景目标与主战场能力 ========== -->
+<h2 id="objectives">二、场景目标与主战场能力</h2>
+
+<h3>2.1 核心压测目标</h3>
+
+<p>C4 场景的核心压测目标可以归纳为三个层次。第一层是<strong>验收独立性验证</strong>：验证系统能否在无人工逐行审查的前提下，通过独立的验收 Agent 有效拦截「代码跑通但玩家卡关」类缺陷，且整个过程中自审自批记录数恒为零。第二层是<strong>长时编码链路的可靠性</strong>：验证 loop 引擎能否在单次轮次中完成一个完整 H5 游戏的编码（从 HTML 骨架到 Canvas 渲染到关卡逻辑到埋点），包括接力提示词机制在任务未完成时的续写能力，以及 <code>[Task finished]</code> 标记检测的准确性。第三层是<strong>发布后运营的闭环能力</strong>：验证游戏上线后的流量数据采集、玩家反馈归因、数据驱动排产、预算跨品类挪移等运营动作能否在 AI 自主模式下高效运转。</p>
+
+<h3>2.2 主战场能力矩阵</h3>
+
+<table>
+<tr><th style="width:22%">能力名称</th><th style="width:15%">类型</th><th>详细说明</th></tr>
+<tr><td><strong>三权分立验收</strong></td><td><span class="tag tag-p0">必需 · 核心</span></td><td>开发自测不等于验收。验收 Agent 独立跑 done_when 清单 + 浏览器实测（Playwright 断言：可点击、无 console error、通关路径可达）。验收报告附截图与日志。executor_id 与 reviewer_id 硬校验不等，同角色版本直接拒收。这是本场景的立卡之本。</td></tr>
+<tr><td><strong>qianshou loop 长时编码</strong></td><td><span class="tag tag-p0">必需</span></td><td>loop 引擎启动 qianshou 子进程进行真实编码。单轮编码时长基线 457~1389 秒，token 消耗基线 ¥0.78~1.23/轮。接力提示词机制在任务未完成时自动续写。<code>[Task finished]</code> 标记检测是收口关键——D1 首跑发现尾部窗口命中率 0/5，检测窗口错位 + 反问停滞是核心缺陷。</td></tr>
+<tr><td><strong>auto-ops 轮次调度</strong></td><td><span class="tag tag-p0">必需</span></td><td>时间片轮转调度多任务并行。轮间 sleep 固定 60 秒。review 重排机制按优先级调整任务队列。free 维护模式确保不误停在建任务。批量排产时按时间片轮转分配编码槽位。</td></tr>
+<tr><td><strong>双执行引擎</strong></td><td><span class="tag tag-p0">必需</span></td><td>loop 引擎（qianshou 子进程）负责编码等复杂长时任务；Agent 引擎（进程内 LLM + ToolCall）负责选题分析、数值核算、数据整合等信息密集型任务。优先级：任务级 > 角色级 > 项目默认。D1 首跑已验证同项目 loop 5 轮 + agent 2 轮共存。</td></tr>
+<tr><td><strong>账本预算与熔断</strong></td><td><span class="tag tag-p0">必需</span></td><td>单款成本上限 + 项目 AI 运行预算预警线（70%）。三级控制：预警 → 降级 → 熔断 → 恢复。注意：当前作用域为项目级，单款预算包为 P1 建议项尚未实现。超支会暂停整个项目循环，牵连其他款。</td></tr>
+<tr><td><strong>deploy 发布管线</strong></td><td><span class="tag tag-p1">必需 · 待补</span></td><td>每款游戏上线出可访问 URL 并可回滚。D1 首跑发现发布面只有宿主半边（5 端点在 router.go），平台/前端零封装，deploy_jobs 全局 0 行（ISSUE-W4-38）。降级方案：复用 mail1 增量目录部署。</td></tr>
+<tr><td><strong>知识库</strong></td><td><span class="tag tag-p1">必需</span></td><td>游戏库 / 失败案例 / 规范（性能与包体约束）。沉淀为项目模板供后续游戏复用。第 10 款成本应显著低于第 3 款。</td></tr>
+<tr><td><strong>marketing 营销</strong></td><td><span class="tag tag-p2">必需</span></td><td>发布帖 + 合集页 SEO。FIX-002 待 e2e 前发帖留 pending_review 计「已生成待审」，引流转化不进分母。</td></tr>
+<tr><td><strong>RACI 人在回路</strong></td><td><span class="tag tag-p0">必需</span></td><td>广告位接入、下架决策走人工批准。三通道决策：绿（AI 自主）/ 黄（人工审核）/ 红（人工批准）。写操作必须人工审核。</td></tr>
+<tr><td><strong>evo 扩编</strong></td><td><span class="tag tag-p2">增强</span></td><td>按队列积压扩开发 / 验收岗。FIX-004 待 e2e 前扩编后可能「扩而不用」，需手工绑任务并标注。T2 核心断言：新角色 3 轮内被调度到任务。</td></tr>
+</table>
+
+<h3>2.3 三权分立验收的深度解析</h3>
+
+<p>三权分立验收是 C4 场景区别于其他五张故事卡的核心特征，需要从机制设计、运作流程、防弊措施三个维度进行深入理解。</p>
+
+<p><strong>机制设计层面</strong>，验收 Agent 在系统中被配置为一个完全独立的角色。它拥有独立的 agent_id、独立的提示词模板（包含 done_when 验收清单的逐项检查逻辑）、独立的技能白名单（只读权限 + Playwright 浏览器实测能力，无编码权限）。当执行 Agent 完成编码任务并提交验收后，auto-ops 调度器会将验收任务分配给验收 Agent，而非原始的执行 Agent。在数据库层面，<code>acceptance_records</code> 表记录了每一条验收记录的 executor_id（执行者）和 reviewer_id（验收者），系统通过硬校验确保这两个字段值不相等。</p>
+
+<p><strong>运作流程层面</strong>，验收 Agent 收到验收任务后会执行以下步骤：首先，读取该任务的 done_when 清单（由任务创建时定义，例如「首屏可玩」「无 console error」「包体 &lt; 2MB」「通关路径可达」等）；其次，通过 Playwright 浏览器实测能力打开游戏的部署 URL，逐项执行断言——检查页面是否可加载、核心交互元素是否可点击、是否存在 JavaScript 运行时错误、通关路径是否可达；最后，生成结构化验收报告，包含每项检查的通过/失败状态、截图证据、console 日志摘录，以及最终结论（pass / rework / reject）。</p>
+
+<p><strong>防弊措施层面</strong>，除了 executor_id 与 reviewer_id 的硬校验之外，系统还设计了多层防线。第一层是「人工推翻」通道：即便验收 Agent 判定通过，人工仍可在验收列表中对报告进行抽检，若发现遗漏问题可点击「驳回」将结论推翻，任务自动退回执行队列并计入 redo 计数。第二层是验收质量度量：系统持续跟踪一次通过率、驳回准确率、人工推翻率、验收 token 占比等指标，用于动态调整验收强度分级阈值。第三层是飞书通知链路：验收驳回时通过飞书连接器推送通知给相关执行人员，确保返工指令及时传达。</p>
+
+<div class="card card-red">
+<h4>P0 建议项现状（截至 D1 首跑）</h4>
+<p>「验收 Agent 接入浏览器实测（Playwright 自动试玩 + 断言）」与「executor_id &ne; reviewer_id 硬校验」两项 P0 建议项<strong>均未落地</strong>。D1 首跑中 <code>acceptance_records = 0</code>，验收腿整条不可达。当前替代取证方案为：人工推翻验收结论（即人工试玩发现问题后手动驳回），以此作为三权分立验收能力的间接验证。在 Playwright 实测验收与硬校验落地之前，C4 场景的核心战场判定须标注为「降级」。</p>
+</div>
+
+<!-- ========== 3. 预置条件与环境配置 ========== -->
+<h2 id="prerequisites">三、预置条件与环境配置</h2>
+
+<h3>3.1 三端服务基线</h3>
+
+<table>
+<tr><th>端</th><th>地址</th><th>说明</th></tr>
+<tr><td>PostgreSQL 17</td><td><code>localhost:5432</code></td><td>双库：<code>ai_native_engine</code>（平台）/ <code>project_server</code>（实例）。psql 取证只读。</td></tr>
+<tr><td>platform 后端</td><td><code>http://localhost:18000</code></td><td>公司/项目/实例/平台真实账本/计费结算/超管后台。WS <code>ws://localhost:18000/ws?token=</code></td></tr>
+<tr><td>project-server</td><td><code>http://localhost:8090</code></td><td>AI 执行引擎。场景轮次/审批/账本/连接器/事件全在此。</td></tr>
+<tr><td>前端（vite dev）</td><td><code>http://localhost:5176</code></td><td>三端同机。Playwright 配置 baseURL 5176。</td></tr>
+</table>
+
+<h3>3.2 项目配置参数</h3>
+
+<div class="metric-row">
+  <div class="metric"><div class="val">lts_c4_game</div><div class="label">项目名称</div></div>
+  <div class="metric"><div class="val">全自动</div><div class="label">运行模式</div></div>
+  <div class="metric"><div class="val">&yen;9,000</div><div class="label">总预算</div></div>
+  <div class="metric warn"><div class="val">&yen;3,000</div><div class="label">AI 运行预算</div></div>
+  <div class="metric"><div class="val">70%</div><div class="label">预警线</div></div>
+</div>
+
+<p>项目 <code>lts_c4_game</code> 的运行模式设定为<strong>全自动</strong>（full_auto），意味着 AI 可以自主推进轮次而无需人工逐轮触发。总预算 &yen;9,000 覆盖平台侧计费与外部成本，AI 运行预算 &yen;3,000 专门用于 LLM token 消耗，预警线设为 70%（即 AI 已用预算达到 &yen;2,100 时触发预警通知）。单轮上限通过 <code>PUT /autoops/config</code> 设定（UI 弹窗无该字段，保存必 500，属已知缺陷 W4-31）。</p>
+
+<h3>3.3 验收 Agent 独立角色配置</h3>
+
+<p>验收 Agent 的独立角色配置是本场景的关键预置条件。在智能体中心（Agent Center）中，需要创建至少一个专职验收的 AI 角色，其配置要点如下：</p>
+
+<ul>
+  <li><strong>角色名称</strong>：测试专家 / 验收专家（对应岗位模板库中的 QA / Tester 类别）</li>
+  <li><strong>提示词模板</strong>：包含 done_when 清单逐项检查逻辑，明确要求「不得因为代码编译通过就判定任务完成，必须实际运行并验证玩家体验」</li>
+  <li><strong>技能白名单</strong>：只读权限 + Playwright 浏览器实测（待 P0 建议项落地后启用）；当前阶段以代码审查 + 静态分析为主</li>
+  <li><strong>输出格式</strong>：结构化验收报告（JSON），包含每项检查的 pass/fail 状态、截图路径、console 日志</li>
+  <li><strong>独立性保障</strong>：该角色的 agent_id 与执行角色的 agent_id 不同，系统在分配验收任务时会自动排除执行者</li>
+</ul>
+
+<p>D1 首跑中已在 UI 智能体中心创建了「测试专家」角色（agent-4c29d259-e3d），但发现该角色在 5 轮后仍零绑定（<code>auto_ops_tasks.role_id</code> 未命中），属于 ISSUE-W4-16B 的复现——<code>deriveRoleKeyForTask</code> 文案命中通道未生效。这一缺陷直接影响验收 Agent 的自动调度，需在后续测试前修复或手工绑定。</p>
+
+<h3>3.4 部署目标配置</h3>
+
+<p>由于 FIX-007（云开通 UI）未做，C4 场景的部署目标采用降级方案：复用 Linode 实例 mail1（<code>mail1.zyinfo.pro</code>，IP: 172.237.66.31，SG Singapore 2）的增量目录。每款游戏部署到 mail1 上的独立子目录，通过 <code>http://mail1.zyinfo.pro:&lt;port&gt;/games/&lt;game_id&gt;/</code> 访问。发布管线当前只有宿主半边（5 端点在 <code>router.go:540-549</code>），平台侧和前端零封装（ISSUE-W4-38），因此部署操作需通过 API 直接调用宿主端点完成。</p>
+
+<h3>3.5 FIX 修复项影响评估</h3>
+
+<table>
+<tr><th>FIX</th><th>内容</th><th>状态</th><th>对 C4 判定的影响</th></tr>
+<tr><td>FIX-001</td><td>通知适配器真实化</td><td>已实施，待 e2e</td><td>验收驳回与上线审批推送按时效记观察项。SLA 与租赁 sweeper 在码（30s/60s ticker），外发适配器亦真实化。人工批准时效由观察项升回实测项。</td></tr>
+<tr><td>FIX-002</td><td>twitter 连接器</td><td>已实施，待 e2e</td><td>发布帖留 pending_review 计「已生成待审」，引流转化不进分母。</td></tr>
+<tr><td>FIX-003</td><td>预算联动</td><td>已实施，待重启</td><td>单款成本上限靠人工盯 <code>GET .../autoops/billing</code>。三级控制在码且真实驱动（项目级），但作用域是项目级非任务级——超支暂停整个项目，牵连其他款。</td></tr>
+<tr><td>FIX-004</td><td>扩编调度闭环</td><td>已实施，待 e2e</td><td>T2 扩的开发/验收岗可能「扩而不用」，需手工绑任务并在报告标注。</td></tr>
+<tr><td>FIX-006</td><td>计费明细页</td><td>未做</td><td>单款成本靠 amoeba + psql 取证。注意 <code>amoeba_daily_stats</code> 战役项目读数恒 0，改取 <code>token_billing_records</code> 按 role 聚合。</td></tr>
+<tr><td>FIX-007</td><td>云开通 UI</td><td>未做</td><td>复用 mail1 增量目录部署游戏站。</td></tr>
+</table>
+
+<!-- ========== 4. T1 生存期操作指引 ========== -->
+<h2 id="t1">四、T1 生存期操作指引（1&ndash;3 款游戏上线）</h2>
+
+<div class="card card-green">
+<h4>T1 阶段目标</h4>
+<p>3 款真能玩通的网页小游戏上线站点。验证从选题到编码到验收到部署的全链路可行性，建立三权分立验收的基线数据。编制：1 人 + 2 AI（开发全能 + 兼职验收）。</p>
+</div>
+
+<h3 id="t1-ui">4.1 UI 路径与冷启动</h3>
+
+<p>T1 阶段的冷启动需要按照以下 UI 路径完成全部预置操作。整个过程模拟一个真实用户从零开始在平台上创建游戏工作室并启动 AI 自动运营的完整旅程。</p>
+
+<h4>步骤 1：注册登录</h4>
+<p>访问 <code>http://localhost:5176/login</code>，使用 LTS 测试账号登录（前缀 <code>lts_c4_</code>，密码 <code>test123</code>）。若账号不存在则先注册。登录成功后跳转全局数据面板 <code>/dashboard</code>。</p>
+
+<h4>步骤 2：新建公司</h4>
+<p>点击「新建公司」，公司名称填写 <code>LTS-C4 网页小游戏产线</code>。注意：行业类型枚举为固定 14 项，无游戏/互娱类目且不接受自定义值，只能选择「互联网/IT」。公司创建成功后记录公司 ID（D1 首跑中为公司 974）。</p>
+
+<h4>步骤 3：新建项目</h4>
+<p>进入公司后通过三步向导创建项目。项目名称填写 <code>lts_c4_game</code>（D1 首跑中为 <code>lts_c4_arcade_*</code>）。关键配置：</p>
+<ul>
+  <li>项目类型：枚举仅 5 项，无游戏类，选择 <code>software</code></li>
+  <li>运行模式：选择<strong>全自动</strong>（full_auto）</li>
+  <li>总预算：<code>&yen;9,000</code></li>
+  <li>AI 运行预算：<code>&yen;3,000</code>（预警线 70%）</li>
+</ul>
+
+<h4>步骤 4：自挂实例与配置下发</h4>
+<p>在项目实例管理中录入 <code>127.0.0.1:8090</code>，触发 grant push。系统会执行 7 步自检流程：instance_host_trusted → instance_registered → grant_push → owner_push → health_check → execution_plane_selfcheck → owner_push(success)。确认 <code>project_config</code> 中 <code>run_mode=full_auto</code>、<code>ai_budget=3000</code>、<code>budget_total=9000</code> 均已同步。</p>
+
+<h4>步骤 5：引导流策略确认</h4>
+<p>进入项目引导流（guided session），填写业务背景：「休闲游戏 / 网页小游戏，H5 轻关卡，可埋广告的轻游戏，目标每周产出 3~5 款」。点击「生成策略」→「确认策略」。此步骤会触发一次真实的 LLM 调用（<code>direct:onboardStrategy</code>），策略确认后 <code>guided_sessions.strategy_confirmed=true</code>。（2026-10-07 注：缺项目作用域确认记录的存量项目，升级后启动会被 hasConfirmedStrategy 闸拦截，重走本步骤即解锁；见 <code>wiki/testing/v3/todo.md</code> V3-07。）</p>
+
+<h4>步骤 6：组织起步</h4>
+<p>在智能体中心创建初始团队：1 个管理者 Agent（经理色）+ 1 个开发全能（fullstack_dev）+ 1 个测试专家（test_expert，兼职验收）。两员工的 <code>parent_agent_id</code> 指向管理者。D1 首跑已验证岗位模板库分类无需手工切换（W4-16A 修复正证）。</p>
+
+<h4>步骤 7：创建任务并启动</h4>
+<p>在 autoops 面板创建 3 条业务任务（1 条 loop 编码 + 2 条 Agent 分析），在提示词模板中显式写入 <code>[Task finished]</code> 要求。点击控制台「启动」按钮，引擎开始自动推进轮次。D1 首跑验证启动通道 <code>code=0</code>，W4-15 冷启动死锁在第二场景不复现。</p>
+
+<h3 id="t1-flow">4.2 选题 → PRD → loop 编码 → 自测 → 提交验收全自动流程</h3>
+
+<p>启动后，系统按照以下全自动流程推进每一款游戏的开发：</p>
+
+<div class="flow">
+  <div class="flow-step">选题分析</div><div class="flow-arrow">&rarr;</div>
+  <div class="flow-step">PRD 生成</div><div class="flow-arrow">&rarr;</div>
+  <div class="flow-step">loop 编码</div><div class="flow-arrow">&rarr;</div>
+  <div class="flow-step">自测</div><div class="flow-arrow">&rarr;</div>
+  <div class="flow-step">提交验收</div><div class="flow-arrow">&rarr;</div>
+  <div class="flow-step">验收判定</div><div class="flow-arrow">&rarr;</div>
+  <div class="flow-step">人工批准</div>
+</div>
+
+<p><strong>选题分析</strong>阶段由 Agent 引擎执行，分析当前市场热门小游戏类型、竞品数据、广告 eCPM 估算，输出选题报告。此阶段 token 消耗较低（D1 首跑 Agent 轮均 &yen;0.005 级别）。</p>
+
+<p><strong>loop 编码</strong>阶段由 loop 引擎启动 qianshou 子进程执行真实编码。D1 首跑数据显示 loop 轮均耗时 79 秒（6~132 秒区间），均 token 消耗 &yen;0.2505/轮，低于基线带 &yen;0.78~1.23/轮——但这不是效率红利，而是因为 <code>task_kind=general</code> 导致 loop 会话落在宿主源码根（W4-40），模型「无处可写」而早退场。</p>
+
+<p><strong>自测 → 提交验收</strong>阶段是 C4 场景的关键断点。D1 首跑发现 <code>[Task finished]</code> 标记在会话尾部窗口命中率 0/5（任意位置命中 3/5），检测窗口错位 + 反问停滞导致验收腿从未被触发，<code>acceptance_records</code> 恒为 0。这一问题是 FIX-018 与 W4-17 的核心修复对象。</p>
+
+<p><strong>验收判定</strong>由独立的验收 Agent 执行（待 P0 建议项落地后）。验收 Agent 读取 done_when 清单，逐项检查并生成结构化报告。当前阶段由人工替代执行。</p>
+
+<p><strong>人工批准</strong>是 RACI 红通道动作。人工在验收列表中对验收报告进行审批，可批准上线或驳回返工。驳回时任务退回执行队列，redo 计数 +1，驳回理由入 <code>role_experiences</code>。</p>
+
+<h3 id="t1-event">4.3 事件注入</h3>
+
+<p>T1 阶段需要注入玩家试玩反馈事件，验证「反馈 → 返工任务」的链路。每款游戏注入 5 条试玩反馈，使用 harness 的 <code>ingest-event.mjs</code> 脚本：</p>
+
+<pre><code># 试玩反馈事件（卡关）
+node ingest-event.mjs --scenario LTS_C4 --type player.feedback \
+  --text "卡关第3关，没有提示" \
+  --extra '{"game":"g1","issue":"stuck_level_3","severity":"major"}'
+
+# 试玩反馈事件（黑屏）
+node ingest-event.mjs --scenario LTS_C4 --type player.feedback \
+  --text "打开后黑屏，无法加载" \
+  --extra '{"game":"g2","issue":"black_screen","severity":"critical"}'
+
+# 试玩反馈事件（太简单）
+node ingest-event.mjs --scenario LTS_C4 --type player.feedback \
+  --text "太简单了，5分钟通关" \
+  --extra '{"game":"g1","issue":"too_easy","severity":"minor"}'
+
+# 站点 PV 事件
+node ingest-event.mjs --scenario LTS_C4 --type site.pv \
+  --text "日PV 1200" \
+  --extra '{"game":"g1","pv":1200,"date":"2026-09-25"}'
+
+# 广告分成事件
+node ingest-event.mjs --scenario LTS_C4 --type payment \
+  --amount 18.40 --order-id LTC4-20260925-001</code></pre>
+
+<p>事件注入的统一端点为 <code>POST /api/v1/events</code>（PS，HMAC 三头 <code>X-Project-ID / X-Timestamp / X-Signature</code>）。事件体契约：<code>{source, event_type, title, content, priority, project_id}</code>，其中 <code>content</code> 放业务 JSON 字符串。</p>
+
+<div class="card card-yellow">
+<h4>D1 首跑事件注入实测结论</h4>
+<p>事件入库、归属、分类、入账四条腿中，<strong>入账腿已通</strong>（payment 事件同秒落 <code>project_ledger</code> income/revenue &yen;18.40），但<strong>派单腿完全断裂</strong>——<code>event_assignments</code> 全表 0 行，<code>agent_configs</code> 中 <code>event_listen</code> 配置 0 条（ISSUE-W4-41）。根因：派单只认 <code>run_mode='event_listen'</code> 的 AgentConfig，而 UI「新建配置」不绑定员工且后端现造随机 UUID，导致双身份体系脱钩。这意味着「反馈转返工任务」链路在派单腿断裂，需手工创建返工任务（记为干预）。</p>
+</div>
+
+<h3 id="t1-human">4.4 人工动作清单</h3>
+
+<h4>动作 1：批准 3 次上线</h4>
+<p>每次上线批准前，人工需核实以下三项：</p>
+<ol>
+  <li><strong>包体大小</strong>：游戏 HTML + JS + 资源总包体 &lt; 2MB（通过 <code>deploy_jobs</code> 或文件系统检查）</li>
+  <li><strong>无外链敏感域</strong>：代码中不存在指向敏感域名的外链（通过静态扫描或人工审查）</li>
+  <li><strong>埋点合规</strong>：广告位接入点、数据采集点符合平台规范</li>
+</ol>
+
+<h4>动作 2：人工抽检并推翻验收结论</h4>
+<p>这是 C4 场景最具特色的人工动作。在 T1 阶段，人工需对至少 2 份验收报告进行抽检，并<strong>推翻至少 1 次「通过」结论</strong>。具体操作流程：</p>
+<ol>
+  <li>进入 autoops 验收列表页面（<code>/project/:id/autoops/acceptance</code>）</li>
+  <li>选择一份验收 Agent 判定为「通过」的报告</li>
+  <li>人工试玩游戏（打开部署 URL，实际操作 3~5 分钟）</li>
+  <li>若发现验收 Agent 遗漏的问题（如真人试玩卡关），点击「驳回」按钮</li>
+  <li>填写驳回理由（如「第 3 关存在不可跳过的死循环 bug」）</li>
+  <li>确认驳回 → 任务自动退回执行队列，redo 计数 +1</li>
+  <li>验证驳回理由已写入 <code>role_experiences</code> 表</li>
+</ol>
+
+<p>在验收 Agent 浏览器实测能力（Playwright）与硬校验（executor_id &ne; reviewer_id）落地之前，人工推翻验收结论是验证三权分立验收能力的<strong>替代取证手段</strong>。即便验收腿当前不可达（<code>acceptance_records = 0</code>），人工试玩并记录问题的动作本身也是有效的质量保障实践。</p>
+
+<h4>动作 3：处理验收争议</h4>
+<p>当执行 Agent 对验收 Agent 的驳回结论有异议时，可发起争议仲裁。争议升级到管理者 Agent 进行仲裁，仲裁结论留痕在 <code>arbitration_cases</code> 与 <code>decision_logs</code> 表中。T1 阶段至少处理 1 次验收争议。</p>
+
+<h3 id="t1-deploy">4.5 部署验证</h3>
+
+<p>每款游戏部署后，通过 <code>GET .../deploy/:id/url</code> 获取可访问 URL，在浏览器中打开验证游戏可玩。验证要点：</p>
+
+<ul>
+  <li>页面能否正常加载（无 404、无黑屏）</li>
+  <li>核心交互是否可用（点击、滑动、键盘操作）</li>
+  <li>首屏加载时间是否可接受（&lt; 5 秒）</li>
+  <li>是否存在 JavaScript 运行时错误（打开 DevTools Console 检查）</li>
+  <li>通关路径是否可达（至少能玩到第 3 关）</li>
+</ul>
+
+<div class="card card-red">
+<h4>部署面现状（ISSUE-W4-38）</h4>
+<p>D1 首跑发现发布面只有宿主半边：5 个 deploy 端点在 <code>router.go:540-549</code>，但平台侧和前端零封装。UI 直访 <code>/project/1115/deploy</code> 返回 404，<code>deploy_jobs</code> 全局 0 行。进程内 <code>deploy_project</code> 工具存在但 loop/Agent 轮结构上不可能调用（<code>task_kind=general</code> 不进代码目录）。真发布动作归 W5 窗口，T1 阶段使用降级方案：手工将游戏文件复制到 mail1 增量目录并验证可访问。</p>
+</div>
+
+<!-- ========== 5. T2 扩张期操作指引 ========== -->
+<h2 id="t2">五、T2 扩张期操作指引（4&ndash;10 款游戏，验收流水线化）</h2>
+
+<div class="card card-green">
+<h4>T2 阶段目标</h4>
+<p>每周稳定产出 3~5 款游戏，验收成为独立流水线。一次通过率从 ~50% 升到 &ge;75%，返工平均 &le;1.2 轮。编制扩展到 1 人 + 6~8 AI。自主率 &ge;65%，干预 &le;10 次/周，单款成本 &le;&yen;80。</p>
+</div>
+
+<h3>5.1 批量排产与时间片轮转</h3>
+
+<p>T2 阶段的核心变化是从「逐款开发」转向「批量排产」。auto-ops 调度器按时间片轮转分配编码槽位，多款游戏的开发任务并行推进。操作要点：</p>
+
+<ul>
+  <li>在 autoops 面板创建 8~15 条业务任务，覆盖选题、编码、关卡设计、数值调优等不同类型</li>
+  <li>观察 <code>/autoops/rounds</code> 每轮被选中任务的分布，确保无任务连续 5 轮未被选中（饿死判定）</li>
+  <li>free 维护模式下确认不误停在建任务（连续 2 轮 free 后未完成任务集不变）</li>
+  <li>review 轮按数据表现重排优先级（砍低留存、加注高留存品类）</li>
+</ul>
+
+<h3>5.2 独立验收全量运转</h3>
+
+<p>T2 阶段验收 Agent 应进入全量运转状态。每一款游戏完成后都必须经过验收 Agent 的独立检查。验收清单（done_when）应包含以下标准项：</p>
+
+<table>
+<tr><th>验收项</th><th>检查方式</th><th>通过标准</th></tr>
+<tr><td>首屏可玩</td><td>Playwright 打开 URL + 等待加载</td><td>5 秒内出现可交互元素</td></tr>
+<tr><td>无 console error</td><td>Playwright 监听 page.on('pageerror')</td><td>0 条未捕获异常</td></tr>
+<tr><td>通关路径可达</td><td>Playwright 模拟点击/滑动操作序列</td><td>至少到达第 3 关</td></tr>
+<tr><td>包体大小</td><td>检查部署目录总大小</td><td>&lt; 2MB</td></tr>
+<tr><td>无外链敏感域</td><td>静态扫描 HTML/JS 中的 URL</td><td>无黑名单域名</td></tr>
+<tr><td>埋点存在</td><td>检查广告位占位符与数据埋点</td><td>至少 1 个广告位 + 1 个 PV 埋点</td></tr>
+</table>
+
+<p>低风险游戏可采用抽样验收策略（每 3 款抽 1 款全量检查），但高风险游戏（涉及新引擎、新机制）必须全量验收。</p>
+
+<h3>5.3 扩编与调度验证</h3>
+
+<p>T2 阶段的核心断言之一是<strong>扩编后的新角色真的被调度到任务</strong>。操作流程：</p>
+
+<ol>
+  <li>观察队列积压情况，当待开发任务 &ge; 8 条时触发扩编建议</li>
+  <li>通过 <code>POST /org/stage/sense</code> → <code>GET /org/advice</code> 获取扩编建议</li>
+  <li>在面板中点击「采纳并扩编」，批准 +2 开发 +1 验收岗位</li>
+  <li><strong>关键断言</strong>：psql 验证新角色 3 轮内出现在 <code>auto_ops_rounds</code> 绑定与 <code>token_billing_records.role_id</code></li>
+</ol>
+
+<pre><code>-- FIX-004 复测：新角色是否被调度
+SELECT r.role_id, COUNT(*) AS round_count
+FROM auto_ops_rounds r
+WHERE r.project_id = ':pid'
+  AND r.start_time > ':expansion_time'
+GROUP BY r.role_id
+ORDER BY round_count DESC;
+
+-- 新角色是否在计费表中出现
+SELECT role_id, SUM(cost) AS total_cost
+FROM token_billing_records
+WHERE project_id = ':pid'
+  AND created_at > ':expansion_time'
+GROUP BY role_id;</code></pre>
+
+<p>若新角色扩而不用（3 轮后零绑定），则 FIX-004 判定为失败，需手工绑定任务并在报告中标注「人工兜底」。</p>
+
+<h3>5.4 验收争议仲裁</h3>
+
+<p>T2 阶段需处理至少 1 次验收与执行的争议。典型场景：执行 Agent 认为游戏已满足 done_when 清单，但验收 Agent 判定驳回（如「第 5 关存在概率性崩溃」）。争议升级到管理者 Agent 仲裁，仲裁过程与结论留痕在 <code>arbitration_cases</code> 表。</p>
+
+<p>人工需确认仲裁结论的合理性，并在 <code>decision_traces</code> 中查看完整的决策链路。仲裁结论可能为「维持驳回」「部分通过」或「推翻驳回」，每种结论都应附带清晰的理由。</p>
+
+<h3>5.5 小游戏平台审核事件注入</h3>
+
+<pre><code># 审核通过
+node ingest-event.mjs --scenario LTS_C4 --type platform.review \
+  --text "游戏g3审核通过" \
+  --extra '{"game":"g3","result":"approved","platform":"miniclip"}'
+
+# 审核拒绝（附理由）
+node ingest-event.mjs --scenario LTS_C4 --type platform.review \
+  --text "游戏g5审核被拒：存在未处理的外部链接" \
+  --extra '{"game":"g5","result":"rejected","reason":"external_links","action_required":"remove_external_urls"}'</code></pre>
+
+<p>审核拒绝应自动触发整改任务创建并升级验收清单（增加「无外链」检查项的权重）。注意：由于 ISSUE-W4-41 的派单断裂，此事件可能无法自动建任务，需手工创建并记为干预。</p>
+
+<!-- ========== 6. T3 规模化期操作指引 ========== -->
+<h2 id="t3">六、T3 规模化期操作指引（11&ndash;30 款游戏，事故自愈）</h2>
+
+<div class="card card-green">
+<h4>T3 阶段目标</h4>
+<p>20 款游戏在跑 + 事故自愈能力验证。数据驱动排产（次留/eCPM 加权），灰度 A/B 测试常态化。事故 1 轮内止损且留完整 decision_traces。自主率 &ge;75%，人工升级 &le;5 次/周，单款成本 &le;&yen;55，事故 MTTR &le;1 个轮次。</p>
+</div>
+
+<h3>6.1 事故演练：JS 报错率飙升</h3>
+
+<p>T3 阶段的核心演练是注入一次生产事故：某款游戏的 JavaScript 报错率突然飙升。具体操作步骤：</p>
+
+<ol>
+  <li><strong>注入事故事件</strong>：</li>
+</ol>
+
+<pre><code># 事故事件：JS 报错率飙升
+node ingest-event.mjs --scenario LTS_C4 --type incident.error_rate \
+  --text "游戏g7 JS报错率飙升至35%" \
+  --extra '{"game":"g7","metric":"js_error_rate","value":0.35,"threshold":0.05,"severity":"critical"}' \
+  --priority urgent</code></pre>
+
+<ol start="2">
+  <li><strong>预期系统反应</strong>：</li>
+</ol>
+<ul>
+  <li>自动冻结该游戏的发布管线（<code>/deploy/:id/freeze</code>）</li>
+  <li>触发回滚到上一个稳定版本（<code>/deploy/:id/rollback</code>）</li>
+  <li>红通道通知：通过飞书连接器推送告警给负责人</li>
+  <li>在 <code>decision_traces</code> 中留下完整的自动处置链路</li>
+  <li>在 <code>risk_registry</code> 中登记风险条目</li>
+</ul>
+
+<ol start="3">
+  <li><strong>人工验证</strong>：</li>
+</ol>
+<ul>
+  <li>确认冻结生效：该游戏的 deploy 状态变为 frozen，其他游戏不受影响</li>
+  <li>确认回滚成功：<code>deploy_jobs</code> 中出现 rollback 类型记录</li>
+  <li>确认通知到达：飞书测试群收到告警消息（或 <code>notifications</code> 表中有对应记录）</li>
+  <li>确认 <code>decision_traces</code> 完整：从事件接收到冻结到回滚的全链路可追溯</li>
+  <li>确认事故复盘报告已自动生成，包含根因分析与规则更新建议</li>
+</ul>
+
+<h3>6.2 下架决策</h3>
+
+<p>对于数据持续低迷或存在不可修复缺陷的游戏，需执行下架操作。下架属于 RACI 红通道动作，必须人工批准。</p>
+
+<pre><code># 查看候选下架游戏（低留存 + 高成本）
+SELECT t.task_name, 
+       SUM(b.cost) AS total_cost,
+       AVG(CASE WHEN m.metric_name='retention_d1' THEN m.value END) AS d1_retention
+FROM auto_ops_tasks t
+JOIN token_billing_records b ON t.id = b.task_id
+LEFT JOIN game_metrics m ON t.id = m.task_id
+WHERE t.project_id = ':pid'
+GROUP BY t.task_name
+HAVING AVG(CASE WHEN m.metric_name='retention_d1' THEN m.value END) < 0.15
+ORDER BY total_cost DESC;</code></pre>
+
+<p>人工在面板中批准下架决策后，系统应自动执行：冻结发布 → 从游戏列表中移除 → 更新合集页 → 记录下架原因到 <code>change_logs</code>。</p>
+
+<h3>6.3 预算跨品类挪移</h3>
+
+<p>T3 阶段需要验证预算在不同品类游戏之间的灵活调配能力。例如，将低留存品类（如纯益智类）的剩余预算挪移到高留存品类（如动作类）：</p>
+
+<ol>
+  <li>通过 <code>PUT .../ledger/budget</code> 批准弹性模式</li>
+  <li>观察 <code>budget_states</code> 表中预算再分配记录</li>
+  <li>确认 <code>change_logs</code> 中有完整的挪移操作留痕</li>
+  <li>验证挪移后低留存品类的任务不会因预算耗尽而突然中断（应有平滑过渡）</li>
+</ol>
+
+<div class="card card-yellow">
+<h4>预算管控注意事项</h4>
+<p>当前预算控制作用域为<strong>项目级</strong>而非任务级：<code>BudgetController</code> 全方法以 <code>projectID</code> 为键，<code>model/task_queue.go</code> 无预算列。超支时的实动作为 <code>PauseProjectDurable</code> 暂停整个项目循环——这会牵连所有在跑游戏。因此「超成本熔断该任务（不牵连其他款）」在 HEAD 不可达，属于卡面 P1 建议项。T3 阶段需实测并记录这一限制：项目级暂停 + 其他款被牵连。</p>
+</div>
+
+<h3>6.4 事故复盘与规则更新</h3>
+
+<p>事故处置完成后，系统应自动生成复盘报告，人工需确认以下内容：</p>
+<ul>
+  <li>根因分析是否准确（是代码缺陷、引擎 bug 还是外部依赖变更）</li>
+  <li>规则更新建议是否合理（如「所有 Canvas 游戏必须添加 try-catch 包裹 requestAnimationFrame」）</li>
+  <li>新规则是否已写入知识库（<code>knowledge_documents</code>）</li>
+  <li>验收清单是否已相应更新（增加对应的检查项）</li>
+</ul>
+
+<!-- ========== 7. 验收判定表 ========== -->
+<h2 id="acceptance">七、验收判定表</h2>
+
+<p>以下判定表覆盖 T1/T2/T3 三个阶段的核心指标，按故事卡原文阈值设定。判定分三档：通过（绿）、观察（黄）、失败（红）。</p>
+
+<h3>T1 生存期判定表</h3>
+<table>
+<tr><th>指标</th><th>通过（绿）</th><th>观察（黄）</th><th>失败（红）</th></tr>
+<tr><td>自主率（轮次口径）</td><td>&ge;45%</td><td>35~45%</td><td>&lt;35% 或含未批写动作</td></tr>
+<tr><td>自主率（交付物口径）</td><td>&ge;30%</td><td>15~30%</td><td>&lt;15%</td></tr>
+<tr><td>上线动作自主率</td><td colspan="3" style="text-align:center">恒 = 0（红通道，上线必须人工批准）</td></tr>
+<tr><td>干预次数</td><td>&le;15</td><td>16~18（且 FIX 兜底占比 &gt;50%）</td><td>&gt;18 或审批链断裂</td></tr>
+<tr><td>单款研发 token</td><td>&le;&yen;120</td><td>&le;&yen;150 收敛中</td><td>&gt;&yen;150</td></tr>
+<tr><td>验收成本占比</td><td>&le;15%</td><td>15~20%</td><td>&gt;20%</td></tr>
+<tr><td>自审自批记录数</td><td><strong>0</strong>（硬性底线）</td><td>&mdash;</td><td>&gt;0 即失败</td></tr>
+<tr><td>首屏可玩率</td><td>&ge;80%</td><td>60~80%</td><td>&lt;60%</td></tr>
+<tr><td>验收返工轮次可见</td><td>&ge;1 次返工留痕</td><td>通道齐但无对象</td><td>通道不存在</td></tr>
+</table>
+
+<h3>T2 扩张期判定表</h3>
+<table>
+<tr><th>指标</th><th>通过（绿）</th><th>观察（黄）</th><th>失败（红）</th></tr>
+<tr><td>自主率</td><td>&ge;65%</td><td>55~65%</td><td>&lt;55%</td></tr>
+<tr><td>干预次数</td><td>&le;10/周</td><td>11~14/周</td><td>&gt;14/周</td></tr>
+<tr><td>单款成本</td><td>&le;&yen;80</td><td>&le;&yen;100</td><td>&gt;&yen;100</td></tr>
+<tr><td>一次通过率</td><td>&ge;75%（从 ~50% 提升）</td><td>60~75%</td><td>&lt;60%</td></tr>
+<tr><td>返工平均轮次</td><td>&le;1.2</td><td>1.2~1.8</td><td>&gt;1.8</td></tr>
+<tr><td>驳回准确率</td><td>&ge;80%</td><td>65~80%</td><td>&lt;65%</td></tr>
+<tr><td>自审自批记录数</td><td><strong>0</strong></td><td>&mdash;</td><td>&gt;0</td></tr>
+<tr><td>扩编角色被调度</td><td>3 轮内进调度</td><td>5 轮内进调度（手工兜底）</td><td>扩而不用</td></tr>
+</table>
+
+<h3>T3 规模化期判定表</h3>
+<table>
+<tr><th>指标</th><th>通过（绿）</th><th>观察（黄）</th><th>失败（红）</th></tr>
+<tr><td>自主率</td><td>&ge;75%</td><td>65~75%</td><td>&lt;65%</td></tr>
+<tr><td>人工升级</td><td>&le;5/周</td><td>6~8/周</td><td>&gt;8/周</td></tr>
+<tr><td>单款成本</td><td>&le;&yen;55</td><td>&le;&yen;70</td><td>&gt;&yen;70</td></tr>
+<tr><td>事故 MTTR</td><td>&le;1 轮次（&ge;60s + 轮耗时）</td><td>&le;2 轮次</td><td>&gt;2 轮次</td></tr>
+<tr><td>事故止损完整性</td><td>1 轮内闭环 + decision_traces 完整</td><td>2 轮内闭环</td><td>未闭环或牵连其他游戏</td></tr>
+<tr><td>组合留存趋势</td><td>上行</td><td>平稳</td><td>下行</td></tr>
+<tr><td>成本/收入按款可算</td><td>全款可算</td><td>&ge;80% 款可算</td><td>&lt;80%</td></tr>
+</table>
+
+<!-- ========== 8. 取证口径 ========== -->
+<h2 id="evidence">八、取证口径</h2>
+
+<p>C4 场景的取证遵循总方案规定的三重口径（页面 + 网络 + psql），所有关键断言必须跨层交叉验证，单层不定论。</p>
+
+<h3>8.1 核心取证表</h3>
+
+<table>
+<tr><th>表名</th><th>所属库</th><th>取证用途</th><th>关键字段</th></tr>
+<tr><td><code>acceptance_records</code></td><td>project_server</td><td>三权验收核心证据：验收结论、复核人、时间</td><td>executor_id, reviewer_id, verdict, human_status, human_handler, score</td></tr>
+<tr><td><code>auto_ops_rounds</code></td><td>project_server</td><td>轮次调度证据：引擎类型、成本、时长、返工轮识别</td><td>engine_type, cost, elapsed_sec, start_time, status, reason</td></tr>
+<tr><td><code>deploy_jobs</code></td><td>project_server</td><td>发布/回滚链路证据</td><td>status, deploy_url, rollback_from, created_at</td></tr>
+<tr><td><code>token_billing_records</code></td><td>project_server</td><td>token 成本归因：按 role 聚合 = 单款成本</td><td>log_ref, cost, role_id, task_id, created_at</td></tr>
+<tr><td><code>auto_ops_tasks</code></td><td>project_server</td><td>任务状态与角色绑定</td><td>role_id, finished, round_count, status</td></tr>
+<tr><td><code>decision_traces</code></td><td>project_server</td><td>决策链路完整追溯</td><td>decision_type, content, created_at</td></tr>
+<tr><td><code>arbitration_cases</code></td><td>project_server</td><td>验收争议仲裁记录</td><td>status, conclusion, created_at</td></tr>
+<tr><td><code>role_experiences</code></td><td>project_server</td><td>驳回理由入角色经验库</td><td>role_id, experience_type, content</td></tr>
+<tr><td><code>budget_states</code></td><td>project_server</td><td>预算状态与预警记录</td><td>ai_used, ai_budget, total_used, total_budget</td></tr>
+<tr><td><code>risk_registry</code></td><td>project_server</td><td>风险登记册（事故演练）</td><td>risk_type, severity, status, mitigation</td></tr>
+</table>
+
+<h3>8.2 关键取证 SQL</h3>
+
+<pre><code>-- 1. 自审自批检查（核心底线：结果必须为 0）
+SELECT COUNT(*) AS self_review_count
+FROM acceptance_records ar
+JOIN auto_ops_tasks t ON ar.task_id = t.id
+WHERE ar.reviewer_id = t.role_id;
+
+-- 2. 验收独立性校验
+SELECT ar.id, ar.executor_id, ar.reviewer_id, ar.verdict, 
+       ar.human_status, ar.score, ar.created_at
+FROM acceptance_records ar
+WHERE ar.project_id = ':pid'
+ORDER BY ar.created_at DESC;
+
+-- 3. 单款成本聚合（按 role 维度）
+SELECT role_id, 
+       COUNT(*) AS billing_rows,
+       ROUND(SUM(cost)::numeric, 4) AS total_cost
+FROM token_billing_records
+WHERE project_id = ':pid'
+GROUP BY role_id
+ORDER BY total_cost DESC;
+
+-- 4. 轮次-任务矩阵（调度公平性）
+SELECT task_id, engine_type, COUNT(*) AS round_count,
+       SUM(cost) AS total_cost,
+       AVG(elapsed_sec) AS avg_duration
+FROM auto_ops_rounds
+WHERE project_id = ':pid'
+GROUP BY task_id, engine_type
+ORDER BY round_count DESC;
+
+-- 5. 发布/回滚链路
+SELECT id, status, deploy_url, created_at, updated_at
+FROM deploy_jobs
+WHERE project_id = ':pid'
+ORDER BY created_at DESC;
+
+-- 6. 预算状态快照
+SELECT ai_used, ai_budget, total_used, total_budget,
+       ROUND((ai_used / NULLIF(ai_budget, 0) * 100)::numeric, 1) AS ai_usage_pct
+FROM budget_states
+WHERE project_id = ':pid'
+ORDER BY updated_at DESC LIMIT 1;
+
+-- 7. 事故决策链路完整性
+SELECT id, decision_type, content, created_at
+FROM decision_traces
+WHERE project_id = ':pid'
+  AND created_at > ':incident_time'
+ORDER BY created_at;
+
+-- 8. 扩编角色调度验证（FIX-004 复测）
+SELECT r.role_id, a.agent_name, COUNT(*) AS rounds_after_expansion
+FROM auto_ops_rounds r
+LEFT JOIN agents a ON r.role_id = a.agent_id
+WHERE r.project_id = ':pid'
+  AND r.start_time > ':expansion_time'
+GROUP BY r.role_id, a.agent_name
+ORDER BY rounds_after_expansion DESC;</code></pre>
+
+<h3>8.3 三重取证交叉验证规则</h3>
+
+<p>每一条关键断言必须满足以下交叉验证要求：</p>
+
+<ol>
+  <li><strong>页面层（L1）</strong>：Playwright 截图入 <code>harness/snapshots/</code>，包含面板数字、状态 tag、审批弹窗内容与按钮态</li>
+  <li><strong>网络层（L2）</strong>：请求 URL / 状态码 + 业务字段 <code>code==0</code> + 响应关键字段（防 200 伪成功）</li>
+  <li><strong>数据库层（L3）</strong>：psql 只读查询确认落盘行存在性与字段字面量</li>
+</ol>
+
+<p>特别注意事项：</p>
+<ul>
+  <li><code>pserN()</code> 在 psql 空返回时给 <code>NaN</code>，易被误读成「0 行」——NaN/空 &ne; 0，任何「0 行」结论必须复跑一次直查确认</li>
+  <li><code>token_billing_records</code> 是 <code>log_ref</code> 不是 <code>log_path</code>（D1 首跑踩坑点）</li>
+  <li>账本表叫 <code>project_ledger</code>（无 <code>_entries</code> 后缀）</li>
+  <li>三类「日志」须分清：qianshou 会话日志（jsonl）、<code>decision_traces</code>（库表）、服务端运行日志（<code>project-server.log</code>）——禁止跨类互为证据</li>
+</ul>
+
+<!-- ========== 9. 附录 ========== -->
+<h2 id="appendix">九、附录：环境信息</h2>
+
+<h3>9.1 端口映射</h3>
+<table>
+<tr><th>服务</th><th>端口</th><th>说明</th></tr>
+<tr><td>PostgreSQL 17</td><td>5432</td><td>双库：ai_native_engine（平台）/ project_server（实例）</td></tr>
+<tr><td>platform 后端</td><td>18000</td><td>公司/项目/实例/账本/超管后台</td></tr>
+<tr><td>project-server</td><td>8090</td><td>AI 执行引擎（单实例单项目）</td></tr>
+<tr><td>前端 vite dev</td><td>5176</td><td>Vue3 前端开发服务器</td></tr>
+<tr><td>外网代理</td><td>7890</td><td>127.0.0.1:7890（新加坡 IP）</td></tr>
+<tr><td>mail1（Linode）</td><td>多端口</td><td>mail1.zyinfo.pro / 172.237.66.31 / SG Singapore 2</td></tr>
+</table>
+
+<h3>9.2 关键表清单（project_server 库）</h3>
+<table>
+<tr><th>分类</th><th>表名</th></tr>
+<tr><td>事件与派单</td><td><code>events</code> / <code>event_assignments</code> / <code>event_classified</code></td></tr>
+<tr><td>auto-ops 调度</td><td><code>auto_ops_tasks</code> / <code>auto_ops_rounds</code> / <code>auto_ops_schedules</code> / <code>auto_ops_progress</code> / <code>auto_ops_meta</code></td></tr>
+<tr><td>验收与审批</td><td><code>acceptance_records</code> / <code>human_task_nodes</code> / <code>approval_requests</code> / <code>compliance_logs</code></td></tr>
+<tr><td>计费与预算</td><td><code>token_billing_records</code> / <code>budget_states</code> / <code>budget_alerts</code> / <code>project_config</code> / <code>project_ledger</code> / <code>amoeba_daily_stats</code></td></tr>
+<tr><td>组织与角色</td><td><code>agents</code> / <code>org_charts</code> / <code>growth_advice</code> / <code>role_versions</code> / <code>change_logs</code> / <code>role_experiences</code></td></tr>
+<tr><td>决策与审计</td><td><code>decision_traces</code> / <code>decision_logs</code> / <code>arbitration_cases</code> / <code>risk_registry</code> / <code>audit_reports</code> / <code>connector_audit_logs</code></td></tr>
+<tr><td>发布与部署</td><td><code>deploy_jobs</code> / <code>deploy_configs</code></td></tr>
+<tr><td>知识库</td><td><code>knowledge_documents</code> / <code>knowledge_chunks</code></td></tr>
+<tr><td>通知</td><td><code>notifications</code></td></tr>
+</table>
+
+<h3>9.3 关键表清单（ai_native_engine 平台库）</h3>
+<table>
+<tr><th>表名</th><th>说明</th></tr>
+<tr><td><code>companies</code> / <code>members</code> / <code>projects</code></td><td>公司/成员/项目基础信息</td></tr>
+<tr><td><code>project_budgets</code></td><td>项目预算（total_budget / used_amount / token_limit）</td></tr>
+<tr><td><code>instances</code> / <code>provision_logs</code></td><td>实例管理 / 配置下发日志</td></tr>
+<tr><td><code>platform_balances</code> / <code>platform_transactions</code></td><td>平台真实账本</td></tr>
+<tr><td><code>token_billing_reports</code></td><td>平台侧计费报告（status: settled/duplicated）</td></tr>
+<tr><td><code>instance_project_grants</code></td><td>实例-项目授权（active/revoked）</td></tr>
+</table>
+
+<h3>9.4 Harness 脚本用法速查</h3>
+
+<table>
+<tr><th>脚本</th><th>用途</th><th>常用命令</th></tr>
+<tr><td><code>lib.mjs</code></td><td>健康探测 + 取 token + 只读 SQL</td><td><code>node lib.mjs</code>（自检）<br><code>node lib.mjs --with-proxy</code>（含外网）</td></tr>
+<tr><td><code>drive.mjs</code></td><td>auto-ops 驱动（观察/触发 review/分析）</td><td><code>node drive.mjs</code>（观察轮）<br><code>node drive.mjs --mode review --wait 240</code>（触发 review）<br><code>node drive.mjs --scenario LTS_C4 --label "T1-D2"</code></td></tr>
+<tr><td><code>ingest-event.mjs</code></td><td>外部事件注入</td><td><code>node ingest-event.mjs --scenario LTS_C4 --type player.feedback --text "..."</code><br><code>node ingest-event.mjs --type payment --amount 18.40 --order-id LTC4-xxx</code><br><code>node ingest-event.mjs --replay-pending</code>（续跑重投）</td></tr>
+<tr><td><code>approve.mjs</code></td><td>审批模拟器</td><td><code>node approve.mjs --dry-run</code>（只出判定）<br><code>node approve.mjs --scope human,acceptance</code><br><code>node approve.mjs --selftest</code>（端到端自证）</td></tr>
+</table>
+
+<h3>9.5 断点续跑指令</h3>
+
+<pre><code># 断点续跑（D2 主用法：建任务→启动→等轮次→验收→停止）
+cd platform-web
+LTS_C4_PROJECT=&lt;pid&gt; npx playwright test --config=e2e/playwright.config.ts \
+  e2e/stories/lut-c4-t1_ui.spec.ts --grep "C4-(7|8|9|10)" --retries=0 --reporter=list
+
+# 只做法证复跑（无写操作，W4-17/FIX-018 换装后回归 tailHit）
+LTS_C4_PROJECT=&lt;pid&gt; npx playwright test --config=e2e/playwright.config.ts \
+  e2e/stories/lut-c4-t1_ui.spec.ts --grep "C4-8 " --retries=0
+
+# 注意：grep 步号后必须带空格（否则 C4-10 被一起捞走）
+# 跑 spec 必带 --config（:5176）
+# 重启引擎只需 UI「启动」（W4-15 不复现）</code></pre>
+
+<h3>9.6 账号体系</h3>
+
+<table>
+<tr><th>别名</th><th>账号格式</th><th>用途</th></tr>
+<tr><td>lts_c4 主账号</td><td><code>lts_c4_&lt;timestamp&gt;_&lt;rand&gt;@test.com</code></td><td>C4 场景测试主账号，密码 test123</td></tr>
+<tr><td>platform_admin</td><td><code>admin_test_m13@test.com</code></td><td>平台超管（user_id=21），harness 默认身份</td></tr>
+<tr><td>测试收件箱</td><td><code>hayoou_com@126.com</code></td><td>邮件外发真实冒烟的唯一收件地址</td></tr>
+<tr><td>飞书</td><td>自建应用</td><td>审批推送/通知链路验证</td></tr>
+</table>
+
+<p style="margin-top:40px;padding:16px;background:#e8f0fe;border-radius:8px;font-size:13px;color:#555">
+  <strong>文档维护说明</strong>：本文档基于 D1 首跑（2026-09-24）的实测数据与判据修正（2026-09-27 主控现算）编写。随着 FIX 修复项的落地与后续测试轮次的推进，部分判定与阈值可能需要更新。请以最新 STATUS.md 与故事卡原文为准。代码层面的详细知识以最新 git log 与代码为准，文档与代码不符时以代码为准。
+  <br><strong>2026-10-07 同步</strong>（V3 API 回归战役，见 <code>wiki/testing/v3/</code>）：本卡流程路径经复核不变；同族语义收紧两处——验收域双签同人禁签拒绝由 500 改 409/3001、预算阈值百分比 &gt;100% 拒绝（=100 放行）；存量项目启动闸注记见步骤 5（V3-07）。
+</p>
+
+</div><!-- .main -->
+</body>
+</html>

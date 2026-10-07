@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第02章 注册与创建公司 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 02 章 · 第一步：把公司开起来</div>
+    <h1>第02章 注册与创建公司</h1>
+    <p class="zy-lead">从注册一个账号，到建好你的第一家「公司」，逐字段讲清：填了会有什么后果、以后还能不能改。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 14 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：每个字段的影响与可改性</span>
+    </div>
+  </header>
+
+  <p>这一章回答一个你最关心的问题：<strong>「我怎么创建公司？这些信息填了，对后面到底有没有影响？」</strong>答案一半是好消息——绝大多数字段以后都能改、代价极低；另一半是你必须提前知道的几个「不可撤销」动作（转让所有权、解散公司）。读完这一章，你就知道哪些可以随便填、哪些要慎重。</p>
+
+  <h2>你将学会</h2>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>注册账号、登录，并理解登录后「回到原来想去的页面」这个行为</span></li>
+    <li><input type="checkbox"><span>创建第一家公司，看懂「公司名称 / 行业类型 / 描述」三项各自的作用</span></li>
+    <li><input type="checkbox"><span>用一张表看清每个字段「填什么好、影响什么、以后能改吗、改的代价」</span></li>
+    <li><input type="checkbox"><span>走通公司管理页的五个页签：列表、组织架构、成员、邀请、设置</span></li>
+    <li><input type="checkbox"><span>理解 14 项权限的人话含义，以及一人公司该怎么给自己和 AI 开权限</span></li>
+  </ul>
+
+  <h2>一、从注册到登录</h2>
+
+  <div class="zy-path">登录页 <span class="sep">›</span> 还没有账号？立即注册</div>
+
+  <p>第一次打开平台，你会停在<strong>登录页</strong>。页面上是两个输入框和一个按钮：<span class="zy-field">请输入邮箱</span>、<span class="zy-field">请输入密码</span>、<span class="zy-btn">登录</span>。底部有一行小字：<strong>还没有账号？<a>立即注册</a></strong>。点它，进入注册页。</p>
+
+  <h3>注册页的四个字段</h3>
+  <p>注册页标题「创建账号」，需要填四项，全部必填：</p>
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>字段</th><th>提示文字（placeholder）</th><th>校验规则（填错会提示）</th></tr></thead>
+      <tbody>
+        <tr><td>用户名</td><td><span class="zy-field">请输入用户名</span></td><td>必填；长度 1–64（提示「用户名长度 1-64」）</td></tr>
+        <tr><td>邮箱</td><td><span class="zy-field">请输入邮箱</span></td><td>必填；需合法邮箱格式（提示「请输入正确的邮箱格式」）</td></tr>
+        <tr><td>密码</td><td><span class="zy-field">请输入密码（至少 6 位）</span></td><td>必填；长度 6–64（提示「密码长度 6-64 位」）</td></tr>
+        <tr><td>确认密码</td><td><span class="zy-field">请再次输入密码</span></td><td>必须与上面密码一致（提示「两次输入的密码不一致」）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>填完点 <span class="zy-btn">注册</span>。成功后页面提示 <strong>「注册成功，请登录」</strong>，并自动跳回登录页。注册页底部也有「已有账号？返回登录」。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">邮箱是唯一身份，务必填真实的</span>
+    <p>邮箱就是你的登录账号，也是系统识别「你是谁」的凭据。用户名只是显示名（界面上的称呼），可以重复、可以后改；但邮箱在系统里是唯一的——注册时若提示「用户已存在」，说明这个邮箱已经注册过了，直接去登录即可。</p>
+  </div>
+
+  <h3>登录：注意「登录后回到哪」这个行为</h3>
+  <p>登录页校验是：邮箱填错格式会提示 <strong>「请输入正确的邮箱格式」</strong>；密码不足 6 位提示 <strong>「密码至少 6 位」</strong>。登录成功提示 <strong>「登录成功」</strong>。</p>
+  <p>一个容易被忽略但很贴心的细节：<strong>登录后会回到你原来想去的那个页面</strong>。比如你还没登录时直接打开了一个项目详情链接，系统会让你先登录，登录完自动跳回那个项目页，而不是总把你丢回数据面板。实现上，登录页会读 URL 里的 <code>redirect</code> 参数，并且只接受「站内路径」（以 <code>/</code> 开头、非 <code>//</code>），防止被引导跳去外部网站。</p>
+
+  <h2>二、创建你的第一个公司</h2>
+
+  <div class="zy-path">左侧菜单「公司管理」 <span class="sep">›</span> 右上角 <span class="zy-btn">创建公司</span></div>
+
+  <p>登录后进入平台，左侧菜单里找到 <strong>公司管理</strong>，点进去，右上角有一个 <span class="zy-btn">创建公司</span> 按钮。点它，会弹出「创建公司」弹窗，里面有三个字段：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>字段</th><th>必填</th><th>提示文字 / 交互</th><th>长度限制</th></tr></thead>
+      <tbody>
+        <tr><td>公司名称</td><td>是</td><td><span class="zy-field">请输入公司名称</span></td><td>1–128 字符</td></tr>
+        <tr><td>行业类型</td><td>否（可不选）</td><td>下拉框，<span class="zy-field">请选择行业</span>，可搜索、可清空</td><td>—</td></tr>
+        <tr><td>描述</td><td>否</td><td><span class="zy-field">简要描述公司（可选）</span>，多行文本框</td><td>最多 512 字符</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>弹窗底部两个按钮：<span class="zy-btn ghost">取消</span> 和 <span class="zy-btn">创建</span>。创建成功提示 <strong>「公司创建成功」</strong>。</p>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">三个字段里只有「公司名称」是必填</span>
+    <p>行业类型和描述都可以留空，等想清楚了再去「公司设置」里补。所以第一次用别卡在「行业到底选哪个」上——先建起来，后面随时能改。</p>
+  </div>
+
+  <h3>行业类型的完整选项清单（抄自代码）</h3>
+  <p>创建公司弹窗里的「行业类型」下拉框，可选值是写死在代码里的这 <strong>14 项</strong>（顺序不变）：</p>
+  <div class="zy-grid c4">
+    <div class="zy-card tinted">智能制造</div>
+    <div class="zy-card tinted">互联网/IT</div>
+    <div class="zy-card tinted">金融</div>
+    <div class="zy-card tinted">教育</div>
+    <div class="zy-card tinted">医疗健康</div>
+    <div class="zy-card tinted">电商零售</div>
+    <div class="zy-card tinted">物流运输</div>
+    <div class="zy-card tinted">房地产</div>
+    <div class="zy-card tinted">能源环保</div>
+    <div class="zy-card tinted">文化传媒</div>
+    <div class="zy-card tinted">咨询服务</div>
+    <div class="zy-card tinted">农林牧渔</div>
+    <div class="zy-card tinted">建筑工程</div>
+    <div class="zy-card tinted">其他</div>
+  </div>
+
+  <p>它存在哪里、被谁读？这个「行业类型」写进公司的 <code>industry</code> 字段（数据库里最长 64 字符）。它会被读到的场景有：</p>
+  <ul>
+    <li><strong>「我的公司」列表</strong>里的「行业」列展示；</li>
+    <li><strong>超管后台</strong>按公司名或行业做关键词搜索时；</li>
+    <li>平台侧 AI 对话在需要「列出你的公司」时，能看到这个字段。</li>
+  </ul>
+  <p>换句话说：<strong>公司这个「行业类型」目前只是展示与统计用途，不会注入到 AI 的执行逻辑里</strong>。真正影响 AI 行为的「行业」是<strong>项目</strong>里另一个独立的「行业」字段（自由文本，建项目时自己填），两者不是一回事，别搞混。</p>
+
+  <h2>三、【重点】这些信息对后续有什么影响</h2>
+
+  <p>这是全章最重要的一节。一句话结论先说：<strong>公司名称、行业类型、描述这三项，都只影响「展示与统计」，不影响 AI 怎么干活；真正需要慎重的是「所有者」和两个不可撤销操作（转让、解散）。</strong>下面是逐字段的完整结论。</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead>
+        <tr><th style="min-width:90px">字段</th><th>填什么好</th><th>影响什么</th><th>以后能改吗</th><th>改的代价</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>公司名称</strong></td>
+          <td>真实、好认、能对客户亮出来的名字（个人可「XX 工作室」，团队用真名）</td>
+          <td>出现在「我的公司」列表、顶栏公司切换器、面包屑、公司账本等处；可能成为对外内容署名的一部分</td>
+          <td><strong>能改</strong>（公司设置 → 保存修改）</td>
+          <td>极低。改完即时生效；若已在对外材料里署了名，需同步改外部，系统内无历史改名成本</td>
+        </tr>
+        <tr>
+          <td><strong>行业类型</strong></td>
+          <td>从 14 项里选最接近的一个；实在选不出就「其他」</td>
+          <td>主要影响展示与统计（列表展示、超管按行业搜索）。<strong>当前不注入 AI 执行逻辑</strong>，不影响模板推荐、提示词或 AI 策略</td>
+          <td><strong>能改</strong>（公司设置里是自由文本框，可改成任意文字）</td>
+          <td>极低</td>
+        </tr>
+        <tr>
+          <td><strong>描述</strong></td>
+          <td>一句话说清公司定位（如「一人跨境电商独立站」）</td>
+          <td>存库并在「我的公司」列表展示；平台侧 AI 对话列公司时能看到它，<strong>不进入项目服务器的执行上下文或知识库</strong></td>
+          <td><strong>能改</strong>（公司设置 → 保存修改）</td>
+          <td>极低</td>
+        </tr>
+        <tr>
+          <td><strong>所有者</strong></td>
+          <td>创建公司的这个人，自动成为所有者</td>
+          <td>所有者是最高权限：只有所有者能解散公司、转让所有权、授予 super_admin。公司的项目、计费主体都挂在所有者名下</td>
+          <td><strong>能改，但不可撤销</strong>（公司设置 → 转让所有权给另一位成员）</td>
+          <td>高。转让后你不再是最高权限，且此操作不可撤销，务必确认对方是可信的团队成员</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="zy-note danger">
+    <span class="zy-note-title">两个「不可撤销」动作，做之前想清楚</span>
+    <p>① <strong>转让所有权</strong>：确认文案是「确定要转让公司所有权吗？此操作不可撤销。」转出去就收不回来了。② <strong>解散公司</strong>：说明文字是「解散后公司将无法恢复，所有数据将被软删除。仅所有者可操作。」这两个是本章唯一的「慎重点」。</p>
+  </div>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>✅ 这样填</h4>
+      <p>第一次建公司：名称用真实的名字，行业先选一个最接近的，描述留空或一句话。建完先跑起来，等业务清晰了再回「公司设置」把描述补详细。</p>
+    </div>
+    <div class="no">
+      <h4>❌ 别这样做</h4>
+      <p>在「行业到底选哪个」上纠结半天不敢点创建；或者随手把「所有者」的转让/解散当测试点着玩——这两项不可撤销，点错了真回不来。</p>
+    </div>
+  </div>
+
+  <h2>四、公司管理页的五个页签</h2>
+
+  <p>公司管理页顶部有五个页签：<strong>公司列表 / 组织架构 / 成员管理 / 成员邀请 / 公司设置</strong>。其中后四个页签需要<strong>先选一家公司</strong>才会激活（未选公司时它们是灰的）。下面逐个走一遍。</p>
+
+  <h3>页签一：公司列表</h3>
+  <p>标题是 <strong>「我的公司」</strong>，右上角 <span class="zy-btn">创建公司</span>。表格列是 <strong>公司名称 / 行业 / 描述 / 状态 / 操作</strong>。状态有两种：<span class="zy-badge green">正常</span> 和 <span class="zy-badge">已停用</span>。操作列有两个按钮：<span class="zy-btn ghost">进入</span> 和 <span class="zy-btn">设置</span>。如果一家公司都没有，表格空态提示 <strong>「暂无公司，点击右上角创建」</strong>。</p>
+  <p>两个按钮的区别：点 <strong>「进入」</strong> 和点 <strong>「设置」</strong> 效果基本一致，都是把这家公司设为「当前公司」并跳到「公司设置」页签——因为后四个页签都围绕「当前选中的公司」工作。真正切换全局「当前公司」的地方，是<strong>顶栏的公司切换器</strong>（见本章第六节）。</p>
+
+  <h3>页签二：组织架构（部门）</h3>
+  <p>这个页签管理公司的<strong>部门树</strong>。左侧卡片标题「部门树」（空态「暂无部门」），右侧卡片标题会根据状态在 <strong>「编辑部门 / 新建部门 / 部门详情」</strong> 之间切换。右上角有 <span class="zy-btn">新增部门</span> 按钮。</p>
+  <p>新建/编辑部门的表单有三个字段：<strong>部门名称</strong>（<span class="zy-field">请输入部门名称</span>）、<strong>上级部门</strong>（下拉树，<span class="zy-field">无（顶级部门）</span> 表示顶级部门）、<strong>排序</strong>（数字，控制同级部门的前后顺序）。按钮是 <span class="zy-btn">保存</span>/<span class="zy-btn">创建</span> 和 <span class="zy-btn ghost">重置</span>。</p>
+  <p>权限：只有<strong>公司所有者或管理员</strong>能调整组织架构。如果你不是管理员，右侧会显示提示 <strong>「仅公司所有者/管理员可调整组织架构」</strong>，只能看不能改。删除部门时会弹确认 <strong>「确定要删除部门「X」吗？」</strong>。</p>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">默认有一个「全体」部门，删不掉</span>
+    <p>创建公司时系统会自动建一个叫 <strong>「全体」</strong> 的顶级部门，作为兜底容器，且这个「全体」部门不允许删除（后端会拦）。所以再小的公司也至少有一个部门。</p>
+  </div>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">一人公司怎么建部门：先别建</span>
+    <p>一人公司没有「跨部门协作」的问题，绝大多数时候保留「全体」一个部门就够了，把成员（你自己 + 以后的 AI Agent）都挂在「全体」下即可。等真的招了第二个真人、需要「市场部 / 技术部」分权时，再回来加部门。部门是用来<strong>分权和归类</strong>的，不是用来凑热闹的——不要照搬大公司的组织树空转。</p>
+  </div>
+
+  <h3>页签三：成员管理</h3>
+  <p>这个页签列出公司所有成员。表格列：<strong>姓名 / 邮箱 / 员工ID / 角色 / 状态 / 加入时间 / 操作</strong>。角色有四种：<span class="zy-badge red">超级管理员</span>、<span class="zy-badge amber">管理员</span>、<span class="zy-badge">普通成员</span>、<span class="zy-badge green">AI Agent</span>。操作列是 <span class="zy-btn ghost">编辑</span> 和 <span class="zy-btn danger">移除</span>。</p>
+  <p>点「编辑」打开「编辑成员」弹窗，字段有：<strong>成员</strong>（只读展示姓名和邮箱）、<strong>角色</strong>（下拉：超级管理员/管理员/普通成员/AI Agent）、<strong>部门</strong>（<span class="zy-field">选择部门</span>）、<strong>员工ID</strong>（<span class="zy-field">员工工号（可选）</span>）、<strong>方向</strong>（<span class="zy-field">所属方向/条线（可选）</span>）、<strong>负责人指派</strong>（三个复选：方向负责人 / 项目负责人 / 任务负责人）、<strong>权限</strong>（权限矩阵，见下一节）。</p>
+  <p>权限门控：不是所有成员你都能改。点「编辑」或「移除」时，如果对方层级不比你低，按钮会被禁用，并提示 <strong>「无权管理该成员：需公司所有者，或角色层级高于对方」</strong>。移除成员前会确认 <strong>「确定要移除成员「X」吗？」</strong>。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">AI Agent 不可授予管理权限</span>
+    <p>在权限矩阵里，当角色选成「AI Agent」时，三项管理权限（暂停项目 / 暂停任务 / 用户管理）会被禁用，并显示提示 <strong>「AI Agent 不可授予管理权限」</strong>。这是硬规则：AI 永远不能拥有「暂停项目、暂停任务、管理用户」这三项人类专属的权力。</p>
+  </div>
+
+  <h3>页签四：成员邀请</h3>
+  <p>这个页签用来邀请真人或 AI Agent 加入公司。右上角 <span class="zy-btn">生成邀请</span>。页面顶部有一条说明：<strong>「邀请码有效期为 7 天。将邀请码或链接分享给团队成员，他们注册/登录后通过「接受邀请」加入公司。」</strong>（如果你不是管理员，这里会变成一条「仅公司所有者/管理员可管理邀请」的提示）。</p>
+  <p>邀请列表列：<strong>邀请码 / 邮箱 / 角色 / 状态 / 过期时间</strong>。邮箱如果没指定，显示 <strong>「不限制」</strong>（谁拿到邀请码都能用）。状态三种：<span class="zy-badge amber">待接受</span> / <span class="zy-badge green">已接受</span> / <span class="zy-badge">已过期</span>。</p>
+  <p>点「生成邀请」打开弹窗，字段：<strong>邮箱</strong>（<span class="zy-field">留空则不限邮箱（可选）</span>）、<strong>角色</strong>（管理员/普通成员/AI Agent，注意这里没有「超级管理员」——超级管理员只能由所有者在成员管理里授予）。弹窗底部按钮是 <span class="zy-btn">生成</span>。生成成功提示 <strong>「邀请生成成功」</strong>；点邀请码旁的复制按钮会提示 <strong>「邀请码已复制」</strong>。</p>
+
+  <h3>页签五：公司设置</h3>
+  <p>这个页签分两块：左边是 <strong>「公司信息」</strong>，右边是 <strong>「转让与解散」</strong> 危险区。</p>
+  <p><strong>公司信息</strong>卡片里是四个字段：<strong>公司名称</strong>（可改）、<strong>行业类型</strong>（这里变成自由文本框，可输入任意文字，最长 64 字符）、<strong>描述</strong>（多行，最长 512）、<strong>所有者 ID</strong>（只读，展示当前所有者的用户 ID）。改完点 <span class="zy-btn">保存修改</span>，成功提示 <strong>「保存成功」</strong>。</p>
+  <p><strong>转让与解散</strong>危险区有两件事：</p>
+  <ul>
+    <li><strong>转让所有权</strong>：选 <span class="zy-field">选择公司成员</span> 作为「新所有者」，点 <span class="zy-btn warn">确认转让</span>。确认弹窗是 <strong>「确定要转让公司所有权吗？此操作不可撤销。」</strong>转让后你不再是最高权限。</li>
+    <li><strong>解散公司</strong>：说明文字 <strong>「解散后公司将无法恢复，所有数据将被软删除。仅所有者可操作。」</strong>，按钮 <span class="zy-btn danger">解散公司</span>，二次确认后执行。</li>
+  </ul>
+
+  <h2>五、成员与权限速查</h2>
+
+  <p>在「成员管理 → 编辑成员」里，有一个<strong>权限矩阵</strong>，一共 <strong>14 项</strong>权限开关，分成两组：<strong>通用权限（人 + AI Agent 共有，11 项）</strong>和<strong>管理权限（仅人类成员可选，3 项）</strong>。下面是每一项的人话解释：</p>
+
+  <div class="zy-table-wrap">
+    <table class="zy-table">
+      <thead><tr><th>权限 key</th><th>界面显示</th><th>人话解释</th><th>谁能有</th></tr></thead>
+      <tbody>
+        <tr><td><code>read</code></td><td>读</td><td>能查看公司/项目里的数据</td><td>人 + Agent</td></tr>
+        <tr><td><code>write</code></td><td>写</td><td>能新增、修改数据</td><td>人 + Agent</td></tr>
+        <tr><td><code>run_task</code></td><td>运行任务</td><td>能触发、执行任务</td><td>人 + Agent</td></tr>
+        <tr><td><code>spend_money</code></td><td>花钱</td><td>能产生花费（调用付费能力、消耗预算）</td><td>人 + Agent</td></tr>
+        <tr><td><code>send_email</code></td><td>外发邮件</td><td>能对外发送邮件（连接器 send_email 工具）</td><td>人 + Agent</td></tr>
+        <tr><td><code>install_plugin</code></td><td>装插件</td><td>能安装插件</td><td>人 + Agent</td></tr>
+        <tr><td><code>install_software</code></td><td>装软件</td><td>能安装软件</td><td>人 + Agent</td></tr>
+        <tr><td><code>add_mcp</code></td><td>加 MCP</td><td>能新增 MCP 连接器（AI 连外部系统的插头）</td><td>人 + Agent</td></tr>
+        <tr><td><code>optimize_prompt</code></td><td>优化提示词</td><td>能优化提示词</td><td>人 + Agent</td></tr>
+        <tr><td><code>run_command</code></td><td>运行命令行</td><td>能执行命令行指令</td><td>人 + Agent</td></tr>
+        <tr><td><code>adjust_weight</code></td><td>调权重</td><td>能调整权重（如任务时间片权重、模型路由权重）</td><td>人 + Agent</td></tr>
+        <tr><td><code>pause_project</code></td><td>暂停项目</td><td>能暂停整个项目</td><td><strong>仅人</strong></td></tr>
+        <tr><td><code>pause_task</code></td><td>暂停任务</td><td>能暂停单个任务</td><td><strong>仅人</strong></td></tr>
+        <tr><td><code>user_manage</code></td><td>用户管理</td><td>能管理用户/成员</td><td><strong>仅人</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>角色默认权限是这样分配的：<strong>超级管理员和管理员默认拥有全部 14 项</strong>；<strong>普通成员和 AI Agent 默认只有 11 项通用权限</strong>（不含三项管理权限）。这也解释了为什么 AI Agent 永远拿不到「暂停项目 / 暂停任务 / 用户管理」。</p>
+
+  <div class="zy-note idea">
+    <span class="zy-note-title">一人公司给自己开哪些：重点不是「开满」，是给 AI 留人工关卡</span>
+    <p>作为所有者，你天然是超级管理员（14 项全开），这是「人的权限」，没问题。真正的风险在<strong>给 AI Agent 开哪些</strong>：AI Agent 默认就带 11 项基础权限，其中 <strong>spend_money（花钱）</strong> 和 <strong>send_email（外发邮件）</strong> 这两项最值得警惕。建议：即便权限列表里 AI 有这两项，也把项目的<strong>运行模式</strong>留在「半自动」或「人工审核」——让真正花钱、真正对外发邮件的动作，在你点头之后才执行。不要图省事一开始就全自动 + 全权限，否则 AI 可能在你看不见的时候把预算花出去或把邮件发给客户。</p>
+  </div>
+
+  <h2>六、多公司的用法</h2>
+
+  <div class="zy-path">顶栏 <span class="sep">›</span> 公司切换器（placeholder「选择公司」，首项「全部公司」）</div>
+
+  <p>平台支持你同时拥有多家公司。顶栏的公司切换器就是一个下拉框，placeholder 是 <strong>「选择公司」</strong>，第一项固定是 <strong>「全部公司」</strong>，下面列出你加入的每一家公司。</p>
+  <p>选「全部公司」等于<strong>不指定公司</strong>（相当于清空当前公司）。选某一家公司，就把它设为「当前公司」，之后建项目、看知识库、进账本，都会落在这家公司下面。切换公司时，系统会顺手清掉之前残留的项目上下文，避免串台。</p>
+
+  <h3>什么时候该建第二家公司</h3>
+  <ul>
+    <li><strong>不同业务主体</strong>：比如你既有一个跨境电商，又有一个咨询业务，两者不该混在一家公司里，分开建更清晰。</li>
+    <li><strong>隔离风险与账</strong>：两家公司各自独立账本、独立成员、独立项目，一条线出了问题不牵连另一条。</li>
+    <li><strong>分别核算</strong>：财务、战略上想分开算的两摊生意，就该是两家公司。</li>
+  </ul>
+
+  <h3>什么时候不该建</h3>
+  <p>早期（尤其一人公司）别为了「看起来正规」就拆一堆公司。公司是<strong>组织容器</strong>，项目才是<strong>生意容器</strong>——同一家公司下可以挂多个项目。一开始专注把一条业务线跑通，比分散注意力经营好几家空壳公司有意义得多。等真出现第二个业务主体、或需要隔离风险时，再开第二家也不迟。</p>
+
+  <h2>七、本章小结与下一步</h2>
+
+  <ul>
+    <li><strong>注册登录</strong>：邮箱是唯一身份，用户名只是显示名；登录后会回到你原来想去的页面。</li>
+    <li><strong>创建公司</strong>：三个字段里只有「公司名称」必填，行业和描述都能后补。</li>
+    <li><strong>字段影响</strong>：公司名称/行业/描述都只影响展示与统计，不影响 AI 执行逻辑；真正要慎重的是「所有者」和转让、解散两个不可撤销动作。</li>
+    <li><strong>行业类型</strong>：14 个下拉选项，目前不进 AI 执行逻辑；项目里另有一个独立的「行业」字段，那才可能影响营销/策略等 AI 功能。</li>
+    <li><strong>权限</strong>：14 项权限分「通用 11 项 + 管理 3 项」，AI Agent 拿不到管理权限；一人公司别给 AI 的「花钱」「外发邮件」留全自动。</li>
+    <li><strong>多公司</strong>：同一业务别拆一堆公司，真出现第二个业务主体再开。</li>
+  </ul>
+
+  <p>公司建好了，下一步就是<strong>在它下面建第一个项目</strong>——那是真正让 AI 开始干活的地方。</p>
+
+  <div class="zy-quick">
+    <a href="03-创建项目.html">去第 03 章：创建项目与信息影响</a>
+    <a href="index.html">回首页目录</a>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

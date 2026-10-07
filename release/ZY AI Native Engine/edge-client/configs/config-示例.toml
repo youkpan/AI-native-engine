@@ -1,0 +1,75 @@
+# 边缘客户端本地配置
+# 生产环境请通过首次启动向导或手动编辑此文件设置敏感字段
+
+[edge]
+# 客户端实例ID（首次启动自动生成，留空即可）
+client_id = ""
+# 激活码（从大平台获取，激活后自动颁发 Token）
+activation_code = ""
+# 设备名称（显示在系统托盘和服务器管理后台）
+device_name = "My-PC"
+# 是否启用系统托盘
+enable_systray = true
+# 开机自启
+auto_start = false
+
+[server]
+# 项目服务器地址（WSS 加密连接）
+base_url = "wss://project.example.com"
+# WebSocket 端点路径
+ws_endpoint = "/ws/edge"
+# Bearer Token（激活后由项目服务器颁发）
+token = ""
+# 心跳间隔
+heartbeat_interval = "30s"
+# 重连初始延迟（指数退避）
+reconnect_initial_delay = "1s"
+# 重连最大延迟
+reconnect_max_delay = "60s"
+# 跳过 TLS 证书校验（仅开发环境，生产必须 false）
+insecure_skip_verify = false
+
+[scan]
+# 监听目录列表（支持多目录）
+watch_dirs = ["D:/Documents"]
+# 允许的文件扩展名
+file_types = [".pdf", ".docx", ".xlsx", ".txt", ".md", ".csv"]
+# 去抖间隔（文件创建后等待写入完成）
+debounce_interval = "2s"
+# 最大文件大小（MB）
+max_file_size_mb = 50
+# 是否启用扫描器
+enabled = true
+# 文档来源目录别名映射（目录名/路径 → 来源别名）
+# 例如 {"work" = "work", "meetings" = "meetings"}
+doc_sources = {}
+# 单文档清洗文本最大字符数（按 rune 截断）
+max_clean_text_len = 200000
+
+[database]
+# SQLite 数据库文件路径
+path = "./data/edge.db"
+
+[log]
+level = "info"
+file = "./logs/edge-client.log"
+max_size = 50
+max_backups = 5
+max_age = 30
+compress = true
+
+[upload]
+# 上传并发数
+concurrency = 3
+# 上传超时
+timeout = "60s"
+# 单次重试最大次数
+max_retries = 3
+
+[llm]
+# 本地 LLM 服务地址（OpenAI 兼容，如 http://127.0.0.1:11434；留空则 AI 指令转发到项目服务器）
+local_base_url = ""
+# 本地模型名
+local_model = ""
+# 请求超时
+timeout = "60s"

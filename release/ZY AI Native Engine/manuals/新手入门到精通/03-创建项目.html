@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第03章 创建项目与信息影响 · 新手入门到精通 · ZY 企业智能引擎</title>
+<link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+<main class="zy-main">
+
+  <header class="zy-hero">
+    <div class="zy-kicker">第 03 章 · 第一步：把公司开起来</div>
+    <h1>第03章 创建项目与信息影响</h1>
+    <p class="zy-lead">从「先选公司」到「服务器跑起来」，一步步建好项目，并讲清每个字段填下去之后，AI 后面的行为会怎么变。</p>
+    <div class="zy-meta">
+      <span class="zy-badge blue">阅读约 15 分钟</span>
+      <span class="zy-badge green">新手友好</span>
+      <span class="zy-badge amber">重点：每个字段的后续影响</span>
+    </div>
+  </header>
+
+  <p>这一章是全书最需要「讲清因果」的一章。上一章你建好了公司，这一章要在公司下面开出第一个项目。你最大的疑问大概率是：<strong>向导里让我填的「项目名称 / 项目类型 / 行业 / 项目描述 / 项目目标」，填成什么样，会真的改变 AI 后面的做法吗？</strong>答案是：会，但影响点不在你直觉以为的地方。读完这一章，你会清楚知道哪些字段要花心思、哪些字段随便填。</p>
+
+  <h2>你将学会</h2>
+  <ul class="zy-check">
+    <li><input type="checkbox"><span>新建项目向导三步怎么走，每步填什么、点「下一步」会发生什么</span></li>
+    <li><input type="checkbox"><span>项目名称 / 类型 / 行业 / 描述 / 目标，哪些是「分类口径」、哪些是「会喂给 AI 的上下文」</span></li>
+    <li><input type="checkbox"><span>判断你的生意适不适合用这个引擎来跑，以及第一个任务该派什么</span></li>
+    <li><input type="checkbox"><span>看懂项目从「草稿」到「运行中」的状态流转，以及必须做的三件事</span></li>
+    <li><input type="checkbox"><span>知道服务器实例的三种来源，以及 HMAC Secret 是干嘛的、重生成会怎样</span></li>
+  </ul>
+
+  <h2>一、建项目前必须知道的一件事：先选公司</h2>
+
+  <p>项目不是独立存在的，它必须<strong>挂在某个公司下面</strong>。公司是「组织容器」（放人、放钱、放共用知识），项目是「生意容器」（一条业务线，独立服务器、独立预算、独立账本）。所以进 <strong>项目管理</strong> 之前，先看一眼顶栏的<strong>公司切换器</strong>选对了没有。</p>
+
+  <div class="zy-path">项目管理 › 新建项目（进入前先确认顶栏公司切换器）</div>
+
+  <p>如果顶栏公司切换器还停在「全部公司」或者没选中你的公司，会发生两件事：</p>
+  <ul>
+    <li><strong>项目列表页</strong>顶部会出现黄色提示：<span class="zy-btn warn">请先选择或创建一个公司</span>；同时右上角 <span class="zy-btn">新建项目</span> 按钮是灰色不可点的。</li>
+    <li>即便你强行打开向导，点到最后一步 <span class="zy-btn">提交创建</span> 时，系统也会弹提示：<span class="zy-btn warn">请先选择公司</span>，不让提交。</li>
+  </ul>
+
+  <div class="zy-note tip">
+    <span class="zy-note-title">一句话记住</span>
+    <p>公司 → 项目 → 任务，是三层容器。迷路时先问自己「我现在在哪一层」；建项目前先确认「我在给哪家公司建」。</p>
+  </div>
+
+  <h2>二、新建项目向导：三步走完</h2>
+
+  <p>在 <strong>项目管理</strong> 页点右上角 <span class="zy-btn">新建项目</span>，弹出标题为「新建项目向导」的对话框。整个向导只有三步，顶部步骤条原文：<strong>基本信息 / 预算设定 / 确认提交</strong>。</p>
+
+  <ol class="zy-steps">
+    <li>
+      <h4>第一步：基本信息</h4>
+      <p>填项目名称、项目类型、行业、运行模式、项目描述、项目目标，以及可选的服务器 IP / 端口（字段逐个讲，见下一节）。填完点右下角 <span class="zy-btn">下一步</span>。</p>
+      <div class="zy-note info"><span class="zy-note-title">会发生什么</span><p>系统校验「项目名称」是否为空（其余字段都不强制）。名称没填会停在原地提示「请输入项目名称」；填了就切到第二步。</p></div>
+    </li>
+    <li>
+      <h4>第二步：预算设定</h4>
+      <p>顶部一行说明：<span class="zy-field">预算单位为人民币（元），0 表示不限制</span>。下面五个数字框：总预算（默认 1000）、Token 月度额度（默认 500）、图片生成额度（默认 100）、视频生成额度（默认 0）、服务器费用额度（默认 500）。点 <span class="zy-btn">下一步</span>。</p>
+      <div class="zy-note info"><span class="zy-note-title">会发生什么</span><p>这一步没有必填校验，直接切到第三步。预算的具体含义和「预警 / 熔断」机制在第 04 章细讲，这里先用默认值跑通即可。</p></div>
+    </li>
+    <li>
+      <h4>第三步：确认提交</h4>
+      <p>把前两步填的内容按「基本信息 / 预算设定」两块汇总给你核对（纯展示，不能改）。确认无误点 <span class="zy-btn ok">提交创建</span>，想改就点 <span class="zy-btn ghost">上一步</span> 回去。</p>
+      <div class="zy-note info"><span class="zy-note-title">会发生什么</span><p>提交后弹出绿色提示 <strong>「项目创建成功」</strong>，向导关闭，项目列表刷新出新项目。此时项目状态是「草稿」，还不能跑——后面第六节讲怎么把它从草稿变成运行中。</p></div>
+    </li>
+  </ol>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">容易漏掉的坑</span>
+    <p>向导里如果填了「服务器 IP」，提交时会顺手把这条服务器录入实例（相当于帮你走了一遍「手动录入服务器」）；如果不填，就留在「草稿」状态，之后在项目详情页的「服务器实例」页签再录。第一次跑建议先不填，把项目建出来再说。</p>
+  </div>
+
+  <h2>三、基本信息逐步详解（含每个字段的后续影响）</h2>
+
+  <p>这一节把第一步的每个字段拆开讲：界面上长什么样、你该填什么、<strong>填下去之后会不会改变 AI 的行为</strong>。字段原文都对照了创建向导的真实代码。</p>
+
+  <h3>项目名称</h3>
+  <div class="zy-path">新建项目向导 › 基本信息 › 项目名称</div>
+  <p>必填。输入框提示 <span class="zy-field">如：营销内容自动化</span>，最长 128 字。这是项目在列表里、在部署脚本里、在服务器上 AGENTS.md 里的名字。</p>
+  <p><strong>影响什么：</strong>名称是「标识」，不是「指令」。它不会改变 AI 的执行逻辑，但会出现在部署脚本和项目服务器的 AGENTS.md 里，所以建议起一个<strong>一看就知道在干什么生意</strong>的名字（「跨境电商独立站」比「我的第一个项目」好）。改名字没有副作用，随时可在项目详情页「编辑」里改。</p>
+
+  <h3>项目类型</h3>
+  <div class="zy-path">新建项目向导 › 基本信息 › 项目类型</div>
+  <p>下拉选择，选项原文：<strong>软件开发 / 电商运营 / 内容创作 / 智能制造 / 通用业务</strong>（可清空）。</p>
+  <p><strong>影响什么：</strong>这里要如实说——我们到代码里查过 `project_type` / `type` 字段在平台和项目服务器里怎么用：<strong>当前版本，项目类型不参与自动运营的执行逻辑</strong>（不会因为选了「软件开发」就让 AI 自动去写代码、选了「电商运营」就自动去开店）。它的实际用途是：</p>
+  <ul>
+    <li><strong>分类管理</strong>：项目列表卡片上显示这个类型标签，方便你自己区分。</li>
+    <li><strong>提示词模板筛选</strong>：项目服务器有内置的岗位/任务模板，按类型和行业过滤（`/templates?type=&industry=`）。</li>
+    <li><strong>引导建项的种子信息</strong>：走「引导建项」时，类型会和描述、目标一起作为项目档案喂给 AI，帮助它生成策略。</li>
+  </ul>
+  <p>所以它<strong>更多是「口径」而非「开关」</strong>，选一个最接近的即可；拿不准就选「通用业务」。</p>
+
+  <h3>行业</h3>
+  <div class="zy-path">新建项目向导 › 基本信息 › 行业</div>
+  <p>这是一个<strong>自由输入框</strong>（不是下拉），提示 <span class="zy-field">如：互联网/制造/教育</span>，最长 64 字。注意它和「项目类型」是两回事：类型是「你干哪类活」，行业是「你服务哪个领域」。</p>
+  <p><strong>影响什么：</strong>和类型类似，行业也是分类与筛选口径（模板筛选、营销模块里做「线索挖掘 / 行业趋势」时作为输入），<strong>不影响自动运营的执行逻辑</strong>。填一个大概的行业词即可。</p>
+
+  <h3>运行模式</h3>
+  <div class="zy-path">新建项目向导 › 基本信息 › 运行模式</div>
+  <p>单选，选项原文：<strong>全自动 / 半自动 / 手动</strong>，默认停在「半自动」。</p>
+  <div class="zy-note warn">
+    <span class="zy-note-title">两个名字，同一件事</span>
+    <p>创建向导里叫「手动」，等你进了项目、到「自动运营控制台 → 调整运行模式」时它叫「人工审核」，<strong>指同一种模式</strong>（都是「不启用自动运营循环」）。别以为项目里出现了新选项。</p>
+    <p>补一句给爱较真的人：这两处写入的<strong>内部取值其实不是同一个字符串</strong>——向导写的是 <code>manual</code>，控制台写的是 <code>manual_review</code>，后端把两者都当作「不启动循环」，是同一个意思、两种叫法。所以界面上都显示「手动 / 人工审核」，行为完全一致。</p>
+  </div>
+  <p>三种模式的差别一句话版：</p>
+  <ul>
+    <li><strong>全自动</strong>：AI 自动拆解任务、调度轮次、评审验收，全程自己跑，只在关键节点通知你。</li>
+    <li><strong>半自动</strong>：AI 自动执行，但关键决策节点（目标变更、大额支出、对外动作）要你点头才继续。</li>
+    <li><strong>手动 / 人工审核</strong>：AI 产出方案后必须你审核通过才执行，节奏最慢但最可控。</li>
+  </ul>
+  <div class="zy-note idea">
+    <span class="zy-note-title">第一周建议选「半自动」</span>
+    <p>半自动不是「AI 少干活」，而是「关键决策要你点头」。第一周用它，你能看懂 AI 的行为逻辑，再决定要不要放开。只有 <strong>full_auto / semi_auto 会启用自动运营循环</strong>；选「手动」时任务靠你手动触发，AI 不会自己排班。完整机制见第 04 章。</p>
+  </div>
+
+  <h3>项目描述</h3>
+  <div class="zy-path">新建项目向导 › 基本信息 › 项目描述</div>
+  <p>多行文本框，提示 <span class="zy-field">简要描述项目概况</span>，最长 2048 字。</p>
+  <p><strong>影响什么（重点）：这是真正会喂给 AI 的字段。</strong>走「引导建项」时，项目描述会和目标、类型、行业一起作为<strong>项目档案种子</strong>写入会话，AI 据此生成执行策略（里程碑、关键路径、目标拆解、需要的岗位）并拆出初始任务。描述写得越清楚，AI 拆出来的第一批任务就越贴合你的生意。</p>
+  <p>怎么写：写清三件事——<strong>做什么生意、卖给谁、现在手上有什么</strong>。例如：「面向海外小品牌的独立站代运营，客户主要是做服装和家居的 DTC 卖家，目前手上有 3 个意向客户和一批产品图片素材。」</p>
+
+  <h3>项目目标</h3>
+  <div class="zy-path">新建项目向导 › 基本信息 › 项目目标</div>
+  <p>多行文本框，提示 <span class="zy-field">项目要达成的核心目标</span>，最长 2048 字。</p>
+  <p><strong>影响什么（重点）：同样会喂给 AI。</strong>目标告诉 AI「什么算成功、多久内」，它用来判断任务优先级和「这件事到底做完没有」。写目标时给一个可衡量的结果和一个时间：例如「3 个月内把独立站从 0 做到每天 100 个访问、成交第一笔订单」。</p>
+  <div class="zy-note tip">
+    <span class="zy-note-title">描述 vs 目标，别混</span>
+    <p>描述回答「这是个什么生意」，目标回答「做到什么程度算赢」。两个都写清楚，AI 拆任务时才有抓手；只写一个，AI 只能靠猜。</p>
+  </div>
+
+  <h3>服务器 IP 与端口</h3>
+  <div class="zy-path">新建项目向导 › 基本信息 › 服务器 IP / 服务器端口</div>
+  <p>服务器 IP 输入框提示 <span class="zy-field">项目服务器 IP（可选，稍后可改）</span>；服务器端口是数字框，默认 <span class="zy-field">8090</span>（范围 1–65535）。</p>
+  <p><strong>影响什么：</strong>这决定「平台以后把请求转发到哪台服务器」。可选、稍后可改，第一次建项目建议<strong>留空</strong>，等项目建好后再到「服务器实例」页签录入（见第七节）。</p>
+
+  <h2>四、【核心】一张表说清「填的信息 → 影响什么 → 能否改」</h2>
+
+  <p>这是本章的招牌内容。把向导里所有字段的因果摊开：哪些是「管理口径」（改了只是换个标签），哪些是「AI 上下文」（改了会改变 AI 后面的行为）。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr>
+        <th>字段</th>
+        <th>你填什么</th>
+        <th>影响什么（AI 会不会因此变）</th>
+        <th>能否改 / 怎么改</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>项目名称</td>
+        <td>生意名，如「营销内容自动化」</td>
+        <td>标识口径。会写进部署脚本和服务器 AGENTS.md，<strong>不改 AI 执行逻辑</strong></td>
+        <td>随时改，项目详情页「编辑」</td>
+      </tr>
+      <tr>
+        <td>项目类型</td>
+        <td>软件开发 / 电商运营 / 内容创作 / 智能制造 / 通用业务</td>
+        <td>分类 + 模板筛选 + 引导建项种子；<strong>不改自动运营执行逻辑</strong></td>
+        <td>随时改，「编辑」</td>
+      </tr>
+      <tr>
+        <td>行业</td>
+        <td>自由文本，如「互联网/制造/教育」</td>
+        <td>同上，分类/筛选口径 + 营销模块输入；<strong>不改执行逻辑</strong></td>
+        <td>随时改，「编辑」</td>
+      </tr>
+      <tr>
+        <td>运行模式</td>
+        <td>全自动 / 半自动 / 手动（=人工审核）</td>
+        <td><strong>强影响</strong>：决定 AI 是否自动排班、关键节点是否要你点头</td>
+        <td>可改，项目详情「编辑」或自动运营控制台</td>
+      </tr>
+      <tr>
+        <td>项目描述</td>
+        <td>做什么生意、卖给谁、现在有什么</td>
+        <td><strong>强影响</strong>：进入引导建项的项目上下文，AI 据此生成策略与初始任务</td>
+        <td>可改，「编辑」；改后 AI 不会自动重读</td>
+      </tr>
+      <tr>
+        <td>项目目标</td>
+        <td>什么算成功、多久内</td>
+        <td><strong>强影响</strong>：同上，进入 AI 上下文，影响任务拆解与验收方向</td>
+        <td>可改，「编辑」；改后 AI 不会自动重读</td>
+      </tr>
+      <tr>
+        <td>服务器 IP / 端口</td>
+        <td>平台把请求转发到哪台服务器</td>
+        <td>影响转发目标与连通；与 AI 执行逻辑无关</td>
+        <td>可改，服务器实例页签「编辑实例」</td>
+      </tr>
+      <tr>
+        <td>预算项（总预算 / Token / 图片 / 视频 / 服务器）</td>
+        <td>人民币，0 = 不限</td>
+        <td>影响「花到多少预警、多少熔断暂停」，间接影响 AI 是否停摆</td>
+        <td>可改，预算明细页签「调整预算」</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>总原则一句话：</strong>名称 / 行业 / 类型改了主要是<strong>管理口径</strong>变化，随便改；描述与目标改了会<strong>改变 AI 的后续行为</strong>，所以要谨慎——最好在项目详情页「编辑」里改，改完之后如果想让 AI 重新理解，就在自动运营控制台里给任务<strong>注入新信息</strong>，或重新走一遍「引导建项」让它按新的描述/目标重新拆任务（当前版本项目详情页没有单独的「注入信息」按钮，改描述的入口就是「编辑」）。</p>
+
+  <h2>五、适合创建哪些项目 / 不适合哪些</h2>
+
+  <p>这个引擎的强项是「AI 组织一支队伍，按轮次把任务拆了、干了、验收了」。判断一个项目适不适合，就看<strong>它的交付物能不能用文字、代码、图片、网页来验收</strong>。</p>
+
+  <div class="zy-do-dont">
+    <div class="yes">
+      <h4>适合：交付物能在线验收</h4>
+      <p>软件、网站、小程序、内容（图文/视频脚本）、营销物料、数据整理分析、自动化流程、知识问答/客户页面。这类活儿 AI 干完能给你一个看得见、点得开的结果。</p>
+    </div>
+    <div class="no">
+      <h4>不适合：要线下施工或实体交付</h4>
+      <p>开实体店装修、工厂产线改造、需要现场施工的工程。这些的最终交付在物理世界，AI 只能帮你做方案、文案、流程这些「纸上」的部分。</p>
+    </div>
+  </div>
+
+  <ul>
+    <li><strong>可以做、但要人兜底</strong>：涉及<strong>对外发布、收款、签合同</strong>的环节。AI 能生成内容，但「真的发出去」「真的收钱」这类动作要在半自动模式里由你点头（或走三通道人工审核）。</li>
+    <li><strong>不适合</strong>：需要<strong>实时性极高</strong>的（毫秒级高频交易）、或<strong>一开始没有任何可文本化输入</strong>的（你没有资料、也说不清要干嘛，AI 无从拆任务）。</li>
+  </ul>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr>
+        <th>项目类型</th>
+        <th>典型场景</th>
+        <th>第一个任务该派什么</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>软件开发</td>
+        <td>做个内部工具 / 企业官网 / SaaS MVP</td>
+        <td>「写清需求并产出 PRD 与技术方案」，再走软件工程向导</td>
+      </tr>
+      <tr>
+        <td>电商运营</td>
+        <td>独立站选品、上架、营销</td>
+        <td>「调研目标市场和竞品，产出选品清单」</td>
+      </tr>
+      <tr>
+        <td>内容创作</td>
+        <td>自媒体账号、图文/视频内容矩阵</td>
+        <td>「定内容定位与选题库，先产出 10 个选题」</td>
+      </tr>
+      <tr>
+        <td>智能制造</td>
+        <td>工厂流程梳理、设备资料问答、生产报表</td>
+        <td>「把现有工艺文档整理成结构化知识库」</td>
+      </tr>
+      <tr>
+        <td>通用业务</td>
+        <td>咨询、本地服务、知识问答客户页面</td>
+        <td>「梳理业务 FAQ 并搭一个对外问答知识库」</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>六、项目建好之后：从草稿到跑起来</h2>
+
+  <p>刚建好的项目状态是「草稿」，还不能跑。项目的一生有这几个状态（界面原文标签）：</p>
+
+  <div class="zy-flow">
+    <div class="zy-flow-node hot"><b>草稿</b>draft 刚建好</div>
+    <div class="zy-flow-arrow">›</div>
+    <div class="zy-flow-node warn"><b>开通中</b>provisioning 部署中</div>
+    <div class="zy-flow-arrow">›</div>
+    <div class="zy-flow-node ok"><b>运行中</b>running 可派任务</div>
+    <div class="zy-flow-arrow">›</div>
+    <div class="zy-flow-node"><b>已暂停 / 已停止 / 已完成</b>paused / stopped / done</div>
+  </div>
+
+  <p>还有一个 <strong>开通失败（failed）</strong> 状态：开通或部署没成功时会停在这，可以重新开通，不会卡死（见第七节）。</p>
+
+  <p>从「草稿」到「运行中」，<strong>必须做三件事</strong>：</p>
+  <ol>
+    <li><strong>录入 / 开通服务器</strong>：在项目详情页「服务器实例」页签，点 <span class="zy-btn">录入服务器</span>（或 <span class="zy-btn">录入服务器 IP</span>）填一台服务器，或走云厂商自动开通。</li>
+    <li><strong>确认部署完成</strong>：服务器上把部署脚本跑完、服务起来之后，回到页签点 <span class="zy-btn ok">确认部署完成</span>。</li>
+    <li><strong>启动</strong>：点页面头部 <span class="zy-btn ok">启动</span>，项目进入「运行中」，这时才能去自动运营里派任务。</li>
+  </ol>
+
+  <p>项目详情页头部按钮原文：<span class="zy-btn">返回</span> <span class="zy-btn ok">启动</span> <span class="zy-btn warn">暂停</span> <span class="zy-btn ok">恢复</span> <span class="zy-btn danger">停止</span> <span class="zy-btn">标记完成</span> <span class="zy-btn">编辑</span>。这些按钮按当前状态出现/隐藏（比如「暂停」只在运行中显示，「恢复」只在已暂停时显示）。</p>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">状态不会自己前进</span>
+    <p>开通中 → 运行中这一步要你手动「确认部署完成」+「启动」；不会因为你等着就自动变绿。反过来，如果你点了「停止」，项目也会停在已停止，需要时再「启动」。</p>
+  </div>
+
+  <h2>七、服务器实例是怎么来的（三种来源）</h2>
+
+  <p>每个项目对应一台<strong>独立的项目服务器</strong>——这叫「单实例单项目物理隔离」。好处是：<strong>项目之间数据隔离、互不影响</strong>，一个项目跑崩了不影响另一个；代价是：<strong>每个项目都要一台服务器</strong>（有成本）。项目服务器你不用 SSH 上去操作，界面已经透传了它的能力。</p>
+
+  <div class="zy-grid c3">
+    <div class="zy-card blue">
+      <h4>来源一：云厂商自动开通</h4>
+      <p>平台对接了 <strong>Linode / 腾讯云</strong>，你选厂商、规格、地域，平台自动下单开机、SSH 部署、健康检查，全程可看进度。</p>
+    </div>
+    <div class="zy-card green">
+      <h4>来源二：手动录入已有服务器</h4>
+      <p>你手上已经有一台服务器，点 <span class="zy-btn">录入服务器</span>，弹窗填字段再提交。适合已有机器、不想再开一台的情况。</p>
+    </div>
+    <div class="zy-card amber">
+      <h4>来源三：部署脚本方式</h4>
+      <p>点 <span class="zy-btn">查看部署脚本</span> 拿一段一键部署脚本，到你自己的服务器上跑，脚本会自动装 Go、装数据库、生成配置、启动服务。</p>
+    </div>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">部署脚本有个必填项：代码仓库地址</span>
+    <p>这一版部署脚本要求<strong>显式配置代码仓库地址</strong>——两个配置项 <code>AE_DEPLOY_REPO_URL</code>（仓库地址）和 <code>AE_DEPLOY_REPO_BRANCH</code>（分支）。<strong>没配的话，「云厂商自动开通」会直接报错停下</strong>（fail-closed），不会再像以前那样拿一个占位的仓库地址静默往下跑、最后在服务器上莫名其妙地失败。也就是说：如果你走自动开通却一直失败，先检查这两个配置项填了没有。另外脚本的启动方式也补了 <code>nohup</code>，退出终端后服务不会被一起带走。</p>
+    <p>顺带记一句：<strong>健康检查用的端口</strong>、部署脚本里的 <code>server.port</code>、以及平台转发请求的端口，<strong>现在统一取自同一个来源</strong>——改了端口不会出现「平台以为在 8090、脚本却起在别的端口」这种对不上的问题。</p>
+  </div>
+
+  <div class="zy-note info">
+    <span class="zy-note-title">自动开通失败不会「烂尾」</span>
+    <p>云厂商自动开通如果中途出岔子（例如脚本部署异常），系统的恢复路径会<strong>把已经创建的资源回滚掉</strong>，并把实例置为「开通失败（failed）」——不会留下半开不开、还在偷偷扣费的机器。失败后你可以排查原因再重新开通。</p>
+  </div>
+
+  <p>手动录入的弹窗字段原文：<span class="zy-field">服务器 IP（如：192.168.1.100）</span>、<span class="zy-field">SSH 端口（默认 22）</span>、<span class="zy-field">项目服务器端口（默认 8090）</span>、<span class="zy-field">规格（如：4核8G）</span>、<span class="zy-field">地域（如：华东1）</span>，底部 <span class="zy-btn">提交</span>。弹窗顶部会提示：<strong>「HMAC 密钥由平台自动生成，可在实例密钥入口查看」</strong>——就是说你不需要自己造密钥。</p>
+
+  <h3>HMAC Secret 是干嘛的</h3>
+  <p><strong>人话：</strong>HMAC Secret 是「平台和你的项目服务器之间对暗号的密钥」。平台每次把请求转给项目服务器时，会用这把密钥给请求「盖个章」（签名）；项目服务器验章通过，才相信「这请求确实是平台发的，不是别人伪造的」。在「服务器实例」页签里它显示为一行，旁边三个按钮：<span class="zy-btn">显示</span> <span class="zy-btn">复制</span> <span class="zy-btn warn">重新生成</span>。</p>
+  <div class="zy-note danger">
+    <span class="zy-note-title">重新生成会让旧密钥失效</span>
+    <p>点「重新生成」后，<strong>旧密钥立即作废</strong>，必须把新密钥同步到项目服务器配置（重新跑部署脚本或改配置文件），否则平台和服务器对不上暗号，正在跑的项目会「失联」。界面的确认框原文就是提醒你：<strong>「重新生成后旧密钥将立即失效，需同步到项目服务器配置。确认重新生成？」</strong></p>
+    <p>要特别说清一点：<strong>系统只会「告警」，不会替你自动把新密钥推给项目服务器</strong>。轮换成功后接口会返回一条 warning，提醒你新旧密钥不一致；<strong>正在跑的项目可能因此短暂失联，直到你手动把密钥同步过去</strong>。（跨端自动同步需要一套新的协议，目前还没做。）所以轮换密钥要挑低峰期，并且<strong>立刻</strong>去更新服务器配置——别轮换完就忘了，那会让项目一直连不上。</p>
+  </div>
+  <p>录入服务器后，项目列表卡片上有个 <span class="zy-btn">连接测试</span>，点一下能验证连通性和密钥对齐；成功文案原文：<strong>「连接成功：{ip}:{port}，HMAC 验证通过（{ms}ms）」</strong>。出现这个绿字，就说明平台和你的服务器「暗号对上了」。</p>
+
+  <h2>八、项目详情页五个页签鸟瞰</h2>
+
+  <p>进入一个项目，详情页顶部是五个页签：<strong>概览 / 预算明细 / 服务器实例 / 开通日志 / 运行配置</strong>。逐个一句话带过 + 关键按钮。</p>
+
+  <div class="zy-table-wrap">
+  <table class="zy-table">
+    <thead>
+      <tr>
+        <th>页签</th>
+        <th>干什么用</th>
+        <th>关键按钮</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>概览</td>
+        <td>项目名称、类型、行业、模式、创建时间、描述、目标的只读总览</td>
+        <td>（无，纯展示）</td>
+      </tr>
+      <tr>
+        <td>预算明细</td>
+        <td>看总预算用了多少，各额度（Token/图片/视频/服务器）还剩多少</td>
+        <td><span class="zy-btn">调整预算</span></td>
+      </tr>
+      <tr>
+        <td>服务器实例</td>
+        <td>看/改服务器 IP、端口、规格、地域，管 HMAC Secret，看部署脚本</td>
+        <td><span class="zy-btn">编辑实例</span> <span class="zy-btn">查看部署脚本</span> <span class="zy-btn">录入服务器</span></td>
+      </tr>
+      <tr>
+        <td>开通日志</td>
+        <td>按时间线看开通/部署的每一步成功失败，排查「为什么还没起来」</td>
+        <td>（无，只读时间线）</td>
+      </tr>
+      <tr>
+        <td>运行配置</td>
+        <td>调度、执行器、定价等一堆技术参数</td>
+        <td><span class="zy-btn ok">保存配置</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="zy-note warn">
+    <span class="zy-note-title">运行配置里的参数，新手一律不要动</span>
+    <p>这个页签里是给进阶玩家调的技术参数：并发数、Review 间隔、Tick 间隔、最大轮数、qianshou 命令、输出格式、权限模式、单轮最大预算、单价（元/百万 token）等。它们都有安全默认值，<strong>新手动了反而容易把项目跑乱或烧钱</strong>。除非你明确知道自己要调什么，否则看两眼就退出来，别保存。</p>
+    <p>顺带说一句：其中的<strong>「单轮最大预算」现在是真的会生效的</strong>——默认 100 元，某一轮实际花费一旦超过它，系统会告警并暂停项目（详见<a href="04-运行模式与预算.html">第 04 章</a>）。所以别把它设得太低，否则正常的长任务也可能被它拦住。</p>
+  </div>
+
+  <h2>九、本章小结与下一步</h2>
+
+  <ul>
+    <li>项目必须挂在公司下：建项目前先选对公司，否则向导会拦你「请先选择公司」。</li>
+    <li>向导三步：基本信息 → 预算设定 → 确认提交，提交成功即「项目创建成功」，状态为草稿。</li>
+    <li>名称 / 类型 / 行业是「分类口径」，随便改；<strong>描述 / 目标 / 运行模式才真正影响 AI</strong>，要花心思写、谨慎改。</li>
+    <li>从草稿到跑起来三件事：录入/开通服务器 → 确认部署完成 → 启动。</li>
+    <li>HMAC Secret 是平台和项目服务器的「对暗号」，重新生成会让旧密钥失效、需同步。</li>
+  </ul>
+
+  <p>项目建好、模式也选好了，下一步你该弄明白<strong>三种运行模式到底差在哪、预算怎么设才不会半夜烧钱</strong>——去读 <a href="04-运行模式与预算.html">第 04 章 · 运行模式、自主级别与预算</a>。</p>
+
+  <div class="zy-quick">
+    <a href="02-创建公司.html">上一步：第 02 章 创建公司</a>
+    <a href="04-运行模式与预算.html">下一步：第 04 章 运行模式与预算</a>
+  </div>
+
+</main>
+<script src="assets/manual.js"></script>
+</body>
+</html>

@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C3 AI 营销内容生成 SaaS - 长周期场景指引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .breadcrumb {
+            padding: 15px 0;
+            color: #666;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #999;
+        }
+        
+        h1 {
+            color: #1a73e8;
+            font-size: 32px;
+            margin: 30px 0 20px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #1a73e8;
+        }
+        
+        h2 {
+            color: #1a73e8;
+            font-size: 26px;
+            margin: 40px 0 20px 0;
+            padding: 10px 0;
+            border-left: 4px solid #1a73e8;
+            padding-left: 15px;
+        }
+        
+        h3 {
+            color: #34a853;
+            font-size: 20px;
+            margin: 25px 0 15px 0;
+        }
+        
+        h4 {
+            color: #555;
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+        }
+        
+        p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: #1a73e8;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #e8f0fe;
+        }
+        
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 14px;
+        }
+        
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        
+        pre code {
+            background: transparent;
+            padding: 0;
+        }
+        
+        .nav-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 100px;
+            width: 250px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 15px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .nav-sidebar h3 {
+            color: #1a73e8;
+            font-size: 16px;
+            margin: 0 0 10px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #1a73e8;
+        }
+        
+        .nav-sidebar ul {
+            list-style: none;
+        }
+        
+        .nav-sidebar li {
+            margin: 8px 0;
+        }
+        
+        .nav-sidebar a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+        
+        .nav-sidebar a:hover {
+            background: #e8f0fe;
+            color: #1a73e8;
+        }
+        
+        .nav-sidebar .level-2 {
+            padding-left: 20px;
+            font-size: 13px;
+        }
+        
+        .highlight-box {
+            background: #e8f0fe;
+            border-left: 4px solid #1a73e8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        
+        .warning-box {
+            background: #fff4e5;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #34a853;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        
+        .critical-box {
+            background: #ffebee;
+            border-left: 4px solid #ea4335;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        
+        .status-pass {
+            color: #34a853;
+            font-weight: bold;
+        }
+        
+        .status-fail {
+            color: #ea4335;
+            font-weight: bold;
+        }
+        
+        .status-observe {
+            color: #ff9800;
+            font-weight: bold;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .content-wrapper {
+            margin-left: 290px;
+            padding: 20px;
+        }
+        
+        @media (max-width: 1400px) {
+            .nav-sidebar {
+                display: none;
+            }
+            .content-wrapper {
+                margin-left: 0;
+            }
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #1a73e8;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .json-key {
+            color: #9cdcfe;
+        }
+        
+        .json-string {
+            color: #ce9178;
+        }
+        
+        .json-number {
+            color: #b5cea8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="#">首页</a>
+            <span>></span>
+            <a href="#">长周期场景案例</a>
+            <span>></span>
+            <strong>C3 AI 营销内容生成 SaaS</strong>
+        </div>
+
+        <nav class="nav-sidebar">
+            <h3>目录导航</h3>
+            <ul>
+                <li><a href="#overview">场景概述</a></li>
+                <li><a href="#objectives">场景目标与主战场能力</a></li>
+                <li><a href="#prerequisites">预置条件与环境配置</a></li>
+                <li><a href="#t1">T1 生存期操作指引</a></li>
+                <li><a href="#t2">T2 扩张期操作指引</a></li>
+                <li><a href="#t3">T3 规模化期操作指引</a></li>
+                <li><a href="#acceptance">验收判定表</a></li>
+                <li><a href="#evidence">取证口径</a></li>
+                <li><a href="#appendix">附录：环境信息</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrapper">
+            <h1 id="overview">C3 — AI 营销内容生成 SaaS 场景指引</h1>
+
+            <h2>一、场景概述</h2>
+            
+            <p>本场景聚焦于验证 ZY AI Native Engine 在 B2B SaaS 订阅制业务模式下的全链路自动化运营能力。场景设定为一家由 1 人独立开发者创建的「输入品牌调性→自动生成博客/邮件/推文」的月费订阅工具，定价 $19/$49 两档，目标用户为中小企业的营销团队。</p>
+
+            <p>该场景的核心价值在于测试平台在<strong>毛利薄、预算敏感</strong>业务环境下的三大关键能力：双线账本体系下的预算三级控制机制（预警/降级/熔断/恢复）、A/B 测试驱动的持续迭代优化、以及客服邮件的自动化闭环处理。由于 SaaS 业务的边际成本特性，AI 运行预算的精确控制与熔断恢复机制成为本场景的核心关注点。</p>
+
+            <div class="highlight-box">
+                <h4>双线账本体系</h4>
+                <p><strong>平台真实账本</strong>：记录所有真实交易，包括用户订阅付费、平台余额扣减、计费结算等，采用 PostgreSQL 的 <code>platform_balances</code>、<code>platform_transactions</code>、<code>token_billing_reports</code> 等表，确保资金流的真实性与可审计性。</p>
+                <p><strong>项目虚拟账本</strong>：每个项目独立核算 AI 运行成本与业务收益，采用 <code>project_ledger</code>、<code>budget_states</code>、<code>token_billing_records</code> 等表，实现项目级的阿米巴核算，支持预算预警与熔断机制。</p>
+            </div>
+
+            <p><strong>预算三级控制机制</strong>是本场景的核心测试点。系统通过 <code>budget_states</code> 表实时追踪 AI 运行预算的使用情况，当已用额度达到预警线（默认 80%）时触发预警通知，达到 100% 时自动熔断并暂停项目循环，人工补充预算后可通过产品 UI 恢复运行。整个流程需要确保：队列不丢失、状态可恢复、断点续跑、通知可达。</p>
+
+            <p><strong>A/B 迭代能力</strong>体现在营销内容的持续优化上。系统通过 <code>marketing_campaigns</code> 和 <code>marketing_contents</code> 表管理多版本文案，通过事件注入模拟 A/B 测试结果，验证胜出方案能否自动进入模板库并留版本链，驱动后续轮次的 review 重排。</p>
+
+            <p><strong>客服邮件闭环</strong>测试系统对用户咨询、退款请求、Bug 报告的自动化响应能力。通过 <code>events</code> 表注入客户支持邮件事件，验证 EventAgent 能否正确分类（usage/refund/bug）、派单给客服 Agent、起草回复并转入 <code>connector_audit_logs</code> 的 <code>pending_review</code> 队列等待人工审批，同时确保 GDPR 退订链接、无 spam 触发词等合规要求。</p>
+
+            <p>从 D1 到 D4 的实际测试历程表明，该场景经历了从冷启动断链（ISSUE-W4-01）到自挂链路打通（D2）、从预算口径失真（D3 判据校准）到三级控制全链演练（D4 预算钻取）的完整验证过程。D4 的成功实施证明了「预警→熔断→暂停→充值→恢复」的完整闭环在产品内可真实达成，为后续场景的预算控制测试提供了可复用的方法论。</p>
+
+            <h2 id="objectives">二、场景目标与主战场能力</h2>
+
+            <h3>2.1 核心业务目标</h3>
+
+            <p>本场景旨在验证平台能否支撑一家 AI 营销 SaaS 公司从 0 到 1 再到规模化的完整生命周期：</p>
+
+            <ul>
+                <li><strong>T1 生存期（1-3 周）</strong>：完成产品上线、获得首个付费订阅、建立基础客服能力、经历至少一次完整的预算熔断恢复循环</li>
+                <li><strong>T2 扩张期（4-10 周）</strong>：实现 MRR $300、A/B 测试常态化、团队扩编至 1 人 + 11 AI、建立数据驱动的迭代机制</li>
+                <li><strong>T3 规模化期（11-30 周）</strong>：实现动态预算调度、月 churn 率 ≤5%、AI 成本占 MRR <6%、具备异常自愈能力</li>
+            </ul>
+
+            <h3>2.2 主战场能力验证</h3>
+
+            <div class="critical-box">
+                <h4>毛利薄 → 熔断是常态操作</h4>
+                <p>由于 SaaS 业务的边际成本特性（每新增一个用户都需要持续消耗 AI token 生成内容），AI 运行预算的精确控制成为生死线。本场景刻意将 AI 运行预算设为 ¥1,200（后校准为 ¥40），单轮上限 ¥8（后尝试调整为 ¥2 被 ISSUE-W4-31 阻挡），目的就是在测试窗口内真实触发熔断，验证系统的应对能力。</p>
+            </div>
+
+            <p><strong>能力一：预算三级控制的精确性与可靠性</strong></p>
+            <p>系统必须能够在预算消耗的 80% 节点准确触发预警，在 100% 节点自动熔断并暂停项目，且恢复后能够从断点续跑。D4 的实测数据显示：从 ¥4.70 下压预算到 ¥4.96 后，45 秒内 <code>warned</code> 标志从 false 翻转为 true，40 分钟 / 64 轮后真实越线触发熔断，<code>ai_meltdown</code> 置位、<code>status</code> 转为 paused、通知 id=60 以 urgent 优先级送达。恢复流程通过 UI「设置预算」补充到 ¥40 + 点击「恢复」按钮完成，<code>round_no</code> 从 592 连续到 593，无任何跳号或重跑。</p>
+
+            <p><strong>能力二：FIX-003 为本卡成立前提</strong></p>
+            <p>FIX-003（预算联动断裂修复）直接决定了本场景的可行性。在修复前，熔断只能通过人工查询 <code>/autoops/billing</code> 接口判断，「预警→暂停→恢复」链路无法自动化。修复后，<code>budget.go:358 PreRoundCheck</code> 在每轮开始前检查三道闸门：① 终止标志、② AI 预算线、③ 总预算线，独立持久化 <code>ai_meltdown</code>/<code>total_meltdown</code> 标志，并通过 WebSocket 广播状态变更。</p>
+
+            <p><strong>2026-10-07 同步（V3-06 预算读面实时化）</strong>：<code>GET /budget/state</code> 读面此前直回持久旗标，预算调小后会出现「读面未熔断、start/resume 闸已拒绝」的口径漂移（V3 战役 T2b/T4 两轮复确认）。现读面在刷新消耗真值后按与闸门<strong>完全一致</strong>的判据实时重算两枚熔断旗标（只改返回视图、不落盘，持久旗标的置位与通知仍归 <code>PreRoundCheck</code>；消耗查询失败且配置了总预算时 fail-close 视为已超）。本卡预算演练的读数判据不变，预警/熔断标签在轮前即会如实反映。</p>
+
+            <p>但实测也暴露了 FIX-003 的局限性：<code>single_round_max_budget</code> 的调整被 ISSUE-W4-31 阻挡（UI 保存恒返回 500 错误，根因是 <code>jsonl_poll_interval_sec</code> 请求键与 GORM 物理列 <code>json_l_poll_interval_sec</code> 不匹配），导致单轮上限 ¥2 无法生效，只能停留在 ¥100。这意味着「单轮成本 ≤¥2」的硬断言虽然实测绿（46 轮 max 仅 ¥0.00491），但闸门本身未被验证。</p>
+
+            <p><strong>能力三：A/B 迭代与客服闭环的协同</strong></p>
+            <p>系统需要证明能够通过 A/B 测试持续优化营销内容，同时自动化处理客服邮件。A/B 测试的结果通过事件注入（如 <code>marketing.ab_result</code>）进入系统，驱动 review 轮重排优先级；客服邮件通过 <code>customer.support</code> 事件注入，触发 EventAgent 分类、Agent 起草回复、转入审批队列。两者的协同体现在：客服反馈中的高频问题可以沉淀为 FAQ 进入知识库（<code>knowledge_documents</code>），反哺后续的营销内容生成。</p>
+
+            <p><strong>能力四：双线账本的一致性与可审计性</strong></p>
+            <p>平台真实账本与项目虚拟账本必须保持恒等式：<code>project_budgets.used_amount ≡ Σ settled token_billing_reports.cost</code>（容差 0.01）。D3 的实测发现跨侧差额 ¥0.0984，经分解 100% 归因为上报器批内 <code>log_ref</code> 去重挤掉的 18 行（ISSUE-W4-36），且平台侧 <code>used_amount</code> 与 <code>Σ settled</code> 的漂移（¥0.0858）归因于 <code>numeric(*,2)</code> 逐批累加舍入（ISSUE-W4-29）。这两个问题虽然不影响业务逻辑，但暴露了资金计量准确性的隐患，需要通过修复后的一次性重放或主控明文接受为已实现漏账来解决。</p>
+
+            <h2 id="prerequisites">三、预置条件与环境配置</h2>
+
+            <h3>3.1 三端服务基线</h3>
+
+            <table>
+                <tr>
+                    <th>端</th>
+                    <th>地址</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>PostgreSQL 17</td>
+                    <td><code>localhost:5432</code></td>
+                    <td>双库：<code>ai_native_engine</code>（平台）/ <code>project_server</code>（实例）</td>
+                </tr>
+                <tr>
+                    <td>platform 后端</td>
+                    <td><code>http://localhost:18000</code></td>
+                    <td>公司/项目/实例/平台真实账本/计费结算/超管后台</td>
+                </tr>
+                <tr>
+                    <td>project-server</td>
+                    <td><code>http://localhost:8090</code></td>
+                    <td>AI 执行引擎，当前实例绑定宿主项目 34</td>
+                </tr>
+                <tr>
+                    <td>前端（platform-web）</td>
+                    <td><code>http://localhost:5176</code></td>
+                    <td>vite dev 模式，Playwright 测试入口</td>
+                </tr>
+            </table>
+
+            <h3>3.2 账号与公司设定</h3>
+
+            <p><strong>测试主账号</strong>：采用 <code>lts_</code> 前缀，如 <code>lts_c3_1790167890560_3851@test.com</code>，密码统一为 <code>test123</code>。该账号通过注册页真实注册，非 SQL 直插。</p>
+
+            <p><strong>公司设定</strong>：公司名 <code>LTS-C3 AI营销SaaS</code>（公司 ID 904），项目名 <code>lts_c3_copyforge</code>（项目 ID 1045），运行模式 <code>full_auto</code>（全自动），owner 为 <code>u2271</code>。</p>
+
+            <div class="warning-box">
+                <h4>AI 运行预算刻意设小</h4>
+                <p><strong>初始设定</strong>：AI 运行预算 ¥1,200，单轮上限 ¥8，总预算 ¥6,000。</p>
+                <p><strong>D3 校准</strong>：由于实测单轮成本仅 ¥0.0046/轮（agent 引擎占 97.1%），¥1,200 预算需 ≈260,000 轮才能触达预警线，远超测试窗口。因此通过产品 UI 将 AI 预算下压至 ¥40（D4 进一步下压至 ¥4.96 实现短窗演练）。</p>
+                <p><strong>禁止 SQL 直改</strong>：所有预算调整必须通过产品 UI 的「设置预算」对话框完成，确保测试的是真实产品通道。</p>
+            </div>
+
+            <h3>3.3 连接器配置</h3>
+
+            <p><strong>Email 连接器</strong>：用于客服邮件外发，权限设为 <code>write_review</code>（所有外发需人工审批），<code>notify_to</code> 指向测试收件箱 <code>hayoou_com@126.com</code>。</p>
+
+            <p><strong>飞书审批通道</strong>：用于审批推送与通知链路，验证 FIX-001 的真实化效果。连接器权限同样为 <code>write_review</code>。</p>
+
+            <p><strong>Stripe 支付连接器</strong>：由于 FIX 未做，订阅事件全部通过 <code>harness/ingest-event.mjs</code> 模拟注入，不进真实支付通道。</p>
+
+            <h3>3.4 数据构建路径</h3>
+
+            <p><strong>公司→项目→预算基线</strong>：全部走 UI 真实路径。登录 → 创建公司 → 新建项目（三步向导：全自动 / ¥6,000 / ¥1,200）→ 引导流贴业务背景 → 组织建造（1 人 + 2 AI）→ autoops 配置起首任务组。</p>
+
+            <p><strong>角色/组织起点</strong>：通过平台引导流（guided）+ PS <code>POST /projects/:id/org/*</code> 接口创建。扩编一律走产品 <code>org/advice→accept</code>，不 SQL 直插角色（否则测不到 evo 链路）。</p>
+
+            <p><strong>基线快照</strong>：每场景开测时拍摄 <code>harness/snapshots/</code>，包含 psql 关键表行数 + 服务健康状态，所有计数断言取相对基线增量。</p>
+
+            <h2 id="t1">四、T1 生存期操作指引</h2>
+
+            <h3>4.1 UI 路径：从登录到首轮循环</h3>
+
+            <p><span class="step-number">1</span><strong>登录与全局面板</strong></p>
+            <p>访问 <code>http://localhost:5176/login</code>，输入 <code>lts_c3_*</code> 账号密码，点击登录。进入 <code>/dashboard</code> 全局面板，可自定义展示模块（如项目列表、预算概览、最近轮次等）。</p>
+
+            <p><span class="step-number">2</span><strong>创建公司与项目</strong></p>
+            <p>点击「创建公司」，填写公司名称 <code>LTS-C3 内容工坊</code>，完成创建。进入公司后，点击「新建项目」，进入三步向导：</p>
+            <ul>
+                <li>步骤一：选择运行模式 <code>full_auto</code>（全自动）</li>
+                <li>步骤二：设置总预算 ¥6,000、AI 运行预算 ¥1,200（D3 后改为 ¥40）</li>
+                <li>步骤三：填写项目描述「月费 $19/$49 的 AI 营销内容生成工具，输入品牌调性自动生成博客/邮件/推文」</li>
+            </ul>
+            <p>提交后，项目 ID 1045 创建，状态从 <code>draft</code> 转为 <code>running</code>。</p>
+
+            <p><span class="step-number">3</span><strong>实例绑定与执行域自检</strong></p>
+            <p>进入项目详情页，点击「录入服务器」，填写 <code>127.0.0.1:8090</code>（本机测试形态）。点击「确认部署完成」，系统执行域自检：</p>
+            <ul>
+                <li><code>execution_plane_reachable=true</code></li>
+                <li><code>hmac_verified=true</code>（latency 1ms）</li>
+                <li><code>execution_plane_selfcheck=success</code></li>
+            </ul>
+            <p>自检通过后，<code>instance_project_grants</code> 表落库 1 行（<code>source='push'</code>），PS 侧 <code>project_config</code> 惰性建行。</p>
+
+            <div class="highlight-box">
+                <h4>ISSUE-W4-03：配置同步失败</h4>
+                <p>自挂后 <code>run_mode</code>/<code>ai_budget</code>/<code>owner</code> 未同步：平台下发打 <code>/api/v1/autoops/config</code>，宿主实路由是 <code>/api/v1/projects/:id/autoops/config</code>，导致 404。需手动进入自动运营控制台确认配置。</p>
+            </div>
+
+            <p><span class="step-number">4</span><strong>引导流与策略确认</strong></p>
+            <p>进入 <code>/project/1045/autoops</code> 自动运营控制台，系统提示「策略未确认，请先完成引导建项并确认执行策略」。通过引导流 4 步走完（业务介绍→组织→定义→启动），策略确认后 <code>strategy_confirmed=true</code>，引擎开始自动起轮。（2026-10-07 注：这道闸即 V3 战役登记的存量项目启动闸——升级前创建、缺项目作用域确认记录的项目会被拦，<strong>重走本步骤即解锁</strong>；迁移回填方案待裁，见 <code>wiki/testing/v3/todo.md</code> V3-07。新建项目走完引导确认不受影响。）</p>
+
+            <p><span class="step-number">5</span><strong>观察首轮循环</strong></p>
+            <p>引擎启动后，<code>auto_ops_rounds</code> 表开始入库轮次记录。轮间隔约 60-67 秒，分引擎类型：</p>
+            <ul>
+                <li><code>agent/task</code>：进程内 LLM + ToolCall，avg 1-2s，成本 ¥0.0046/轮</li>
+                <li><code>loop/task</code>：qianshou 子进程，avg 98-1042s，成本 ¥0.78-1.23/轮（真值样本仅 2 轮）</li>
+                <li><code>review</code>：验收轮，avg 280s，成本 ¥0.0018/轮</li>
+            </ul>
+
+            <h3>4.2 事件注入：订阅与客服闭环</h3>
+
+            <p>通过 <code>harness/ingest-event.mjs</code> 脚本注入外部事件，模拟真实业务流。事件统一落 <code>POST /api/v1/events</code>，HMAC 三头签名。</p>
+
+            <p><strong>事件一：试用开始</strong></p>
+            <pre><code>node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type subscription.trial_started \
+  --title "trial lts-c3-001" \
+  --content '{"plan":"pro-monthly","email":"t1@example.com"}'</code></pre>
+            <p>期望反应：EventAgent 分类为 <code>strategy_tag=revenue</code>，<code>status=processing</code>，<code>project_ledger</code> 落分录。由于 FIX-004 未完全接通，自动开通任务可能不触发，需人工观察 <code>event_assignments</code> 表。</p>
+
+            <p><strong>事件二：首笔订阅</strong></p>
+            <pre><code>node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type checkout.completed \
+  --title "首笔订阅 $19" \
+  --content '{"plan":"basic-monthly","amount":19.00}' \
+  --priority important</code></pre>
+            <p>期望反应：入账 <code>project_ledger</code>，自动建催缴任务（若 FIX-004 生效）。</p>
+
+            <p><strong>事件三：支付失败</strong></p>
+            <pre><code>node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type invoice.payment_failed \
+  --title "催缴" \
+  --content '{"customer":"t1","retry_in":"3d"}' \
+  --priority important</code></pre>
+            <p>期望反应：自动建催缴任务，客服 Agent 起草催缴邮件转 <code>pending_review</code>。</p>
+
+            <p><strong>事件四：客户支持邮件</strong></p>
+            <pre><code>node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type customer.support \
+  --title "退款请求" \
+  --content '{"type":"refund","reason":"unused"}' \
+  --priority important</code></pre>
+            <p>期望反应：EventAgent 分类为 <code>strategy_tag=customer_relations</code>，客服 Agent 起草退款处理回复，转 <code>connector_audit_logs</code> 的 <code>pending_review</code> 队列。人工在 <code>/autoops/human</code> 页面审批，核验收件人在白名单、含 GDPR 退订链接、无 spam 触发词。</p>
+
+            <h3>4.3 批准外发：合规性检查</h3>
+
+            <p>所有外发动作（邮件/发帖/支付操作）必须经过人工审批。审批入口：</p>
+            <ul>
+                <li><code>/autoops/human</code>：人工节点审批（RACI 流程）</li>
+                <li><code>/connectors/audit</code>：连接器写动作审批（<code>pending_review</code> 队列）</li>
+                <li><code>/autoops/acceptance-records</code>：验收记录审批</li>
+            </ul>
+
+            <p><strong>审批要点</strong>：</p>
+            <ul>
+                <li>GDPR 退订链接：所有营销邮件必须包含退订链接</li>
+                <li>无 spam 触发词：避免「免费」「保证」「立即」等触发词</li>
+                <li>收件人白名单：只发给已授权的用户</li>
+                <li>署名规范：不提及 AI 身份，署名 ZY Pan</li>
+            </ul>
+
+            <p>T1 阶段需批准 6 封外发邮件 + 1 次上线 + 1 次退款 $19，全部在 <code>connector_audit_logs</code> 留痕。</p>
+
+            <h3>4.4 核心演练：预算 80% 预警 → 追加 → 恢复 → 断言队列不丢</h3>
+
+            <div class="critical-box">
+                <h4>本场景的核心测试点</h4>
+                <p>预算三级控制的完整闭环是本场景成立的关键。D4 的成功实施证明了该链路在产品内可真实达成。</p>
+            </div>
+
+            <p><strong>步骤一：下压预算至触发预警</strong></p>
+            <p>进入 <code>/project/1045/autoops</code> 控制台，点击「设置预算」按钮，在对话框中：</p>
+            <ul>
+                <li>将「AI 运行预算」从 ¥40 改为 ¥4.96（= 当时已用 ¥4.70 + ¥0.25 余量）</li>
+                <li>「预警线」显式回填 80%（防默认漂移）</li>
+                <li>「项目总预算」回填 ¥6,000（不动总盘）</li>
+                <li>点击「保存」</li>
+            </ul>
+            <p>系统发出 <code>PUT /api/v1/projects/1045/autoops/config</code>，HTTP 200 / code=0。PS 侧 <code>project_config</code> 落库 <code>ai_budget=4.96</code>。</p>
+
+            <p><strong>步骤二：观察预警触发</strong></p>
+            <p>由于 80% 预警线（¥3.968）已低于当前已用额（¥4.70），下一个轮次边界（约 45 秒后）<code>PreRoundCheck</code> 算出 <code>pct = 4.7020/4.96 = 94.8% ≥ 80%</code>，触发：</p>
+            <ul>
+                <li><code>budget_states.warned</code> 从 <code>false</code> 翻转为 <code>true</code></li>
+                <li>新增通知 <code>notifications</code> id=59，<code>user_id=2271</code>、<code>project_id=1045</code>、<code>type=budget_alert</code>、<code>title=AI 运行预算预警</code>、<code>priority=important</code></li>
+                <li>控制台页顶栏铃铛可见预警通知</li>
+                <li>控制台预算卡片显示「预警」标签</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>ISSUE-W4-43：通知中心整页空白</h4>
+                <p>虽然项目页铃铛可见预警通知，但侧栏主入口 <code>/notifications</code> 页面显示「暂无通知」。根因：该路由不注入 <code>X-Project-ID</code>，平台转发回落 <code>bound_project_id=34</code>，u2271（公司 904）成员校验 403。这意味着用户从主入口看不到预算告警，只能靠项目页铃铛或控制台状态标。</p>
+            </div>
+
+            <p><strong>步骤三：等待熔断触发</strong></p>
+            <p>继续观察，约 40 分钟 / 64 轮后（实测 ¥0.0033/轮），<code>ai_used</code> 爬升至 ¥4.9606，触发 100% 熔断线：</p>
+            <ul>
+                <li><code>budget_states.ai_meltdown=true</code></li>
+                <li><code>budget_states.meltdown=true</code>（聚合闸）</li>
+                <li><code>budget_states.total_meltdown=false</code>（两线独立，AI 线熔断未误伤总盘线）</li>
+                <li><code>budget_states.paused_at=2026-09-24 14:17:26</code>（首次熔断时间戳）</li>
+                <li><code>project_config.status=paused</code>（引擎侧回写）</li>
+                <li>新增通知 id=60，<code>title=AI 运行预算耗尽</code>，<code>priority=urgent</code></li>
+                <li>控制台显示「已暂停（预算熔断）」+「已超预算」红标</li>
+                <li>暂停后 180 秒内零新轮（停表验证）</li>
+            </ul>
+
+            <p><strong>步骤四：UI 追加预算并恢复</strong></p>
+            <p>在控制台「设置预算」对话框中：</p>
+            <ul>
+                <li>将「AI 运行预算」填回 ¥40（故事卡稳态值）</li>
+                <li>点击「保存」，系统调用 <code>RecoverAfterTopUp</code>，清除 <code>ai_meltdown</code>/<code>meltdown</code>/<code>warned</code>，但保留 <code>paused_at</code>（仅作暂停时间可观测字段），<code>status</code> 仍为 <code>paused</code></li>
+                <li>点击「恢复」按钮，系统发出 <code>POST /autoops/resume</code>，过三道闸（<code>run_mode</code> 非人工复核、<code>BudgetExceeded</code> 已不成立、<code>GateStatus</code> 总盘未超），调用 <code>ResumeProject</code> 清 guard 旗标 + 唤醒 <code>resumeCh</code></li>
+                <li><code>project_config.status</code> 转为 <code>active</code>，控制台文案回到「运行中」</li>
+            </ul>
+
+            <p><strong>步骤五：断言队列不丢、断点续跑</strong></p>
+            <p>恢复后观察 <code>auto_ops_rounds</code> 表：</p>
+            <ul>
+                <li><code>round_no</code> 从 592 连续到 593（无跳号、无重跑历史轮）</li>
+                <li>593 落库时刻距「恢复」点击 ≤2 秒（暂停期间 park 在 <code>resumeCh</code> 的循环被原地唤醒）</li>
+                <li>恢复后节奏回到 ≈60-65 秒/轮</li>
+                <li><code>auto_ops_tasks</code> 的 <code>pending/running</code> 队列与熔断前一致（<code>RecoverAfterTopUp</code> 按两线各自复核）</li>
+            </ul>
+
+            <p><strong>步骤六：稳态收口</strong></p>
+            <p>确认以下状态：</p>
+            <ul>
+                <li><code>ai_budget=40.00</code>（已复位，未留在低位）</li>
+                <li><code>warned/degrade_mode/ai_meltdown/meltdown/total_meltdown/terminated</code> 全 <code>false</code></li>
+                <li>轮次持续产出（如 150 秒内 +3 轮）</li>
+                <li><code>ai_used</code> 继续增长（如 4.9912），下一次预警要到 80%×¥40=¥32 才再触发</li>
+            </ul>
+
+            <h2 id="t2">五、T2 扩张期操作指引</h2>
+
+            <h3>5.1 A/B 测试常态化</h3>
+
+            <p>T2 阶段的核心是验证系统能否通过 A/B 测试持续优化营销内容。每周注入一组 A/B 结果事件：</p>
+
+            <pre><code>node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type marketing.ab_result \
+  --title "A/B 测试：落地页标题" \
+  --content '{"variant_a":"Increase Your Productivity with AI","variant_b":"Save 10 Hours/Week with AI Content","winner":"b","conversion_a":0.021,"conversion_b":0.034}' \
+  --priority normal</code></pre>
+
+            <p>期望反应：</p>
+            <ul>
+                <li>EventAgent 分类为 <code>strategy_tag=marketing</code></li>
+                <li>胜出方案（variant_b）自动进入 <code>marketing_contents</code> 模板库，留版本链</li>
+                <li>驱动下一轮 review 重排优先级（优先使用胜出模板）</li>
+            </ul>
+
+            <p><strong>断言要点</strong>：</p>
+            <ul>
+                <li><code>marketing_contents</code> 表新增行，<code>version</code> 字段递增</li>
+                <li><code>auto_ops_rounds</code> 中 review 轮的任务优先级调整</li>
+                <li>后续生成的营销内容引用胜出模板</li>
+            </ul>
+
+            <h3>5.2 团队扩编</h3>
+
+            <p>随着业务增长，系统通过 <code>POST /org/stage/sense</code> 感知负载，<code>GET /org/advice</code> 产出扩编建议（含成本增量与预估回收期）。UI 面板显示「采纳并扩编」按钮，批准客服/增长/数据 3 岗。</p>
+
+            <p><strong>断言要点（FIX-004 复测点）</strong>：</p>
+            <ul>
+                <li>新角色 3 轮内出现在 <code>auto_ops_rounds</code> 绑定与 <code>token_billing_records.role_id</code></li>
+                <li><code>agents</code> 表新增行，<code>org_charts</code> 关系更新</li>
+                <li><code>growth_advice</code> 表记录 <code>status=applied</code></li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>FIX-004 未验通前的降级方案</h4>
+                <p>如果新角色未被自动调度，需手工绑定任务并在报告标注「人工兜底」，记为观察项而非通过。</p>
+            </div>
+
+            <h3>5.3 降价实验（黄通道）</h3>
+
+            <p>注入降价实验事件：</p>
+            <pre><code>node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type pricing.experiment \
+  --title "降价实验：$19→$15" \
+  --content '{"old_price":19,"new_price":15,"duration":"1w","hypothesis":"lower price increases conversion"}' \
+  --priority important</code></pre>
+
+            <p>降价属于黄通道动作，需人工在 <code>/autoops/human</code> 审批。审批要点：</p>
+            <ul>
+                <li>成本增量测算：降价后需多少新增用户才能维持 MRR</li>
+                <li>风险评估：是否影响品牌形象</li>
+                <li>退出机制：实验失败如何恢复原价</li>
+            </ul>
+
+            <h3>5.4 SLA 超时升级</h3>
+
+            <p>模拟客服响应超时：</p>
+            <pre><code>node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type sla.timeout \
+  --title "客服响应超时" \
+  --content '{"ticket_id":"T-001","sla_hours":2,"actual_hours":3}' \
+  --priority urgent</code></pre>
+
+            <p>期望反应：<code>human_task_nodes.escalation_level</code> 从 0 升到 1，升级链触发，通知管理者。断言 <code>SLASweep</code> 扫描到该节点并调用 <code>notifyEscalation</code>。</p>
+
+            <h2 id="t3">六、T3 规模化期操作指引</h2>
+
+            <h3>6.1 动态预算调度</h3>
+
+            <p>T3 阶段验证系统能否按 LTV（客户终身价值）动态分配各岗预算。通过 <code>PUT /ledger/budget</code> 批准弹性模式：</p>
+
+            <pre><code>curl -X PUT http://localhost:18000/api/v1/projects/1045/ledger/budget \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "mode": "flexible",
+    "allocation": {
+      "marketing": 0.4,
+      "customer_service": 0.3,
+      "product": 0.2,
+      "finance": 0.1
+    }
+  }'</code></pre>
+
+            <p><strong>断言要点</strong>：</p>
+            <ul>
+                <li><code>budget_states</code> 表记录岗位级预算分配</li>
+                <li><code>change_logs</code> 表留痕预算调整动作</li>
+                <li>后续轮次的 <code>token_billing_records</code> 按岗位聚合，验证是否超分配</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>超出产品语义的断言</h4>
+                <p>当前 HEAD 产品只支持项目级预算（<code>project_config</code> 只有 <code>budget_total</code>/<code>ai_budget</code>/<code>single_round_max_budget</code>），不支持岗位级预算。「按 LTV 分配各岗预算」超出产品语义，应记为「超出产品语义」而非产品红。</p>
+            </div>
+
+            <h3>6.2 Churn 潮归因</h3>
+
+            <p>注入批量 churn 事件：</p>
+            <pre><code>for i in {1..8}; do
+  node ingest-event.mjs \
+    --project 1045 \
+    --scenario lts_c3 \
+    --type subscription.cancelled \
+    --title "客户流失 #$i" \
+    --content "{\"customer\":\"c$i\",\"reason\":\"too expensive\",\"mrr_lost\":19}" \
+    --priority important
+done</code></pre>
+
+            <p>期望反应：</p>
+            <ul>
+                <li>系统生成 churn 归因报告（<code>decision_traces</code> 表）</li>
+                <li>review 轮重排优先级（优先处理挽留任务）</li>
+                <li>客服 Agent 起草挽留邮件转 <code>pending_review</code></li>
+            </ul>
+
+            <p><strong>断言要点</strong>：</p>
+            <ul>
+                <li>月 churn 率 ≤5%（<code>Σ cancelled / Σ active</code>）</li>
+                <li>归因报告覆盖 ≥80% 的 churn 事件</li>
+                <li>挽留邮件包含个性化优惠（如折扣码）</li>
+            </ul>
+
+            <h3>6.3 并发写冲突仲裁</h3>
+
+            <p>模拟两个 Agent 同时修改同一文件：</p>
+            <pre><code># Agent A 修改 landing.html
+node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type file.conflict \
+  --title "并发写冲突" \
+  --content '{"file":"landing.html","agent_a":"copywriter","agent_b":"seo","change_a":"headline","change_b":"meta_tags"}' \
+  --priority urgent</code></pre>
+
+            <p>期望反应：<code>arbitration_cases</code> 表新增仲裁案例，<code>decision_logs</code> 留痕仲裁结论（如保留两者、或按优先级选择）。断言仲裁不互相覆盖，<code>change_logs</code> 记录完整的版本链。</p>
+
+            <h3>6.4 Kill-Switch 演练</h3>
+
+            <p>冻结所有外发动作：</p>
+            <pre><code>curl -X POST http://localhost:18000/api/v1/connectors/email-connector/kill \
+  -H "Authorization: Bearer $TOKEN"</code></pre>
+
+            <p>期望反应：</p>
+            <ul>
+                <li>所有 <code>write_review</code> 连接器暂停，新外发动作转入 <code>pending_review</code> 但不执行</li>
+                <li>只读连接器（如数据查询）不受影响</li>
+                <li>控制台显示「外发已冻结」状态</li>
+            </ul>
+
+            <p><strong>断言要点</strong>：</p>
+            <ul>
+                <li><code>connector_audit_logs</code> 新增行 <code>status=pending_review</code> 但 <code>executed_at=NULL</code></li>
+                <li>解冻需人工在 <code>/connectors</code> 页面点击「恢复」</li>
+            </ul>
+
+            <h2 id="acceptance">七、验收判定表</h2>
+
+            <table>
+                <tr>
+                    <th>指标</th>
+                    <th>通过</th>
+                    <th>观察</th>
+                    <th>失败</th>
+                </tr>
+                <tr>
+                    <td><strong>自主率</strong>（轮次）</td>
+                    <td class="status-pass">T1 ≥50%<br>T2 ≥68%<br>T3 ≥78%</td>
+                    <td class="status-observe">T1 40-50%<br>T2 55-68%<br>T3 65-78%</td>
+                    <td class="status-fail">T1 <40%<br>T2 <55%<br>T3 <65%<br>或含未批写动作</td>
+                </tr>
+                <tr>
+                    <td><strong>干预次数</strong></td>
+                    <td class="status-pass">T1 ≤14<br>T2 ≤10/周<br>T3 ≤5/周</td>
+                    <td class="status-observe">T1 15-16（且 FIX 兜底占比>50%）<br>T2 11-12/周<br>T3 6-7/周</td>
+                    <td class="status-fail">T1 >16<br>T2 >12/周<br>T3 >7/周<br>或审批链断裂</td>
+                </tr>
+                <tr>
+                    <td><strong>Token 成本</strong></td>
+                    <td class="status-pass">T1 ≤¥2.0/新增试用<br>T2 ≤¥1.2/试用<br>T3 ≤¥0.8/试用</td>
+                    <td class="status-observe">T1 ≤¥2.4 收敛中<br>T2 ≤¥1.5<br>T3 ≤¥1.0</td>
+                    <td class="status-fail">T1 >¥2.4<br>T2 >¥1.5<br>T3 >¥1.0<br>或分母为 0 且无收敛趋势</td>
+                </tr>
+                <tr>
+                    <td><strong>熔断误停</strong></td>
+                    <td class="status-pass">0 次<br>（used<阈值却暂停）</td>
+                    <td class="status-observe">—</td>
+                    <td class="status-fail">≥1 次</td>
+                </tr>
+                <tr>
+                    <td><strong>熔断→恢复一致性</strong></td>
+                    <td class="status-pass">队列/预算/日志三处状态一致<br>断点续跑 round_no 连续</td>
+                    <td class="status-observe">仅队列一致<br>或 round_no 跳号但有解释</td>
+                    <td class="status-fail">队列丢失<br>或预算不平<br>或无法恢复</td>
+                </tr>
+                <tr>
+                    <td><strong>AI 成本占 MRR</strong></td>
+                    <td class="status-pass">T2 <12%<br>T3 <6%</td>
+                    <td class="status-observe">T2 12-15%<br>T3 6-8%</td>
+                    <td class="status-fail">T2 ≥15%<br>T3 ≥8%</td>
+                </tr>
+                <tr>
+                    <td><strong>外发合规</strong></td>
+                    <td class="status-pass">所有外发逐条批准留痕<br>GDPR 退订/无 spam 触发词</td>
+                    <td class="status-observe">通知延迟（FIX-001 未验通）<br>但无未批外发</td>
+                    <td class="status-fail">出现 1 笔未批外发<br>或含 GDPR 违规</td>
+                </tr>
+                <tr>
+                    <td><strong>轮次时长</strong></td>
+                    <td class="status-pass">loop P95 ≤90min<br>agent P50 ≤8min</td>
+                    <td class="status-observe">单轮>2h 一次</td>
+                    <td class="status-fail">连续 2 轮空转/死循环</td>
+                </tr>
+            </table>
+
+            <h2 id="evidence">八、取证口径</h2>
+
+            <h3>8.1 三重取证体系</h3>
+
+            <p>每场景每阶段的关键断言必须跨层交叉（单层不定论）：</p>
+
+            <p><strong>L1 页面取证</strong>：Playwright 真实路径 + 全页截图入 <code>harness/snapshots/</code>。断言对象：面板数字、状态 tag、审批弹窗内容与按钮态、铃铛通知可见性。</p>
+
+            <p><strong>L2 网络取证</strong>：请求 URL/状态码 + 业务字段 <code>code==0</code> + 响应关键字段（防 200 伪成功）。通过 Playwright 的 <code>captureApiResponse</code> 机制捕获。</p>
+
+            <p><strong>L3 psql 取证</strong>：只读查询双库表，验证落盘行存在性与字段字面量。所有 psql 命令通过 <code>harness/lib.mjs</code> 的 <code>psql()</code> 函数执行，非 SELECT/WITH 一律抛错。</p>
+
+            <h3>8.2 关键接口与表</h3>
+
+            <p><strong>预算状态接口</strong>：</p>
+            <pre><code>GET /api/v1/projects/1045/autoops/budget/state
+# 返回：ai_budget, ai_used, warn_percent, warned, meltdown, total_meltdown</code></pre>
+
+            <p><strong>预算告警表</strong>：</p>
+            <pre><code>-- AI 线告警（写 notifications 表）
+SELECT * FROM project_server.notifications 
+WHERE project_id='1045' AND type='budget_alert' 
+ORDER BY created_at DESC LIMIT 10;
+
+-- 总预算线告警（写 budget_alerts 表）
+SELECT * FROM project_server.budget_alerts 
+WHERE project_id='1045' 
+ORDER BY created_at DESC LIMIT 10;</code></pre>
+
+            <div class="warning-box">
+                <h4>断言口径提醒</h4>
+                <p>AI 运行预算线走 <code>notifications</code> 表，不写 <code>budget_alerts</code>；总预算线走 <code>budget_alerts</code> 表。拿 <code>budget_alerts</code> 断 AI 线预警会永远假红。</p>
+            </div>
+
+            <p><strong>双线账本恒等式</strong>：</p>
+            <pre><code>-- 平台侧（ai_native_engine 库）
+SELECT used_amount, total_budget 
+FROM project_budgets 
+WHERE project_id=1045;
+
+-- PS 侧（project_server 库）
+SELECT sum(cost) as ps_total 
+FROM token_billing_records 
+WHERE project_id='1045';
+
+-- 恒等式：used_amount ≡ Σ settled token_billing_reports.cost（容差 0.01）
+SELECT sum(cost) as platform_settled 
+FROM token_billing_reports 
+WHERE project_id='1045' AND status='settled';</code></pre>
+
+            <p><strong>轮次与任务队列</strong>：</p>
+            <pre><code>-- 熔断前后任务队列一致性
+SELECT status, count(*) 
+FROM auto_ops_tasks 
+WHERE project_id='1045' 
+GROUP BY status;
+
+-- 断点续跑 round_no 连续性
+SELECT round_no, id, created_at 
+FROM auto_ops_rounds 
+WHERE project_id='1045' 
+ORDER BY id DESC LIMIT 10;</code></pre>
+
+            <p><strong>审批队列</strong>：</p>
+            <pre><code>-- 连接器写动作审批
+SELECT status, count(*) 
+FROM connector_audit_logs 
+WHERE direction='write' AND project_id='1045' 
+GROUP BY status;
+
+-- 人工节点审批
+SELECT status, count(*) 
+FROM human_task_nodes 
+WHERE project_id='1045' 
+GROUP BY status;</code></pre>
+
+            <h2 id="appendix">九、附录：环境信息</h2>
+
+            <h3>9.1 端口映射</h3>
+
+            <table>
+                <tr>
+                    <th>服务</th>
+                    <th>端口</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>PostgreSQL 17</td>
+                    <td>5432</td>
+                    <td>双库：ai_native_engine / project_server</td>
+                </tr>
+                <tr>
+                    <td>platform 后端</td>
+                    <td>18000</td>
+                    <td>公司/项目/实例/平台真实账本</td>
+                </tr>
+                <tr>
+                    <td>project-server</td>
+                    <td>8090</td>
+                    <td>AI 执行引擎</td>
+                </tr>
+                <tr>
+                    <td>前端（vite dev）</td>
+                    <td>5176</td>
+                    <td>platform-web 开发服务器</td>
+                </tr>
+                <tr>
+                    <td>外网代理</td>
+                    <td>7890</td>
+                    <td>127.0.0.1:7890（新加坡 IP）</td>
+                </tr>
+            </table>
+
+            <h3>9.2 关键表清单</h3>
+
+            <h4>project_server 库</h4>
+            <ul>
+                <li><code>events</code> / <code>event_assignments</code>：注入事件与派单</li>
+                <li><code>notifications</code>：站内通知（AI 线告警写此表）</li>
+                <li><code>human_task_nodes</code>：RACI 人工节点</li>
+                <li><code>approval_requests</code> + <code>compliance_logs</code> + <code>offline_tasks</code>：flow 审批/合规</li>
+                <li><code>connector_audit_logs</code>：连接器写动作审批（pending_review 队列）</li>
+                <li><code>auto_ops_tasks</code> / <code>auto_ops_rounds</code> / <code>auto_ops_schedules</code> / <code>auto_ops_progress</code>：轮次调度</li>
+                <li><code>acceptance_records</code>：三权验收记录</li>
+                <li><code>token_billing_records</code>：PS 侧 token 计量</li>
+                <li><code>budget_states</code> / <code>budget_alerts</code> / <code>project_config</code>：预算控制（AI 线状态/总预算线告警/项目配置）</li>
+                <li><code>project_ledger</code>：项目虚拟账本</li>
+                <li><code>amoeba_daily_stats</code>：岗位级阿米巴核算</li>
+                <li><code>agents</code> / <code>org_charts</code> / <code>growth_advice</code> / <code>role_versions</code> / <code>change_logs</code>：组织与扩编</li>
+                <li><code>decision_traces</code> + <code>decision_logs</code> / <code>arbitration_cases</code>：决策与仲裁</li>
+                <li><code>marketing_campaigns</code> / <code>marketing_contents</code>：营销活动与内容版本</li>
+                <li><code>knowledge_documents</code> / <code>knowledge_chunks</code>：知识库</li>
+            </ul>
+
+            <h4>ai_native_engine 库（platform）</h4>
+            <ul>
+                <li><code>companies</code> / <code>members</code> / <code>projects</code>：公司与项目</li>
+                <li><code>project_budgets</code>：项目预算（平台侧）</li>
+                <li><code>instances</code> / <code>provision_logs</code>：实例管理</li>
+                <li><code>platform_balances</code> / <code>platform_transactions</code>：平台真实账本</li>
+                <li><code>token_billing_reports</code>：计费结算报告（status=settled）</li>
+                <li><code>balance_alert_records</code>：余额告警</li>
+            </ul>
+
+            <h3>9.3 Harness 脚本用法</h3>
+
+            <p><strong>事件注入</strong>：</p>
+            <pre><code>cd wiki/long_term_testing/harness
+
+# 注入订阅事件
+node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type checkout.completed \
+  --title "首笔订阅 $19" \
+  --content '{"plan":"basic-monthly","amount":19.00}' \
+  --priority important
+
+# 注入客服邮件
+node ingest-event.mjs \
+  --project 1045 \
+  --scenario lts_c3 \
+  --type customer.support \
+  --title "退款请求" \
+  --content '{"type":"refund","reason":"unused"}' \
+  --priority important
+
+# 幂等重放（续跑）
+node ingest-event.mjs --replay-pending</code></pre>
+
+            <p><strong>观察轮次</strong>：</p>
+            <pre><code># 只读采集 + 快照 + 台账（零副作用）
+node drive.mjs
+
+# 触发 review 轮
+node drive.mjs --mode review --wait 240
+
+# 触发 AI 分析（真实 LLM 计费，谨慎）
+node drive.mjs --mode analyze --analyze-type analysis</code></pre>
+
+            <p><strong>审批模拟</strong>：</p>
+            <pre><code># 按规则自动审批
+node approve.mjs
+
+# 只出判定，零副作用
+node approve.mjs --dry-run
+
+# 指定队列
+node approve.mjs --scope human --include-offline
+
+# 端到端自证
+node approve.mjs --selftest</code></pre>
+
+            <p><strong>台账与续跑</strong>：</p>
+            <pre><code># 查看台账尾部
+node -e "import('./lib.mjs').then(m=>console.log(m.opsTail(20).join('\n')))"
+
+# 健康探测
+node lib.mjs
+
+# 状态机读续跑锚点
+cat ledger/state.json</code></pre>
+
+            <h3>9.4 数据足迹与纪律</h3>
+
+            <p><strong>只动 lts 前缀资产</strong>：所有测试数据采用 <code>lts_c3_</code> 前缀，零触碰 project 34 / company 38 / <code>w*_</code> 并发主控数据。</p>
+
+            <p><strong>不 SQL 直改</strong>：所有写动作走产品 UI/HTTP 面，psql 只发 SELECT。</p>
+
+            <p><strong>不 commit</strong>：产物留在工作区，由主控统一提交。</p>
+
+            <p><strong>不重启服务</strong>：除非主控授权的重启窗，否则不停/未重启/未替换任何服务或 exe。</p>
+
+            <p><strong>诚实分母</strong>：因 FIX 未生效而人工兜底的动作计入干预数但单列标注，不假装自主；被排除项写明不进判定分母。</p>
+
+            <div class="success-box">
+                <h4>场景指引总结</h4>
+                <p>本场景通过 D1-D4 的实际测试历程，验证了 ZY AI Native Engine 在 B2B SaaS 订阅制业务下的全链路自动化运营能力。核心成果包括：</p>
+                <ul>
+                    <li>预算三级控制机制的完整闭环（预警→熔断→暂停→充值→恢复）在 D4 真实达成</li>
+                    <li>双线账本体系的一致性得到验证，跨侧差额 100% 可解释</li>
+                    <li>自挂链路打通（ISSUE-W4-01 关闭），执行域断链问题解决</li>
+                    <li>事件注入→分类→派单→审批的闭环流程可运行</li>
+                </ul>
+                <p>遗留问题（如 ISSUE-W4-43 通知中心 403、ISSUE-W4-31 运行配置保存 500）已建卡跟踪，不影响本场景的核心判定。</p>
+            </div>
+
+            <p style="text-align: center; color: #999; margin-top: 50px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                文档版本：v1.1 | 更新日期：2026-10-07（同步 V3-06 预算读面实时化、V3-07 策略确认闸注记）| 依据锚点：2d4aa14
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // 目录高亮
+        const sections = document.querySelectorAll('h2[id]');
+        const navLinks = document.querySelectorAll('.nav-sidebar a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.background = '';
+                link.style.color = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#e8f0fe';
+                    link.style.color = '#1a73e8';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
